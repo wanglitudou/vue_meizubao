@@ -1,0 +1,187 @@
+.containers {
+  width: 100%;
+  height: auto;
+  height: calc(100% - 0.88rem);
+  background: #fff;
+}
+.sear {
+  width: 7.1rem;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  border: 1px solid #ccc;
+  margin: 0.2rem auto 0;
+}
+.list_list {
+  width: 100%;
+  height: auto;
+}
+.list_search {
+  width: 96%;
+  height: 0.88rem;
+  border: 1px solid #fff;
+  margin-top: 0.2rem;
+  text-align: center;
+  margin-left: 2%;
+  background: #fff;
+  border-radius: 0.1rem;
+}
+.searchs {
+  width: 7.1rem;
+  background: #fff;
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+}
+.searchs input {
+  width: 6rem;
+  height: 0.88rem;
+  border: 0;
+  border-radius: 2px;
+  outline: none;
+  padding-left: 1rem;
+  box-sizing: border-box;
+  float: left;
+  margin-left: 0.2rem;
+}
+.searchs img {
+  width: 0.5rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  margin-top: 0.2rem;
+}
+.scrolls {
+  width: 100%;
+  height: auto;
+  overflow-y: scroll;
+  height: calc(100% - 0.88rem);
+  margin-top: 20px;
+}
+.list_cent {
+  width: 7.1rem;
+  margin: 0.2rem auto 0;
+}
+.list_lef {
+  width: 3.46rem;
+  float: right;
+  border-radius: 3px;
+  margin-top: -10px;
+}
+.list_lef .listing {
+  border-radius: 3px;
+  background: #fff;
+  padding-bottom: 0.2rem;
+  margin-top: 10px;
+}
+.listing {
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+}
+.list_rig .listing {
+  border-radius: 3px;
+  background: #fff;
+  padding-bottom: 0.2rem;
+  margin-top: 10px;
+}
+.list_lef img {
+  width: 3.36rem;
+  height: 3.46rem;
+}
+.list_rig {
+  width: 3.46rem;
+  /* border: 1px solid #ccc; */
+  /* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12); */
+  border-radius: 3px;
+}
+.list_rig img {
+  width: 3.44rem;
+}
+
+.list_rig .other span {
+  padding: 0.2rem;
+  font-size: 15px;
+  color: #000000;
+  letter-spacing: 0;
+}
+.list_lef .other span {
+  padding: 0.2rem;
+  font-size: 15px;
+  color: #000000;
+  letter-spacing: 0;
+}
+.paice {
+  font-size: 13px;
+  color: #666666;
+  letter-spacing: 0;
+}
+.paice {
+  font-size: 13px;
+  color: #666666;
+  letter-spacing: 0;
+}
+.meeting {
+  padding: 0 0.3rem;
+  font-size: 13px;
+  color: #999999;
+  letter-spacing: 0;
+}
+.count {
+  font-size: 14px;
+  color: #00a5ff;
+  letter-spacing: 0;
+}
+.other a {
+  font-size: 14px;
+  color: #ff272d;
+  letter-spacing: 0;
+}
+.rent {
+  font-size: 12px;
+  color: #999999;
+  letter-spacing: 0;
+  padding: 0 0.2rem;
+}
+.list_lef .other .orders {
+  width: 2.4rem;
+  height: 0.72rem;
+  line-height: 0.72rem;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  text-align: center;
+  background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+  box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.list_lef .other p .order {
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
+.list_cent .list_rig .other .orders {
+  width: 2.4rem;
+  height: 0.72rem;
+  line-height: 0.72rem;
+  margin: 0 auto;
+  text-align: center;
+  background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+  box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.list_cent .list_rig .other p .order {
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
+.addmore {
+  width: 7.068rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  margin: 0.2rem auto 0;
+  font-size: 14px;
+  color: #00a5ff;
+  letter-spacing: 0;
+  background: #fff;
+}

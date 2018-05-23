@@ -1,0 +1,371 @@
+<template>
+    <div class="containers">
+        <div class="pic_view">
+            <div class="nav_pic">
+                <span class="list_tab"
+                      v-for="(item,index) in tabs"
+                      :key="index"
+                      :class="num==index?'dora':''"
+                      @click="tab(index)">{{item.name}}</span>
+                <span class="sousuo"
+                      @click="aaa()">
+                    <img src="../../assets/icon/search_1.png"
+                         alt="">
+                </span>
+            </div>
+        </div>
+        <div class="searchs_box"
+             v-if="flog">
+            <input type="text"
+                   placeholder="请输入搜索内容"
+                   v-model="message"
+                   @blur="loseblur()">
+            <img src="../../assets/icon/search_1.png"
+                 alt="111">
+        </div>
+        <div class="list_box">
+            <div class="listbox_lef"
+                 v-for="item in accessoryproducts"
+                 :key="item.index
+                     ">
+                <div class="cent_left">
+                    <div class="list_img">
+                        <img :src="item.images"
+                             alt="666">
+                    </div>
+                    <div class="list_oper">
+                        <p class="oper_room">
+                            <span>{{item.name}}</span>
+                        </p>
+
+                        <p class="every_pro">
+                            <span class="data_pro">
+                                <span class="data_mon">￥{{item.price}}</span>
+                            </span>
+                        </p>
+                        <p class="cli_app">
+                            <span class="cli_ment">立即下单</span>
+                        </p>
+                    </div>
+                </div>
+                <!-- <div class="cent_left">
+                    <div class="list_img">
+                        <img src="../../assets/images/icon2.jpg"
+                             alt="">
+                    </div>
+                    <div class="list_oper">
+                        <p class="oper_room">
+                            <span>仪器操作室</span>
+                        </p>
+                        <p class="every_pro">
+                            <span class="data_pro">
+                                <span class="data_mon">￥1500</span>
+                            </span>
+                        </p>
+                        <p class="cli_app">
+                            <span class="cli_ment">立即下单</span>
+                        </p>
+                    </div>
+                </div> -->
+                <!-- <div class="cent_left">
+                    <div class="list_img">
+                        <img src="../../assets/images/icon2.jpg"
+                             alt="">
+                    </div>
+                    <div class="list_oper">
+                        <p class="oper_room">
+                            <span>仪器操作室</span>
+
+                        </p>
+                        <p class="every_pro">
+                            <span class="data_pro">
+                                <span class="data_mon">￥1500</span>
+                            </span>
+                        </p>
+                        <p class="cli_app">
+                            <span class="cli_ment">立即下单</span>
+                        </p>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- <div class="listbox_rig">
+                <div class="cent_left">
+                    <div class="list_img">
+                        <img src="../../assets/images/icon2.jpg"
+                             alt="">
+                    </div>
+                    <div class="list_oper">
+                        <p class="oper_room">
+                            <span>仪器操作室</span>
+
+                        </p>
+                        <p class="every_pro">
+                            <span class="data_pro">
+                                <span class="data_mon">￥1500</span>
+                            </span>
+                        </p>
+                        <p class="cli_app">
+                            <span class="cli_ment">立即下单</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="cent_left">
+                    <div class="list_img">
+                        <img src="../../assets/images/icon2.jpg"
+                             alt="">
+                    </div>
+                    <div class="list_oper">
+                        <p class="oper_room">
+                            <span>仪器操作室</span>
+
+                        </p>
+                        <p class="every_pro">
+                            <span class="data_pro">
+                                <span class="data_mon">￥1500</span>
+                            </span>
+                        </p>
+                        <p class="cli_app">
+                            <span class="cli_ment">立即下单</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="cent_left">
+                    <div class="list_img">
+                        <img src="../../assets/images/icon2.jpg"
+                             alt="">
+                    </div>
+                    <div class="list_oper">
+                        <p class="oper_room">
+                            <span>仪器操作室</span>
+                        </p>
+                        <p class="every_pro">
+                            <span class="data_pro">
+                                <span class="data_mon">￥1500</span>
+                            </span>
+                        </p>
+                        <p class="cli_app">
+                            <span class="cli_ment">立即下单</span>
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="foot_load">
+            <span>加载更多 > </span>
+        </div> -->
+    </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      tabs: [], // 热租仪器分类
+      accessoryproducts: [], //产品配套筛选
+      num: 1,
+      flog: false,
+      url: [],
+      message: ""
+    };
+  },
+  created() {
+    let that = this;
+    //热租仪器分类
+    that.$axios
+      .get("http://mzbao.weiyingjia.org/api/meizubao/productType", {})
+      .then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
+          that.tabs = res.data.data;
+          that.type(res.data.data[0].id);
+        }
+      })
+      .catch(() => {
+        console.log("查询失败");
+      });
+  },
+  methods: {
+    type(name) {
+      let that = this;
+      //热租仪器筛选
+      that.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/productSearch", {
+          typeId: 6,
+          keywords: "",
+          page: 1
+        })
+
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.accessoryproducts = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    loseblur() {
+      alert("666");
+    },
+    aaa() {
+      this.flog = true;
+    },
+    details() {
+      this.$router.push({ name: "details" });
+    },
+    tab(index) {
+      this.num = index;
+    }
+  }
+};
+</script>
+<style scoped>
+.containers {
+  width: 100%;
+  /* height: calc(100% - 0.81rem); */
+  background: #fff;
+}
+.sousuo {
+  width: 58px;
+  height: 44px;
+  line-height: 44px;
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  position: absolute;
+  right: 0;
+}
+.dora {
+  border-bottom: 2px solid #fd4689;
+  font-size: 18px;
+}
+.pic_view {
+  width: 7.1rem;
+  height: auto;
+  margin: 0.2rem auto 0;
+}
+.sousuo img {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  margin-top: 10px;
+}
+.nav_pic {
+  width: 6.2rem;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #000;
+}
+.searchs_box {
+  width: 96%;
+  height: 0.9rem;
+  border: 1px solid #ccc;
+  margin-top: 0.2rem;
+  text-align: center;
+  margin-left: 2%;
+  background: #fff;
+  border-radius: 0.2rem;
+  position: absolute;
+  top: 0px;
+  display: inherit;
+}
+
+.searchs_box input {
+  width: 6rem;
+  height: 0.9rem;
+  border: 0;
+  outline: none;
+  padding-left: 1rem;
+  box-sizing: border-box;
+  float: left;
+  margin-left: 0.2rem;
+  border-bottom: 1px solid #ccc;
+}
+.list_box {
+  width: 100%;
+  height: calc(100% - 1.2rem);
+  overflow: auto;
+  margin-top: 0.2rem;
+}
+.searchs_box img {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.list_box .listbox_lef {
+  width: 48%;
+  float: right;
+  border-radius: 3px;
+}
+.cent_left {
+  background: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  margin-top: 10px;
+  padding-bottom: 0.4rem;
+}
+.list_img {
+  height: 2rem;
+}
+.list_img img {
+  width: 100%;
+  height: 100%;
+}
+.oper_room {
+  padding: 0.2rem;
+}
+
+.every_pro {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+.data_mon {
+  font-size: 12px;
+  color: #f00;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+.week_mon {
+  font-size: 12px;
+  color: #000;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+.cli_app {
+  width: 2rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10px;
+  background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+  box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+  border-radius: 3px;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
+.listbox_rig {
+  width: 49%;
+}
+.foot_load {
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  margin-top: 10px;
+  background: #fff;
+  text-align: center;
+}
+.foot_load span {
+  height: 1.5rem;
+  line-height: 1.5rem;
+  font-size: 14px;
+  color: #00a5ff;
+  letter-spacing: 0;
+}
+</style>
