@@ -82,8 +82,8 @@
     </div>
 </template>
 <script>
-import "./essence.css";
 export default {};
 </script>
 <style scoped>
+  @import "./essence.css";
 </style>

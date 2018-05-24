@@ -48,7 +48,7 @@
         </div>
 
         <!-- <div> -->
-         
+
 
         <!-- <div class="scrolls"> -->
             <!-- <div class="list_cent"> -->
@@ -198,18 +198,19 @@
             <!-- </div> -->
 
         <!-- </div> -->
-       
-    
+
+
         <!-- <div class="addmore">
             <span class="more_add">加载更多</span>
         </div> -->
-      
+
 <!-- <vue-waterfall-easy :imgsArr="imgsArr" ></vue-waterfall-easy> -->
  
 <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
     <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" >
        <!-- block item markup -->
        <div class="box listing">
+
                <div>
                  <img :src="item.images" alt="">
                </div>
@@ -245,6 +246,7 @@
      <div class="noData" v-show="noData">
        <div>暂无数据</div>
      </div>
+
     </div>
     
     <!-- 点击加载 -->
@@ -413,15 +415,17 @@ export default {
 };
 </script>
 <style scoped>
+
 @import "./detail.css";
 .topSearch{
-        position: fixed;
+   position: fixed;
     width: 100%;
     top: 0;
     height: 1.2rem;
     background: #fff;
     z-index: 2;
 }
+
 .searchs {
   /* position: fixed; */
   /* top: 22px; */
