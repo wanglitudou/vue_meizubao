@@ -24,6 +24,8 @@ import "element-ui/lib/theme-chalk/index.css";
 // import "mint-ui/lib/style.css";
 //引入axios
 import axios from "axios";
+
+
 axios.defaults.transformRequest = [
   function(data) {
     let newData = "";
