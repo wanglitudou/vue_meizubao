@@ -67,9 +67,6 @@
 <script>
 
 
-
-
-import "./details.css";
 import DateTimePicker from 'date-time-picker';
 export default {
   mounted(){
@@ -210,5 +207,5 @@ export default {
 };
 </script>
 <style scoped>
-
+  @import "./details.css";
 </style>

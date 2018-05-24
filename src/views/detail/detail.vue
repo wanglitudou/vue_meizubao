@@ -21,7 +21,7 @@
                     <ul class="sortMenu-ul">
                         <div v-for="(item,index) in tabs"
                         :ley="index"
-                      
+
                           @click="tab(index)">
                         <!-- <tab :tab="tab"
                             :index="index"
@@ -50,7 +50,7 @@
         </div>
 
         <!-- <div> -->
-         
+
 
         <!-- <div class="scrolls"> -->
             <!-- <div class="list_cent"> -->
@@ -200,12 +200,12 @@
             <!-- </div> -->
 
         <!-- </div> -->
-       
-    
+
+
         <!-- <div class="addmore">
             <span class="more_add">加载更多</span>
         </div> -->
-      
+
 <!-- <vue-waterfall-easy :imgsArr="imgsArr" ></vue-waterfall-easy> -->
 
 <div v-masonry transition-duration="0.3s" item-selector=".item" column-width=".item">
@@ -216,7 +216,7 @@
  <img :src="item.images" alt="">
 
            </div>
-         
+
           <div class="other">
                             <p>
                                 <span>{{item.name}}</span>
@@ -251,7 +251,6 @@
 </template>
 <script>
 import qs from "qs";
-import "./detail.css";
 import vueWaterfallEasy from "vue-waterfall-easy";
 import { VueMasonryPlugin } from "vue-masonry";
 export default {
@@ -368,6 +367,7 @@ export default {
 };
 </script>
 <style scoped>
+  @import "./detail.css";
 .searchs {
   position: absolute;
   top: 22px;
@@ -438,10 +438,10 @@ export default {
   background-color: #ffffff;
   box-shadow: 0 2px 4px 0 #ebeced;
   display:flex;
-  
+
 }
 .sortMenu-ul {
-  /* min-width: px2rem(320px); */ 
+  /* min-width: px2rem(320px); */
   width: 88%;
   height: 0.88rem;
   margin-left: 2%;
