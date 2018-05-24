@@ -25,6 +25,7 @@ import "element-ui/lib/theme-chalk/index.css";
 //引入axios
 import axios from "axios";
 
+window.ajaxSrc = "http://mzbao.weiyingjia.org";
 
 axios.defaults.transformRequest = [
   function(data) {
