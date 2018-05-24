@@ -95,92 +95,92 @@ let routes = [
   },
   {
     name: "detail",
-    path: "detail",
+    path: "/detail",
     component: detail
   },
   {
     name: "details",
-    path: "details",
+    path: "/details",
     component: details
   },
   {
     name: "industry",
-    path: "industry",
+    path: "/industry",
     component: industry
   },
   {
     name: "cooperation",
-    path: "cooperation",
+    path: "/cooperation",
     component: cooperation
   },
   {
     name: "project",
-    path: "project",
+    path: "/project",
     component: project
   },
   {
     name: "matching",
-    path: "matching",
+    path: "/matching",
     component: matching
   },
   {
     name: "train",
-    path: "train",
+    path: "/train",
     component: train
   },
   {
     name: "essence",
-    path: "essence",
+    path: "/essence",
     component: essence
   },
   {
     name: "looksee",
-    path: "looksee",
+    path: "/looksee",
     component: looksee
   },
   {
     name: "seemore",
-    path: "seemore",
+    path: "/seemore",
     component: seemore
   },
   {
     name: "clickpay",
-    path: "clickpay",
+    path: "/clickpay",
     component: clickpay
   },
   {
     name: "curriculum",
-    path: "curriculum",
+    path: "/curriculum",
     component: curriculum
   },
   {
     name: "integral",
-    path: "integral",
+    path: "/integral",
     component: integral
   },
   {
     name: "address",
-    path: "address",
+    path: "/address",
     component: address
   },
   {
     name: "customservice",
-    path: "customservice",
+    path: "/customservice",
     component: customservice
   },
   {
     name: "viewscreen",
-    path: "viewscreen",
+    path: "/viewscreen",
     component: viewscreen
   },
   {
     name: "photograph",
-    path: "photograph",
+    path: "/photograph",
     component: photograph
   },
   {
     name: "pageindustry",
-    path: "pageindustry",
+    path: "/pageindustry",
     component: pageindustry
   }
 ];
