@@ -24,6 +24,9 @@ import "element-ui/lib/theme-chalk/index.css";
 // import "mint-ui/lib/style.css";
 //引入axios
 import axios from "axios";
+
+window.ajaxSrc = "http://mzbao.weiyingjia.org";
+
 axios.defaults.transformRequest = [
   function(data) {
     let newData = "";

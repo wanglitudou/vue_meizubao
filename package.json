@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "date-time-picker": "^0.5.2",
     "element-ui": "^2.3.9",
     "masonry": "0.0.2",
     "vue": "^2.5.2",
