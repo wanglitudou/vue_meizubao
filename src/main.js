@@ -42,7 +42,11 @@ Vue.prototype.$axios = axios;
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
+//瀑布流
 
+import {VueMasonryPlugin} from 'vue-masonry';
+
+Vue.use(VueMasonryPlugin)
 // eslint-disable no-new
 new Vue({
   el: "#app",

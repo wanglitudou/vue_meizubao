@@ -52,7 +52,6 @@ export default {
   methods: {
     updataImg(url) {
       this.$router.push({ name: url });
-      console.log("666");
     }
   }
 };
