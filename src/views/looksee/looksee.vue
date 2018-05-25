@@ -1,7 +1,8 @@
 <template>
-    <div class="container">
-        <div class="pic_view">
-            <div class="nav_pic">
+  <div class="container">
+    <div class="pic_view">
+
+      <!-- <div class="nav_pic">
                 <span class="list_tab"
                       v-for="(item,index) in tabs"
                       :key="index"
@@ -9,13 +10,25 @@
                       @click="tab(index)">{{item.name}}</span>
                 <span class="sousuo"
                       @click="aaa()">
-                    <img src="../../assets/icon/search_1.png"
-                         alt="">
+                    <img src="../../assets/icon/search_1.png" alt=""> 
                 </span>
-            </div>
+            </div> -->
+      <div class="sortMenu clearfix" v-show="slideShow">
+        <ul class="sortMenu-ul">
+          <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
+            <tab :item="item" :index="index" :num="num"></tab>
+          </div>
+        </ul>
+        <!-- 搜索按钮 -->
+        <div class="sousuo" @click="aaa()">
+          <img src="../../assets/icon/search_1.png" alt="">
         </div>
+      </div>
+      <div class="topSearch" v-if="flog">
+        <search @search="search"></search>
+      </div>
 
-        <div class="searchs_box"
+      <!-- <div class="searchs_box"
              v-if="flog">
             <input type="text"
                    placeholder="请输入搜索内容"
@@ -23,48 +36,91 @@
                    @blur="loseblur()">
             <img src="../../assets/icon/search_1.png"
                  alt="111">
+        </div> -->
+      <div class="slider" v-show="itemshow">
+        <div class="slider_item" v-for="(item,index) in sliders" @click="slider(index)">
+          <p>{{item}}</p>
+          <div class="img">
+            <img v-bind:src="index== number?Highlight:gray" alt="">
+            <img v-bind:src="index== number?Highlight:gray" alt="" class="rotate">
+          </div>
+          <!-- 下拉框 -->
         </div>
-        <div class="list_container">
+      </div>
 
-            <!--导航,点击搜索滑动-->
-
-            <div class="list_box">
-                <div class="listbox_lef"
-                     v-for="item in thebeautyindustry"
-                     :key="item.index">
-                    <div class="cent_left">
-                        <div class="list_img">
-                            <img :src="item.images"
-                                 alt="">
-                        </div>
-                        <div class="list_oper">
-                            <p class="oper_room">
-                                <span>{{item.name}}</span>
-                                <span>{{item.level}}</span>
-                            </p>
-                            <p class="content">{{item.centetnt}}</p>
-                            <p class="every_pro">
-                                <span class="data_pro">
-                                    <span class="data_mon">{{item.dayprice}}</span>/日</span>
-                                <span class="week_pro">
-                                    <span class="week_mon">{{item.price}}</span>/周</span>
-                            </p>
-                            <p class="cli_app">
-                                <span class="cli_ment">点击预约</span>
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="foot_load">
-                <span>加载更多 > </span>
-            </div>
-        </div>
     </div>
+
+    <!-- <div class="list_container"> -->
+
+    <!--导航,点击搜索滑动-->
+
+    <!-- <div class="list_box">
+        <div class="listbox_lef" v-for="item in thebeautyindustry" :key="item.index">
+          <div class="cent_left">
+            <div class="list_img">
+              <img :src="item.images" alt="">
+            </div>
+            <div class="list_oper">
+              <p class="oper_room">
+                <span>{{item.name}}</span>
+                <span>{{item.level}}</span>
+              </p>
+              <p class="content">{{item.centetnt}}</p>
+              <p class="every_pro">
+                <span class="data_pro">
+                  <span class="data_mon">{{item.dayprice}}</span>/日</span>
+                <span class="week_pro">
+                  <span class="week_mon">{{item.price}}</span>/周</span>
+              </p>
+              <p class="cli_app">
+                <span class="cli_ment">点击预约</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="foot_load">
+        <span>加载更多 > </span>
+      </div> -->
+    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
+      <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry">
+        <!-- block item markup -->
+        <div class="cent_left">
+          <div class="list_img">
+            <img :src="item.images" alt="">
+          </div>
+          <div class="list_oper">
+            <p class="oper_room">
+              <span>{{item.name}}</span>
+              <span>{{item.level}}</span>
+            </p>
+            <p class="content">{{item.centetnt}}</p>
+            <p class="every_pro">
+              <span class="data_pro">
+                <span class="data_mon">{{item.dayprice}}</span>/日</span>
+              <span class="week_pro">
+                <span class="week_mon">{{item.price}}</span>/周</span>
+            </p>
+            <p class="cli_app">
+              <span class="cli_ment">点击预约</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+     <div class="moreData" ref="load" v-show="showLoad">
+            <div v-if="load" @click="loadMore">加载更多></div>
+            <div v-else>已全部加载</div>
+        </div>
+  </div>
+
 </template>
 <script>
+import tab from "../../components/tabBar.vue";
+import search from "../../components/search.vue";
 export default {
   data() {
     return {
@@ -73,10 +129,23 @@ export default {
       num: 1,
       flog: false,
       url: [],
-      message: ""
+      message: "",
+      Highlight: require("../../assets/images/jian2.png"),
+      gray: require("../../assets/images/jian.png"),
+      number: 4,
+      sliders: ["级别", "日薪资", "周薪"],
+      keyword: "",
+      code: 1,
+      uid: 0,
+      slideShow: true,
+      itemshow:true,
+        showLoad: true,
     };
   },
   created() {
+    //
+    // require('../../assets/images/jian.png')
+    // this.gray  = require('../../assets/images/jian.png')
     let that = this;
     //热租仪器分类
     that.$axios
@@ -85,7 +154,7 @@ export default {
         console.log(res);
         if (res.data.status_code == 1001) {
           that.tabs = res.data.data;
-          that.type(res.data.data[0].id);
+          that.getData(res.data.data[0].id);
         }
       })
       .catch(() => {
@@ -93,7 +162,7 @@ export default {
       });
   },
   methods: {
-    type(name) {
+    getData(name) {
       let that = this;
       //热租仪器筛选
       that.$axios
@@ -106,7 +175,6 @@ export default {
           dayprice: "",
           price: ""
         })
-
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
@@ -117,18 +185,47 @@ export default {
           console.log("查询失败");
         });
     },
+       loadMore() {
+      this.pages++;
+      // 搜索的加载更多，搜索没有产品的id
+      if (this.code != 1) {
+        this.getData("", this.keyword, this.pages);
+      } else {
+        this.getData(this.uid, "", this.pages);
+      }
+    },
     loseblur() {
       alert("666");
     },
-    aaa() {
+    slider(index) {
+      this.number = index;
+    },
+      aaa() {
       this.flog = true;
+      this.imgsArr = [];
+      this.showLoad = false;
+      this.itemshow  = false
+      this.code = 2; //点击搜索 不传 产品id
+      //  console.log(this.$refs.masonry)
+      this.$refs.masonry.style = "position:relative";
     },
     details() {
       this.$router.push({ name: "details" });
     },
-    tab(index) {
+    tab(id, index) {
       this.num = index;
+      this.uid = id;
+      this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+    },
+    search(keyword) {
+      this.keyword = keyword;
+      this.pages = 1;
+      this.getData("", keyword, this.pages);
     }
+  },
+  components: {
+    tab,
+    search
   }
 };
 </script>
@@ -158,8 +255,8 @@ export default {
 }
 .pic_view {
   width: 7.1rem;
-  height: auto;
-  margin: 0.2rem auto 0;
+  height: 2rem;
+  margin: auto 0;
 }
 .sousuo img {
   width: 24px;
@@ -226,7 +323,8 @@ export default {
   padding-bottom: 0.4rem;
 }
 .list_img {
-  height: 2rem;
+  /* height: 2rem; */
+  width: 100%;
 }
 .list_img img {
   width: 100%;
@@ -288,5 +386,84 @@ export default {
   font-size: 14px;
   color: #00a5ff;
   letter-spacing: 0;
+}
+.slider {
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0.8rem;
+  background: #fff;
+  z-index: 2;
+}
+.slider_item {
+  width: 33.3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #333;
+}
+.img {
+  display: flex;
+  flex-direction: column;
+}
+.img img {
+  margin-left: 3px;
+  width: 10px;
+  display: block;
+}
+.rotate {
+  transform: rotate(180deg);
+}
+.sortMenu {
+  z-index: 1;
+  width: 100%;
+  /* margin-top: px2rem(48px); */
+  position: fixed;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px 0 #ebeced;
+  display: flex;
+}
+.sortMenu-ul {
+  /* min-width: px2rem(320px); */
+  width: 86%;
+  height: 0.88rem;
+  margin-left: 2%;
+  overflow-x: scroll;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  display: -webkit-box;
+  justify-content: flex-start;
+  animation: moveTo 0.5s ease both;
+}
+.sousuo {
+  width: 16%;
+  height: 0.88rem;
+  line-height: 44px;
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item {
+  width: 47%;
+  height: auto;
+  padding: 1%;
+  margin: 1.2%;
+}
+.moreData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 1rem;
+  font-size: 14px;
+  color: #00a5ff;
 }
 </style>
