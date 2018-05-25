@@ -57,7 +57,7 @@
                         <span class="tinct">¥19,000</span>
                     </div>
                     <div class="total_rig">
-                        <span>立即下单</span>
+                        <router-link to="/confirm/technician">立即下单</router-link>
                     </div>
                 </div>
             </div>

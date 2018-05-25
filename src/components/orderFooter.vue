@@ -1,101 +1,97 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div class="order_foot">
+    <div class="total_foot">
+      <div class="total_lef">
+        <span class="add">合计：</span>
+        <span class="tinct">¥{{countNum}}</span>
+      </div>
+      <div class="total_rig">
+        <span>{{text}}</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'orderFooter',
+  props:["count","text"],
+  mounted(){
+    this.countNum=this.toThousands(this.count)
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      countNum:''
     }
+  },
+  methods:{
+    toThousands(num) {
+      var num = (num || 0).toString(), result = '';
+      while (num.length > 3) {
+        result = ',' + num.slice(-3) + result;
+        num = num.slice(0, num.length - 3);
+      }
+      if (num) { result = num + result; }
+      return result;
+    },
+
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .order_foot {
+    width: 100%;
+    margin-top: 20px;
+    background: #fff;
+    /*box-shadow: 0 2px 9px 0 #eeeeee;*/
+    margin: 0.2rem auto 0;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  .total_foot {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    box-shadow: 0 1px 9px 0 #eeeeee;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.2rem auto 0;
+  }
 
+  .total_lef {
+    width: 70%;
+    height: 1rem;
+    line-height: 1rem;
+    line-height: 1rem;
+  }
+  .add {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333333;
+    letter-spacing: 0;
+  }
+  .tinct {
+    font-size: 17px;
+    color: rgba(253, 70, 137, 0.9);
+    letter-spacing: 0;
+    line-height: 20px;
+    font-weight:300;
+  }
+  .total_rig {
+    width: 40%;
+    text-align: center;
+    font-size: 15px;
+    color: #ffffff;
+    letter-spacing: 0;
+    background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+    box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+    font-weight:300;
+  }
 
 </style>

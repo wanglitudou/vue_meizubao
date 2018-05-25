@@ -187,7 +187,7 @@ let routes = [
   },
   {
     name:"confirm",
-    path:"/confirm",
+    path:"/confirm/:type",
     component:confirm
   },
 ];

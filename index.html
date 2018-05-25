@@ -5,7 +5,7 @@
   <meta charset="utf-8">
 
   <title>project</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
   <script>
     (function (doc, win) {
 
@@ -13,7 +13,7 @@
         //orientationchange方向改变事件
         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
         recalc = function () {
-          //当前设备视口宽度 
+          //当前设备视口宽度
           var clientWidth = docEl.clientWidth;
           if (!clientWidth) return;
           docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';

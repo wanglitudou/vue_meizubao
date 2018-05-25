@@ -37,10 +37,10 @@
     <com-addressCard :type="'button'"></com-addressCard>
 
 
-    <com-orderCard :type="'product'"></com-orderCard>
+    <com-orderCard :type="'technician'"></com-orderCard>
 
 
-    <com-orderFooter :count="'19700'"></com-orderFooter>
+    <com-orderFooter :count="'19700'" :text="'确认到达'"></com-orderFooter>
 
 
 

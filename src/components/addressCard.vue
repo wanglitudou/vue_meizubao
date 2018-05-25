@@ -1,20 +1,33 @@
 <template>
-  <div class="order_foot">
-    <div class="total_foot">
-      <div class="total_lef">
-        <span class="add">合计：</span>
-        <span class="tinct">¥19,000</span>
+
+  <div>
+    <div class="address">
+      <div class="left">
+        <img src="../assets/icon/address.png" alt="">
       </div>
-      <div class="total_rig">
-        <span>立即下单</span>
+      <div class="center">
+        <div class="top">
+          <span class="color666">收货人: <span class="color333">嘿嘿</span></span>
+          <span class="color333 text-right">13801231255</span>
+        </div>
+        <div class="bottom">
+          <span class="color666">收货地址: </span><span class="color333">北京朝阳区国粹苑国粹苑国粹苑国粹苑A座4层</span></span>
+        </div>
       </div>
+      <div class="right" v-if="type=='button'">
+        <img src="../assets/icon/arrow.png" alt="">
+      </div>
+      <div class="right" v-else> </div>
     </div>
+    <div class="address-line"  v-if="type=='button'"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'addressCard',
+
+  props: ["type"],
   data () {
     return {
 
@@ -25,57 +38,61 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .order_foot {
-    width: 100%;
-    margin-top: 20px;
-    background: #fff;
-    /*box-shadow: 0 2px 9px 0 #eeeeee;*/
-    margin: 0.2rem auto 0;
+
+  .address {
+    font-size: 14px;
     display: flex;
-    justify-content: space-between;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-  }
-  .total_foot {
-    width: 100%;
-    height: 1rem;
-    line-height: 1rem;
-    box-shadow: 0 1px 9px 0 #eeeeee;
-    border-radius: 3px;
-    display: flex;
-    justify-content: space-between;
-    margin: 0.2rem auto 0;
+    flex-direction: row;
+    background: #FFFFFF;
+    box-shadow: 0 2px 9px 0 #EEEEEE;
+    border-radius: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
-  .total_lef {
-    width: 70%;
-    height: 1rem;
-    line-height: 1rem;
-    line-height: 1rem;
+  .address-line {
+    background-image: linear-gradient(-130deg, #FD4689 0%, #FD82D9 100%);
+    border-radius: 2px;
+    height: 4px;
+
   }
-  .add {
-    margin-left: 10px;
-    font-size: 14px;
-    color: #333333;
-    letter-spacing: 0;
+
+  .top {
+    margin-bottom: 8px;
   }
-  .tinct {
-    font-size: 17px;
-    color: rgba(253, 70, 137, 0.9);
-    letter-spacing: 0;
-    line-height: 20px;
-    font-weight:300;
+
+  .left {
+    display: flex;
   }
-  .total_rig {
-    width: 40%;
-    text-align: center;
-    font-size: 15px;
-    color: #ffffff;
-    letter-spacing: 0;
-    background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
-    box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
-    font-weight:300;
+
+  .right, .left {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .left img {
+    width: 20px;
+  }
+
+  .right img {
+    width: 18px;
+  }
+
+  .color333 {
+    color: #333;
+  }
+
+  .color666 {
+    color: #666;
+    font-weight: 400;
+  }
+
+
+  .text-right {
+    float: right;
   }
 
 </style>
