@@ -171,7 +171,6 @@ export default {
 }
 .payment {
   width: 7.1rem;
-  /* height: 3.2rem; */
   margin: 0.2rem auto 0;
 }
 .pay_one {

@@ -1,11 +1,28 @@
 <template>
     <div class="container">
         <div class="list_list">
-            <div class="banner">
+            <!-- <div class="banner">
                 <img src="../../assets/images/icon1.jpg"
                      alt="">
+            </div> -->
+            <div class="banner">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <!-- <img src=""
+                                 alt=""
+                                 v-for="(item,index) in url "
+                                 :src="item.images"
+                                 name="pic"
+                                 :key="item.index"
+                                 @click="updataImg(item.href)"> -->
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="ban_cent">
+            <div class="ban_cent"
+                 v-for="item in instrumentdetails"
+                 :key="item.index">
                 <p class="name_cent">
                     <span class="name">{{data.name}}</span>
                     <span class="dollar">￥ {{data.price}}元</span>
@@ -189,21 +206,6 @@ export default {
       date2:"",
     };
   }
-  // created() {
-  // let that = this;
-  // //首页banner查询
-  // that.$axios
-  //   .get("http://mzbao.weiyingjia.org/api/meizubao/instrumentDetail/?id="+)
-  //   .then(res => {
-  //     console.log(res);
-  //     if (res.data.status_code == 1001) {
-  //       that.url = res.data.data;
-  //     }
-  //   })
-  //   .catch(() => {
-  //     console.log("查询失败");
-  //   });
-  // }
 };
 </script>
 <style scoped>
