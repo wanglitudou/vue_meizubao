@@ -3,7 +3,7 @@
     <div class="total_foot">
       <div class="total_lef">
         <span class="add">合计：</span>
-        <span class="tinct">¥{{countNum}}</span>
+        <span class="tinct">¥{{finalCount}}</span>
       </div>
       <template v-if="nextFun">
         <div class="total_rig" @click="nextFun">
@@ -20,6 +20,11 @@ export default {
   props:["count","text",'nextFun'],
   mounted(){
     this.countNum=this.toThousands(this.count)
+  },
+  computed:{
+    finalCount:function(){
+      return this.countNum=this.toThousands(this.count)
+    }
   },
   data () {
     return {

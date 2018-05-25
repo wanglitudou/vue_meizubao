@@ -18,7 +18,11 @@
     "date-time-picker": "^0.5.2",
     "element-ui": "^2.3.9",
     "masonry": "0.0.2",
+<<<<<<< HEAD
     "mint-ui": "^2.2.13",
+=======
+    "ui-mcalendar": "^1.2.3",
+>>>>>>> datePicker
     "vue": "^2.5.2",
     "vue-masonry": "^0.11.1",
     "vue-router": "^3.0.1",
