@@ -9,7 +9,7 @@
     <div class="right-info">
       <p class="big">精英名字</p>
       <div>
-        <span class="color666">薪水：</span><span>￥10000/月</span>
+        <span class="color666">租赁押金：</span><span>￥10000/月</span>
         <span class="text-right">3日</span><span class="text-right color666">预约时间：</span>
       </div>
       <div class="bottom-text">
@@ -24,7 +24,7 @@
       <img src="../assets/images/timg.jpeg" alt="">
     </div>
     <div class="right-info">
-      <p class="big">精英名字</p>
+      <p class="big">设备名称</p>
       <div>
         <span class="color666">薪水：</span><span>￥10000/月</span>
         <span class="text-right">3日</span><span class="text-right color666">预约时间：</span>

@@ -5,9 +5,11 @@
         <span class="add">合计：</span>
         <span class="tinct">¥{{countNum}}</span>
       </div>
-      <div class="total_rig">
-        <span>{{text}}</span>
-      </div>
+      <template v-if="nextFun">
+        <div class="total_rig" @click="nextFun">
+          <span>{{text}}</span>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -15,7 +17,7 @@
 <script>
 export default {
   name: 'orderFooter',
-  props:["count","text"],
+  props:["count","text",'nextFun'],
   mounted(){
     this.countNum=this.toThousands(this.count)
   },
@@ -92,6 +94,8 @@ export default {
     background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
     box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
     font-weight:300;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
   }
 
 </style>

@@ -20,9 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="ban_cent"
-                 v-for="item in instrumentdetails"
-                 :key="item.index">
+            <div class="ban_cent" >
                 <p class="name_cent">
                     <span class="name">{{data.name}}</span>
                     <span class="dollar">￥ {{data.price}}元</span>
@@ -67,29 +65,31 @@
                     <span class="sign">网签租赁协议</span>
                 </p>
             </div>
-            <div class="name_foot">
-                <div class="total_foot">
-                    <div class="total_lef">
-                        <span class="add">合计:</span>
-                        <span class="tinct">¥19,000</span>
-                    </div>
-                    <div class="total_rig">
-                        <router-link to="/confirm/technician">立即下单</router-link>
-                    </div>
-                </div>
-            </div>
+
+            <orderFooter :text="'立即下单'" :count="19700" :nextFun="buy"></orderFooter>
+
+
         </div>
     </div>
 </template>
 <script>
 
-
+  import orderFooter from '../../components/orderFooter.vue'
 import DateTimePicker from 'date-time-picker';
 export default {
   mounted(){
     this.init();
   },
+  components:{
+    orderFooter,
+  },
   methods:{
+
+    buy:function(){
+      this.$router.push('/confirm/instrument')
+    },
+
+
     init(){
       Date.prototype.Format = function (fmt) { //author: meizz
         var o = {

@@ -4,6 +4,7 @@ import catagory from "../views/catagory.vue";
 import cart from "../views/cart.vue";
 import mine from "../views/mine.vue";
 import confirm from "../views/confirm.vue";
+import orderDetails from "../views/orderDetails.vue"
 //引入其他页面的组件
 
 import detail from "../views/detail/detail.vue";
@@ -189,6 +190,11 @@ let routes = [
     name:"confirm",
     path:"/confirm/:type",
     component:confirm
+  },
+  {
+    name:"order_details",
+    path:"/order_details/:type",
+    component:orderDetails
   },
 ];
 
