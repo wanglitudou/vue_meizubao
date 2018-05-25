@@ -24,42 +24,42 @@
                  v-for="item in instrumentdetails"
                  :key="item.index">
                 <p class="name_cent">
-                    <span class="name">{{item.name}}</span>
-                    <span class="dollar">￥ {{item.price}}</span>
+                    <span class="name">{{data.name}}</span>
+                    <span class="dollar">￥ {{data.price}}元</span>
                 </p>
                 <p class="name_rent">
                     <span class="monthly">
-                        <a>￥{{item.firstrent}}</a>/月</span>
+                        <a>￥{{data.firstrent}}</a>/月</span>
                     <span class="renewal">续租 :
-                        <a>￥{{item.continued}}</a>
+                        <a>￥{{data.continued}}</a>
                     </span>
                     <span></span>
                 </p>
                 <p class="name_words">
-                    <span>{{item.centent}}</span>
+                    <span>{{data.centent}}</span>
                 </p>
                 <p class="name_cate">
-                    <span>起租期:{{item.num}}</span>
-                    <span>租赁押金:￥{{item.deposit}}</span>
-                    <span>{{item.plac}}</span>
+                    <span>起租期:{{data.num}}个月</span>
+                    <span>租赁押金:￥{{data.deposit}}</span>
+                    <span>{{data.place}}</span>
                 </p>
             </div>
             <div class="product">
                 <p class="name_pro">
-                    <span>{{item.match_product}}：</span>
-                    <!-- <span>产品1 </span>
-                    <span>产品2</span>
-                    <span>产品3</span> -->
+                    <span>配合产品 ：</span>
+                    <span>
+                    {{data.match_product}}
+                    </span>
                 </p>
 
             </div>
             <div class="data_name">
                 <p class="begin_rent">
-                    <span> 起租日期 {{item.start}}
-                        <!-- <i class="iconfont icon-xiaoxizhongxin"></i> -->
+                    <span v-on:click="datePicker('date1')"> 起租日期 <span>{{date1}}</span>
+                        <i class="iconfont icon-xiaoxizhongxin"></i>
                     </span>
-                    <span> 终止日期 {{item.end}}
-                        <!-- <i class="iconfont icon-xiaoxizhongxin"></i> -->
+                    <span v-on:click="datePicker('date2',14)"> 终止日期 {{date2}}
+                        <i class="iconfont icon-xiaoxizhongxin"></i>
                     </span>
                 </p>
                 <p class="name_credit">
@@ -82,52 +82,132 @@
     </div>
 </template>
 <script>
-import "./details.css";
+
+
+import DateTimePicker from 'date-time-picker';
 export default {
+  mounted(){
+    this.init();
+  },
+  methods:{
+    init(){
+      Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+          "M+": this.getMonth() + 1, //月份
+          "d+": this.getDate(), //日
+          "h+": this.getHours(), //小时
+          "m+": this.getMinutes(), //分
+          "s+": this.getSeconds(), //秒
+          "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+          "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+      }
+
+      this.$axios
+        .get(window.ajaxSrc+"/api/meizubao/instrumentDetail", {
+          params: { 'id': 6 }
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.data = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("http请求错误");
+        });
+    },
+
+
+    datePicker(str,addMonth){
+      let self=this;
+      var defaultDate
+      if(str=='date2'){
+        defaultDate=self.date1;
+      }
+      let options;
+      if(str=='date1'){
+        options={
+          lang: 'zh-CN', // 语言，默认 'EN' ，默认 'EN', 'zh-CN' 可选
+          format: 'yyyy-MM-dd', // 格式， 'yyyy-MM-dd'
+          default: self.date1 || new Date(), // 默认值 `new Date()`。 如果`default`有值且是字符串的话就会根据`format`参数来将其转化为一个`Date`实例。当然可以选择传入一个日期实例。
+          min: new Date().Format('yyyy-MM-dd'),
+          max:'2040-05-30',
+        };
+      }else if(str=='date2'){
+        var minDate;
+        if(self.date1&&addMonth){
+
+          var year,month,day,addYear=0;
+
+          year=new Date(self.date1).getFullYear();
+          month=new Date(self.date1).getMonth()+1;
+          day=new Date(self.date1).getDate();
+
+          month+=addMonth;
+          while(month>=12){
+            addYear++;
+            month-=12;
+          }
+          year+=addYear;
+
+          console.log('year:'+year);
+          console.log('month:'+month);
+          console.log('day:'+day);
+
+
+          var dateStr=year+'-'+month+'-'+day;
+          minDate=new Date(dateStr).Format('yyyy-MM-dd');
+        }
+        options={
+          lang: 'zh-CN', // 语言，默认 'EN' ，默认 'EN', 'zh-CN' 可选
+          format: 'yyyy-MM-dd', // 格式， 'yyyy-MM-dd'
+          default: self.date2 || defaultDate || new Date(), // 默认值 `new Date()`。 如果`default`有值且是字符串的话就会根据`format`参数来将其转化为一个`Date`实例。当然可以选择传入一个日期实例。
+          min: minDate,
+          max:'2040-05-30',
+        };
+      }
+      let config={
+        day: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+        shortDay: ['日', '一', '二', '三', '四', '五', '六'],
+        MDW: 'M月d日D', // 主面板标题部分 月日星期
+        YM: 'yyyy年M月', // 日期部分标题显示
+        OK: '确定', // 确定按钮
+        CANCEL: '取消' // 取消按钮
+      };
+
+
+      var datePicker = new DateTimePicker.Date(options, config);
+      datePicker.on('selected', function (formatDate, now) {
+        // formatData = 2016-10-19
+        // now = Date instance -> Wed Oct 19 2016 20:28:12 GMT+0800 (CST)
+        console.log(formatDate);
+        str=="date1" && (self.date1=formatDate);
+        str=='date2' && (self.date2=formatDate);
+      })
+      datePicker.on('cleared', function () {
+
+        str=="date1" && (self.date1='');
+        str=='date2' && (self.date2='');
+      })
+    },
+
+
+
+  },
   data() {
     return {
-      url: [], //banner
-      instrumentdetails: [] //仪器详情
+      data:[],
+      date1:"",
+      date2:"",
     };
-  },
-  created() {
-    let that = this;
-    //仪器详情
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/instrumentDetail", {
-        id: 1
-      })
-      .then(res => {
-        console.log(res);
-
-        // if (res.data.status_code == 1001) {
-        //   that.instrumentdetails = res.data.data;
-        // }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
-  },
-  methods: {},
-  components: {},
-  mounted: function() {
-    var myswiper = new Swiper(".swiper-container", {
-      loop: true,
-      autoplay: 2000
-    });
   }
 };
 </script>
 <style scoped>
-.banner {
-  height: 3rem;
-}
-.banner .swiper-container {
-  width: 100%;
-  height: 3rem;
-}
-.banner .swiper-container img {
-  width: 100%;
-  height: auto;
-}
+  @import "./details.css";
 </style>

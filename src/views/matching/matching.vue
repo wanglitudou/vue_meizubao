@@ -53,7 +53,36 @@
     </div>
 </template>
 <script>
-export default {};
+export default {
+
+  mounted(){
+    this.init();
+  },
+  methods: {
+    init(){
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
+          params: {'id': 6}
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.data = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("http请求错误");
+        });
+    },
+  },
+  data() {
+    return {
+      init:[],
+      date1:"",
+      date2:"",
+    };
+  }
+};
 </script>
 <style scoped>
 .container {

@@ -19,6 +19,9 @@ import "./components/js/jquery-2.1.0";
 
 //引入axios
 import axios from "axios";
+
+window.ajaxSrc = "http://mzbao.weiyingjia.org";
+
 axios.defaults.transformRequest = [
   function(data) {
     let newData = "";
@@ -37,7 +40,11 @@ Vue.prototype.$axios = axios;
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
+//瀑布流
 
+import {VueMasonryPlugin} from 'vue-masonry';
+
+Vue.use(VueMasonryPlugin)
 // eslint-disable no-new
 new Vue({
   el: "#app",
