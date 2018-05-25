@@ -17,43 +17,52 @@
                     </div>
                 </div> -->
                 <!-- 头部导航 -->
-                 <div class="sortMenu clearfix" v-show="slideShow">
+                <div class="sortMenu clearfix"
+                     v-show="slideShow">
                     <ul class="sortMenu-ul">
                         <div v-for="(item,index) in tabs"
-                        :ley="index"
-                          @click="tab(index)">
-                        <!-- <tab :tab="tab"
+                             :key="index"
+                             @click="tab(index)">
+                            <!-- <tab :tab="tab"
                             :index="index"
                             :active="active" @click="toggle(index)"></tab> -->
-                              <li class="cell"   :class="num == index ?'dora':''">
-                            {{item.name}}
+                            <li class="cell"
+                                :class="num == index ?'dora':''">
+                                {{item.name}}
                             </li>
                         </div>
                     </ul>
                     <!-- 搜索按钮 -->
-                   
-                      <div class="sousuo" @click="aaa()">
-                         <img src="../../assets/icon/search_1.png" alt="">
-                       </div>
-                  </div>
-                  <div class="topSearch" v-if="flog">
-                    <div class="searchs">
-                    <form action="javascript:return true;">  
-                        <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">  
-                    </form>  
-                        <img src="../../assets/icon/search_1.png"  alt="111">
+
+                    <div class="sousuo"
+                         @click="aaa()">
+                        <img src="../../assets/icon/search_1.png"
+                             alt="">
                     </div>
-                  </div>
+                </div>
+                <div class="topSearch"
+                     v-if="flog">
+                    <div class="searchs">
+                        <form action="javascript:return true;">
+                            <input @keyup.13=show()
+                                   type="search"
+                                   placeholder="请输入搜索内容"
+                                   v-model="keyword"
+                                   ref="input1">
+                        </form>
+                        <img src="../../assets/icon/search_1.png"
+                             alt="111">
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- <div> -->
 
-
         <!-- <div class="scrolls"> -->
-            <!-- <div class="list_cent"> -->
-                <!-- <div class="list_lef" -->
-                     <!-- v-for="item in immediatelyorder"
+        <!-- <div class="list_cent"> -->
+        <!-- <div class="list_lef" -->
+        <!-- v-for="item in immediatelyorder"
                      :key="item.index">
                     <div class="listing">
                         <div>
@@ -91,9 +100,9 @@
                     <div>
 
                     </div> -->
-                <!-- </div> -->
-                <!-- <div class="list_rig" -->
-                     <!-- v-for="item in immediatelyorder"
+        <!-- </div> -->
+        <!-- <div class="list_rig" -->
+        <!-- v-for="item in immediatelyorder"
                      :key="item.index">
                     <div class="listing">
                         <div>
@@ -128,7 +137,7 @@
                             </p>
                         </div>
                     </div> -->
-                    <!-- <div class="listing">
+        <!-- <div class="listing">
                         <div>
                             <img src="../../assets/images/icon6.jpg"
                                  alt=""
@@ -161,7 +170,7 @@
                             </p>
                         </div>
                     </div> -->
-                    <!-- <div class="listing">
+        <!-- <div class="listing">
                         <div>
                             <img src="../../assets/images/icon1.jpg"
                                  alt=""
@@ -194,67 +203,73 @@
                             </p>
                         </div>
                     </div> -->
-                <!-- </div> -->
-            <!-- </div> -->
-
+        <!-- </div> -->
         <!-- </div> -->
 
+        <!-- </div> -->
 
         <!-- <div class="addmore">
             <span class="more_add">加载更多</span>
         </div> -->
 
-<!-- <vue-waterfall-easy :imgsArr="imgsArr" ></vue-waterfall-easy> -->
- 
-<div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
-    <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" >
-       <!-- block item markup -->
-       <div class="box listing">
+        <!-- <vue-waterfall-easy :imgsArr="imgsArr" ></vue-waterfall-easy> -->
 
-               <div>
-                 <img :src="item.images" alt="">
-               </div>
-                <div class="other">
-                    <p>
-                        <span>{{item.name}}</span>
-                        <span class="paice">￥{{item.price}}</span>
-                    </p>
-                    <p class="meeting">
-                        {{item.centent}}
-                    </p>
-                    <p>
-                        <span>
-                            <a>￥{{item.firstrent}}</a>/月
-                        </span>
-                        <span class="count"
-                                @click="details()">
-                            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                            {{item.created}}
-                        </span>
-                    </p>
-                    <p class="rent"> 起租期:{{item.num}}个月</p>
-                    <p class="orders"
-                        @click="details()">
-                        <span class="order">
-                            立即下单
-                        </span>
-                    </p>
+        <div v-masonry
+             transition-duration="0.3s"
+             ref="masonry"
+             item-selector=".item"
+             column-width=".item">
+            <div v-masonry-tile
+                 class="item"
+                 v-for="(item, index) in imgsArr">
+                <!-- block item markup -->
+                <div class="box listing">
+
+                    <div>
+                        <img :src="item.images"
+                             alt="">
+                    </div>
+                    <div class="other">
+                        <p>
+                            <span>{{item.name}}</span>
+                            <span class="paice">￥{{item.price}}</span>
+                        </p>
+                        <p class="meeting">
+                            {{item.centent}}
+                        </p>
+                        <p>
+                            <span>
+                                <a>￥{{item.firstrent}}</a>/月
+                            </span>
+                            <span class="count"
+                                  @click="details()">
+                                <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+                                {{item.created}}
+                            </span>
+                        </p>
+                        <p class="rent"> 起租期:{{item.num}}个月</p>
+                        <p class="orders"
+                           @click="details()">
+                            <span class="order">
+                                立即下单
+                            </span>
+                        </p>
+                    </div>
                 </div>
-             </div>
-       
-     </div>
-     <div class="noData" v-show="noData">
-       <div>暂无数据</div>
-     </div>
+
+            </div>
+            <div class="noData"
+                 v-show="noData">
+                <div>暂无数据</div>
+            </div>
+
+        </div>
+
+        <!-- 点击加载 -->
 
     </div>
-    
-    <!-- 点击加载 -->
-   
-   
-  </div>
-  
-</div>
+
+    </div>
 </template>
 <script>
 import qs from "qs";
@@ -278,8 +293,8 @@ export default {
       isScroll: true,
       pages: 1,
       keyword: "",
-      noData:false,
-      slideShow:true
+      noData: false,
+      slideShow: true
     };
   },
 
@@ -293,7 +308,7 @@ export default {
         if (res.data.status_code == 1001) {
           console.log(res.data.data);
           that.tabs = res.data.data;
-          this.getData(res.data.data[0].id, "", this.pages,1);
+          this.getData(res.data.data[0].id, "", this.pages, 1);
         }
       })
       .catch(() => {
@@ -342,7 +357,7 @@ export default {
     show() {
       this.$refs.input1.blur();
       console.log(this.keyword);
-      this.getData("", this.keyword, this.pages,2);
+      this.getData("", this.keyword, this.pages, 2);
     },
     loseblur() {
       //   alert("666");
@@ -350,9 +365,9 @@ export default {
     aaa() {
       this.flog = true;
       this.imgsArr = [];
-      this.slideShow = false
-    //  console.log(this.$refs.masonry)
-    this.$refs.masonry.style="height:100%;position:relative"
+      this.slideShow = false;
+      //  console.log(this.$refs.masonry)
+      this.$refs.masonry.style = "height:100%;position:relative";
     },
     details() {
       this.$router.push({ name: "details" });
@@ -362,7 +377,7 @@ export default {
       this.num = index;
       //   console.log(index)
     },
-    getData(name, keyword, page,type) {
+    getData(name, keyword, page, type) {
       //     let that =  this
       //   that.$axios
       //   .get("http://mzbao.weiyingjia.org/api/meizubao/instrumentType", {})
@@ -391,17 +406,15 @@ export default {
           if (res.data.status_code == 1001) {
             // arr.push(res.data.data);
             console.log(arr);
-            console.log(type)
-            if(type == 2 && res.data.data.length ==0){
-             
-                this.noData =  true
-            }else{
-                this.noData =false
+            console.log(type);
+            if (type == 2 && res.data.data.length == 0) {
+              this.noData = true;
+            } else {
+              this.noData = false;
             }
             // this.imgsArr = this.imgsArr.concat(arr);
             // console.log(this.imgsArr)
             this.imgsArr = res.data.data;
-        
           }
         })
         .catch(() => {
@@ -415,15 +428,14 @@ export default {
 };
 </script>
 <style scoped>
-
 @import "./detail.css";
-.topSearch{
-   position: fixed;
-    width: 100%;
-    top: 0;
-    height: 1.2rem;
-    background: #fff;
-    z-index: 2;
+.topSearch {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 1.2rem;
+  background: #fff;
+  z-index: 2;
 }
 
 .searchs {
@@ -432,18 +444,18 @@ export default {
   /* display: inherit; */
   /* z-index: 8; */
   /* width: 100%; */
-      width: 96%;
-    height: auto;
-    border: 1px solid #ccc;
-    margin-top: 0.2rem;
-    text-align: center;
-    margin-left: 2%;
-    background: #fff;
-    border-radius: 0.2rem;
-    position: fixed;
-    top: 0px;
-    display: inherit;
-    z-index: 8;
+  width: 96%;
+  height: auto;
+  border: 1px solid #ccc;
+  margin-top: 0.2rem;
+  text-align: center;
+  margin-left: 2%;
+  background: #fff;
+  border-radius: 0.2rem;
+  position: fixed;
+  top: 0px;
+  display: inherit;
+  z-index: 8;
 }
 .sousuo {
   width: 20%;
@@ -470,7 +482,6 @@ export default {
 .sousuo img {
   width: 24px;
   height: 24px;
-  
 }
 .nav_pic {
   /* width: 6.2rem;
@@ -537,12 +548,12 @@ export default {
   text-overflow: ellipsis;
   word-break: keep-all;
 }
-.noData{
-    width: 100%;
-    height: 100%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
+.noData {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
 }
 </style>

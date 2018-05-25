@@ -13,8 +13,8 @@
           <input name="phone"
                  type="text"
                  class="inpt"
-                 v-model="phone"
-                 placeholder="请输入手机号码" />
+                 placeholder="请输入手机号码"
+                 v-model="phone" />
         </span>
       </p>
       <p class="ver_code">
@@ -24,7 +24,8 @@
                  class="inpt"
                  placeholder="请输入验证码">
         </span>
-        <span class="ver_send">发送</span>
+        <span class="ver_send"
+              @click="send()">发送</span>
       </p>
       <p class="log_log">
         <span class="log_lo"
@@ -40,7 +41,10 @@
     </div>
   </div>
 </template>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+
 <script>
+import { MessageBox } from "mint-ui";
 export default {
   data() {
     return {
@@ -48,21 +52,31 @@ export default {
     };
   },
   methods: {
-    sendcode() {
-      var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
-      if (this.phone == "") {
-        alert("请输入手机号码");
-      } else if (!reg.test(this.phone)) {
-        alert("手机格式不正确");
-      } else {
-        // this.timer();
-        // this.time=60;
-        // this.disabled=true;
-        /*axios.post(url).then(
-                        res=>{
-                        this.phonedata=res.data;
-                    })*/
+    send() {
+      let that = this;
+      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.phone)) {
+        MessageBox.alert("请输入正确的手机号格式");
+        // alert("请输入正确的手机号格式");
+        return false;
       }
+      //获取验证码
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/telcode?phone=" +
+            that.phone,
+          {}
+        )
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            console.log(res.data.data);
+            // that.tabs = res.data.data;
+            // this.getData(res.data.data[0].id, "", this.pages, 1);
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
     },
     login() {
       this.$router.push({ name: "home" });
@@ -72,7 +86,7 @@ export default {
     },
     types() {
       let that = this;
-      //首页banner查询
+      //手机号登陆
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/wlogin", {})
         .then(res => {
@@ -103,6 +117,8 @@ export default {
     }
   },
   created() {
+    //获取授权
+
     this.types();
     // var tokenUrl = window.sessionStorage.getItem("token");
     // var $login = window.sessionStorage.getItem("$login");

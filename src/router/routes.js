@@ -31,7 +31,6 @@ import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 
-
 let routes = [
   {
     path: "/",
@@ -77,12 +76,6 @@ let routes = [
         path: "authname",
         component: authname
       },
-      {
-        name: "information",
-        path: "information",
-        component: information
-      },
-
       {
         name: "coursepage",
         path: "coursepage",
@@ -182,14 +175,19 @@ let routes = [
   },
   {
     name: "login",
-    path: "login",
+    path: "/login",
     component: login
   },
   {
-    name:"confirm",
-    path:"/confirm",
-    component:confirm
+    name: "confirm",
+    path: "/confirm",
+    component: confirm
   },
+  {
+    name: "information",
+    path: "/information",
+    component: information
+  }
 ];
 
 export default routes; //抛出
