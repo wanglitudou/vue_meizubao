@@ -5,7 +5,6 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <!-- <img src="" alt=""> -->
             <img src=""
                  alt=""
                  v-for="(item,index) in url "
@@ -23,7 +22,7 @@
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
-             @click="pageindustry()">
+             @click="login()">
       </div>
     </div>
     <div ref="scroll"
@@ -137,7 +136,7 @@
         </div>
         <div class="hotimg">
           <div class="hotimg_lef"
-               v-for="item in CooperativeProject"
+               v-for="item in cooperativeProject"
                :key="item.index">
             <img :src="item.images"
                  alt=""
@@ -161,11 +160,11 @@ export default {
   data() {
     return {
       url: [], //banner
-      CooperativeProject: [], //合作项目
       rentinginstrument: [], //热租仪器
       beautyindustry: [], //美业菁英
       accessoryproducts: [], //配套产品
-      visualscreen: [] //首页shiping
+      cooperativeProject: [], //合作项目
+      visualscreen: [] //培训视屏
     };
   },
   created() {
@@ -182,25 +181,13 @@ export default {
       .catch(() => {
         console.log("查询失败");
       });
-    //合作项目查询
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.CooperativeProject = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
     //首页热租仪器
     that.$axios
       .get("http://mzbao.weiyingjia.org/api/meizubao/instrument", {})
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
-          that.beautyindustry = res.data.data;
+          that.rentinginstrument = res.data.data;
         }
       })
       .catch(() => {
@@ -212,19 +199,43 @@ export default {
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
+          that.beautyindustry = res.data.data;
+        }
+      })
+      .catch(() => {
+        console.log("查询失败");
+      });
+    //配套产品
+    that.$axios
+      .get("http://mzbao.weiyingjia.org/api/meizubao/product", {})
+      .then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
           that.accessoryproducts = res.data.data;
         }
       })
       .catch(() => {
         console.log("查询失败");
       });
-    //首页shipoing
+    //培训视屏
     that.$axios
       .get("http://mzbao.weiyingjia.org/api/meizubao/video", {})
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
           that.visualscreen = res.data.data;
+        }
+      })
+      .catch(() => {
+        console.log("查询失败");
+      });
+    //合作项目查询
+    that.$axios
+      .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
+      .then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
+          that.cooperativeProject = res.data.data;
         }
       })
       .catch(() => {
@@ -289,8 +300,8 @@ export default {
       //点击培训视频当中的"查看更多" 跳转到对应的详情页面
       this.$router.push({ name: "clickpay" });
     },
-    pageindustry() {
-      this.$router.push({ name: "pageindustry" });
+    login() {
+      this.$router.push({ name: "login" });
     }
 
     // go_to_search() {

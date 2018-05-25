@@ -61,11 +61,6 @@ let routes = [
         component: mine
       },
       {
-        name: "login",
-        path: "login",
-        component: login
-      },
-      {
         name: "ordergoods",
         path: "ordergoods",
         component: ordergoods
@@ -182,6 +177,11 @@ let routes = [
     name: "pageindustry",
     path: "pageindustry",
     component: pageindustry
+  },
+  {
+    name: "login",
+    path: "login",
+    component: login
   }
 ];
 

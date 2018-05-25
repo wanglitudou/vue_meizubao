@@ -9,11 +9,21 @@
     <div class="phone">
       <p class="pho_pho">
         <span class="pho_tel">手机号</span>
-        <span class="ple_pho">请输入手机号码</span>
+        <span class="ple_pho">
+          <input name="phone"
+                 type="text"
+                 class="inpt"
+                 v-model="phone"
+                 placeholder="请输入手机号码" />
+        </span>
       </p>
       <p class="ver_code">
         <span class="ver_tel">验证码</span>
-        <span class="ver_pho">请输入验证码</span>
+        <span class="ver_pho">
+          <input type="text"
+                 class="inpt"
+                 placeholder="请输入验证码">
+        </span>
         <span class="ver_send">发送</span>
       </p>
       <p class="log_log">
@@ -23,7 +33,8 @@
       <p class="wech">
         <span class="wech_img">
           <img src="../../assets/icon/wechat.png"
-               alt="">
+               alt=""
+               @click="authorization()">
         </span>
       </p>
     </div>
@@ -32,12 +43,140 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      phone: this.phone
+    };
   },
   methods: {
+    sendcode() {
+      var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+      if (this.phone == "") {
+        alert("请输入手机号码");
+      } else if (!reg.test(this.phone)) {
+        alert("手机格式不正确");
+      } else {
+        // this.timer();
+        // this.time=60;
+        // this.disabled=true;
+        /*axios.post(url).then(
+                        res=>{
+                        this.phonedata=res.data;
+                    })*/
+      }
+    },
     login() {
       this.$router.push({ name: "home" });
+    },
+    authorization() {
+      console.log("666");
+    },
+    types() {
+      let that = this;
+      //首页banner查询
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/wlogin", {})
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+      // $.ajax({
+      //   type: "get",
+      //   url: "http://mzbao.weiyingjia.org/api/meizubao/wlogin",
+      //   async: false,
+      //   // dataType: "jsonp",
+      //   success: function(data) {
+      //     console.log(data);
+      //     // if (data.errcode == 100010) {
+      //     //   var _url = data.errmsg + "?url=" + window.location.href;
+      //     //   console.log(data.errmsg + "?url=" + window.location.href);
+      //     //   window.location.href = _url;
+      //     // }
+      //   },
+      //   error: function() {
+      //     console.log("异常！");
+      //   }
+      // });
     }
+  },
+  created() {
+    this.types();
+    // var tokenUrl = window.sessionStorage.getItem("token");
+    // var $login = window.sessionStorage.getItem("$login");
+    // if ($login !== "$login") {
+    //   if (!tokenUrl) {
+    //     var url = "http://pushcms.wx.weiyingjia.org/site/getuserinfo";
+    //     function UrlSearch() {
+    //       var name, value;
+    //       var str = location.href; //取得整个地址栏
+    //       var num = str.indexOf("?");
+    //       str = str.substr(num + 1); //str得到?之后的字符串
+    //       var arr = str.split("&"); //得到&分割的参数，放入数组中
+    //       for (var i = 0; i < arr.length; i++) {
+    //         num = arr[i].indexOf("=");
+    //         if (num >= 0) {
+    //           name = arr[i].substring(0, num);
+    //           value = arr[i].substr(num + 1);
+    //           this[name] = value;
+    //         }
+    //       }
+    //     }
+
+    //     var Request = new UrlSearch();
+    //     var code = Request.code;
+    //     // var userId = Request.userid;
+    //     if (Request.userid == "undefined") {
+    //       var userId = "";
+    //     } else {
+    //       var userId = Request.userid;
+    //     }
+    //     var storage = window.sessionStorage;
+    //     console.log(code);
+    //     if (code) {
+    //       //console.log(code);return false;
+    //       var urlCode = url + "?code=" + code + "&userid=" + userId;
+    //       $.ajax({
+    //         type: "get",
+    //         url: urlCode,
+    //         async: false,
+    //         success: function(data) {
+    //           console.log(data);
+    //           if (data.errcode == 200) {
+    //             var errmessage = data.errmsg;
+    //             var member = data.member;
+    //             window.sessionStorage.setItem("$login", "$login");
+    //             window.sessionStorage.setItem("token", errmessage); // 在这里设置的
+    //             window.sessionStorage.setItem("member", member); //  授权获得用户的token，后面分享出去需要带的参数
+    //             // alert(errmessage);
+    //           }
+    //         },
+    //         error: function(err) {
+    //           console.log(err);
+    //         }
+    //       });
+    //     } else {
+    //       $.ajax({
+    //         type: "get",
+    //         url: url,
+    //         async: false,
+    //         success: function(data) {
+    //           console.log(data);
+    //           if (data.errcode == 100010) {
+    //             var _url = data.errmsg + "?url=" + window.location.href;
+    //             console.log(data.errmsg + "?url=" + window.location.href);
+    //             window.location.href = _url;
+    //           }
+    //         },
+    //         error: function() {
+    //           console.log("异常！");
+    //         }
+    //       });
+    //     }
+    //   }
+    // }
   }
 };
 </script>
@@ -47,6 +186,13 @@ export default {
   height: auto;
   height: calc(100% - 1.5rem);
   background: #ffffff;
+}
+.inpt {
+  width: 5rem;
+  padding: 0.1rem 0.2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 .cent_ber {
   width: 7.068rem;
