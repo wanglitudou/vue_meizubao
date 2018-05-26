@@ -31,6 +31,7 @@ import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
+import sign from "../views/sign.vue";
 
 let routes = [
   {
@@ -193,6 +194,11 @@ let routes = [
     name: "order_details",
     path: "/order_details/:type",
     component: orderDetails
+  },
+  {
+    name:"sign",
+    path:"/sign",
+    component:sign
   }
 ];
 

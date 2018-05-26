@@ -2,9 +2,9 @@
   <div class="container">
     <div class="list_list">
       <!-- <div class="banner">
-                <img src="../../assets/images/icon1.jpg"
-                     alt="">
-            </div> -->
+          <img src="../../assets/images/icon1.jpg"
+               alt="">
+      </div> -->
       <div class="banner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
@@ -45,9 +45,7 @@
       <div class="product">
         <p class="name_pro">
           <span>配合产品 ：</span>
-          <span>
-                    {{data.match_product}}
-                    </span>
+          <span>{{data.match_product}}</span>
         </p>
 
       </div>
@@ -73,7 +71,7 @@
         </p>
       </div>
 
-      <orderFooter :text="'立即下单'" :count="19700" :nextFun="jumpToConfirm"></orderFooter>
+      <orderFooter :text="'立即下单'" :count="month*data.firstrent + (data.deposit-0)" :nextFun="jumpToConfirm"></orderFooter>
 
 
     </div>
@@ -82,61 +80,15 @@
 <script>
 
   import orderFooter from '../../components/orderFooter.vue'
-import DateTimePicker from 'date-time-picker';
-export default {
-  mounted() {
-    this.init();
-  },
-  components: {
-    orderFooter,
-  },
-  methods: {
-
-    buy: function () {
-      this.$router.push('/confirm/instrument')
-    },
 
 
-    init(){
-      Date.prototype.Format = function (fmt) { //author: meizz
-        var o = {
-          "M+": this.getMonth() + 1, //月份
-          "d+": this.getDate(), //日
-          "h+": this.getHours(), //小时
-          "m+": this.getMinutes(), //分
-          "s+": this.getSeconds(), //秒
-          "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-          S: this.getMilliseconds() //毫秒
-        };
-        if (/(y+)/.test(fmt))
-          fmt = fmt.replace(
-            RegExp.$1,
-            (this.getFullYear() + "").substr(4 - RegExp.$1.length)
-          );
-        for (var k in o)
-          if (new RegExp("(" + k + ")").test(fmt))
-            fmt = fmt.replace(
-              RegExp.$1,
-              RegExp.$1.length == 1
-                ? o[k]
-                : ("00" + o[k]).substr(("" + o[k]).length)
-            );
-        return fmt;
+  export default {
+
+    data() {
+      return {
+        data: [],
+        month: 1,
       };
-
-      this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-          params: {id: 6}
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            this.data = res.data.data;
-          }
-        })
-        .catch(() => {
-          console.log("http请求错误");
-        });
     },
     mounted(){
       this.init();
@@ -160,15 +112,15 @@ export default {
       jumpToConfirm: function () {
         this.$router.push({
 //          path: '/confirm/instrument',
-          name: "confirm",
+          name:"confirm",
           params: {
-            type: 'instrument',
+            type:'instrument',
             name: "设备名称",
             price: 1000,
             during: 10,
             deposit: 2800,
-            month: this.data.num,
-            count: 25700,
+            month:this.data.num,
+            count:25700,
           }
         })
       },
@@ -193,9 +145,8 @@ export default {
       },
     },
   }
-}
   ;
 </script>
 <style scoped>
-@import "./details.css";
+  @import "./details.css";
 </style>

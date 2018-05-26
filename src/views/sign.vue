@@ -1,66 +1,32 @@
 <template>
   <div class="container">
-    <div class="list_bans">
-      <div class="banners">
-        <img :src="data.images && data.images[0]"
-             alt="">
-      </div>
-      <div class="pro_name">
-        <span class="pro_names">{{data.name}}</span>
-      </div>
-      <div class="list_coor">
-        <p class="cate_pro">
-          <span>配合仪器: {{data.instrument}}</span>
-        </p>
-        <p class="cate_cen">
-          <span>配合产品:</span>
-          <span>422266522335118</span>
-        </p>
-      </div>
-      <div class="price_cent">
-        <p class="pri_cen pri_common">
-          <span class="zro">零售价</span>
-          <span>￥{{data.price}}</span>
-        </p>
-        <p class="pri_lis pri_common">
-          <span class="zro">折扣价</span>
-          <span class="pri_mon">￥{{data.discount}}</span>
-        </p>
-        <div class="pri_common">
-          <span class="zro">购买数量</span>
 
 
-          <div class="spinner">
-            <div class="decrease" @click="decrease" v-bind:class="{ disable: number==1  }">-</div>
-            <input type="number" class="value" maxlength="3" v-model="number"/>
-            <div class="increase" @click="increase">+</div>
-          </div>
+    <div id="canvasDiv"></div>
 
 
-        </div>
-        <!--<p class="pri_common">-->
-        <!--<span class="zro">总金额</span>-->
-        <!--<span class="price_con">￥4500</span>-->
-        <!--</p>-->
-      </div>
-      <div class="pro_detail">
-        <p class="pro_det">产品详情</p>
-        <p class="pro_beg">{{data.details}}</p>
-      </div>
-    </div>
 
-    <orderFooter :text="'立即下单'" :count="number*data.discount" :nextFun="jumpToConfirm"></orderFooter>
+    <button id="fixed">固定画布</button>
+
+    <button id="btn_clear">清除</button>
+
+    <button id="btn_submit">提交</button>
+
+    <img id= "hiddenImg" src="https://sfault-image.b0.upaiyun.com/236/838/2368380853-5b06b6892b27a" alt="">
+
+    <img id="qmimg"/>
+
+
 
   </div>
 </template>
 <script>
-  import orderFooter from '../../components/orderFooter.vue'
+
   export default {
 
     data() {
       return {
         data: [],
-        number:1,
       };
     },
 
@@ -71,50 +37,277 @@
     methods: {
 
 
-
-      decrease: function () {
-        if (this.number>1) {
-          this.number--
-        } else {
-          return false
-        }
-      },
-      increase: function () {
-        this.number++
-      },
-      jumpToConfirm: function () {
-        this.$router.push({
-//          path: '/confirm/instrument',
-          name: "confirm",
-          params: {
-            type: 'product',
-            name: this.data.name,
-            price: this.data.discount,
-            number:this.number,
-            count: this.number*this.data.discount,
-          }
-        })
-      },
-
-
       init(){
-        this.$axios
-          .get(window.ajaxSrc + "/api/meizubao/productDetail", {
-            params: {'id': 6}
-          })
-          .then(res => {
-            console.log(res);
-            if (res.data.status_code == 1001) {
-              this.data = res.data.data;
+
+
+        var canvasDiv = document.getElementById('canvasDiv');
+        var canvas = document.createElement('canvas');
+
+        var screenWidth=document.documentElement.clientWidth;
+        var screenHeight=document.documentElement.clientHeight;
+
+        var canvasWidth = screenWidth;
+        var canvasHeight = 300;
+
+
+
+
+        var point = {};
+
+        point.notFirst = false;
+
+
+        canvas.setAttribute('width', canvasWidth);
+
+        canvas.setAttribute('height', canvasHeight);
+
+        canvas.setAttribute('id', 'canvas');
+
+        canvasDiv.appendChild(canvas);
+
+
+        if (typeof G_vmlCanvasManager != 'undefined') {
+
+
+          canvas = G_vmlCanvasManager.initElement(canvas);
+
+        }
+
+
+        var context = canvas.getContext("2d");
+
+
+        var img = new Image();
+
+        img.src = 'https://sfault-image.b0.upaiyun.com/236/838/2368380853-5b06b6892b27a';
+
+        img.setAttribute("crossOrigin", 'Anonymous');
+
+
+        img.onload = function () {
+
+          var ptrn = context.createPattern(img, 'no-repeat');
+
+          context.fillStyle = ptrn;
+
+          context.fillRect(0, 0, canvas.width, canvas.height/2);
+
+        }
+
+        console.log(canvas);
+
+        canvas.addEventListener("touchstart", function (e) {
+
+          var mouseX = e.pageX - this.offsetLeft;
+
+          var mouseY = e.pageY - this.offsetTop;
+
+          paint = true;
+
+          addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+
+          redraw();
+
+        });
+
+
+        canvas.addEventListener("touchend", function (e) {
+
+          paint = false;
+
+        });
+
+
+        canvas.addEventListener("touchmove", function (e) {
+
+          if (paint) {
+
+            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+
+            redraw();
+
+          }
+
+        });
+
+
+        canvas.addEventListener("mousedown", function (e) {
+
+          var mouseX = e.pageX - this.offsetLeft;
+
+          var mouseY = e.pageY - this.offsetTop;
+
+          paint = true;
+
+          addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+
+          redraw();
+
+        });
+
+
+        canvas.addEventListener("mousemove", function (e) {
+
+          if (paint) {
+
+            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+
+            redraw();
+
+          }
+
+        });
+
+
+        canvas.addEventListener("mouseup", function (e) {
+
+          paint = false;
+
+        });
+
+
+        canvas.addEventListener("mouseleave", function (e) {
+
+          paint = false;
+
+        });
+
+
+        var clickX = new Array();
+
+        var clickY = new Array();
+
+        var clickDrag = new Array();
+
+        var paint;
+
+
+
+
+
+        $(document).on('touchstart touchmove touchend', $.proxy(function(e) {
+          if (e.target === canvas) {
+            e.preventDefault();
+          }
+        }, this));
+
+
+        function addClick(x, y, dragging) {
+
+          clickX.push(x);
+
+          clickY.push(y);
+
+          clickDrag.push(dragging);
+
+        }
+
+
+        function redraw() {
+
+          //canvas.width = canvas.width; // Clears the canvas
+
+
+          context.strokeStyle = "#333333";
+
+          context.lineJoin = "round";
+
+          context.lineWidth = 2;
+
+
+          while (clickX.length > 0) {
+
+            point.bx = point.x;
+
+            point.by = point.y;
+
+            point.x = clickX.pop();
+
+            point.y = clickY.pop();
+
+            point.drag = clickDrag.pop();
+
+            context.beginPath();
+
+            if (point.drag && point.notFirst) {
+
+              context.moveTo(point.bx, point.by);
+
+            } else {
+
+              point.notFirst = true;
+
+              context.moveTo(point.x - 1, point.y);
+
+            }
+
+            context.lineTo(point.x, point.y);
+
+            context.closePath();
+
+            context.stroke();
+
+          }
+
+
+        }
+
+        var clear = document.getElementById("btn_clear");
+
+        var submit = document.getElementById("btn_submit");
+
+        var fixed = document.getElementById("fixed");
+
+        clear.addEventListener("click", function () {
+
+          canvas.width = (canvas.width - 0);
+
+        });
+
+
+        submit.addEventListener("click", function () {
+
+
+          var img = document.getElementById('qmimg');
+
+          try{
+            img.setAttribute("src", canvas.toDataURL("image/png"));
+          }catch (err){
+            alert(err);
+          }
+
+
+        });
+
+
+        fixed.addEventListener("click", function () {
+
+
+          document.body.addEventListener('touchstart touchmove touchend', function (e) {
+            if (e.target === canvas) {
+              e.preventDefault();
             }
           })
-          .catch(() => {
-            console.log("http请求错误");
-          });
+
+
+        })
+
+
+
+//        this.$axios
+//          .get(window.ajaxSrc + "/api/meizubao/productDetail", {
+//            params: {'id': 6}
+//          })
+//          .then(res => {
+//            console.log(res);
+//            if (res.data.status_code == 1001) {
+//              this.data = res.data.data;
+//            }
+//          })
+//          .catch(() => {
+//            console.log("http请求错误");
+//          });
       },
-    },
-    components: {
-      orderFooter,
     },
 
 
@@ -123,183 +316,15 @@
 <style scoped>
   .container {
     width: 100%;
-    height: auto;
-    height: calc(100% - 0.88rem);
     background: #fff;
   }
 
-  .list_bans {
-    width: 7.068rem;
-    margin: 0.2rem auto 0;
-    overflow-y: scroll;
+  #hiddenImg{
+    height:0;
+    width:0;
   }
-
-  .banners {
-    width: 7.068rem;
-    height: 5rem;
-    margin: 0.2rem auto 0;
-  }
-
-  .banners img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .pro_name {
-    height: 1rem;
-    line-height: 1rem;
-    border: 1px solid #f7f7f7;
-    margin-left: 2px;
-  }
-
-  .pro_names {
-    margin-left: 20px;
-    font-size: 16px;
-    color: #000000;
-    letter-spacing: 0;
-  }
-
-  .list_coor {
-    width: 7.068rem;
-    height: 1.8rem;
-    margin-top: 0.1rem;
-    border-radius: 2px;
-  }
-
-  .cate_pro {
-    width: 7.068rem;
-    height: 0.9rem;
-    line-height: 0.9rem;
-    border: 1px solid #f7f7f7;
-  }
-
-  .cate_pro span {
-    margin-left: 20px;
-    font-size: 14px;
-    color: #666666;
-    letter-spacing: 0;
-  }
-
-  .cate_cen {
-    width: 7.068rem;
-    height: 0.9rem;
-    line-height: 0.9rem;
-    border: 1px solid #f7f7f7;
-  }
-
-  .cate_cen span {
-    margin-left: 20px;
-    font-size: 14px;
-    color: #666666;
-    letter-spacing: 0;
-  }
-
-  .price_cent {
-    width: 7.068rem;
-    height: 3.8rem;
-    background: #ffffff;
-    box-shadow: 0 2px 9px 0 #eeeeee;
-    border-radius: 2px;
-    margin-top: 5px;
-  }
-
-  .pri_common {
-    width: 7.068rem;
-    height: 0.91rem;
-    line-height: 0.91rem;
-    border-bottom: 1px solid #f7f7f7;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-  }
-
-  .pri_mon {
-    font-size: 14px;
-    color: #ff272d;
-    letter-spacing: 0;
-  }
-
-  .price_con {
-    font-size: 14px;
-    color: #fd4689;
-    letter-spacing: 0;
-  }
-
-  .zro {
-    font-size: 14px;
-    color: #666666;
-    letter-spacing: 0;
-  }
-
-  .pro_detail {
-    width: 7.068rem;
-    height: 2rem;
-    background: #ffffff;
-    box-shadow: 0 2px 9px 0 #eeeeee;
-    border-radius: 3px;
-    margin-top: 5px;
-    margin-bottom: 0.6rem;
-  }
-
-  .pro_det {
-    padding: 0.2rem;
-    font-size: 14px;
-    color: #000000;
-    letter-spacing: 0;
-  }
-
-  .pro_beg {
-    padding: 0.1rem;
-    font-size: 14px;
-    color: #666666;
-    letter-spacing: 0;
-  }
-
-  .spinner {
-    display: inline-block;
-  }
-
-  .decrease, .value, .increase {
-    height: 26px;
-    width: 26px;
-
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .value {
-    width: 30px;
-    font: 16px Arial;
-    line-height: 26px;
-    text-align: center;
-    background-color: #f96198;
-    border: none;
-    color: #fff;
-  }
-
-  .decrease, .increase {
-    display: inline-block;
-    vertical-align: middle;
-    -moz-box-shadow: 0 0 2px #999 inset; /* For Firefox3.6+ */
-    -webkit-box-shadow: 0 0 2px #999 inset; /* For Chrome5+, Safari5+ */
-    box-shadow: 0 0 2px #999 inset;
-    color: #e5312a;
-    line-height: 26px;
-    text-align: center;
-  }
-
-  .decrease {
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
-  }
-
-  .disable {
-    background-color: #eee;
-  }
-
-  .increase {
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
+  #canvasDiv{
+    border:1px solid #ddd;
   }
 
 </style>

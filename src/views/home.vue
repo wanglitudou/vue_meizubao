@@ -171,15 +171,15 @@ export default {
     let that = this;
     var str = window.location.href;
     var arr = str.split("?");
-    if (arr.length > 1) {
-      //调用"获取地址栏参数的方法"
-      var code = that.GetQueryString("code");
-      console.log(code);
-      //再次调用这个方法
-      that.getXlogin(code);
-      return false;
-    }
-    that.getXlogin(""); //获取xlogin
+//    if (arr.length > 1) {
+//      //调用"获取地址栏参数的方法"
+//      var code = that.GetQueryString("code");
+//      console.log(code);
+//      //再次调用这个方法
+//      that.getXlogin(code);
+//      return false;
+//    }
+//    that.getXlogin(""); //获取xlogin
     that.banner(); //首页banner查询
     that.getInstrument(); // 首页热租仪器
     that.getTechnician(); //首页美业菁英
@@ -444,7 +444,7 @@ export default {
 
 .searchs input {
   width: 6rem;
-  height: 0.8rem;
+  height: 0.785rem;
   border: 0;
   outline: none;
   padding-left: 1rem;

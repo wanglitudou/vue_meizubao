@@ -28,9 +28,32 @@ export default {
   name: 'addressCard',
 
   props: ["type"],
+  mounted(){
+    this.init();
+  },
+  methods:{
+    init(){
+
+
+      console.log("初始化地址");
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/addressList", {
+          params: {'id': 1}
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.address = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("http请求错误");
+        });
+    }
+  },
   data () {
     return {
-
+      address:[]
     }
   }
 }
@@ -48,6 +71,7 @@ export default {
     border-radius: 2px;
     padding-top: 10px;
     padding-bottom: 10px;
+    justify-content: space-between;
   }
 
   .address-line {
