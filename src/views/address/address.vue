@@ -1,76 +1,20 @@
 <template>
     <div class="container">
         <div class="list_cont">
-            <div class="list_one">
+            <div class="list_one"
+                 v-for="item in list"
+                 :key="item.index">
                 <p class="goods">
                     <span class="consignee">收货人:
                         <span class="consig_name">
-                            王一
+                            {{item.user_name}}
                         </span>
                     </span>
-                    <span class="consig_num">15711174255</span>
+                    <span class="consig_num">{{item.mobile}}</span>
                 </p>
                 <p class="consig_address">
                     <span class="consig_spec">
-                        北京市 北京市 朝阳区 国粹苑a座4278聚通达科技股份有限公司
-                    </span>
-                </p>
-                <p class="give">
-                    <span class="give_address">
-                        <el-checkbox v-model="checked"
-                                     class="give_icon"></el-checkbox>
-
-                        设为默认地址
-                    </span>
-                    <span class="give_edit">
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                        编辑</span>
-                    <span class="give_delete">
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                        删除</span>
-                </p>
-            </div>
-            <div class="list_one">
-                <p class="goods">
-                    <span class="consignee">收货人:
-                        <span class="consig_name">
-                            王一
-                        </span>
-                    </span>
-                    <span class="consig_num">15711174255</span>
-                </p>
-                <p class="consig_address">
-                    <span class="consig_spec">
-                        北京市 北京市 朝阳区 国粹苑a座4278聚通达科技股份有限公司
-                    </span>
-                </p>
-                <p class="give">
-                    <span class="give_address">
-                        <el-checkbox v-model="checked"
-                                     class="give_icon"></el-checkbox>
-
-                        设为默认地址
-                    </span>
-                    <span class="give_edit">
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                        编辑</span>
-                    <span class="give_delete">
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                        删除</span>
-                </p>
-            </div>
-            <div class="list_one">
-                <p class="goods">
-                    <span class="consignee">收货人:
-                        <span class="consig_name">
-                            王一
-                        </span>
-                    </span>
-                    <span class="consig_num">15711174255</span>
-                </p>
-                <p class="consig_address">
-                    <span class="consig_spec">
-                        北京市 北京市 朝阳区 国粹苑a座4278聚通达科技股份有限公司
+                        {{item.address}}
                     </span>
                 </p>
                 <p class="give">
@@ -98,8 +42,30 @@
 export default {
   data() {
     return {
-      checked: true
+      checked: true,
+      list: []
     };
+  },
+  created() {
+    this.getAdd();
+  },
+  methods: {
+    getAdd() {
+      let that = this;
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/addressList?uid=" +
+            localStorage.id,
+          {}
+        )
+        .then(res => {
+          console.log(res);
+          that.list = res.data.data;
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    }
   }
 };
 </script>
@@ -136,6 +102,7 @@ export default {
 }
 .consig_address {
   width: 7.1rem;
+  min-height: 0.8rem;
   font-size: 14px;
   color: #333333;
   letter-spacing: 0;

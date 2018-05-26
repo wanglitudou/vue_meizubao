@@ -63,7 +63,8 @@ export default {
       that.$axios
         .get(
           "http://mzbao.weiyingjia.org/api/meizubao/telcode?phone=" +
-            that.phone,
+            that.phone +
+            "&used_type=1",
           {}
         )
         .then(res => {

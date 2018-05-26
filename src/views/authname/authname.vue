@@ -6,6 +6,7 @@
                     <span>身份证号码:</span>
                     <span class="id_txt">
                         <input type="text"
+                               v-model="data.id_card"
                                placeholder="请输入身份证号码">
                     </span>
                 </p>
@@ -19,16 +20,8 @@
                     <span>家庭住址:</span>
                     <span class="id_txt">
                         <input type="text"
+                               v-model="data.home_address"
                                placeholder="请输入家庭住址">
-                    </span>
-                </p>
-            </div>
-            <div class="id_num">
-                <p class="id_name">
-                    <span>店院地址：</span>
-                    <span class="id_txt">
-                        <input type="text"
-                               placeholder="请输入店院地址">
                     </span>
                 </p>
             </div>
@@ -43,13 +36,66 @@
             </div>
         </div>
         <div class="next_up">
-            <span class="next_nex">下一步</span>
+            <span class="next_nex"
+                  @click="submitBtn()">已完成</span>
         </div>
 
     </div>
 </template>
 <script>
-export default {};
+import { MessageBox } from "mint-ui";
+export default {
+  data() {
+    return {
+      data: {
+        //其他
+        headimg: "",
+        manage_years: "",
+        manage_area: "",
+        id_card: "",
+        card_front: "",
+        card_behind: "",
+        home_address: "",
+        business_license: "",
+        store_image: "",
+        store_name: "",
+        lists: []
+      }
+      //   arr: ["200", "333"]
+    };
+  },
+  created(e) {},
+  methods: {
+    submitBtn() {
+      let that = this;
+      //用户信息
+      that.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
+          uid: localStorage.id,
+          nickname: that.$route.query.name,
+          age: that.$route.query.age,
+          birthdate: that.$route.query.birthdate,
+          telephone: that.$route.query.phone,
+          email: that.$route.query.mailbox,
+          store_name: that.$route.query.Adname, //商店名称
+          store_addr: that.$route.query.address,
+          manage_years: that.$route.query.manage_years,
+          manage_area: that.$route.query.manage_area,
+          id_card: that.data.id_card,
+          home_address: that.data.home_address
+        })
+        .then(res => {
+          console.log(res);
+          if ((res.data.status_code = "1001")) {
+            MessageBox.alert("修改成功");
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    }
+  }
+};
 </script>
 <style scoped>
 .container {

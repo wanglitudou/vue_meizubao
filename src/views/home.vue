@@ -5,9 +5,8 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src=""
-                 alt=""
-                 v-for="(item,index) in url "
+            <img alt=""
+                 v-for="item in url"
                  :src="item.images"
                  name="pic"
                  :key="item.index"
@@ -22,7 +21,7 @@
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
-             @click="information()">
+             @click="address()">
       </div>
     </div>
     <div ref="scroll"
@@ -175,9 +174,9 @@ export default {
       var code = that.GetQueryString("code"); //调用"获取地址栏参数的方法"
       console.log(code);
       that.getXlogin(code); //再次调用这个方法
-      return false;
+    } else {
+      that.getXlogin(""); //获取xlogin
     }
-    that.getXlogin(""); //获取xlogin
     that.banner(); //首页banner查询
     that.getInstrument(); // 首页热租仪器
     that.getTechnician(); //首页美业菁英
@@ -185,9 +184,6 @@ export default {
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
   },
-  methods: {},
-  components: {},
-  updated: function() {},
   mounted: function() {
     var myswiper = new Swiper(".swiper-container", {
       loop: true,
@@ -312,6 +308,10 @@ export default {
             var str = window.location.href;
           } else if (res.data.status_code == "1001") {
             if (!res.data.data.tel) {
+              localStorage.openid = res.data.data.openid;
+              localStorage.tel = res.data.data.tel;
+              localStorage.id = res.data.data.id;
+              localStorage.headimg = res.data.data.headimg;
               //判断tel是否存在,不存在跳到对应填写页面
               // that.$router.push({ name: "mine" });
             }
@@ -358,9 +358,12 @@ export default {
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
-    information() {
-      this.$router.push({ name: "information" }); //调节其他页面时的跳转(完善信息页面)
+    address() {
+      this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
     }
+    // payment() {
+    //   this.$router.push({ name: "payment" }); //调节其他页面时的跳转(完善信息页面)
+    // }
   }
 };
 </script>
