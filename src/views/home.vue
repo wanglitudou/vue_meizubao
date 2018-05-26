@@ -22,7 +22,7 @@
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
-             @click="login()">
+             @click="information()">
       </div>
     </div>
     <div ref="scroll"
@@ -169,78 +169,23 @@ export default {
   },
   created() {
     let that = this;
-    //首页banner查询
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/banners", {})
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.url = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
-    //首页热租仪器
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/instrument", {})
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.rentinginstrument = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
-    //首页美业菁英
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.beautyindustry = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
-    //配套产品
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/product", {})
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.accessoryproducts = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
-    //培训视屏
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/video", {})
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.visualscreen = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
-    //合作项目查询
-    that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.cooperativeProject = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
+    var str = window.location.href;
+    var arr = str.split("?");
+    if (arr.length > 1) {
+      //调用"获取地址栏参数的方法"
+      var code = that.GetQueryString("code");
+      console.log(code);
+      //再次调用这个方法
+      that.getXlogin(code);
+      return false;
+    }
+    that.getXlogin(""); //获取xlogin
+    that.banner(); //首页banner查询
+    that.rentinginstrument(); // 首页热租仪器
+    that.beautyindustry(); //首页美业菁英
+    that.accessoryproducts(); //配套产品
+    that.trainingvisualscreen(); //培训视屏
+    that.cooperativeprojectquery(); //合作项目查询
   },
   methods: {},
   components: {},
@@ -252,61 +197,167 @@ export default {
     });
   },
   methods: {
+    //获取地址栏参数
+    GetQueryString(name) {
+      var reg = new RegExp("(^|&?)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return decodeURIComponent(r[2]);
+      return null;
+    },
+    //获取banner
+    banner() {
+      let that = this;
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/banners", {})
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.url = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    //获取热租仪器
+    rentinginstrument() {
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/instrument", {})
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.rentinginstrument = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    //获取美业菁英
+    beautyindustry() {
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.beautyindustry = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    //获取配套产品
+    accessoryproducts() {
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/product", {})
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.accessoryproducts = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    //获取培训视频
+    trainingvisualscreen() {
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/video", {})
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.visualscreen = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    //获取合作项目查询
+    cooperativeprojectquery() {
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.cooperativeProject = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+
+    //获取xlogin
+    getXlogin(code) {
+      var str = "http://mzbao.weiyingjia.org/api/meizubao/wlogin";
+      if (code) {
+        str = "http://mzbao.weiyingjia.org/api/meizubao/wlogin?code=" + code;
+      }
+      let that = this;
+      that.$axios
+        .get(str, {})
+        .then(res => {
+          if (res.data.status_code == 400) {
+            console.log(222);
+            //后台的地址
+            var _url = res.data.message + "?url=" + window.location.href;
+            console.log(res.data.message + "?url=" + window.location.href);
+            window.location.href = _url;
+            var str = window.location.href;
+          } else if (res.data.status_code == "1001") {
+            if (!res.data.data.tel) {
+              //判断tel是否存在,不存在跳到对应填写页面
+              // that.$router.push({ name: "mine" });
+            }
+          }
+          console.log(res);
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
     updataImg(url) {
-      this.$router.push(url);
-      console.log("111");
+      this.$router.push(url); //轮播用到
     },
     detail() {
-      //点击图片的时候,跳转到对应的详情页面
-      this.$router.push({ name: "detail" });
+      this.$router.push({ name: "detail" }); //点击图片的时候,跳转到对应的详情页面
     },
     details() {
-      //热租仪器模块,点击图片,跳转到对应的详情页面
-      this.$router.push({ name: "details" });
+      this.$router.push({ name: "details" }); //热租仪器模块,点击图片,跳转到对应的详情页面
     },
     essence() {
-      //美业菁英模块,点击图片,跳转到对应的详情页面
-      this.$router.push({ name: "essence" });
+      this.$router.push({ name: "essence" }); //美业菁英模块,点击图片,跳转到对应的详情页面
     },
     hotcent() {
-      //热租仪器
-      this.$router.push({ name: "industry" });
+      this.$router.push({ name: "industry" }); //热租仪器
     },
     cooperation() {
-      //合作项目,点击合作项目模块,跳转到对应的详情页面
-      this.$router.push({ name: "cooperation" });
+      this.$router.push({ name: "cooperation" }); //合作项目,点击合作项目模块,跳转到对应的详情页面
     },
     project() {
-      //合作项目模块,点击查看更多的时候,跳转对应的详情页面
-      this.$router.push({ name: "project" });
+      this.$router.push({ name: "project" }); //合作项目模块,点击查看更多的时候,跳转对应的详情页面
     },
     matching() {
-      //配套产品模块,点击图片,跳转到对应详情页面
-      this.$router.push({ name: "matching" });
+      this.$router.push({ name: "matching" }); //配套产品模块,点击图片,跳转到对应详情页面
     },
     train() {
-      //培训视频模块,点击图片,跳转到对应的详情页面
-      this.$router.push({ name: "train" });
+      this.$router.push({ name: "train" }); //培训视频模块,点击图片,跳转到对应的详情页面
     },
     looksee() {
-      //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
-      this.$router.push({ name: "looksee" });
+      this.$router.push({ name: "looksee" }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
     },
     seemore() {
-      //配套产品模块,点击查看更多的时候,跳转到对应的页面
-      this.$router.push({ name: "seemore" });
+      this.$router.push({ name: "seemore" }); //配套产品模块,点击查看更多的时候,跳转到对应的页面
     },
     clickpay() {
-      //点击培训视频当中的"查看更多" 跳转到对应的详情页面
-      this.$router.push({ name: "clickpay" });
+      this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
-    login() {
-      this.$router.push({ name: "login" });
+    information() {
+      this.$router.push({ name: "information" }); //调节其他页面时的跳转(完善信息页面)
     }
-
-    // go_to_search() {
-    //   this.$router.push("/search");
-    // }
   }
 };
 </script>

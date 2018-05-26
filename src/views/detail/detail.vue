@@ -343,7 +343,7 @@ export default {
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/instrumentSearch", {
-          typeId: 6,
+          typeId: name,
           keywords: keyword,
           page: page
         })
@@ -353,18 +353,7 @@ export default {
           let arr = [];
           if (res.data.status_code == 1001) {
             // arr.push(res.data.data);
-            console.log(arr);
-            // console.log(type)
-            // if(res.data.data.length ==0){
-            //     this.noData =  true
-            // }else{
-            //     this.noData =false
-            // }
-            // if( res.data.data.length == 0){
-            //     this.load =false
-            // }else{
-            //     this.load = true
-            // }
+            
             if (res.data.data.length == 0) {
               that.load = false;
               this.$refs.load.style = "height:100%";
@@ -460,10 +449,10 @@ export default {
   padding: 5px;
 }
 .item {
-  width: 47%;
+  width: 48%;
   height: auto;
   padding: 1%;
-  margin:2.5%
+  /* margin:3% */
 }
 .box {
   width: 100%;

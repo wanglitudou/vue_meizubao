@@ -111,10 +111,10 @@
 
       </div>
     </div>
-     <div class="moreData" ref="load" v-show="showLoad">
-            <div v-if="load" @click="loadMore">加载更多></div>
-            <div v-else>已全部加载</div>
-        </div>
+    <div class="moreData" ref="load" v-show="showLoad">
+      <div v-if="load" @click="loadMore">加载更多></div>
+      <div v-else>已全部加载</div>
+    </div>
   </div>
 
 </template>
@@ -138,8 +138,9 @@ export default {
       code: 1,
       uid: 0,
       slideShow: true,
-      itemshow:true,
-        showLoad: true,
+      itemshow: true,
+      showLoad: true,
+      load: true
     };
   },
   created() {
@@ -185,7 +186,7 @@ export default {
           console.log("查询失败");
         });
     },
-       loadMore() {
+    loadMore() {
       this.pages++;
       // 搜索的加载更多，搜索没有产品的id
       if (this.code != 1) {
@@ -200,11 +201,11 @@ export default {
     slider(index) {
       this.number = index;
     },
-      aaa() {
+    aaa() {
       this.flog = true;
       this.imgsArr = [];
       this.showLoad = false;
-      this.itemshow  = false
+      this.itemshow = false;
       this.code = 2; //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
       this.$refs.masonry.style = "position:relative";

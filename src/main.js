@@ -13,8 +13,8 @@ import "../static/common/swiper.min.js";
 
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
-// import MintUI from "mint-ui";
-// import "mint-ui/lib/style.css";
+import MintUI from "mint-ui";
+import "mint-ui/lib/style.css";
 import "./components/js/jquery-2.1.0";
 
 //引入axios
@@ -42,9 +42,10 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false;
 //瀑布流
 
-import {VueMasonryPlugin} from 'vue-masonry';
+import { VueMasonryPlugin } from "vue-masonry";
 
-Vue.use(VueMasonryPlugin)
+Vue.use(VueMasonryPlugin);
+Vue.use(MintUI);
 // eslint-disable no-new
 new Vue({
   el: "#app",

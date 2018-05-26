@@ -9,12 +9,13 @@
       return {};
     },
     components: {
-      orderFooter,addressCard,orderCard,
+      'com-orderFooter':orderFooter,
+      'com-addressCard':addressCard,
+      'com-orderCard':orderCard,
     },
     created() {
     },
     mounted() {
-      console.log(this.$route.params)
     },
     methods: {}
   };
@@ -33,13 +34,14 @@
 <template>
   <div class="container">
 
-    <addressCard :type="'button'"></addressCard>
+    <com-addressCard :type="'show'"></com-addressCard>
 
 
-    <orderCard :type="$route.params.type"></orderCard>
+    <com-orderCard :type="'technician'"></com-orderCard>
 
 
-    <orderFooter :count="'19700'" :text="'立即下单'"></orderFooter>
+
+    <com-orderFooter :count="'19700'" :text="'确认到达'"></com-orderFooter>
 
 
 
