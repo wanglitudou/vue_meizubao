@@ -5,6 +5,7 @@
     import orderCard from '../components/orderCard.vue'
 
   export default {
+
     data() {
       return {};
     },
@@ -16,7 +17,12 @@
     mounted() {
       console.log(this.$route.params)
     },
-    methods: {}
+    methods: {
+
+      order:function(){
+        console.log("模拟下单")
+      }
+    }
   };
 </script>
 
@@ -24,8 +30,6 @@
   .container {
     padding: 11px;
   }
-
-
 
 </style>
 
@@ -35,13 +39,17 @@
 
     <addressCard :type="'button'"></addressCard>
 
+    <orderCard
+      :type="$route.params.type"
+      :name="$route.params.name"
+      :price="$route.params.price"
+      :during="$route.params.during"
+      :deposit="$route.params.deposit"
+      :month="$route.params.month"
+      :number="$route.params.number"
+    ></orderCard>
 
-    <orderCard :type="$route.params.type"></orderCard>
-
-
-    <orderFooter :count="'19700'" :text="'立即下单'"></orderFooter>
-
-
+    <orderFooter :count="$route.params.count" :text="'立即下单'" :nextFun="order"></orderFooter>
 
   </div>
 </template>
