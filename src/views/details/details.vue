@@ -26,11 +26,11 @@
           <span class="dollar">￥ {{data.price}}元</span>
         </p>
         <p class="name_rent">
-                    <span class="monthly">
-                        <a>￥{{data.firstrent}}</a>/月</span>
+          <span class="monthly">
+            <a>￥{{data.firstrent}}</a>/月</span>
           <span class="renewal">续租 :
-                        <a>￥{{data.continued}}</a>
-                    </span>
+            <a>￥{{data.continued}}</a>
+          </span>
           <span></span>
         </p>
         <p class="name_words">
@@ -53,9 +53,15 @@
         <div class="begin_rent">
           <span>选择你租赁的时长(月):</span>
           <div class="spinner">
-            <div class="decrease" @click="decrease" v-bind:class="{ disable: month==data.num }">-</div>
-            <input type="number" class="value" maxlength="3" v-model="month"/>
-            <div class="increase" @click="increase">+</div>
+            <div class="decrease"
+                 @click="decrease"
+                 v-bind:class="{ disable: month==data.num }">-</div>
+            <input type="number"
+                   class="value"
+                   maxlength="3"
+                   v-model="month" />
+            <div class="increase"
+                 @click="increase">+</div>
           </div>
 
           <!--<span v-on:click="datePicker('date1')"> 起租日期 <span>{{date1}}</span>-->
@@ -78,7 +84,6 @@
   </div>
 </template>
 <script>
-
   import orderFooter from '../../components/orderFooter.vue'
 
 
@@ -90,26 +95,24 @@
         month: 1,
       };
     },
-    mounted(){
+    mounted() {
       this.init();
     },
     components: {
-      orderFooter,
+      orderFooter
     },
     methods: {
-
-
-      decrease: function () {
+      decrease: function() {
         if (this.month > this.data.num) {
-          this.month--
+          this.month--;
         } else {
-          return false
+          return false;
         }
       },
-      increase: function () {
+      increase: function() {
         this.month = this.month + 1;
       },
-      jumpToConfirm: function () {
+      jumpToConfirm: function() {
         this.$router.push({
 //          path: '/confirm/instrument',
           name:"confirm",
@@ -122,15 +125,13 @@
             month:this.data.num,
             count:25700,
           }
-        })
+        });
       },
 
-
-      init(){
-
+      init() {
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-            params: {'id': 6}
+            params: { id: 6 }
           })
           .then(res => {
             console.log(res);
@@ -142,10 +143,9 @@
           .catch(() => {
             console.log("http请求错误");
           });
-      },
-    },
-  }
-  ;
+      }
+    }
+  };
 </script>
 <style scoped>
   @import "./details.css";
