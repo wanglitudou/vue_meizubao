@@ -172,11 +172,9 @@ export default {
     var str = window.location.href;
     var arr = str.split("?");
     if (arr.length > 1) {
-      //调用"获取地址栏参数的方法"
-      var code = that.GetQueryString("code");
+      var code = that.GetQueryString("code"); //调用"获取地址栏参数的方法"
       console.log(code);
-      //再次调用这个方法
-      that.getXlogin(code);
+      that.getXlogin(code); //再次调用这个方法
       return false;
     }
     that.getXlogin(""); //获取xlogin

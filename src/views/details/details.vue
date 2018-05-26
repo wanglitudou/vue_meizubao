@@ -16,84 +16,84 @@
                                  name="pic"
                                  :key="item.index"
                                  @click="updataImg(item.href)"> -->
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="ban_cent" >
-                <p class="name_cent">
-                    <span class="name">{{data.name}}</span>
-                    <span class="dollar">￥ {{data.price}}元</span>
-                </p>
-                <p class="name_rent">
-                    <span class="monthly">
-                        <a>￥{{data.firstrent}}</a>/月</span>
-                    <span class="renewal">续租 :
-                        <a>￥{{data.continued}}</a>
-                    </span>
-                    <span></span>
-                </p>
-                <p class="name_words">
-                    <span>{{data.centent}}</span>
-                </p>
-                <p class="name_cate">
-                    <span>起租期:{{data.num}}个月</span>
-                    <span>租赁押金:￥{{data.deposit}}</span>
-                    <span>{{data.place}}</span>
-                </p>
-            </div>
-            <div class="product">
-                <p class="name_pro">
-                    <span>配合产品 ：</span>
-                    <span>
-                    {{data.match_product}}
-                    </span>
-                </p>
-
-            </div>
-            <div class="data_name">
-                <p class="begin_rent">
-                    <span v-on:click="datePicker('date1')"> 起租日期 <span>{{date1}}</span>
-                        <i class="iconfont icon-xiaoxizhongxin"></i>
-                    </span>
-                    <span v-on:click="datePicker('date2',14)"> 终止日期 {{date2}}
-                        <i class="iconfont icon-xiaoxizhongxin"></i>
-                    </span>
-                </p>
-                <p class="name_credit">
-                    <span class="sesame">验证芝麻信用</span>
-                    <span class="sign">网签租赁协议</span>
-                </p>
-            </div>
-
-            <orderFooter :text="'立即下单'" :count="19700" :nextFun="buy"></orderFooter>
-
-
+          </div>
         </div>
       </div>
+      <div class="ban_cent">
+        <p class="name_cent">
+          <span class="name">{{data.name}}</span>
+          <span class="dollar">￥ {{data.price}}元</span>
+        </p>
+        <p class="name_rent">
+          <span class="monthly">
+            <a>￥{{data.firstrent}}</a>/月</span>
+          <span class="renewal">续租 :
+            <a>￥{{data.continued}}</a>
+          </span>
+          <span></span>
+        </p>
+        <p class="name_words">
+          <span>{{data.centent}}</span>
+        </p>
+        <p class="name_cate">
+          <span>起租期:{{data.num}}个月</span>
+          <span>租赁押金:￥{{data.deposit}}</span>
+          <span>{{data.place}}</span>
+        </p>
+      </div>
+      <div class="product">
+        <p class="name_pro">
+          <span>配合产品 ：</span>
+          <span>
+            {{data.match_product}}
+          </span>
+        </p>
+
+      </div>
+      <div class="data_name">
+        <p class="begin_rent">
+          <span v-on:click="datePicker('date1')"> 起租日期
+            <span>{{date1}}</span>
+            <i class="iconfont icon-xiaoxizhongxin"></i>
+          </span>
+          <span v-on:click="datePicker('date2',14)"> 终止日期 {{date2}}
+            <i class="iconfont icon-xiaoxizhongxin"></i>
+          </span>
+        </p>
+        <p class="name_credit">
+          <span class="sesame">验证芝麻信用</span>
+          <span class="sign">网签租赁协议</span>
+        </p>
+      </div>
+
+      <orderFooter :text="'立即下单'"
+                   :count="19700"
+                   :nextFun="buy"></orderFooter>
+
     </div>
+  </div>
+  </div>
   </div>
 </template>
 <script>
-
-  import orderFooter from '../../components/orderFooter.vue'
-import DateTimePicker from 'date-time-picker';
+import orderFooter from "../../components/orderFooter.vue";
+import DateTimePicker from "date-time-picker";
 export default {
   mounted() {
     this.init();
   },
-  components:{
-    orderFooter,
+  components: {
+    orderFooter
   },
-  methods:{
-
-    buy:function(){
-      this.$router.push('/confirm/instrument')
+  methods: {
+    buy: function() {
+      this.$router.push("/confirm/instrument");
     },
 
-
-    init(){
-      Date.prototype.Format = function (fmt) { //author: meizz
+    init() {
+      Date.prototype.Format = function(fmt) {
+        //author: meizz
         var o = {
           "M+": this.getMonth() + 1, //月份
           "d+": this.getDate(), //日
