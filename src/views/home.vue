@@ -445,7 +445,7 @@ export default {
 
 .searchs input {
   width: 6rem;
-  height: 0.8rem;
+  height: 0.785rem;
   border: 0;
   outline: none;
   padding-left: 1rem;

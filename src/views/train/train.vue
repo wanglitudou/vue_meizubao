@@ -43,8 +43,7 @@ export default {};
 <style scoped>
 .container {
   width: 100%;
-  height: auto;
-  background: #dec;
+  background-color: #fff;
   height: calc(100% - 1rem);
 }
 .cent_list {
@@ -69,7 +68,6 @@ export default {};
   width: 7.06rem;
   height: 0.58rem;
   line-height: 0.58rem;
-  background: #fff;
   margin: 0rem auto 0;
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
