@@ -1,19 +1,48 @@
 <template>
   <div class="container">
-    <div class="searchs_box">
+    <!-- <div class="searchs_box">
       <input type="text"
              placeholder="请输入搜索内容">
       <img src="../../assets/icon/search_1.png"
            alt="111">
+    </div> -->
+    <div class="topSearch">
+      <search @search="search"></search>
     </div>
-    <div class="list_box">
-      <div class="listbox_lef"
-           v-for="item in cooperativeproject"
-           :key="item.index">
+    <!-- 瀑布流 -->
+
+    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
+      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject">
+        <div class="listbox_lef">
+          <div class="cent_left">
+            <div class="list_img">
+              <img :src="item.images" alt="">
+            </div>
+            <div class="list_oper">
+              <p class="oper_room">
+                <span>{{item.name}}</span>
+              </p>
+              <p class="content">{{item.content}}</p>
+              <p class="every_pro">
+                <span class="data_pro">
+                  <span class="data_mon">￥{{item.price}}</span>/日</span>
+                <span class="pay_add">￥{{item.price}}</span>
+              </p>
+              <p class="cli_app">
+                <span class="cli_ment" @click="cooperation()">点击预约</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- <div class="list_box">
+      <div class="listbox_lef" v-for="item in cooperativeproject" :key="item.index">
         <div class="cent_left">
           <div class="list_img">
-            <img :src="item.message"
-                 alt="">
+            <img :src="item.images" alt="">
           </div>
           <div class="list_oper">
             <p class="oper_room">
@@ -26,11 +55,10 @@
               <span class="pay_add">￥{{item.price}}</span>
             </p>
             <p class="cli_app">
-              <span class="cli_ment"
-                    @click="cooperation()">点击预约</span>
+              <span class="cli_ment" @click="cooperation()">点击预约</span>
             </p>
           </div>
-        </div>
+        </div> -->
         <!-- <div class="cent_left">
           <div class="list_img">
             <img src="../../assets/images/icon2.jpg"
@@ -73,7 +101,7 @@
             </p>
           </div>
         </div> -->
-      </div>
+      <!-- </div> -->
 
       <!-- <div class="listbox_rig">
         <div class="cent_left">
@@ -143,45 +171,91 @@
       <!-- <div class="foot_load">
         <span>加载更多 > </span>
       </div> -->
-    </div>
 
+
+      <div class="moreData" ref="load" v-show="showLoad">
+            <div v-if="load" @click="loadMore">加载更多></div>
+            <div v-else>已全部加载</div>
+        </div>
+    
   </div>
 </template>
 <script>
+import search from "../../components/search.vue";
 export default {
   data() {
     return {
-      cooperativeproject: [] //合作项目
+      cooperativeproject: [], //合作项目
+      keyword: "",
+      pages: 1,
+      count:15,
+      showLoad:true,
+      load:true,
+      code:1//
     };
   },
   created() {
-    let that = this;
-    //首页banner查询
-    that.$axios
-      .post("http://mzbao.weiyingjia.org/api/meizubao/projectSearch", {
-        keywords: "",
-        page: 1
-      })
-
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          that.cooperativeproject = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
+    this.getData(this.keyword, this.pages);
   },
   methods: {
     cooperation() {
       //合作项目,点击合作项目模块,跳转到对应的详情页面
       this.$router.push({ name: "cooperation" });
+    },
+    search(keyword) {
+      this.keyword = keyword;
+      this.pages = 1;
+      this.code = 2
+      this.getData(keyword, this.pages);
+    },
+    getData(keyword, pages) {
+      console.log(keyword)
+      let that = this;
+      //首页banner查询
+      that.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/projectSearch", {
+          keywords: keyword,
+          page: pages
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            if (res.data.data.length == 0) {
+              that.load = false;
+              this.$refs.load.style = "height:100%";
+              this.$refs.masonry.style = "position:relative";
+            } else if (res.data.data.length < this.count) {
+              that.load = false;
+              this.$refs.load.style = "1rem";
+              // this.$refs.masonry.style="position:relative"
+            } else {
+              that.load = true;
+              this.$refs.load.style = "height:1rem";
+            }
+
+            that.cooperativeproject = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    loadMore(){
+        this.pages++;
+      // 搜索的加载更多，搜索没有产品的id
+      if (this.code != 1) {
+        this.getData(this.keyword, this.pages);
+      } else {
+        this.getData('',this.pages);
+      }
     }
     // cooperation() {
     //   //点击预约的时候,跳转到对应的详情页面
     //   this.$router({ name: "cooperation" });
     // }
+  },
+  components: {
+    search
   }
 };
 </script>
@@ -263,7 +337,7 @@ export default {
 }
 .list_box .listbox_lef {
   width: 48%;
-  float: right;
+  
   border-radius: 3px;
 }
 .cent_left {
@@ -274,11 +348,13 @@ export default {
   padding-bottom: 0.4rem;
 }
 .list_img {
-  height: 2rem;
+  /* height: 2rem; */
+  width: 100%;
+  height: auto;
 }
 .list_img img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 .oper_room {
   padding: 0.2rem;
@@ -334,5 +410,28 @@ export default {
   font-size: 14px;
   color: #00a5ff;
   letter-spacing: 0;
+}
+.topSearch {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 1.2rem;
+  background: #fff;
+  z-index: 2;
+}
+.item {
+  width: 46%;
+  height: auto;
+  padding: 1%;
+  margin: 1.5%;
+}
+.moreData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 1rem;
+  font-size: 14px;
+  color: #00a5ff;
 }
 </style>

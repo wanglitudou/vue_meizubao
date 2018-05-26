@@ -10,12 +10,12 @@
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <!-- <img src=""
-                                 alt=""
-                                 v-for="(item,index) in url "
-                                 :src="item.images"
-                                 name="pic"
-                                 :key="item.index"
-                                 @click="updataImg(item.href)"> -->
+                   alt=""
+                   v-for="(item,index) in url "
+                   :src="item.images"
+                   name="pic"
+                   :key="item.index"
+                   @click="updataImg(item.href)"> -->
             </div>
           </div>
         </div>
@@ -52,15 +52,27 @@
 
       </div>
       <div class="data_name">
-        <p class="begin_rent">
-          <span v-on:click="datePicker('date1')"> 起租日期
-            <span>{{date1}}</span>
-            <i class="iconfont icon-xiaoxizhongxin"></i>
-          </span>
-          <span v-on:click="datePicker('date2',14)"> 终止日期 {{date2}}
-            <i class="iconfont icon-xiaoxizhongxin"></i>
-          </span>
-        </p>
+        <div class="begin_rent">
+          <span>选择你租赁的时长(月):</span>
+          <div class="spinner">
+            <div class="decrease"
+                 @click="decrease"
+                 v-bind:class="{ disable: month==data.num }">-</div>
+            <input type="number"
+                   class="value"
+                   maxlength="3"
+                   v-model="month" />
+            <div class="increase"
+                 @click="increase">+</div>
+          </div>
+
+          <!--<span v-on:click="datePicker('date1')"> 起租日期 <span>{{date1}}</span>-->
+          <!--<i class="iconfont icon-xiaoxizhongxin"></i>-->
+          <!--</span>-->
+          <!--<span v-on:click="datePicker('date2',14)"> 终止日期 {{date2}}-->
+          <!--<i class="iconfont icon-xiaoxizhongxin"></i>-->
+          <!--</span>-->
+        </div>
         <p class="name_credit">
           <span class="sesame">验证芝麻信用</span>
           <span class="sign">网签租赁协议</span>
@@ -69,11 +81,9 @@
 
       <orderFooter :text="'立即下单'"
                    :count="19700"
-                   :nextFun="buy"></orderFooter>
+                   :nextFun="jumpToConfirm"></orderFooter>
 
     </div>
-  </div>
-  </div>
   </div>
 </template>
 <script>
@@ -133,85 +143,56 @@ export default {
           console.log("http请求错误");
         });
     },
-
-    datePicker(str, addMonth) {
-      let self = this;
-      var defaultDate;
-      if (str == "date2") {
-        defaultDate = self.date1;
-      }
-      let options;
-      if (str == "date1") {
-        options = {
-          lang: "zh-CN", // 语言，默认 'EN' ，默认 'EN', 'zh-CN' 可选
-          format: "yyyy-MM-dd", // 格式， 'yyyy-MM-dd'
-          default: self.date1 || new Date(), // 默认值 `new Date()`。 如果`default`有值且是字符串的话就会根据`format`参数来将其转化为一个`Date`实例。当然可以选择传入一个日期实例。
-          min: new Date().Format("yyyy-MM-dd"),
-          max: "2040-05-30"
-        };
-      } else if (str == "date2") {
-        var minDate;
-        if (self.date1 && addMonth) {
-          var year,
-            month,
-            day,
-            addYear = 0;
-
-          year = new Date(self.date1).getFullYear();
-          month = new Date(self.date1).getMonth() + 1;
-          day = new Date(self.date1).getDate();
-
-          month += addMonth;
-          while (month >= 12) {
-            addYear++;
-            month -= 12;
-          }
-          year += addYear;
-
-          console.log("year:" + year);
-          console.log("month:" + month);
-          console.log("day:" + day);
-
-          var dateStr = year + "-" + month + "-" + day;
-          minDate = new Date(dateStr).Format("yyyy-MM-dd");
+    mounted() {
+      this.init();
+    },
+    components: {
+      orderFooter
+    },
+    methods: {
+      decrease: function() {
+        if (this.month > this.data.num) {
+          this.month--;
+        } else {
+          return false;
         }
-        options = {
-          lang: "zh-CN", // 语言，默认 'EN' ，默认 'EN', 'zh-CN' 可选
-          format: "yyyy-MM-dd", // 格式， 'yyyy-MM-dd'
-          default: self.date2 || defaultDate || new Date(), // 默认值 `new Date()`。 如果`default`有值且是字符串的话就会根据`format`参数来将其转化为一个`Date`实例。当然可以选择传入一个日期实例。
-          min: minDate,
-          max: "2040-05-30"
-        };
-      }
-      let config = {
-        day: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
-        shortDay: ["日", "一", "二", "三", "四", "五", "六"],
-        MDW: "M月d日D", // 主面板标题部分 月日星期
-        YM: "yyyy年M月", // 日期部分标题显示
-        OK: "确定", // 确定按钮
-        CANCEL: "取消" // 取消按钮
-      };
+      },
+      increase: function() {
+        this.month = this.month + 1;
+      },
+      jumpToConfirm: function() {
+        this.$router.push({
+          //          path: '/confirm/instrument',
+          name: "confirm",
+          params: {
+            type: "instrument",
+            name: "设备名称",
+            price: 1000,
+            during: 10,
+            deposit: 2800,
+            month: this.data.num,
+            count: 25700
+          }
+        });
+      },
 
-      var datePicker = new DateTimePicker.Date(options, config);
-      datePicker.on("selected", function(formatDate, now) {
-        // formatData = 2016-10-19
-        // now = Date instance -> Wed Oct 19 2016 20:28:12 GMT+0800 (CST)
-        console.log(formatDate);
-        str == "date1" && (self.date1 = formatDate);
-        str == "date2" && (self.date2 = formatDate);
-      });
-      datePicker.on("cleared", function() {
-        str == "date1" && (self.date1 = "");
-        str == "date2" && (self.date2 = "");
-      });
+      init() {
+        this.$axios
+          .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
+            params: { id: 6 }
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              this.data = res.data.data;
+              this.month = this.data.num;
+            }
+          })
+          .catch(() => {
+            console.log("http请求错误");
+          });
+      }
     }
-  },
-  data() {
-    return {
-      data: [],
-      date1: "",
-      date2: ""
-    };
   }
 };
 </script>

@@ -42,7 +42,6 @@
                     <img src="../../assets/images/icon3.jpg"
                          alt="">
                 </div>
-
                 <div class="cou_rig">
                     <p class="cou_name">仪器名称</p>
                     <p class="cou_cent">十点开会覅额回复撒哈斯而后发生符合倒计时十点开会覅额符合倒计时十点开会覅额…</p>

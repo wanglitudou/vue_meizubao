@@ -17,42 +17,22 @@
                     </div>
                 </div> -->
                 <!-- 头部导航 -->
-                <div class="sortMenu clearfix"
-                     v-show="slideShow">
+                <div class="sortMenu clearfix" v-show="slideShow">
                     <ul class="sortMenu-ul">
-                        <div v-for="(item,index) in tabs"
-                             :key="index"
-                             @click="tab(index)">
-                            <!-- <tab :tab="tab"
-                            :index="index"
-                            :active="active" @click="toggle(index)"></tab> -->
-                            <li class="cell"
-                                :class="num == index ?'dora':''">
-                                {{item.name}}
-                            </li>
+                        <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
+                            <tab :item="item" :index="index" :num="num"></tab>
+                            <!-- <li class="cell"   :class="num == index ?'dora':''">
+                            {{item.name}}
+                            </li> -->
                         </div>
                     </ul>
                     <!-- 搜索按钮 -->
-
-                    <div class="sousuo"
-                         @click="aaa()">
-                        <img src="../../assets/icon/search_1.png"
-                             alt="">
+                    <div class="sousuo" @click="aaa()">
+                        <img src="../../assets/icon/search_1.png" alt="">
                     </div>
                 </div>
-                <div class="topSearch"
-                     v-if="flog">
-                    <div class="searchs">
-                        <form action="javascript:return true;">
-                            <input @keyup.13=show()
-                                   type="search"
-                                   placeholder="请输入搜索内容"
-                                   v-model="keyword"
-                                   ref="input1">
-                        </form>
-                        <img src="../../assets/icon/search_1.png"
-                             alt="111">
-                    </div>
+                <div class="topSearch" v-if="flog">
+                    <search @search="search"></search>
                 </div>
             </div>
         </div>
@@ -214,20 +194,12 @@
 
         <!-- <vue-waterfall-easy :imgsArr="imgsArr" ></vue-waterfall-easy> -->
 
-        <div v-masonry
-             transition-duration="0.3s"
-             ref="masonry"
-             item-selector=".item"
-             column-width=".item">
-            <div v-masonry-tile
-                 class="item"
-                 v-for="(item, index) in imgsArr">
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
+            <div v-masonry-tile class="item" v-for="(item, index) in imgsArr">
                 <!-- block item markup -->
                 <div class="box listing">
-
                     <div>
-                        <img :src="item.images"
-                             alt="">
+                        <img :src="item.images" alt="">
                     </div>
                     <div class="other">
                         <p>
@@ -241,15 +213,13 @@
                             <span>
                                 <a>￥{{item.firstrent}}</a>/月
                             </span>
-                            <span class="count"
-                                  @click="details()">
+                            <span class="count" @click="details()">
                                 <i class="iconfont icon-yingyongchengxu-xianxing"></i>
                                 {{item.created}}
                             </span>
                         </p>
                         <p class="rent"> 起租期:{{item.num}}个月</p>
-                        <p class="orders"
-                           @click="details()">
+                        <p class="orders" @click="details()">
                             <span class="order">
                                 立即下单
                             </span>
@@ -258,14 +228,13 @@
                 </div>
 
             </div>
-            <div class="noData"
-                 v-show="noData">
-                <div>暂无数据</div>
-            </div>
-
         </div>
 
         <!-- 点击加载 -->
+        <div class="moreData" ref="load" v-show="showLoad">
+            <div v-if="load" @click="loadMore">加载更多></div>
+            <div v-else>已全部加载</div>
+        </div>
 
     </div>
 
@@ -273,6 +242,8 @@
 </template>
 <script>
 import qs from "qs";
+import tab from "../../components/tabBar.vue";
+import search from "../../components/search.vue";
 import vueWaterfallEasy from "vue-waterfall-easy";
 import { VueMasonryPlugin } from "vue-masonry";
 import { isClassBody } from "babel-types";
@@ -294,7 +265,12 @@ export default {
       pages: 1,
       keyword: "",
       noData: false,
-      slideShow: true
+      slideShow: true,
+      load: true,
+      showLoad: true,
+      count: 15,
+      code: 1,
+      uid: 0
     };
   },
 
@@ -308,76 +284,48 @@ export default {
         if (res.data.status_code == 1001) {
           console.log(res.data.data);
           that.tabs = res.data.data;
-          this.getData(res.data.data[0].id, "", this.pages, 1);
+          this.getData(res.data.data[0].id, "", this.pages);
         }
       })
       .catch(() => {
         console.log("查询失败");
       });
-    // this.getData()
-    // this.getData();
   },
-  mounted() {
-    let isScroll = true;
-    window.addEventListener("scroll", function() {
-      console.log(111);
-      if (
-        document.body.scrollTop + window.innerHeight >=
-        document.body.offsetHeight
-      ) {
-        if (isScroll == true) {
-          this.pages++;
-          console.log(this.pages);
-        }
-      }
-    });
-  },
-  methods: {
-    // type(name) {
-    //   console.log(name);
-    //   let that = this;
-    //   //热租仪器筛选
-    //   that.$axios
-    //     .post("http://mzbao.weiyingjia.org/api/meizubao/instrumentSearch", {
-    //       typeId: 6,
-    //       keywords: "",
-    //       page: 1
-    //     })
 
-    //     .then(res => {
-    //       console.log(res);
-    //       if (res.data.status_code == 1001) {
-    //         that.imgsArr = res.data.data;
-    //       }
-    //     })
-    //     .catch(() => {
-    //       console.log("查询失败");
-    //     });
-    // },
-    show() {
-      this.$refs.input1.blur();
-      console.log(this.keyword);
-      this.getData("", this.keyword, this.pages, 2);
-    },
-    loseblur() {
-      //   alert("666");
+  methods: {
+  
+    loadMore() {
+      this.pages++;
+      // 搜索的加载更多，搜索没有产品的id
+      if (this.code != 1) {
+        this.getData("", this.keyword, this.pages);
+      } else {
+        this.getData(this.uid, "", this.pages);
+      }
     },
     aaa() {
       this.flog = true;
       this.imgsArr = [];
-      this.slideShow = false;
+      this.showLoad = false;
+      this.code = 2; //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
-      this.$refs.masonry.style = "height:100%;position:relative";
+      this.$refs.masonry.style = "position:relative";
+    },
+    search(keyword) {
+      // console.log(word)
+      this.keyword = keyword;
+      this.pages = 1;
+      this.getData("", keyword, this.pages);
     },
     details() {
       this.$router.push({ name: "details" });
     },
-    tab(index) {
-      // let that  = this
+    tab(id, index) {
       this.num = index;
-      //   console.log(index)
+      this.uid = id;
+      this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
     },
-    getData(name, keyword, page, type) {
+    getData(name, keyword, page) {
       //     let that =  this
       //   that.$axios
       //   .get("http://mzbao.weiyingjia.org/api/meizubao/instrumentType", {})
@@ -395,7 +343,7 @@ export default {
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/instrumentSearch", {
-          typeId: 6,
+          typeId: name,
           keywords: keyword,
           page: page
         })
@@ -405,25 +353,35 @@ export default {
           let arr = [];
           if (res.data.status_code == 1001) {
             // arr.push(res.data.data);
-            console.log(arr);
-            console.log(type);
-            if (type == 2 && res.data.data.length == 0) {
-              this.noData = true;
+            
+            if (res.data.data.length == 0) {
+              that.load = false;
+              this.$refs.load.style = "height:100%";
+              this.$refs.masonry.style = "position:relative";
+            } else if (res.data.data.length < this.count) {
+              that.load = false;
+              this.$refs.load.style = "1rem";
+              // this.$refs.masonry.style="position:relative"
             } else {
-              this.noData = false;
+              that.load = true;
+              this.$refs.load.style = "height:1rem";
             }
+
             // this.imgsArr = this.imgsArr.concat(arr);
             // console.log(this.imgsArr)
             this.imgsArr = res.data.data;
           }
         })
-        .catch(() => {
+        .catch(res => {
+          console.log(res);
           console.log("查询失败");
         });
     }
   },
   components: {
-    vueWaterfallEasy
+    vueWaterfallEasy,
+    tab,
+    search
   }
 };
 </script>
@@ -437,13 +395,7 @@ export default {
   background: #fff;
   z-index: 2;
 }
-
 .searchs {
-  /* position: fixed; */
-  /* top: 22px; */
-  /* display: inherit; */
-  /* z-index: 8; */
-  /* width: 100%; */
   width: 96%;
   height: auto;
   border: 1px solid #ccc;
@@ -458,7 +410,7 @@ export default {
   z-index: 8;
 }
 .sousuo {
-  width: 20%;
+  width: 16%;
   height: 0.88rem;
   line-height: 44px;
   background: #ffffff;
@@ -469,11 +421,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.dora {
-  color: #000 !important;
-  border-bottom: 2px solid #fd4689;
-  font-size: 18px !important;
-}
+
 .pic_view {
   width: 7.1rem;
   height: auto;
@@ -526,7 +474,7 @@ export default {
 }
 .sortMenu-ul {
   /* min-width: px2rem(320px); */
-  width: 88%;
+  width: 86%;
   height: 0.88rem;
   margin-left: 2%;
   overflow-x: scroll;
@@ -535,19 +483,7 @@ export default {
   justify-content: flex-start;
   animation: moveTo 0.5s ease both;
 }
-.sortMenu .cell {
-  display: block;
-  font-size: 16px;
-  height: 0.88rem;
-  line-height: 0.88rem;
-  padding: 0 28px 0 28px;
 
-  color: #bbbdbf;
-  text-align: center;
-  position: relative;
-  text-overflow: ellipsis;
-  word-break: keep-all;
-}
 .noData {
   width: 100%;
   height: 100%;
@@ -555,5 +491,14 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 20px;
+}
+.moreData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 1rem;
+  font-size: 14px;
+  color: #00a5ff;
 }
 </style>

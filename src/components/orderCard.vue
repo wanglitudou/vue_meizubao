@@ -9,7 +9,7 @@
     <div class="right-info">
       <p class="big">精英名字</p>
       <div>
-        <span class="color666">租赁押金：</span><span>￥10000/月</span>
+        <span class="color666">薪水：</span><span>￥10000/月</span>
         <span class="text-right">3日</span><span class="text-right color666">预约时间：</span>
       </div>
       <div class="bottom-text">
@@ -24,13 +24,13 @@
       <img src="../assets/images/timg.jpeg" alt="">
     </div>
     <div class="right-info">
-      <p class="big">设备名称</p>
+      <p class="big">{{name}}</p>
       <div>
-        <span class="color666">薪水：</span><span>￥10000/月</span>
-        <span class="text-right">3日</span><span class="text-right color666">预约时间：</span>
+        <span class="color666">租赁押金：</span><span>￥{{deposit}}</span>
+        <span class="text-right color666">起租期：{{month}}月</span>
       </div>
       <div class="bottom-text">
-        <span class="color666">诚意金：</span>￥<span class="big red">1500</span>/月
+        <span class="color666">首租租金：</span>￥<span class="big red">{{price}}</span>/月
       </div>
     </div>
   </div>
@@ -44,10 +44,10 @@
       <img src="../assets/images/timg.jpeg" alt="">
     </div>
     <div class="right-info">
-      <p class="big">产品名字</p>
+      <p class="big">{{name}}</p>
       <div>
-        <span class="color666">价格：</span><span class="big red"> 1223</span>
-        <span class="text-right">x 1</span>
+        <span class="color666">价格：</span><span class="big red"> {{price}}</span>
+        <span class="text-right">x {{number}}</span>
       </div>
       <div class="bottom-text">
       </div>
@@ -64,7 +64,15 @@
 <script>
 export default {
   name: 'addressCard',
-  props:['type'],
+  props:[
+    'type',
+    'name',
+    'price',
+    'during',
+    'month',
+    'deposit',
+    'number',
+  ],
   data () {
     return {
 

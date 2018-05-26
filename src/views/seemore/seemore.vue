@@ -1,8 +1,8 @@
 <template>
     <div class="containers">
-        <div class="pic_view">
-            <div class="nav_pic">
-                <span class="list_tab"
+        <!-- <div class="pic_view">
+            <div class="nav_pic"> -->
+        <!-- <span class="list_tab"
                       v-for="(item,index) in tabs"
                       :key="index"
                       :class="num==index?'dora':''"
@@ -11,10 +11,34 @@
                       @click="aaa()">
                     <img src="../../assets/icon/search_1.png"
                          alt="">
-                </span>
+                </span> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <div class="list_list">
+            <div class="list_search">
+                <div class="sortMenu clearfix" v-show="slideShow">
+                    <ul class="sortMenu-ul">
+                        <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
+                            <tab :item="item" :index="index" :num="num"></tab>
+                            <!-- <li class="cell"   :class="num == index ?'dora':''">
+                            {{item.name}}
+                            </li> -->
+                        </div>
+                    </ul>
+                    <!-- 搜索按钮 -->
+                    <div class="sousuo" @click="aaa()">
+                        <img src="../../assets/icon/search_1.png" alt="">
+                    </div>
+                </div>
+                <!--  -->
+                <div class="topSearch" v-if="flog">
+                    <search @search="search"></search>
+                </div>
+
             </div>
         </div>
-        <div class="searchs_box"
+
+        <!-- <div class="searchs_box"
              v-if="flog">
             <input type="text"
                    placeholder="请输入搜索内容"
@@ -22,16 +46,13 @@
                    @blur="loseblur()">
             <img src="../../assets/icon/search_1.png"
                  alt="111">
-        </div>
-        <div class="list_box">
-            <div class="listbox_lef"
-                 v-for="item in accessoryproducts"
-                 :key="item.index
+        </div> -->
+        <!-- <div class="list_box"> -->
+        <!-- <div class="listbox_lef" v-for="item in accessoryproducts" :key="item.index
                      ">
                 <div class="cent_left">
                     <div class="list_img">
-                        <img :src="item.images"
-                             alt="666">
+                        <img :src="item.images" alt="666">
                     </div>
                     <div class="list_oper">
                         <p class="oper_room">
@@ -47,8 +68,8 @@
                             <span class="cli_ment">立即下单</span>
                         </p>
                     </div>
-                </div>
-                <!-- <div class="cent_left">
+                </div> -->
+        <!-- <div class="cent_left">
                     <div class="list_img">
                         <img src="../../assets/images/icon2.jpg"
                              alt="">
@@ -67,7 +88,7 @@
                         </p>
                     </div>
                 </div> -->
-                <!-- <div class="cent_left">
+        <!-- <div class="cent_left">
                     <div class="list_img">
                         <img src="../../assets/images/icon2.jpg"
                              alt="">
@@ -87,9 +108,9 @@
                         </p>
                     </div>
                 </div> -->
-            </div>
+        <!-- </div> -->
 
-            <!-- <div class="listbox_rig">
+        <!-- <div class="listbox_rig">
                 <div class="cent_left">
                     <div class="list_img">
                         <img src="../../assets/images/icon2.jpg"
@@ -150,22 +171,62 @@
                     </div>
                 </div>
             </div> -->
-        </div>
+        <!-- </div> -->
         <!-- <div class="foot_load">
             <span>加载更多 > </span>
         </div> -->
+
+        <!-- 瀑布流布局 -->
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
+            <!-- v-for="(item, index) in accessoryproducts -->
+            <div v-masonry-tile class="item" v-for="(item, index) in accessoryproducts">
+                <div class="cent_left">
+                    <div class="list_img">
+                        <img :src="item.images" alt="666">
+                    </div>
+                    <div class="list_oper">
+                        <p class="oper_room">
+                            <span>{{item.name}}</span>
+                        </p>
+
+                        <p class="every_pro">
+                            <span class="data_pro">
+                                <span class="data_mon">￥{{item.price}}</span>
+                            </span>
+                        </p>
+                        <p class="cli_app">
+                            <span class="cli_ment">立即下单</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 加载更多 -->
+        <div class="moreData" ref="load" v-show="showLoad">
+            <div v-if="load" @click="loadMore">加载更多></div>
+            <div v-else>已全部加载</div>
+        </div>
     </div>
 </template>
 <script>
+import tab from "../../components/tabBar.vue";
+import search from "../../components/search.vue";
 export default {
   data() {
     return {
       tabs: [], // 热租仪器分类
       accessoryproducts: [], //产品配套筛选
       num: 1,
+      pages: 1,
       flog: false,
       url: [],
-      message: ""
+      message: "",
+      slideShow: true,
+      showLoad: true,
+      load: true,
+      keyword: "",
+      code: 1,//这个是不搜索的
+      count:15
     };
   },
   created() {
@@ -177,7 +238,7 @@ export default {
         console.log(res);
         if (res.data.status_code == 1001) {
           that.tabs = res.data.data;
-          that.type(res.data.data[0].id);
+          this.getData(res.data.data[0].id, "", this.pages);
         }
       })
       .catch(() => {
@@ -185,19 +246,31 @@ export default {
       });
   },
   methods: {
-    type(name) {
+    getData(name, keyword, pages) {
       let that = this;
       //热租仪器筛选
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/productSearch", {
           typeId: 6,
-          keywords: "",
-          page: 1
+          keywords: keyword,
+          page: pages
         })
 
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
+            if (res.data.data.length == 0) {
+              that.load = false;
+              this.$refs.load.style = "height:100%";
+              this.$refs.masonry.style = "position:relative";
+            } else if (res.data.data.length < this.count) {
+              that.load = false;
+              this.$refs.load.style = "100%";
+              // this.$refs.masonry.style="position:relative"
+            } else {
+              that.load = true;
+              this.$refs.load.style = "height:1rem";
+            }
             that.accessoryproducts = res.data.data;
           }
         })
@@ -205,35 +278,112 @@ export default {
           console.log("查询失败");
         });
     },
+    search(keyword) {
+      console.log(keyword);
+      this.keyword = keyword;
+      this.pages = 1;
+      this.getData("", keyword, this.pages);
+    },
     loseblur() {
       alert("666");
     },
+    // aaa() {
+    //   //   this.flog = true;
+    //   this.flog = true;
+    //   this.imgsArr = [];
+    //   this.slideShow = false;
+    // },
     aaa() {
       this.flog = true;
+      this.accessoryproducts = [];
+      this.showLoad = false;
+      this.code = 2; //点击搜索 不传 产品id
+      //  console.log(this.$refs.masonry)
+      this.$refs.masonry.style = "position:relative";
+    },
+    search(keyword) {
+      // console.log(word)
+      this.getData("", keyword, this.pages);
     },
     details() {
       this.$router.push({ name: "details" });
     },
-    tab(index) {
+    tab(id, index) {
       this.num = index;
+      this.getData(id, "", 1); //传输1 是页数 为了和搜索区分开 提示暂无数据区分开
+      //   this.$refs.masonry.style="position:relative"
+    },
+    // },
+    loadMore() {
+      this.pages++;
+      // 搜索的加载更多，搜索没有产品的id
+      if (this.code != 1) {
+        this.getData("", this.keyword, this.pages);
+      } else {
+        this.getData(this.uid, "", this.pages);
+      }
     }
+  },
+  components: {
+    tab,
+    search
   }
 };
 </script>
 <style scoped>
 .containers {
   width: 100%;
-  /* height: calc(100% - 0.81rem); */
+  height: calc(100% - 0.81rem);
   background: #fff;
 }
+
+.list_list {
+  width: 100%;
+  height: auto;
+}
+.list_search {
+  width: 100%;
+  height: 0.88rem;
+  /* border: 1px solid #fff; */
+  /* margin-top: 0.2rem; */
+  text-align: center;
+  /* margin-left: 2%; */
+  background: #fff;
+  border-radius: 0.1rem;
+}
+
+.sortMenu {
+  z-index: 1;
+  width: 100%;
+  /* margin-top: px2rem(48px); */
+  position: fixed;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px 0 #ebeced;
+  display: flex;
+}
+.sortMenu-ul {
+  /* min-width: px2rem(320px); */
+  width: 86%;
+  height: 0.88rem;
+  margin-left: 2%;
+  overflow-x: scroll;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  display: -webkit-box;
+  justify-content: flex-start;
+  animation: moveTo 0.5s ease both;
+}
+
 .sousuo {
-  width: 58px;
-  height: 44px;
+  width: 14%;
+  height: 0.88rem;
   line-height: 44px;
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   position: absolute;
   right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .dora {
   border-bottom: 2px solid #fd4689;
@@ -310,11 +460,12 @@ export default {
   padding-bottom: 0.4rem;
 }
 .list_img {
-  height: 2rem;
+  width: 100%;
+  height: auto;
 }
 .list_img img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 .oper_room {
   padding: 0.2rem;
@@ -367,5 +518,20 @@ export default {
   font-size: 14px;
   color: #00a5ff;
   letter-spacing: 0;
+}
+.item {
+  width: 48%;
+  height: auto;
+  padding: 1%;
+  margin: 1%;
+}
+.moreData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 1rem;
+  font-size: 14px;
+  color: #00a5ff;
 }
 </style>

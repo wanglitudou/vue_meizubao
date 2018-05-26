@@ -179,11 +179,11 @@ export default {
     }
     that.getXlogin(""); //获取xlogin
     that.banner(); //首页banner查询
-    that.rentinginstrument(); // 首页热租仪器
-    that.beautyindustry(); //首页美业菁英
-    that.accessoryproducts(); //配套产品
-    that.trainingvisualscreen(); //培训视屏
-    that.cooperativeprojectquery(); //合作项目查询
+    that.getInstrument(); // 首页热租仪器
+    that.getTechnician(); //首页美业菁英
+    that.getProduct(); //配套产品
+    that.getVideo(); //培训视屏
+    that.getProject(); //合作项目查询
   },
   methods: {},
   components: {},
@@ -218,7 +218,8 @@ export default {
         });
     },
     //获取热租仪器
-    rentinginstrument() {
+    getInstrument() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/instrument", {})
         .then(res => {
@@ -232,7 +233,8 @@ export default {
         });
     },
     //获取美业菁英
-    beautyindustry() {
+    getTechnician() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
         .then(res => {
@@ -246,7 +248,8 @@ export default {
         });
     },
     //获取配套产品
-    accessoryproducts() {
+    getProduct() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/product", {})
         .then(res => {
@@ -260,7 +263,8 @@ export default {
         });
     },
     //获取培训视频
-    trainingvisualscreen() {
+    getVideo() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/video", {})
         .then(res => {
@@ -274,7 +278,8 @@ export default {
         });
     },
     //获取合作项目查询
-    cooperativeprojectquery() {
+    getProject() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
         .then(res => {
