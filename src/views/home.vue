@@ -5,9 +5,8 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src=""
-                 alt=""
-                 v-for="(item,index) in url "
+            <img alt=""
+                 v-for="item in url"
                  :src="item.images"
                  name="pic"
                  :key="item.index"
@@ -22,7 +21,7 @@
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
-             @click="information()">
+             @click="address()">
       </div>
     </div>
     <div ref="scroll"
@@ -41,11 +40,8 @@
             <img :src="item.images"
                  alt=""
                  @click="details()">
+            <span>{{item.name}}</span>
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="detail()">
@@ -66,11 +62,8 @@
             <img :src="item.images"
                  alt=""
                  @click="essence()">
+            <span class="item_name">{{item.name}}</span>
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="looksee()">
@@ -91,11 +84,9 @@
             <img :src="item.images"
                  alt=""
                  @click="matching()">
+            <span class="item_name">{{item.name}}</span>
+
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="seemore()">
@@ -116,11 +107,9 @@
             <img :src="item.images"
                  alt=""
                  @click="train()">
+            <span class="item_name">{{item.name}}</span>
+
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="clickpay()">
@@ -141,16 +130,13 @@
             <img :src="item.images"
                  alt=""
                  @click="cooperation()">
+            <span class="item_name">{{item.name}}</span>
+
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent">
           <span @click="project()">查看更多>> </span>
         </div>
-
       </div>
     </div>
   </div>
@@ -172,24 +158,19 @@ export default {
     var str = window.location.href;
     var arr = str.split("?");
     if (arr.length > 1) {
-      //调用"获取地址栏参数的方法"
-      var code = that.GetQueryString("code");
+      var code = that.GetQueryString("code"); //调用"获取地址栏参数的方法"
       console.log(code);
-      //再次调用这个方法
-      that.getXlogin(code);
-      return false;
+      that.getXlogin(code); //再次调用这个方法
+    } else {
+      that.getXlogin(""); //获取xlogin
     }
-    that.getXlogin(""); //获取xlogin
     that.banner(); //首页banner查询
-    that.rentinginstrument(); // 首页热租仪器
-    that.beautyindustry(); //首页美业菁英
-    that.accessoryproducts(); //配套产品
-    that.trainingvisualscreen(); //培训视屏
-    that.cooperativeprojectquery(); //合作项目查询
+    that.getInstrument(); // 首页热租仪器
+    that.getTechnician(); //首页美业菁英
+    that.getProduct(); //配套产品
+    that.getVideo(); //培训视屏
+    that.getProject(); //合作项目查询
   },
-  methods: {},
-  components: {},
-  updated: function() {},
   mounted: function() {
     var myswiper = new Swiper(".swiper-container", {
       loop: true,
@@ -204,6 +185,7 @@ export default {
       if (r != null) return decodeURIComponent(r[2]);
       return null;
     },
+
     //获取banner
     banner() {
       let that = this;
@@ -220,7 +202,8 @@ export default {
         });
     },
     //获取热租仪器
-    rentinginstrument() {
+    getInstrument() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/instrument", {})
         .then(res => {
@@ -234,7 +217,8 @@ export default {
         });
     },
     //获取美业菁英
-    beautyindustry() {
+    getTechnician() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
         .then(res => {
@@ -248,7 +232,8 @@ export default {
         });
     },
     //获取配套产品
-    accessoryproducts() {
+    getProduct() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/product", {})
         .then(res => {
@@ -262,7 +247,8 @@ export default {
         });
     },
     //获取培训视频
-    trainingvisualscreen() {
+    getVideo() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/video", {})
         .then(res => {
@@ -276,7 +262,8 @@ export default {
         });
     },
     //获取合作项目查询
-    cooperativeprojectquery() {
+    getProject() {
+      let that = this;
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
         .then(res => {
@@ -309,6 +296,10 @@ export default {
             var str = window.location.href;
           } else if (res.data.status_code == "1001") {
             if (!res.data.data.tel) {
+              localStorage.openid = res.data.data.openid;
+              localStorage.tel = res.data.data.tel;
+              localStorage.id = res.data.data.id;
+              localStorage.headimg = res.data.data.headimg;
               //判断tel是否存在,不存在跳到对应填写页面
               // that.$router.push({ name: "mine" });
             }
@@ -325,26 +316,26 @@ export default {
     detail() {
       this.$router.push({ name: "detail" }); //点击图片的时候,跳转到对应的详情页面
     },
-    details() {
-      this.$router.push({ name: "details" }); //热租仪器模块,点击图片,跳转到对应的详情页面
+    details(pid) {
+      this.$router.push({ name: "details" ,query:{pid:pid} }); //热租仪器模块,点击图片,跳转到对应的详情页面
     },
-    essence() {
-      this.$router.push({ name: "essence" }); //美业菁英模块,点击图片,跳转到对应的详情页面
+    essence(pid) {
+      this.$router.push({ name: "essence" ,query:{pid:pid} }); //美业菁英模块,点击图片,跳转到对应的详情页面
     },
     hotcent() {
       this.$router.push({ name: "industry" }); //热租仪器
     },
-    cooperation() {
-      this.$router.push({ name: "cooperation" }); //合作项目,点击合作项目模块,跳转到对应的详情页面
+    cooperation(pid) {
+      this.$router.push({ name: "cooperation" ,query:{pid:pid} }); //合作项目,点击合作项目模块,跳转到对应的详情页面
     },
     project() {
       this.$router.push({ name: "project" }); //合作项目模块,点击查看更多的时候,跳转对应的详情页面
     },
-    matching() {
-      this.$router.push({ name: "matching" }); //配套产品模块,点击图片,跳转到对应详情页面
+    matching(pid) {
+      this.$router.push({ name: "matching" ,query:{pid:pid} }); //配套产品模块,点击图片,跳转到对应详情页面
     },
-    train() {
-      this.$router.push({ name: "train" }); //培训视频模块,点击图片,跳转到对应的详情页面
+    train(pid) {
+      this.$router.push({ name: "train"  ,query:{pid:pid} }); //培训视频模块,点击图片,跳转到对应的详情页面
     },
     looksee() {
       this.$router.push({ name: "looksee" }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
@@ -355,9 +346,12 @@ export default {
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
-    information() {
-      this.$router.push({ name: "information" }); //调节其他页面时的跳转(完善信息页面)
+    address() {
+      this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
     }
+    // payment() {
+    //   this.$router.push({ name: "payment" }); //调节其他页面时的跳转(完善信息页面)
+    // }
   }
 };
 </script>
@@ -439,7 +433,7 @@ export default {
 
 .searchs input {
   width: 6rem;
-  height: 0.8rem;
+  height: 0.792rem;
   border: 0;
   outline: none;
   padding-left: 1rem;
@@ -469,6 +463,11 @@ export default {
   font-size: 16px;
   color: #000000;
   letter-spacing: 0;
+}
+.item_name {
+  color: red;
+  margin-top: 1rem;
+  margin-left: 1rem;
 }
 .list_ban .hotrents {
   width: 100%;
@@ -506,31 +505,17 @@ export default {
   width: 3.2rem;
   height: 2.4rem;
 }
-.hotcent {
-  width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
-  margin-top: 0.2rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-  font-size: 14px;
-  color: #666666;
-  letter-spacing: 0;
-}
 .hot_cent {
   width: 100%;
   height: 0.5rem;
   line-height: 0.5rem;
-  margin-top: 0.1rem;
+  margin-top: 0.8rem;
   font-size: 12px;
   color: #222;
   text-align: center;
 }
 .hot_cent span {
-  font-size: 0.34rem;
   color: #ccc;
   font-size: 12px;
 }
 </style>
-

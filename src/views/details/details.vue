@@ -1,21 +1,16 @@
+
 <template>
   <div class="container">
     <div class="list_list">
       <!-- <div class="banner">
-                <img src="../../assets/images/icon1.jpg"
-                     alt="">
-            </div> -->
+          <img src="../../assets/images/icon1.jpg"
+               alt="">
+      </div> -->
       <div class="banner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <!-- <img src=""
-                   alt=""
-                   v-for="(item,index) in url "
-                   :src="item.images"
-                   name="pic"
-                   :key="item.index"
-                   @click="updataImg(item.href)"> -->
+            <div class="swiper-slide" v-for="item in data.images">
+              <img :src="item" alt="">
             </div>
           </div>
         </div>
@@ -26,11 +21,11 @@
           <span class="dollar">￥ {{data.price}}元</span>
         </p>
         <p class="name_rent">
-                    <span class="monthly">
-                        <a>￥{{data.firstrent}}</a>/月</span>
+          <span class="monthly">
+            <a>￥{{data.firstrent}}</a>/月</span>
           <span class="renewal">续租 :
-                        <a>￥{{data.continued}}</a>
-                    </span>
+            <a>￥{{data.continued}}</a>
+          </span>
           <span></span>
         </p>
         <p class="name_words">
@@ -45,9 +40,7 @@
       <div class="product">
         <p class="name_pro">
           <span>配合产品 ：</span>
-          <span>
-                    {{data.match_product}}
-                    </span>
+          <span>{{data.match_product}}</span>
         </p>
 
       </div>
@@ -55,9 +48,15 @@
         <div class="begin_rent">
           <span>选择你租赁的时长(月):</span>
           <div class="spinner">
-            <div class="decrease" @click="decrease" v-bind:class="{ disable: month==data.num }">-</div>
-            <input type="number" class="value" maxlength="3" v-model="month"/>
-            <div class="increase" @click="increase">+</div>
+            <div class="decrease"
+                 @click="decrease"
+                 v-bind:class="{ disable: month==data.num }">-</div>
+            <input type="number"
+                   class="value"
+                   maxlength="3"
+                   v-model="month" />
+            <div class="increase"
+                 @click="increase">+</div>
           </div>
 
           <!--<span v-on:click="datePicker('date1')"> 起租日期 <span>{{date1}}</span>-->
@@ -73,112 +72,60 @@
         </p>
       </div>
 
-      <orderFooter :text="'立即下单'" :count="19700" :nextFun="jumpToConfirm"></orderFooter>
+      <orderFooter :text="'立即下单'" :count="month*data.firstrent + (data.deposit-0)" :nextFun="jumpToConfirm"></orderFooter>
 
 
     </div>
   </div>
 </template>
 <script>
-
   import orderFooter from '../../components/orderFooter.vue'
-import DateTimePicker from 'date-time-picker';
-export default {
-  mounted() {
-    this.init();
-  },
-  components: {
-    orderFooter,
-  },
-  methods: {
-
-    buy: function () {
-      this.$router.push('/confirm/instrument')
-    },
 
 
-    init(){
-      Date.prototype.Format = function (fmt) { //author: meizz
-        var o = {
-          "M+": this.getMonth() + 1, //月份
-          "d+": this.getDate(), //日
-          "h+": this.getHours(), //小时
-          "m+": this.getMinutes(), //分
-          "s+": this.getSeconds(), //秒
-          "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-          S: this.getMilliseconds() //毫秒
-        };
-        if (/(y+)/.test(fmt))
-          fmt = fmt.replace(
-            RegExp.$1,
-            (this.getFullYear() + "").substr(4 - RegExp.$1.length)
-          );
-        for (var k in o)
-          if (new RegExp("(" + k + ")").test(fmt))
-            fmt = fmt.replace(
-              RegExp.$1,
-              RegExp.$1.length == 1
-                ? o[k]
-                : ("00" + o[k]).substr(("" + o[k]).length)
-            );
-        return fmt;
+  export default {
+
+    data() {
+      return {
+        data: [],
+        month: 1,
       };
-
-      this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-          params: {id: 6}
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            this.data = res.data.data;
-          }
-        })
-        .catch(() => {
-          console.log("http请求错误");
-        });
     },
-    mounted(){
+    mounted() {
       this.init();
     },
     components: {
-      orderFooter,
+      orderFooter
     },
     methods: {
-
-
-      decrease: function () {
+      decrease: function() {
         if (this.month > this.data.num) {
-          this.month--
+          this.month--;
         } else {
-          return false
+          return false;
         }
       },
-      increase: function () {
+      increase: function() {
         this.month = this.month + 1;
       },
-      jumpToConfirm: function () {
+      jumpToConfirm: function() {
         this.$router.push({
 //          path: '/confirm/instrument',
-          name: "confirm",
+          name:"confirm",
           params: {
-            type: 'instrument',
-            name: "设备名称",
-            price: 1000,
-            during: 10,
-            deposit: 2800,
-            month: this.data.num,
-            count: 25700,
+            type:'instrument',
+            name: this.data.name,
+            price: this.data.firstrent,
+            deposit: this.data.deposit,
+            month:this.data.num,
+            count:this.month*this.data.firstrent+(this.data.deposit-0),
           }
-        })
+        });
       },
 
-
-      init(){
-
+      init() {
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-            params: {'id': 6}
+            params: { id: this.$route.query.pid }
           })
           .then(res => {
             console.log(res);
@@ -190,12 +137,13 @@ export default {
           .catch(() => {
             console.log("http请求错误");
           });
-      },
-    },
-  }
-}
-  ;
+      }
+    }
+  };
 </script>
 <style scoped>
-@import "./details.css";
+  @import "./details.css";
+  .swiper-container{
+    height:5rem;
+  }
 </style>

@@ -123,7 +123,7 @@ export default {
 
       this.$axios
         .get(window.ajaxSrc+"/api/meizubao/technicianDetail", {
-          params: { 'id': 2 }
+          params: { id: this.$route.query.pid }
         })
         .then(res => {
           console.log(res);

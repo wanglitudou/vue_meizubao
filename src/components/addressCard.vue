@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <div class="address">
+    <div class="address" @click="jumpToAddress">
       <div class="left">
         <img src="../assets/icon/address.png" alt="">
       </div>
@@ -28,9 +28,24 @@ export default {
   name: 'addressCard',
 
   props: ["type",'detail'],
+  mounted(){
+  },
+  methods:{
+
+
+    jumpToAddress(){
+
+      alert("暂时没有address页面,有了在这改 label");
+//      this.$router.push({
+//        name:"confirm",
+//
+//      })
+    },
+
+  },
   data () {
     return {
-
+      address:[]
     }
   }
 }
@@ -48,6 +63,7 @@ export default {
     border-radius: 2px;
     padding-top: 10px;
     padding-bottom: 10px;
+    justify-content: space-between;
   }
 
   .address-line {

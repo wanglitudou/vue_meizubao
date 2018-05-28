@@ -31,12 +31,11 @@ import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
-import allorder from '../components/allOrder.vue'; 
-import prepayment from '../components/prepayment.vue'; 
-import completed from '../components/completed.vue'; 
-import processing from '../components/processing.vue'; 
-let routes = [
-  {
+
+
+import sign from "../views/sign.vue";
+
+let routes = [{
     path: "/",
     redirect: "./index/home"
   },
@@ -44,8 +43,7 @@ let routes = [
     name: "index",
     path: "/index",
     component: index,
-    children: [
-      {
+    children: [{
         name: "home",
         path: "home",
         component: home
@@ -70,11 +68,7 @@ let routes = [
         path: "payment",
         component: payment
       },
-      {
-        name: "authname",
-        path: "authname",
-        component: authname
-      },
+
       {
         name: "coursepage",
         path: "coursepage",
@@ -83,7 +77,6 @@ let routes = [
       {
         name: "cart",
         path: "/cart",
-        redirect: '/cart/allorder',
         component: cart,
       },
     ]
@@ -96,7 +89,10 @@ let routes = [
   {
     name: "details",
     path: "/details",
-    component: details
+    component: details,
+    meta: {
+      keepAlive: true
+    },
   },
   {
     name: "industry",
@@ -197,6 +193,11 @@ let routes = [
     name: "order_details",
     path: "/order_details/:type",
     component: orderDetails
+  },
+  {
+    name: "authname",
+    path: "/authname",
+    component: authname
   }
 ];
 

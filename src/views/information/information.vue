@@ -26,7 +26,7 @@
           <span>生 日：</span>
           <span class="id_txt">
             <input type="text"
-                   v-model="data.birthday"
+                   v-model="data.birthdate"
                    placeholder="请输入生日">
           </span>
         </p>
@@ -77,14 +77,20 @@
         </div>
         <div class="year_rig">
           <p class="new_year">
-            <span class="new_name ">新开业</span>
-            <span class="new_name">1年以内</span>
-            <span class="new_name">1~3年</span>
+            <span class="new_name yearBtn year1"
+                  vl="year1">新开业</span>
+            <span class="new_name yearBtn year2"
+                  vl="year2">1年以内</span>
+            <span class="new_name yearBtn year3"
+                  vl="year3">1~3年</span>
           </p>
           <p class="year_new">
-            <span class="new_name">3~5年</span>
-            <span class="new_name">5~10年</span>
-            <span class="new_name">10年以上</span>
+            <span class="new_name yearBtn year4"
+                  vl="year4">3~5年</span>
+            <span class="new_name yearBtn year5"
+                  vl="year5">5~10年</span>
+            <span class="new_name yearBtn year6"
+                  vl="year6">10年以上</span>
           </p>
         </div>
       </div>
@@ -94,47 +100,50 @@
         </div>
         <div class="year_rig">
           <p class="new_year">
-            <span class="new_name">50</span>
-            <span class="new_name">50-100</span>
+            <span class="new_name areBtn are1"
+                  vl="are1">50</span>
+            <span class="new_name areBtn are2"
+                  vl="are2">50-100</span>
 
-            <span class="new_name">100-200</span>
+            <span class="new_name areBtn are3"
+                  vl="are3">100-200</span>
           </p>
           <p class="year_new">
-            <span class="new_name">200-500</span>
-            <span class="new_name">500-1000</span>
-            <span class="new_name">1000以上</span>
+            <span class="new_name areBtn are4"
+                  vl="are4">200-500</span>
+            <span class="new_name areBtn are5"
+                  vl="are5">500-1000</span>
+            <span class="new_name areBtn are6"
+                  vl="are6">1000以上</span>
           </p>
         </div>
       </div>
     </div>
     <div class="next_up">
       <span class="next_nex"
-            @click="next">下一步</span>
+            @click="authname()">下一步</span>
     </div>
   </div>
 </template>
 <script>
 import { MessageBox } from "mint-ui";
-// $(".new_name").each(function(x) {
-//   $(".new_name")
-//     .eq(x)
-//     .click(function() {
-//       $(".new_name")
-//         .eq(x)
-//         .addClass("yearActive");
-//     });
-// });
 export default {
   data() {
     return {
       data: {
-        phone: this.phone,
-        name: this.name,
-        age: this.age,
-        mailbox: "niahj",
+        phone: "",
+        name: "",
+        age: "",
+        mailbox: "",
         shop: "",
-        address: this.address,
-        birthday: this.birthday,
+        address: "",
+        birthdate: "",
+        //其他
+        id: "",
+        headimg: "",
+        manage_years: "",
+        manage_area: "",
+        id_card: "",
         lists: []
       }
       //   arr: ["200", "333"]
@@ -142,20 +151,56 @@ export default {
   },
   created() {
     let that = this;
+    setTimeout(function() {
+      $(".new_name").each(function(x) {
+        $(".new_name")
+          .eq(x)
+          .click(function() {
+            if (x < 6) {
+              that.data.manage_years = $(".new_name")
+                .eq(x)
+                .attr("vl");
+              $(".yearBtn").removeClass("yearActive");
+              $(".yearBtn")
+                .eq(x)
+                .addClass("yearActive");
+            } else {
+              that.data.manage_area = $(".new_name")
+                .eq(x)
+                .attr("vl");
+              $(".areBtn").removeClass("yearActive");
+              $(".areBtn")
+                .eq(x - 6)
+                .addClass("yearActive");
+            }
+          });
+      });
+    }, 0);
     console.log($(".new_name"));
-
     //用户信息
     that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/productDetail", {
-        uid: 1
-      })
+      .get(
+        "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+          sessionStorage.id
+      )
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
           console.log(res.data.data);
+          // that.data.id="",//用户id
+          //  that.data.headimg="",//头像
+          that.data.name = res.data.data.nickname;
+          that.data.age = res.data.data.age;
+          that.data.phone = res.data.data.telephone;
+          that.data.shop = res.data.data.store_name;
+          that.data.address = res.data.data.store_addr;
+          that.data.birthdate = res.data.data.birthdate;
+          that.data.mailbox = res.data.data.email;
+          that.data.manage_years = res.data.data.manage_years; //经营年限
+          that.data.manage_area = res.data.data.manage_area; //经营面积
           that.lists = res.data.data;
-
-          this.getData(res.data.data[0].id, "", this.pages, 1);
+          $("." + res.data.data.manage_years).addClass("yearActive");
+          $("." + res.data.data.manage_area).addClass("yearActive");
         }
         // 假装 请求成功 赋值页面
         this.shop = "聚通达";
@@ -165,6 +210,23 @@ export default {
       });
   },
   methods: {
+    authname() {
+      this.$router.push({
+        path: "/authname",
+        query: {
+          name: this.data.name,
+          Adname: this.data.shop,
+          age: this.data.age,
+          birthdate: this.data.birthdate,
+          phone: this.data.phone,
+          mailbox: this.data.mailbox,
+          address: this.data.address,
+          manage_years: this.data.manage_years,
+          manage_area: this.data.manage_area,
+          id_card: this.data.id_card
+        }
+      }); //调节其他页面时的跳转(完善信息页面)
+    },
     //验证电话号码
     remind() {
       let that = this;
@@ -238,9 +300,19 @@ export default {
       console.log(this.shop);
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/productDetail", {
-          id: 1,
-          store_name: that.shop
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
+          uid: localStorage.id,
+          nickname: that.data.name,
+          age: that.data.age,
+          birthdate: that.data.birthday,
+          telephone: that.data.phone,
+          email: that.data.name,
+          store_name: that.data.name,
+          store_addr: that.data.address
+          // manage_years: that.data.name,
+          // manage_area: that.data.name,
+          // id_card: that.data.name,
+          // home_address: that.data.name
         })
         .then(res => {
           console.log(res);
