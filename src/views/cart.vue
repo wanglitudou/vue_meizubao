@@ -3,13 +3,34 @@
   <div class="container">
     <div class="pic_view">
       <div class="nav_pic">
-        <span v-for="(item,index) in tabs"
+        <!-- <span v-for="(item,index) in tabs"
               :key="index"
               :class="num==index?'dora':''"
-              @click="tab(index)">{{item}}</span>
-      </div>
+              @click="tab(index)">{{item}}</span> -->
+        <!-- <span><router-link to="/cart/allorder" active-class="active">全部订单</router-link></span>
+           <span><router-link to="/cart/prepayment" active-class="active">代付款</router-link></span>
+           <span><router-link to="/cart/processing" active-class="active">进行中</router-link></span>
+           <span><router-link to="/cart/completed" active-class="active">已完成</router-link></span> -->
+        <!-- <div>代付款</div>
+           <div>进行中</div>
+           <div>已完成</div> -->
+        <div class="tabBar">
+          <button @click="select">{{statusCode}}</button>
+          <ul class="uli" v-show="ulShow">
+            <li class="status_item" v-for="(optionItem,index) in options" @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
+          </ul>
+        </div>
+        <div class="tabBar" v-for="(item,index) in tabs">
+          <div class="status" :class="tabNum == index ?'active':''" @click="tabClick(item.id,index)">
+            {{item.item}}
+          </div>
 
-      <div class="pic_ture">
+        </div>
+        <!-- <div class="tabBar"></div> -->
+        <!-- <div class="tabBar"></div> -->
+      </div>
+      <!-- <router-view></router-view> -->
+      <!-- <div class="pic_ture">
 
         <div v-show="num==0">
           <div class="total">
@@ -91,8 +112,8 @@
             </div>
           </div>
 
-        </div>
-        <!-- <div v-show="num==1">
+        </div> -->
+      <!-- <div v-show="num==1">
           2222
         </div>
         <div v-show="num==3">
@@ -101,30 +122,243 @@
         <div v-show="num==4">
           444
         </div> -->
-      </div>
-      <div class="view_vie">
-
-      </div>
-      <div class="view_view">
-
-      </div>
+      <!-- </div> -->
+      <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail" :loadMore="loadMore" :load="load" :toPay="toPay" :complete="complete" :renewal="renewal" :back="back"></order>
 
     </div>
   </div>
 </template>
 <script>
+//  aa(){
+//       if (window.history && window.history.pushState) {
+//   window.addEventListener('popstate', () => {
+//     let hashLocation = location.hash
+//     let hashSplit = hashLocation.split('#/')
+//     let hashName = hashSplit[1]
+
+//    let hashSplit1 =  hashName.split('/')
+//    console.log(hashSplit1[0])
+//    if(hashSplit1[0] == 'cart'){
+//      this.$route.push('/name');
+//    }
+//   })
+//    }
+// }
+import order from "../components/order.vue";
+import { find, remove, filter, forEach } from "lodash";
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
-      tabs: ["全部订单", "待付款", "进行中", "已完成"],
-      num: 0
+      tabs: ["待付款", "进行中", "已完成"],
+      tabs: [
+        { id: 1, item: "待付款" },
+        { id: 2, item: "进行中" },
+        { id: 3, item: "已完成" }
+      ],
+      statusCode: "全部订单",
+      status: 0, //订单的三种状态 1：代付款，2：进行中，3：已完成
+      type: 0, //四大类产品 0:全部 ，1：仪器， 2：技师，3：产品，5：项目
+      options: [
+        { id: 0, item: "全部订单" },
+        { id: 1, item: "仪器订单" },
+        { id: 2, item: "技师订单" },
+        { id: 3, item: "产品订单" },
+        { id: 5, item: "项目订单" }
+      ],
+      num: 0,
+      tabNum: 3,
+      uid: 1,
+      ulShow: false,
+      page: 1,
+      orderlist: [],
+      count: 15,
+      load: true
     };
+  },
+  created() {
+    this.getOrder(this.type, this.status, this.page, this.uid);
   },
   methods: {
     tab(index) {
-      console.log(index)
+      console.log(index);
       this.num = index;
-    }
+    },
+    // 点击选择订单
+    select() {
+      this.ulShow = true;
+    },
+    // 点击下拉框选择  订单的状态 例如：仪器的订单  产品的订单
+    optionLi(value, index) {
+      this.ulShow = false;
+      this.statusCode = value.item;
+      this.type = value.id;
+      this.orderlist = [];
+      this.getOrder(this.type, this.status, this.page, this.uid);
+    },
+    tabClick(item, index) {
+      // console.log(index)
+      (this.tabNum = index), (this.ulShow = false);
+      this.status = item;
+      this.page = 1;
+      this.orderlist = [];
+      console.log(this.status);
+      this.getOrder(this.type, this.status, 1, this.uid);
+    },
+    // 根据状态获取order列表
+    getOrder(type, status, page, uid) {
+      let that = this;
+      //热租仪器分类
+      this.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/orderList", {
+          uid: uid,
+          type: type,
+          status: status,
+          page: page
+        })
+        .then(res => {
+          // console.log(res.data.data);
+          if (res.data.status_code == "1001") {
+            if (res.data.data.length < 15) {
+              this.load = false;
+            } else {
+              this.load = true;
+            }
+
+            that.orderlist = this.orderlist.concat(res.data.data);
+            console.log(that.orderlist);
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+    // 加载更多~~~
+    loadMore() {
+      this.page++;
+      console.log(this.page);
+
+      this.getOrder(this.type, this.status, this.page, this.uid);
+    },
+    //确认收货
+    receipt(type,status,id) {
+      console.log(id);
+      this.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+          uid: this.uid,
+          id: id,
+          status: status
+        })
+        .then(res => {
+          if (res.data.status_code == "1001") {
+            //  remove(this.orderlist,{"id":id})
+            Toast("确认成功");
+            if(type == 3){
+              var result2 = filter(this.orderlist, { id: id });
+            forEach(result2, function(item) {
+              item.status = 7;
+            });
+            }else{
+                  var result2 = filter(this.orderlist, { id: id });
+            forEach(result2, function(item) {
+              item.status = 6;
+            });
+            }
+           
+
+            //  this.getOrder()
+          } else {
+            Toast("确认失败");
+          }
+        });
+    },
+    //取消订单
+    cancel(status,id) {
+       console.log(id);
+      this.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+          uid: this.uid,
+          id: id,
+          status: status
+        })
+        .then(res => {
+          if (res.data.status_code == "1001") {
+            //  remove(this.orderlist,{"id":id})
+            Toast("确认成功");
+            
+                  var result2 = filter(this.orderlist, { id: id });
+            forEach(result2, function(item) {
+              item.status = 8;
+            });
+           
+           
+
+            //  this.getOrder()
+          } else {
+            Toast("确认失败");
+          }
+        });
+      
+    },
+    //去详情页
+    todetail(id) {
+      console.log(id);
+    },
+    // 立即付款
+    toPay(id) {
+      this.$router.push({
+        name: "order_details",
+        params: {
+          id: id
+        }
+      });
+    },
+    //确认收货物
+    complete(id, status) {
+      this.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+          uid: this.uid,
+          id: id,
+          status: status
+        })
+        .then(res => {
+          if (res.data.status_code == "1001") {
+            //  remove(this.orderlist,{"id":id})
+
+            Toast("修改成功");
+            var result2 = filter(this.orderlist, { id: id });
+            forEach(result2, function(item) {
+              item.status = 7;
+            });
+
+            //  this.getOrder()
+          } else {
+            Toast("修改失败");
+          }
+        });
+    },
+    //退还
+    back(id){
+     this.$router.push({
+        name: "order_details",
+        params: {
+          id: id
+        }
+      });
+    },
+    //续约
+      renewal(id){
+        this.$router.push({
+        name: "order_details",
+        params: {
+          id: id
+        }
+      });
+      }
+  },
+  watch: {},
+  components: {
+    order
   }
 };
 </script>
@@ -145,7 +379,7 @@ export default {
   margin: 0.2rem auto 0;
 }
 .nav_pic {
-  width: 7.5rem;
+  width: 100%;
   height: 0.88rem;
   line-height: 0.88rem;
   box-shadow: 0 2px 9px 0 #eeeeee;
@@ -154,11 +388,19 @@ export default {
   padding: 0 10px;
   font-size: 16px;
   color: #000;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  background: #fff;
+}
+.nav_pic span a {
+  color: #000;
+  text-decoration: none;
 }
 .total {
   width: 7.5rem;
   height: auto;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;
 }
@@ -169,10 +411,7 @@ export default {
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;
 }
-.payment {
-  width: 7.1rem;
-  margin: 0.2rem auto 0;
-}
+
 .pay_one {
   width: 7.1rem;
   height: 36px;
@@ -293,5 +532,33 @@ export default {
   color: #fd4689;
   letter-spacing: 0;
   border-radius: 5px;
+}
+.active {
+  display: block;
+  border-bottom: 2px solid #fd4689;
+}
+.uli {
+  border: 1px solid #ccc;
+  background: #fff;
+  z-index: 3;
+}
+button {
+  border: none;
+  background: #fff;
+  outline: none;
+  position: relative;
+}
+button::after {
+  content: "";
+  width: 14px;
+  height: 8px;
+  background: url(../assets/images/jian.png) no-repeat center;
+  /* //通过定位将图标放在合适的位置 */
+  position: absolute;
+  top: 40%;
+  /* margin-bottom: 10px; */
+  /* //给自定义的图标实现点击下来功能 */
+  pointer-events: none;
+  transform: rotate(180deg);
 }
 </style>

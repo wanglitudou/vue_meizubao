@@ -31,7 +31,10 @@ import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
-
+import allorder from '../components/allOrder.vue'; 
+import prepayment from '../components/prepayment.vue'; 
+import completed from '../components/completed.vue'; 
+import processing from '../components/processing.vue'; 
 let routes = [
   {
     path: "/",
@@ -51,11 +54,6 @@ let routes = [
         name: "catagory",
         path: "catagory",
         component: catagory
-      },
-      {
-        name: "cart",
-        path: "cart",
-        component: cart
       },
       {
         name: "mine",
@@ -81,9 +79,15 @@ let routes = [
         name: "coursepage",
         path: "coursepage",
         component: coursepage
-      }
+      },
+      {
+        name: "cart",
+        path: "/cart",
+        redirect: '/cart/allorder',
+        component: cart,
+      },
     ]
-  },
+  },  
   {
     name: "detail",
     path: "/detail",

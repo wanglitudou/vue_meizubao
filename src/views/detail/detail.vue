@@ -192,7 +192,7 @@
             <span class="more_add">加载更多</span>
         </div> -->
 
-        <!-- <vue-waterfall-easy :imgsArr="imgsArr" ></vue-waterfall-easy> -->
+       
 
         <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
             <div v-masonry-tile class="item" v-for="(item, index) in imgsArr">
@@ -244,7 +244,7 @@
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
-import vueWaterfallEasy from "vue-waterfall-easy";
+
 import { VueMasonryPlugin } from "vue-masonry";
 import { isClassBody } from "babel-types";
 export default {
@@ -379,7 +379,7 @@ export default {
     }
   },
   components: {
-    vueWaterfallEasy,
+    // vueWaterfallEasy,
     tab,
     search
   }
