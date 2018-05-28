@@ -1,3 +1,4 @@
+
 <template>
   <div class="container">
     <div class="list_list">
@@ -8,14 +9,8 @@
       <div class="banner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <!-- <img src=""
-                   alt=""
-                   v-for="(item,index) in url "
-                   :src="item.images"
-                   name="pic"
-                   :key="item.index"
-                   @click="updataImg(item.href)"> -->
+            <div class="swiper-slide" v-for="item in data.images">
+              <img :src="item" alt="">
             </div>
           </div>
         </div>
@@ -130,7 +125,7 @@
       init() {
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-            params: { id: this.$route.params.pid }
+            params: { id: this.$route.query.pid }
           })
           .then(res => {
             console.log(res);
@@ -148,4 +143,7 @@
 </script>
 <style scoped>
   @import "./details.css";
+  .swiper-container{
+    height:5rem;
+  }
 </style>

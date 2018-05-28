@@ -89,7 +89,10 @@ let routes = [
   {
     name: "details",
     path: "/details",
-    component: details
+    component: details,
+    meta: {
+      keepAlive: true
+    },
   },
   {
     name: "industry",

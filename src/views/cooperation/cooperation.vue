@@ -2,59 +2,71 @@
   <div class="container">
     <div class="con_cents">
       <div class="con_pro">
-        <div class="conpro_img">
-          <img src="../../assets/images/icon1.jpg"
-               alt="">
+
+
+        <div class="banner">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-for="item in data.images">
+                <img :src="item" alt="">
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="conpro_name">
           <p class="conpro_pro">
-            <span class="conname_name">项目名称</span>
-            <span class="conmoney">￥5000</span>
+            <span class="conname_name">{{data.name}}</span>
+            <span class="conmoney">￥{{data.price}}</span>
           </p>
         </div>
       </div>
       <div class="cent_cate">
         <p class="pro_cate">
-          <span>项目类别</span>
-          <span>XXXX</span>
+          <span>项目类别：</span>
+          <span>{{data.typeName}}</span>
         </p>
         <p class="pro_cate">
-          <span>适合人群</span>
-          <span>XXXX</span>
+          <span>适合人群：</span>
+          <span>{{data.suitable}}</span>
         </p>
         <p class="pro_cate">
-          <span>操作周期</span>
-          <span>XXXX</span>
+          <span>操作周期：</span>
+          <span></span>
         </p>
         <p class="pro_cate">
-          <span>项目禁忌</span>
-          <span>XXXX</span>
+          <span>项目禁忌：</span>
+          <span>{{taboo}}</span>
         </p>
         <p class="pro_cate">
-          <span>分成比例</span>
-          <span>XXXX</span>
+          <span>分成比例：</span>
+          <span>{{data.divideinto}}</span>
+        </p>
 
+        <p class="pro_cate">
+          <span>报名开始时间：</span>
+          <span>{{data.divideinto}}</span>
         </p>
+        <p class="pro_cate">
+          <span>分成比例：</span>
+          <span>{{data.divideinto}}</span>
+        </p>
+
+        <!--<p class="pro_cate">-->
+          <!--<span>订金</span>-->
+          <!--<span>{{data.money}}</span>-->
+        <!--</p>-->
+
+
       </div>
       <div class="pro_intro">
         <p class="pro_introduce">项目介绍</p>
-        <p class="pro_int">开始三年前、五年前、八年前，在博鳌，习主席三次演讲。心系世界难题，提出解决方案。</p>
+        <p class="pro_int">{{data.content}}</p>
       </div>
       <div class="order_name">
-        <p class="order_time">
-          <span class="order_tim">预约时间</span>
-        </p>
-        <p class="begin_str">
-          <span>开始日期 20180808
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-          </span>
-          <span>结束日期 20180808
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-          </span>
-        </p>
         <p class="good_fail">
           <span>预付诚意金：</span>
-          <span>￥5000</span>
+          <span>￥{{data.money}}</span>
         </p>
         <p class="net_sign">
           <span>网签租赁协议</span>
@@ -62,31 +74,63 @@
 
       </div>
     </div>
-    <div class="name_foot">
-      <div class="total_foot">
-        <div class="total_lef">
-          <span class="add">合计:</span>
-          <span class="tinct">¥19:000</span>
-        </div>
-        <div class="total_rig">
-          <span>开始预约</span>
-        </div>
-      </div>
-    </div>
+    <orderFooter :text="'立即下单'" :count="data.money" :nextFun="jumpToConfirm"  ></orderFooter>
 
   </div>
 </template>
 <script>
+  import orderFooter from '../../components/orderFooter.vue'
 export default {
   data() {
-    return {};
+    return {
+      data:[],
+    };
+  },
+
+  mounted() {
+    this.init();
+  },
+
+  components: {
+    orderFooter
+  },
+  methods:{
+    init(){
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/projectDetail", {
+          params: { id: this.$route.query.pid }
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.data = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("http请求错误");
+        });
+    },
+
+    jumpToConfirm: function() {
+      this.$router.push({
+//          path: '/confirm/instrument',
+        name:"confirm",
+        params: {
+          type:'product',
+          name: this.data.name,
+          price: this.data.firstrent,
+          deposit: this.data.deposit,
+          month:this.data.num,
+          count:this.month*this.data.firstrent+(this.data.deposit-0),
+        }
+      });
+    },
   }
 };
 </script>
 <style scoped>
 .container {
   width: 100%;
-  height: auto;
   height: calc(100% - 1rem);
   background: #fff;
 }
@@ -104,9 +148,12 @@ export default {
   border-radius: 2px;
   margin: 0.2rem auto 0;
 }
-.conpro_img {
+.banner {
   width: 7.1rem;
   height: 5rem;
+}
+.swiper-container{
+  height:5rem;
 }
 .conpro_img img {
   width: 100%;
