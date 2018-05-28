@@ -43,7 +43,7 @@ export default {};
 }
 .nav {
   width: 100%;
-  height: 0.88rem;
+  height: 1rem;
   display: flex;
   position: fixed;
   bottom: 0;
@@ -65,8 +65,5 @@ export default {};
 .nav li .iconfont {
   font-size: 0.44rem;
 }
-/* .nav li .spanInfo{
-    
-} */
 </style>
 

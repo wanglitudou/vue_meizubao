@@ -39,12 +39,9 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="details(item.id)">
+                 @click="details()">
+            <span>{{item.name}}</span>
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="detail()">
@@ -64,12 +61,9 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="essence(item.id)">
+                 @click="essence()">
+            <span class="item_name">{{item.name}}</span>
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="looksee()">
@@ -89,12 +83,10 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="matching(item.id)">
+                 @click="matching()">
+            <span class="item_name">{{item.name}}</span>
+
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="seemore()">
@@ -114,12 +106,10 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="train(item.id)">
+                 @click="train()">
+            <span class="item_name">{{item.name}}</span>
+
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent"
              @click="clickpay()">
@@ -139,17 +129,14 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="cooperation(item.id)">
+                 @click="cooperation()">
+            <span class="item_name">{{item.name}}</span>
+
           </div>
-        </div>
-        <div class="hotcent">
-          <span>热租仪器</span>
-          <span>热租仪器</span>
         </div>
         <div class="hot_cent">
           <span @click="project()">查看更多>> </span>
         </div>
-
       </div>
     </div>
   </div>
@@ -198,7 +185,6 @@ export default {
       if (r != null) return decodeURIComponent(r[2]);
       return null;
     },
-
 
     //获取banner
     banner() {
@@ -478,6 +464,11 @@ export default {
   color: #000000;
   letter-spacing: 0;
 }
+.item_name {
+  color: red;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
 .list_ban .hotrents {
   width: 100%;
   height: 5px;
@@ -514,23 +505,11 @@ export default {
   width: 3.2rem;
   height: 2.4rem;
 }
-.hotcent {
-  width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
-  margin-top: 0.2rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
-  font-size: 14px;
-  color: #666666;
-  letter-spacing: 0;
-}
 .hot_cent {
   width: 100%;
   height: 0.5rem;
   line-height: 0.5rem;
-  margin-top: 0.1rem;
+  margin-top: 0.8rem;
   font-size: 12px;
   color: #222;
   text-align: center;
@@ -540,4 +519,3 @@ export default {
   font-size: 12px;
 }
 </style>
-
