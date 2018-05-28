@@ -33,8 +33,7 @@ import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 import sign from "../views/sign.vue";
 
-let routes = [
-  {
+let routes = [{
     path: "/",
     redirect: "./index/home"
   },
@@ -42,8 +41,7 @@ let routes = [
     name: "index",
     path: "/index",
     component: index,
-    children: [
-      {
+    children: [{
         name: "home",
         path: "home",
         component: home
