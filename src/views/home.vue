@@ -185,7 +185,6 @@ export default {
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
   },
-  methods: {},
   components: {},
   updated: function() {},
   mounted: function() {
@@ -202,6 +201,8 @@ export default {
       if (r != null) return decodeURIComponent(r[2]);
       return null;
     },
+
+
     //获取banner
     banner() {
       let that = this;
@@ -312,6 +313,7 @@ export default {
             var str = window.location.href;
           } else if (res.data.status_code == "1001") {
             if (!res.data.data.tel) {
+
               //判断tel是否存在,不存在跳到对应填写页面
               // that.$router.push({ name: "mine" });
             }
