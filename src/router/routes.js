@@ -73,11 +73,7 @@ let routes = [
         path: "payment",
         component: payment
       },
-      {
-        name: "authname",
-        path: "authname",
-        component: authname
-      },
+
       {
         name: "coursepage",
         path: "coursepage",
@@ -196,9 +192,9 @@ let routes = [
     component: orderDetails
   },
   {
-    name:"sign",
-    path:"/sign",
-    component:sign
+    name: "authname",
+    path: "/authname",
+    component: authname
   }
 ];
 
