@@ -118,12 +118,11 @@
           name:"confirm",
           params: {
             type:'instrument',
-            name: "设备名称",
-            price: 1000,
-            during: 10,
-            deposit: 2800,
+            name: this.data.name,
+            price: this.data.firstrent,
+            deposit: this.data.deposit,
             month:this.data.num,
-            count:25700,
+            count:this.month*this.data.firstrent+(this.data.deposit-0),
           }
         });
       },
@@ -131,7 +130,7 @@
       init() {
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-            params: { id: 6 }
+            params: { id: this.$route.params.pid }
           })
           .then(res => {
             console.log(res);

@@ -85,6 +85,7 @@
                  alt=""
                  @click="matching()">
             <span class="item_name">{{item.name}}</span>
+
           </div>
         </div>
         <div class="hot_cent"
@@ -107,6 +108,7 @@
                  alt=""
                  @click="train()">
             <span class="item_name">{{item.name}}</span>
+
           </div>
         </div>
         <div class="hot_cent"
@@ -129,6 +131,7 @@
                  alt=""
                  @click="cooperation()">
             <span class="item_name">{{item.name}}</span>
+
           </div>
         </div>
         <div class="hot_cent">
@@ -182,6 +185,7 @@ export default {
       if (r != null) return decodeURIComponent(r[2]);
       return null;
     },
+
     //获取banner
     banner() {
       let that = this;
@@ -312,11 +316,11 @@ export default {
     detail() {
       this.$router.push({ name: "detail" }); //点击图片的时候,跳转到对应的详情页面
     },
-    details() {
-      this.$router.push({ name: "details" }); //热租仪器模块,点击图片,跳转到对应的详情页面
+    details(pid) {
+      this.$router.push({ name: "details", params: { pid: pid } }); //热租仪器模块,点击图片,跳转到对应的详情页面
     },
-    essence() {
-      this.$router.push({ name: "essence" }); //美业菁英模块,点击图片,跳转到对应的详情页面
+    essence(pid) {
+      this.$router.push({ name: "essence", params: { pid: pid } }); //美业菁英模块,点击图片,跳转到对应的详情页面
     },
     cooperation() {
       this.$router.push({ name: "cooperation" }); //合作项目,点击合作项目模块,跳转到对应的详情页面
@@ -508,7 +512,6 @@ export default {
   text-align: center;
 }
 .hot_cent span {
-  font-size: 0.34rem;
   color: #ccc;
   font-size: 12px;
 }
