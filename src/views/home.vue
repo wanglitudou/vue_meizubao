@@ -39,7 +39,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="details()">
+                 @click="details(item.id)">
           </div>
         </div>
         <div class="hotcent">
@@ -64,7 +64,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="essence()">
+                 @click="essence(item.id)">
           </div>
         </div>
         <div class="hotcent">
@@ -89,7 +89,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="matching()">
+                 @click="matching(item.id)">
           </div>
         </div>
         <div class="hotcent">
@@ -114,7 +114,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="train()">
+                 @click="train(item.id)">
           </div>
         </div>
         <div class="hotcent">
@@ -139,7 +139,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="cooperation()">
+                 @click="cooperation(item.id)">
           </div>
         </div>
         <div class="hotcent">
@@ -330,11 +330,11 @@ export default {
     detail() {
       this.$router.push({ name: "detail" }); //点击图片的时候,跳转到对应的详情页面
     },
-    details() {
-      this.$router.push({ name: "details" }); //热租仪器模块,点击图片,跳转到对应的详情页面
+    details(pid) {
+      this.$router.push({ name: "details" ,params:{pid:pid} }); //热租仪器模块,点击图片,跳转到对应的详情页面
     },
-    essence() {
-      this.$router.push({ name: "essence" }); //美业菁英模块,点击图片,跳转到对应的详情页面
+    essence(pid) {
+      this.$router.push({ name: "essence" ,params:{pid:pid} }); //美业菁英模块,点击图片,跳转到对应的详情页面
     },
     hotcent() {
       this.$router.push({ name: "industry" }); //热租仪器
@@ -536,7 +536,6 @@ export default {
   text-align: center;
 }
 .hot_cent span {
-  font-size: 0.34rem;
   color: #ccc;
   font-size: 12px;
 }

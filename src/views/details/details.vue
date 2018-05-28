@@ -130,7 +130,7 @@
       init() {
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-            params: { id: 6 }
+            params: { id: this.$route.params.pid }
           })
           .then(res => {
             console.log(res);
