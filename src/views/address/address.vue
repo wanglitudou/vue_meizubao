@@ -24,7 +24,8 @@
 
             设为默认地址
           </span>
-          <span class="give_edit">
+          <span class="give_edit"
+                @click="addtheaddress()">
             <i class="iconfont icon-yingyongchengxu-xianxing"></i>
             编辑</span>
           <span class="give_delete">
@@ -34,7 +35,8 @@
       </div>
     </div>
     <div class="give_good">
-      <span class="give_add">添加</span>
+      <span class="give_add"
+            @click="addtheaddress()">添加</span>
     </div>
   </div>
 </template>
@@ -65,6 +67,10 @@ export default {
         .catch(() => {
           console.log("查询失败");
         });
+    },
+    //路由跳转,到新增地址页面
+    addtheaddress() {
+      this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
     }
   }
 };

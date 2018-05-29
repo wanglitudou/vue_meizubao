@@ -1,6 +1,6 @@
 <template>
     <div class="containers">
-        
+
         <!-- <div class="searchs_box">
             <input type="text"
                    placeholder="请输入搜索内容">
@@ -10,13 +10,21 @@
         <div class="topSearch">
             <search @search="search"></search>
         </div>
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:0.88rem">
-            <div v-masonry-tile class="item" v-for="(item, index) in screenscreening">
+        <div v-masonry
+             transition-duration="0.3s"
+             ref="masonry"
+             item-selector=".item"
+             column-width=".item"
+             style="margin-top:0.88rem">
+            <div v-masonry-tile
+                 class="item"
+                 v-for="(item, index) in screenscreening">
                 <div class="listbox_lef">
                     <div class="cent_left">
                         <div class="list_img">
                             <img :src="item.images
-                        " alt="">
+                        "
+                                 alt="">
                         </div>
                         <div class="list_oper">
                             <p class="oper_room">
@@ -155,14 +163,17 @@
                     </div>
                 </div>
             </div> -->
-    <!-- </div> -->
-    <!-- <div class="foot_load">
+        <!-- </div> -->
+        <!-- <div class="foot_load">
             <span>加载更多 > </span>
         </div> -->
 
         <!-- 点击加载 -->
-        <div class="moreData" ref="load" v-show="showLoad">
-            <div v-if="load" @click="loadMore">加载更多></div>
+        <div class="moreData"
+             ref="load"
+             v-show="showLoad">
+            <div v-if="load"
+                 @click="loadMore">加载更多></div>
             <div v-else>已全部加载</div>
         </div>
     </div>
@@ -175,35 +186,35 @@ export default {
       screenscreening: [], //视频筛选
       pages: 1,
       keyword: "",
-      showLoad:true,
-      load:true,
-      count:15
+      showLoad: true,
+      load: true,
+      count: 15
     };
   },
   created() {
     let that = this;
     //首页banner查询
-    this.getData(this.keyword,this.pages);
+    this.getData(this.keyword, this.pages);
   },
   methods: {
     search(keyword) {
-      console.log(keyword)
+      console.log(keyword);
       this.keyword = keyword;
       this.pages = 1;
-      this.getData(keyword,this.pages);
+      this.getData(keyword, this.pages);
     },
     //请求数据
     getData(word, pages) {
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/videoSearch", {
-          keywords:word,
+          keywords: word,
           page: pages
         })
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-              if (res.data.data.length == 0) {
+            if (res.data.data.length == 0) {
               that.load = false;
               this.$refs.load.style = "height:100%";
               this.$refs.masonry.style = "position:relative";
@@ -226,11 +237,11 @@ export default {
       this.pages++;
       // 搜索的加载更多，搜索没有产品的id
       if (this.code != 1) {
-        this.getData(this.keyword,this.pages);
+        this.getData(this.keyword, this.pages);
       } else {
-        this.getData( "", this.pages);
+        this.getData("", this.pages);
       }
-    },
+    }
   },
   components: {
     search
