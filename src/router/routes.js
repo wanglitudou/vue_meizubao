@@ -191,7 +191,7 @@ let routes = [{
   },
   {
     name: "order_details",
-    path: "/order_details/:type",
+    path: "/order_details",
     component: orderDetails
   },
   {

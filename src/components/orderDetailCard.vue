@@ -1,60 +1,74 @@
 <template>
 
   <div>
+<!-- 技师 -->
+  <div class="card" v-if='detail.type == 2'>
+    <div class="head">
+      <img :src="detail.images" alt="">
+    </div>
+    <div class="right-info">
+      <p class="big">{{detail.goods_name}}</p>
+      <div>
+        <span class="color666">薪水：</span><span>￥{{detail.weekprice}}/月</span>
+        <span class="text-right">预约时间:{{detail.stage}}日</span>
+        <!--  -->
+        <!-- <span class="text-right color666">：{{detail.strtime}}</span> -->
+      </div>
+      <div class="bottom-text">
+        <span class="color666">诚意金：</span>￥<span class="big red">{{detail.deposit}}</span>
+      </div>
+    </div>
+  </div>
+<!-- 仪器 -->
+  <div class="card" v-if='detail.type ==1 '>  
+    <div class="head">
+      <img :src="detail.images" alt="">
+    </div>
+    <div class="right-info">
+      <p class="big">{{detail.goods_name}}</p>
+      <div>
+        <span class="color666">租赁押金：</span><span>￥{{detail.deposit}}</span>
+        <span class="text-right color666">租期：{{detail.stage}}月</span>
+      </div>
+      <div class="bottom-text">
+        <span class="color666">首租租金：</span>￥{{detail.firstrent}}<span class="big red"></span>/月
+      </div>
+    </div>
+  </div>
+ 
 
-  <div class="card" v-if='type=="technician"'>
+
+
+<!-- 产品 -->
+  <div class="card" v-if='detail.type==3'>
     <div class="head">
       <img src="../assets/images/timg.jpeg" alt="">
     </div>
     <div class="right-info">
-      <p class="big">精英名字</p>
+      <p class="big">{{detail.goods_name}}</p>
       <div>
-        <span class="color666">薪水：</span><span>￥10000/月</span>
-        <span class="text-right">3日</span><span class="text-right color666">预约时间：</span>
+        <span class="color666">价格：</span><span class="big red"> {{detail.productprice}}</span>
+        <span class="text-right">x {{detail.number}}</span>
       </div>
       <div class="bottom-text">
-        <span class="color666">诚意金：</span>￥<span class="big red">1500</span>/月
       </div>
     </div>
   </div>
-
-
-  <div class="card" v-if='type=="instrument"'>
+<!-- 项目 -->
+ <div class="card" v-if='detail.type==5'>
     <div class="head">
       <img src="../assets/images/timg.jpeg" alt="">
     </div>
     <div class="right-info">
-      <p class="big">{{name}}</p>
+      <p class="big">{{detail.goods_name}}</p>
       <div>
-        <span class="color666">租赁押金：</span><span>￥{{deposit}}</span>
-        <span class="text-right color666">起租期：{{month}}月</span>
-      </div>
-      <div class="bottom-text">
-        <span class="color666">首租租金：</span>￥<span class="big red">{{price}}</span>/月
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-  <div class="card" v-if='type=="product"'>
-    <div class="head">
-      <img src="../assets/images/timg.jpeg" alt="">
-    </div>
-    <div class="right-info">
-      <p class="big">{{name}}</p>
-      <div>
-        <span class="color666">价格：</span><span class="big red"> {{price}}</span>
-        <span class="text-right">x {{number}}</span>
+        <span class="color666">诚意金：</span><span class="big red"> {{detail.deposit}}</span>
+        <!-- <span class="text-right">x {{number}}</span> -->
       </div>
       <div class="bottom-text">
       </div>
     </div>
   </div>
-
-
 
   </div>
 
@@ -65,7 +79,7 @@
 export default {
   name: 'addressCard',
   props:[
-    'dettail',
+    'detail',
     'type',
     'name',
     'price',
@@ -73,10 +87,11 @@ export default {
     'month',
     'deposit',
     'number',
+    
   ],
   data () {
     return {
-
+    
     }
   }
 }
@@ -137,12 +152,8 @@ export default {
   .big {
     font-size: 16px;
   }
-
   .red {
     color: #ff272d;
 
   }
-
-
-
 </style>

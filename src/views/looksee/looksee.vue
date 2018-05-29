@@ -134,6 +134,7 @@ export default {
       gray: require("../../assets/images/jian.png"),
       number: 4,
       sliders: ["级别", "日薪资", "周薪"],
+      arr:[{tab:ites,tabs:['']}],
       keyword: "",
       code: 1,
       uid: 0,
