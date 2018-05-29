@@ -39,7 +39,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="details()">
+                 @click="details(item.id)">
             <span>{{item.name}}</span>
           </div>
         </div>
@@ -61,7 +61,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="essence()">
+                 @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
@@ -83,7 +83,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="matching()">
+                 @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -106,7 +106,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="train()">
+                 @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -129,7 +129,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="cooperation()">
+                 @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
