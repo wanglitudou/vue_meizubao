@@ -3,13 +3,28 @@
     <div class="total_foot">
       <div class="total_lef">
         <span class="add">合计：</span>
-        <span class="tinct">¥{{finalCount}}</span>
+        <span class="tinct">¥{{detail.total_price}}</span>
       </div>
-      <template v-if="nextFun">
+      <template v-if="detail.status == 1">
         <div class="total_rig" @click="nextFun">
-          <span>{{text}}</span>
+          <span>立即付款</span>
         </div>
       </template>
+       <template v-if="detail.status == 4">
+        <div class="total_rig" @click="confirm(detail.status,detail.uid)">
+          <span>确认收货</span>
+        </div>
+      </template>
+       <template v-if="detail.status == 6">
+        <div class="total_rig" @click="back(detail.status,detail.uid)">
+          <span v-if="detail.type != 2">退还</span>
+          <span v-else>完成服务</span>
+        </div>
+         <div class="total_rig" @click="renewal">
+          <span>续约</span>
+        </div>
+      </template>
+     
     </div>
   </div>
 </template>
@@ -17,7 +32,7 @@
 <script>
 export default {
   name: 'orderFooter',
-  props:["count","text",'nextFun'],
+  props:["count","text",'nextFun','detail','confirm','back','renewal'],
   mounted(){
     this.countNum=this.toThousands(this.count)
   },
