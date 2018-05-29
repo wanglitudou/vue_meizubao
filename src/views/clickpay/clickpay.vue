@@ -196,7 +196,7 @@ export default {
     getData(word, pages) {
       let that = this;
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/instrumentSearch", {
+        .post("http://mzbao.weiyingjia.org/api/meizubao/videoSearch", {
           keywords:word,
           page: pages
         })

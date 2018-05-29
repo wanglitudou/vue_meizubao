@@ -39,7 +39,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="details()">
+                 @click="details(item.id)">
             <span>{{item.name}}</span>
           </div>
         </div>
@@ -61,7 +61,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="essence()">
+                 @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
@@ -83,7 +83,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="matching()">
+                 @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -106,7 +106,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="train()">
+                 @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -129,7 +129,7 @@
                :key="item.index">
             <img :src="item.images"
                  alt=""
-                 @click="cooperation()">
+                 @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -317,22 +317,25 @@ export default {
       this.$router.push({ name: "detail" }); //点击图片的时候,跳转到对应的详情页面
     },
     details(pid) {
-      this.$router.push({ name: "details", params: { pid: pid } }); //热租仪器模块,点击图片,跳转到对应的详情页面
+      this.$router.push({ name: "details" ,query:{pid:pid} }); //热租仪器模块,点击图片,跳转到对应的详情页面
     },
     essence(pid) {
-      this.$router.push({ name: "essence", params: { pid: pid } }); //美业菁英模块,点击图片,跳转到对应的详情页面
+      this.$router.push({ name: "essence" ,query:{pid:pid} }); //美业菁英模块,点击图片,跳转到对应的详情页面
     },
-    cooperation() {
-      this.$router.push({ name: "cooperation" }); //合作项目,点击合作项目模块,跳转到对应的详情页面
+    hotcent() {
+      this.$router.push({ name: "industry" }); //热租仪器
+    },
+    cooperation(pid) {
+      this.$router.push({ name: "cooperation" ,query:{pid:pid} }); //合作项目,点击合作项目模块,跳转到对应的详情页面
     },
     project() {
       this.$router.push({ name: "project" }); //合作项目模块,点击查看更多的时候,跳转对应的详情页面
     },
-    matching() {
-      this.$router.push({ name: "matching" }); //配套产品模块,点击图片,跳转到对应详情页面
+    matching(pid) {
+      this.$router.push({ name: "matching" ,query:{pid:pid} }); //配套产品模块,点击图片,跳转到对应详情页面
     },
-    train() {
-      this.$router.push({ name: "train" }); //培训视频模块,点击图片,跳转到对应的详情页面
+    train(pid) {
+      this.$router.push({ name: "train"  ,query:{pid:pid} }); //培训视频模块,点击图片,跳转到对应的详情页面
     },
     looksee() {
       this.$router.push({ name: "looksee" }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
@@ -430,7 +433,7 @@ export default {
 
 .searchs input {
   width: 6rem;
-  height: 0.785rem;
+  height: 0.792rem;
   border: 0;
   outline: none;
   padding-left: 1rem;

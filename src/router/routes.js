@@ -31,6 +31,8 @@ import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
+
+
 import sign from "../views/sign.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue"
 
@@ -53,11 +55,6 @@ let routes = [{
         component: catagory
       },
       {
-        name: "cart",
-        path: "cart",
-        component: cart
-      },
-      {
         name: "mine",
         path: "mine",
         component: mine
@@ -77,9 +74,14 @@ let routes = [{
         name: "coursepage",
         path: "coursepage",
         component: coursepage
-      }
+      },
+      {
+        name: "cart",
+        path: "/cart",
+        component: cart,
+      },
     ]
-  },
+  },  
   {
     name: "detail",
     path: "/detail",
@@ -88,7 +90,10 @@ let routes = [{
   {
     name: "details",
     path: "/details",
-    component: details
+    component: details,
+    meta: {
+      keepAlive: true
+    },
   },
   {
     name: "industry",

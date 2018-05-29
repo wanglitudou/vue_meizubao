@@ -41,7 +41,7 @@
       init(){
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/videoDetail", {
-            params: {'id': 1}
+            params: { id: this.$route.query.pid }
           })
           .then(res => {
             console.log(res);

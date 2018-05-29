@@ -1,17 +1,17 @@
 <template>
 
   <div>
-    <div class="address" @click="">
+    <div class="address" @click="jumpToAddress">
       <div class="left">
         <img src="../assets/icon/address.png" alt="">
       </div>
       <div class="center">
         <div class="top">
-          <span class="color666">收货人: <span class="color333">嘿嘿</span></span>
-          <span class="color333 text-right">13801231255</span>
+          <span class="color666">收货人: <span class="color333">{{detail.user_name}}</span></span>
+          <span class="color333 text-right">{{detail.mobile}}</span>
         </div>
         <div class="bottom">
-          <span class="color666">收货地址: </span><span class="color333">北京朝阳区国粹苑国粹苑国粹苑国粹苑A座4层</span></span>
+          <span class="color666">收货地址: </span><span class="color333">{{detail.province}}{{detail.city}}{{detail.area}}{{detail.address}}</span>
         </div>
       </div>
       <div class="right" v-if="type=='button'">
@@ -19,7 +19,7 @@
       </div>
       <div class="right" v-else> </div>
     </div>
-    <div class="address-line"  v-if="type=='button'"></div>
+    <!-- <div class="address-line"  v-if="type=='button'"></div> -->
   </div>
 </template>
 
@@ -27,9 +27,8 @@
 export default {
   name: 'addressCard',
 
-  props: ["type"],
+  props: ["type",'detail'],
   mounted(){
-    this.init();
   },
   methods:{
 
@@ -43,26 +42,6 @@ export default {
 //      })
     },
 
-
-
-    init(){
-
-
-      console.log("初始化地址");
-      this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/addressList", {
-          params: {'id': 1}
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            this.address = res.data.data;
-          }
-        })
-        .catch(() => {
-          console.log("http请求错误");
-        });
-    }
   },
   data () {
     return {

@@ -17,12 +17,13 @@
     "axios": "^0.18.0",
     "date-time-picker": "^0.5.2",
     "element-ui": "^2.3.9",
+    "lodash": "^4.17.10",
+    "lodash.clonedeep": "^4.5.0",
     "masonry": "0.0.2",
     "mint-ui": "^2.2.13",
     "vue": "^2.5.2",
     "vue-masonry": "^0.11.1",
-    "vue-router": "^3.0.1",
-    "vue-waterfall-easy": "^2.1.4"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -67,7 +68,6 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
-    "vue-waterfall-easy": "^2.1.4",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
