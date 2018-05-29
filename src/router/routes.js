@@ -32,6 +32,7 @@ import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 import sign from "../views/sign.vue";
+import addtheaddress from "../views/addtheaddress/addtheaddress.vue"
 
 let routes = [{
     path: "/",
@@ -193,6 +194,11 @@ let routes = [{
     name: "authname",
     path: "/authname",
     component: authname
+  },
+  {
+    name: "addtheaddress",
+    path: "/addtheaddress",
+    component: addtheaddress
   }
 ];
 

@@ -21,7 +21,7 @@
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
-             @click="address()">
+             @click="addtheaddress()">
       </div>
     </div>
     <div ref="scroll"
@@ -343,8 +343,8 @@ export default {
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
-    address() {
-      this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
+    addtheaddress() {
+      this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
     }
     // payment() {
     //   this.$router.push({ name: "payment" }); //调节其他页面时的跳转(完善信息页面)
