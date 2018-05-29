@@ -30,13 +30,10 @@
           <span>适合人群：</span>
           <span>{{data.suitable}}</span>
         </p>
-        <p class="pro_cate">
-          <span>操作周期：</span>
-          <span></span>
-        </p>
+
         <p class="pro_cate">
           <span>项目禁忌：</span>
-          <span>{{taboo}}</span>
+          <span>{{data.taboo}}</span>
         </p>
         <p class="pro_cate">
           <span>分成比例：</span>
@@ -45,11 +42,21 @@
 
         <p class="pro_cate">
           <span>报名开始时间：</span>
-          <span>{{data.divideinto}}</span>
+          <span>{{data.sigh_strtime}}</span>
         </p>
         <p class="pro_cate">
           <span>分成比例：</span>
-          <span>{{data.divideinto}}</span>
+          <span>{{data.sigh_stoptime}}</span>
+        </p>
+
+
+        <p class="pro_cate">
+          <span>项目开始时间：</span>
+          <span>{{data.strtime}}</span>
+        </p>
+        <p class="pro_cate">
+          <span>项目结束时间：</span>
+          <span>{{data.stoptime}}</span>
         </p>
 
         <!--<p class="pro_cate">-->
@@ -68,13 +75,9 @@
           <span>预付诚意金：</span>
           <span>￥{{data.money}}</span>
         </p>
-        <p class="net_sign">
-          <span>网签租赁协议</span>
-        </p>
-
       </div>
     </div>
-    <orderFooter :text="'立即下单'" :count="data.money" :nextFun="jumpToConfirm"  ></orderFooter>
+    <orderFooter :text="'立即下单'" :count="data.money" :nextFun="createOrder"  ></orderFooter>
 
   </div>
 </template>
@@ -111,19 +114,36 @@ export default {
         });
     },
 
-    jumpToConfirm: function() {
-      this.$router.push({
-//          path: '/confirm/instrument',
-        name:"confirm",
-        params: {
-          type:'product',
-          name: this.data.name,
-          price: this.data.firstrent,
-          deposit: this.data.deposit,
-          month:this.data.num,
-          count:this.month*this.data.firstrent+(this.data.deposit-0),
-        }
-      });
+    createOrder: function() {
+
+      this.$axios
+        .post(window.ajaxSrc + "/api/meizubao/instrumentOrder", {
+          params: {
+            uid:window.localStorage.id,
+            g_id:this.data.id,
+            type:5,
+            m_type:"",
+            strtime:"",
+            stoptime:"",
+            stage:"",
+            agreement:"",
+            image:"",
+            goods_num:"",
+            total_price:"",
+            goods_name:"",
+            address_id:"",
+            deposit:"",
+          }
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.data = res.data.data;
+          }
+        })
+        .catch(() => {
+          console.log("http请求错误");
+        });
     },
   }
 };
@@ -178,8 +198,9 @@ export default {
 }
 .cent_cate {
   width: 7.1rem;
-  height: 4.56rem;
+
   margin: 0.2rem auto 0;
+  margin-bottom: 0.5rem;
 }
 .pro_cate {
   width: 7.1rem;
