@@ -119,7 +119,7 @@ export default {
 
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
-            uid:window.localStorage.id,
+            uid:47,
             g_id:this.data.id,
             type:5,
             m_type:1,

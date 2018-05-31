@@ -45,6 +45,7 @@
                     id="datePicker"
                     mode='range'
                     v-model='selectedDate'
+                    :disabled-dates='[{ start: new Date(2018, 5, 2), end: new Date(2018, 5, 12)}]'
                     show-caps>
                   </v-date-picker>
                 </p>
@@ -219,7 +220,7 @@ export default {
       date2:"",
       selectedDate: {
         start: new Date(),
-        end: new Date(2018, 6, 4)
+        end: new Date(),
       }
     };
   }

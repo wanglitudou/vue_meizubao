@@ -48,10 +48,10 @@ Vue.config.productionTip = false;
 
 //新的日历插件
 Vue.use(VCalendar, {
-  firstDayOfWeek: 2,  // Monday
+  firstDayOfWeek: 1,  // Monday
   local:"zh-CN",
   // paneWidth:100,
-  // navVisibility:"hidden",
+  datePickerShowDayPopover:false,
 });
 
 
