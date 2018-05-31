@@ -96,7 +96,7 @@
         <span>加载更多 > </span>
       </div> -->
     <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:1.9rem">
-      <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry">
+      <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry" @click="details(item.id)">
 
         <div class="cent_left">
           <div class="list_img">
@@ -212,6 +212,14 @@ export default {
       });
   },
   methods: {
+    details(id){
+       this.$router.push({
+        name: "details",
+        query: {
+          pid: id
+        }
+      });
+    },
     getData(name, keywords, star, dayprice, page) {
       console.log(name, keywords, star, dayprice, page);
       let that = this;

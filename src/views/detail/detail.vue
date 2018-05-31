@@ -193,7 +193,7 @@
         </div> -->
 
         <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
-            <div v-masonry-tile class="item" v-for="(item, index) in imgsArr">
+            <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
                 <!-- block item markup -->
                 <div class="box listing">
                     <div>
@@ -217,7 +217,7 @@
                             </span>
                         </p>
                         <p class="rent"> 起租期:{{item.num}}个月</p>
-                        <p class="orders" @click="details()">
+                        <p class="orders">
                             <span class="order">
                                 立即下单
                             </span>
@@ -227,11 +227,11 @@
 
             </div>
         </div>
-        <div class="Loading" v-if="showLoading">
+        <!-- <div class="Loading" v-if="showLoading">
             <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
-        </div>
+        </div> -->
         <!-- 点击加载 -->
-        <div class="moreData" ref="load" v-else>
+        <div class="moreData" ref="load">
             <!--  -->
             <div>
                 <div v-if="load" @click="loadMore">加载更多></div>
@@ -321,8 +321,14 @@ export default {
       this.pages = 1;
       this.getData("", keyword, this.pages);
     },
-    details() {
-      this.$router.push({ name: "details" });
+    details(id) {
+      this.$router.push({
+        name: "details",
+        query: {
+          pid: id
+        }
+      });
+      console.log(id);
     },
     tab(id, index) {
       this.showLoading = true;

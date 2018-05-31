@@ -18,9 +18,15 @@
     </div>
     <!-- 技师续约 -->
     <div class="technician" v-if="detail.type == 2">
-      <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='[{ start: new Date(2018, 5, 2), end: new Date(2018, 5, 12)}]' show-caps>
-      </v-date-picker>
+      <v-date-picker
+            id="datePicker"
+            mode='range'
+            v-model='selectedDate'
+            :disabled-dates='disableDate'
+            show-caps>
+          </v-date-picker>
     </div>
+    {{during}}
     <!-- @click="decrease" -->
     <!-- @click="increase" -->
     <!-- v-bind:class="{ disable: month==data.num }" -->
@@ -31,10 +37,15 @@
 // import{datePicker} from 'VCalendar'
 import "v-calendar/lib/v-calendar.min.css";
 export default {
-  props: ["detail", "mounth", "increase", "decrease", "allPrice"],
+  props: ["detail", "mounth", "increase", "decrease", "allPrice","disableDate",'selectedDate','during'],
   data() {
         return {
+         
+        // disableDate: []
         };
+      },
+      mounted(){
+          console.log(this.disableDate)
       }
      
 };
@@ -113,12 +124,12 @@ export default {
   font-size: 16px;
   color: red;
 }
-
- #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title{
-    font-size:0.32rem;
+ #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title {
+    font-size: 0.32rem;
   }
-  #datePicker .c-weekdays{
-    font-size:0.28rem;
+
+  #datePicker .c-weekdays {
+    font-size: 0.28rem;
   }
 
   #datePicker .c-day-content {
@@ -127,9 +138,11 @@ export default {
     height: .5rem;
     font-size: .28rem;
   }
-  #datePicker .c-day-background{
+
+  #datePicker .c-day-background {
     /*width:.7rem !important;*/
-    height:.7rem !important;
+    height: .7rem !important;
   }
+
 </style>
   

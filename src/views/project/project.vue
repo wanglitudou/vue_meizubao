@@ -12,7 +12,7 @@
     <!-- 瀑布流 -->
 
     <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
-      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject">
+      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
         <div class="listbox_lef">
           <div class="cent_left">
             <div class="list_img">
@@ -202,6 +202,14 @@ export default {
     this.getData(this.keyword, this.pages);
   },
   methods: {
+    details(id){
+      this.$router.push({
+        name: "details",
+        query: {
+          pid: id
+        }
+      });
+    },
     cooperation() {
       //合作项目,点击合作项目模块,跳转到对应的详情页面
       this.$router.push({ name: "cooperation" });

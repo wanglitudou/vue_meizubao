@@ -11,7 +11,7 @@
             <search @search="search"></search>
         </div>
         <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:0.88rem">
-            <div v-masonry-tile class="item" v-for="(item, index) in screenscreening">
+            <div v-masonry-tile class="item" v-for="(item, index) in screenscreening" @click="details(item.id)">
                 <div class="listbox_lef">
                     <div class="cent_left">
                         <div class="list_img">
@@ -193,6 +193,14 @@ export default {
     this.getData(this.keyword, this.pages);
   },
   methods: {
+    details(id) {
+      this.$router.push({
+        name: "details",
+        query: {
+          pid: id
+        }
+      });
+    },
     search(keyword) {
       console.log(keyword);
       this.keyword = keyword;
