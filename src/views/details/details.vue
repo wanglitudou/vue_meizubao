@@ -92,7 +92,7 @@
       return {
         data: [],
         month: 1,
-        agreement:null,
+        agreementId:null,
         showSignTag:false,
       };
     },
@@ -215,6 +215,8 @@
         this.showSignTag=true;
 //        $.smartScroll($("#componentSign"),$("#canvasDiv"))
       },
+
+
       decrease: function() {
         if (this.month > this.data.num) {
           this.month--;
@@ -228,7 +230,7 @@
 
       jumpToConfirm: function() {
         console.log(!this.data.agreement)
-        if(!this.agreement){
+        if(!this.agreementId){
           Toast('请网签租赁协议后下单');
           return false
         }

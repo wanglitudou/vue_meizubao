@@ -6,7 +6,7 @@
 
     <mt-button id="btn_clear" type="default">清除</mt-button>
 
-    <button @click="submit" type="default" id="btn_submit">提交</button>
+    <mt-button @click="submit" type="default" id="btn_submit">提交</mt-button>
 
     <img id="hiddenImg"
          :src="src"
@@ -26,7 +26,7 @@ export default {
     };
   },
 
-  props:["src","gid",],
+  props:["src","gid","saveAgreementId"],
   mounted() {
     this.init();
   },
@@ -34,6 +34,7 @@ export default {
   methods: {
     submit:function(){
 
+      let self= this
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/agreement", {
           uid:window.localStorage.id,
@@ -44,12 +45,13 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-
             alert("上传成功")
+            self.saveAgreementId(res.data.data.id);
           }
         })
-        .catch(() => {
+        .catch((err) => {
           console.log("http请求错误");
+          console.log(err);
         });
     },
 
@@ -270,7 +272,7 @@ export default {
 </script>
 <style scoped>
 .container {
-  position: absolute;
+  position: fixed;
   height:100%;
   width: 100%;
   background: #fff;
