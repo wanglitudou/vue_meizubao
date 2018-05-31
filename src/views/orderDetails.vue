@@ -5,10 +5,15 @@ import addressCard from "../components/addressCard.vue";
 import orderCard from "../components/orderDetailCard.vue";
 import orderStatus from "../components/statusTop.vue";
 import orderInformation from "../components/information.vue";
+// import orderRenewalVue from '../components/orderRenewal.vue';
+import orderRenewal  from '../components/orderRenewal.vue'
 export default {
   data() {
     return {
       orderId: this.$route.params.id,
+      renewalShow:false,
+      text:'续约',
+      showRenewal:false,
       // address: {
       //   user_name: "",
       //   mobile: "",
@@ -17,7 +22,11 @@ export default {
       //   area: "",
       //   address: ""
       // }
-      detail:{}
+      detail:{},
+      mounth:0,
+      allPrice:0,
+      stoptime:'',
+      allTime:[]
     };
   },
   components: {
@@ -25,12 +34,12 @@ export default {
     "com-addressCard": addressCard,
     "com-orderCard": orderCard,
     "com-orderStatus":orderStatus,
-   "com-orderInformation" :orderInformation
+   "com-orderInformation" :orderInformation,
+   "com-orderRenewal":orderRenewal
   
   },
   created() {
    
-    
     this.$axios
       .get("http://mzbao.weiyingjia.org/api/meizubao/orderDetail", {
         params: { id: this.orderId }
@@ -41,9 +50,26 @@ export default {
         }
       })
       .catch({});
+      
   },
-  mounted() {},
+  mounted() {
+    this.getTimeArray();
+  },
   methods: {
+    getTimeArray(){
+      // console.log(this.stoptime)
+      this.$axios
+      .get("http://mzbao.weiyingjia.org/api/meizubao/technicianTime", {
+        params: { id: 1}
+      })
+      .then(res => {
+       console.log(res)
+       if (res.data.status_code == "1001") {
+       
+        }
+      })
+      .catch({});
+    },
     //立即支付
     nextFun(){
     // console.log(111)
@@ -91,8 +117,44 @@ export default {
           console.log("查询失败");
         });
     },
-    renewal(){
-
+    getRenewal(orderId,month,stoptime,totalPrice){
+         this.$axios.post('http://mzbao.weiyingjia.org/api/meizubao/rentContinue',{
+           id:orderId,
+           stage:month,
+           total_price:totalPrice,
+           stoptime:stoptime
+         }).then(res=>{
+             console.log(res)
+         })
+    },
+    // 计算价钱
+    getPrice(price,month){
+       this.allPrice =  price * month
+       console.log(this.allPrice)
+    },
+    renewal(detail){
+       console.log(detail)
+      //  this.text = '继续续约'
+      if(detail.type==1){
+          console.log(detail)
+          this.getRenewal(this.orderId,this.mounth,this.stoptime,this.allPrice)
+          // console.log(this.orderId)
+      }
+      
+    },
+    // 加法 
+    increase(){
+      this.mounth++
+     this.getPrice(this.detail.continued,this.mounth)
+    },
+    // 减法
+    decrease(){
+      this.mounth--
+      if(this.mounth <0){
+        this.mounth = 0
+        return false
+      }
+       this.getPrice(this.detail.continued,this.mounth)
     }
   }
 };
@@ -112,7 +174,8 @@ export default {
     <com-addressCard :type="'show'" :detail="detail"></com-addressCard>
     <com-orderCard :type="'technician'" :detail="detail"></com-orderCard>
     <com-orderInformation :detail="detail"></com-orderInformation>
-    <com-orderFooter :detail='detail' :confirm="confirm" :back="back"  :renewal="renewal" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
+    <com-orderRenewal :detail="detail" :decrease="decrease" :allPrice="allPrice" :increase="increase" :mounth="mounth"></com-orderRenewal>
+    <com-orderFooter :detail='detail'  :confirm="confirm" :back="back"  :renewal="renewal" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
 
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div class="containers">
-        
+
         <!-- <div class="searchs_box">
             <input type="text"
                    placeholder="请输入搜索内容">
@@ -155,19 +155,22 @@
                     </div>
                 </div>
             </div> -->
-    <!-- </div> -->
-    <!-- <div class="foot_load">
+        <!-- </div> -->
+        <!-- <div class="foot_load">
             <span>加载更多 > </span>
         </div> -->
-
+        <div class="Loading" v-if="showLoading">
+            <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
+        </div>
         <!-- 点击加载 -->
-        <div class="moreData" ref="load" v-show="showLoad">
+        <div class="moreData" ref="load">
             <div v-if="load" @click="loadMore">加载更多></div>
             <div v-else>已全部加载</div>
         </div>
     </div>
 </template>
 <script>
+import { Spinner } from "mint-ui";
 import search from "../../components/search.vue";
 export default {
   data() {
@@ -175,35 +178,39 @@ export default {
       screenscreening: [], //视频筛选
       pages: 1,
       keyword: "",
-      showLoad:true,
-      load:true,
-      count:15
+      showLoad: true,
+      load: true,
+      count: 15,
+      showLoading: true
     };
   },
   created() {
     let that = this;
     //首页banner查询
-    this.getData(this.keyword,this.pages);
+    this.getData(this.keyword, this.pages);
   },
   methods: {
     search(keyword) {
-      console.log(keyword)
+      console.log(keyword);
       this.keyword = keyword;
       this.pages = 1;
-      this.getData(keyword,this.pages);
+      this.getData(keyword, this.pages);
     },
     //请求数据
     getData(word, pages) {
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/videoSearch", {
-          keywords:word,
+          keywords: word,
           page: pages
         })
         .then(res => {
           console.log(res);
+
           if (res.data.status_code == 1001) {
-              if (res.data.data.length == 0) {
+              console.log(11)
+              this.showLoading =  false
+            if (res.data.data.length == 0) {
               that.load = false;
               this.$refs.load.style = "height:100%";
               this.$refs.masonry.style = "position:relative";
@@ -226,11 +233,11 @@ export default {
       this.pages++;
       // 搜索的加载更多，搜索没有产品的id
       if (this.code != 1) {
-        this.getData(this.keyword,this.pages);
+        this.getData(this.keyword, this.pages);
       } else {
-        this.getData( "", this.pages);
+        this.getData("", this.pages);
       }
-    },
+    }
   },
   components: {
     search
@@ -420,5 +427,16 @@ export default {
   height: 1rem;
   font-size: 14px;
   color: #00a5ff;
+}
+.Loading {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+  opacity: 0.5;
 }
 </style>

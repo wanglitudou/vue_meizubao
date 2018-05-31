@@ -46,6 +46,8 @@ import { VueMasonryPlugin } from "vue-masonry";
 
 Vue.use(VueMasonryPlugin);
 Vue.use(MintUI);
+import VCalendar from 'v-calendar'
+Vue.use(VCalendar)
 // eslint-disable no-new
 new Vue({
   el: "#app",

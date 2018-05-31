@@ -192,8 +192,6 @@
             <span class="more_add">加载更多</span>
         </div> -->
 
-       
-
         <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
             <div v-masonry-tile class="item" v-for="(item, index) in imgsArr">
                 <!-- block item markup -->
@@ -229,18 +227,24 @@
 
             </div>
         </div>
-
-        <!-- 点击加载 -->
-        <div class="moreData" ref="load" v-show="showLoad">
-            <div v-if="load" @click="loadMore">加载更多></div>
-            <div v-else>已全部加载</div>
+ <div class="Loading" v-if="showLoading">
+            <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
         </div>
+        <!-- 点击加载 -->
+        <div class="moreData" ref="load" v-else>
+            <!--  -->
+            <div>
+                <div v-if="load" @click="loadMore">加载更多></div>
+                <div v-else>已全部加载</div>
+            </div>
 
-    </div>
+        </div>
+       
 
     </div>
 </template>
 <script>
+import { Spinner } from "mint-ui";
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
@@ -255,8 +259,10 @@ export default {
       num: 0,
       flog: false,
       url: [],
+      aaaa: "寄杂志",
       message: "",
       imgsArr: [],
+      showLoading: true,
       group: 0, // request param
       //   a:require('../../assets/images/icon6.jpg'),
       //   c:require('../../assets/images/icon9.jpg'),
@@ -293,7 +299,6 @@ export default {
   },
 
   methods: {
-  
     loadMore() {
       this.pages++;
       // 搜索的加载更多，搜索没有产品的id
@@ -321,6 +326,7 @@ export default {
       this.$router.push({ name: "details" });
     },
     tab(id, index) {
+      this.showLoading = true;
       this.num = index;
       this.uid = id;
       this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
@@ -353,7 +359,7 @@ export default {
           let arr = [];
           if (res.data.status_code == 1001) {
             // arr.push(res.data.data);
-            
+            this.showLoading = false;
             if (res.data.data.length == 0) {
               that.load = false;
               this.$refs.load.style = "height:100%";
@@ -501,4 +507,16 @@ export default {
   font-size: 14px;
   color: #00a5ff;
 }
+.Loading{
+ position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ccc;
+    opacity: 0.5;
+}
+   
 </style>
