@@ -227,7 +227,7 @@
 
             </div>
         </div>
- <div class="Loading" v-if="showLoading">
+        <div class="Loading" v-if="showLoading">
             <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
         </div>
         <!-- 点击加载 -->
@@ -239,7 +239,6 @@
             </div>
 
         </div>
-       
 
     </div>
 </template>
@@ -507,16 +506,15 @@ export default {
   font-size: 14px;
   color: #00a5ff;
 }
-.Loading{
- position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ccc;
-    opacity: 0.5;
+.Loading {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+  opacity: 0.5;
 }
-   
 </style>

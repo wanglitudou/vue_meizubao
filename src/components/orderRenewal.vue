@@ -18,8 +18,8 @@
     </div>
     <!-- 技师续约 -->
     <div class="technician" v-if="detail.type == 2">
-      <v-calendar :attributes='attrs'>
-      </v-calendar>
+      <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='[{ start: new Date(2018, 5, 2), end: new Date(2018, 5, 12)}]' show-caps>
+      </v-date-picker>
     </div>
     <!-- @click="decrease" -->
     <!-- @click="increase" -->
@@ -33,35 +33,10 @@ import "v-calendar/lib/v-calendar.min.css";
 export default {
   props: ["detail", "mounth", "increase", "decrease", "allPrice"],
   data() {
-    return {
-      attrs: [
-        {
-          key: 'today',
-          highlight: {
-            backgroundColor: '#ff8080',
-            // Other properties are available too, like `height` & `borderRadius`
-          },
-         dates:[{ start: new Date(2018, 0, 1), end: new Date(2018, 0, 5) },
-    { start: new Date(2018, 0, 15), span: 5 } // Span is number of days
-         ]}
-      ],
-       
-    };
-  },
-    computed: {
-    inputState() {
-      if (!this.selectedValue) {
         return {
-          type: 'is-danger',
-          message: 'Date required.',
         };
       }
-      return {
-        type: 'is-primary',
-        message: '',
-      };
-    },
-  },
+     
 };
 </script>
 <style>
@@ -94,7 +69,7 @@ export default {
   vertical-align: middle;
 }
 .value {
-  width: 30px;
+  width:30px;
   font: 16px Arial;
   line-height: 26px;
   text-align: center;
@@ -138,4 +113,23 @@ export default {
   font-size: 16px;
   color: red;
 }
+
+ #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title{
+    font-size:0.32rem;
+  }
+  #datePicker .c-weekdays{
+    font-size:0.28rem;
+  }
+
+  #datePicker .c-day-content {
+
+    width: .5rem;
+    height: .5rem;
+    font-size: .28rem;
+  }
+  #datePicker .c-day-background{
+    /*width:.7rem !important;*/
+    height:.7rem !important;
+  }
 </style>
+  
