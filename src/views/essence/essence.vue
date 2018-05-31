@@ -41,13 +41,12 @@
                     <span>预约时间</span>
                 </p>
                 <p class="list_begin">
-                    <span v-on:click="datePicker('date1')">开始日期 {{date1}}
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                    </span>
-                    <span v-on:click="datePicker('date2',14)">
-                        结束日期 {{date2}}
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                    </span>
+                  <v-date-picker
+                    id="datePicker"
+                    mode='range'
+                    v-model='selectedDate'
+                    show-caps>
+                  </v-date-picker>
                 </p>
                 <p class="list_tech">
                     <span>预约操作师工作天数为：3天（五天为一周）</span>
@@ -218,10 +217,36 @@ export default {
       data:[],
       date1:"",
       date2:"",
+      selectedDate: {
+        start: new Date(),
+        end: new Date(2018, 5, 18)
+      }
     };
   }
 };
 </script>
 <style scoped>
   @import "./essence.css";
+</style>
+
+
+<style>
+
+  #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title{
+    font-size:0.32rem;
+  }
+  #datePicker .c-weekdays{
+    font-size:0.28rem;
+  }
+
+  #datePicker .c-day-content {
+
+    width: .5rem;
+    height: .5rem;
+    font-size: .28rem;
+  }
+  #datePicker .c-day-background{
+    /*width:.7rem !important;*/
+    height:.7rem !important;
+  }
 </style>

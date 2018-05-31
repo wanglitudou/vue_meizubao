@@ -116,24 +116,23 @@ export default {
 
     createOrder: function() {
 
+
       this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/instrumentOrder", {
-          params: {
+        .post(window.ajaxSrc + "/api/meizubao/addOrder", {
             uid:window.localStorage.id,
             g_id:this.data.id,
             type:5,
-            m_type:"",
+            m_type:1,
             strtime:"",
             stoptime:"",
             stage:"",
-            agreement:"",
-            image:"",
-            goods_num:"",
-            total_price:"",
-            goods_name:"",
+            agreement:5,
+            image:this.data.images[0],
+            goods_num:1,
+            total_price:this.data.money,
+            goods_name:this.data.name,
             address_id:"",
             deposit:"",
-          }
         })
         .then(res => {
           console.log(res);
@@ -141,8 +140,11 @@ export default {
             this.data = res.data.data;
           }
         })
-        .catch(() => {
+        .catch((err) => {
           console.log("http请求错误");
+
+          alert(JSON.stringify(err));
+
         });
     },
   }
@@ -234,7 +236,6 @@ export default {
 }
 .order_name {
   width: 7.1rem;
-  height: 3.42rem;
   margin: 0.2rem auto 0;
   margin-bottom: 20px;
   background: #ffffff;

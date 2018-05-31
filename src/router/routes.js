@@ -81,7 +81,7 @@ let routes = [{
         component: cart,
       },
     ]
-  },  
+  },
   {
     name: "detail",
     path: "/detail",
@@ -192,8 +192,8 @@ let routes = [{
   },
   {
     name: "order_details",
-    path: "/order_details",
-    component: orderDetails
+    path: "/order_details/:type",
+    component: orderDetails,
   },
   {
     name: "authname",

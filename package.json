@@ -22,6 +22,7 @@
     "masonry": "0.0.2",
     "mint-ui": "^2.2.13",
     "v-distpicker": "^1.0.17",
+    "v-calendar": "^0.9.7",
     "vue": "^2.5.2",
     "vue-masonry": "^0.11.1",
     "vue-pickers": "^1.0.6",
