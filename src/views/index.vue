@@ -29,7 +29,7 @@
 <script>
 export default {};
 </script>
-<style>
+<style >
 .container {
   height: 100%;
   display: flex;

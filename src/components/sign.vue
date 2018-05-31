@@ -3,14 +3,12 @@
 
     <div id="canvasDiv"></div>
 
-    <button id="fixed">固定画布</button>
-
     <button id="btn_clear">清除</button>
 
-    <button id="btn_submit">提交</button>
+    <button @click="submit" id="btn_submit">提交</button>
 
     <img id="hiddenImg"
-         src="https://sfault-image.b0.upaiyun.com/236/838/2368380853-5b06b6892b27a"
+         :src="src"
          alt="">
 
     <img id="qmimg" />
@@ -25,10 +23,33 @@ export default {
     };
   },
 
+  props:["src","gid",],
   mounted() {
     this.init();
   },
+
   methods: {
+    submit:function(){
+
+      this.$axios
+        .post(window.ajaxSrc + "/api/meizubao/agreement", {
+          uid:window.localStorage.id,
+          g_id:this.gid,
+          img:canvas.toDataURL("image/jpg"),
+          type:1,
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+
+            alert("上传成功")
+          }
+        })
+        .catch(() => {
+          console.log("http请求错误");
+        });
+    },
+
     init() {
       var canvasDiv = document.getElementById("canvasDiv");
       var canvas = document.createElement("canvas");
@@ -37,7 +58,7 @@ export default {
       var screenHeight = document.documentElement.clientHeight;
 
       var canvasWidth = screenWidth;
-      var canvasHeight = 300;
+      var canvasHeight = 400;
 
       var point = {};
 
@@ -59,17 +80,27 @@ export default {
 
       var img = new Image();
 
-      img.src =
-        "https://sfault-image.b0.upaiyun.com/236/838/2368380853-5b06b6892b27a";
+      img.src = this.src;
 
       img.setAttribute("crossOrigin", "Anonymous");
 
       img.onload = function() {
-        var ptrn = context.createPattern(img, "no-repeat");
 
-        context.fillStyle = ptrn;
+        let imgWidth=img.width;
+        let imgHeight=img.height;
 
-        context.fillRect(0, 0, canvas.width, canvas.height / 2);
+
+        canvas.setAttribute("height", imgHeight*screenWidth/imgWidth);
+
+
+//        var ptrn = context.createPattern(img, "no-repeat");
+//
+//        context.fillStyle = ptrn;
+//
+//        context.fillRect(0, 0, canvas.width, canvas.height);
+
+          context.drawImage(this,0,0,screenWidth,imgHeight*screenWidth/imgWidth);
+
       };
 
       console.log(canvas);
@@ -193,32 +224,20 @@ export default {
 
       var submit = document.getElementById("btn_submit");
 
-      var fixed = document.getElementById("fixed");
 
       clear.addEventListener("click", function() {
         canvas.width = canvas.width - 0;
       });
 
-      submit.addEventListener("click", function() {
-        var img = document.getElementById("qmimg");
-
-        try {
-          img.setAttribute("src", canvas.toDataURL("image/png"));
-        } catch (err) {
-          alert(err);
-        }
-      });
-
-      fixed.addEventListener("click", function() {
-        document.body.addEventListener(
-          "touchstart touchmove touchend",
-          function(e) {
-            if (e.target === canvas) {
-              e.preventDefault();
-            }
-          }
-        );
-      });
+//      submit.addEventListener("click", function() {
+//        var img = document.getElementById("qmimg");
+//
+//        try {
+//          img.setAttribute("src", canvas.toDataURL("image/png"));
+//        } catch (err) {
+//          alert(err);
+//        }
+//      });
 
       //        this.$axios
       //          .get(window.ajaxSrc + "/api/meizubao/productDetail", {
@@ -239,8 +258,16 @@ export default {
 </script>
 <style scoped>
 .container {
+  position: absolute;
+  height:100%;
   width: 100%;
   background: #fff;
+  overflow: hidden;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  z-index: 9;
 }
 
 #hiddenImg {
@@ -248,6 +275,12 @@ export default {
   width: 0;
 }
 #canvasDiv {
-  border: 1px solid #ddd;
+
 }
+
+  #btn_submit{
+    position: absolute;
+    top:0;
+    left:0;
+  }
 </style>

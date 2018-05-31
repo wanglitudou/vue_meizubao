@@ -92,11 +92,39 @@
             price: this.data.discount,
             number:this.number,
             count: this.number*this.data.discount,
+            createOrder: this.createOrder,
           }
         })
       },
 
-
+      createOrder:function(){
+        this.$axios
+          .post(window.ajaxSrc + "/api/meizubao/addOrder", {
+            uid:window.localStorage.id,
+            g_id:this.data.id,
+            type:3,
+            m_type:1,
+            strtime:"",
+            stoptime:"",
+            stage:"",
+            agreement:"",
+            image:this.data.images[0],
+            goods_num:this.number,
+            total_price:this.number*this.data.discount,
+            goods_name:this.data.name,
+            address_id:"",
+            deposit:"",
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              this.data = res.data.data;
+            }
+          })
+          .catch(() => {
+            console.log("http请求错误");
+          });
+      },
       init(){
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/productDetail", {
@@ -123,7 +151,6 @@
 <style scoped>
   .container {
     width: 100%;
-    height: auto;
     height: calc(100% - 0.88rem);
     background: #fff;
   }

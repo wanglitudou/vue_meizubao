@@ -33,8 +33,6 @@ import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 
 
-import sign from "../views/sign.vue";
-
 let routes = [{
     path: "/",
     redirect: "./index/home"
@@ -80,7 +78,7 @@ let routes = [{
         component: cart,
       },
     ]
-  },  
+  },
   {
     name: "detail",
     path: "/detail",
@@ -192,7 +190,7 @@ let routes = [{
   {
     name: "order_details",
     path: "/order_details/:type",
-    component: orderDetails
+    component: orderDetails,
   },
   {
     name: "authname",
