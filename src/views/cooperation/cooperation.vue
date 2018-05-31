@@ -107,6 +107,7 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             this.data = res.data.data;
+
           }
         })
         .catch(() => {
@@ -136,6 +137,8 @@ export default {
         })
         .then(res => {
           console.log(res);
+
+
           if (res.data.status_code == 1001) {
             this.data = res.data.data;
           }
