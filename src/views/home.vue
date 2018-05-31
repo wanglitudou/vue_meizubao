@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-
-    <div class="banner">
+    <div class=" ">
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -317,25 +316,25 @@ export default {
       this.$router.push({ name: "detail" }); //点击图片的时候,跳转到对应的详情页面
     },
     details(pid) {
-      this.$router.push({ name: "details" ,query:{pid:pid} }); //热租仪器模块,点击图片,跳转到对应的详情页面
+      this.$router.push({ name: "details", query: { pid: pid } }); //热租仪器模块,点击图片,跳转到对应的详情页面
     },
     essence(pid) {
-      this.$router.push({ name: "essence" ,query:{pid:pid} }); //美业菁英模块,点击图片,跳转到对应的详情页面
+      this.$router.push({ name: "essence", query: { pid: pid } }); //美业菁英模块,点击图片,跳转到对应的详情页面
     },
     hotcent() {
       this.$router.push({ name: "industry" }); //热租仪器
     },
     cooperation(pid) {
-      this.$router.push({ name: "cooperation" ,query:{pid:pid} }); //合作项目,点击合作项目模块,跳转到对应的详情页面
+      this.$router.push({ name: "cooperation", query: { pid: pid } }); //合作项目,点击合作项目模块,跳转到对应的详情页面
     },
     project() {
       this.$router.push({ name: "project" }); //合作项目模块,点击查看更多的时候,跳转对应的详情页面
     },
     matching(pid) {
-      this.$router.push({ name: "matching" ,query:{pid:pid} }); //配套产品模块,点击图片,跳转到对应详情页面
+      this.$router.push({ name: "matching", query: { pid: pid } }); //配套产品模块,点击图片,跳转到对应详情页面
     },
     train(pid) {
-      this.$router.push({ name: "train"  ,query:{pid:pid} }); //培训视频模块,点击图片,跳转到对应的详情页面
+      this.$router.push({ name: "train", query: { pid: pid } }); //培训视频模块,点击图片,跳转到对应的详情页面
     },
     looksee() {
       this.$router.push({ name: "looksee" }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
@@ -346,11 +345,15 @@ export default {
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
+    // addtheaddress() {
+    //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
+    // }
     address() {
       this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
     }
-    // payment() {
-    //   this.$router.push({ name: "payment" }); //调节其他页面时的跳转(完善信息页面)
+    // information() {
+    //   //完善信息
+    //   this.$router.push({ name: "information" });
     // }
   }
 };

@@ -303,6 +303,12 @@ export default {
     //去详情页
     todetail(id) {
       console.log(id);
+      this.$router.push({
+       name: "order_details",
+        params: {
+          id: id
+        }
+      })
     },
     // 立即付款
     toPay(id) {
@@ -328,7 +334,7 @@ export default {
             Toast("修改成功");
             var result2 = filter(this.orderlist, { id: id });
             forEach(result2, function(item) {
-              item.status = 7;
+              item.status = 5;
             });
 
             //  this.getOrder()

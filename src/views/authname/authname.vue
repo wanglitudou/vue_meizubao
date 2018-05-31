@@ -1,49 +1,51 @@
 <template>
-    <div class="container">
-        <div class="auth_name">
-            <div class="id_num">
-                <p class="id_name">
-                    <span>身份证号码:</span>
-                    <span class="id_txt">
-                        <input type="text"
-                               v-model="data.id_card"
-                               placeholder="请输入身份证号码">
-                    </span>
-                </p>
-            </div>
-            <div class="up_data">
-                <span class="updata_lef"></span>
-                <span class="updata_rig"></span>
-            </div>
-            <div class="id_num id_number">
-                <p class="id_name">
-                    <span>家庭住址:</span>
-                    <span class="id_txt">
-                        <input type="text"
-                               v-model="data.home_address"
-                               placeholder="请输入家庭住址">
-                    </span>
-                </p>
-            </div>
-            <div class="up_data up_dataimg">
-                <span class="updata_lef"></span>
-                <span class="updata_rig"></span>
-            </div>
-            <div class="relation">
-                <p class="credit">
-                    <span class="sesame">关联芝麻信用</span>
-                </p>
-            </div>
-        </div>
-        <div class="next_up">
-            <span class="next_nex"
-                  @click="submitBtn()">已完成</span>
-        </div>
-
+  <div class="container">
+    <div class="auth_name">
+      <div class="id_num">
+        <p class="id_name">
+          <span>身份证号码:</span>
+          <span class="id_txt">
+            <input type="text"
+                   v-model="data.id_card"
+                   @blur="card()"
+                   placeholder="请输入身份证号码">
+          </span>
+        </p>
+      </div>
+      <div class="up_data">
+        <span class="updata_lef"></span>
+        <span class="updata_rig"></span>
+      </div>
+      <div class="id_num id_number">
+        <p class="id_name">
+          <span>家庭住址:</span>
+          <span class="id_txt">
+            <input type="text"
+                   v-model="data.home_address"
+                   @blur="homeaddress()"
+                   placeholder="请输入家庭住址">
+          </span>
+        </p>
+      </div>
+      <div class="up_data up_dataimg">
+        <span class="updata_lef"></span>
+        <span class="updata_rig"></span>
+      </div>
+      <div class="relation">
+        <p class="credit">
+          <span class="sesame">关联芝麻信用</span>
+        </p>
+      </div>
     </div>
+    <div class="next_up">
+      <span class="next_nex"
+            @click="submitBtn()">已完成</span>
+    </div>
+
+  </div>
 </template>
 <script>
-import { MessageBox } from "mint-ui";
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
@@ -93,6 +95,20 @@ export default {
         .catch(() => {
           console.log("查询失败");
         });
+    },
+    card() {
+      let that = this;
+      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)$/.test(that.name)) {
+        Toast("请输入正确的格式");
+        return false;
+      }
+    },
+    homeaddress() {
+      let that = this;
+      if (!/(^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+)$/.test(that.name)) {
+        Toast("请输入正确的格式");
+        return false;
+      }
     }
   }
 };
