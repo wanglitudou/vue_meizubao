@@ -1,28 +1,35 @@
+
 <template>
   <div class="container">
+    <div class="zhe"
+         v-show="show1"
+         @click="close"></div>
     <div class="collectgoods">
       <p class="collects">
         收货人:
         <span><input type="text"
+                 v-model="consignee"
                  class="inp"></span>
       </p>
       <p class="collects">
         联系电话:
         <span><input type="text"
+                 v-model="telephone"
                  class="inp"></span>
       </p>
       <p class="collect_bet">
-        <span>所在地区</span>
-        <span>请选择 ></span>
+        <span>所在地区</span>{{province}}{{city}}{{area}}
+        <span @click="levl()">请选择 ></span>
+
       </p>
+
       <p class="detail_address">
 
         <span class="detail_add">
           <input type="text"
                  class="inpts_text"
-                 placeholder="请输入详细地址">
-          <mt-picker :slots="slots"
-                     @change="onValuesChange"></mt-picker>
+                 placeholder="请输入详细地址"
+                 v-model="address">
         </span>
       </p>
 
@@ -41,20 +48,54 @@
         保存
       </span>
     </div>
+    <vue-pickers :show="show1"
+                 :selectData="pickData3"
+                 v-on:cancel="close"
+                 v-on:confirm="confirmFn"></vue-pickers>
   </div>
 </template>
+
+
 <script>
-// import { Checklist } from "mint-ui";
+//mint-ui三级
 import { Picker } from "mint-ui";
 import { Toast } from "mint-ui";
+import VuePickers from "vue-pickers";
+import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
 export default {
   data() {
     return {
-      checked: true
+      checked: true,
+      show1: false,
+      pickData3: {
+        columns: 3,
+        link: true,
+        pData1: provs_data,
+        pData2: citys_data,
+        pData3: dists_data
+      },
+      province: "",
+      city: "",
+      area: "",
+      address: "",
+      consignee: "",
+      telephone: ""
     };
   },
   created() {},
+  components: {
+    VuePickers
+  },
   methods: {
+    close() {
+      this.show1 = false;
+    },
+    confirmFn(e) {
+      this.province = e.select1.text;
+      this.city = e.select2.text;
+      this.area = e.select3.text;
+      this.show1 = false;
+    },
     sive() {
       this.preservation();
     },
@@ -62,14 +103,14 @@ export default {
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/address", {
-          mobile: "17610160588",
-          user_name: "投入和",
-          province: "投入和",
-          city: "突然ht",
-          area: "任务分工",
-          address: "让我个",
+          mobile: that.telephone,
+          user_name: that.consignee,
+          province: that.province,
+          city: that.city,
+          area: that.area,
+          address: that.address,
           is_default_address: 1,
-          user_id: 1
+          user_id: localStorage.id
         })
         .then(res => {
           console.log(res);
@@ -84,19 +125,25 @@ export default {
           console.log("查询失败");
         });
     },
-    onValuesChange(picker, values) {
-      if (values[0] > values[1]) {
-        picker.setSlotValue(1, values[0]);
-      }
+    levl() {
+      this.show1 = true;
     }
   }
 };
 </script>
 <style scoped>
+.zhe {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 6;
+}
 .container {
   width: 100%;
   height: 100%;
-  /* background: #dec; */
 }
 .inp {
   width: 5rem;
@@ -125,7 +172,6 @@ export default {
   line-height: 1rem;
   font-size: 15px;
   color: #666666;
-  /* padding-left: 10px; */
   display: flex;
   border-bottom: 2px solid #f7f7f7;
   justify-content: space-between;

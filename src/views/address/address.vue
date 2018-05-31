@@ -28,11 +28,14 @@
                 @click="addtheaddress()">
             <i class="iconfont icon-yingyongchengxu-xianxing"></i>
             编辑</span>
-          <span class="give_delete">
+          <span class="give_delete"
+                @click="del(item.id)">
+            <!-- @click="del(item.id)"> -->
             <i class="iconfont icon-yingyongchengxu-xianxing"></i>
             删除</span>
         </p>
       </div>
+      <div style="clear:both;height:2rem;"></div>
     </div>
     <div class="give_good">
       <span class="give_add"
@@ -41,6 +44,7 @@
   </div>
 </template>
 <script>
+import { MessageBox } from "mint-ui";
 export default {
   data() {
     return {
@@ -52,6 +56,31 @@ export default {
     this.getAdd();
   },
   methods: {
+    del(id) {
+      let that = this;
+      MessageBox({
+        title: "提示",
+        message: "确定执行操作吗?",
+        showCancelButton: true,
+        callback: function(action) {
+          console.log(action);
+          if (action == "confirm") {
+            console.log("666");
+            that.$axios
+              .get(
+                "http://mzbao.weiyingjia.org/api/meizubao/delAddress?id=" + id,
+                {}
+              )
+              .then(res => {
+                that.getAdd();
+              })
+              .catch(() => {
+                console.log("查询失败");
+              });
+          }
+        }
+      });
+    },
     getAdd() {
       let that = this;
       that.$axios
