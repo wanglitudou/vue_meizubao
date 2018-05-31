@@ -23,7 +23,7 @@
       </div>
       <div class="cent_cate">
         <p class="pro_cate">
-          <span>项目类别：</span>
+          <span>项目类别123：</span>
           <span>{{data.typeName}}</span>
         </p>
         <p class="pro_cate">
@@ -76,19 +76,48 @@
           <span>￥{{data.money}}</span>
         </p>
       </div>
+      <p class="list_rent" @click="showSign">
+                    <span>
+                        网签租赁协议
+                    </span>
+      </p>
     </div>
     <orderFooter :text="'立即下单'" :count="data.money" :nextFun="createOrder"  ></orderFooter>
+    <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
+
+
+
 
   </div>
 </template>
 <script>
   import orderFooter from '../../components/orderFooter.vue'
+  import sign from '../../components/sign.vue'
+  import { Toast } from 'mint-ui';
+
+
+
 export default {
   data() {
     return {
       data:[],
+      agreementId:null,
+      showSignTag:false,
     };
   },
+
+
+  saveAgreementId:function(agreementId){
+    this.showSignTag=false;
+    this.agreementId=agreementId;
+  },
+  showSign:function(){
+    this.showSignTag=true
+  },
+
+
+
+
 
   mounted() {
     this.init();
@@ -115,12 +144,22 @@ export default {
         });
     },
 
+
+    saveAgreementId:function(agreementId){
+      this.showSignTag=false;
+      this.agreementId=agreementId;
+    },
+    showSign:function(){
+      this.showSignTag=true
+    },
+
+
+
     createOrder: function() {
-
-
+//      window.location.href="http://mzbao.weiyingjia.org/meizubao/pay/index.php?total_fee=0.01&order_id=45";
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
-            uid:47,
+            uid:window.localStorage.id,
             g_id:this.data.id,
             type:5,
             m_type:1,
@@ -134,20 +173,17 @@ export default {
             goods_name:this.data.name,
             address_id:"",
             deposit:"",
+            open_id:window.localStorage.openid,
         })
         .then(res => {
           console.log(res);
-
-
           if (res.data.status_code == 1001) {
-            this.data = res.data.data;
+            window.location.href=res.data.data.url
           }
         })
         .catch((err) => {
           console.log("http请求错误");
-
-          alert(JSON.stringify(err));
-
+          console.log(err);
         });
     },
   }
