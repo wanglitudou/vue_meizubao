@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class=" ">
+    <div class="banner">
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide">

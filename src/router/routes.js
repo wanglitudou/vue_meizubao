@@ -31,10 +31,9 @@ import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
-
-
-import sign from "../views/sign.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue"
+
+
 
 let routes = [{
     path: "/",

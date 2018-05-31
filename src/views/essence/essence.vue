@@ -219,7 +219,7 @@ export default {
       date2:"",
       selectedDate: {
         start: new Date(),
-        end: new Date(2018, 5, 18)
+        end: new Date(2018, 6, 4)
       }
     };
   }
