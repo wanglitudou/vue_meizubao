@@ -329,12 +329,6 @@ export default {
           console.log("查询失败");
         });
     }
-    // delay() {
-    //   let instance = Toast("请输入正确的格式");
-    //   setTimeout(() => {
-    //     instance.close();
-    //   }, 500);
-    // }
   }
 };
 </script>
