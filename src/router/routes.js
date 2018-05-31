@@ -33,12 +33,9 @@ import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 
 
-<<<<<<< HEAD
-=======
 import sign from "../views/sign.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue"
 
->>>>>>> b43c184a96829329c5d084ebc1b146344ebc4883
 let routes = [{
     path: "/",
     redirect: "./index/home"
