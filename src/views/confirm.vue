@@ -50,7 +50,7 @@
       :number="$route.params.number"
     ></orderCard>
 
-    <orderFooter :count="$route.params.count" :text="'立即下单'" :nextFun="order"></orderFooter>
+    <orderFooter :count="$route.params.count" :text="'立即下单'" :nextFun="$route.params.createOrder"></orderFooter>
 
   </div>
 </template>

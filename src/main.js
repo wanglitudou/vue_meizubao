@@ -17,6 +17,10 @@ import MintUI from "mint-ui";
 import "mint-ui/lib/style.css";
 import "./components/js/jquery-2.1.0";
 
+
+//引入新的日历插件
+import VCalendar from 'v-calendar';
+import 'v-calendar/lib/v-calendar.min.css';
 //引入axios
 import axios from "axios";
 
@@ -42,12 +46,21 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false;
 //瀑布流
 
+//新的日历插件
+Vue.use(VCalendar, {
+  firstDayOfWeek: 1,  // Monday
+  local:"zh-CN",
+  // paneWidth:100,
+  datePickerShowDayPopover:false,
+});
+
+
+
 import { VueMasonryPlugin } from "vue-masonry";
 
 Vue.use(VueMasonryPlugin);
 Vue.use(MintUI);
-import VCalendar from 'v-calendar'
-Vue.use(VCalendar)
+
 // eslint-disable no-new
 new Vue({
   el: "#app",

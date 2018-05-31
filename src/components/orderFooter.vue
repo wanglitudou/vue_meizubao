@@ -32,6 +32,8 @@ export default {
     }
   },
   methods:{
+
+
     toThousands(num) {
       var num = (num || 0).toString(), result = '';
       while (num.length > 3) {

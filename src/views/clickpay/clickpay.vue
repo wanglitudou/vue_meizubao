@@ -159,14 +159,17 @@
         <!-- <div class="foot_load">
             <span>加载更多 > </span>
         </div> -->
-        <div class="Loading" v-if="showLoading">
-            <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
+        <div>
+            <div class="Loading" v-if="showLoading">
+                <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
+            </div>
+            <!-- 点击加载 -->
+            <div class="moreData" ref="load">
+                <div v-if="load" @click="loadMore">加载更多></div>
+                <div v-else>已全部加载</div>
+            </div>
         </div>
-        <!-- 点击加载 -->
-        <div class="moreData" ref="load">
-            <div v-if="load" @click="loadMore">加载更多></div>
-            <div v-else>已全部加载</div>
-        </div>
+
     </div>
 </template>
 <script>
@@ -208,8 +211,8 @@ export default {
           console.log(res);
 
           if (res.data.status_code == 1001) {
-              console.log(11)
-              this.showLoading =  false
+            console.log(11);
+            this.showLoading = false;
             if (res.data.data.length == 0) {
               that.load = false;
               this.$refs.load.style = "height:100%";

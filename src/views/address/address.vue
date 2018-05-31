@@ -1,44 +1,50 @@
 <template>
-    <div class="container">
-        <div class="list_cont">
-            <div class="list_one"
-                 v-for="item in list"
-                 :key="item.index">
-                <p class="goods">
-                    <span class="consignee">收货人:
-                        <span class="consig_name">
-                            {{item.user_name}}
-                        </span>
-                    </span>
-                    <span class="consig_num">{{item.mobile}}</span>
-                </p>
-                <p class="consig_address">
-                    <span class="consig_spec">
-                        {{item.address}}
-                    </span>
-                </p>
-                <p class="give">
-                    <span class="give_address">
-                        <el-checkbox v-model="checked"
-                                     class="give_icon"></el-checkbox>
+  <div class="container">
+    <div class="list_cont">
+      <div class="list_one"
+           v-for="item in list"
+           :key="item.index">
+        <p class="goods">
+          <span class="consignee">收货人:
+            <span class="consig_name">
+              {{item.user_name}}
+            </span>
+          </span>
+          <span class="consig_num">{{item.mobile}}</span>
+        </p>
+        <p class="consig_address">
+          <span class="consig_spec">
+            {{item.address}}
+          </span>
+        </p>
+        <p class="give">
+          <span class="give_address">
+            <el-checkbox v-model="checked"
+                         class="give_icon"></el-checkbox>
 
-                        设为默认地址
-                    </span>
-                    <span class="give_edit">
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                        编辑</span>
-                    <span class="give_delete">
-                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                        删除</span>
-                </p>
-            </div>
-        </div>
-        <div class="give_good">
-            <span class="give_add">添加</span>
-        </div>
+            设为默认地址
+          </span>
+          <span class="give_edit"
+                @click="addtheaddress()">
+            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            编辑</span>
+          <span class="give_delete"
+                @click="del(item.id)">
+            <!-- @click="del(item.id)"> -->
+            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            删除</span>
+        </p>
+      </div>
+      <div style="clear:both;height:2rem;"></div>
     </div>
+    <div class="give_good">
+      <span class="give_add"
+            @click="addtheaddress()">添加</span>
+    </div>
+  </div>
 </template>
 <script>
+import { MessageBox } from "mint-ui";
 export default {
   data() {
     return {
@@ -50,6 +56,31 @@ export default {
     this.getAdd();
   },
   methods: {
+    del(id) {
+      let that = this;
+      MessageBox({
+        title: "提示",
+        message: "确定执行操作吗?",
+        showCancelButton: true,
+        callback: function(action) {
+          console.log(action);
+          if (action == "confirm") {
+            console.log("666");
+            that.$axios
+              .get(
+                "http://mzbao.weiyingjia.org/api/meizubao/delAddress?id=" + id,
+                {}
+              )
+              .then(res => {
+                that.getAdd();
+              })
+              .catch(() => {
+                console.log("查询失败");
+              });
+          }
+        }
+      });
+    },
     getAdd() {
       let that = this;
       that.$axios
@@ -65,6 +96,10 @@ export default {
         .catch(() => {
           console.log("查询失败");
         });
+    },
+    //路由跳转,到新增地址页面
+    addtheaddress() {
+      this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
     }
   }
 };
@@ -136,9 +171,9 @@ export default {
 }
 .give_good {
   width: 7.1rem;
-  height: 1rem;
-  line-height: 1rem;
-  background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+  height: 0.8rem;
+  line-height: 0.8rem;
+  background-image: linear-gradient(-130deg, #fd82d9 0%, #fd4689 100%);
   box-shadow: 0 0 13px 0 #eeeeee;
   margin: 0.2rem auto 0;
   text-align: center;

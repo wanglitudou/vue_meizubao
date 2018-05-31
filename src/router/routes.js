@@ -31,9 +31,9 @@ import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
+import addtheaddress from "../views/addtheaddress/addtheaddress.vue"
 
 
-import sign from "../views/sign.vue";
 
 let routes = [{
     path: "/",
@@ -80,7 +80,7 @@ let routes = [{
         component: cart,
       },
     ]
-  },  
+  },
   {
     name: "detail",
     path: "/detail",
@@ -191,13 +191,18 @@ let routes = [{
   },
   {
     name: "order_details",
-    path: "/order_details",
-    component: orderDetails
+    path: "/order_details/:type",
+    component: orderDetails,
   },
   {
     name: "authname",
     path: "/authname",
     component: authname
+  },
+  {
+    name: "addtheaddress",
+    path: "/addtheaddress",
+    component: addtheaddress
   }
 ];
 

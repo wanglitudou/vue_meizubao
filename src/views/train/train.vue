@@ -54,9 +54,38 @@
           });
       },
 
-      buy(){
-        alert("在这写预约下单支付");
-      }
+
+
+      createOrder: function() {
+        this.$axios
+          .post(window.ajaxSrc + "/api/meizubao/addOrder", {
+            uid:window.localStorage.id,
+            g_id:this.data.id,
+            type:4,
+            m_type:1,
+            strtime:"",
+            stoptime:"",
+            stage:"",
+            agreement:"",
+            image:this.data.images[0],
+            goods_num:1,
+            total_price:this.data.money,
+            goods_name:this.data.name,
+            address_id:"",
+            deposit:"",
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              this.data = res.data.data;
+            }
+          })
+          .catch(() => {
+            console.log("http请求错误");
+          });
+      },
+
+
     },
 
     mounted(){

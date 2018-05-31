@@ -7,7 +7,8 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.name"
-                   placeholder="请输入姓名">
+                   placeholder="请输入姓名"
+                   @blur="provingname()">
           </span>
         </p>
       </div>
@@ -17,7 +18,8 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.age"
-                   placeholder="请输入年龄">
+                   placeholder="请输入年龄"
+                   @blur="provingage()">
           </span>
         </p>
       </div>
@@ -27,6 +29,7 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.birthdate"
+                   @blur="provingbirthday()"
                    placeholder="请输入生日">
           </span>
         </p>
@@ -37,6 +40,7 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.phone"
+                   @blur="remind()"
                    placeholder="请输入电话">
           </span>
         </p>
@@ -47,6 +51,7 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.mailbox"
+                   @blur="provingmailbox()"
                    placeholder="请输入邮箱">
           </span>
         </p>
@@ -57,6 +62,7 @@
           <span class="id_txt id_ple">
             <input type="text"
                    v-model="data.shop"
+                   @blur="provingshop()"
                    placeholder="请输入店院名称">
           </span>
         </p>
@@ -67,6 +73,7 @@
           <span class="id_txt id_ple">
             <input type="text"
                    v-model="data.address"
+                   @blur="provingaddress()"
                    placeholder="请输入店院地址">
           </span>
         </p>
@@ -126,7 +133,7 @@
   </div>
 </template>
 <script>
-import { MessageBox } from "mint-ui";
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
@@ -227,21 +234,11 @@ export default {
         }
       }); //调节其他页面时的跳转(完善信息页面)
     },
-    //验证电话号码
-    remind() {
-      let that = this;
-      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.phone)) {
-        MessageBox.alert("请输入正确的手机号格式");
-        // alert("请输入正确的手机号格式");
-        return false;
-      }
-    },
     //验证姓名
     provingname() {
       let that = this;
       if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.name)) {
-        MessageBox.alert("请输入正确的格式");
-        // alert("请输入正确的手机号格式");
+        Toast("请输入正确的格式");
         return false;
       }
     },
@@ -249,37 +246,7 @@ export default {
     provingage() {
       let that = this;
       if (!/^(?:[1-9]?\d|100)$/.test(that.age)) {
-        MessageBox.alert("请输入正确的格式");
-        // alert("请输入正确的手机号格式");
-        return false;
-      }
-    },
-    //验证邮箱
-    provingmailbox() {
-      let that = this;
-      if (
-        !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(that.mailbox)
-      ) {
-        MessageBox.alert("请输入正确的格式");
-        // alert("请输入正确的手机号格式");
-        return false;
-      }
-    },
-    //验证店铺
-    provingshop() {
-      let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.shop)) {
-        MessageBox.alert("请输入正确的格式");
-        // alert("请输入正确的手机号格式");
-        return false;
-      }
-    },
-    //验证地址
-    provingaddress() {
-      let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.address)) {
-        MessageBox.alert("请输入正确的格式");
-        // alert("请输入正确的手机号格式");
+        Toast("请输入正确的格式");
         return false;
       }
     },
@@ -291,11 +258,46 @@ export default {
           that.birthday
         )
       ) {
-        MessageBox.alert("请输入正确的格式");
-        // alert("请输入正确的手机号格式");
+        Toast("请输入正确的格式");
         return false;
       }
     },
+    //验证电话号码
+    remind() {
+      let that = this;
+      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.phone)) {
+        Toast("请输入正确的手机号格式");
+        return false;
+      }
+    },
+
+    //验证邮箱
+    provingmailbox() {
+      let that = this;
+      if (
+        !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(that.mailbox)
+      ) {
+        Toast("请输入正确的格式");
+        return false;
+      }
+    },
+    //验证店铺
+    provingshop() {
+      let that = this;
+      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.shop)) {
+        Toast("请输入正确的格式");
+        return false;
+      }
+    },
+    //验证地址
+    provingaddress() {
+      let that = this;
+      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.address)) {
+        Toast("请输入正确的格式");
+        return false;
+      }
+    },
+
     next() {
       console.log(this.shop);
       let that = this;
@@ -389,7 +391,7 @@ export default {
   justify-content: space-between;
 }
 .year_lef {
-  width: 23%;
+  width: 25%;
   height: 1.6rem;
 }
 .year_rig {
