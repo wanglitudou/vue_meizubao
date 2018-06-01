@@ -1,13 +1,15 @@
 <script>
 
     import orderFooter from '../components/orderFooter.vue'
-    import addressCard from '../components/addressCard.vue'
+    import addressCard from '../components/orderAddressCard.vue'
     import orderCard from '../components/orderCard.vue'
 
   export default {
 
     data() {
-      return {};
+      return {
+        addressId:null,
+      };
     },
     components: {
       orderFooter,addressCard,orderCard,
@@ -21,24 +23,24 @@
     methods: {
 
       createOrder:function(){//全部参数通过  $route传入 除 uid addressId
-
+        console.log(this.addressId);
         this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
           uid:window.localStorage.id,
-          g_id:$route.params.g_id,
-          type:$route.params.type,
-          m_type:$route.params.m_type,
-          strtime:$route.params.strtime,
-          stoptime:$route.params.stoptime,
-          stage:$route.params.stage,
-          agreement:$route.params.agreement,
-          image:$route.params.image,
-          goods_num:$route.params.goods_num,
-          total_price:$route.params.total_price,
-          goods_name:$route.params.goods_name,
-          address_id:addressId,
-          deposit:$route.params.deposit,
-
+          g_id:this.$route.params.g_id,
+          type:this.$route.params.type,
+          m_type:this.$route.params.m_type,
+          strtime:this.$route.params.strtime,
+          stoptime:this.$route.params.stoptime,
+          stage:this.$route.params.stage,
+          agreement:this.$route.params.agreement,
+          image:this.$route.params.image,
+          goods_num:this.$route.params.goods_num,
+          total_price:this.$route.params.total_price,
+          goods_name:this.$route.params.goods_name,
+          address_id:this.addressId,
+          deposit:this.$route.params.deposit,
+          open_id:window.localStorage.openid,
         })
           .then(res => {
             console.log(res);
@@ -50,6 +52,10 @@
             console.log("http请求错误");
           });
       },
+      saveAddressId :function(id) {
+        console.log('comfirm页面存id:'+id);
+        this.addressId=id;
+      }
 
 
 
@@ -69,19 +75,26 @@
 <template>
   <div class="container">
 
-    <addressCard :type="'button'"></addressCard>
+    <addressCard :type="'button'" :saveAddressId="saveAddressId"></addressCard>
+
+    <!--stage 仪器租赁时长(月)、技师租赁天数-->
+    <!--month 仪器起租期(月)-->
+    <!--number 商品数量-->
 
     <orderCard
       :type="$route.params.type"
-      :name="$route.params.name"
+      :name="$route.params.goods_name"
+      :img="$route.params.image"
       :price="$route.params.price"
-      :during="$route.params.during"
+      :total_price="$route.params.total_price"
+      :stage="$route.params.stage"
       :deposit="$route.params.deposit"
       :month="$route.params.month"
-      :number="$route.params.number"
+      :number="$route.params.goods_num"
+
     ></orderCard>
 
-    <orderFooter :count="$route.params.count" :text="'立即下单'" :nextFun="createOrder"></orderFooter>
+    <orderFooter :count="$route.params.total_price" :text="'立即下单'" :nextFun="createOrder"></orderFooter>
 
   </div>
 </template>

@@ -46,6 +46,7 @@
             mode='range'
             v-model='selectedDate'
             :disabled-dates='this.disableDate'
+            :input-props='{ class: "input-style" ,placeholder: "请选择你要租赁的日期"}'
             show-caps>
           </v-date-picker>
         </p>
@@ -166,19 +167,21 @@
 //          path: '/confirm/instrument',
           name: "confirm",
           params: {
-            type: 'product',
+            type: 2,
             g_id:this.$route.query.pid,
             m_type:"1",
             strtime:this.startTime,
             stoptime:this.endTime,
             stage:this.during,
             agreement:this.agreementId,
-            image:this.data.images[0],
+            image:this.data.images,
             goods_num:"1",
             total_price:this.totalPrice,
             goods_name:this.data.name,
-            address_id:this.addressId,
             deposit:"",
+
+
+            price:this.data.dayprice,
 
           }
         })
@@ -224,6 +227,10 @@
 
 
 <style>
+
+  .input-style{
+    width:200px;
+  }
 
   #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title {
     font-size: 0.32rem;

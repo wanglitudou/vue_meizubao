@@ -75,7 +75,8 @@
 
       <orderFooter :text="'立即下单'" :count="month*data.firstrent + (data.deposit-0)" :nextFun="jumpToConfirm"></orderFooter>
 
-      <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id"></sign>
+
+      <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
 
     </div>
   </div>
@@ -210,10 +211,12 @@
     },
     methods: {
 
+      saveAgreementId:function(agreementId){
+        this.showSignTag=false;
+        this.agreementId=agreementId;
+      },
       showSign:function(){
-//        $('html').addClass('noscroll');
-        this.showSignTag=true;
-//        $.smartScroll($("#componentSign"),$("#canvasDiv"))
+        this.showSignTag=true
       },
 
 
@@ -229,30 +232,47 @@
       },
 
       jumpToConfirm: function() {
-        console.log(!this.data.agreement)
         if(!this.agreementId){
           Toast('请网签租赁协议后下单');
           return false
         }
 
-        if(this.month < this.data.num){
 
+        if(this.month < this.data.num){
           Toast('请重新选择您要租赁的时长');
           return false
         }
 
+
+
         this.$router.push({
 //          path: '/confirm/instrument',
-          name:"confirm",
+          name: "confirm",
           params: {
-            type:'instrument',
-            name: this.data.name,
-            price: this.data.firstrent,
-            deposit: this.data.deposit,
+            type: 1,
+            g_id:this.$route.query.pid,
+            m_type:1,
+            strtime:"",
+            stoptime:"",
+            stage:this.month,
+            agreement:this.agreementId,
+            image:this.data.images[0],
+            goods_num:1,
+            total_price:this.month*this.data.firstrent+(this.data.deposit-0),
+            goods_name:this.data.name,
+            deposit:this.data.deposit,
+
+
+
+            price:this.data.firstrent,
             month:this.data.num,
-            count:this.month*this.data.firstrent+(this.data.deposit-0),
           }
-        });
+        })
+
+
+
+
+
       },
 
       init() {

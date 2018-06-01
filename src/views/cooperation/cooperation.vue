@@ -124,7 +124,8 @@ export default {
   },
 
   components: {
-    orderFooter
+    orderFooter,
+    sign
   },
   methods:{
     init(){
@@ -156,6 +157,17 @@ export default {
 
 
     createOrder: function() {
+
+
+
+
+      if(!this.agreementId){
+        Toast('请网签租赁协议后下单');
+        return false
+      }
+
+
+
 //      window.location.href="http://mzbao.weiyingjia.org/meizubao/pay/index.php?total_fee=0.01&order_id=45";
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
@@ -166,7 +178,7 @@ export default {
             strtime:"",
             stoptime:"",
             stage:"",
-            agreement:5,
+            agreement:this.agreementId,
             image:this.data.images[0],
             goods_num:1,
             total_price:this.data.money,
@@ -372,5 +384,14 @@ export default {
   letter-spacing: 0;
   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+}
+.list_rent {
+  height: 0.88rem;
+  line-height: 0.88rem;
+  border-bottom: 1px solid #f7f7f7;
+  font-size: 14px;
+  color: #fd4689;
+  letter-spacing: 0;
+  text-align: center;
 }
 </style>
