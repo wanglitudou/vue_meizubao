@@ -83,18 +83,35 @@
         this.number++
       },
       jumpToConfirm: function () {
+
+
+
         this.$router.push({
 //          path: '/confirm/instrument',
           name: "confirm",
           params: {
-            type: 'product',
-            name: this.data.name,
-            price: this.data.discount,
-            number:this.number,
-            count: this.number*this.data.discount,
-            createOrder: this.createOrder,
+            type: 3,
+            g_id:this.$route.query.pid,
+            m_type:1,
+            strtime:"",
+            stoptime:"",
+            stage:"",
+            agreement:"",
+            image:this.data.images[0],
+            goods_num:this.number,
+            total_price:this.number*this.data.discount,
+            goods_name:this.data.name,
+            deposit:"",
+
+
+
+            price:this.data.discount,
+
           }
         })
+
+
+
       },
 
       createOrder:function(){
