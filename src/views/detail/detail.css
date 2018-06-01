@@ -97,11 +97,7 @@
   color: #666666;
   letter-spacing: 0;
 }
-.paice {
-  font-size: 13px;
-  color: #666666;
-  letter-spacing: 0;
-}
+
 .meeting {
   padding: 0 0.3rem;
   font-size: 13px;
@@ -124,7 +120,7 @@
   letter-spacing: 0;
   padding: 0 0.2rem;
 }
-.list_lef .other .orders {
+ .other .orders {
   width: 2.4rem;
   height: 0.72rem;
   line-height: 0.72rem;
@@ -137,7 +133,7 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
-.list_lef .other p .order {
+ .other p .order {
   font-size: 14px;
   color: #ffffff;
   letter-spacing: 0;
