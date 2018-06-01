@@ -82,6 +82,7 @@ import { VueMasonryPlugin } from "vue-masonry";
 
 Vue.use(VueMasonryPlugin);
 Vue.use(MintUI);
+
 // eslint-disable no-new
 new Vue({
   el: "#app",
