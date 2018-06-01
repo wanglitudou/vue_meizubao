@@ -31,7 +31,7 @@ export default {
       disableDate: [],
       selectedDate: {
         start: new Date(),
-        end: new Date()
+        end: new Date(),
       },
       price:0,
     };
@@ -61,7 +61,13 @@ export default {
   },
   computed:{
      during(){
-       return  ((this.selectedDate.end.getTime() - this.selectedDate.start.getTime() + (24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000))
+
+       if(((this.selectedDate.end.getTime() - this.selectedDate.start.getTime()))/(24 * 60 * 60 *1000 == 0)){
+         return    ((this.selectedDate.end.getTime() - this.selectedDate.start.getTime() + (24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000))
+       }else{
+          return  ((this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) / (24 * 60 * 60 * 1000))
+       }
+      
      },
      endTime(){
       //  return this.selectedDate.end
@@ -124,9 +130,11 @@ export default {
     //立即支付
     nextFun() {
       // console.log(111)
+        var openid = window.localStorage.getItem('openid')
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/continuePay", {
-          id: this.detail.id
+          id: this.detail.id,
+          openid:openid
         })
         .then(res => {
           console.log(res);
@@ -189,6 +197,8 @@ export default {
           // console.log(res);
         if(res.data.status_code == 1001){
           window.location.href=res.data.data.url
+        }else{
+          Toast('续约失败')
         }
         });
     },

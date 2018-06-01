@@ -214,7 +214,7 @@ export default {
   methods: {
     details(id){
        this.$router.push({
-        name: "details",
+        name: "essence",
         query: {
           pid: id
         }

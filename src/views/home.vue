@@ -15,13 +15,18 @@
       </div>
     </div>
     <div class="list_search">
-      <div class="searchs">
+      <!-- <div class="searchs">
         <input type="text"
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
              @click="address()">
-      </div>
+      </div> -->
+    <div>请输入搜索</div>
+ <img src="../assets/icon/search_1.png"
+             alt="111"
+             @click="address()">
+
     </div>
     <div ref="scroll"
          class="scrolls">
@@ -416,12 +421,15 @@ export default {
 .list_search {
   width: 96%;
   height: 0.81rem;
-  border: 1px solid #fff;
+  border: 1px solid #ccc;
   margin-top: 0.2rem;
   text-align: center;
   margin-left: 2%;
   background: #fff;
   border-radius: 0.2rem;
+    display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .searchs {
   width: 96%;
@@ -432,23 +440,15 @@ export default {
   margin-left: 2%;
   background: #fff;
   border-radius: 0.2rem;
+
 }
 
-.searchs input {
-  width: 6rem;
-  height: 0.792rem;
-  border: 0;
-  outline: none;
-  padding-left: 1rem;
-  box-sizing: border-box;
-  float: left;
-  margin-left: 0.2rem;
-  border-bottom: 1px solid #ccc;
-}
-.searchs img {
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: 0.2rem;
+.list_search img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+
 }
 .list_ban {
   width: 6.7rem;

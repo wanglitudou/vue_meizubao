@@ -179,7 +179,7 @@
         <!-- 瀑布流布局 -->
         <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
             <!-- v-for="(item, index) in accessoryproducts -->
-            <div v-masonry-tile class="item" v-for="(item, index) in accessoryproducts">
+            <div v-masonry-tile class="item" v-for="(item, index) in accessoryproducts" @click="details(item.id)">
                 <div class="cent_left">
                     <div class="list_img">
                         <img :src="item.images" alt="666">
@@ -225,8 +225,8 @@ export default {
       showLoad: true,
       load: true,
       keyword: "",
-      code: 1,//这个是不搜索的
-      count:15
+      code: 1, //这个是不搜索的
+      count: 15
     };
   },
   created() {
@@ -246,6 +246,15 @@ export default {
       });
   },
   methods: {
+    details(id) {
+      this.$router.push({
+        name: "matching",
+        query: {
+          pid: id
+        }
+      });
+      console.log(id);
+    },
     getData(name, keyword, pages) {
       let that = this;
       //热租仪器筛选
