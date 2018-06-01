@@ -61,7 +61,7 @@ export default {
   },
   computed:{
      during(){
-       return  ((this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) / (24 * 60 * 60 * 1000))
+       return  ((this.selectedDate.end.getTime() - this.selectedDate.start.getTime() + (24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000))
      },
      endTime(){
       //  return this.selectedDate.end
@@ -75,6 +75,9 @@ export default {
        }else{
             return this.detail.dayprice * parseInt(this.during) *0.8
        }
+     },
+     getPrice(){
+       return this.mounth * this.detail.continued
      }
     
   },
@@ -89,7 +92,6 @@ export default {
           console.log(res);
           if (res.data.status_code == "1001") {
             this.allTime = res.data.data;
-        
             var appointmentTime = [];
 
             let minDate;
@@ -191,10 +193,10 @@ export default {
         });
     },
     // 计算价钱
-    getPrice(price, month) {
-      this.allPrice = price * month;
-      console.log(this.allPrice);
-    },
+    // getPrice(price, month) {
+    //   this.allPrice = price * month;
+    //   console.log(this.allPrice);
+    // },
     renewal(detail) {
       console.log(detail);
      var openid = window.localStorage.getItem('openid')
@@ -205,6 +207,7 @@ export default {
        Toast('请选择您的时间')
        return false
       }
+      this.allPrice =  this.getPrice
         console.log(detail);
         this.getRenewal(
           this.orderId,
@@ -236,7 +239,10 @@ export default {
     // 加法
     increase() {
       this.mounth++;
-      this.getPrice(this.detail.continued, this.mounth);
+      console.log(this.mounth)
+      console.log(this.getPrice)
+      console.log(this.detail.continued)
+      // this.getPrice(this.detail.continued, this.mounth);
     },
     // 减法
     decrease() {
@@ -245,7 +251,7 @@ export default {
         this.mounth = 0;
         return false;
       }
-      this.getPrice(this.detail.continued, this.mounth);
+      // this.getPrice(this.detail.continued, this.mounth);
     }
   }
 };
@@ -409,6 +415,7 @@ export default {
     <div>
     <!-- 仪器续约 -->
     <div class="instrument" v-if="detail.type == 1">
+      <div v-if="detail.status == 6">
       <!-- <div class="extension">续约</div> -->
       <div class="begin_rent">
         <span>选择你续约的时长(月):</span>
@@ -419,12 +426,14 @@ export default {
         </div>
       </div>
       <div class="xuyue" v-show="mounth>0">
-        <span>续约金额：￥{{allPrice}}</span>
+        <span>续约金额：￥{{getPrice}}</span>
 
+      </div>
       </div>
     </div>
     <!-- 技师续约 -->
     <div class="technician" v-if="detail.type == 2">
+      <div v-if="detail.status == 6">
       <v-date-picker
             id="datePicker"
             mode='range'
@@ -440,6 +449,7 @@ export default {
     <!-- @click="decrease" -->
     <!-- @click="increase" -->
     <!-- v-bind:class="{ disable: month==data.num }" -->
+    </div>
   </div>
     <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :renewal="renewal" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
   </div>

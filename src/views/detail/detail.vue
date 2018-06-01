@@ -2,20 +2,6 @@
     <div class="containers">
         <div class="list_list">
             <div class="list_search">
-                <!-- <div class="pic_view">
-                    <div class="nav_pic">
-                        <span class="list_tab"
-                              v-for="(item,index) in tabs"
-                              :key="index"
-                              :class="num==index?'dora':''"
-                              @click="tab(index)">{{item.name}}</span>
-                        <span class="sousuo"
-                              @click="aaa()">
-                            <img src="../../assets/icon/search_1.png"
-                                 alt="">
-                        </span>
-                    </div>
-                </div> -->
                 <!-- 头部导航 -->
                 <div class="sortMenu clearfix" v-show="slideShow">
                     <ul class="sortMenu-ul">
@@ -200,18 +186,18 @@
                         <img :src="item.images" alt="">
                     </div>
                     <div class="other">
-                        <p>
+                        <p class="name">
                             <span>{{item.name}}</span>
                             <span class="paice">￥{{item.price}}</span>
                         </p>
                         <p class="meeting">
                             {{item.centent}}
                         </p>
-                        <p>
+                        <p class="date">
                             <span>
                                 <a>￥{{item.firstrent}}</a>/月
                             </span>
-                            <span class="count" @click="details()">
+                            <span class="count">
                                 <i class="iconfont icon-yingyongchengxu-xianxing"></i>
                                 {{item.created}}
                             </span>
@@ -224,6 +210,36 @@
                         </p>
                     </div>
                 </div>
+                  <!-- <div class="box listing">
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                    <div class="other">
+                        <p class="name">
+                            <span>热租仪器</span>
+                            <span class="paice">￥20000</span>
+                        </p>
+                        <p class="meeting">
+                           
+                            十点开会你们都得到，周末不加班其他的都好说能打开的的卡萨丁 第三节活动空间撒打卡机三大
+                        </p>
+                        <p class="date">
+                            <span>
+                                <a>￥123</a>/月
+                            </span>
+                            <span class="count">
+                                <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+                              
+                            </span>
+                        </p>
+                        <p class="rent"> 起租期:12323个月</p>
+                        <p class="orders">
+                            <span class="order">
+                                立即下单
+                            </span>
+                        </p>
+                    </div>
+                </div> -->
 
             </div>
         </div>
@@ -260,7 +276,7 @@ export default {
       url: [],
       aaaa: "寄杂志",
       message: "",
-      imgsArr: [],
+      imgsArr: ['1','2','3'],
       showLoading: true,
       group: 0, // request param
       //   a:require('../../assets/images/icon6.jpg'),
@@ -354,7 +370,7 @@ export default {
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/instrumentSearch", {
-          typeId: name,
+          typeId: 6,
           keywords: keyword,
           page: page
         })
@@ -380,7 +396,7 @@ export default {
 
             // this.imgsArr = this.imgsArr.concat(arr);
             // console.log(this.imgsArr)
-            this.imgsArr = res.data.data;
+            // this.imgsArr = this.imgArr.concat(res.data.data);
           }
         })
         .catch(res => {
@@ -465,9 +481,12 @@ export default {
   padding: 1%;
   /* margin:3% */
 }
+
+
+
 .box {
   width: 100%;
-  height: auto;
+  height: 100%;
   margin: 2%;
 }
 .box img {
@@ -522,5 +541,18 @@ export default {
   justify-content: center;
   background: #ccc;
   opacity: 0.5;
+}
+.name{
+    font-size: 15px;
+    color: #000000;
+        padding: 0 0.3rem;
+}
+.name .prace{
+
+}
+.date{
+    padding: 0 0.3rem;
+    display: flex;
+    justify-content:space-between;
 }
 </style>
