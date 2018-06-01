@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-  import { Button } from 'mint-ui';
+  import { Button,Toast } from 'mint-ui';
 
 export default {
   data() {
@@ -47,11 +47,12 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-            alert("上传成功")
+            Toast('协议保存成功');
             self.saveAgreementId(res.data.data.id);
           }
         })
         .catch((err) => {
+          Toast('协议保存失败');
           console.log("http请求错误");
           console.log(err);
         });

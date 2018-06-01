@@ -22,10 +22,7 @@
       </div>
     </div>
 
-
     <orderFooter :text="'开始预约'" :count="data.price" :nextFun="buy"></orderFooter>
-
-
 
   </div>
 </template>
@@ -77,7 +74,7 @@
           .then(res => {
             console.log(res);
             if (res.data.status_code == 1001) {
-              this.data = res.data.data;
+              window.location.href=res.data.data.url;
             }
           })
           .catch(() => {
