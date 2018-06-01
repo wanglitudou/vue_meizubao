@@ -20,7 +20,7 @@
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
-             @click="address()">
+             @click="information()">
       </div>
     </div>
     <div ref="scroll"
@@ -350,10 +350,14 @@ export default {
     // }
     address() {
       this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
+    },
+    information() {
+      //完善信息
+      this.$router.push({ name: "information" });
     }
-    // information() {
+    // aaa() {
     //   //完善信息
-    //   this.$router.push({ name: "information" });
+    //   this.$router.push({ name: "aaa" });
     // }
   }
 };

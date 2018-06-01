@@ -32,11 +32,11 @@ import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 
+import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
+import aaa from "../views/address/aaa.vue";
 
-import sign from "../views/sign.vue";
-import addtheaddress from "../views/addtheaddress/addtheaddress.vue"
-
-let routes = [{
+let routes = [
+  {
     path: "/",
     redirect: "./index/home"
   },
@@ -44,7 +44,8 @@ let routes = [{
     name: "index",
     path: "/index",
     component: index,
-    children: [{
+    children: [
+      {
         name: "home",
         path: "home",
         component: home
@@ -78,8 +79,8 @@ let routes = [{
       {
         name: "cart",
         path: "/cart",
-        component: cart,
-      },
+        component: cart
+      }
     ]
   },
   {
@@ -93,7 +94,7 @@ let routes = [{
     component: details,
     meta: {
       keepAlive: true
-    },
+    }
   },
   {
     name: "industry",
@@ -193,7 +194,7 @@ let routes = [{
   {
     name: "order_details",
     path: "/order_details/:type",
-    component: orderDetails,
+    component: orderDetails
   },
   {
     name: "authname",
@@ -204,6 +205,11 @@ let routes = [{
     name: "addtheaddress",
     path: "/addtheaddress",
     component: addtheaddress
+  },
+  {
+    name: "aaa",
+    path: "/aaa",
+    component: aaa
   }
 ];
 
