@@ -181,23 +181,23 @@
         <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
             <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
                 <!-- block item markup -->
-                <!-- <div class="box listing">
+                <div class="box listing">
                     <div>
                         <img :src="item.images" alt="">
                     </div>
                     <div class="other">
-                        <p>
+                        <p class="name">
                             <span>{{item.name}}</span>
                             <span class="paice">￥{{item.price}}</span>
                         </p>
                         <p class="meeting">
                             {{item.centent}}
                         </p>
-                        <p>
+                        <p class="date">
                             <span>
                                 <a>￥{{item.firstrent}}</a>/月
                             </span>
-                            <span class="count" @click="details()">
+                            <span class="count">
                                 <i class="iconfont icon-yingyongchengxu-xianxing"></i>
                                 {{item.created}}
                             </span>
@@ -209,8 +209,8 @@
                             </span>
                         </p>
                     </div>
-                </div> -->
-                  <div class="box listing">
+                </div>
+                  <!-- <div class="box listing">
                     <div>
                         <img src="" alt="">
                     </div>
@@ -220,7 +220,7 @@
                             <span class="paice">￥20000</span>
                         </p>
                         <p class="meeting">
-                            <!-- {{item.centent}} -->
+                           
                             十点开会你们都得到，周末不加班其他的都好说能打开的的卡萨丁 第三节活动空间撒打卡机三大
                         </p>
                         <p class="date">
@@ -229,7 +229,7 @@
                             </span>
                             <span class="count">
                                 <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                                <!-- {{item.created}} -->
+                              
                             </span>
                         </p>
                         <p class="rent"> 起租期:12323个月</p>
@@ -239,7 +239,7 @@
                             </span>
                         </p>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
