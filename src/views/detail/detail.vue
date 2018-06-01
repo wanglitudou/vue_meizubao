@@ -276,7 +276,7 @@ export default {
       url: [],
       aaaa: "寄杂志",
       message: "",
-      imgsArr: ['1','2','3'],
+      imgsArr: [],
       showLoading: true,
       group: 0, // request param
       //   a:require('../../assets/images/icon6.jpg'),
@@ -396,7 +396,7 @@ export default {
 
             // this.imgsArr = this.imgsArr.concat(arr);
             // console.log(this.imgsArr)
-            // this.imgsArr = this.imgArr.concat(res.data.data);
+            this.imgsArr = this.imgArr.concat(res.data.data);
           }
         })
         .catch(res => {
