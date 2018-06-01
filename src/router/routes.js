@@ -187,7 +187,10 @@ let routes = [{
   {
     name: "confirm",
     path: "/confirm/:type",
-    component: confirm
+    component: confirm,
+    meta:{
+      keepAlive:true,
+    }
   },
   {
     name: "order_details",

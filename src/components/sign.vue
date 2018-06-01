@@ -4,9 +4,9 @@
     <div id="canvasDiv"></div>
 
 
-    <mt-button id="btn_clear" type="default">清除</mt-button>
+    <mt-button size="small" id="btn_clear" type="default">重写签名</mt-button>
 
-    <mt-button @click="submit" type="default" id="btn_submit">提交</mt-button>
+    <mt-button size="small" @click="submit" type="default" id="btn_submit">上传协议</mt-button>
 
     <img id="hiddenImg"
          :src="src"
@@ -31,10 +31,12 @@ export default {
     this.init();
   },
 
-  methods: {
-    submit:function(){
 
-      let self= this
+  methods: {
+
+
+    submit:function(){
+      let self= this;
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/agreement", {
           uid:window.localStorage.id,
@@ -100,9 +102,7 @@ export default {
         imgWidth=img.width;
         imgHeight=img.height;
 
-
         canvas.setAttribute("height", imgHeight*screenWidth/imgWidth);
-
 
 //        var ptrn = context.createPattern(img, "no-repeat");
 //
@@ -237,9 +237,7 @@ export default {
 
 
       clear.addEventListener("click", function() {
-//        canvas.width = canvas.width - 0;
-
-
+        canvas.width = canvas.width - 0;
         context.drawImage(img,0,0,screenWidth,imgHeight*screenWidth/imgWidth);
       });
 
@@ -301,6 +299,6 @@ export default {
   #btn_clear{
     position: absolute;
     top: 12px;
-    left:80px;
+    left:100px;
   }
 </style>
