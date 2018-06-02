@@ -1,16 +1,9 @@
 <template>
     <div class="containers">
-
-        <!-- <div class="searchs_box">
-            <input type="text"
-                   placeholder="请输入搜索内容">
-            <img src="../../assets/icon/search_1.png"
-                 alt="111">
-        </div> -->
         <div class="topSearch">
             <search @search="search"></search>
         </div>
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:0.88rem">
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:0.88rem" v-if="isNodata">
             <div v-masonry-tile class="item" v-for="(item, index) in screenscreening" @click="details(item.id)">
                 <div class="listbox_lef">
                     <div class="cent_left">
@@ -34,146 +27,23 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- <div class="list_box">
-            <div class="listbox_lef" v-for="item in screenscreening" :key="item.index">
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img :src="item.images
-                        " alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>{{item.name}}</span>
-                        </p>
-                        <p class="content">{{item.content}}</p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥{{item.price}}</span>/日</span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">点击付费</span>
-                        </p>
-                    </div>
-                </div> -->
-        <!-- <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>课程标题</span>
-                        </p>
-                        <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>/日</span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">点击付费</span>
-                        </p>
-                    </div>
-                </div> -->
-        <!-- <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>课程标题</span>
-                        </p>
-                        <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>/日</span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">点击付费</span>
-                        </p>
-                    </div>
-                </div> -->
-        <!-- </div> -->
-
-        <!-- <div class="listbox_rig">
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>课程标题</span>
-                        </p>
-                        <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>/日</span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">点击付费</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>课程标题</span>
-                        </p>
-                        <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>/日</span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">点击付费</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>课程标题</span>
-                        </p>
-                        <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>/日</span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">点击付费</span>
-                        </p>
-                    </div>
-                </div>
-            </div> -->
-        <!-- </div> -->
-        <!-- <div class="foot_load">
-            <span>加载更多 > </span>
-        </div> -->
-        <div>
-            <div class="Loading" v-if="showLoading">
-                <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
-            </div>
-            <!-- 点击加载 -->
-            <div class="moreData" ref="load">
-                <div v-if="load" @click="loadMore">加载更多></div>
-                <div v-else>已全部加载</div>
+            <!-- 点击加载更多 -->
+            <div class="item loadMore" ref="load">
+                <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+                <span v-else>
+                    <span @click="loadMore" v-if="loading">加载更多</span>
+                    <span v-else>数据全部加载完成</span>
+                </span>
             </div>
         </div>
-
+        <!-- 暂无数据 -->
+        <div class="noData" v-if="showNodata">
+            暂无数据
+        </div>
     </div>
 </template>
 <script>
-import { Spinner } from "mint-ui";
+import { Spinner, Toast, Indicator } from "mint-ui";
 import search from "../../components/search.vue";
 export default {
   data() {
@@ -184,11 +54,15 @@ export default {
       showLoad: true,
       load: true,
       count: 15,
-      showLoading: true
+      showLoading: true,
+      topStatus: false,
+      showNodata: false,
+      isNodata: false,
+      loading: false
     };
   },
   created() {
-    let that = this;
+    Indicator.open();
     //首页banner查询
     this.getData(this.keyword, this.pages);
   },
@@ -202,10 +76,16 @@ export default {
       });
     },
     search(keyword) {
+      if (keyword == "") {
+        Toast("不能为空");
+        return false;
+      }
       console.log(keyword);
       this.keyword = keyword;
       this.pages = 1;
-      this.getData(keyword, this.pages);
+      setTimeout(() => {
+        this.getData(keyword, this.pages);
+      }, 1000);
     },
     //请求数据
     getData(word, pages) {
@@ -221,22 +101,37 @@ export default {
           if (res.data.status_code == 1001) {
             console.log(11);
             this.showLoading = false;
+            setTimeout(() => {
+              Indicator.close();
+            }, 1000);
+            // if (res.data.data.length == 0) {
+            //   that.load = false;
+            //   this.$refs.load.style = "height:100%";
+            //   this.$refs.masonry.style = "position:relative";
+            // } else if (res.data.data.length < this.count) {
+            //   that.load = false;
+            //   this.$refs.load.style = "1rem";
+            //   // this.$refs.masonry.style="position:relative"
+            // } else {
+            //   that.load = true;
+            //   this.$refs.load.style = "height:1rem";
+            // }
             if (res.data.data.length == 0) {
-              that.load = false;
-              this.$refs.load.style = "height:100%";
-              this.$refs.masonry.style = "position:relative";
+              this.showNodata = true;
+              this.isNodata = false;
             } else if (res.data.data.length < this.count) {
-              that.load = false;
-              this.$refs.load.style = "1rem";
-              // this.$refs.masonry.style="position:relative"
+              this.isNodata = true;
+              this.loading = false;
             } else {
-              that.load = true;
-              this.$refs.load.style = "height:1rem";
+              this.isNodata = true;
+              that.topStatus = false;
+              that.loading = true;
             }
             that.screenscreening = res.data.data;
           }
         })
-        .catch(() => {
+        .catch((res) => {
+            console.log(res)
           console.log("查询失败");
         });
     },
@@ -439,15 +334,23 @@ export default {
   font-size: 14px;
   color: #00a5ff;
 }
-.Loading {
-  position: fixed;
-  top: 0;
+.nodata {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: #ccc;
-  opacity: 0.5;
+  align-items: center;
+}
+.loadMore {
+  width: 96%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 16px;
+}
+.searchs {
+  font-size: 16px;
 }
 </style>

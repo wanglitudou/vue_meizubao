@@ -146,7 +146,7 @@
 // }
 import order from "../components/order.vue";
 import { find, remove, filter, forEach } from "lodash";
-import { Toast } from "mint-ui";
+import {  Spinner, Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -177,6 +177,7 @@ export default {
     };
   },
   created() {
+   Indicator.open()
     this.getOrder(this.type, this.status, this.page, this.uid);
   },
   methods: {
@@ -219,6 +220,7 @@ export default {
         .then(res => {
           // console.log(res.data.data);
           if (res.data.status_code == "1001") {
+             Indicator.close()
             if (res.data.data.length < 15) {
               this.load = false;
             } else {
@@ -237,7 +239,7 @@ export default {
     loadMore() {
       this.page++;
       console.log(this.page);
-
+     
       this.getOrder(this.type, this.status, this.page, this.uid);
     },
     //确认收货

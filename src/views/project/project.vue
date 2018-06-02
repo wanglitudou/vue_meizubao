@@ -11,7 +11,7 @@
     </div>
     <!-- 瀑布流 -->
 
-    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
+    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
       <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
         <div class="listbox_lef">
           <div class="cent_left">
@@ -34,156 +34,23 @@
             </div>
           </div>
         </div>
-
+      </div>
+      <div class="item loadMore" ref="load">
+        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+        <span v-else>
+          <span @click="loadMore" v-if="loading">加载更多</span>
+          <span v-else>数据全部加载完成</span>
+        </span>
       </div>
     </div>
-
-    <!-- <div class="list_box">
-      <div class="listbox_lef" v-for="item in cooperativeproject" :key="item.index">
-        <div class="cent_left">
-          <div class="list_img">
-            <img :src="item.images" alt="">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>{{item.name}}</span>
-            </p>
-            <p class="content">{{item.content}}</p>
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">￥{{item.price}}</span>/日</span>
-              <span class="pay_add">￥{{item.price}}</span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment" @click="cooperation()">点击预约</span>
-            </p>
-          </div>
-        </div> -->
-    <!-- <div class="cent_left">
-          <div class="list_img">
-            <img src="../../assets/images/icon2.jpg"
-                 alt="">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>项目名称</span>
-            </p>
-            <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">￥1500</span>/日</span>
-              <span class="pay_add">￥1500</span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment"
-                    @click="cooperation()">点击预约</span>
-            </p>
-          </div>
-        </div>
-        <div class="cent_left">
-          <div class="list_img">
-            <img src="../../assets/images/icon2.jpg"
-                 alt="">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>项目名称</span>
-            </p>
-            <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">￥1500</span>/日</span>
-              <span class="pay_add">￥1500</span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment"
-                    @click="cooperation()">点击预约</span>
-            </p>
-          </div>
-        </div> -->
-    <!-- </div> -->
-
-    <!-- <div class="listbox_rig">
-        <div class="cent_left">
-          <div class="list_img">
-            <img src="../../assets/images/icon2.jpg"
-                 alt="">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>项目名称</span>
-            </p>
-            <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">￥1500</span>/日</span>
-              <span class="pay_add">￥1500</span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment"
-                    @click="cooperation()">点击预约</span>
-            </p>
-          </div>
-        </div>
-        <div class="cent_left">
-          <div class="list_img">
-            <img src="../../assets/images/icon2.jpg"
-                 alt="">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>项目名称</span>
-            </p>
-            <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">￥1500</span>/日</span>
-              <span class="pay_add">￥1500</span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment"
-                    @click="cooperation()">点击预约</span>
-            </p>
-          </div>
-        </div>
-        <div class="cent_left">
-          <div class="list_img">
-            <img src="../../assets/images/icon2.jpg"
-                 alt="">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>项目名称</span>
-            </p>
-            <p class="content">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">￥1500</span>/日</span>
-              <span class="pay_add">￥1500</span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment"
-                    @click="cooperation()">点击预约</span>
-            </p>
-          </div>
-        </div>
-      </div> -->
-    <!-- <div class="foot_load">
-        <span>加载更多 > </span>
-      </div> -->
-    <div>
-      <div class="Loading" v-if="showLoading">
-        <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
-      </div>
-      <div class="moreData" ref="load" v-if="showLoad">
-        <div v-if="load" @click="loadMore">加载更多></div>
-        <div v-else>已全部加载</div>
-      </div>
+    <!-- 暂无数据 -->
+    <div class="noData" v-if="showNodata">
+      暂无数据
     </div>
   </div>
 </template>
 <script>
-import { Spinner } from "mint-ui";
+import { Spinner, Toast, Indicator } from "mint-ui";
 import search from "../../components/search.vue";
 export default {
   data() {
@@ -195,14 +62,18 @@ export default {
       showLoad: true,
       load: true,
       code: 1, //
-      showLoading: true
+      loading: true,
+      isNodata: false,
+      showNodata: false,
+      topStatus: false
     };
   },
   created() {
+    Indicator.open();
     this.getData(this.keyword, this.pages);
   },
   methods: {
-    details(id){
+    details(id) {
       this.$router.push({
         name: "cooperation",
         query: {
@@ -215,10 +86,17 @@ export default {
       this.$router.push({ name: "cooperation" });
     },
     search(keyword) {
+      if (keyword == "") {
+        Toast("不能为空");
+        return false;
+      }
       this.keyword = keyword;
       this.pages = 1;
       this.code = 2;
-      this.getData(keyword, this.pages);
+      Indicator.open();
+      setTimeout(() => {
+        this.getData(keyword, this.pages);
+      }, 1000);
     },
     getData(keyword, pages) {
       console.log(keyword);
@@ -232,27 +110,41 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == "1001") {
-            that.showLoading = false;
+            setTimeout(() => {
+              Indicator.close();
+            }, 1000);
             if (res.data.data.length == 0) {
-              that.load = false;
-              this.$refs.load.style = "height:100%";
-              this.$refs.container.style = "height:100%";
-              this.$refs.masonry.style = "position:relative";
+              this.showNodata = true;
+              this.isNodata = false;
             } else if (res.data.data.length < this.count) {
-              that.load = false;
-              this.$refs.load.style = "1rem";
-              // this.$refs.masonry.style="position:relative"
+              this.isNodata = true;
+              this.loading = false;
             } else {
-              that.load = true;
-              this.$refs.load.style = "height:1rem";
+              this.isNodata = true;
+              that.topStatus = false;
+              that.loading = true;
             }
+            // if (res.data.data.length == 0) {
+            //   that.load = false;
+            //   this.$refs.load.style = "height:100%";
+            //   this.$refs.container.style = "height:100%";
+            //   this.$refs.masonry.style = "position:relative";
+            // } else if (res.data.data.length < this.count) {
+            //   that.load = false;
+            //   this.$refs.load.style = "1rem";
+            //   // this.$refs.masonry.style="position:relative"
+            // } else {
+            //   that.load = true;
+            //   this.$refs.load.style = "height:1rem";
+            // }
 
             that.cooperativeproject = that.cooperativeproject.concat(
               res.data.data
             );
           }
         })
-        .catch(() => {
+        .catch(res => {
+          console.log(res);
           console.log("查询失败");
         });
     },
@@ -460,6 +352,25 @@ export default {
   justify-content: center;
   background: #ccc;
   opacity: 0.5;
-  z-index:1;
+  z-index: 1;
+}
+.nodata {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loadMore {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 16px;
+}
+.searchs {
+  font-size: 16px;
 }
 </style>
