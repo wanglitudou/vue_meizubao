@@ -8,6 +8,7 @@
   height: auto;
   margin: 0.2rem auto 0;
   overflow-y: scroll;
+  padding-bottom: 1.5rem;
 }
 .cent_list .ban_two {
   width: 7.068rem;
@@ -40,11 +41,11 @@
 }
 .metting {
   width: 7.068rem;
-  height: 2.2rem;
   margin: 0.2rem auto 0;
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
+  padding-bottom:8px;
 }
 .metting p {
   margin-left: 5px;
