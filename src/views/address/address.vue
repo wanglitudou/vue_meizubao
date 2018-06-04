@@ -1,40 +1,40 @@
 <template>
   <div class="container">
     <div class="list_cont">
-      <div class="list_one"
-           v-for="item in list"
-           :key="item.index">
-        <p class="goods">
-          <span class="consignee">收货人:
-            <span class="consig_name">
-              {{item.user_name}}
-            </span>
-          </span>
-          <span class="consig_num">{{item.mobile}}</span>
-        </p>
-        <p class="consig_address">
-          <span class="consig_spec">
-            {{item.address}}
-          </span>
-        </p>
-        <p class="give">
-          <span class="give_address">
-            <el-checkbox v-model="checked"
-                         class="give_icon"></el-checkbox>
 
-            设为默认地址
-          </span>
-          <span class="give_edit"
-                @click="addtheaddress()">
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-            编辑</span>
-          <span class="give_delete"
-                @click="del(item.id)">
-            <!-- @click="del(item.id)"> -->
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-            删除</span>
-        </p>
-      </div>
+      <el-radio-group v-model="radio2">
+        <div class="list_one"
+             v-for="item in list"
+             :key="item.index">
+          <p class="goods">
+            <span class="consignee">收货人:
+              <span class="consig_name">
+                {{item.user_name}}
+              </span>
+            </span>
+            <span class="consig_num">{{item.mobile}}</span>
+          </p>
+          <p class="consig_address">
+            <span class="consig_spec">
+              {{item.address}}
+            </span>
+          </p>
+          <p class="give">
+            <span class="give_address">
+              <el-checkbox class="give_icon"></el-checkbox> 设为默认地址
+            </span>
+            <span class="give_edit"
+                  @click="edittheaddress(item.id)">
+              <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+              编辑</span>
+            <span class="give_delete"
+                  @click="del(item.id)">
+              <!-- @click="del(item.id)"> -->
+              <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+              删除</span>
+          </p>
+        </div>
+      </el-radio-group>
       <div style="clear:both;height:2rem;"></div>
     </div>
     <div class="give_good">
@@ -49,11 +49,38 @@ export default {
   data() {
     return {
       checked: true,
-      list: []
+      untinted: 1,
+      list: [],
+      consignee: "",
+      telephone: "",
+      address: ""
     };
   },
   created() {
     this.getAdd();
+    console.log("111");
+    let that = this;
+    that.$axios
+      .get(
+        "http://mzbao.weiyingjia.org/api/meizubao/addressInfo?id=" +
+          localStorage.id
+      )
+      .then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
+          console.log(res.data.data);
+          console.log("666");
+          that.consignee = res.data.data.user_name;
+          that.telephone = res.data.data.mobile;
+          that.address = res.data.data.address;
+          console.log(that.consignee);
+          console.log(that.telephone);
+          console.log(that.address);
+        }
+      })
+      .catch(() => {
+        console.log("查询失败");
+      });
   },
   methods: {
     del(id) {
@@ -87,7 +114,12 @@ export default {
         .get(
           "http://mzbao.weiyingjia.org/api/meizubao/addressList?uid=" +
             localStorage.id,
-          {}
+          {
+            // id: localStorage.id,
+            // consignee: that.$router.consignee,
+            // telephone: that.$router.telephone,
+            // address: that.$router.address
+          }
         )
         .then(res => {
           console.log(res);
@@ -100,6 +132,20 @@ export default {
     //路由跳转,到新增地址页面
     addtheaddress() {
       this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
+    },
+    edittheaddress(id) {
+      this.$router.push({
+        path: "/addtheaddress",
+        query: {
+          type: "edit",
+          id: id,
+          consignee: this.consignee,
+          telephone: this.telephone,
+          address: this.address
+        }
+      });
+
+      // this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
     }
   }
 };

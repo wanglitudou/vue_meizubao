@@ -145,17 +145,19 @@
       init(){
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/productDetail", {
-            params: {'id': this.$route.query.id}
+            params: { id: this.$route.query.pid }
           })
           .then(res => {
-            console.log(res);
-            if (res.data.status_code == 1001) {
-              this.data = res.data.data;
-            }
-          })
-          .catch(() => {
-            console.log("http请求错误");
-          });
+          console.log(res);
+        if (res.data.status_code == 1001) {
+          this.data = res.data.data;
+        }
+      })
+      .catch(() => {
+          console.log("http请求错误");
+      });
+
+
       },
     },
     components: {

@@ -188,7 +188,7 @@ export default {
     that.$axios
       .get(
         "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
-          sessionStorage.id
+          localStorage.id
       )
       .then(res => {
         console.log(res);
@@ -236,66 +236,66 @@ export default {
     },
     //验证姓名
     provingname() {
-      let that = this;
-      if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.name)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
+      // let that = this;
+      // if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.name)) {
+      //   Toast("请输入正确的格式");
+      //   return false;
+      // }
     },
     //验证年龄
     provingage() {
-      let that = this;
-      if (!/^(?:[1-9]?\d|100)$/.test(that.age)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
+      // let that = this;
+      // if (!/^(?:[1-9]?\d|100)$/.test(that.age)) {
+      //   Toast("请输入正确的格式");
+      //   return false;
+      // }
     },
     //验证生日
     provingbirthday() {
-      let that = this;
-      if (
-        !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
-          that.birthday
-        )
-      ) {
-        Toast("请输入正确的格式");
-        return false;
-      }
+      // let that = this;
+      // if (
+      //   !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
+      //     that.birthday
+      //   )
+      // ) {
+      //   Toast("请输入正确的格式");
+      //   return false;
+      // }
     },
     //验证电话号码
     remind() {
       let that = this;
-      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.phone)) {
-        Toast("请输入正确的手机号格式");
-        return false;
-      }
+      // if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.phone)) {
+      //   Toast("请输入正确的手机号格式");
+      //   return false;
+      // }
     },
 
     //验证邮箱
     provingmailbox() {
-      let that = this;
-      if (
-        !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(that.mailbox)
-      ) {
-        Toast("请输入正确的格式");
-        return false;
-      }
+      // let that = this;
+      // if (
+      //   !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(that.mailbox)
+      // ) {
+      //   Toast("请输入正确的格式");
+      //   return false;
+      // }
     },
     //验证店铺
     provingshop() {
-      let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.shop)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
+      // let that = this;
+      // if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.shop)) {
+      //   Toast("请输入正确的格式");
+      //   return false;
+      // }
     },
     //验证地址
     provingaddress() {
-      let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.address)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
+      // let that = this;
+      // if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.address)) {
+      //   Toast("请输入正确的格式");
+      //   return false;
+      // }
     },
 
     next() {
