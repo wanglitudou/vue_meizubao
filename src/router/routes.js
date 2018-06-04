@@ -31,9 +31,7 @@ import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
-
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
-import aaa from "../views/address/aaa.vue";
 
 let routes = [
   {
@@ -189,7 +187,10 @@ let routes = [
   {
     name: "confirm",
     path: "/confirm/:type",
-    component: confirm
+    component: confirm,
+    meta: {
+      keepAlive: true
+    }
   },
   {
     name: "order_details",
@@ -205,11 +206,6 @@ let routes = [
     name: "addtheaddress",
     path: "/addtheaddress",
     component: addtheaddress
-  },
-  {
-    name: "aaa",
-    path: "/aaa",
-    component: aaa
   }
 ];
 

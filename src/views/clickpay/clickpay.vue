@@ -10,21 +10,13 @@
         <div class="topSearch">
             <search @search="search"></search>
         </div>
-        <div v-masonry
-             transition-duration="0.3s"
-             ref="masonry"
-             item-selector=".item"
-             column-width=".item"
-             style="margin-top:0.88rem">
-            <div v-masonry-tile
-                 class="item"
-                 v-for="(item, index) in screenscreening">
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:0.88rem">
+            <div v-masonry-tile class="item" v-for="(item, index) in screenscreening" @click="details(item.id)">
                 <div class="listbox_lef">
                     <div class="cent_left">
                         <div class="list_img">
                             <img :src="item.images
-                        "
-                                 alt="">
+                        " alt="">
                         </div>
                         <div class="list_oper">
                             <p class="oper_room">
@@ -167,18 +159,21 @@
         <!-- <div class="foot_load">
             <span>加载更多 > </span>
         </div> -->
-
-        <!-- 点击加载 -->
-        <div class="moreData"
-             ref="load"
-             v-show="showLoad">
-            <div v-if="load"
-                 @click="loadMore">加载更多></div>
-            <div v-else>已全部加载</div>
+        <div>
+            <div class="Loading" v-if="showLoading">
+                <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
+            </div>
+            <!-- 点击加载 -->
+            <div class="moreData" ref="load">
+                <div v-if="load" @click="loadMore">加载更多></div>
+                <div v-else>已全部加载</div>
+            </div>
         </div>
+
     </div>
 </template>
 <script>
+import { Spinner } from "mint-ui";
 import search from "../../components/search.vue";
 export default {
   data() {
@@ -188,7 +183,8 @@ export default {
       keyword: "",
       showLoad: true,
       load: true,
-      count: 15
+      count: 15,
+      showLoading: true
     };
   },
   created() {
@@ -197,6 +193,14 @@ export default {
     this.getData(this.keyword, this.pages);
   },
   methods: {
+    details(id) {
+      this.$router.push({
+        name: "details",
+        query: {
+          pid: id
+        }
+      });
+    },
     search(keyword) {
       console.log(keyword);
       this.keyword = keyword;
@@ -213,7 +217,10 @@ export default {
         })
         .then(res => {
           console.log(res);
+
           if (res.data.status_code == 1001) {
+            console.log(11);
+            this.showLoading = false;
             if (res.data.data.length == 0) {
               that.load = false;
               this.$refs.load.style = "height:100%";
@@ -431,5 +438,16 @@ export default {
   height: 1rem;
   font-size: 14px;
   color: #00a5ff;
+}
+.Loading {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+  opacity: 0.5;
 }
 </style>

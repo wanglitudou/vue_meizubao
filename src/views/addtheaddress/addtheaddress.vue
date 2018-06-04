@@ -18,7 +18,7 @@
                  class="inp"></span>
       </p>
       <p class="collect_bet">
-        <span>所在地区</span>{{province}}{{city}}{{area}}
+        <span>所在地区 {{province}}{{city}}{{area}}</span>
         <span @click="levl()">请选择 ></span>
 
       </p>
@@ -82,7 +82,38 @@ export default {
       telephone: ""
     };
   },
-  created() {},
+  computed: {
+    isDefault() {
+      return this.checked ? 1 : 0;
+    }
+  },
+  created() {
+    let that = this;
+
+    if (this.$route.query.type == "edit") {
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/addressInfo?id=" +
+            this.$route.query.id
+        )
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            // console.log(res.data.data);
+            console.log("666");
+            that.consignee = res.data.data.user_name;
+            that.telephone = res.data.data.mobile;
+            that.address = res.data.data.address;
+            console.log(that.consignee);
+            console.log(that.telephone);
+            console.log(that.address);
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    }
+  },
   components: {
     VuePickers
   },
@@ -97,27 +128,42 @@ export default {
       this.show1 = false;
     },
     sive() {
-      this.preservation();
+      if (this.$route.query.type == "edit") {
+        this.editAddress();
+      } else {
+        this.addAddress();
+      }
     },
-    preservation() {
+
+    addAddress() {
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/address", {
+          // user_id: localStorage.id,
           mobile: that.telephone,
           user_name: that.consignee,
           province: that.province,
           city: that.city,
           area: that.area,
           address: that.address,
-          is_default_address: 1,
-          user_id: localStorage.id
+          is_default_address: that.isDefault,
+          user_id: window.localStorage.id
         })
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
             Toast(res.data.message);
             setTimeout(() => {
-              that.$router.push({ name: "address" });
+              that.$router.push({
+                path: "/address",
+                query: {
+                  consignee: that.province,
+                  telephone: that.telephone,
+                  address: that.address
+                }
+              });
+
+              // that.$router.push({ name: "address" });
             }, 500);
           }
         })
@@ -125,6 +171,45 @@ export default {
           console.log("查询失败");
         });
     },
+
+    editAddress() {
+      let that = this;
+      that.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateAddress", {
+          // user_id: localStorage.id,
+          mobile: that.telephone,
+          user_name: that.consignee,
+          province: that.province,
+          city: that.city,
+          area: that.area,
+          address: that.address,
+          is_default_address: that.isDefault,
+          user_id: window.localStorage.id,
+          id: that.$route.query.id
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            Toast(res.data.message);
+            setTimeout(() => {
+              that.$router.push({
+                path: "/address",
+                query: {
+                  consignee: that.province,
+                  telephone: that.telephone,
+                  address: that.address
+                }
+              });
+
+              // that.$router.push({ name: "address" });
+            }, 500);
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+
     levl() {
       this.show1 = true;
     }

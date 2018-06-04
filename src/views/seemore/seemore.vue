@@ -251,7 +251,7 @@ export default {
       //热租仪器筛选
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/productSearch", {
-          typeId: 6,
+          typeId: name,
           keywords: keyword,
           page: pages
         })

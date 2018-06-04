@@ -20,7 +20,7 @@
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
-             @click="information()">
+             @click="address()">
       </div>
     </div>
     <div ref="scroll"
@@ -163,6 +163,7 @@ export default {
     } else {
       that.getXlogin(""); //获取xlogin
     }
+    // that.achieve(); //获取token
     that.banner(); //首页banner查询
     that.getInstrument(); // 首页热租仪器
     that.getTechnician(); //首页美业菁英
@@ -177,6 +178,28 @@ export default {
     });
   },
   methods: {
+    //获取token
+    // achieve() {
+    //   let that = this;
+    //   that.$axios
+    //     .post("http://mzbao.weiyingjia.org/api/meizubao/authorizations", {
+    //       // email: "",
+    //       // password: ""
+    //     })
+    //     .then(res => {
+    //       console.log(res);
+    //       if (res.data.status_code == 1001) {
+    //         console.log(res.data.data);
+    //         // that.lists = res.data.data;
+    //         // this.shop = res.data.data.shop;
+    //         // this.getData(res.data.data[0].id, "", this.pages, 1);
+    //       }
+    //     })
+    //     .catch(() => {
+    //       console.log("查询失败");
+    //     });
+    // },
+
     //获取地址栏参数
     GetQueryString(name) {
       var reg = new RegExp("(^|&?)" + name + "=([^&]*)(&|$)");
@@ -345,9 +368,9 @@ export default {
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
-    // addtheaddress() {
-    //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
-    // }
+    addtheaddress() {
+      this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
+    },
     address() {
       this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
     },
@@ -355,10 +378,6 @@ export default {
       //完善信息
       this.$router.push({ name: "information" });
     }
-    // aaa() {
-    //   //完善信息
-    //   this.$router.push({ name: "aaa" });
-    // }
   }
 };
 </script>

@@ -3,9 +3,10 @@
 
     <div id="canvasDiv"></div>
 
-    <button id="btn_clear">清除</button>
 
-    <button @click="submit" id="btn_submit">提交</button>
+    <mt-button size="small" id="btn_clear" type="default">重写签名</mt-button>
+
+    <mt-button size="small" @click="submit" type="default" id="btn_submit">上传协议</mt-button>
 
     <img id="hiddenImg"
          :src="src"
@@ -16,6 +17,8 @@
   </div>
 </template>
 <script>
+  import { Button } from 'mint-ui';
+
 export default {
   data() {
     return {
@@ -23,14 +26,17 @@ export default {
     };
   },
 
-  props:["src","gid",],
+  props:["src","gid","saveAgreementId"],
   mounted() {
     this.init();
   },
 
-  methods: {
-    submit:function(){
 
+  methods: {
+
+
+    submit:function(){
+      let self= this;
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/agreement", {
           uid:window.localStorage.id,
@@ -41,14 +47,17 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-
             alert("上传成功")
+            self.saveAgreementId(res.data.data.id);
           }
         })
-        .catch(() => {
+        .catch((err) => {
           console.log("http请求错误");
+          console.log(err);
         });
     },
+
+
 
     init() {
       var canvasDiv = document.getElementById("canvasDiv");
@@ -84,14 +93,16 @@ export default {
 
       img.setAttribute("crossOrigin", "Anonymous");
 
+
+      let imgWidth;
+      let imgHeight;
+
       img.onload = function() {
 
-        let imgWidth=img.width;
-        let imgHeight=img.height;
-
+        imgWidth=img.width;
+        imgHeight=img.height;
 
         canvas.setAttribute("height", imgHeight*screenWidth/imgWidth);
-
 
 //        var ptrn = context.createPattern(img, "no-repeat");
 //
@@ -227,6 +238,7 @@ export default {
 
       clear.addEventListener("click", function() {
         canvas.width = canvas.width - 0;
+        context.drawImage(img,0,0,screenWidth,imgHeight*screenWidth/imgWidth);
       });
 
 //      submit.addEventListener("click", function() {
@@ -258,7 +270,7 @@ export default {
 </script>
 <style scoped>
 .container {
-  position: absolute;
+  position: fixed;
   height:100%;
   width: 100%;
   background: #fff;
@@ -280,7 +292,13 @@ export default {
 
   #btn_submit{
     position: absolute;
-    top:0;
-    left:0;
+    top:12px;
+    left:12px;
+  }
+
+  #btn_clear{
+    position: absolute;
+    top: 12px;
+    left:100px;
   }
 </style>

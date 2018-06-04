@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" ref="container">
     <!-- <div class="searchs_box">
       <input type="text"
              placeholder="请输入搜索内容">
@@ -12,7 +12,7 @@
     <!-- 瀑布流 -->
 
     <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
-      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject">
+      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
         <div class="listbox_lef">
           <div class="cent_left">
             <div class="list_img">
@@ -59,7 +59,7 @@
             </p>
           </div>
         </div> -->
-        <!-- <div class="cent_left">
+    <!-- <div class="cent_left">
           <div class="list_img">
             <img src="../../assets/images/icon2.jpg"
                  alt="">
@@ -101,9 +101,9 @@
             </p>
           </div>
         </div> -->
-      <!-- </div> -->
+    <!-- </div> -->
 
-      <!-- <div class="listbox_rig">
+    <!-- <div class="listbox_rig">
         <div class="cent_left">
           <div class="list_img">
             <img src="../../assets/images/icon2.jpg"
@@ -168,19 +168,22 @@
           </div>
         </div>
       </div> -->
-      <!-- <div class="foot_load">
+    <!-- <div class="foot_load">
         <span>加载更多 > </span>
       </div> -->
-
-
-      <div class="moreData" ref="load" v-show="showLoad">
-            <div v-if="load" @click="loadMore">加载更多></div>
-            <div v-else>已全部加载</div>
-        </div>
-    
+    <div>
+      <div class="Loading" v-if="showLoading">
+        <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
+      </div>
+      <div class="moreData" ref="load" v-if="showLoad">
+        <div v-if="load" @click="loadMore">加载更多></div>
+        <div v-else>已全部加载</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import { Spinner } from "mint-ui";
 import search from "../../components/search.vue";
 export default {
   data() {
@@ -188,16 +191,25 @@ export default {
       cooperativeproject: [], //合作项目
       keyword: "",
       pages: 1,
-      count:15,
-      showLoad:true,
-      load:true,
-      code:1//
+      count: 15,
+      showLoad: true,
+      load: true,
+      code: 1, //
+      showLoading: true
     };
   },
   created() {
     this.getData(this.keyword, this.pages);
   },
   methods: {
+    details(id){
+      this.$router.push({
+        name: "details",
+        query: {
+          pid: id
+        }
+      });
+    },
     cooperation() {
       //合作项目,点击合作项目模块,跳转到对应的详情页面
       this.$router.push({ name: "cooperation" });
@@ -205,11 +217,11 @@ export default {
     search(keyword) {
       this.keyword = keyword;
       this.pages = 1;
-      this.code = 2
+      this.code = 2;
       this.getData(keyword, this.pages);
     },
     getData(keyword, pages) {
-      console.log(keyword)
+      console.log(keyword);
       let that = this;
       //首页banner查询
       that.$axios
@@ -219,10 +231,12 @@ export default {
         })
         .then(res => {
           console.log(res);
-          if (res.data.status_code == 1001) {
+          if (res.data.status_code == "1001") {
+            that.showLoading = false;
             if (res.data.data.length == 0) {
               that.load = false;
               this.$refs.load.style = "height:100%";
+              this.$refs.container.style = "height:100%";
               this.$refs.masonry.style = "position:relative";
             } else if (res.data.data.length < this.count) {
               that.load = false;
@@ -233,20 +247,22 @@ export default {
               this.$refs.load.style = "height:1rem";
             }
 
-            that.cooperativeproject = res.data.data;
+            that.cooperativeproject = that.cooperativeproject.concat(
+              res.data.data
+            );
           }
         })
         .catch(() => {
           console.log("查询失败");
         });
     },
-    loadMore(){
-        this.pages++;
+    loadMore() {
+      this.pages++;
       // 搜索的加载更多，搜索没有产品的id
       if (this.code != 1) {
         this.getData(this.keyword, this.pages);
       } else {
-        this.getData('',this.pages);
+        this.getData("", this.pages);
       }
     }
     // cooperation() {
@@ -262,7 +278,7 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  height: calc(100% - 0.81rem);
+  height: auto;
   background: #fff;
 }
 .sousuo {
@@ -337,7 +353,7 @@ export default {
 }
 .list_box .listbox_lef {
   width: 48%;
-  
+
   border-radius: 3px;
 }
 .cent_left {
@@ -433,5 +449,17 @@ export default {
   height: 1rem;
   font-size: 14px;
   color: #00a5ff;
+}
+.Loading {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+  opacity: 0.5;
+  z-index:1;
 }
 </style>

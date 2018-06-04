@@ -7,11 +7,11 @@
       </div>
       <div class="center">
         <div class="top">
-          <span class="color666">收货人: <span class="color333">{{detail.user_name}}</span></span>
-          <span class="color333 text-right">{{detail.mobile}}</span>
+          <span class="color666">收货人: <span class="color333">{{data.user_name}}</span></span>
+          <span class="color333 text-right">{{data.mobile}}</span>
         </div>
         <div class="bottom">
-          <span class="color666">收货地址: </span><span class="color333">{{detail.province}}{{detail.city}}{{detail.area}}{{detail.address}}</span>
+          <span class="color666">收货地址: </span><span class="color333">{{data.province}}{{data.city}}{{data.area}}{{data.address}}</span>
         </div>
       </div>
       <div class="right" v-if="type=='button'">
@@ -25,28 +25,42 @@
 
 <script>
 export default {
-  name: 'addressCard',
 
-  props: ["type",'detail'],
+  data() {
+    return {
+      data: [],
+    };
+  },
+  props: ["type","saveAddressId"],
   mounted(){
+    this.init();
   },
   methods:{
-
+    init(){
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/addressList", {
+          params: {uid: window.localStorage.id}
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.data = res.data.data[0];
+            this.saveAddressId(this.data.id);
+          }
+        })
+        .catch((err) => {
+          console.log("http请求错误");
+          console.log(err);
+        });
+    },
     jumpToAddress(){
 
       alert("暂时没有address页面,有了在这改 label");
-//      this.$router.push({
-//        name:"confirm",
-//
-//      })
+
     },
 
   },
-  data () {
-    return {
-      address:[]
-    }
-  }
+
 }
 </script>
 
