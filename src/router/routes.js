@@ -32,6 +32,7 @@ import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
+import mediaDetails from "../views/photograph/mediaDetails.vue";
 
 let routes = [
   {
@@ -206,6 +207,12 @@ let routes = [
     name: "addtheaddress",
     path: "/addtheaddress",
     component: addtheaddress
+  },
+
+  {
+    name: "mediaDetails",
+    path: "/mediaDetails",
+    component: mediaDetails
   }
 ];
 

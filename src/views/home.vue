@@ -15,18 +15,22 @@
       </div>
     </div>
     <div class="list_search">
-      <div class="searchs">
+      <!-- <div class="searchs">
         <input type="text"
                placeholder="请输入搜索内容">
         <img src="../assets/icon/search_1.png"
              alt="111"
              @click="address()">
-      </div>
+      </div> -->
+      <div style="margin-left:20px;">请输入搜索</div>
+      <img src="../assets/icon/search_1.png"
+           alt="111">
+
     </div>
     <div ref="scroll"
          class="scrolls">
       <div class="list_ban">
-        <div class=" hotrent">
+        <div class="hotrent">
           <span>热租仪器</span>
         </div>
         <div class="hotrents">
@@ -39,7 +43,7 @@
             <img :src="item.images"
                  alt=""
                  @click="details(item.id)">
-            <span>{{item.name}}</span>
+            <span class="item_name">{{item.name}}</span>
           </div>
         </div>
         <div class="hot_cent"
@@ -47,6 +51,7 @@
           <span>查看更多></span>
         </div>
       </div>
+
       <div class="list_ban">
         <div class=" hotrent">
           <span>美业菁英</span>
@@ -367,33 +372,33 @@ export default {
     },
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
-    },
-    addtheaddress() {
-      this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
-    },
-    address() {
-      this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
-    },
-    information() {
-      //完善信息
-      this.$router.push({ name: "information" });
     }
+    // addtheaddress() {
+    //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
+    // }
+    // address() {
+    //   this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
+    // }
+    // information() {
+    //   //完善信息
+    //   this.$router.push({ name: "information" });
+    // }
   }
 };
 </script>
 <style scoped>
 .container {
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
 .scrolls {
   width: 100%;
   height: auto;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   height: calc(100% - 3.81rem);
-  margin-top: 0.4rem;
+  /* margin-top: 0.4rem; */
 }
 .banner {
   height: 3rem;
@@ -439,12 +444,15 @@ export default {
 .list_search {
   width: 96%;
   height: 0.81rem;
-  border: 1px solid #fff;
+  border: 1px solid #ccc;
   margin-top: 0.2rem;
   text-align: center;
   margin-left: 2%;
   background: #fff;
   border-radius: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .searchs {
   width: 96%;
@@ -457,21 +465,11 @@ export default {
   border-radius: 0.2rem;
 }
 
-.searchs input {
-  width: 6rem;
-  height: 0.792rem;
-  border: 0;
-  outline: none;
-  padding-left: 1rem;
-  box-sizing: border-box;
-  float: left;
-  margin-left: 0.2rem;
-  border-bottom: 1px solid #ccc;
-}
-.searchs img {
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: 0.2rem;
+.list_search img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
 .list_ban {
   width: 6.7rem;
@@ -491,9 +489,12 @@ export default {
   letter-spacing: 0;
 }
 .item_name {
-  color: red;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 10px;
 }
 .list_ban .hotrents {
   width: 100%;
@@ -511,15 +512,18 @@ export default {
 .hotimg {
   width: 100%;
   height: 2.4rem;
+  display: flex;
+  justify-content: center;
 }
 .hotimg .hotimg_lef {
   width: 3.2rem;
   height: 2.4rem;
-  float: right;
+  padding: 5px;
 }
 .hotimg .hotimg_lef img {
-  width: 3.2rem;
-  height: 2.4rem;
+  display: block;
+  width: 100%;
+  height: 100%;
   border-radius: 6px;
 }
 .hotimg .hotimg_rig {

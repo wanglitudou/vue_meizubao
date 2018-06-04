@@ -9,7 +9,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: "static",
     assetsPublicPath: "/",
-    proxyTable: {},
+
     proxyTable: {
       "/app": {
         target: "http://mzbao.weiyingjia.org",

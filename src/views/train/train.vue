@@ -22,10 +22,7 @@
       </div>
     </div>
 
-
     <orderFooter :text="'开始预约'" :count="data.price" :nextFun="buy"></orderFooter>
-
-
 
   </div>
 </template>
@@ -61,7 +58,7 @@
           .post(window.ajaxSrc + "/api/meizubao/addOrder", {
             uid:window.localStorage.id,
             g_id:this.data.id,
-            type:4,
+            type:5,
             m_type:1,
             strtime:"",
             stoptime:"",
@@ -77,7 +74,7 @@
           .then(res => {
             console.log(res);
             if (res.data.status_code == 1001) {
-              this.data = res.data.data;
+              window.location.href=res.data.data.url;
             }
           })
           .catch(() => {

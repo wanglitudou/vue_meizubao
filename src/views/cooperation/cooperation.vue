@@ -269,9 +269,8 @@ export default {
 }
 .pro_intro {
   width: 7.1rem;
-  height: 2rem;
-  margin-top: 0.2rem;
   margin: 0.2rem auto 0;
+  padding-bottom:12px;
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;
@@ -386,12 +385,13 @@ export default {
   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
 }
 .list_rent {
-  height: 0.88rem;
-  line-height: 0.88rem;
+  height: 1rem;
+  line-height: 1rem;
   border-bottom: 1px solid #f7f7f7;
   font-size: 14px;
   color: #fd4689;
   letter-spacing: 0;
   text-align: center;
+  margin-bottom:1.5rem;
 }
 </style>

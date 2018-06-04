@@ -15,37 +15,54 @@
 </template>
 
 <script>
-export default {
-  name: 'orderFooter',
-  props:["count","text",'nextFun'],
-  mounted(){
-    this.countNum=this.toThousands(this.count)
-  },
-  computed:{
-    finalCount:function(){
-      return this.countNum=this.toThousands(this.count)
-    }
-  },
-  data () {
-    return {
-      countNum:''
-    }
-  },
-  methods:{
-
-
-    toThousands(num) {
-      var num = (num || 0).toString(), result = '';
-      while (num.length > 3) {
-        result = ',' + num.slice(-3) + result;
-        num = num.slice(0, num.length - 3);
-      }
-      if (num) { result = num + result; }
-      return result;
+  export default {
+    name: 'orderFooter',
+    props: ["count", "text", 'nextFun'],
+    mounted(){
+      this.countNum = this.toThousands(this.count)
     },
+    computed: {
+      finalCount: function () {
+        return this.countNum = this.toThousands(this.count)
+      }
+    },
+    data () {
+      return {
+        countNum: ''
+      }
+    },
+    methods: {
 
+
+      toThousands(num) {
+        return (num+"").replace(/(\d)(?=(\d{3})+(\.|$))/g, '$1,');
+//        var flag = 1;
+//        if (num < 0) {
+//          flag = 0;
+//          num = -num;
+//        }
+//        var str = num.toString();
+//        var n = str.slice(str.lastIndexOf('.'))
+//        if (n.indexOf('.') == -1) {
+//          n = "";
+//        }
+//        var str = parseInt(num).toString();
+//        var list =
+//          str.split("").reverse();
+//        for (var i = 0; i < list.length; i++) {
+//          if (i % 4 == 3) {
+//            list.splice(i,
+//              0, ",");
+//          }
+//        }
+//        if (flag == 1) {
+//          return list.reverse().join("") + n;
+//        } else {
+//          return "-" + list.reverse().join("") + n;
+//        }
+      }
+    }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -62,6 +79,7 @@ export default {
     bottom: 0;
     left: 0;
   }
+
   .total_foot {
     width: 100%;
     height: 1rem;
@@ -79,19 +97,22 @@ export default {
     line-height: 1rem;
     line-height: 1rem;
   }
+
   .add {
     margin-left: 10px;
     font-size: 14px;
     color: #333333;
     letter-spacing: 0;
   }
+
   .tinct {
     font-size: 17px;
     color: rgba(253, 70, 137, 0.9);
     letter-spacing: 0;
     line-height: 20px;
-    font-weight:300;
+    font-weight: 300;
   }
+
   .total_rig {
     width: 40%;
     text-align: center;
@@ -100,9 +121,9 @@ export default {
     letter-spacing: 0;
     background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
     box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
-    font-weight:300;
+    font-weight: 300;
     border-top-left-radius: 5px;
-    border-bottom-left-radius:5px;
+    border-bottom-left-radius: 5px;
   }
 
 </style>

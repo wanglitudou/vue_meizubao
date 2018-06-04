@@ -1,222 +1,81 @@
 <template>
-    <div class="containers">
-        <!-- <div class="pic_view">
-            <div class="nav_pic"> -->
-        <!-- <span class="list_tab"
-                      v-for="(item,index) in tabs"
-                      :key="index"
-                      :class="num==index?'dora':''"
-                      @click="tab(index)">{{item.name}}</span>
-                <span class="sousuo"
-                      @click="aaa()">
-                    <img src="../../assets/icon/search_1.png"
-                         alt="">
-                </span> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <div class="list_list">
-            <div class="list_search">
-                <div class="sortMenu clearfix" v-show="slideShow">
-                    <ul class="sortMenu-ul">
-                        <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
-                            <tab :item="item" :index="index" :num="num"></tab>
-                            <!-- <li class="cell"   :class="num == index ?'dora':''">
+  <div class="containers">
+
+    <div class="list_list">
+      <div class="list_search">
+        <div class="sortMenu clearfix" v-show="slideShow">
+          <ul class="sortMenu-ul">
+            <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
+              <tab :item="item" :index="index" :num="num"></tab>
+              <!-- <li class="cell"   :class="num == index ?'dora':''">
                             {{item.name}}
                             </li> -->
-                        </div>
-                    </ul>
-                    <!-- 搜索按钮 -->
-                    <div class="sousuo" @click="aaa()">
-                        <img src="../../assets/icon/search_1.png" alt="">
-                    </div>
-                </div>
-                <!--  -->
-                <div class="topSearch" v-if="flog">
-                    <search @search="search"></search>
-                </div>
-
             </div>
+          </ul>
+          <!-- 搜索按钮 -->
+          <div class="sousuo" @click="aaa()">
+            <img src="../../assets/icon/search_1.png" alt="">
+          </div>
+        </div>
+        <!--  -->
+        <div class="topSearch" v-if="flog">
+          <search @search="search"></search>
         </div>
 
-        <!-- <div class="searchs_box"
-             v-if="flog">
-            <input type="text"
-                   placeholder="请输入搜索内容"
-                   v-model="message"
-                   @blur="loseblur()">
-            <img src="../../assets/icon/search_1.png"
-                 alt="111">
-        </div> -->
-        <!-- <div class="list_box"> -->
-        <!-- <div class="listbox_lef" v-for="item in accessoryproducts" :key="item.index
-                     ">
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img :src="item.images" alt="666">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>{{item.name}}</span>
-                        </p>
-
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥{{item.price}}</span>
-                            </span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">立即下单</span>
-                        </p>
-                    </div>
-                </div> -->
-        <!-- <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>仪器操作室</span>
-                        </p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>
-                            </span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">立即下单</span>
-                        </p>
-                    </div>
-                </div> -->
-        <!-- <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>仪器操作室</span>
-
-                        </p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>
-                            </span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">立即下单</span>
-                        </p>
-                    </div>
-                </div> -->
-        <!-- </div> -->
-
-        <!-- <div class="listbox_rig">
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>仪器操作室</span>
-
-                        </p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>
-                            </span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">立即下单</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>仪器操作室</span>
-
-                        </p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>
-                            </span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">立即下单</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img src="../../assets/images/icon2.jpg"
-                             alt="">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>仪器操作室</span>
-                        </p>
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥1500</span>
-                            </span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">立即下单</span>
-                        </p>
-                    </div>
-                </div>
-            </div> -->
-        <!-- </div> -->
-        <!-- <div class="foot_load">
-            <span>加载更多 > </span>
-        </div> -->
-
-        <!-- 瀑布流布局 -->
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
-            <!-- v-for="(item, index) in accessoryproducts -->
-            <div v-masonry-tile class="item" v-for="(item, index) in accessoryproducts">
-                <div class="cent_left">
-                    <div class="list_img">
-                        <img :src="item.images" alt="666">
-                    </div>
-                    <div class="list_oper">
-                        <p class="oper_room">
-                            <span>{{item.name}}</span>
-                        </p>
-
-                        <p class="every_pro">
-                            <span class="data_pro">
-                                <span class="data_mon">￥{{item.price}}</span>
-                            </span>
-                        </p>
-                        <p class="cli_app">
-                            <span class="cli_ment">立即下单</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 加载更多 -->
-        <div class="moreData" ref="load" v-show="showLoad">
-            <div v-if="load" @click="loadMore">加载更多></div>
-            <div v-else>已全部加载</div>
-        </div>
+      </div>
     </div>
+
+    <!-- 瀑布流布局 -->
+    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+      <!-- v-for="(item, index) in accessoryproducts -->
+      <div v-masonry-tile class="item" v-for="(item, index) in accessoryproducts" @click="details(item.id)">
+        <div class="cent_left">
+          <div class="list_img">
+            <img :src="item.images" alt="666">
+          </div>
+          <div class="list_oper">
+            <p class="oper_room">
+              <span>{{item.name}}</span>
+            </p>
+
+            <p class="every_pro">
+              <span class="data_pro">
+                <span class="data_mon">￥{{item.price}}</span>
+              </span>
+            </p>
+            <p class="cli_app">
+              <span class="cli_ment">立即下单</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- 店家加载更多 -->
+      <div class="item loadMore" ref="load">
+        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+        <span v-else>
+          <span @click="loadMore" v-if="loading">加载更多</span>
+          <span v-else>数据全部加载完成</span>
+        </span>
+      </div>
+
+    </div>
+    <!-- 暂无数据 -->
+    <div class="noData" v-if="showNodata">
+      赞无数据
+    </div>
+  </div>
 </template>
 <script>
+import { Spinner, Toast, Indicator } from "mint-ui";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
+import { VueMasonryPlugin } from "vue-masonry";
 export default {
   data() {
     return {
       tabs: [], // 热租仪器分类
       accessoryproducts: [], //产品配套筛选
-      num: 1,
+      num: 0,
       pages: 1,
       flog: false,
       url: [],
@@ -225,11 +84,17 @@ export default {
       showLoad: true,
       load: true,
       keyword: "",
-      code: 1,//这个是不搜索的
-      count:15
+      code: 1, //这个是不搜索的
+      count: 15,
+      topStatus: false,
+      showNodata: false,
+      isNodata: false,
+      loading: false,
+      typeid: 0
     };
   },
   created() {
+    Indicator.open();
     let that = this;
     //热租仪器分类
     that.$axios
@@ -242,10 +107,23 @@ export default {
         }
       })
       .catch(() => {
+        setTimeout(() => {
+          Indicator.close();
+        }, 1000);
+        Toast('加载失败')
         console.log("查询失败");
       });
   },
   methods: {
+    details(id) {
+      this.$router.push({
+        name: "matching",
+        query: {
+          pid: id
+        }
+      });
+      console.log(id);
+    },
     getData(name, keyword, pages) {
       let that = this;
       //热租仪器筛选
@@ -259,19 +137,23 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
+            Indicator.close();
+            this.topStatus = false;
             if (res.data.data.length == 0) {
-              that.load = false;
-              this.$refs.load.style = "height:100%";
-              this.$refs.masonry.style = "position:relative";
+              this.isNodata = false;
+              this.showNodata = true;
             } else if (res.data.data.length < this.count) {
-              that.load = false;
-              this.$refs.load.style = "100%";
-              // this.$refs.masonry.style="position:relative"
+              this.loading = false;
+              this.isNodata = true;
             } else {
-              that.load = true;
-              this.$refs.load.style = "height:1rem";
+              this.isNodata = true;
+              that.topStatus = false;
+              that.loading = true;
             }
-            that.accessoryproducts = res.data.data;
+
+            that.accessoryproducts = that.accessoryproducts.concat(
+              res.data.data
+            );
           }
         })
         .catch(() => {
@@ -279,7 +161,10 @@ export default {
         });
     },
     search(keyword) {
-      console.log(keyword);
+      if (this.keyword == "") {
+        Toast("搜索不能为空");
+        return false;
+      }
       this.keyword = keyword;
       this.pages = 1;
       this.getData("", keyword, this.pages);
@@ -296,10 +181,11 @@ export default {
     aaa() {
       this.flog = true;
       this.accessoryproducts = [];
-      this.showLoad = false;
+      this.showNodata = false;
+      this.isNodata = false;
       this.code = 2; //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
-      this.$refs.masonry.style = "position:relative";
+      // this.$refs.masonry.style = "position:relative";
     },
     search(keyword) {
       // console.log(word)
@@ -309,18 +195,31 @@ export default {
       this.$router.push({ name: "details" });
     },
     tab(id, index) {
+      this.typeid = id;
+      console.log(id);
       this.num = index;
-      this.getData(id, "", 1); //传输1 是页数 为了和搜索区分开 提示暂无数据区分开
+      this.accessoryproducts = [];
+      (this.isNodata = false), (this.showNodata = false);
+      Indicator.open();
+      setTimeout(() => {
+        this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+      }, 2000);
+      //   this.getData(id, "", 1); //传输1 是页数 为了和搜索区分开 提示暂无数据区分开
       //   this.$refs.masonry.style="position:relative"
     },
     // },
     loadMore() {
+      this.topStatus = true;
       this.pages++;
       // 搜索的加载更多，搜索没有产品的id
       if (this.code != 1) {
-        this.getData("", this.keyword, this.pages);
+        setTimeout(() => {
+          this.getData("", this.keyword, this.pages);
+        });
       } else {
-        this.getData(this.uid, "", this.pages);
+        setTimeout(() => {
+          this.getData(this.typeid, "", this.pages);
+        });
       }
     }
   },
@@ -533,5 +432,21 @@ export default {
   height: 1rem;
   font-size: 14px;
   color: #00a5ff;
+}
+.loadMore {
+  width: 96%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 16px;
+}
+.noData {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

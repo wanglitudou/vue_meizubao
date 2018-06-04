@@ -45,7 +45,7 @@
           .then(res => {
             console.log(res);
             if (res.data.status_code == 1001) {
-              this.data = res.data.data;
+              window.location.href=res.data.data.url;
             }
           })
           .catch((err) => {

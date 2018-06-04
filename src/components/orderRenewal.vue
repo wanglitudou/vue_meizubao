@@ -40,14 +40,14 @@ export default {
   props: ["detail", "mounth", "increase", "decrease", "allPrice","disableDate",'selectedDate','during'],
   data() {
         return {
-         
+
         // disableDate: []
         };
       },
       mounted(){
           console.log(this.disableDate)
       }
-     
+
 };
 </script>
 <style>
@@ -138,11 +138,10 @@ export default {
     height: .5rem;
     font-size: .28rem;
   }
-
   #datePicker .c-day-background {
     /*width:.7rem !important;*/
     height: .7rem !important;
   }
 
 </style>
-  
+

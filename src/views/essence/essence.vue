@@ -3,7 +3,7 @@
     <div class="cent_list">
       <div class="ban_two">
         <div class="ban_lef">
-          <img src="../../assets/images/icon1.jpg"
+          <img :src="data.images"
                alt="">
         </div>
         <div class="ban_rig">
@@ -94,7 +94,6 @@
 </template>
 <script>
   import orderFooter from '../../components/orderFooter.vue'
-  import DateTimePicker from 'date-time-picker';
   import sign from '../../components/sign.vue'
   import { Toast } from 'mint-ui';
 
