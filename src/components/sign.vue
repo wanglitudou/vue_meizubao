@@ -8,9 +8,9 @@
 
     <mt-button size="small" @click="submit" type="default" id="btn_submit">上传协议</mt-button>
 
-    <img id="hiddenImg"
-         :src="src"
-         alt="">
+    <!--<img id="hiddenImg"-->
+         <!--:src="src"-->
+         <!--alt="">-->
 
     <img id="qmimg" />
 
@@ -36,39 +36,49 @@ export default {
 
 
     submit:function(){
-      let self= this;
-      this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/agreement", {
-          uid:window.localStorage.id,
-          g_id:this.gid,
-          img:canvas.toDataURL("image/jpg"),
-          type:1,
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            Toast('协议保存成功');
-            self.saveAgreementId(res.data.data.id);
-          }
-        })
-        .catch((err) => {
-          Toast('协议保存失败');
-          console.log("http请求错误");
-          console.log(err);
-        });
+
+      try {
+        var baseCode=canvas.toDataURL("image/jpg");
+        console.log(baseCode);
+      }catch (err){
+        alert(err);
+      }
+
+
+
+//      let self= this;
+//      this.$axios
+//        .post(window.ajaxSrc + "/api/meizubao/agreement", {
+//          uid:window.localStorage.id,
+//          g_id:this.gid,
+//          img:canvas.toDataURL("image/jpg"),
+//          type:1,
+//        })
+//        .then(res => {
+//          console.log(res);
+//          if (res.data.status_code == 1001) {
+//            Toast('协议保存成功');
+//            self.saveAgreementId(res.data.data.id);
+//          }
+//        })
+//        .catch((err) => {
+//          Toast('协议保存失败');
+//          console.log("http请求错误");
+//          console.log(err);
+//        });
     },
 
 
 
     init() {
-      var canvasDiv = document.getElementById("canvasDiv");
-      var canvas = document.createElement("canvas");
+      let canvasDiv = document.getElementById("canvasDiv");
+      let canvas = document.createElement("canvas");
 
-      var screenWidth = document.documentElement.clientWidth;
+      let screenWidth = document.documentElement.clientWidth;
       var screenHeight = document.documentElement.clientHeight;
 
-      var canvasWidth = screenWidth;
-      var canvasHeight = 400;
+      let canvasWidth = screenWidth;
+      let canvasHeight = 400;
 
       var point = {};
 
@@ -90,9 +100,10 @@ export default {
 
       var img = new Image();
 
+      img.crossOrigin = 'anonymous';
+//      img.setAttribute("crossOrigin", "anonymous");
       img.src = this.src;
 
-      img.setAttribute("crossOrigin", "Anonymous");
 
 
       let imgWidth;
@@ -177,14 +188,14 @@ export default {
 
       var paint;
 
-      $(document).on(
-        "touchstart touchmove touchend",
-        $.proxy(function(e) {
-          if (e.target === canvas) {
-            e.preventDefault();
-          }
-        }, this)
-      );
+//      $(document).on(
+//        "touchstart touchmove touchend",
+//        $.proxy(function(e) {
+//          if (e.target === canvas) {
+//            e.preventDefault();
+//          }
+//        }, this)
+//      );
 
       function addClick(x, y, dragging) {
         clickX.push(x);

@@ -77,7 +77,7 @@
     </div>
 </template>
 <script>
-import { Spinner,Toast, Indicator } from "mint-ui";
+import { Spinner, Toast, Indicator } from "mint-ui";
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
@@ -109,7 +109,7 @@ export default {
       loading: true,
       topStatus: false,
       isNodata: true,
-      showNodata:false,
+      showNodata: false
     };
   },
 
@@ -137,20 +137,23 @@ export default {
       this.flog = true;
       this.imgsArr = [];
       this.showNodata = false;
-      this.isNodata =  false
+      this.isNodata = false;
       this.code = 2; //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
-    //   this.$refs.masonry.style = "position:relative";
+      //   this.$refs.masonry.style = "position:relative";
     },
     search(keyword) {
-    //   console.log(word)
-      if(this.keyword == ''){
-          Toast("搜索不能为空")
-      return false
+      //   console.log(word)
+      this.keyword =  keyword
+      if (this.keyword == "") {
+        Toast("搜索不能为空");
+        return false;
       }
       this.keyword = keyword;
       this.pages = 1;
-      this.getData("", keyword, this.pages);
+      setTimeout(() => {
+        this.getData("", keyword, this.pages);
+      });
     },
     loadMore() {
       this.topStatus = true;
@@ -177,9 +180,10 @@ export default {
       this.num = index;
       this.uid = id;
       this.imgsArr = [];
-      this.isNodata = false
-      this.showNodata =  false
-         Indicator.open();
+      this.isNodata = false;
+      this.showNodata = false;
+      this.pages = 1;
+      Indicator.open();
       setTimeout(() => {
         this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
       }, 2000);
@@ -198,7 +202,7 @@ export default {
             this.topStatus = false;
             if (res.data.data.length == 0) {
               this.isNodata = false;
-              this.showNodata  = true
+              this.showNodata = true;
             } else if (res.data.data.length < this.count) {
               this.loading = false;
               this.isNodata = true;

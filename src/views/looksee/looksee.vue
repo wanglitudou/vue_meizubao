@@ -261,14 +261,13 @@ export default {
       // this.itemshow = false;
       //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
-      this.$refs.masonry.style = "position:relative,margin-top:1.2rem";
+      // this.$refs.masonry.style = "position:relative,margin-top:1.2rem";
     },
     details() {
       this.$router.push({ name: "details" });
     },
     tab(id, index) {
       this.num = index;
-
       this.typeId = id;
       Indicator.open();
       this.pages = 1;

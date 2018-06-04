@@ -181,7 +181,7 @@ export default {
       this.isNodata = false;
       this.code = 2; //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
-      this.$refs.masonry.style = "position:relative";
+      // this.$refs.masonry.style = "position:relative";
     },
     search(keyword) {
       // console.log(word)
@@ -437,5 +437,12 @@ export default {
   align-items: center;
   color: #000;
   font-size: 16px;
+}
+.noData{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
