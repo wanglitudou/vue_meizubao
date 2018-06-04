@@ -165,7 +165,10 @@ export default {
         }
       })
       .catch(() => {
-        console.log("查询失败");
+          setTimeout(() => {
+          Indicator.close();
+        }, 1000);
+        Toast('加载失败')
       });
   },
   methods: {
