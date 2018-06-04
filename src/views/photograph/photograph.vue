@@ -13,8 +13,7 @@
         <div v-show="num==0">
           <div class="cent_cents">
             <div class="pic_center">
-              <!--图片切换时展示的内容 左边-->
-              <!--图片切换时展示的内容 右边-->
+
 
               <div class="pic_name">
                 <div class="picleft_img">
@@ -28,7 +27,14 @@
                   </span>
                 </p>
               </div>
+
+
+
             </div>
+
+
+
+
             <div class="add_more">
               <span>加载更多></span>
             </div>
@@ -262,6 +268,10 @@
     letter-spacing: 0;
   }
 
+  .ins_img{
+    vertical-align: middle;
+    width:24px;
+  }
   .ins_img img {
     width: 14px;
     height: 14px;

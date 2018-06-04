@@ -58,7 +58,7 @@
           .post(window.ajaxSrc + "/api/meizubao/addOrder", {
             uid:window.localStorage.id,
             g_id:this.data.id,
-            type:4,
+            type:5,
             m_type:1,
             strtime:"",
             stoptime:"",

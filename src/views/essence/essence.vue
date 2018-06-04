@@ -94,7 +94,6 @@
 </template>
 <script>
   import orderFooter from '../../components/orderFooter.vue'
-  import DateTimePicker from 'date-time-picker';
   import sign from '../../components/sign.vue'
   import { Toast } from 'mint-ui';
 
