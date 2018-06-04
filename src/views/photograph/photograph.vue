@@ -11,20 +11,20 @@
           <div class="cent_cents">
             <div class="pic_center">
 
-              <div class="pic_name" v-for="(item,index) in picData ">
-                <div class="picleft_img">
-                  <img src="../../assets/images/icon1.jpg" alt="">
+              <div class="pic_name" v-for="(item,index) in imageData ">
+                <div class="picleft_img" @click="jumpToDetails('image',item.images,item.name)">
+                  <img :src="item.images" alt="">
                 </div>
                 <p class="name_ins">
                   <span class="ins_name">{{item.name}}</span>
-                  <span class="ins_img" @click="down(item.id,item.text_url)">
+                  <span class="ins_img" @click="down(item.id,item.images)">
                     <img src="../../assets/images/download.jpg" alt="">
                   </span>
                 </p>
               </div>
             </div>
-            <div class="add_more">
-              <span>加载更多></span>
+            <div class="add_more" @click="loadMoreImage">
+              <span>{{imageNoMore?'已全部显示':'加载更多'}}</span>
             </div>
           </div>
 
@@ -36,20 +36,20 @@
               <!--图片切换时展示的内容 左边-->
 
               <div class="pic_name" v-for="(item,index) in videoData">
-                <div class="picleft_img">
+                <div class="picleft_img" @click="jumpToDetails('video',item.images,item.name)">
                   <img src="../../assets/images/icon7.jpg" alt="">
                 </div>
                 <p class="name_ins">
                   <span class="ins_name">{{item.name}}</span>
-                  <span class="ins_img" @click="down(item.id,item.url)">
+                  <span class="ins_img" @click="down(item.id,item.images)">
                     <img src="../../assets/images/download.jpg" alt="">
                   </span>
                 </p>
               </div>
               <!--图片切换时展示的内容 右边-->
             </div>
-            <div class="add_more">
-              <span @click="loadMore">加载更多></span>
+            <div class="add_more" @click="loadMoreVideo">
+              <span>{{videoNoMore?'已全部显示':'加载更多'}}</span>
             </div>
           </div>
         </div>
@@ -62,76 +62,123 @@
   </div>
 </template>
 <script>
-import { MessageBox } from "mint-ui";
-export default {
-  data() {
-    return {
-      tabs: ["图片", "视频"],
-      num: 0,
-      picData: [],
-      videoData: [],
-      page: 1
-    };
-  },
-  mounted() {
-    this.init();
-    this.initVideo();
-  },
-  methods: {
-    tab(index) {
-      this.num = index;
+  import {MessageBox} from "mint-ui";
+  export default {
+    data() {
+      return {
+        tabs: ["图片", "视频"],
+        num: 0,
+        imageData: [],
+        videoData: [],
+        imageNoMore:false,
+        videoNoMore:false,
+        imagePage: 1,
+        videoPage: 1,
+      };
+    },
+    mounted() {
+      this.getImage();
+      this.getVideo();
+    },
 
-      if (index == 1) {
-        this.status_code = 2;
-      }
-    },
-    // 获取图片
-    init() {
-      this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/imagesData", {
-          params: { page: this.page }
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            this.picData = this.picData.concat(res.data.data);
-            console.log(res);
+
+    methods: {
+
+
+
+      tab(index) {
+        this.num = index;
+
+        if (index == 1) {
+          this.status_code = 2;
+        }
+      },
+
+      loadMoreImage(){
+        if(this.imageNoMore){
+            return false
+        }else{
+          this.getImage()
+        }
+      },
+      loadMoreVideo(){
+        if(this.videoNoMore){
+          return false
+        }else{
+          this.getVideo()
+        }
+      },
+
+
+      jumpToDetails:function(type,images,name){
+        this.$router.push({
+//          path: '/confirm/instrument',
+          name: "mediaDetails",
+          query: {
+            type: type,
+            images:images,
+            name:name,
           }
         })
-        .catch(err => {
-          console.log("http请求错误");
-          console.log(err);
-        });
-    },
-    // 获取视频
-    initVideo() {
-      this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/videoData", {
-          params: { page: this.page }
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            this.videoData = this.videoData.concat(res.data.data);
+
+      },
+
+
+
+      // 获取图片
+      getImage() {
+        this.$axios
+          .get(window.ajaxSrc + "/api/meizubao/imagesData", {
+            params: {page: this.imagePage}
+          })
+          .then(res => {
             console.log(res);
-          }
-        })
-        .catch(err => {
-          console.log("http请求错误");
-          console.log(err);
-        });
-    },
-    down(id, url) {
-      console.log(id);
-      console.log(url);
-      MessageBox("请复制此链接去下载", url);
-    },
-    // 加载更多
-    loadMore() {
-     
+            if (res.data.status_code == 1001) {
+              if(res.data.data.length==0){
+                this.videoNoMore=true;
+                return false
+              }
+              this.imageData = this.imageData.concat(res.data.data);
+              this.imagePage++
+              console.log(res);
+            }
+          })
+          .catch(err => {
+            console.log("http请求错误");
+            console.log(err);
+          });
+      },
+      // 获取视频
+      getVideo() {
+        this.$axios
+          .get(window.ajaxSrc + "/api/meizubao/videoData", {
+            params: {page: this.videoPage}
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              if(res.data.data.length==0){
+                this.videoNoMore=true;
+                return false
+              }
+              this.videoData = this.videoData.concat(res.data.data);
+              this.videoPage++
+              console.log(res);
+            }
+          })
+          .catch(err => {
+            console.log("http请求错误");
+            console.log(err);
+          });
+      },
+      down(id, url) {
+        console.log(id);
+        console.log(url);
+        MessageBox("请复制此链接去下载", url);
+      },
+
     }
-  }
-};
+  };
 </script>
 
 <style scoped>
@@ -190,7 +237,7 @@ export default {
 
 .pic_name {
   width: 50%;
-  height: 2.94rem;
+
   background: #ffffff;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
@@ -202,7 +249,7 @@ export default {
 .picleft_img {
   width: 100%;
   height: 2.26rem;
-  border: 1px solid #ccc;
+
 }
 
 .picleft_img img {
