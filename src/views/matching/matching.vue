@@ -145,7 +145,7 @@
       init(){
         this.$axios
           .get(window.ajaxSrc + "/api/meizubao/productDetail", {
-            params: {'id': 6}
+            params: {'id': this.$route.query.id}
           })
           .then(res => {
             console.log(res);

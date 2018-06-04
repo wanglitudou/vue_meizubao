@@ -305,7 +305,6 @@ export default {
       this.$router.push({ name: "project" }); //合作项目模块,点击查看更多的时候,跳转对应的详情页面
     },
     matching(pid) {
-      console.log(pid)
       this.$router.push({ name: "matching", query: { pid: pid } }); //配套产品模块,点击图片,跳转到对应详情页面
     },
     train(pid) {

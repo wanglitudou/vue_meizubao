@@ -42,7 +42,7 @@
 <!-- 产品 -->
   <div class="card" v-if='detail.type==3'>
     <div class="head">
-      <img src="../assets/images/timg.jpeg" alt="">
+      <img :src="detail.image" alt="">
     </div>
     <div class="right-info">
       <p class="big">{{detail.goods_name}}</p>
@@ -57,7 +57,7 @@
 <!-- 项目 -->
  <div class="card" v-if='detail.type==5'>
     <div class="head">
-      <img src="../assets/images/timg.jpeg" alt="">
+      <img :src="detail.image" alt="">
     </div>
     <div class="right-info">
       <p class="big">{{detail.goods_name}}</p>
