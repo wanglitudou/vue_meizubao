@@ -19,23 +19,47 @@
       <div class="bottom-wrapper">
         <div class="des-wrapper">
           <span class="text">{{$route.query.name}}</span>
-          <img class="right-button" src="../../assets/images/download.jpg" alt="" @click="down($route.query.images)">
+          <!--<a :href="$route.query.images" download="test">下载</a>-->
+          <img class="right-button"
+               src="../../assets/images/download.jpg"
+               alt=""
+               :data-clipboard-text="$route.query.images"
+          >
         </div>
       </div>
-
   </div>
 </template>
 <script>
 
 
 
-  import {MessageBox} from "mint-ui";
+
+
+
+  import ClipboardJS from 'clipboard';
+  import {Toast} from "mint-ui";
   export default {
+    mounted(){
+      var clipboard=new ClipboardJS('.right-button');
+      clipboard.on('success', function(e) {
+        Toast({
+          message: '下载链接已复制到剪切板,请通过外部浏览器打开',
+          position: 'middle',
+          duration: 4000
+        });
+      });
+
+      clipboard.on('error', function(e) {
+        Toast({
+          message: '自动复制到剪切板失败。',
+          position: 'middle',
+          duration: 4000
+        });
+      });
+    },
     methods:{
-      down(url) {
-        console.log(url);
-        MessageBox("请复制此链接去下载", url);
-      },
+
+
     }
   }
 

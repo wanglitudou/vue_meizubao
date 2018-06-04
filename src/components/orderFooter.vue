@@ -35,30 +35,31 @@
 
 
       toThousands(num) {
-        var flag = 1;
-        if (num < 0) {
-          flag = 0;
-          num = -num;
-        }
-        var str = num.toString();
-        var n = str.slice(str.lastIndexOf('.'))
-        if (n.indexOf('.') == -1) {
-          n = "";
-        }
-        var str = parseInt(num).toString();
-        var list =
-          str.split("").reverse();
-        for (var i = 0; i < list.length; i++) {
-          if (i % 4 == 3) {
-            list.splice(i,
-              0, ",");
-          }
-        }
-        if (flag == 1) {
-          return list.reverse().join("") + n;
-        } else {
-          return "-" + list.reverse().join("") + n;
-        }
+        return (num+"").replace(/(\d)(?=(\d{3})+(\.|$))/g, '$1,');
+//        var flag = 1;
+//        if (num < 0) {
+//          flag = 0;
+//          num = -num;
+//        }
+//        var str = num.toString();
+//        var n = str.slice(str.lastIndexOf('.'))
+//        if (n.indexOf('.') == -1) {
+//          n = "";
+//        }
+//        var str = parseInt(num).toString();
+//        var list =
+//          str.split("").reverse();
+//        for (var i = 0; i < list.length; i++) {
+//          if (i % 4 == 3) {
+//            list.splice(i,
+//              0, ",");
+//          }
+//        }
+//        if (flag == 1) {
+//          return list.reverse().join("") + n;
+//        } else {
+//          return "-" + list.reverse().join("") + n;
+//        }
       }
     }
   }
