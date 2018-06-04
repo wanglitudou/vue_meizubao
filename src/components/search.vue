@@ -59,4 +59,7 @@ export default {
   height: 0.5rem;
   line-height: 0.5rem;
 }
+.searchs input{
+    font-size: 16px;
+}
 </style>

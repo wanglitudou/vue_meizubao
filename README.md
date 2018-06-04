@@ -37,3 +37,11 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
      <!--项目  project-->
      <!--技师  technician-->
      <!--视频  video-->
+
+
+
+     <!-- details 仪器 -->
+     <!-- essence 技师 -->
+     <!-- matching 配套产品 -->
+     <!-- train 视频 -->
+     <!-- cooperation 项目 -->

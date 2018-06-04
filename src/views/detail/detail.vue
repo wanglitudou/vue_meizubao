@@ -23,162 +23,7 @@
             </div>
         </div>
 
-        <!-- <div> -->
-
-        <!-- <div class="scrolls"> -->
-        <!-- <div class="list_cent"> -->
-        <!-- <div class="list_lef" -->
-        <!-- v-for="item in immediatelyorder"
-                     :key="item.index">
-                    <div class="listing">
-                        <div>
-                            <img :src="item.images"
-                                 alt=""
-                                 @click="details()">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>{{item.name}}</span>
-                                <span class="paice">{{item.price}}</span>
-                            </p>
-                            <p class="meeting">{{item.centent}}</p>
-                            <p>
-                                <span>
-                                    <a>{{item.num}}</a>/月
-                                </span>
-                                <span class="count"
-                                      @click="details()">
-                                    <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                                    {{item.credit}}
-                                </span>
-                            </p>
-                            <p class="rent"> 起租期:{{item.firstrent}}</p>
-                            <p class="orders"
-                               @click="details()">
-                                <span class="order">
-                                    立即下单
-                                </span>
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div>
-
-                    </div> -->
-        <!-- </div> -->
-        <!-- <div class="list_rig" -->
-        <!-- v-for="item in immediatelyorder"
-                     :key="item.index">
-                    <div class="listing">
-                        <div>
-                            <img :src="item.images"
-                                 alt=""
-                                 @click="details()">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>{{item.name}}</span>
-                                <span class="paice">{{item.price}}</span>
-                            </p>
-                            <p class="meeting">
-                                {{item.centent}}
-                            </p>
-                            <p>
-                                <span>
-                                    <a>{{item.num}}</a>/月
-                                </span>
-                                <span class="count"
-                                      @click="details()">
-                                    <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                                    {{item.credit}}
-                                </span>
-                            </p>
-                            <p class="rent"> 起租期:{{item.firstrent}}</p>
-                            <p class="orders"
-                               @click="details()">
-                                <span class="order">
-                                    立即下单
-                                </span>
-                            </p>
-                        </div>
-                    </div> -->
-        <!-- <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon6.jpg"
-                                 alt=""
-                                 @click="details()">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                                <span class="paice">￥20000元</span>
-                            </p>
-                            <p class="meeting">
-                                十点开会覅额回复撒哈斯而后发生符合倒计时
-                            </p>
-                            <p>
-                                <span>
-                                    <a>￥1500</a>/月
-                                </span>
-                                <span class="count"
-                                      @click="details()">
-                                    <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                                    700
-                                </span>
-                            </p>
-                            <p class="rent"> 起租期:6个月</p>
-                            <p class="orders"
-                               @click="details()">
-                                <span class="order">
-                                    立即下单
-                                </span>
-                            </p>
-                        </div>
-                    </div> -->
-        <!-- <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon1.jpg"
-                                 alt=""
-                                 @click="details()">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                                <span class="paice">￥20000元</span>
-                            </p>
-                            <p class="meeting">
-                                十点开会覅额回复撒哈斯而后发生符合倒计时
-                            </p>
-                            <p>
-                                <span>
-                                    <a>￥1500</a>/月
-                                </span>
-                                <span class="count"
-                                      @click="details()">
-                                    <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                                    700
-                                </span>
-                            </p>
-                            <p class="rent"> 起租期:6个月</p>
-                            <p class="orders"
-                               @click="details()">
-                                <span class="order">
-                                    立即下单
-                                </span>
-                            </p>
-                        </div>
-                    </div> -->
-        <!-- </div> -->
-        <!-- </div> -->
-
-        <!-- </div> -->
-
-        <!-- <div class="addmore">
-            <span class="more_add">加载更多</span>
-        </div> -->
-
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item">
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
             <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
                 <!-- block item markup -->
                 <div class="box listing">
@@ -187,19 +32,24 @@
                     </div>
                     <div class="other">
                         <p class="name">
-                            <span>{{item.name}}</span>
-                            <span class="paice">￥{{item.price}}</span>
+                            <!-- {{item.name}} -->
+                            <span>仪器</span>
+                            <!-- {{item.price}} -->
+                            <span class="paice">￥价钱</span>
                         </p>
                         <p class="meeting">
-                            {{item.centent}}
+                            <!-- {{item.centent}} -->
+                            倒萨大酒店
                         </p>
                         <p class="date">
                             <span>
-                                <a>￥{{item.firstrent}}</a>/月
+                                <!-- {{item.firstrent}} -->
+                                <a>￥10</a>/月
                             </span>
                             <span class="count">
                                 <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                                {{item.created}}
+                                <!-- {{item.created}} -->
+                                dsadsad
                             </span>
                         </p>
                         <p class="rent"> 起租期:{{item.num}}个月</p>
@@ -210,56 +60,24 @@
                         </p>
                     </div>
                 </div>
-                  <!-- <div class="box listing">
-                    <div>
-                        <img src="" alt="">
-                    </div>
-                    <div class="other">
-                        <p class="name">
-                            <span>热租仪器</span>
-                            <span class="paice">￥20000</span>
-                        </p>
-                        <p class="meeting">
-                           
-                            十点开会你们都得到，周末不加班其他的都好说能打开的的卡萨丁 第三节活动空间撒打卡机三大
-                        </p>
-                        <p class="date">
-                            <span>
-                                <a>￥123</a>/月
-                            </span>
-                            <span class="count">
-                                <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                              
-                            </span>
-                        </p>
-                        <p class="rent"> 起租期:12323个月</p>
-                        <p class="orders">
-                            <span class="order">
-                                立即下单
-                            </span>
-                        </p>
-                    </div>
-                </div> -->
 
+            </div>
+            <div class="item loadMore" ref="load">
+                <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+                <span v-else>
+                    <span @click="loadMore" v-if="loading">加载更多</span>
+                    <span v-else>数据全部加载完成</span>
+                </span>
             </div>
         </div>
-        <!-- <div class="Loading" v-if="showLoading">
-            <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
-        </div> -->
-        <!-- 点击加载 -->
-        <div class="moreData" ref="load">
-            <!--  -->
-            <div>
-                <div v-if="load" @click="loadMore">加载更多></div>
-                <div v-else>已全部加载</div>
-            </div>
-
+        <div class="nodata" v-if="showNodata">
+            暂无数据
         </div>
 
     </div>
 </template>
 <script>
-import { Spinner } from "mint-ui";
+import { Spinner,Toast, Indicator } from "mint-ui";
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
@@ -274,14 +92,10 @@ export default {
       num: 0,
       flog: false,
       url: [],
-      aaaa: "寄杂志",
       message: "",
       imgsArr: [],
       showLoading: true,
       group: 0, // request param
-      //   a:require('../../assets/images/icon6.jpg'),
-      //   c:require('../../assets/images/icon9.jpg'),
-      //   b:require('../../assets/images/a.jpg')
       isScroll: true,
       pages: 1,
       keyword: "",
@@ -291,11 +105,16 @@ export default {
       showLoad: true,
       count: 15,
       code: 1,
-      uid: 0
+      uid: 0,
+      loading: true,
+      topStatus: false,
+      isNodata: true,
+      showNodata:false,
     };
   },
 
   created() {
+    Indicator.open();
     let that = this;
     //热租仪器分类
     that.$axios
@@ -314,28 +133,37 @@ export default {
   },
 
   methods: {
-    loadMore() {
-      this.pages++;
-      // 搜索的加载更多，搜索没有产品的id
-      if (this.code != 1) {
-        this.getData("", this.keyword, this.pages);
-      } else {
-        this.getData(this.uid, "", this.pages);
-      }
-    },
     aaa() {
       this.flog = true;
       this.imgsArr = [];
-      this.showLoad = false;
+      this.showNodata = false;
+      this.isNodata =  false
       this.code = 2; //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
-      this.$refs.masonry.style = "position:relative";
+    //   this.$refs.masonry.style = "position:relative";
     },
     search(keyword) {
-      // console.log(word)
+    //   console.log(word)
+      if(this.keyword == ''){
+          Toast("搜索不能为空")
+      return false
+      }
       this.keyword = keyword;
       this.pages = 1;
       this.getData("", keyword, this.pages);
+    },
+    loadMore() {
+      this.topStatus = true;
+      this.pages++;
+      if (this.code != 1) {
+        setTimeout(() => {
+          this.getData("", this.keyword, this.pages);
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          this.getData(this.uid, "", this.pages);
+        }, 1000);
+      }
     },
     details(id) {
       this.$router.push({
@@ -344,59 +172,43 @@ export default {
           pid: id
         }
       });
-      console.log(id);
     },
     tab(id, index) {
-      this.showLoading = true;
       this.num = index;
       this.uid = id;
-      this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+      this.imgsArr = [];
+      this.isNodata = false
+      this.showNodata =  false
+         Indicator.open();
+      setTimeout(() => {
+        this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+      }, 2000);
     },
     getData(name, keyword, page) {
-      //     let that =  this
-      //   that.$axios
-      //   .get("http://mzbao.weiyingjia.org/api/meizubao/instrumentType", {})
-      //   .then(res => {
-      //     console.log(res);
-      //     if (res.data.status_code == 1001) {
-      //       that.tabs = res.data.data;
-      //       that.type(res.data.data[0].id);
-      //     }
-      //   })
-      //   .catch(() => {
-      //     console.log("查询失败");
-      //   });
-
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/instrumentSearch", {
-          typeId: 6,
+          typeId: name,
           keywords: keyword,
           page: page
         })
-
         .then(res => {
-          console.log(res);
-          let arr = [];
           if (res.data.status_code == 1001) {
-            // arr.push(res.data.data);
-            this.showLoading = false;
+            Indicator.close();
+            this.topStatus = false;
             if (res.data.data.length == 0) {
-              that.load = false;
-              this.$refs.load.style = "height:100%";
-              this.$refs.masonry.style = "position:relative";
+              this.isNodata = false;
+              this.showNodata  = true
             } else if (res.data.data.length < this.count) {
-              that.load = false;
-              this.$refs.load.style = "1rem";
-              // this.$refs.masonry.style="position:relative"
+              this.loading = false;
+              this.isNodata = true;
             } else {
-              that.load = true;
-              this.$refs.load.style = "height:1rem";
+              this.isNodata = true;
+              that.topStatus = false;
+              that.loading = true;
             }
 
-            // this.imgsArr = this.imgsArr.concat(arr);
-            // console.log(this.imgsArr)
-            this.imgsArr = this.imgArr.concat(res.data.data);
+            this.imgsArr = this.imgsArr.concat(res.data.data);
           }
         })
         .catch(res => {
@@ -482,8 +294,6 @@ export default {
   /* margin:3% */
 }
 
-
-
 .box {
   width: 100%;
   height: 100%;
@@ -542,17 +352,32 @@ export default {
   background: #ccc;
   opacity: 0.5;
 }
-.name{
-    font-size: 15px;
-    color: #000000;
-        padding: 0 0.3rem;
+.name {
+  font-size: 15px;
+  color: #000000;
+  padding: 0 0.3rem;
 }
-.name .prace{
-
+.name .prace {
 }
-.date{
-    padding: 0 0.3rem;
-    display: flex;
-    justify-content:space-between;
+.date {
+  padding: 0 0.3rem;
+  display: flex;
+  justify-content: space-between;
+}
+.loadMore {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 16px;
+}
+.nodata {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -28,15 +28,6 @@
         <search @search="search"></search>
       </div>
 
-      <!-- <div class="searchs_box"
-             v-if="flog">
-            <input type="text"
-                   placeholder="请输入搜索内容"
-                   v-model="message"
-                   @blur="loseblur()">
-            <img src="../../assets/icon/search_1.png"
-                 alt="111">
-        </div> -->
       <div class="slider" v-show="slideShow">
         <div class="slider_item" v-for="(value,index) in sliders">
           <div class="slider_tab" @click="slider(index)">
@@ -53,51 +44,12 @@
               </span>
               <span style="margin-left:10px;">{{i.item}}</span>
             </li>
-
           </ul>
         </div>
-
       </div>
-
     </div>
-
-    <!-- <div class="list_container"> -->
-
-    <!--导航,点击搜索滑动-->
-
-    <!-- <div class="list_box">
-        <div class="listbox_lef" v-for="item in thebeautyindustry" :key="item.index">
-          <div class="cent_left">
-            <div class="list_img">
-              <img :src="item.images" alt="">
-            </div>
-            <div class="list_oper">
-              <p class="oper_room">
-                <span>{{item.name}}</span>
-                <span>{{item.level}}</span>
-              </p>
-              <p class="content">{{item.centetnt}}</p>
-              <p class="every_pro">
-                <span class="data_pro">
-                  <span class="data_mon">{{item.dayprice}}</span>/日</span>
-                <span class="week_pro">
-                  <span class="week_mon">{{item.price}}</span>/周</span>
-              </p>
-              <p class="cli_app">
-                <span class="cli_ment">点击预约</span>
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-      <div class="foot_load">
-        <span>加载更多 > </span>
-      </div> -->
-    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:1.9rem">
+    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:1.9rem" v-if="isNodata">
       <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry" @click="details(item.id)">
-
         <div class="cent_left">
           <div class="list_img">
             <img :src="item.images" alt="">
@@ -119,22 +71,26 @@
             </p>
           </div>
         </div>
-
       </div>
+      <!-- 加载更多 -->
+      <div class="item loadMore" ref="load">
+        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+        <span v-else>
+          <span @click="loadMore" v-if="loading">加载更多</span>
+          <span v-else>数据全部加载完成</span>
+        </span>
+      </div>
+
     </div>
-    <div class="Loading" v-if="showLoading">
-      <mt-spinner type="fading-circle" color="#FD4689" :size="36"></mt-spinner>
+    <!-- 没有数据 -->
+    <div class="nodata" v-if="showNodata">
+      暂无数据
     </div>
-    <div class="moreData" ref="load">
-      <div v-if="load" @click="loadMore">加载更多></div>
-      <div v-else>已全部加载</div>
-    </div>
-    
   </div>
 
 </template>
 <script>
-import { Spinner } from "mint-ui";
+import { Spinner, Toast, Indicator } from "mint-ui";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
 import { filter, forEach, find } from "lodash";
@@ -152,9 +108,6 @@ export default {
       Highlight: require("../../assets/images/jian2.png"),
       gray: require("../../assets/images/jian.png"),
       number: 4,
-      showLoading: true,
-
-      // sliders: ["级别", "日薪资", "周薪"],
       sliders: [
         {
           id: 1, // 为1 是等级
@@ -179,10 +132,13 @@ export default {
       typeId: 0,
       slideShow: true,
       itemshow: true,
-      showLoad: true,
       load: true,
       pages: 1,
-      count: 15
+      count: 15,
+      topStatus: false,
+      loading: false,
+      showNodata: false,
+      isNodata: false
     };
   },
   created() {
@@ -190,6 +146,7 @@ export default {
     // require('../../assets/images/jian.png')
     // this.gray  = require('../../assets/images/jian.png')
     let that = this;
+    Indicator.open();
     //热租仪器分类
     that.$axios
       .get("http://mzbao.weiyingjia.org/api/meizubao/technicianType", {})
@@ -212,8 +169,8 @@ export default {
       });
   },
   methods: {
-    details(id){
-       this.$router.push({
+    details(id) {
+      this.$router.push({
         name: "essence",
         query: {
           pid: id
@@ -237,43 +194,55 @@ export default {
         .then(res => {
           // console.log(res.data.data.length);
           if (res.data.status_code == 1001) {
-            this.showLoading = false;
+            Indicator.close();
+            this.topStatus = false;
             if (res.data.data.length == 0) {
-              that.load = false;
-              that.$refs.container.style = "height:100%;";
-              this.$refs.load.style = "height:100%";
-              this.$refs.masonry.style = "position:relative";
+              this.isNodata = false;
+              this.showNodata = true;
             } else if (res.data.data.length < this.count) {
-              that.load = false;
-              this.$refs.load.style = "1rem";
-              // this.$refs.masonry.style="position:relative"
+              this.loading = false;
+              this.isNodata = true;
             } else {
-              that.load = true;
-              this.$refs.load.style = "height:1rem";
+              this.isNodata = true;
+              that.topStatus = false;
+              that.loading = true;
             }
 
+            // if (res.data.data.length == 0) {
+            //   that.load = false;
+            //   that.$refs.container.style = "height:100%;";
+            //   this.$refs.load.style = "height:100%";
+            //   this.$refs.masonry.style = "position:relative";
+            // } else if (res.data.data.length < this.count) {
+            //   that.load = false;
+            //   this.$refs.load.style = "1rem";
+            //   // this.$refs.masonry.style="position:relative"
+            // } else {
+            //   that.load = true;
+            //   this.$refs.load.style = "height:1rem";
+            // }
             that.thebeautyindustry = that.thebeautyindustry.concat(
               res.data.data
             );
-            console.log(that.thebeautyindustry);
           }
         })
         .catch(() => {
           console.log("查询失败");
-          that.$refs.container.style = "height:100%;";
-          this.$refs.load.style = "height:100%";
-          this.$refs.masonry.style = "position:relative";
         });
     },
     loadMore() {
+      this.topStatus = true;
       this.pages++;
       // 搜索的加载更多，搜索没有产品的id
       // that.getData(res.data.data[0].id,this.keywords,this.grade,this.dayprice,this.page);
       if (this.code != 1) {
-        this.getData("", this.keywords, "", "", this.pages);
-        // this.getData('',)
+        setTimeout(() => {
+          this.getData("", this.keywords, "", "", this.pages);
+        }, 1000);
       } else {
-        this.getData(this.uid, "", this.grade, this.dayprice, this.pages);
+        setTimeout(() => {
+          this.getData(this.typeId, "", this.grade, this.dayprice, this.pages);
+        }, 1000);
       }
     },
     loseblur() {
@@ -299,19 +268,29 @@ export default {
     },
     tab(id, index) {
       this.num = index;
-      this.showLoading = true;
-      this.typeId = id;
-      console.log(id);
-      this.pages = 1;
-      this.thebeautyindustry = [];
-      // that.getData(res.data.data[0].id,this.keywords,this.grade,this.dayprice,this.page);
 
-      this.getData(id, this.keywords, this.grade, this.dayprice, this.pages); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+      this.typeId = id;
+      Indicator.open();
+      this.pages = 1;
+      this.isNodata = false;
+      this.showNodata = false;
+      this.thebeautyindustry = [];
+
+      // that.getData(res.data.data[0].id,this.keywords,this.grade,this.dayprice,this.page);
+      setTimeout(() => {
+        this.getData(id, this.keywords, this.grade, this.dayprice, this.pages); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+      },1000);
     },
     search(keyword) {
+      if (keyword == "") {
+        Toast("搜索不能为空");
+        return false;
+      }
       this.keywords = keyword;
       this.pages = 1;
-      this.getData("", keyword, this.grade, this.dayprice, this.pages);
+      setTimeout(() => {
+        this.getData("", keyword, this.grade, this.dayprice, this.pages);
+      });
     },
     // 点击筛选tab
     slider(index) {
@@ -338,7 +317,10 @@ export default {
       this.thebeautyindustry = [];
       this.ulnum = 4;
       this.pages = 1;
-      this.getData(this.typeId, "", this.grade, this.dayprice, this.pages);
+      Indicator.open();
+      setTimeout(() => {
+        this.getData(this.typeId, "", this.grade, this.dayprice, this.pages);
+      }, 1000);
       // console.log(this.grade)
       // console.log(this.dayprice)
     }
@@ -352,7 +334,7 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  height: auto;
+  height: 100%;
   background: #fff;
 }
 .list_container {
@@ -642,7 +624,8 @@ export default {
   position: fixed;
   height: 1.2rem;
   top: 0;
-  width: 100%; /* height: 1.2rem; */
+  width: 100%;
+  /* height: 1.2rem; */
   background: #fff;
   z-index: 2;
 }
@@ -656,5 +639,12 @@ export default {
   justify-content: center;
   background: #ccc;
   opacity: 0.5;
+}
+.nodata {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
