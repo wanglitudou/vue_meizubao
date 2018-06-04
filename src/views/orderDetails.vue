@@ -118,12 +118,6 @@ export default {
 
 
 
-
-
-            //
-
-
-
             var beforeDate = new Date(minDateStamp - 24 * 60 * 60 * 1000);
             console.log(beforeDate);
             let temArr = { start: new Date(beforeDate), end: null };
