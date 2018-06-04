@@ -37,35 +37,35 @@ export default {
 
     submit:function(){
 
-      try {
-        var baseCode=canvas.toDataURL("image/jpg");
-        console.log(baseCode);
-      }catch (err){
-        alert(err);
-      }
+//      try {
+//        var baseCode=canvas.toDataURL("image/jpg");
+//        console.log(baseCode);
+//      }catch (err){
+//        alert(err);
+//      }
 
 
 
-//      let self= this;
-//      this.$axios
-//        .post(window.ajaxSrc + "/api/meizubao/agreement", {
-//          uid:window.localStorage.id,
-//          g_id:this.gid,
-//          img:canvas.toDataURL("image/jpg"),
-//          type:1,
-//        })
-//        .then(res => {
-//          console.log(res);
-//          if (res.data.status_code == 1001) {
-//            Toast('协议保存成功');
-//            self.saveAgreementId(res.data.data.id);
-//          }
-//        })
-//        .catch((err) => {
-//          Toast('协议保存失败');
-//          console.log("http请求错误");
-//          console.log(err);
-//        });
+      let self= this;
+      this.$axios
+        .post(window.ajaxSrc + "/api/meizubao/agreement", {
+          uid:window.localStorage.id,
+          g_id:this.gid,
+          img:canvas.toDataURL("image/jpg"),
+          type:1,
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            Toast('协议保存成功');
+            self.saveAgreementId(res.data.data.id);
+          }
+        })
+        .catch((err) => {
+          Toast('协议保存失败');
+          console.log("http请求错误");
+          console.log(err);
+        });
     },
 
 

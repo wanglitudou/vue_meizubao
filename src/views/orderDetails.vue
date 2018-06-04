@@ -67,12 +67,12 @@ export default {
        }else{
           return  ((this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) / (24 * 60 * 60 * 1000))
        }
-      
+
      },
      endTime(){
       //  return this.selectedDate.end
-        var date = new Date(this.selectedDate.end);  
-    return  (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()) 
+        var date = new Date(this.selectedDate.end);
+    return  (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds())
      },
      renprice(){
        if(this.during >4){
@@ -85,7 +85,7 @@ export default {
      getPrice(){
        return this.mounth * this.detail.continued
      }
-    
+
   },
   methods: {
     getTimeArray() {
@@ -100,29 +100,34 @@ export default {
             this.allTime = res.data.data;
             var appointmentTime = [];
 
-            let minDate;
-            for (var i = 0; i < this.allTime.length; i++) {
-              for (var j = 1; j < this.allTime.length; j++) {
-                if (this.allTime[i][0] > this.allTime[j][0]) {
-                  minDate = this.allTime[j][0];
-                } else {
-                  minDate = this.allTime[i][0];
+            //
+            let nowTimeStamp = new Date().getTime();
+
+            let minDateStamp = nowTimeStamp;
+
+            //
+
+            for (timeArr of allTime){
+              let thisTimeStamp=new Date(timeArr[0]).getTime();
+              if(thisTimeStamp> nowTimeStamp){
+                if(thisTimeStamp<minDateStamp){
+                  minDateStamp=thisTimeStamp;
                 }
               }
             }
-            minDate = new Date(minDate).getTime();
 
-       
-            var beforeDate = new Date(minDate - 24 * 60 * 60 * 1000);
+
+
+            var beforeDate = new Date(minDateStamp - 24 * 60 * 60 * 1000);
             console.log(beforeDate);
             let temArr = { start: new Date(beforeDate), end: null };
             this.disableDate.push(temArr);
-            for (var arr of this.allTime) {
-              // console.log(arr)
-              let temArr = { start: new Date(arr[0]), end: new Date(arr[1]) };
-              // let temArr = { start: null, end: new Date(arr[2]) };
-              this.disableDate.push(temArr);
-            }
+//            for (var arr of this.allTime) {
+//              // console.log(arr)
+//              let temArr = { start: new Date(arr[0]), end: new Date(arr[1]) };
+//              // let temArr = { start: null, end: new Date(arr[2]) };
+//              this.disableDate.push(temArr);
+//            }
           }
         })
         .catch({});
@@ -211,7 +216,7 @@ export default {
       console.log(detail);
      var openid = window.localStorage.getItem('openid')
       //  this.text = '继续续约'
-    
+
       if (detail.type == 1) {
         if(this.mounth == 0){
        Toast('请选择您的时间')
@@ -235,7 +240,7 @@ export default {
       // console.log(during)
       //  console.log(this.renprice)
       this.price =  this.renprice
-      
+
            this.getRenewal(
           this.orderId,
           '',
