@@ -41,8 +41,13 @@
                 </div>
                 <p class="name_ins">
                   <span class="ins_name">{{item.name}}</span>
-                  <span class="ins_img" @click="down(item.id,item.url)">
-                    <img src="../../assets/images/download.jpg" alt="">
+                  <span class="ins_img" >
+                    <!-- @click="down(item.id,item.url)" -->
+                    <!-- <a :href="item.url" download="video"> -->
+<!-- <img src="../../assets/images/download.jpg" alt=""> -->
+                      
+                    <!-- </a> -->
+                    <a href="https://vuejs.org/images/logo.png" download="2017.png">下载 vue 的 LOGO</a>
                   </span>
                 </p>
               </div>
@@ -125,6 +130,7 @@ export default {
       console.log(id);
       console.log(url);
       MessageBox("请复制此链接去下载", url);
+
     },
     // 加载更多
     loadMore() {

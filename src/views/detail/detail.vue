@@ -118,7 +118,7 @@ export default {
     let that = this;
     //热租仪器分类
     that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/instrumentType", {})
+      .get(window.ajaxSrc+"/api/meizubao/instrumentType", {})
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
@@ -144,7 +144,7 @@ export default {
     },
     search(keyword) {
       //   console.log(word)
-      this.keyword =  keyword
+      this.keyword = keyword
       if (this.keyword == "") {
         Toast("搜索不能为空");
         return false;
@@ -191,7 +191,7 @@ export default {
     getData(name, keyword, page) {
       let that = this;
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/instrumentSearch", {
+        .post(window.ajaxSrc+"/api/meizubao/instrumentSearch", {
           typeId: name,
           keywords: keyword,
           page: page
