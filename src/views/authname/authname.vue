@@ -4,17 +4,31 @@
       <div class="id_num">
         <p class="id_name">
           <span>身份证号码:</span>
-          <span class="id_txt">
+          <span class="id_txt "
+                id="updata">
             <input type="text"
+                   class="inpt"
                    v-model="data.id_card"
                    @blur="card()"
                    placeholder="请输入身份证号码">
+
           </span>
         </p>
       </div>
       <div class="up_data">
-        <span class="updata_lef"></span>
-        <span class="updata_rig"></span>
+        <span class="updata_lef">
+          <input type="file"
+                 class="inpt_imgone"
+                 @change="updataimg($event,1)">
+          <img :src="data.imgOne"
+               alt="">
+        </span>
+
+        <span class="updata_rig"><input type="file"
+                 class="inpt_imgtwo"
+                 @change="updataimg($event,2)">
+          <img :src="data.imgtwo"
+               alt=""></span>
       </div>
       <div class="id_num id_number">
         <p class="id_name">
@@ -28,8 +42,18 @@
         </p>
       </div>
       <div class="up_data up_dataimg">
-        <span class="updata_lef"></span>
-        <span class="updata_rig"></span>
+        <span class="updata_lefs"><input type="file"
+                 class="inpt_imgthree"
+                 @change="updataimg($event,3)">
+          <img :src="data.imgthree"
+               alt="">
+        </span>
+        <span class="updata_rigs"><input type="file"
+                 class="inpt_imgfour"
+                 @change="updataimg($event,4)">
+          <img :src="data.imgfour"
+               alt="">
+        </span>
       </div>
       <div class="relation">
         <p class="credit">
@@ -51,6 +75,7 @@ export default {
     return {
       data: {
         //其他
+
         headimg: "",
         manage_years: "",
         manage_area: "",
@@ -61,8 +86,14 @@ export default {
         business_license: "",
         store_image: "",
         store_name: "",
-        lists: []
+        lists: [],
+        fileList: [],
+        imgOne: "",
+        imgtwo: "",
+        imgthree: "",
+        imgfour: ""
       }
+
       //   arr: ["200", "333"]
     };
   },
@@ -109,6 +140,54 @@ export default {
         Toast("请输入正确的格式");
         return false;
       }
+    },
+    updataimg(e, num) {
+      let file = e.target.files[0];
+      console.log(file);
+      var formData = new FormData();
+      //上传图片
+      formData.append("img", file);
+      formData.append("type", num);
+      formData.append("uid", localStorage.id);
+      let that = this;
+      // that.$axios
+      //   .post("http://mzbao.weiyingjia.org/api/meizubao/uploadImages", {
+
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+      //   })
+      //   .catch(() => {
+      //     console.log("查询失败");
+      //   });
+      console.log(formData);
+      $.ajax({
+        type: "post",
+        url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        dataType: "json",
+        success: function(res) {
+          console.log(res);
+          if (res.code == 200) {
+            that.fileList = res.data;
+          }
+          if (num == 1) {
+            that.imgOne = res.data.url;
+          } else if (num == 2) {
+            that.imgtwo = res.data.url;
+          } else if (num == 3) {
+            that.imgthree = res.data.url;
+          } else if (num == 4) {
+            that.imgfour = res.data.url;
+          }
+        },
+        error: function(res) {
+          console.log(11111);
+        }
+      });
     }
   }
 };
@@ -147,6 +226,13 @@ export default {
   color: #cccccc;
   letter-spacing: 0;
 }
+.updata {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #cccccc;
+  letter-spacing: 0;
+}
+
 .id_txt input {
   width: 4rem;
   height: 0.88rem;
@@ -171,6 +257,61 @@ export default {
   line-height: 72px;
   background: #eeeeee;
   border-radius: 3px;
+  position: relative;
+}
+.updata_lef img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.updata_lefs {
+  width: 115px;
+  height: 1.48rem;
+  line-height: 72px;
+  background: #eeeeee;
+  border-radius: 3px;
+  position: relative;
+}
+.updata_lefs img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.inpt_imgone {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 999;
+}
+.inpt_imgtwo {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 999;
+}
+.inpt_imgthree {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 999;
+}
+.inpt_imgfour {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 999;
 }
 .updata_rig {
   width: 115px;
@@ -178,6 +319,25 @@ export default {
   line-height: 72px;
   background: #eeeeee;
   border-radius: 3px;
+  position: relative;
+}
+.updata_rig img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.updata_rigs {
+  width: 115px;
+  height: 1.48rem;
+  line-height: 72px;
+  background: #eeeeee;
+  border-radius: 3px;
+  position: relative;
+}
+.updata_rigs img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 .id_number {
   margin-top: 10px;
