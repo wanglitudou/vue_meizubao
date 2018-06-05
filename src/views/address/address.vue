@@ -2,39 +2,39 @@
   <div class="container">
     <div class="list_cont">
 
-      <el-radio-group v-model="radio2">
-        <div class="list_one"
-             v-for="item in list"
-             :key="item.index">
-          <p class="goods">
-            <span class="consignee">收货人:
-              <span class="consig_name">
-                {{item.user_name}}
-              </span>
+      <!-- <el-radio-group v-model="radio2"> -->
+      <div class="list_one"
+           v-for="item in list"
+           :key="item.index">
+        <p class="goods">
+          <span class="consignee">收货人:
+            <span class="consig_name">
+              {{item.user_name}}
             </span>
-            <span class="consig_num">{{item.mobile}}</span>
-          </p>
-          <p class="consig_address">
-            <span class="consig_spec">
-              {{item.address}}
-            </span>
-          </p>
-          <p class="give">
-            <span class="give_address">
-              <el-checkbox class="give_icon"></el-checkbox> 设为默认地址
-            </span>
-            <span class="give_edit"
-                  @click="edittheaddress(item.id)">
-              <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-              编辑</span>
-            <span class="give_delete"
-                  @click="del(item.id)">
-              <!-- @click="del(item.id)"> -->
-              <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-              删除</span>
-          </p>
-        </div>
-      </el-radio-group>
+          </span>
+          <span class="consig_num">{{item.mobile}}</span>
+        </p>
+        <p class="consig_address">
+          <span class="consig_spec">
+            {{item.address}}
+          </span>
+        </p>
+        <p class="give">
+          <span class="give_address">
+            <el-checkbox class="give_icon"></el-checkbox> 设为默认地址
+          </span>
+          <span class="give_edit"
+                @click="edittheaddress(item.id)">
+            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            编辑</span>
+          <span class="give_delete"
+                @click="del(item.id)">
+            <!-- @click="del(item.id)"> -->
+            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            删除</span>
+        </p>
+      </div>
+      <!-- </el-radio-group> -->
       <div style="clear:both;height:2rem;"></div>
     </div>
     <div class="give_good">
@@ -54,6 +54,7 @@ export default {
       consignee: "",
       telephone: "",
       address: ""
+      // radio2: ""
     };
   },
   created() {
