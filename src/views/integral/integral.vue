@@ -145,7 +145,26 @@
     </div>
 </template>
 <script>
-export default {};
+export default {
+  mounted(){
+    this.$axios
+      .get(window.ajaxSrc + "/api/meizubao/productDetail", {
+        params: { id: this.$route.query.pid }
+      })
+      .then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
+          this.data = res.data.data;
+        }
+      })
+      .catch(() => {
+        console.log("http请求错误");
+      });
+  },
+
+
+
+};
 </script>
 <style scoped>
 .container {
