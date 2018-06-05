@@ -144,7 +144,7 @@ export default {
           city: that.city,
           area: that.area,
           address: that.address,
-          is_default_address: that.checked ? 1 : 0,
+          is_default_address: that.isDefault,
           user_id: window.localStorage.id
         })
         .then(res => {
@@ -180,7 +180,7 @@ export default {
           city: that.city,
           area: that.area,
           address: that.address,
-          // is_default_address: that.isDefault,
+          is_default_address: that.isDefault,
           user_id: window.localStorage.id,
           id: that.$route.query.id
         })
