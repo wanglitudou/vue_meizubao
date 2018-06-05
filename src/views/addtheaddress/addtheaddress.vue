@@ -42,9 +42,9 @@
         <span>设为默认地址</span>
       </p>
     </div>
-    <div class="preservation">
-      <span class="sive"
-            @click="sive()">
+    <div class="preservation"
+         @click="sive()">
+      <span class="sive">
         保存
       </span>
     </div>
@@ -89,7 +89,6 @@ export default {
   },
   created() {
     let that = this;
-
     if (this.$route.query.type == "edit") {
       that.$axios
         .get(
@@ -134,7 +133,6 @@ export default {
         this.addAddress();
       }
     },
-
     addAddress() {
       let that = this;
       that.$axios
@@ -146,7 +144,7 @@ export default {
           city: that.city,
           area: that.area,
           address: that.address,
-          is_default_address: that.isDefault,
+          is_default_address: that.checked ? 1 : 0,
           user_id: window.localStorage.id
         })
         .then(res => {
@@ -171,7 +169,6 @@ export default {
           console.log("查询失败");
         });
     },
-
     editAddress() {
       let that = this;
       that.$axios
@@ -183,7 +180,7 @@ export default {
           city: that.city,
           area: that.area,
           address: that.address,
-          is_default_address: that.isDefault,
+          is_default_address: that.checked ? 1 : 0,
           user_id: window.localStorage.id,
           id: that.$route.query.id
         })
