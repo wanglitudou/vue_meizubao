@@ -168,7 +168,6 @@ export default {
     var str = window.location.href;
     var code = that.GetQueryString("code")
     if (code) {
-      
       that.getXlogin(code); //再次调用这个方法
     } else {
       that.getXlogin(""); //获取xlogin

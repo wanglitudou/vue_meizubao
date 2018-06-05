@@ -38,22 +38,22 @@
           </span>
           <span class="iconfont icon-yingyongchengxu-xianxing"></span>
         </p>
-        <p @click="customservice()">
-          <span>
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-            <span class="mine">我的客服</span>
+        <!--<p @click="customservice()">-->
+          <!--<span>-->
+            <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
+            <!--<span class="mine">我的客服</span>-->
 
-          </span>
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
-        </p>
-        <p>
-          <span>
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-            <span class="mine">我的微贷</span>
+          <!--</span>-->
+          <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--<span>-->
+            <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
+            <!--<span class="mine">我的微贷</span>-->
 
-          </span>
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
-        </p>
+          <!--</span>-->
+          <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
+        <!--</p>-->
         <p @click="photograph()">
           <span>
             <i class="iconfont icon-yingyongchengxu-xianxing"></i>
@@ -62,14 +62,14 @@
           </span>
           <span class="iconfont icon-yingyongchengxu-xianxing"></span>
         </p>
-        <p>
-          <span>
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-            <span class="mine">我的下载</span>
+        <!--<p>-->
+          <!--<span>-->
+            <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
+            <!--<span class="mine">我的下载</span>-->
 
-          </span>
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
-        </p>
+          <!--</span>-->
+          <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
+        <!--</p>-->
       </div>
 
     </div>
@@ -102,10 +102,7 @@ export default {
     address() {
       this.$router.push({ name: "address" });
     },
-    //我的客服
-    customservice() {
-      this.$router.push({ name: "customservice" });
-    },
+
     //资料库
     photograph() {
       this.$router.push({ name: "photograph" });
@@ -167,9 +164,7 @@ export default {
 }
 .list_cent {
   width: 7.1rem;
-  height: 6.4rem;
   box-shadow: 0 2px 9px 0 rgba(253, 74, 203, 0.15);
-  border-radius: 3px;
   border-radius: 10px;
   margin: 0 auto;
   margin-top: -20px;
