@@ -21,16 +21,11 @@ import "./components/js/jquery-2.1.0";
 import VCalendar from "v-calendar";
 import "v-calendar/lib/v-calendar.min.css";
 //引入axios
-import axios from "axios";
+// import axios from "axios";
+import axios from './http';
 
 window.ajaxSrc = "http://mzbao.weiyingjia.org";
 
-
-
-// x下载js
-
-// import download  from './assets/js/download.js'
-require('../static/common/download.js')
 axios.defaults.transformRequest = [
   function(data) {
     let newData = "";

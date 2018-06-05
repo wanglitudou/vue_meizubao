@@ -5,8 +5,7 @@
       <div class="banner">
         <div class="ban_left">
           <div class="portrait">
-            <img src="../assets/images/icon1.jpg"
-                 alt="666">
+            <img src="../assets/images/icon1.jpg" alt="666">
             <span class="name">丹丹</span>
           </div>
         </div>
@@ -78,9 +77,16 @@
 </template>
 
 <script>
+import { Indicator } from "mint-ui";
 export default {
   data() {
     return {};
+  },
+  created() {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
   },
   methods: {
     //我的课程

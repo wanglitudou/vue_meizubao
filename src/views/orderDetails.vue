@@ -138,7 +138,7 @@ export default {
         var openid = window.localStorage.getItem('openid')
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/continuePay", {
-          id: this.detail.id,
+          id: this.orderId,
           openid:openid
         })
         .then(res => {
@@ -399,7 +399,7 @@ export default {
 <template>
   <div class="container">
     <com-orderStatus :detail="detail"></com-orderStatus>
-    <com-addressCard :type="'show'" :detail="detail"></com-addressCard>
+    <com-addressCard :type="'show'" :detail="detail" v-if="detail.type == 1 ||detail.type == 2 "></com-addressCard>
     <com-orderCard :type="'technician'" :detail="detail"></com-orderCard>
     <com-orderInformation :detail="detail"></com-orderInformation>
     <!-- <com-orderRenewal :detail="detail" :disableDate="disableDate"  :decrease="decrease" :allPrice="allPrice" :increase="increase" :mounth="mounth" :selectedDate="selectedDate" :during="during"></com-orderRenewal> -->
