@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { Indicator } from 'mint-ui'
+import { Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -49,10 +49,10 @@ export default {
     };
   },
   created() {
-    Indicator.open()
-    setTimeout(()=>{
-      Indicator.close()
-    },1000)
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
   },
   mounted() {},
   methods: {
