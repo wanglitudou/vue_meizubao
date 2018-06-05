@@ -214,6 +214,11 @@ let routes = [
     path: "/mediaDetails",
     component: mediaDetails
   }
+  // {
+  //   name: "mine",
+  //   path: "mine",
+  //   component: mine
+  // }
 ];
 
 export default routes; //抛出

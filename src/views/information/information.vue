@@ -133,7 +133,7 @@
   </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
+import { Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -157,6 +157,11 @@ export default {
     };
   },
   created() {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
+
     let that = this;
     setTimeout(function() {
       $(".new_name").each(function(x) {

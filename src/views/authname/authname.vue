@@ -70,6 +70,7 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
+import { Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -93,11 +94,14 @@ export default {
         imgthree: "",
         imgfour: ""
       }
-
-      //   arr: ["200", "333"]
     };
   },
-  created(e) {},
+  created(e) {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
+  },
   methods: {
     submitBtn() {
       let that = this;
@@ -126,7 +130,11 @@ export default {
         .catch(() => {
           console.log("查询失败");
         });
+      this.$router.push({ name: "mine" });
     },
+    // complete() {
+    //   this.$router.push({ name: "mine" });
+    // },
     card() {
       let that = this;
       if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)$/.test(that.name)) {

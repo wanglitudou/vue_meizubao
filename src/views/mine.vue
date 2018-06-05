@@ -5,12 +5,14 @@
       <div class="banner">
         <div class="ban_left">
           <div class="portrait">
-            <img src="../assets/images/icon1.jpg" alt="666">
+            <img src="../assets/images/icon1.jpg"
+                 alt="666">
             <span class="name">丹丹</span>
           </div>
         </div>
         <div class="ban_right">
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
+          <span class="iconfont icons icon-yingyongchengxu-xianxing"
+                @click="Perfectinformation()"></span>
         </div>
       </div>
       <div class="list_cent">
@@ -39,20 +41,20 @@
           <span class="iconfont icon-yingyongchengxu-xianxing"></span>
         </p>
         <!--<p @click="customservice()">-->
-          <!--<span>-->
-            <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
-            <!--<span class="mine">我的客服</span>-->
+        <!--<span>-->
+        <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
+        <!--<span class="mine">我的客服</span>-->
 
-          <!--</span>-->
-          <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
+        <!--</span>-->
+        <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
         <!--</p>-->
         <!--<p>-->
-          <!--<span>-->
-            <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
-            <!--<span class="mine">我的微贷</span>-->
+        <!--<span>-->
+        <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
+        <!--<span class="mine">我的微贷</span>-->
 
-          <!--</span>-->
-          <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
+        <!--</span>-->
+        <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
         <!--</p>-->
         <p @click="photograph()">
           <span>
@@ -63,12 +65,12 @@
           <span class="iconfont icon-yingyongchengxu-xianxing"></span>
         </p>
         <!--<p>-->
-          <!--<span>-->
-            <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
-            <!--<span class="mine">我的下载</span>-->
+        <!--<span>-->
+        <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
+        <!--<span class="mine">我的下载</span>-->
 
-          <!--</span>-->
-          <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
+        <!--</span>-->
+        <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
         <!--</p>-->
       </div>
 
@@ -106,6 +108,10 @@ export default {
     //资料库
     photograph() {
       this.$router.push({ name: "photograph" });
+    },
+    //完善信息
+    Perfectinformation() {
+      this.$router.push({ name: "information" });
     }
   }
 };
@@ -161,6 +167,10 @@ export default {
   height: 2rem;
   line-height: 2rem;
   color: #fff;
+  /* background: red; */
+}
+.icons {
+  color: #ddeecc;
 }
 .list_cent {
   width: 7.1rem;
