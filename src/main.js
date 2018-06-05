@@ -25,6 +25,12 @@ import axios from "axios";
 
 window.ajaxSrc = "http://mzbao.weiyingjia.org";
 
+
+
+// x下载js
+
+// import download  from './assets/js/download.js'
+require('../static/common/download.js')
 axios.defaults.transformRequest = [
   function(data) {
     let newData = "";
