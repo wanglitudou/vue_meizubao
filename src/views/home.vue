@@ -146,6 +146,7 @@
   </div>
 </template>
 <script>
+import { Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -158,12 +159,15 @@ export default {
     };
   },
   created() {
+    Indicator.open();
+    setTimeout(()=>{
+      Indicator.close()
+    },1000)
+
     let that = this;
     var str = window.location.href;
-    var arr = str.split("?");
-    if (arr.length > 1) {
-      var code = that.GetQueryString("code"); //调用"获取地址栏参数的方法"
-      console.log(code);
+    var code = that.GetQueryString("code")
+    if (code) {
       that.getXlogin(code); //再次调用这个方法
     } else {
       that.getXlogin(""); //获取xlogin
@@ -326,6 +330,7 @@ export default {
               localStorage.openid = res.data.data.openid;
               localStorage.tel = res.data.data.tel;
               localStorage.id = res.data.data.id;
+               sessionStorage.token = res.data.data.token;
               localStorage.headimg = res.data.data.headimg;
               //判断tel是否存在,不存在跳到对应填写页面
               // that.$router.push({ name: "mine" });
@@ -382,7 +387,7 @@ export default {
     // information() {
     //   //完善信息
     //   this.$router.push({ name: "information" });
-    // }
+    // },
   }
 };
 </script>

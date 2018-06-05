@@ -98,7 +98,7 @@ export default {
     let that = this;
     //热租仪器分类
     that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/productType", {})
+      .get(window.ajaxSrc+"/api/meizubao/productType", {})
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
@@ -128,7 +128,7 @@ export default {
       let that = this;
       //热租仪器筛选
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/productSearch", {
+        .post(window.ajaxSrc+"/api/meizubao/productSearch", {
           typeId: name,
           keywords: keyword,
           page: pages

@@ -103,7 +103,7 @@ export default {
       let that = this;
       //首页banner查询
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/projectSearch", {
+        .post(window.ajaxSrc+"/api/meizubao/projectSearch", {
           keywords: keyword,
           page: pages
         })

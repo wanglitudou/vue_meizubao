@@ -17,8 +17,8 @@
                 </div>
                 <p class="name_ins">
                   <span class="ins_name">{{item.name}}</span>
-                  <span class="ins_img" @click="down(item.id,item.images)">
-                    <img src="../../assets/images/download.jpg" alt="">
+                  <span class="ins_img button" :data-clipboard-text="item.images">
+                    <img src="../../assets/images/download.jpg">
                   </span>
                 </p>
               </div>
@@ -41,8 +41,16 @@
                 </div>
                 <p class="name_ins">
                   <span class="ins_name">{{item.name}}</span>
-                  <span class="ins_img" @click="down(item.id,item.images)">
-                    <img src="../../assets/images/download.jpg" alt="">
+                  <span class="ins_img">
+                    <!-- @click="down(item.id,item.url)" -->
+                    <!-- <a :href="item.url" download="video"> -->
+                    <!-- <img src="../../assets/images/download.jpg" alt=""> -->
+
+                    <!-- </a> -->
+
+                    <span class="ins_img button"  :data-clipboard-text="item.images">
+                      <img src="../../assets/images/download.jpg"   alt="">
+                    </span>
                   </span>
                 </p>
               </div>
@@ -61,8 +69,10 @@
     </div>
   </div>
 </template>
+
 <script>
-  import {MessageBox} from "mint-ui";
+  import ClipboardJS from 'clipboard';
+  import {MessageBox,Toast} from "mint-ui";
   export default {
     data() {
       return {
@@ -76,14 +86,58 @@
         videoPage: 1,
       };
     },
+    created(){
+     
+    },
     mounted() {
       this.getImage();
       this.getVideo();
+     
+      //  var clipboard=new ClipboardJS('.right-button');
+      // //  console.log(clipboard)
+      // clipboard.on('success', function(e) {
+      //   // console.log(e)
+      //   Toast({
+      //     message: '下载链接已复制到剪切板,请通过外部浏览器打开',
+      //     position: 'middle',
+      //     duration: 4000
+      //   });
+      // });
+
+      // clipboard.on('error', function(e) {
+      //   // console.log(e)
+      //   Toast({
+      //     message: '自动复制到剪切板失败。',
+      //     position: 'middle',
+      //     duration: 4000
+      //   });
+      // });
     },
 
 
     methods: {
+      bindCopy(){
+         var btns =  document.querySelectorAll('.button');
+         console.log(btns);
+          var clipboard = new ClipboardJS(btns);
+      clipboard.on('success', function(e) {
+        // console.log(e)
+        Toast({
+          message: '下载链接已复制到剪切板,请通过外部浏览器打开',
+          position: 'middle',
+          duration: 4000
+        });
+      });
 
+      clipboard.on('error', function(e) {
+        // console.log(e)
+        Toast({
+          message: '自动复制到剪切板失败。',
+          position: 'middle',
+          duration: 4000
+        });
+      });
+      },
 
 
       tab(index) {
@@ -120,9 +174,24 @@
             name:name,
           }
         })
+        .catch(err => {
+          console.log("http请求错误");
+          console.log(err);
+        });
+    },
+    // down(id, url) {
+    //   console.log(id);
+    //   console.log(url);
+    //   MessageBox("请复制此链接去下载", url);
 
-      },
+    // },
+    // 加载更多
 
+
+down(){
+  console.log(111)
+   download("hello world", "http://mzbadmin.weiyingjia.org/upload/1527501986451.mp4", "text/plain");
+},
 
 
       // 获取图片
@@ -141,6 +210,7 @@
               this.imageData = this.imageData.concat(res.data.data);
               this.imagePage++
               console.log(res);
+              this.bindCopy()
             }
           })
           .catch(err => {
@@ -164,6 +234,7 @@
               this.videoData = this.videoData.concat(res.data.data);
               this.videoPage++
               console.log(res);
+              this.bindCopy()
             }
           })
           .catch(err => {
@@ -171,11 +242,11 @@
             console.log(err);
           });
       },
-      down(id, url) {
-        console.log(id);
-        console.log(url);
-        MessageBox("请复制此链接去下载", url);
-      },
+      // down(id, url) {
+      //   console.log(id);
+      //   console.log(url);
+      //   MessageBox("请复制此链接去下载", url);
+      // },
 
     }
   };
@@ -249,7 +320,6 @@
 .picleft_img {
   width: 100%;
   height: 2.26rem;
-
 }
 
 .picleft_img img {
@@ -287,7 +357,7 @@
   font-size: 14px;
   color: #00a5ff;
 }
-.add_more span{
+.add_more span {
   display: block;
 }
 </style>

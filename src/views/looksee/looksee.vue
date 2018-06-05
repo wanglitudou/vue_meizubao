@@ -149,7 +149,7 @@ export default {
     Indicator.open();
     //热租仪器分类
     that.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/technicianType", {})
+      .get(window.ajaxSrc+"/api/meizubao/technicianType", {})
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
@@ -185,7 +185,7 @@ export default {
       let that = this;
       //热租仪器筛选
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/technicianSearch", {
+        .post(window.ajaxSrc+"/api/meizubao/technicianSearch", {
           typeId: name,
           keywords: keywords,
           page: page,

@@ -168,7 +168,7 @@ export default {
       ],
       num: 0,
       tabNum: 3,
-      uid: 1,
+      uid: window.localStorage.getItem('id'),
       ulShow: false,
       page: 1,
       orderlist: [],

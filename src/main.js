@@ -21,7 +21,8 @@ import "./components/js/jquery-2.1.0";
 import VCalendar from "v-calendar";
 import "v-calendar/lib/v-calendar.min.css";
 //引入axios
-import axios from "axios";
+// import axios from "axios";
+import axios from './http';
 
 window.ajaxSrc = "http://mzbao.weiyingjia.org";
 
