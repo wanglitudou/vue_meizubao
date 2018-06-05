@@ -388,7 +388,7 @@ export default {
     // information() {
     //   //完善信息
     //   this.$router.push({ name: "information" });
-    // }
+    // },
   }
 };
 </script>

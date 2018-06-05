@@ -2,7 +2,6 @@
   <div class="container">
     <div class="list_cont">
 
-      <!-- <el-radio-group v-model="radio2"> -->
       <div class="list_one"
            v-for="item in list"
            :key="item.index">
@@ -21,7 +20,10 @@
         </p>
         <p class="give">
           <span class="give_address">
-            <el-checkbox class="give_icon"></el-checkbox> 设为默认地址
+            <input type="radio"
+                   v-model="selectedNumber"
+                   :value="item.id"
+                   class="give_icon" /> 设为默认地址
           </span>
           <span class="give_edit"
                 @click="edittheaddress(item.id)">
@@ -34,7 +36,6 @@
             删除</span>
         </p>
       </div>
-      <!-- </el-radio-group> -->
       <div style="clear:both;height:2rem;"></div>
     </div>
     <div class="give_good">
@@ -44,44 +45,39 @@
   </div>
 </template>
 <script>
-import { MessageBox } from "mint-ui";
+import { MessageBox, Toast } from "mint-ui";
 export default {
   data() {
     return {
-      checked: true,
-      untinted: 1,
       list: [],
-      consignee: "",
-      telephone: "",
-      address: ""
+      selectedNumber: 1
       // radio2: ""
     };
   },
-  created() {
-    this.getAdd();
-    console.log("111");
-    let that = this;
-    that.$axios
-      .get(
-        "http://mzbao.weiyingjia.org/api/meizubao/addressInfo?id=" +
-          localStorage.id
-      )
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          console.log(res.data.data);
-          console.log("666");
-          that.consignee = res.data.data.user_name;
-          that.telephone = res.data.data.mobile;
-          that.address = res.data.data.address;
-          console.log(that.consignee);
-          console.log(that.telephone);
-          console.log(that.address);
-        }
-      })
-      .catch(() => {
-        console.log("查询失败");
-      });
+  watch: {
+    selectedNumber: function(e) {
+      console.log(e);
+
+      this.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateDefaultAddress", {
+          is_default: 1,
+          uid: window.localStorage.id,
+          id: e
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            Toast("设置默认地址成功");
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    }
+  },
+
+  mounted() {
+    this.getList();
   },
   methods: {
     del(id) {
@@ -100,7 +96,7 @@ export default {
                 {}
               )
               .then(res => {
-                that.getAdd();
+                that.getList();
               })
               .catch(() => {
                 console.log("查询失败");
@@ -109,7 +105,7 @@ export default {
         }
       });
     },
-    getAdd() {
+    getList() {
       let that = this;
       that.$axios
         .get(
@@ -125,6 +121,13 @@ export default {
         .then(res => {
           console.log(res);
           that.list = res.data.data;
+
+          for (var i = 0; i < that.list.length; i++) {
+            if (that.list[i].is_default_address) {
+              that.selectedNumber = that.list[i].id;
+              return false;
+            }
+          }
         })
         .catch(() => {
           console.log("查询失败");
