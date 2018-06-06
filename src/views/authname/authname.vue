@@ -100,7 +100,7 @@ export default {
     Indicator.open();
     setTimeout(() => {
       Indicator.close();
-    }, 1000);
+    }, 500);
   },
   methods: {
     submitBtn() {
@@ -137,7 +137,7 @@ export default {
     // },
     card() {
       let that = this;
-      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)$/.test(that.name)) {
+      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(that.name)) {
         Toast("请输入正确的格式");
         return false;
       }
@@ -175,7 +175,6 @@ export default {
         data: formData,
         processData: false,
         contentType: false,
-
         dataType: "json",
         success: function(res) {
           console.log(res);
@@ -183,13 +182,14 @@ export default {
             that.fileList = res.data;
           }
           if (num == 1) {
-            that.imgOne = res.data.url;
+            that.data.imgOne = res.data.url;
+            console.log("666");
           } else if (num == 2) {
-            that.imgtwo = res.data.url;
+            that.data.imgtwo = res.data.url;
           } else if (num == 3) {
-            that.imgthree = res.data.url;
+            that.data.imgthree = res.data.url;
           } else if (num == 4) {
-            that.imgfour = res.data.url;
+            that.data.imgfour = res.data.url;
           }
         },
         error: function(res) {
