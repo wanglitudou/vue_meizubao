@@ -11,12 +11,12 @@
           </div>
         </template>
         <template v-if="detail.status == 4">
-          <div class="total_rig" @click="confirm(detail.status,detail.uid)">
+          <div class="total_rig" @click="confirm(detail.uid)">
             <span>确认收货</span>
           </div>
         </template>
         <template v-if="detail.status == 6">
-          <div class="total_rig" @click="back(detail.status,detail.uid)">
+          <div class="total_rig" @click="back(detail.uid)">
             <span v-if="detail.type != 2">退还</span>
             <span v-else>完成服务</span>
           </div>

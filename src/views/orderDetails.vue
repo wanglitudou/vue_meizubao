@@ -139,17 +139,23 @@ export default {
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/continuePay", {
           id: this.orderId,
-          openid:openid
+          open_id:openid
         })
         .then(res => {
           console.log(res);
+          if(res.data.status_code == 1001){
+           window.location.href=res.data.data.url;
+          }else{
+            Toast("支付失败");
+          }
         });
     },
     //确认收货
-    confirm(status, uid, id) {
+    confirm(uid) {
+      console.log(uid)
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
-          status: status,
+          status: 6,
           uid: uid,
           id: this.orderId
         })
@@ -168,11 +174,11 @@ export default {
         });
     },
     // 退还
-    back(status, uid) {
+    back( uid) {
       // console.log(status,uid,id)
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
-          status: status,
+          status: 5,
           uid: uid,
           id: this.orderId
         })
@@ -196,7 +202,7 @@ export default {
           stage: month,
           total_price: totalPrice,
           stoptime: stoptime,
-          openid:openid
+          open_id:openid
         })
         .then(res => {
           // console.log(res);
