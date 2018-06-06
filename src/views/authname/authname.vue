@@ -100,7 +100,7 @@ export default {
     Indicator.open();
     setTimeout(() => {
       Indicator.close();
-    }, 1000);
+    }, 500);
   },
   methods: {
     submitBtn() {
@@ -137,7 +137,7 @@ export default {
     // },
     card() {
       let that = this;
-      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)$/.test(that.name)) {
+      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(that.name)) {
         Toast("请输入正确的格式");
         return false;
       }
