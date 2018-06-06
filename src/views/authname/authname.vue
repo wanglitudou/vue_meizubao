@@ -69,8 +69,7 @@
   </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
-import { Indicator } from "mint-ui";
+import { Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -135,18 +134,30 @@ export default {
     // complete() {
     //   this.$router.push({ name: "mine" });
     // },
-    card() {
-      let that = this;
-      if (
-        !/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(that.name)
-      ) {
+    idCardReg(num) {
+      console.log(num);
+      let re1 = /^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}[0-9Xx]$/,
+        re2 = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+      if (re1.test(num) || re2.test(num)) {
+        return true;
+      } else {
         Toast("请输入正确的格式");
         return false;
       }
     },
+    card() {
+      let that = this;
+      if (this.idCardReg(this.data.id_card)) {
+        return;
+      }
+    },
     homeaddress() {
       let that = this;
-      if (!/(^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+)$/.test(that.name)) {
+      if (
+        !/(^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+)$/.test(
+          that.data.home_address
+        )
+      ) {
         Toast("请输入正确的格式");
         return false;
       }

@@ -5,7 +5,7 @@
       <div class="banner">
         <div class="ban_left">
           <div class="portrait">
-            <img src="../assets/images/icon1.jpg"
+            <img :src="headImg"
                  alt="666">
             <span class="name">丹丹</span>
           </div>
@@ -82,13 +82,18 @@
 import { Indicator } from "mint-ui";
 export default {
   data() {
-    return {};
+    return {
+      headImg: ""
+    };
   },
   created() {
     Indicator.open();
     setTimeout(() => {
       Indicator.close();
     }, 1000);
+    //获取头像
+    this.headImg = localStorage.getItem("headimg");
+    // console.log(headImg)
   },
   methods: {
     //我的课程
