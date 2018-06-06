@@ -1,7 +1,11 @@
 <template>    
     <div class="order_foot">
       <div class="total_foot">
-        <div class="total_lef">
+        <div class="total_lef" v-if="during >0">
+          <span class="add">合计：</span>
+          <span class="tinct">¥{{renprice}}</span>
+        </div>
+         <div class="total_lef" v-else>
           <span class="add">合计：</span>
           <span class="tinct">¥{{detail.total_price}}</span>
         </div>
@@ -32,7 +36,7 @@
 <script>
 export default {
   name: "orderFooter",
-  props: ["count", "nextFun", "detail", "confirm", "back", "renewal"],
+  props: ["count", "nextFun", "detail", "confirm", "back", "renewal",'during','renprice'],
   mounted() {
     this.countNum = this.toThousands(this.count);
   },
