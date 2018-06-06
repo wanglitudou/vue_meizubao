@@ -135,7 +135,13 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-            window.location.href=res.data.data.url;
+            if(this.value == 2){
+              this.$router.push({name:"cart"})
+              // console.log(11)
+            }else{
+               window.location.href=res.data.data.url;
+            }
+           
           }
         })
         .catch(() => {

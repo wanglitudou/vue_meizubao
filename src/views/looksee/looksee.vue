@@ -190,7 +190,7 @@ export default {
           keywords: keywords,
           page: page,
           // level: "",
-          star: star,
+          level: star,
           dayprice: dayprice
           // price: ""
         })
@@ -258,17 +258,19 @@ export default {
       this.flog = true;
       this.imgsArr = [];
       this.slideShow = false;
-      this.showLoad = false;
+      // this.showLoad = false;
       this.thebeautyindustry = [];
       this.code = 2;
+      this.showNodata = false;
+      this.isNodata = false;
       // this.itemshow = false;
       //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
       // this.$refs.masonry.style = "position:relative,margin-top:1.2rem";
     },
-    details() {
-      this.$router.push({ name: "details" });
-    },
+    // details() {
+    //   this.$router.push({ name: "details" });
+    // },
     tab(id, index) {
       this.num = index;
       this.typeId = id;
@@ -648,5 +650,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.loadMore {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
 }
 </style>
