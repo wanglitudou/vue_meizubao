@@ -3,7 +3,7 @@
     import orderFooter from '../components/orderFooter.vue'
     import addressCard from '../components/orderAddressCard.vue'
     import orderCard from '../components/orderCard.vue'
-
+    import {Toast} from 'mint-ui'
   export default {
 
     data() {
@@ -46,6 +46,8 @@
             console.log(res);
             if (res.data.status_code == 1001) {
               window.location.href=res.data.data.url;
+            }else if(res.data.status_code == 1002){
+                Toast(res.data.message)
             }
           })
           .catch((err) => {
