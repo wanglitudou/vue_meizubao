@@ -75,15 +75,17 @@ export default {
     return  (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds())
      },
      renprice(){
-       if(this.during >4){
+       console.log(this.during)
+       if(this.during > 4){
           // return  parseInt(this.detail.continued) * parseInt(this.during)
-         return this.detail.dayprice* parseInt(this.during)
+         return (this.detail.dayprice* parseInt(this.during)*0.8).toFixed(2)
        }else{
-            return this.detail.dayprice * parseInt(this.during) *0.8
+         console.log(21322121)
+            return  (this.detail.dayprice * parseInt(this.during)).toFixed(2)
        }
      },
      getPrice(){
-       return this.mounth * this.detail.continued
+       return (this.mounth * this.detail.continued).toFixed(2)
      }
 
   },
@@ -472,7 +474,7 @@ export default {
     <!-- v-bind:class="{ disable: month==data.num }" -->
     </div>
   </div>
-    <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :renewal="renewal" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
+    <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :renewal="renewal" :during="during"  :renprice="renprice" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
   </div>
 </template>
 
