@@ -121,7 +121,7 @@ export default {
         {
           id: 2, //为2 是日薪资
           item: "日薪资",
-          arr: [{ num: 1, item: "从低到高" }, { num: 2, item: "从高到低" }]
+          arr: [{ num: 1, item: "从高到低" }, { num: 2, item: "从低到高" }]
         }
       ],
       grade: "", //等级
@@ -151,7 +151,7 @@ export default {
     that.$axios
       .get(window.ajaxSrc+"/api/meizubao/technicianType", {})
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status_code == 1001) {
           that.tabs = res.data.data;
           that.typeId = res.data.data[0].id;
@@ -181,7 +181,9 @@ export default {
       });
     },
     getData(name, keywords, star, dayprice, page) {
-      console.log(name, keywords, star, dayprice, page);
+      // console.log(name, keywords, star, dayprice, page);
+      // console.log(dayprice)
+      // return false
       let that = this;
       //热租仪器筛选
       that.$axios
@@ -190,7 +192,7 @@ export default {
           keywords: keywords,
           page: page,
           // level: "",
-          star: star,
+          level: star,
           dayprice: dayprice
           // price: ""
         })
@@ -258,17 +260,19 @@ export default {
       this.flog = true;
       this.imgsArr = [];
       this.slideShow = false;
-      this.showLoad = false;
+      // this.showLoad = false;
       this.thebeautyindustry = [];
       this.code = 2;
+      this.showNodata = false;
+      this.isNodata = false;
       // this.itemshow = false;
       //点击搜索 不传 产品id
       //  console.log(this.$refs.masonry)
       // this.$refs.masonry.style = "position:relative,margin-top:1.2rem";
     },
-    details() {
-      this.$router.push({ name: "details" });
-    },
+    // details() {
+    //   this.$router.push({ name: "details" });
+    // },
     tab(id, index) {
       this.num = index;
       this.typeId = id;
@@ -297,7 +301,7 @@ export default {
     // 点击筛选tab
     slider(index) {
       this.ulnum = index;
-      console.log(index);
+      // console.log(index);
     },
     // 点击下拉菜单
     itemli(item, index, value, id) {
@@ -313,13 +317,15 @@ export default {
         var result2 = find(this.sliders, { id: 2 });
         result2.item = item.item;
         this.dayprice = item.num;
-        console.log(2);
+        // console.log(this.dayprice)
+        // console.log(2);
       }
 
       this.thebeautyindustry = [];
       this.ulnum = 4;
       this.pages = 1;
       Indicator.open();
+      
       setTimeout(() => {
         this.getData(this.typeId, "", this.grade, this.dayprice, this.pages);
       }, 1000);
@@ -648,5 +654,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.loadMore {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
 }
 </style>

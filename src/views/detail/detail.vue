@@ -33,23 +33,22 @@
                     <div class="other">
                         <p class="name">
                             <!-- {{item.name}} -->
-                            <span>仪器</span>
+                            <span>{{item.name}}</span>
                             <!-- {{item.price}} -->
-                            <span class="paice">￥价钱</span>
+                            <span class="paice">￥{{item.price}}</span>
                         </p>
                         <p class="meeting">
-                            <!-- {{item.centent}} -->
-                            倒萨大酒店
+                            {{item.centent}}
                         </p>
                         <p class="date">
                             <span>
                                 <!-- {{item.firstrent}} -->
-                                <a>￥10</a>/月
+                                <a>￥{{item.firstrent}}</a>/月
                             </span>
                             <span class="count">
                                 <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                                <!-- {{item.created}} -->
-                                dsadsad
+                                {{item.created}}
+                                
                             </span>
                         </p>
                         <p class="rent"> 起租期:{{item.num}}个月</p>
@@ -149,6 +148,7 @@ export default {
         Toast("搜索不能为空");
         return false;
       }
+      this.imgsArr = []
       this.keyword = keyword;
       this.pages = 1;
       setTimeout(() => {

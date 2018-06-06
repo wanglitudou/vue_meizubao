@@ -90,6 +90,7 @@ export default {
         Toast("不能为空");
         return false;
       }
+      this.cooperativeproject = []
       this.keyword = keyword;
       this.pages = 1;
       this.code = 2;
