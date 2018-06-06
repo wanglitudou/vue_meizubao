@@ -94,7 +94,7 @@ export default {
     }, 1000);
     //获取头像
     this.headImg = localStorage.getItem("headimg");
-    this.nickname = localStorage.getItem("name");
+    this.nickname = localStorage.getItem("nickname");
 
     // console.log(headImg);
   },

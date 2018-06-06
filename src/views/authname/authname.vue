@@ -126,35 +126,37 @@ export default {
         });
     },
     submitBtn() {
-      let that = this;
       //用户信息
-      that.$axios
+      this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
-          nickname: that.$route.query.name,
-          age: that.$route.query.age,
-          birthdate: that.$route.query.birthdate,
-          telephone: that.$route.query.phone,
-          email: that.$route.query.mailbox,
-          store_name: that.$route.query.Adname, //商店名称
-          store_addr: that.$route.query.address,
-          manage_years: that.$route.query.manage_years,
-          manage_area: that.$route.query.manage_area,
-          id_card: that.data.id_card,
-          home_address: that.data.home_address
+          nickname: this.$route.query.name,
+          age: this.$route.query.age,
+          birthdate: this.$route.query.birthdate,
+          telephone: this.$route.query.phone,
+          email: this.$route.query.mailbox,
+          store_name: this.$route.query.Adname, //商店名称
+          store_addr: this.$route.query.address,
+          manage_years: this.$route.query.manage_years,
+          manage_area: this.$route.query.manage_area,
+          id_card: this.data.id_card,
+          home_address: this.data.home_address
         })
         .then(res => {
           console.log(res);
           if ((res.data.status_code = "1001")) {
-            localStorage.nickname = that.$route.query.name;
+            localStorage.nickname = this.$route.query.name;
             console.log(localStorage.nickname);
-            MessageBox.alert("修改成功");
+            Toast("修改成功");
+            setTimeout(() => {
+              this.$router.push({ name: "mine" });
+            }, 800);
           }
         })
-        .catch(() => {
+        .catch(res => {
+          console.log(res);
           console.log("查询失败");
         });
-      this.$router.push({ name: "mine" });
     },
     // complete() {
     //   this.$router.push({ name: "mine" });
