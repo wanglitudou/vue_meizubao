@@ -137,7 +137,9 @@ export default {
     // },
     card() {
       let that = this;
-      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(that.name)) {
+      if (
+        !/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(that.name)
+      ) {
         Toast("请输入正确的格式");
         return false;
       }
