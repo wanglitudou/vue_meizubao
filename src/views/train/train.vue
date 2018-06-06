@@ -5,8 +5,7 @@
       <div class="cent_list">
         <div class="list_lists">
           <div class="banner">
-            <img :src="data.images"
-                 alt="">
+            <img :src="data.images" alt="">
           </div>
           <div class="name_project">
             <p>
@@ -26,24 +25,15 @@
       </div>
       <!-- 选择支付方式 -->
 
-      <orderFooter :text="'开始预约'"
-                   :count="data.price"
-                   :nextFun="nextFun"></orderFooter>
+      <orderFooter :text="'开始预约'" :count="data.price" :nextFun="nextFun"></orderFooter>
     </div>
-    <div class="opcity"
-         v-show="showOpcity"
-         @click="clearOpcity">
+    <div class="opcity" v-show="showOpcity" @click="clearOpcity">
     </div>
-    <div class="payMethod"
-         v-show="showOpcity">
-      <mt-radio title="请选择支付方式"
-                v-model="value"
-                :options="options">
+    <div class="payMethod" v-show="showOpcity">
+      <mt-radio title="请选择支付方式" v-model="value" :options="options">
       </mt-radio>
       <div class="pay">
-        <mt-button type="danger"
-                   style="margin:5px"
-                   @click="nextPay">立即支付 </mt-button>
+        <mt-button type="danger" style="margin:5px" @click="nextPay">立即支付 </mt-button>
       </div>
     </div>
   </div>
@@ -148,18 +138,12 @@ export default {
         })
         .then(res => {
           console.log(res);
-          if (res.data.status_code == 1001) {
-<<<<<<< HEAD
+
+          if (this.value == 2) {
+            this.$router.push({ name: "cart" });
+            // console.log(11)
+          } else {
             window.location.href = res.data.data.url;
-=======
-            if(this.value == 2){
-              this.$router.push({name:"cart"})
-              // console.log(11)
-            }else{
-               window.location.href=res.data.data.url;
-            }
-           
->>>>>>> bd9bb94626a9882682efa44f4ae1085c6e4bbd04
           }
         })
         .catch(() => {

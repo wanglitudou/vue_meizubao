@@ -51,7 +51,7 @@
           <div class="spinner">
             <div class="decrease"
                  @click="decrease"
-                 v-bind:class="{ disable: month==data.num }">-</div>
+                 v-bind:class="{ disable: month==data.lease_time }">-</div>
             <input type="number"
                    class="value"
                    maxlength="3"
@@ -73,7 +73,7 @@
         </p>
       </div>
 
-      <orderFooter :text="'立即下单'" :count="month*data.firstrent + (data.deposit-0)" :nextFun="jumpToConfirm"></orderFooter>
+      <orderFooter :text="'立即下单'" :count="(month*data.firstrent + (data.deposit-0)).toFixed(2)" :nextFun="jumpToConfirm"></orderFooter>
 
 
       <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
@@ -221,14 +221,14 @@
 
 
       decrease: function() {
-        if (this.month > this.data.num) {
+        if (this.month > this.data.lease_time) {
           this.month--;
         } else {
           return false;
         }
       },
       increase: function() {
-        this.month = this.month + 1;
+        this.month = parseInt(this.month) + 1;
       },
 
       jumpToConfirm: function() {
@@ -238,36 +238,36 @@
         }
 
 
-        if(this.month < this.data.num){
+        if(this.month < this.data.lease_time){
           Toast('请重新选择您要租赁的时长');
           return false
         }
 
+console.log(this.month)
+
+//         this.$router.push({
+// //          path: '/confirm/instrument',
+//           name: "confirm",
+//           params: {
+//             type: 1,
+//             g_id:this.$route.query.pid,
+//             m_type:1,
+//             strtime:"",
+//             stoptime:"",
+//             stage:this.month,
+//             agreement:this.agreementId,
+//             image:this.data.images[0],
+//             goods_num:1,
+//             total_price:this.month*this.data.firstrent+(this.data.deposit-0),
+//             goods_name:this.data.name,
+//             deposit:this.data.deposit,
 
 
-        this.$router.push({
-//          path: '/confirm/instrument',
-          name: "confirm",
-          params: {
-            type: 1,
-            g_id:this.$route.query.pid,
-            m_type:1,
-            strtime:"",
-            stoptime:"",
-            stage:this.month,
-            agreement:this.agreementId,
-            image:this.data.images[0],
-            goods_num:1,
-            total_price:this.month*this.data.firstrent+(this.data.deposit-0),
-            goods_name:this.data.name,
-            deposit:this.data.deposit,
 
-
-
-            price:this.data.firstrent,
-            month:this.data.num,
-          }
-        })
+//             price:this.data.firstrent,
+//             month:this.data.num,
+//           }
+//         })
 
 
 
@@ -284,7 +284,7 @@
             console.log(res);
             if (res.data.status_code == 1001) {
               this.data = res.data.data;
-              this.month = this.data.num;
+              this.month = this.data.lease_time;
             }
           })
           .catch(() => {
