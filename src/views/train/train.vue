@@ -5,7 +5,8 @@
       <div class="cent_list">
         <div class="list_lists">
           <div class="banner">
-            <img :src="data.images" alt="">
+            <img :src="data.images"
+                 alt="">
           </div>
           <div class="name_project">
             <p>
@@ -25,15 +26,26 @@
       </div>
       <!-- 选择支付方式 -->
 
-      <orderFooter :text="'开始预约'" :count="data.price" :nextFun="nextFun"></orderFooter>
+      <orderFooter :text="'开始预约'"
+                   :count="data.price"
+                   :nextFun="nextFun"></orderFooter>
     </div>
-    <div class="opcity" v-show="showOpcity" @click="clearOpcity">
+    <div class="opcity"
+         v-show="showOpcity"
+         @click="clearOpcity">
     </div>
-    <div class="payMethod" v-show="showOpcity">
-        <mt-radio title="请选择支付方式" v-model="value" :options="options">
-        </mt-radio>
-        <div class="pay"><mt-button type="danger" style="margin:5px" @click="nextPay">立即支付 </mt-button></div>
+    <div class="payMethod"
+         v-show="showOpcity">
+      <mt-radio title="请选择支付方式"
+                v-model="value"
+                :options="options">
+      </mt-radio>
+      <div class="pay">
+        <mt-button type="danger"
+                   style="margin:5px"
+                   @click="nextPay">立即支付 </mt-button>
       </div>
+    </div>
   </div>
 </template>
 <script>
@@ -50,7 +62,7 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             this.data = res.data.data;
-            console.log(res.data.data.integral)
+            console.log(res.data.data.integral);
           }
         })
         .catch(() => {
@@ -58,27 +70,29 @@ export default {
         });
     },
     //获取用户信息
-     initIntegral(){
-        this.$axios.get(window.ajaxSrc + "/api/meizubao/userInfo",{
-         params:{uid:window.localStorage.id}
-        }).then(res=>{
-          console.log(res)
-          if(res.data.status_code == 1001){
-            this.integral =  res.data.data.integral
-          }
-        }).catch(()=>{
-          console.log("http请求错误")
+    initIntegral() {
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/userInfo", {
+          params: { uid: window.localStorage.id }
         })
-      },  
-  //  弹出遮罩选择支付方式
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.integral = res.data.data.integral;
+          }
+        })
+        .catch(() => {
+          console.log("http请求错误");
+        });
+    },
+    //  弹出遮罩选择支付方式
     nextFun: function() {
-
-      this.showOpcity =  true
+      this.showOpcity = true;
       // console.log(this.integral)
-      if(this.data.integral >this.integral){
-       this.options[1].disabled =  true
-      }else{
-        this.options[1].disabled =  false
+      if (this.data.integral > this.integral) {
+        this.options[1].disabled = true;
+      } else {
+        this.options[1].disabled = false;
       }
       // this.$axios
       //   .post(window.ajaxSrc + "/api/meizubao/addOrder", {
@@ -110,31 +124,34 @@ export default {
     },
     // 微信支付 和积分兑换
     nextPay() {
-      if(this.value == ''){
-        Toast('请选择支付方式')
-        return false
+      if (this.value == "") {
+        Toast("请选择支付方式");
+        return false;
       }
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
-          uid:window.localStorage.id,
-          g_id:this.data.id,
-          type:4,
-          m_type:this.value,
-          strtime:"",
-          stoptime:"",
-          stage:"",
-          agreement:"",
-          image:this.data.images[0],
-          goods_num:1,
-          total_price:this.data.price,
-          goods_name:this.data.name,
-          address_id:"",
-          deposit:"",
-          open_id:window.localStorage.openid,
+          uid: window.localStorage.id,
+          g_id: this.data.id,
+          type: 4,
+          m_type: this.value,
+          strtime: "",
+          stoptime: "",
+          stage: "",
+          agreement: "",
+          image: this.data.images[0],
+          goods_num: 1,
+          total_price: this.data.price,
+          goods_name: this.data.name,
+          address_id: "",
+          deposit: "",
+          open_id: window.localStorage.openid
         })
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
+<<<<<<< HEAD
+            window.location.href = res.data.data.url;
+=======
             if(this.value == 2){
               this.$router.push({name:"cart"})
               // console.log(11)
@@ -142,19 +159,19 @@ export default {
                window.location.href=res.data.data.url;
             }
            
+>>>>>>> bd9bb94626a9882682efa44f4ae1085c6e4bbd04
           }
         })
         .catch(() => {
           console.log("http请求错误");
         });
-        setTimeout(()=>{
-           this.showOpcity  = false
-        },500)
-     
+      setTimeout(() => {
+        this.showOpcity = false;
+      }, 500);
     },
     // 隐藏遮罩
-    clearOpcity(){
-      this.showOpcity =  false
+    clearOpcity() {
+      this.showOpcity = false;
     }
   },
   components: {
@@ -177,12 +194,12 @@ export default {
         {
           label: "积分兑换",
           value: "2",
-          disabled:false,
-        },
+          disabled: false
+        }
       ],
       value: "",
-      showOpcity:false,
-      integral:'',
+      showOpcity: false,
+      integral: ""
     };
   }
 };
@@ -363,12 +380,12 @@ export default {
   opacity: 0.5;
   z-index: 5;
 }
-.mint-radiolist-title{
-  text-align:  center;
+.mint-radiolist-title {
+  text-align: center;
   font-size: 16px;
   color: #000;
 }
-.pay{
+.pay {
   width: 100%;
   text-align: center;
   font-size: 14px;
@@ -376,10 +393,10 @@ export default {
   display: flex;
   justify-content: center;
 }
-.pay span{
-    display: block;
-    padding: 10px;
-   background: #fd4689;
-   border-radius: 10px;
+.pay span {
+  display: block;
+  padding: 10px;
+  background: #fd4689;
+  border-radius: 10px;
 }
 </style>

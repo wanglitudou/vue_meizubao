@@ -160,13 +160,13 @@ export default {
   },
   created() {
     Indicator.open();
-    setTimeout(()=>{
-      Indicator.close()
-    },1000)
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
 
     let that = this;
     var str = window.location.href;
-    var code = that.GetQueryString("code")
+    var code = that.GetQueryString("code");
     if (code) {
       that.getXlogin(code); //再次调用这个方法
     } else {
@@ -318,8 +318,9 @@ export default {
       that.$axios
         .get(str, {})
         .then(res => {
+          console.log(res);
           if (res.data.status_code == 400) {
-            console.log(222);
+            console.log(res.data.status_code);
             //后台的地址
             var _url = res.data.message + "?url=" + window.location.href;
             console.log(res.data.message + "?url=" + window.location.href);
@@ -330,8 +331,10 @@ export default {
               localStorage.openid = res.data.data.openid;
               localStorage.tel = res.data.data.tel;
               localStorage.id = res.data.data.id;
-               sessionStorage.token = res.data.data.token;
+              sessionStorage.token = res.data.data.token;
               localStorage.headimg = res.data.data.headimg;
+              // localStorage.name=res.data.data
+
               //判断tel是否存在,不存在跳到对应填写页面
               // that.$router.push({ name: "mine" });
             }

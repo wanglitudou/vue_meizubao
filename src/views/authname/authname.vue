@@ -69,8 +69,7 @@
   </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
-import { Indicator } from "mint-ui";
+import { Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -98,11 +97,34 @@ export default {
   },
   created(e) {
     Indicator.open();
+    this.getInfo();
     setTimeout(() => {
       Indicator.close();
     }, 500);
   },
   methods: {
+    getInfo() {
+      let that = this;
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+            localStorage.id
+        )
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.data.imgOne = res.data.data.card_behind;
+            that.data.imgtwo = res.data.data.business_license;
+            that.data.imgthree = res.data.data.card_front;
+            that.data.imgfour = res.data.data.store_image;
+            that.data.id_card = res.data.data.id_card;
+            that.data.home_address = res.data.data.home_address;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
     submitBtn() {
       let that = this;
       //用户信息
@@ -124,6 +146,8 @@ export default {
         .then(res => {
           console.log(res);
           if ((res.data.status_code = "1001")) {
+            localStorage.nickname = that.$route.query.name;
+            console.log(localStorage.nickname);
             MessageBox.alert("修改成功");
           }
         })
@@ -135,18 +159,30 @@ export default {
     // complete() {
     //   this.$router.push({ name: "mine" });
     // },
-    card() {
-      let that = this;
-      if (
-        !/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(that.name)
-      ) {
+    idCardReg(num) {
+      console.log(num);
+      let re1 = /^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}[0-9Xx]$/,
+        re2 = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+      if (re1.test(num) || re2.test(num)) {
+        return true;
+      } else {
         Toast("请输入正确的格式");
         return false;
       }
     },
+    card() {
+      let that = this;
+      if (this.idCardReg(this.data.id_card)) {
+        return;
+      }
+    },
     homeaddress() {
       let that = this;
-      if (!/(^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+)$/.test(that.name)) {
+      if (
+        !/(^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+)$/.test(
+          that.data.home_address
+        )
+      ) {
         Toast("请输入正确的格式");
         return false;
       }

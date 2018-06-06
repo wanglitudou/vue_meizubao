@@ -214,8 +214,6 @@ export default {
           $("." + res.data.data.manage_years).addClass("yearActive");
           $("." + res.data.data.manage_area).addClass("yearActive");
         }
-        // 假装 请求成功 赋值页面
-        this.shop = "聚通达";
       })
       .catch(() => {
         console.log("查询失败");
@@ -242,7 +240,7 @@ export default {
     //验证姓名
     provingname() {
       let that = this;
-      if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.name)) {
+      if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.data.name)) {
         Toast("请输入正确的格式");
         return false;
       }
@@ -250,7 +248,7 @@ export default {
     //验证年龄
     provingage() {
       let that = this;
-      if (!/^(?:[1-9]?\d|100)$/.test(that.age)) {
+      if (!/^(?:[1-9]?\d|100)$/.test(that.data.age)) {
         Toast("请输入正确的格式");
         return false;
       }
@@ -260,7 +258,7 @@ export default {
       let that = this;
       if (
         !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
-          that.birthday
+          that.data.birthdate
         )
       ) {
         Toast("请输入正确的格式");
@@ -270,7 +268,7 @@ export default {
     //验证电话号码
     remind() {
       let that = this;
-      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.phone)) {
+      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.data.phone)) {
         Toast("请输入正确的手机号格式");
         return false;
       }
@@ -280,7 +278,9 @@ export default {
     provingmailbox() {
       let that = this;
       if (
-        !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(that.mailbox)
+        !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(
+          that.data.mailbox
+        )
       ) {
         Toast("请输入正确的格式");
         return false;
@@ -289,7 +289,7 @@ export default {
     //验证店铺
     provingshop() {
       let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.shop)) {
+      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.shop)) {
         Toast("请输入正确的格式");
         return false;
       }
@@ -297,7 +297,7 @@ export default {
     //验证地址
     provingaddress() {
       let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.address)) {
+      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.address)) {
         Toast("请输入正确的格式");
         return false;
       }
