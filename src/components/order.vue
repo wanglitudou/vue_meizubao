@@ -19,7 +19,7 @@
                 <!-- :src="item.image" -->
                 <div class="paymentcenter" @click="todetail(item.id)">
                     <!-- ../assets/images/icon1.jpg -->
-                    <div class="img"><img src="../assets/images/icon1.jpg" alt=""></div>
+                    <div class="img"><img :src="item.image" alt=""></div>
                     <div class="detail">
                         <p class="name">{{item.goods_name}}</p>
                         <!-- <p class="content">{{item.logistics}}</p> -->
@@ -36,7 +36,7 @@
                             <div>物流公司：{{item.logistics}}</div>
                             <div>物流单号：{{item.number}}</div>
                         </div>
-                        <div class="que" @click="receipt(item.type,item.status,item.id)">确认收货</div>
+                        <div class="que" @click="receipt(item.type,item.id)">确认收货</div>
                     </div>
                     <!-- 租赁中 -->
                     <div class="zhuang" v-if="item.status == 6">
@@ -85,16 +85,16 @@
                             <div>交通方式：{{item.logistics}}</div>
                             <div>时间：{{item.number}}</div>
                         </div>
-                        <div class="que" @click="receipt(item.type,item.status,item.id)">确认到达</div>
+                        <div class="que" @click="receipt(item.type,item.id)">确认到达</div>
                     </div>
                     <!-- 待发货 -->
                     <div class='Cancellation' v-if="item.status == 3">
-                        <div class="cancel" @click="cancel(item.status,item.id)">取消订单</div>
+                        <div class="cancel" @click="cancel(item.id)">取消订单</div>
                     </div>
                     <!-- 租赁中 -->
                     <div class="zhuang" v-if="item.status == 6">
                       
-                        <div class="complete" @click="complete(item.id,item.status)">完成服务</div>
+                        <div class="complete" @click="complete(item.id)">完成服务</div>
                           <div class="xuyue"  @click="renewal(item.id)">续约</div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                             <div>物流公司：{{item.logistics}}</div>
                             <div>物流单号：{{item.number}}</div>
                         </div>
-                        <div class="que" @click="receipt(item.type,item.status,item.id)">确认收货</div>
+                        <div class="que" @click="receipt(item.type,item.id)">确认收货</div>
 
                     </div>
                 </div>

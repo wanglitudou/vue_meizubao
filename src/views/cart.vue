@@ -188,6 +188,9 @@ export default {
     // 点击选择订单
     select() {
       this.ulShow = true;
+      setTimeout(()=>{
+         this.ulShow = false
+      },1000)
     },
     // 点击下拉框选择  订单的状态 例如：仪器的订单  产品的订单
     optionLi(value, index) {
@@ -243,13 +246,13 @@ export default {
       this.getOrder(this.type, this.status, this.page, this.uid);
     },
     //确认收货
-    receipt(type,status,id) {
+    receipt(type,id) {
       console.log(id);
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
-          status: status
+          status: 6
         })
         .then(res => {
           if (res.data.status_code == "1001") {
@@ -266,7 +269,7 @@ export default {
               item.status = 6;
             });
             }
-           
+            console.log(this.orderlist)
 
             //  this.getOrder()
           } else {
@@ -275,18 +278,18 @@ export default {
         });
     },
     //取消订单
-    cancel(status,id) {
+    cancel(id) {
        console.log(id);
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
-          status: status
+          status: 8
         })
         .then(res => {
           if (res.data.status_code == "1001") {
             //  remove(this.orderlist,{"id":id})
-            Toast("确认成功");
+            Toast("取消成功");
             
                   var result2 = filter(this.orderlist, { id: id });
             forEach(result2, function(item) {
@@ -322,12 +325,12 @@ export default {
       });
     },
     //确认收货物
-    complete(id, status) {
+    complete(id) {
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
-          status: status
+          status:5
         })
         .then(res => {
           if (res.data.status_code == "1001") {
