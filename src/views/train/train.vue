@@ -149,17 +149,12 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-<<<<<<< HEAD
-            window.location.href = res.data.data.url;
-=======
-            if(this.value == 2){
-              this.$router.push({name:"cart"})
+            if (this.value == 2) {
+              this.$router.push({ name: "cart" });
               // console.log(11)
-            }else{
-               window.location.href=res.data.data.url;
+            } else {
+              window.location.href = res.data.data.url;
             }
-           
->>>>>>> bd9bb94626a9882682efa44f4ae1085c6e4bbd04
           }
         })
         .catch(() => {
