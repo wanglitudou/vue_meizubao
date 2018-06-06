@@ -97,11 +97,34 @@ export default {
   },
   created(e) {
     Indicator.open();
+    this.getInfo();
     setTimeout(() => {
       Indicator.close();
     }, 500);
   },
   methods: {
+    getInfo() {
+      let that = this;
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+            localStorage.id
+        )
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            that.data.imgOne = res.data.data.card_behind;
+            that.data.imgtwo = res.data.data.business_license;
+            that.data.imgthree = res.data.data.card_front;
+            that.data.imgfour = res.data.data.store_image;
+            that.data.id_card = res.data.data.id_card;
+            that.data.home_address = res.data.data.home_address;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
     submitBtn() {
       let that = this;
       //用户信息
@@ -123,6 +146,8 @@ export default {
         .then(res => {
           console.log(res);
           if ((res.data.status_code = "1001")) {
+            localStorage.nickname = that.$route.query.name;
+            console.log(localStorage.nickname);
             MessageBox.alert("修改成功");
           }
         })

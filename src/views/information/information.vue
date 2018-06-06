@@ -214,8 +214,6 @@ export default {
           $("." + res.data.data.manage_years).addClass("yearActive");
           $("." + res.data.data.manage_area).addClass("yearActive");
         }
-        // 假装 请求成功 赋值页面
-        this.shop = "聚通达";
       })
       .catch(() => {
         console.log("查询失败");

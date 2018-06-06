@@ -7,7 +7,7 @@
           <div class="portrait">
             <img :src="headImg"
                  alt="666">
-            <span class="name">丹丹</span>
+            <span class="name">{{nickname}}</span>
           </div>
         </div>
         <div class="ban_right">
@@ -83,7 +83,8 @@ import { Indicator } from "mint-ui";
 export default {
   data() {
     return {
-      headImg: ""
+      headImg: "",
+      nickname: ""
     };
   },
   created() {
@@ -93,9 +94,33 @@ export default {
     }, 1000);
     //获取头像
     this.headImg = localStorage.getItem("headimg");
-    // console.log(headImg)
+    this.nickname = localStorage.getItem("name");
+
+    // console.log(headImg);
   },
   methods: {
+    getname() {
+      let that = this;
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+            localStorage.id
+        )
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            // that.data.imgOne = res.data.data.card_behind;
+            // that.data.imgtwo = res.data.data.business_license;
+            // that.data.imgthree = res.data.data.card_front;
+            // that.data.imgfour = res.data.data.store_image;
+            // that.data.id_card = res.data.data.id_card;
+            // that.data.home_address = res.data.data.home_address;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
     //我的课程
     curriculum() {
       //点击我的课程时 跳到对应的页面
