@@ -5,8 +5,7 @@
       <div class="cent_list">
         <div class="list_lists">
           <div class="banner">
-            <img :src="data.images"
-                 alt="">
+            <img :src="data.images" alt="">
           </div>
           <div class="name_project">
             <p>
@@ -26,24 +25,15 @@
       </div>
       <!-- 选择支付方式 -->
 
-      <orderFooter :text="'开始预约'"
-                   :count="data.price"
-                   :nextFun="nextFun"></orderFooter>
+      <orderFooter :text="'开始预约'" :count="data.price" :nextFun="nextFun"></orderFooter>
     </div>
-    <div class="opcity"
-         v-show="showOpcity"
-         @click="clearOpcity">
+    <div class="opcity" v-show="showOpcity" @click="clearOpcity">
     </div>
-    <div class="payMethod"
-         v-show="showOpcity">
-      <mt-radio title="请选择支付方式"
-                v-model="value"
-                :options="options">
+    <div class="payMethod" v-show="showOpcity">
+      <mt-radio title="请选择支付方式" v-model="value" :options="options">
       </mt-radio>
       <div class="pay">
-        <mt-button type="danger"
-                   style="margin:5px"
-                   @click="nextPay">立即支付 </mt-button>
+        <mt-button type="danger" style="margin:5px" @click="nextPay">立即支付 </mt-button>
       </div>
     </div>
   </div>
