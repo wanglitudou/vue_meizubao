@@ -255,15 +255,15 @@ export default {
     },
     //验证生日
     provingbirthday() {
-      let that = this;
-      if (
-        !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
-          that.data.birthdate
-        )
-      ) {
-        Toast("请输入正确的格式");
-        return false;
-      }
+      // let that = this;
+      // if (
+      //   !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
+      //     that.data.birthdate
+      //   )
+      // ) {
+      //   Toast("请输入正确的格式");
+      //   return false;
+      // }
     },
     //验证电话号码
     remind() {
