@@ -4,7 +4,7 @@
             <div class="intege_nav">
                 <div class="intege_cent">
                     <span class="mine_intege">我的积分</span>
-                    <span class="num_intege"> 10</span>
+                    <span class="num_intege"> {{integral}}</span>
                     <span class="intege_inte">积分</span>
                 </div>
             </div>
@@ -14,163 +14,120 @@
             </div>
         </div>
         <div class="scrolls">
-            <div class="list_cent">
-                <div class="list_lef">
-                    <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon6.jpg"
-                                 alt="">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                            </p>
-                            <p class="meeting">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                            <p>
-                                <span>
-                                    <a>
-                                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>1500</a>
-                                </span>
-                            </p>
-                        </div>
+            <div class="list_cent" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+                <!-- <div class="list_lef"> -->
 
-                    </div>
-                    <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon1.jpg"
-                                 alt="">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                            </p>
-                            <p class="meeting">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                            <p>
-                                <span>
-                                    <a>
-                                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>1500</a>
-                                </span>
-                            </p>
-                        </div>
-
-                    </div>
-                    <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon6.jpg"
-                                 alt="">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                            </p>
-                            <p class="meeting">十点开会覅额回复撒哈斯而后发生符合倒计时</p>
-                            <p>
-                                <span>
-                                    <a>
-                                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>1500</a>
-                                </span>
-                            </p>
-                        </div>
-
-                    </div>
-
+                <div class="listing item" v-masonry-tile v-for="(item,index) of dataArr" @click="toTrain(item.id)">
                     <div>
+                        <img :src="item.images" alt="">
+                    </div>
+                    <div class="other">
+                        <p>
+                            <span>{{item.name}}</span>
+                        </p>
+                        <p class="meeting">{{item.content}}</p>
+                        <p>
+                            <span>
+                                <a>
+                                    <i class="iconfont icon-yingyongchengxu-xianxing"></i>{{item.price}}</a>
+                            </span>
+                        </p>
+                    </div>
 
+                </div>
+                <!-- 加载更多 -->
+                <div class="item loadMore" ref="load">
+                    <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+                    <!-- <span v-else>
+                        <span @click="loadMore" v-if="loading">加载更多</span>
+                        <span v-else>数据全部加载完成</span>
+                    </span> -->
+                    <div class="add_more" @click="loadMore">
+                        <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
                     </div>
                 </div>
-                <div class="list_rig">
-                    <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon1.jpg"
-                                 alt="">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                            </p>
-                            <p class="meeting">
-                                十点开会覅额回复撒哈斯而后发生符合倒计时
-                            </p>
-                            <p>
-                                <span>
-                                    <a>
-                                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>1500</a>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon6.jpg"
-                                 alt="">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                            </p>
-                            <p class="meeting">
-                                十点开会覅额回复撒哈斯而后发生符合倒计时
-                            </p>
-                            <p>
-                                <span>
-                                    <a>
-                                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>1500</a>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="listing">
-                        <div>
-                            <img src="../../assets/images/icon1.jpg"
-                                 alt="">
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span>热租仪器</span>
-                            </p>
-                            <p class="meeting">
-                                十点开会覅额回复撒哈斯而后发生符合倒计时
-                            </p>
-                            <p>
-                                <span>
-                                    <a>
-                                        <i class="iconfont icon-yingyongchengxu-xianxing"></i>1500</a>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <!-- 没有数据 -->
+            <div class="noData" v-if="showNodata">
+                暂无数据
             </div>
         </div>
     </div>
 </template>
 <script>
+import { Spinner, Toast, Indicator } from "mint-ui";
 export default {
-  mounted(){
-    this.$axios
-      .get(window.ajaxSrc + "/api/meizubao/productDetail", {
-        params: { id: this.$route.query.pid }
-      })
-      .then(res => {
-        console.log(res);
-        if (res.data.status_code == 1001) {
-          this.data = res.data.data;
-        }
-      })
-      .catch(() => {
-        console.log("http请求错误");
-      });
+  data() {
+    return {
+      page: 1,
+      dataArr: [],
+      integral: "",
+      count: 15,
+      isNodata:true,
+      showNodata: false,
+      topStatus: false,
+      loading: false
+    };
   },
+  mounted() {
+    // this.$axios
+    //   .get(window.ajaxSrc + "/api/meizubao/productDetail", {
+    //     params: { id: this.$route.query.pid }
+    //   })
+    //   .then(res => {
+    //     console.log(res);
+    //     if (res.data.status_code == 1001) {
+    //       this.data = res.data.data;
+    //     }
+    //   })
+    //   .catch(() => {
+    //     console.log("http请求错误");
+    //   });
+    this.init();
+  },
+  methods: {
+    init() {
+      let that = that;
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/integralShop", {
+          params: { uid: window.localStorage.id, page: this.page }
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            if (res.data.data.data.length == 0) {
+              this.showNodata = true;
+              this.isNodata =  false
+            } else if (res.data.data.data.length < this.count) {
+              this.topStatus = false;
+              this.showNodata = false;
+              this.loading = false;
+            } else {
+              this.topStatus = false;
+              this.loading = true;
+              this.showNodata =  false
+            }
 
+            this.integral =this.integral.concat(res.data.data.integral);
+            this.dataArr = res.data.data.data;
+          }
+        });
+    },
+    toTrain(id) {
+      this.$router.push({ name: "train", query: { pid: id } });
+    },
+    loadMore() {
+        this.page++
 
-
+    }
+  }
 };
 </script>
 <style scoped>
 .container {
   width: 100%;
   height: auto;
-  height: calc(100% - 0.88rem);
+  /* height: auto; */
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   background: #fff;
@@ -184,14 +141,16 @@ export default {
 .intege_nav {
   height: 1.8rem;
   line-height: 1.8rem;
-  margin: 0.2rem auto 0;
+  display: flex;
+  justify-content: center;
+  /* margin: 0.2rem auto 0; */
 }
 .intege_cent {
-  width: 166px;
-  height: 45px;
-  line-height: 45px;
-  margin: 0 auto;
-  margin-top: 22.5px;
+  /* width: 166px; */
+  /* height: 45px; */
+  /* line-height: 45px; */
+  /* margin: 0 auto; */
+  /* margin-top: 22.5px; */
 }
 .mine_intege {
   font-size: 17px;
@@ -238,7 +197,7 @@ export default {
 }
 .list_lef {
   width: 3.46rem;
-  float: right;
+  /* float: right; */
   border-radius: 3px;
   margin-top: -10px;
 }
@@ -261,8 +220,9 @@ export default {
   border-radius: 3px;
 }
 .list_lef img {
-  width: 3.36rem;
-  height: 3.46rem;
+  width: 100%;
+  /* width: 3.36rem; */
+  /* height: 3.46rem; */
 }
 .list_rig {
   width: 3.46rem;
@@ -352,5 +312,30 @@ export default {
   font-size: 14px;
   color: #ffffff;
   letter-spacing: 0;
+}
+.item {
+  width: 48%;
+  height: auto;
+  padding: 1%;
+  /* margin:3% */
+}
+.item img {
+  width: 100%;
+}
+.noData {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loadMore {
+  width: 96%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 16px;
 }
 </style>
