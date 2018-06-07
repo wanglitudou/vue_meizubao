@@ -112,10 +112,11 @@ export default {
         )
         .then(res => {
           console.log(res);
+          console.log("我是图片");
           if (res.data.status_code == 1001) {
-            that.data.imgOne = res.data.data.card_behind;
-            that.data.imgtwo = res.data.data.business_license;
-            that.data.imgthree = res.data.data.card_front;
+            that.data.imgOne = res.data.data.card_front;
+            that.data.imgtwo = res.data.data.card_behind;
+            that.data.imgthree = res.data.data.business_license;
             that.data.imgfour = res.data.data.store_image;
             that.data.id_card = res.data.data.id_card;
             that.data.home_address = res.data.data.home_address;
