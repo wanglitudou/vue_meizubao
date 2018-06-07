@@ -243,6 +243,7 @@ export default {
         success: function(res) {
           console.log(res);
           alert(res.data.url);
+
           if (res.code == 200) {
             that.fileList = res.data;
           }
