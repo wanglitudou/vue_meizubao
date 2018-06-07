@@ -24,10 +24,6 @@
                  capture="camera"
                  accept="image/*"
                  @change="updataimg($event,1)">
-          <!-- <input type="file"
-                 class="file"
-                
-                 @change="uploadImg" /> -->
           <img :src="data.imgOne"
                alt="">
         </span>
@@ -110,6 +106,7 @@ export default {
     if (isIos) {
       $("input:file").removeAttr("capture");
     }
+
     Indicator.open();
     this.getInfo();
     setTimeout(() => {
@@ -233,6 +230,7 @@ export default {
         dataType: "json",
         success: function(res) {
           console.log(res);
+          alert(res.data.url);
           if (res.code == 200) {
             that.fileList = res.data;
           }
