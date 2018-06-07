@@ -33,7 +33,7 @@ import photograph from "../views/photograph/photograph.vue";
 import pageindustry from "../views/pageindustry/pageindustry.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
 import mediaDetails from "../views/photograph/mediaDetails.vue";
-
+import search from "../views/search/search.vue";
 let routes = [
   {
     path: "/",
@@ -46,7 +46,6 @@ let routes = [
     //   title: "首页"
     // },
     component: index,
-
     children: [
       {
         name: "home",
@@ -103,6 +102,11 @@ let routes = [
     path: "/detail",
     component: detail
   },
+  { 
+    name:'search',
+    path:'/search',
+    component:search
+  }, 
   {
     name: "details",
     path: "/details",

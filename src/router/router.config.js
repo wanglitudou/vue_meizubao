@@ -6,6 +6,7 @@ Vue.use(VueRouter); //注册VueRouter
 
 import routes from "./routes"; //引入routers
 
+
 //实例化路由
 var router = new VueRouter({
   routes: routes

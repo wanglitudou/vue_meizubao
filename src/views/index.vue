@@ -2,7 +2,6 @@
 
   <div class="container">
     <router-view class="wrapper"></router-view>
-
     <ul class="nav">
       <router-link :tag="'li'"
                    :to="{name:'home'}">

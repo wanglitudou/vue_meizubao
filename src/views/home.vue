@@ -14,14 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="list_search">
-      <!-- <div class="searchs">
-        <input type="text"
-               placeholder="请输入搜索内容">
-        <img src="../assets/icon/search_1.png"
-             alt="111"
-             @click="address()">
-      </div> -->
+    <div class="list_search" ref="search" @click="toSearch">
       <div style="margin-left:20px;">请输入搜索</div>
       <img src="../assets/icon/search_1.png"
            alt="111">
@@ -380,6 +373,9 @@ export default {
     },
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
+    },
+    toSearch(){
+    this.$router.push({name:'search'})
     }
     // addtheaddress() {
     //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
@@ -452,12 +448,14 @@ export default {
 .list_search {
   width: 96%;
   height: 0.81rem;
-  border: 1px solid #ccc;
+  border: 1px solid #EEE;
   margin-top: 0.2rem;
   text-align: center;
   margin-left: 2%;
   background: #fff;
+  color:#EEE;
   border-radius: 0.2rem;
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -470,7 +468,8 @@ export default {
   text-align: center;
   margin-left: 2%;
   background: #fff;
-  border-radius: 0.2rem;
+ 
+  color: #EEE;
 }
 
 .list_search img {
