@@ -20,8 +20,6 @@
           <input type="file"
                  class="inpt_imgone"
                  id="img-upload"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
@@ -31,8 +29,6 @@
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
@@ -53,8 +49,6 @@
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
                  id="img-upload"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
@@ -63,8 +57,6 @@
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
                  id="img-upload"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
@@ -215,14 +207,13 @@ export default {
     },
     updataimg(e, num) {
       let file = e.target.files[0];
-      console.log(file)
+      console.log(file);
       alert(file.isClosed);
       alert(file.path);
       alert(file.type);
       alert(file.name);
       alert(file.lastModified);
-  
-      
+
       var formData = new FormData();
       //上传图片
       formData.append("img", file);
