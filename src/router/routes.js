@@ -42,34 +42,34 @@ let routes = [
   {
     name: "index",
     path: "/index",
-    meta: {
-      title: "首页"
-    },
+    // meta: {
+    //   title: "首页"
+    // },
     component: index,
 
     children: [
       {
         name: "home",
         path: "home",
-        meta: {
-          title: "首页"
-        },
+        // meta: {
+        //   title: "首页"
+        // },
         component: home
       },
       {
         name: "catagory",
         path: "catagory",
-        meta: {
-          title: "分类"
-        },
+        // meta: {
+        //   title: "分类"
+        // },
         component: catagory
       },
       {
         name: "mine",
         path: "mine",
-        meta: {
-          title: "我的"
-        },
+        // meta: {
+        //   title: "我的"
+        // },
         component: mine
       },
       {
@@ -91,9 +91,9 @@ let routes = [
       {
         name: "cart",
         path: "/cart",
-        meta: {
-          title: "订单"
-        },
+        // meta: {
+        //   title: "订单"
+        // },
         component: cart
       }
     ]

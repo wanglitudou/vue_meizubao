@@ -8,10 +8,10 @@ import routes from "./routes"; //引入routers
 
 //实例化路由
 var router = new VueRouter({
-  mode: "history",
   routes: routes
+  // mode: "history"
 });
 
 //抛出
+// Vue.use(require("vue-wechat-title")); //实例化参数
 export default router;
-Vue.use(require("vue-wechat-title")); //实例化参数
