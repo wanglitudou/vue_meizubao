@@ -1,7 +1,6 @@
 <template>
 
   <div class="container">
-    <!-- <div v-wechat-title="$route.meta.title"></div> -->
     <router-view class="wrapper"></router-view>
 
     <ul class="nav">

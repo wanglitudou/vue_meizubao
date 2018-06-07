@@ -51,25 +51,25 @@ let routes = [
       {
         name: "home",
         path: "home",
-        // meta: {
-        //   title: "首页"
-        // },
+        meta: {
+          title: "首页"
+        },
         component: home
       },
       {
         name: "catagory",
         path: "catagory",
-        // meta: {
-        //   title: "分类"
-        // },
+        meta: {
+          title: "分类"
+        },
         component: catagory
       },
       {
         name: "mine",
         path: "mine",
-        // meta: {
-        //   title: "我的"
-        // },
+        meta: {
+          title: "我的"
+        },
         component: mine
       },
       {
@@ -91,9 +91,9 @@ let routes = [
       {
         name: "cart",
         path: "/cart",
-        // meta: {
-        //   title: "订单"
-        // },
+        meta: {
+          title: "订单"
+        },
         component: cart
       }
     ]
@@ -108,7 +108,8 @@ let routes = [
     path: "/details",
     component: details,
     meta: {
-      keepAlive: true
+      keepAlive: true,
+      title: "详情页"
     }
   },
   {
@@ -159,16 +160,25 @@ let routes = [
   {
     name: "curriculum",
     path: "/curriculum",
+    meta: {
+      title: "我的课程"
+    },
     component: curriculum
   },
   {
     name: "integral",
     path: "/integral",
+    meta: {
+      title: "我的积分"
+    },
     component: integral
   },
   {
     name: "address",
     path: "/address",
+    meta: {
+      title: "我的地址"
+    },
     component: address
   },
   {
@@ -184,6 +194,9 @@ let routes = [
   {
     name: "photograph",
     path: "/photograph",
+    meta: {
+      title: "资料库"
+    },
     component: photograph
   },
   {
@@ -212,6 +225,7 @@ let routes = [
   {
     name: "order_details",
     path: "/order_details/:type",
+
     component: orderDetails
   },
   {

@@ -12,6 +12,13 @@ var router = new VueRouter({
   // mode: "history"
 });
 
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
+});
 //抛出
 // Vue.use(require("vue-wechat-title")); //实例化参数
 export default router;

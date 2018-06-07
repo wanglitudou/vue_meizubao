@@ -19,7 +19,15 @@
         <span class="updata_lef">
           <input type="file"
                  class="inpt_imgone"
+                 id="img-upload"
+                 multiple
+                 capture="camera"
+                 accept="image/*"
                  @change="updataimg($event,1)">
+          <!-- <input type="file"
+                 class="file"
+                
+                 @change="uploadImg" /> -->
           <img :src="data.imgOne"
                alt="">
         </span>
@@ -96,6 +104,12 @@ export default {
     };
   },
   created(e) {
+    var ua = navigator.userAgent.toLowerCase();
+    //判断是否是苹果手机，是则是true
+    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    if (isIos) {
+      $("input:file").removeAttr("capture");
+    }
     Indicator.open();
     this.getInfo();
     setTimeout(() => {
