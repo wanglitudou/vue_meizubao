@@ -19,6 +19,10 @@
         <span class="updata_lef">
           <input type="file"
                  class="inpt_imgone"
+                 id="img-upload"
+                 multiple
+                 capture="camera"
+                 accept="image/*"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
@@ -26,6 +30,10 @@
 
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
+                 id="img-upload"
+                 multiple
+                 capture="camera"
+                 accept="image/*"
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
                alt=""></span>
@@ -44,12 +52,20 @@
       <div class="up_data up_dataimg">
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
+                 id="img-upload"
+                 multiple
+                 capture="camera"
+                 accept="image/*"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
                alt="">
         </span>
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
+                 id="img-upload"
+                 multiple
+                 capture="camera"
+                 accept="image/*"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
                alt="">
@@ -96,6 +112,13 @@ export default {
     };
   },
   created(e) {
+    var ua = navigator.userAgent.toLowerCase();
+    //判断是否是苹果手机，是则是true
+    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    if (isIos) {
+      $("input:file").removeAttr("capture");
+    }
+
     Indicator.open();
     this.getInfo();
     setTimeout(() => {
@@ -112,10 +135,11 @@ export default {
         )
         .then(res => {
           console.log(res);
+          console.log("我是图片");
           if (res.data.status_code == 1001) {
-            that.data.imgOne = res.data.data.card_behind;
-            that.data.imgtwo = res.data.data.business_license;
-            that.data.imgthree = res.data.data.card_front;
+            that.data.imgOne = res.data.data.card_front;
+            that.data.imgtwo = res.data.data.card_behind;
+            that.data.imgthree = res.data.data.business_license;
             that.data.imgfour = res.data.data.store_image;
             that.data.id_card = res.data.data.id_card;
             that.data.home_address = res.data.data.home_address;
@@ -126,35 +150,37 @@ export default {
         });
     },
     submitBtn() {
-      let that = this;
       //用户信息
-      that.$axios
+      this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
-          nickname: that.$route.query.name,
-          age: that.$route.query.age,
-          birthdate: that.$route.query.birthdate,
-          telephone: that.$route.query.phone,
-          email: that.$route.query.mailbox,
-          store_name: that.$route.query.Adname, //商店名称
-          store_addr: that.$route.query.address,
-          manage_years: that.$route.query.manage_years,
-          manage_area: that.$route.query.manage_area,
-          id_card: that.data.id_card,
-          home_address: that.data.home_address
+          nickname: this.$route.query.name,
+          age: this.$route.query.age,
+          birthdate: this.$route.query.birthdate,
+          telephone: this.$route.query.phone,
+          email: this.$route.query.mailbox,
+          store_name: this.$route.query.Adname, //商店名称
+          store_addr: this.$route.query.address,
+          manage_years: this.$route.query.manage_years,
+          manage_area: this.$route.query.manage_area,
+          id_card: this.data.id_card,
+          home_address: this.data.home_address
         })
         .then(res => {
           console.log(res);
           if ((res.data.status_code = "1001")) {
-            localStorage.nickname = that.$route.query.name;
+            localStorage.nickname = this.$route.query.name;
             console.log(localStorage.nickname);
-            MessageBox.alert("修改成功");
+            Toast("修改成功");
+            setTimeout(() => {
+              this.$router.push({ name: "mine" });
+            }, 800);
           }
         })
-        .catch(() => {
+        .catch(res => {
+          console.log(res);
           console.log("查询失败");
         });
-      this.$router.push({ name: "mine" });
     },
     // complete() {
     //   this.$router.push({ name: "mine" });
@@ -216,6 +242,7 @@ export default {
         dataType: "json",
         success: function(res) {
           console.log(res);
+          alert(res.data.url);
           if (res.code == 200) {
             that.fileList = res.data;
           }

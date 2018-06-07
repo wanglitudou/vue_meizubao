@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    
     <div class="list_img">
       <div class="box">
         <!-- <img src="../assets/images/img_1.png"
