@@ -1,27 +1,20 @@
 <template>
   <div class="container">
     <div class="banner">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img alt=""
-                 v-for="item in url"
-                 :src="item.images"
-                 name="pic"
-                 :key="item.index"
-                 @click="updataImg(item.href)">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="list_search" ref="search" @click="toSearch">
-      <div style="margin-left:20px;">请输入搜索</div>
-      <img src="../assets/icon/search_1.png"
-           alt="111">
+      <mt-swipe :auto="4000">
+        <mt-swipe-item v-for="item in url">
+          <img :src="item.images" alt="">
+        </mt-swipe-item>
+      </mt-swipe>
 
     </div>
-    <div ref="scroll"
-         class="scrolls">
+
+    <div class="list_search" ref="search" @click="toSearch">
+      <div style="margin-left:20px;">请输入搜索</div>
+      <img src="../assets/icon/search_1.png" alt="111">
+
+    </div>
+    <div ref="scroll" class="scrolls">
       <div class="list_ban">
         <div class="hotrent">
           <span>热租仪器</span>
@@ -30,17 +23,12 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in rentinginstrument"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="details(item.id)">
+          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
+            <img :src="item.images" alt="" @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent"
-             @click="detail()">
+        <div class="hot_cent" @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
@@ -53,17 +41,12 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in beautyindustry"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="essence(item.id)">
+          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
+            <img :src="item.images" alt="" @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent"
-             @click="looksee()">
+        <div class="hot_cent" @click="looksee()">
           <span>查看更多></span>
         </div>
       </div>
@@ -75,18 +58,13 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in accessoryproducts"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="matching(item.id)">
+          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
+            <img :src="item.images" alt="" @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent"
-             @click="seemore()">
+        <div class="hot_cent" @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -98,18 +76,13 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in visualscreen"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="train(item.id)">
+          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
+            <img :src="item.images" alt="" @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent"
-             @click="clickpay()">
+        <div class="hot_cent" @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -121,12 +94,8 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in cooperativeProject"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="cooperation(item.id)">
+          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
+            <img :src="item.images" alt="" @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -140,6 +109,7 @@
 </template>
 <script>
 import { Indicator } from "mint-ui";
+import { Swipe, SwipeItem } from 'mint-ui'
 export default {
   data() {
     return {
@@ -174,10 +144,6 @@ export default {
     that.getProject(); //合作项目查询
   },
   mounted: function() {
-    var myswiper = new Swiper(".swiper-container", {
-      loop: true,
-      autoplay: 2000
-    });
   },
   methods: {
     //获取token
@@ -374,8 +340,8 @@ export default {
     clickpay() {
       this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
-    toSearch(){
-    this.$router.push({name:'search'})
+    toSearch() {
+      this.$router.push({ name: "search" });
     }
     // addtheaddress() {
     //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
@@ -448,14 +414,14 @@ export default {
 .list_search {
   width: 96%;
   height: 0.81rem;
-  border: 1px solid #EEE;
+  border: 1px solid #eee;
   margin-top: 0.2rem;
   text-align: center;
   margin-left: 2%;
   background: #fff;
-  color:#EEE;
+  color: #eee;
   border-radius: 0.2rem;
-  
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -468,8 +434,8 @@ export default {
   text-align: center;
   margin-left: 2%;
   background: #fff;
- 
-  color: #EEE;
+
+  color: #eee;
 }
 
 .list_search img {
@@ -554,5 +520,9 @@ export default {
 .hot_cent span {
   color: #ccc;
   font-size: 12px;
+}
+.mint-swipe-item img {
+  width: 100%;
+  height: 100%;
 }
 </style>

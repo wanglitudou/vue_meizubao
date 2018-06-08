@@ -37,7 +37,7 @@
             </div>
         </div>
         <!-- 暂无数据 -->
-        <div class="noData" v-if="showNodata">
+        <div class="nodata" v-if="showNodata">
             暂无数据
         </div>
     </div>
@@ -353,12 +353,5 @@ export default {
 .searchs {
   font-size: 16px;
 }
-.noData {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-}
+
 </style>
