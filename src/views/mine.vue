@@ -11,34 +11,48 @@
           </div>
         </div>
         <div class="ban_right">
-          <span class="iconfont icons icon-yingyongchengxu-xianxing"
-                @click="Perfectinformation()"></span>
+          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png"
+                 alt=""></span>
+          <!-- <span class="iconfont icons icon-yingyongchengxu-xianxing"
+                @click="Perfectinformation()"></span> -->
         </div>
       </div>
       <div class="list_cent">
         <p @click="curriculum()">
           <span>
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            <span class="curriculum_mine"><img src="../assets/icon/curriculum.png"
+                   alt=""></span>
+            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             <span class="mine">我的课程</span>
 
           </span>
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
+          <span class="icon_right"><img src="../assets/icon/arrow.png"
+                 alt=""></span>
+          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
         </p>
         <p @click="integral()">
           <span>
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            <span class="curriculum_mine"><img src="../assets/icon/integral.png"
+                   alt=""></span>
+            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             <span class="mine">我的积分</span>
 
           </span>
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
+          <span class="icon_right"><img src="../assets/icon/arrow.png"
+                 alt=""></span>
+          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
         </p>
         <p @click="address()">
           <span>
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            <span class="curriculum_mine"><img src="../assets/icon/address.png"
+                   alt=""></span>
+            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             <span class="mine">我的地址</span>
 
           </span>
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
+          <span class="icon_right"><img src="../assets/icon/arrow.png"
+                 alt=""></span>
+          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
         </p>
         <!--<p @click="customservice()">-->
         <!--<span>-->
@@ -58,11 +72,15 @@
         <!--</p>-->
         <p @click="photograph()">
           <span>
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            <span class="curriculum_mine"><img src="../assets/icon/database.png"
+                   alt=""></span>
+            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             <span class="mine">资料库</span>
 
           </span>
-          <span class="iconfont icon-yingyongchengxu-xianxing"></span>
+          <span class="icon_right"><img src="../assets/icon/arrow.png"
+                 alt=""></span>
+          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
         </p>
         <!--<p>-->
         <!--<span>-->
@@ -199,6 +217,10 @@ export default {
   color: #fff;
   /* background: red; */
 }
+.banner .ban_right img {
+  width: 26px;
+  height: 26px;
+}
 .icons {
   color: #ddeecc;
 }
@@ -222,6 +244,17 @@ export default {
 .list_cent p {
   position: relative;
 }
+.icon_right img {
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 5px;
+}
+.curriculum_mine img {
+  width: 26px;
+  height: 26px;
+  margin-top: 5px;
+}
 .list_cent p i {
   color: #fd4689;
   font-size: 0.36rem;
@@ -230,5 +263,7 @@ export default {
   position: absolute;
   top: -0px;
   left: 42px;
+  margin-left: 20px;
+  font-size: 14px;
 }
 </style>
