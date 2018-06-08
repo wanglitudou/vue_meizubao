@@ -208,11 +208,16 @@ export default {
     updataimg(e, num) {
       let file = e.target.files[0];
       console.log(file);
-      alert(file.isClosed);
-      alert(file.path);
-      alert(file.type);
-      alert(file.name);
-      alert(file.lastModified);
+      // alert(file.isClosed);
+      // alert(file.path);
+      // if (file.isClosed == undefined) {
+      //   return Toast("上传失败");
+      // }else{
+      //    }
+      // }
+      // alert(file.type);
+      // alert(file.name);
+      // alert(file.lastModified);
 
       var formData = new FormData();
       //上传图片
