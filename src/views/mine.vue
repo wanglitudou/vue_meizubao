@@ -22,37 +22,31 @@
           <span>
             <span class="curriculum_mine"><img src="../assets/icon/curriculum.png"
                    alt=""></span>
-            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             <span class="mine">我的课程</span>
 
           </span>
           <span class="icon_right"><img src="../assets/icon/arrow.png"
                  alt=""></span>
-          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
         </p>
         <p @click="integral()">
           <span>
             <span class="curriculum_mine"><img src="../assets/icon/integral.png"
                    alt=""></span>
-            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             <span class="mine">我的积分</span>
 
           </span>
           <span class="icon_right"><img src="../assets/icon/arrow.png"
                  alt=""></span>
-          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
         </p>
         <p @click="address()">
           <span>
             <span class="curriculum_mine"><img src="../assets/icon/address.png"
                    alt=""></span>
-            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             <span class="mine">我的地址</span>
 
           </span>
           <span class="icon_right"><img src="../assets/icon/arrow.png"
                  alt=""></span>
-          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
         </p>
         <!--<p @click="customservice()">-->
         <!--<span>-->
@@ -245,15 +239,15 @@ export default {
   position: relative;
 }
 .icon_right img {
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
-  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 10px;
 }
 .curriculum_mine img {
-  width: 26px;
-  height: 26px;
-  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
 }
 .list_cent p i {
   color: #fd4689;
@@ -263,7 +257,9 @@ export default {
   position: absolute;
   top: -0px;
   left: 42px;
-  margin-left: 20px;
+  font-size: 15px;
+  color: #333333;
+  margin-left: 15px;
   font-size: 14px;
 }
 </style>
