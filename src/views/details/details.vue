@@ -243,31 +243,31 @@
           return false
         }
 
-console.log(this.month)
+// console.log(this.month)
 
-//         this.$router.push({
-// //          path: '/confirm/instrument',
-//           name: "confirm",
-//           params: {
-//             type: 1,
-//             g_id:this.$route.query.pid,
-//             m_type:1,
-//             strtime:"",
-//             stoptime:"",
-//             stage:this.month,
-//             agreement:this.agreementId,
-//             image:this.data.images[0],
-//             goods_num:1,
-//             total_price:this.month*this.data.firstrent+(this.data.deposit-0),
-//             goods_name:this.data.name,
-//             deposit:this.data.deposit,
+        this.$router.push({
+//          path: '/confirm/instrument',
+          name: "confirm",
+          params: {
+            type: 1,
+            g_id:this.$route.query.pid,
+            m_type:1,
+            strtime:"",
+            stoptime:"",
+            stage:this.month,
+            agreement:this.agreementId,
+            image:this.data.images[0],
+            goods_num:1,
+            total_price:this.month*this.data.firstrent+(this.data.deposit-0),
+            goods_name:this.data.name,
+            deposit:this.data.deposit,
 
 
 
-//             price:this.data.firstrent,
-//             month:this.data.num,
-//           }
-//         })
+            price:this.data.firstrent,
+            month:this.data.num,
+          }
+        })
 
 
 
