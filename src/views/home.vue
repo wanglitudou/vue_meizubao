@@ -2,8 +2,11 @@
   <div class="container">
     <div class="banner">
       <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="item in url">
-          <img :src="item.images" alt="">
+        <mt-swipe-item>
+          <div v-for="item in url">
+            <img :src="item.images" alt="">
+          </div>
+
         </mt-swipe-item>
       </mt-swipe>
 
@@ -109,7 +112,7 @@
 </template>
 <script>
 import { Indicator } from "mint-ui";
-import { Swipe, SwipeItem } from 'mint-ui'
+import { Swipe, SwipeItem } from "mint-ui";
 export default {
   data() {
     return {
@@ -143,8 +146,7 @@ export default {
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
   },
-  mounted: function() {
-  },
+  mounted: function() {},
   methods: {
     //获取token
     // achieve() {

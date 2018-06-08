@@ -191,9 +191,7 @@ export default {
       // console.log(word)
       this.getData("", keyword, this.pages);
     },
-    details() {
-      this.$router.push({ name: "details" });
-    },
+   
     tab(id, index) {
       this.typeid = id;
       console.log(id);
