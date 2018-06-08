@@ -215,7 +215,14 @@ export default {
     },
     updataimg(e, num) {
       let file = e.target.files[0];
-      console.log(file);
+      console.log(file)
+      alert(file.isClosed);
+      alert(file.path);
+      alert(file.type);
+      alert(file.name);
+      alert(file.lastModified);
+  
+      
       var formData = new FormData();
       //上传图片
       formData.append("img", file);
@@ -242,7 +249,8 @@ export default {
         dataType: "json",
         success: function(res) {
           console.log(res);
-          alert(res.data.url);
+          // alert(res.data.url);
+
           if (res.code == 200) {
             that.fileList = res.data;
           }
