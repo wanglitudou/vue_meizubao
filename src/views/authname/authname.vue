@@ -11,7 +11,6 @@
                    v-model="data.id_card"
                    @blur="card()"
                    placeholder="请输入身份证号码">
-
           </span>
         </p>
       </div>
@@ -19,7 +18,6 @@
         <span class="updata_lef">
           <input type="file"
                  class="inpt_imgone"
-                 capture="camera"
                  id="img-upload"
                  accept="image/*">
           <img :src="data.imgOne"
