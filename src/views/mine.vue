@@ -10,13 +10,19 @@
           </div>
         </div>
         <div class="ban_right">
-          <span class="iconfont icons icon-yingyongchengxu-xianxing" @click="Perfectinformation()"></span>
+          <span class="iconfont icons icon-yingyongchengxu-xianxing" @click="Perfectinformation()">
+          </span>
+
+          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png" alt=""></span>
+          <!-- <span class="iconfont icons icon-yingyongchengxu-xianxing"
+                @click="Perfectinformation()"></span> -->
+
         </div>
       </div>
       <div class="list_cent">
         <p @click="curriculum()">
           <span>
-             <span class="icon"><img src="../assets/icon/course.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/course.png" alt=""></span>
             <span class="mine">我的课程</span>
 
           </span>
@@ -28,16 +34,18 @@
             <span class="mine">我的积分</span>
 
           </span>
-           <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
         <p @click="address()">
           <span>
             <span class="icon"><img src="../assets/icon/address.png" alt=""></span>
             <span class="mine">我的地址</span>
-
           </span>
           <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          
         </p>
+      
+       
         <!--<p @click="customservice()">-->
         <!--<span>-->
         <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
@@ -56,20 +64,13 @@
         <!--</p>-->
         <p @click="photograph()">
           <span>
-           <span class="icon"><img src="../assets/icon/database.png" alt=""></span>
+
+            <span class="icon"><img src="../assets/icon/database.png" alt=""></span>
             <span class="mine">资料库</span>
 
           </span>
           <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
-        <!--<p>-->
-        <!--<span>-->
-        <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
-        <!--<span class="mine">我的下载</span>-->
-
-        <!--</span>-->
-        <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
-        <!--</p>-->
       </div>
 
     </div>
@@ -197,6 +198,10 @@ export default {
   color: #fff;
   /* background: red; */
 }
+.banner .ban_right img {
+  width: 26px;
+  height: 26px;
+}
 .icons {
   color: #ddeecc;
 }
@@ -223,6 +228,7 @@ export default {
   display: flex;
 
 }
+
 .list_cent p .icon {
   width: 18.4px;
   height: 17.4px;
@@ -231,6 +237,21 @@ export default {
 .list_cent p .icon img {
   display: block;
   width: 100%;
+}
+.icon_right img {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 10px;
+}
+.curriculum_mine img {
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+}
+.list_cent p i {
+  color: #fd4689;
+  font-size: 0.36rem;
 }
 /* .list_cent p{} */
 .list_cent p .mine {
@@ -248,5 +269,10 @@ export default {
 .list_cent p .more img{
   width: 100%;
   display: block;
+  left: 42px;
+  font-size: 15px;
+  color: #333333;
+  margin-left: 15px;
+  font-size: 14px;
 }
 </style>

@@ -2,22 +2,26 @@
   <div class="container">
     <div class="banner">
       <mt-swipe :auto="4000">
+
         <mt-swipe-item>
           <div v-for="item in url">
             <img :src="item.images" alt="">
           </div>
-
         </mt-swipe-item>
       </mt-swipe>
 
     </div>
 
-    <div class="list_search" ref="search" @click="toSearch">
+    <div class="list_search"
+         ref="search"
+         @click="toSearch">
       <div style="margin-left:20px;">请输入搜索</div>
-      <img src="../assets/icon/search_1.png" alt="111">
+      <img src="../assets/icon/search_1.png"
+           alt="111">
 
     </div>
-    <div ref="scroll" class="scrolls">
+    <div ref="scroll"
+         class="scrolls">
       <div class="list_ban">
         <div class="hotrent">
           <span>热租仪器</span>
@@ -26,12 +30,17 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
-            <img :src="item.images" alt="" @click="details(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in rentinginstrument"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent" @click="detail()">
+        <div class="hot_cent"
+             @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
@@ -44,12 +53,17 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
-            <img :src="item.images" alt="" @click="essence(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in beautyindustry"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent" @click="looksee()">
+        <div class="hot_cent"
+             @click="looksee()">
           <span>查看更多></span>
         </div>
       </div>
@@ -61,13 +75,18 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
-            <img :src="item.images" alt="" @click="matching(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in accessoryproducts"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="seemore()">
+        <div class="hot_cent"
+             @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -79,13 +98,18 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
-            <img :src="item.images" alt="" @click="train(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in visualscreen"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="clickpay()">
+        <div class="hot_cent"
+             @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -97,8 +121,12 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
-            <img :src="item.images" alt="" @click="cooperation(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in cooperativeProject"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
