@@ -11,14 +11,8 @@
           </div>
         </div>
         <div class="ban_right">
-          <!-- <span class="iconfont icons icon-yingyongchengxu-xianxing" @click="Perfectinformation()">
-          </span> -->
-
           <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png"
                  alt=""></span>
-          <!-- <span class="iconfont icons icon-yingyongchengxu-xianxing"
-                @click="Perfectinformation()"></span> -->
-
         </div>
       </div>
       <div class="list_cent">

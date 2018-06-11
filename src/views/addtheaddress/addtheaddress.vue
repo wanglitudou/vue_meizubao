@@ -22,9 +22,7 @@
         <span @click="levl()">请选择 ></span>
 
       </p>
-
       <p class="detail_address">
-
         <span class="detail_add">
           <input type="text"
                  class="inpts_text"
@@ -32,13 +30,11 @@
                  v-model="address">
         </span>
       </p>
-
       <p class="tacit_address">
         <span>
           <el-checkbox v-model="checked"
                        class="give_icon"></el-checkbox>
         </span>
-
         <span>设为默认地址</span>
       </p>
     </div>
@@ -54,12 +50,9 @@
                  v-on:confirm="confirmFn"></vue-pickers>
   </div>
 </template>
-
-
 <script>
 //mint-ui三级
-import { Picker } from "mint-ui";
-import { Toast } from "mint-ui";
+import { Picker, Toast } from "mint-ui";
 import VuePickers from "vue-pickers";
 import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
 export default {
