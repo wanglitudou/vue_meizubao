@@ -34,6 +34,7 @@ import pageindustry from "../views/pageindustry/pageindustry.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
 import mediaDetails from "../views/photograph/mediaDetails.vue";
 import search from "../views/search/search.vue";
+import dataBase from '../views/dataBase/index.vue'
 let routes = [
   {
     path: "/",
@@ -247,7 +248,12 @@ let routes = [
     name: "mediaDetails",
     path: "/mediaDetails",
     component: mediaDetails
-  }
+  },
+  {
+    name: "dataBase",
+    path: "/dataBase",
+    component: dataBase
+  },
   // {
   //   name: "mine",
   //   path: "mine",

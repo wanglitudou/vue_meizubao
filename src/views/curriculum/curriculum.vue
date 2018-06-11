@@ -1,59 +1,12 @@
 <template>
     <div class="container">
-        <!-- <div class="course">
-            <div class="list_search">
-                <div class="searchs">
-                    <input type="text"
-                           placeholder="请输入搜索内容">
-                    <img src="../../assets/icon/search_1.png"
-                         alt="">
-                </div>
-            </div>
-            <div class="list_cou">
-                <div class="cou_one">
-                    <div class="cou_lef">
-                        <img src="../../assets/images/icon1.jpg"
-                             alt="">
-                    </div>
 
-                    <div class="cou_rig">
-                        <p class="cou_name">仪器名称</p>
-                        <p class="cou_cent">十点开会覅额回复撒哈斯而后发生符合倒计时十点开会覅额符合倒计时十点开会覅额…</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="list_cou">
-            <div class="cou_one">
-                <div class="cou_lef">
-                    <img src="../../assets/images/icon2.jpg"
-                         alt="">
-                </div>
-
-                <div class="cou_rig">
-                    <p class="cou_name">仪器名称</p>
-                    <p class="cou_cent">十点开会覅额回复撒哈斯而后发生符合倒计时十点开会覅额符合倒计时十点开会覅额…</p>
-                </div>
-            </div>
-        </div>
-        <div class="list_cou">
-            <div class="cou_one">
-                <div class="cou_lef">
-                    <img src="../../assets/images/icon3.jpg"
-                         alt="">
-                </div>
-                <div class="cou_rig">
-                    <p class="cou_name">仪器名称</p>
-                    <p class="cou_cent">十点开会覅额回复撒哈斯而后发生符合倒计时十点开会覅额符合倒计时十点开会覅额…</p>
-                </div>
-            </div>
-        </div> -->
         <!-- 搜索按钮 -->
         <div class="searchTop">
             <search @search="search"></search>
         </div>
         <div class="listContent" v-if="isHaveData">
-            <div class="list" v-for="(item,index) in list " @click="todetail(item.id)" >
+            <div class="list" v-for="(item,index) in list " @click="todetail(item)">
                 <div class="img">
                     <img :src="item.images" alt="">
                 </div>
@@ -63,15 +16,20 @@
                 </div>
             </div>
             <!--加载更多和暂无数据 -->
-            <div class="loadmore">
-                <div class="loading">正在加载</div>  
-                <div class="isNodata">
-                    <p>加载更多</p>
-                </div>
+
+        </div>
+
+        <!-- 暂无数据 -->
+        <div class="nodata" v-else>暂无数据</div>
+        <div class="loadmore" v-if="list.length">
+            <div class="loading" v-if="isload">
+                <mt-spinner type="fading-circle" color="#FD4689"></mt-spinner>
+            </div>
+            <div class="isNodata" v-else>
+                <p @click="loadMore" v-if="iSmore">加载更多</p>
+                <p v-else>数据已全部加载</p>
             </div>
         </div>
-          <!-- 暂无数据 -->
-        <div class="nodata" v-else>暂无数据</div>
     </div>
 </template>
 <script>
@@ -83,20 +41,27 @@ export default {
       keywords: "",
       page: 1,
       list: [],
-      isHaveData:true,
-      count:15,
+      isHaveData: true,
+      count: 15,
+      isload: false,
+      iSmore: false
     };
   },
   created() {
+    Indicator.open();
     this.init(this.keywords, this.page);
   },
   methods: {
     search(keywords) {
-        if(keywords == ''){
-            Toast('搜索不能为空')
-            return false
-        }
-        this.init(keywords,this.page)
+      if (keywords == "") {
+        Toast("搜索不能为空");
+        return false;
+      }
+      this.page = 1;
+      this.list = [];
+      this.keywords = keywords;
+      this.init(keywords, this.page);
+      //   this.code =
     },
     init(keywords, page) {
       this.$axios
@@ -108,20 +73,40 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-              if(res.data.data.length == 0){
-                  this.isHaveData = false
-              }else if(res.data.data.length<this.count){
-                   
-              }else{
-
-              }
+            setTimeout(() => {
+              Indicator.close()
+            },1000)
+            if (res.data.data.length == 0) {
+              this.isHaveData = false;
+            } else if (res.data.data.length < this.count) {
+              this.isload = false;
+              this.iSmore = false;
+              this.isHaveData = true;
+            } else {
+              this.isload = false;
+              this.iSmore = true;
+              this.isHaveData = true;
+            }
             this.list = this.list.concat(res.data.data);
           }
         })
         .catch(res => {});
     },
-    todetail(id){
-      
+    todetail(item) {
+      this.$router.push({
+        name: "dataBase",
+        query: {
+          item:item
+        }
+      });
+    },
+    loadMore() {
+      this.page++;
+      this.isload = true;
+      setTimeout(() => {
+        this.isload = false;
+      }, 1000);
+      this.init(this.keywords, this.page);
     }
   },
   components: {
@@ -132,14 +117,16 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  height: auto;
-  height: calc(100% - 0.88rem);
+  height: 100%;
+  /* height: calc(100% - 0.88rem); */
   background: #fff;
+  position: relative;
 }
 /* new 代码 */
 .searchTop {
   width: 100%;
   height: 44px;
+  z-index: 4;
   position: fixed;
   background: #fff;
   top: 0;
@@ -195,26 +182,30 @@ export default {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-.nodata{
+.nodata {
   width: 100%;
   height: 100%;
   display: flex;
   font-size: 16px;
-  color: #FD4689;
+  color: #fd4689;
   justify-content: center;
   align-items: center;
 }
-.isNodata{
-    font-size: 14px;
-    color: #00A5FF;
-    font-family: PingFangSC-Regular;
+.isNodata {
+  font-size: 14px;
+  color: #00a5ff;
+  font-family: PingFangSC-Regular;
 }
-.loadmore{
- position: absolute;
- bottom: 20px;
- width: 100%;
- justify-content: center;
- align-items: center;
+.loadmore {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 </style>
   

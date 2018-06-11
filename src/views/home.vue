@@ -11,17 +11,15 @@
       </mt-swipe>
 
     </div>
-
-    <div class="list_search"
-         ref="search"
-         @click="toSearch">
-      <div style="margin-left:20px;">请输入搜索</div>
-      <img src="../assets/icon/search_1.png"
-           alt="111">
-
+    <!-- 搜索 -->
+    <div class="search_content">
+      <div class="list_search" ref="search" @click="toSearch">
+        <div style="margin-left:20px;">请输入搜索</div>
+       <img src="../assets/icon/search_1.png" alt="111">
+      </div>
     </div>
-    <div ref="scroll"
-         class="scrolls">
+    <!-- 内容 -->
+    <!-- <div ref="scroll" class="scrolls">
       <div class="list_ban">
         <div class="hotrent">
           <span>热租仪器</span>
@@ -30,17 +28,12 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in rentinginstrument"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="details(item.id)">
+          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
+            <img :src="item.images" alt="" @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent"
-             @click="detail()">
+        <div class="hot_cent" @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
@@ -53,17 +46,12 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in beautyindustry"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="essence(item.id)">
+          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
+            <img :src="item.images" alt="" @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent"
-             @click="looksee()">
+        <div class="hot_cent" @click="looksee()">
           <span>查看更多></span>
         </div>
       </div>
@@ -75,18 +63,13 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in accessoryproducts"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="matching(item.id)">
+          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
+            <img :src="item.images" alt="" @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent"
-             @click="seemore()">
+        <div class="hot_cent" @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -98,18 +81,13 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in visualscreen"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="train(item.id)">
+          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
+            <img :src="item.images" alt="" @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent"
-             @click="clickpay()">
+        <div class="hot_cent" @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -121,12 +99,8 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in cooperativeProject"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="cooperation(item.id)">
+          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
+            <img :src="item.images" alt="" @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -135,7 +109,127 @@
           <span @click="project()">查看更多>> </span>
         </div>
       </div>
+    </div> -->
+    <!-- 内容 -->
+    <div ref="scroll" class="scrolls">
+      <!-- 热租仪器 -->
+        <!-- <div class="list_ban">
+        <div class="hotrent">
+          <span>热租仪器</span>
+        </div>
+        <div class="hotrents">
+          <div></div>
+        </div>
+        <div class="hotimg">
+          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
+            <img :src="item.images" alt="" @click="details(item.id)">
+            <span class="item_name">{{item.name}}</span>
+          </div>
+        </div>
+        <div class="hot_cent" @click="detail()">
+          <span>查看更多></span>
+        </div>
+      </div> -->
+       <div class="list_btn">
+         <!-- title -->
+         <div class="hotrent">
+           <span>热租仪器</span>
+         </div>
+         <div class="hotrents">
+           <div></div>
+         </div>
+         <!-- 内容-->
+          <div class="hotimg">
+          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
+             <img :src="item.images" alt="" @click="details(item.id)">
+            <span class="item_name">{{item.name}}</span>
+          </div>
+        </div>
+        <!-- 查看更多 -->
+        <div class="hot_cent" @click="detail()">
+          <span>查看更多></span>
+        </div>
+       </div>
+      
+      <!-- 美业菁英 -->
+      <div class="list_btn">
+        <div class=" hotrent">
+          <span>美业菁英</span>
+        </div>
+        <div class=" hotrents">
+          <div></div>
+        </div>
+        <div class="hotimg">
+          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
+            <img :src="item.images" alt="" @click="essence(item.id)">
+            <span class="item_name">{{item.name}}</span>
+          </div>
+        </div>
+        <div class="hot_cent" @click="looksee()">
+          <span>查看更多></span>
+        </div>
+      </div>
+      
+      <div class="list_btn">
+        <div class=" hotrent">
+          <span>配套产品</span>
+        </div>
+        <div class=" hotrents">
+          <div></div>
+        </div>
+        <div class="hotimg">
+          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
+            <img :src="item.images" alt="" @click="matching(item.id)">
+            <span class="item_name">{{item.name}}</span>
+
+          </div>
+        </div>
+        <div class="hot_cent" @click="seemore()">
+          <span>查看更多></span>
+        </div>
+      </div>
+
+        <div class="list_btn">
+        <div class=" hotrent">
+          <span>培训视频</span>
+        </div>
+        <div class=" hotrents">
+          <div></div>
+        </div>
+        <div class="hotimg">
+          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
+            <img :src="item.images" alt="" @click="train(item.id)">
+            <span class="item_name">{{item.name}}</span>
+
+          </div>
+        </div>
+        <div class="hot_cent" @click="clickpay()">
+          <span>查看更多></span>
+        </div>
+      </div>
+
+      <div class="list_btn">
+        <div class=" hotrent">
+          <span>合作项目</span>
+        </div>
+        <div class=" hotrents">
+          <div></div>
+        </div>
+        <div class="hotimg">
+          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
+            <img :src="item.images" alt="" @click="cooperation(item.id)">
+            <span class="item_name">{{item.name}}</span>
+
+          </div>
+        </div>
+        <div class="hot_cent">
+          <span @click="project()">查看更多>> </span>
+        </div>
+      </div>
+
+
     </div>
+
   </div>
 </template>
 <script>
@@ -386,18 +480,20 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style  lang="scss">
+@import '../styles/helper.scss';
 .container {
   height: 100%;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
 }
 .scrolls {
   width: 100%;
   height: auto;
+  padding-bottom: 1.2rem;
   /* overflow-y: scroll; */
-  height: calc(100% - 3.81rem);
+  /* height: calc(100% - 3.81rem); */
   /* margin-top: 0.4rem; */
 }
 .banner {
@@ -411,7 +507,7 @@ export default {
   width: 100%;
   height: auto;
 }
-.nav-list ul {
+/* .nav-list ul {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -440,41 +536,38 @@ export default {
 .nav-list ul li span img {
   width: 100%;
   height: 100%;
-}
-.list_search {
-  width: 96%;
-  height: 0.81rem;
-  border: 1px solid #eee;
-  margin-top: 0.2rem;
-  text-align: center;
-  margin-left: 2%;
-  background: #fff;
-  color: #eee;
-  border-radius: 0.2rem;
+} */
 
+.search_content{
+  width: 100%;
+  height: 64px;
+  box-shadow: 0 2px 9px #EEE;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
-.searchs {
-  width: 96%;
-  height: 0.81rem;
-  border: 1px solid #ccc;
-  margin-top: 0.2rem;
-  text-align: center;
-  margin-left: 2%;
-  background: #fff;
 
-  color: #eee;
+.list_search {
+  width: 89.3%; 
+  height: 44px;
+  margin-left: 5.3%;
+  border-radius: 3px;
+   border: 1px solid #eee;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
+ .list_search  img{
+  width: 23px;
+  height: 24px;
+  margin-right: 5.3%;
+}
+.list_search div{
+  font-size: 13px;
+  color: #666;
+} 
 
-.list_search img {
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-.list_ban {
+
+/* .list_ban {
   width: 6.7rem;
   height: 5rem;
   margin: 0.5rem auto 0;
@@ -550,9 +643,84 @@ export default {
 .hot_cent span {
   color: #ccc;
   font-size: 12px;
-}
+} */
 .mint-swipe-item img {
   width: 100%;
   height: 100%;
 }
+.list_btn{
+  width: 94.7%;
+  height: px2rem(253px);
+  margin-left: 2.6%;
+  box-shadow: 0 2px 9px #EEE;
+  margin-top: px2rem(20px);
+   overflow:hidden;
+}
+.list_btn .hotrent{
+  width: 100%;
+  text-align: center;
+  font-size: px2rem(16px);
+  margin-top: px2rem(15px);
+  // height: px2rem(22px);
+  color: #000;
+  font-weight: bold;
+}
+.hotrent span{
+  width: px2rem(64px);
+  height: px2rem(22px);
+
+}
+.hotrents{
+  width: 100%;
+  height: px2rem(2px);
+  display: flex;
+  justify-content: center;
+  margin-top: px2rem(2px);
+}
+.hotrents div{
+  width: px2rem(42px);
+  height: px2rem(2px);
+   background-image: linear-gradient(-130deg, #fd82d9 0%, #fd4689 100%);
+}
+.hotimg{
+  width: 100%;
+  // height: px2rem();
+  height: auto;
+  display: flex;
+ }
+ .hotimg_lef{
+   display: flex;
+    width: px2rem(160px);
+   height: auto;
+   flex-direction: column;
+   align-items: center;
+   margin-left:px2rem(10px);
+     margin-top:px2rem(15px);
+   &:nth-child(2){
+     margin-left: px2rem(15px);
+   }
+ 
+ }
+ .hotimg_lef img{
+   width: px2rem(160px);
+   height: px2rem(120px);
+ }
+ .hotimg_lef .item_name{
+   display: block;
+   width:px2rem(70px);
+   height: px2rem(20px);
+   color: #666;
+   margin-top: px2rem(10px);
+   font-size: px2rem(14px);
+   
+ }
+.hot_cent{
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-size: px2rem(12px);
+  color: #CCC;
+ margin-top:px2rem(10px);
+}
+
 </style>

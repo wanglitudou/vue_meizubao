@@ -2,7 +2,7 @@
 <template>
   <div class="container">
     <div class="cent_ban">
-      <div class="banner">
+      <div class="banners">
         <div class="ban_left">
           <div class="portrait">
             <img :src="headImg" alt="666">
@@ -146,7 +146,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+@import '../styles/helper.scss';
 .container {
   width: 100%;
   height: auto;
@@ -157,9 +158,9 @@ export default {
   width: 100%;
   height: auto;
 }
-.banner {
-  width: 7.5rem;
-  height: 2.6rem;
+.banners {
+  width: 100%;
+  height: px2rem(150px);
   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
   display: flex;
   justify-content: space-between;
@@ -167,46 +168,46 @@ export default {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.banner .ban_left {
-  height: 2rem;
-  line-height: 2rem;
+.banners .ban_left {
+  width: px2rem(120px);
+  height: px2rem(120px);
+  line-height:px2rem(100px);
 }
-.banner .ban_left .portrait {
-  width: 1.52rem;
-  height: 1.52rem;
+.banners .ban_left .portrait {
+  width: px2rem(76px);
+  height:px2rem(76px);
   border-radius: 50%;
-  margin-top: 0.4rem;
+  margin-top: px2rem(23px);
   z-index: 1000;
+  display: flex;
 }
-.banner .ban_left .portrait img {
+.banners .ban_left .portrait img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
-.banner .ban_left .portrait .name {
-  margin-top: -10px;
-  font-size: 16px;
-  position: absolute;
-  top: 20px;
-  left: 30%;
-  color: #fff;
+.banners .ban_left .portrait .name {
+ 
+display: block;
+font-size: 16px;
+color: #000;
 }
 
-.banner .ban_right {
+.banners .ban_right {
   height: 2rem;
   line-height: 2rem;
   color: #fff;
   /* background: red; */
 }
-.banner .ban_right img {
-  width: 26px;
-  height: 26px;
+.banners .ban_right img {
+  width: px2rem(26px);
+  height: px2rem(26px);
 }
 .icons {
   color: #ddeecc;
 }
 .list_cent {
-  width: 7.1rem;
+  width: 94.7%;
   box-shadow: 0 2px 9px 0 rgba(253, 74, 203, 0.15);
   border-radius: 10px;
   margin: 0 auto;
@@ -215,8 +216,8 @@ export default {
 }
 .list_cent p {
   width: 100%;
-  height: 0.88rem;
-  line-height: 0.88rem;
+  height: px2rem(46px);
+  line-height: px2rem(46px);
   border-bottom: 1px solid #f7f7f7;
   display: flex;
   justify-content: space-between;

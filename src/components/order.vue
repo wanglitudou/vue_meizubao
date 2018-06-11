@@ -246,10 +246,11 @@ export default {
   }
 };
 </script>
-<style  scoped>
+<style  lang="scss">
+@import '../styles/helper.scss';
 .order {
   padding-bottom: 50px;
-  margin-top: 0.9rem;
+  margin-top: px2rem(46px);
 }
 .payment {
   width: 96%;

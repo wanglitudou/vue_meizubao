@@ -213,7 +213,7 @@ down(){
               this.bindCopy()
             }
           })
-          .catch(err => {
+          .catch(() => {
             console.log("http请求错误");
             console.log(err);
           });
@@ -237,7 +237,7 @@ down(){
               this.bindCopy()
             }
           })
-          .catch(err => {
+          .catch(() => {
             console.log("http请求错误");
             console.log(err);
           });
