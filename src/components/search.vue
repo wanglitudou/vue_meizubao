@@ -25,12 +25,12 @@ export default {
 </script>
 <style scoped>
 .searchs {
-  width: 96%;
-  height: auto;
-  border: 1px solid #ccc;
-  margin-top: 0.2rem;
+  width: 92%;
+  height: 32px;
+  border: 1px solid #EEEEEE;
+  margin-top: 6px;
   text-align: center;
-  margin-left: 2%;
+  margin-left: 4%;
   background: #fff;
   border-radius: 0.2rem;
   position: fixed;
@@ -45,21 +45,19 @@ export default {
 }
 .searchs input {
   width: 6rem;
-  height: 0.88rem;
+  /* height: 0.88rem; */
   border: 0;
   border-radius: 2px;
   outline: none;
-  padding-left: 1rem;
-  box-sizing: border-box;
-  float: left;
-  margin-left: 0.2rem;
+  padding-left: 15px;
+  box-sizing: border-box; 
 }
 .searchs img {
-  width: 0.5rem;
-  height: 0.5rem;
-  line-height: 0.5rem;
+  width: 23px;
+  height: 24px;
+ 
 }
 .searchs input{
-    font-size: 16px;
+    font-size: 13px;
 }
 </style>

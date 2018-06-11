@@ -2,10 +2,11 @@
   <div class="container">
     <div class="banner">
       <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="item in url"
-                       :key="item.index">
-          <img :src="item.images"
-               alt="">
+
+        <mt-swipe-item>
+          <div v-for="item in url">
+            <img :src="item.images" alt="">
+          </div>
         </mt-swipe-item>
       </mt-swipe>
 

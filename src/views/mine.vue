@@ -5,49 +5,47 @@
       <div class="banner">
         <div class="ban_left">
           <div class="portrait">
-            <img :src="headImg"
-                 alt="666">
+            <img :src="headImg" alt="666">
             <span class="name">{{nickname}}</span>
           </div>
         </div>
         <div class="ban_right">
-          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png"
-                 alt=""></span>
+          <span class="iconfont icons icon-yingyongchengxu-xianxing" @click="Perfectinformation()">
+          </span>
+
+          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png" alt=""></span>
           <!-- <span class="iconfont icons icon-yingyongchengxu-xianxing"
                 @click="Perfectinformation()"></span> -->
+
         </div>
       </div>
       <div class="list_cent">
         <p @click="curriculum()">
           <span>
-            <span class="curriculum_mine"><img src="../assets/icon/curriculum.png"
-                   alt=""></span>
+            <span class="icon"><img src="../assets/icon/course.png" alt=""></span>
             <span class="mine">我的课程</span>
 
           </span>
-          <span class="icon_right"><img src="../assets/icon/arrow.png"
-                 alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
         <p @click="integral()">
           <span>
-            <span class="curriculum_mine"><img src="../assets/icon/integral.png"
-                   alt=""></span>
+            <span class="icon"><img src="../assets/icon/integral.png" alt=""></span>
             <span class="mine">我的积分</span>
 
           </span>
-          <span class="icon_right"><img src="../assets/icon/arrow.png"
-                 alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
         <p @click="address()">
           <span>
-            <span class="curriculum_mine"><img src="../assets/icon/address.png"
-                   alt=""></span>
+            <span class="icon"><img src="../assets/icon/address.png" alt=""></span>
             <span class="mine">我的地址</span>
-
           </span>
-          <span class="icon_right"><img src="../assets/icon/arrow.png"
-                 alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          
         </p>
+      
+       
         <!--<p @click="customservice()">-->
         <!--<span>-->
         <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
@@ -66,24 +64,13 @@
         <!--</p>-->
         <p @click="photograph()">
           <span>
-            <span class="curriculum_mine"><img src="../assets/icon/database.png"
-                   alt=""></span>
-            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
+
+            <span class="icon"><img src="../assets/icon/database.png" alt=""></span>
             <span class="mine">资料库</span>
 
           </span>
-          <span class="icon_right"><img src="../assets/icon/arrow.png"
-                 alt=""></span>
-          <!-- <span class="iconfont icon-yingyongchengxu-xianxing"></span> -->
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
-        <!--<p>-->
-        <!--<span>-->
-        <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
-        <!--<span class="mine">我的下载</span>-->
-
-        <!--</span>-->
-        <!--<span class="iconfont icon-yingyongchengxu-xianxing"></span>-->
-        <!--</p>-->
       </div>
 
     </div>
@@ -234,9 +221,22 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
+    align-items: center;
 }
 .list_cent p {
   position: relative;
+  display: flex;
+
+}
+
+.list_cent p .icon {
+  width: 18.4px;
+  height: 17.4px;
+  display: block;
+}
+.list_cent p .icon img {
+  display: block;
+  width: 100%;
 }
 .icon_right img {
   width: 20px;
@@ -253,9 +253,22 @@ export default {
   color: #fd4689;
   font-size: 0.36rem;
 }
+/* .list_cent p{} */
 .list_cent p .mine {
   position: absolute;
   top: -0px;
+  left: 47px;
+  font-size: 15px;
+  font-family: PingFangSC-Regular, sans-serif;
+}
+.list_cent p .more{
+  width: 20px;
+  height: 14px;
+  display: block;
+}
+.list_cent p .more img{
+  width: 100%;
+  display: block;
   left: 42px;
   font-size: 15px;
   color: #333333;
