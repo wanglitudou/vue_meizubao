@@ -1,14 +1,14 @@
 import "../static/common/reset.css";
 
-import "./font/iconfont.css";
+// import "./font/iconfont.css";
 
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router/router.config.js";
 // import router from "./router";
 // 轮播图用到的swiper
-import "../static/common/swiper.min.css";
-import "../static/common/swiper.min.js";
+// import "../static/common/swiper.min.css";
+// import "../static/common/swiper.min.js";
 //引入element-ui
 
 import ElementUI from "element-ui";
