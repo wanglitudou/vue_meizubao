@@ -5,15 +5,17 @@
       <div class="banner">
         <div class="ban_left">
           <div class="portrait">
-            <img :src="headImg" alt="666">
+            <img :src="headImg"
+                 alt="666">
             <span class="name">{{nickname}}</span>
           </div>
         </div>
         <div class="ban_right">
-          <span class="iconfont icons icon-yingyongchengxu-xianxing" @click="Perfectinformation()">
-          </span>
+          <!-- <span class="iconfont icons icon-yingyongchengxu-xianxing" @click="Perfectinformation()">
+          </span> -->
 
-          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png" alt=""></span>
+          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png"
+                 alt=""></span>
           <!-- <span class="iconfont icons icon-yingyongchengxu-xianxing"
                 @click="Perfectinformation()"></span> -->
 
@@ -22,30 +24,35 @@
       <div class="list_cent">
         <p @click="curriculum()">
           <span>
-            <span class="icon"><img src="../assets/icon/course.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/course.png"
+                   alt=""></span>
             <span class="mine">我的课程</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
         </p>
         <p @click="integral()">
           <span>
-            <span class="icon"><img src="../assets/icon/integral.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/integral.png"
+                   alt=""></span>
             <span class="mine">我的积分</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
         </p>
         <p @click="address()">
           <span>
-            <span class="icon"><img src="../assets/icon/address.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/address.png"
+                   alt=""></span>
             <span class="mine">我的地址</span>
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
-          
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
+
         </p>
-      
-       
+
         <!--<p @click="customservice()">-->
         <!--<span>-->
         <!--<i class="iconfont icon-yingyongchengxu-xianxing"></i>-->
@@ -65,11 +72,13 @@
         <p @click="photograph()">
           <span>
 
-            <span class="icon"><img src="../assets/icon/database.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/database.png"
+                   alt=""></span>
             <span class="mine">资料库</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
         </p>
       </div>
 
@@ -221,12 +230,11 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-    align-items: center;
+  align-items: center;
 }
 .list_cent p {
   position: relative;
   display: flex;
-
 }
 
 .list_cent p .icon {
@@ -261,12 +269,12 @@ export default {
   font-size: 15px;
   font-family: PingFangSC-Regular, sans-serif;
 }
-.list_cent p .more{
+.list_cent p .more {
   width: 20px;
   height: 14px;
   display: block;
 }
-.list_cent p .more img{
+.list_cent p .more img {
   width: 100%;
   display: block;
   left: 42px;
