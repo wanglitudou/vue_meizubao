@@ -64,7 +64,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+@import '../styles/helper.scss';
 .container {
   width: 100%;
   height: auto;
@@ -77,12 +78,14 @@ export default {
 }
 .box {
   width: 100%;
-  height: 3.6rem;
-  border: 1px solid #ccc;
-  margin: 0 auto;
+  height: auto;
+  // padding-bottom: 1.22rem;
+  // border: 1px solid #ccc;
+ 
 }
 .box img {
   width: 100%;
-  height: 100%;
+  height: px2rem(180px);
+ margin-top: px2rem(15px);
 }
 </style>

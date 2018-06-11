@@ -374,7 +374,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+@import '../styles/helper.scss';
 .dora {
   border-bottom: 2px solid #fd4689;
 }
@@ -385,14 +386,14 @@ export default {
   background: #fff;
 }
 .pic_view {
-  width: 7.5rem;
+  width: 100%;
   height: auto;
   margin: 0.2rem auto 0;
 }
 .nav_pic {
   width: 100%;
-  height: 0.88rem;
-  line-height: 0.88rem;
+  height:px2rem(44px);
+  line-height: px2rem(44px);
   box-shadow: 0 2px 9px 0 #eeeeee;
   display: flex;
   justify-content: space-between;

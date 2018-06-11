@@ -114,7 +114,7 @@ export default {
         });
     },
     toTrain(id) {
-      this.$router.push({ name: "train", query: { pid: id } });
+      this.$router.push({ name: "train", query: { pid: id, } });
     },
     loadMore() {
         this.page++

@@ -1,0 +1,6 @@
+@function px2rem($px) {
+    $rem: 37.5px; // 6plus: 41.4  6: 37.5  5: 32.0   (phone width / 10)
+    @return ($px/$rem) + rem;
+  }
+  
+  

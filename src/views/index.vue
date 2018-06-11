@@ -32,8 +32,8 @@ export default {};
 <style >
 .container {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   background: #fff;
   height: auto;
   height: calc(100% - 0.88rem);

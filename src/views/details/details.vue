@@ -295,7 +295,7 @@
   };
 </script>
 <style scoped>
-  @import "./details.css";
+  
 
   .swiper-container{
     height:5rem;
@@ -305,8 +305,9 @@
 
 
 </style>
-<style>
-
+<style lang="scss">
+@import "./details.css";
+@import '../../styles/helper.scss';
   #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title{
     font-size:0.32rem;
   }
