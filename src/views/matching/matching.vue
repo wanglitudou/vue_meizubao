@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="match-container">
     <div class="list_bans">
-      <div class="banners">
+      <div class="matchBanner">
         <img :src="data.images && data.images[0]"
              alt="">
       </div>
@@ -167,82 +167,86 @@
 
   };
 </script>
-<style scoped>
-  .container {
+<style lang="scss">
+@import '../../styles/helper.scss';
+  .match-container {
     width: 100%;
-    height: calc(100% - 0.88rem);
+    /* height: calc(100% - 0.88rem); */
+    height: auto;
     background: #fff;
   }
 
   .list_bans {
-    width: 7.068rem;
-    margin: 0.2rem auto 0;
+    width: 94.5%;
+    margin: 0 2.7%;
     overflow-y: scroll;
+    padding-bottom: 1.3rem;
   }
 
-  .banners {
-    width: 7.068rem;
+  .matchBanner {
+    width: 100%;
     height: 5rem;
-    margin: 0.2rem auto 0;
+    /* margin: 0.2rem  0; */
   }
 
-  .banners img {
+  .matchBanner img {
     width: 100%;
     height: 100%;
   }
 
   .pro_name {
-    height: 1rem;
-    line-height: 1rem;
+    height: px2rem(47px);
+    line-height: px2rem(47px);
     border: 1px solid #f7f7f7;
-    margin-left: 2px;
+    // margin-left: 2px;
   }
 
   .pro_names {
     margin-left: 20px;
-    font-size: 16px;
+    font-size: px2rem(16px);
     color: #000000;
     letter-spacing: 0;
+    color: #000;
   }
 
   .list_coor {
-    width: 7.068rem;
-    height: 1.8rem;
-    margin-top: 0.1rem;
+    width: 100%;
+    height: px2rem(90px);
+    margin-top: px2rem(15px);
     border-radius: 2px;
   }
 
   .cate_pro {
-    width: 7.068rem;
-    height: 0.9rem;
-    line-height: 0.9rem;
+    width: 100%;
+    height: px2rem(44px);
+    line-height: px2rem(44px);
     border: 1px solid #f7f7f7;
   }
 
   .cate_pro span {
     margin-left: 20px;
-    font-size: 14px;
+    font-size: px2rem(14px);
     color: #666666;
     letter-spacing: 0;
   }
 
   .cate_cen {
-    width: 7.068rem;
-    height: 0.9rem;
-    line-height: 0.9rem;
+    width: 100%;
+    height: px2rem(44px);
+    line-height: px2rem(44px);
     border: 1px solid #f7f7f7;
   }
 
   .cate_cen span {
     margin-left: 20px;
-    font-size: 14px;
+    font-size: px2rem(14px);
     color: #666666;
     letter-spacing: 0;
   }
 
   .price_cent {
-    width: 7.068rem;
-    height: 3.8rem;
+    width: 100%;
+    height: px2rem(138px);
     background: #ffffff;
     box-shadow: 0 2px 9px 0 #eeeeee;
     border-radius: 2px;
@@ -250,13 +254,14 @@
   }
 
   .pri_common {
-    width: 7.068rem;
-    height: 0.91rem;
-    line-height: 0.91rem;
+    width: 100%;
+    height: px2rem(44px);
+    line-height: px2rem(44px);
     border-bottom: 1px solid #f7f7f7;
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+    font-size: px2rem(14px);
   }
 
   .pri_mon {
@@ -278,27 +283,32 @@
   }
 
   .pro_detail {
-    width: 7.068rem;
-    height: 2rem;
-    background: #ffffff;
-    box-shadow: 0 2px 9px 0 #eeeeee;
-    border-radius: 3px;
-    margin-top: 5px;
-    margin-bottom: 0.6rem;
+    width:100%;
+    height: auto;
+    // background: #ffffff;
+    box-shadow: 0 2px 9px 0 #EEE;
+    border-radius: px2rem(3px);
+   overflow: hidden;
+    margin-top: px2rem(15px);
   }
 
   .pro_det {
-    padding: 0.2rem;
-    font-size: 14px;
+    // padding: 0.2rem;
+    font-size: px2rem(14px);
     color: #000000;
     letter-spacing: 0;
+    font-weight: bold;
+    margin: px2rem(10px)
   }
 
   .pro_beg {
-    padding: 0.1rem;
-    font-size: 14px;
+    // padding: 0.1rem;
+    font-size: px2rem(14px);
     color: #666666;
     letter-spacing: 0;
+    margin-left: px2rem(10px);
+    line-height: px2rem(20px);
+    margin-bottom: px2rem(20px);
   }
 
   .spinner {

@@ -42,9 +42,10 @@ export default {
   border-radius: 3px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .searchs input {
-  width: 6rem;
+  /* width: 6rem; */
   /* height: 0.88rem; */
   border: 0;
   border-radius: 2px;
@@ -55,6 +56,7 @@ export default {
 .searchs img {
   width: 23px;
   height: 24px;
+  margin-right: 10px;
  
 }
 .searchs input{

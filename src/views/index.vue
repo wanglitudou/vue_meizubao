@@ -4,22 +4,22 @@
     <router-view class="wrapper"></router-view>
     <ul class="nav">
       <router-link :tag="'li'"
-                   :to="{name:'home'}">
+                   :to="{path:'/home'}">
         <span class="icon icon1"></span>
         <span class="spanInfo">首页</span>
       </router-link>
       <router-link :tag="'li'"
-                   :to="{name:'catagory'}">
+                   :to="{path:'/catagory'}">
         <span class="icon icon2"></span>
         <span class="spanInfo">分类</span>
       </router-link>
       <router-link :tag="'li'"
-                   :to="{name:'cart'}">
+                   :to="{path:'/cart'}">
         <span class="icon icon3"></span>
         <span class="spanInfo">订单</span>
       </router-link>
       <router-link :tag="'li'"
-                   :to="{name:'mine'}">
+                   :to="{path:'/mine'}">
         <span class="icon icon4"></span>
         <span class="spanInfo">我的</span>
       </router-link>
@@ -32,15 +32,16 @@ export default {};
 <style >
 .container {
   height: 100%;
-  /* display: flex; */
-  /* flex-direction: column; */
-  background: #fff;
-  height: auto;
-  height: calc(100% - 0.88rem);
+  overflow: hidden;
+  /* background: #fff; */
+  /* height: 100%; */
+   /* height: calc(100% - 1.2rem); */
+   /* overflow: hidden; */
+
 }
-.wrapper {
+/* .wrapper {
   flex: 1;
-}
+} */
 .nav {
   width: 100%;
   height: 1.1rem;
@@ -53,6 +54,7 @@ export default {};
   padding-top: 0.15rem;
   box-sizing: border-box;
   color: #999;
+  z-index: 2000;
   /* box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05); */
 }
 .nav li {

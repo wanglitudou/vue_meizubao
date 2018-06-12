@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="train-container">
     <div>
 
       <div class="cent_list">
@@ -189,43 +189,51 @@ export default {
   }
 };
 </script>
-<style scoped>
-.container {
+<style lang="scss">
+@import '../../styles/helper.scss';
+.train-container {
   width: 100%;
   background-color: #fff;
   height: calc(100% - 1rem);
 }
 
 .cent_list {
+  width: 94.7%;
+  margin-left: 2.7%;
   height: auto;
   overflow-y: scroll;
 }
 
 .list_lists {
-  height: 5.58rem;
+  // height: 5.58rem;\
+  // height: px2rem(280px);
+  width: 100%;
+  height: auto;
+    // box-shadow: 0 2px 9px 0 #eeeeee;
 }
 
 .banner {
-  width: 7.068rem;
-  height: 5rem;
+  width: 100%;
+  height: px2rem(250px);
   margin: 0.2rem auto 0;
-  box-shadow: 0 2px 9px 0 #eeeeee;
+  // box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
 }
 
 .banner img {
   width: 100%;
-  height: 100%;
+  height: 100%; 
 }
 
 .name_project {
-  width: 7.06rem;
-  height: 0.58rem;
-  line-height: 0.58rem;
+  width: 100%;
+  height: px2rem(30px);
+  line-height: px2rem(30px);
   margin: 0rem auto 0;
   background: #ffffff;
-  box-shadow: 0 2px 9px 0 #eeeeee;
+  // box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
+  font-weight: bold;
 }
 
 .name_pro {
@@ -256,7 +264,7 @@ export default {
   width: 7.068rem;
   height: 0.912rem;
   line-height: 0.912rem;
-  border: 1px solid #f7f7f7;
+  // border: 1px solid #f7f7f7;
   display: flex;
   justify-content: space-between;
   /* padding: 0 20px; */
@@ -266,12 +274,13 @@ export default {
 }
 
 .name_intro {
-  width: 7.068rem;
-  height: 2rem;
-  background: #ffffff;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  border-radius: 3px;
-  margin: 0.2rem auto 0;
+  width: 100%;
+  height: auto;
+  // box-shadow: 0 2px 9px 0 #EEE;
+  // height: px2rem(125px);
+  // background: #ffffff;
+  // border-radius: 3px;
+  // margin: 0.2rem auto 0;
 }
 
 .intro_pro {
@@ -283,6 +292,8 @@ export default {
 
 .intro_con {
   margin: 0.2rem;
+  // margin:px2rem(16px);
+  line-height: px2rem(30px);
   font-size: 14px;
   color: #666666;
   letter-spacing: 0;
