@@ -18,10 +18,10 @@
         <span class="updata_lef">
           <input type="file"
                  class="inpt_imgone"
-                 id="img-upload"
-                 multiple
                  capture="camera"
+                 id="choose"
                  accept="image/*"
+                 multiple
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
