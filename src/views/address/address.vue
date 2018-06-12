@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="list_cont">
-
       <div class="list_one"
            v-for="item in list"
            :key="item.index">
