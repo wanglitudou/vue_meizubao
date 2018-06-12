@@ -3,10 +3,10 @@
     <div class="banner">
       <mt-swipe :auto="4000">
 
-        <mt-swipe-item>
-          <div v-for="item in url">
+        <mt-swipe-item v-for="item in url">
+        
             <img :src="item.images" alt="">
-          </div>
+          
         </mt-swipe-item>
       </mt-swipe>
 
@@ -497,11 +497,11 @@ export default {
   /* margin-top: 0.4rem; */
 }
 .banner {
-  height: 3rem;
+  height: px2rem(150px);
 }
 .banner .swiper-container {
   width: 100%;
-  height: 3rem;
+  height: pz2rem(150px);
 }
 .banner .swiper-container img {
   width: 100%;
