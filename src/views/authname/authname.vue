@@ -18,6 +18,7 @@
         <span class="updata_lef">
           <input type="file"
                  class="inpt_imgone"
+                 id="img-upload"
                  multiple
                  capture="camera"
                  accept="image/*"
@@ -28,6 +29,7 @@
 
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
+                 id="img-upload"
                  multiple
                  capture="camera"
                  accept="image/*"
@@ -49,6 +51,7 @@
       <div class="up_data up_dataimg">
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
+                 id="img-upload"
                  multiple
                  capture="camera"
                  accept="image/*"
@@ -58,6 +61,7 @@
         </span>
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
+                 id="img-upload"
                  multiple
                  capture="camera"
                  accept="image/*"
