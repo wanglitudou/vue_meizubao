@@ -220,8 +220,184 @@
 
   }
 </script>
-<style scoped>
-  @import "./essence.css";
+<style lang="scss">
+  // @import "./essence.css";
+  @import '../../styles/helper.scss';
+  .containerss {
+  width: 100%;
+  height: calc(100% - 0rem);
+  background: #fff;
+}
+.cent_list {
+  width: 94.7%;
+  height: auto;
+  margin: px2rem(10px) 2.6%;
+  overflow-y: scroll;
+  padding-bottom: 1.5rem;
+}
+.cent_list .ban_two {
+  width: 100%;
+  height: px2rem(222px);
+  display: flex;
+  justify-content: space-between;
+  // background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  border-radius: px2rem(2px);
+}
+.cent_list .ban_two .ban_lef {
+  width: 50%;
+  height: 100%;
+  background: red;
+}
+.cent_list .ban_two .ban_lef img {
+  width: 100%;
+  height: 100%;
+}
+.cent_list .ban_two .ban_rig {
+  width: 50%;
+  height: 100%;
+  margin-top: px2rem(10px);
+  background: #fff;
+ margin-left: px2rem(10px);
+}
+.cent_list .ban_two .ban_rig p {
+   margin-top: p2rem(15px);
+  // padding: 0.1rem 0.1rem;
+  font-size: px2rem(14px);
+  color: #000000;
+  letter-spacing: 0;
+   &:nth-child(1){
+    font-size: px2rem(16px);
+    margin-top: px2rem(10px)
+  }
+  margin-top: px2rem(15px);
+  // / / line-height: px2rem
+}
+.metting {
+  width: 100%;
+  margin: px2rem(15px) auto 0;
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+.metting p {
+  margin:2.7%;
+  // margin-top: px2rem(15px);
+  font-size: px2rem(14px);
+  color: #333333;
+  letter-spacing: 0;
+}
+.list_app {
+  width: 100%;
+  // height: px2rem(217px);
+  height: auto;
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  border-radius: 2px;
+  margin-top: 15px;
+}
+
+.list_app .list_time {
+  height: 0.8rem;
+  line-height: 0.8rem;
+  margin-left: 20px;
+  border-bottom: 1px solid #f7f7f7;
+  font-size: px2rem(14px);
+  font-weight: bold;
+}
+.list_app .list_begin {
+  height: 0.88rem;
+  line-height: 0.88rem;
+  border-bottom: 1px solid #f7f7f7;
+  padding: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #333333;
+  letter-spacing: 0;
+}
+.list_app .list_tech {
+  height:px2rem(44px);
+  line-height: px2rem(44px);
+  border-bottom: 1px solid #f7f7f7;
+  padding: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: px2rem(14px);
+  color: #333333;
+  letter-spacing: 0;
+}
+.list_app .list_apvance {
+  height: px2rem(44px);
+  line-height: px2rem(44px);
+  border-bottom: 1px solid #f7f7f7;
+ 
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: px2rem(14px);
+  color: #333333;
+  letter-spacing: 0;
+}
+.list_app .list_rent {
+  height: 0.88rem;
+  line-height: 0.88rem;
+  border-bottom: 1px solid #f7f7f7;
+  font-size: 14px;
+  color: #fd4689;
+  letter-spacing: 0;
+  text-align: center;
+}
+.foot_cent {
+  width: 100%;
+  margin-top: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #ffffff;
+}
+.foot_cent .total_foot {
+  width: 7.068rem;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.2rem auto 0;
+}
+.foot_cent .total_foot .total_lef {
+  width: 70%;
+  font-size: 14px;
+  color: #333333;
+  letter-spacing: 0;
+}
+.foot_cent .total_foot .total_lef .tinct {
+  font-size: 17px;
+  color: #fd4689;
+  letter-spacing: 0;
+}
+.foot_cent .total_foot .total_lef .add {
+  margin-left: 10px;
+}
+.foot_cent .total_foot .total_rig {
+  width: 30%;
+  text-align: center;
+  background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+  box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+  border-radius: 3px;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
+.mon_ery {
+  font-size: 18px;
+  color: #fd4689;
+  letter-spacing: 0;
+}
+
 </style>
 
 

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="container">
+  <div class="cartcontainer">
     <div class="pic_view">
       <div class="nav_pic">
         <!-- <span v-for="(item,index) in tabs"
@@ -379,16 +379,18 @@ export default {
 .dora {
   border-bottom: 2px solid #fd4689;
 }
-.container {
+.cartcontainer {
   width: 100%;
-  height: auto;
-  height: calc(100% -0.88rem);
+  height: 100%;
+  // height: calc(100% -0.88rem);
   background: #fff;
+  overflow: scroll;
 }
 .pic_view {
   width: 100%;
-  height: auto;
-  margin: 0.2rem auto 0;
+  height: 100%;
+  // margin: 0.2rem auto 0;
+  // overflow: hidden;
 }
 .nav_pic {
   width: 100%;
@@ -572,5 +574,32 @@ button::after {
   /* //给自定义的图标实现点击下来功能 */
   pointer-events: none;
   transform: rotate(180deg);
+}
+.nav {
+  width: 100%;
+  height: 1.1rem;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #ffffff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05);
+  padding-top: 0.15rem;
+  box-sizing: border-box;
+  color: #999;
+  /* box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05); */
+}
+.nav li {
+  flex: 1;
+  text-align: center;
+}
+.router-link-active {
+  color: #fd4689;
+}
+.nav li span {
+  display: block;
+  height: 50%;
+  margin: 0 auto;
+  font-size: 10px;
 }
 </style>

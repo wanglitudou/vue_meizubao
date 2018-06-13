@@ -1,51 +1,48 @@
 <template>
-  <div class="container">
-    <div class="banner">
-      <mt-swipe :auto="4000">
+  <div class="homecontainer">
+    <div class="slider-box">
 
-        <mt-swipe-item v-for="(item,index ) in url">
-          <!-- <div > -->
+      <div class="banner">
+        <mt-swipe :auto="4000">
 
-          <img :src="item.images"
-               alt="">
+          <mt-swipe-item v-for="(item,index) in url" :key="index">
 
-          <!-- </div> -->
+            <img :src="item.images" alt="">
 
-        </mt-swipe-item>
-      </mt-swipe>
-
-    </div>
-    <!-- 搜索 -->
-    <div class="search_content">
-      <div class="list_search"
-           ref="search"
-           @click="toSearch">
-        <div style="margin-left:20px;">请输入搜索</div>
-        <img src="../assets/icon/search_1.png"
-             alt="111">
+          </mt-swipe-item>
+        </mt-swipe>
       </div>
-    </div>
-    <!-- 内容 -->
-    <!-- <div ref="scroll" class="scrolls">
-      <div class="list_ban">
+      <!-- 搜索 -->
+      <div class="search_content">
+        <div class="list_search" ref="search" @click="toSearch">
+          <div style="margin-left:20px;">请输入搜索</div>
+          <img src="../assets/icon/search_1.png" alt="111">
+        </div>
+      </div>
+
+      <div class="list_btn">
+        <!-- title -->
         <div class="hotrent">
           <span>热租仪器</span>
         </div>
         <div class="hotrents">
           <div></div>
         </div>
+        <!-- 内容-->
         <div class="hotimg">
           <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
             <img :src="item.images" alt="" @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
+        <!-- 查看更多 -->
         <div class="hot_cent" @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
 
-      <div class="list_ban">
+      <!-- 美业菁英 -->
+      <div class="list_btn">
         <div class=" hotrent">
           <span>美业菁英</span>
         </div>
@@ -62,7 +59,8 @@
           <span>查看更多></span>
         </div>
       </div>
-      <div class="list_ban">
+
+      <div class="list_btn">
         <div class=" hotrent">
           <span>配套产品</span>
         </div>
@@ -74,13 +72,14 @@
             <img :src="item.images" alt="" @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
+            <div class="hot_cent" @click="seemore()">
+              <span>查看更多></span>
+            </div>
           </div>
         </div>
-        <div class="hot_cent" @click="seemore()">
-          <span>查看更多></span>
-        </div>
       </div>
-      <div class="list_ban">
+
+      <div class="list_btn">
         <div class=" hotrent">
           <span>培训视频</span>
         </div>
@@ -94,11 +93,12 @@
 
           </div>
         </div>
-        <div class="hot_cent" @click="clickpay()">
+        <div class="hot_cent" @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
-      <div class="list_ban">
+
+      <div class="list_btn">
         <div class=" hotrent">
           <span>合作项目</span>
         </div>
@@ -112,150 +112,8 @@
 
           </div>
         </div>
-        <div class="hot_cent">
-          <span @click="project()">查看更多>> </span>
-        </div>
-      </div>
-    </div> -->
-    <!-- 内容 -->
-    <div ref="scroll"
-         class="scrolls">
-      <!-- 热租仪器 -->
-      <!-- <div class="list_ban">
-        <div class="hotrent">
-          <span>热租仪器</span>
-        </div>
-        <div class="hotrents">
-          <div></div>
-        </div>
-        <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
-            <img :src="item.images" alt="" @click="details(item.id)">
-            <span class="item_name">{{item.name}}</span>
-          </div>
-        </div>
-        <div class="hot_cent" @click="detail()">
+        <div class="hot_cent" @click="clickpay()">
           <span>查看更多></span>
-        </div>
-      </div> -->
-      <div class="list_btn">
-        <!-- title -->
-        <div class="hotrent">
-          <span>热租仪器</span>
-        </div>
-        <div class="hotrents">
-          <div></div>
-        </div>
-        <!-- 内容-->
-        <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in rentinginstrument"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="details(item.id)">
-            <span class="item_name">{{item.name}}</span>
-          </div>
-        </div>
-        <!-- 查看更多 -->
-        <div class="hot_cent"
-             @click="detail()">
-          <span>查看更多></span>
-        </div>
-      </div>
-
-      <!-- 美业菁英 -->
-      <div class="list_btn">
-        <div class=" hotrent">
-          <span>美业菁英</span>
-        </div>
-        <div class=" hotrents">
-          <div></div>
-        </div>
-        <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in beautyindustry"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="essence(item.id)">
-            <span class="item_name">{{item.name}}</span>
-          </div>
-        </div>
-        <div class="hot_cent"
-             @click="looksee()">
-          <span>查看更多></span>
-        </div>
-      </div>
-
-      <div class="list_btn">
-        <div class=" hotrent">
-          <span>配套产品</span>
-        </div>
-        <div class=" hotrents">
-          <div></div>
-        </div>
-        <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in accessoryproducts"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="matching(item.id)">
-            <span class="item_name">{{item.name}}</span>
-
-          </div>
-        </div>
-        <div class="hot_cent"
-             @click="seemore()">
-          <span>查看更多></span>
-        </div>
-      </div>
-
-      <div class="list_btn">
-        <div class=" hotrent">
-          <span>培训视频</span>
-        </div>
-        <div class=" hotrents">
-          <div></div>
-        </div>
-        <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in visualscreen"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="train(item.id)">
-            <span class="item_name">{{item.name}}</span>
-
-          </div>
-        </div>
-        <div class="hot_cent"
-             @click="clickpay()">
-          <span>查看更多></span>
-        </div>
-      </div>
-
-      <div class="list_btn">
-        <div class=" hotrent">
-          <span>合作项目</span>
-        </div>
-        <div class=" hotrents">
-          <div></div>
-        </div>
-        <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in cooperativeProject"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="cooperation(item.id)">
-            <span class="item_name">{{item.name}}</span>
-
-          </div>
-        </div>
-        <div class="hot_cent">
-          <span @click="project()">查看更多>> </span>
         </div>
       </div>
 
@@ -513,17 +371,23 @@ export default {
 </script>
 <style  lang="scss">
 @import "../styles/helper.scss";
-.container {
+
+.homecontainer {
   height: 100%;
-  overflow-y: auto;
+  overflow: scroll;
+  padding-bottom: 50px;
   // display: flex;
   // flex-direction: column;
 }
+.slider-box {
+  // padding-bottom: 50px;
+}
 .scrolls {
   width: 100%;
-  height: auto;
-  padding-bottom: 1.2rem;
-  /* overflow-y: scroll; */
+  // height: auto;
+  // padding-bottom: 1.2rem;
+  // overflow: hidden;
+  // /* overflow-y: scroll; */
   /* height: calc(100% - 3.81rem); */
   /* margin-top: 0.4rem; */
 }
@@ -538,7 +402,7 @@ export default {
   width: 100%;
   height: auto;
 }
-/* .nav-list ul {
+.nav-list ul {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -567,7 +431,7 @@ export default {
 .nav-list ul li span img {
   width: 100%;
   height: 100%;
-} */
+}
 
 .search_content {
   width: 100%;

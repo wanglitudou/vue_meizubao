@@ -32,15 +32,16 @@ export default {};
 <style >
 .container {
   height: 100%;
-  /* display: flex; */
-  /* flex-direction: column; */
-  background: #fff;
-  height: auto;
-  height: calc(100% - 0.88rem);
+  overflow: hidden;
+  /* background: #fff; */
+  /* height: 100%; */
+   /* height: calc(100% - 1.2rem); */
+   /* overflow: hidden; */
+
 }
-.wrapper {
+/* .wrapper {
   flex: 1;
-}
+} */
 .nav {
   width: 100%;
   height: 1.1rem;
@@ -53,6 +54,7 @@ export default {};
   padding-top: 0.15rem;
   box-sizing: border-box;
   color: #999;
+  z-index: 2000;
   /* box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05); */
 }
 .nav li {

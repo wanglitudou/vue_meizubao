@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="cooperation-container">
     <div class="con_cents">
       <div class="con_pro">
 
 
-        <div class="banner">
+        <div class="cooperationBanner">
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="item in data.images">
@@ -201,41 +201,49 @@ export default {
   }
 };
 </script>
-<style scoped>
-.container {
+<style lang="scss">
+@import '../../styles/helper.scss';
+.cooperation-container {
   width: 100%;
   height: calc(100% - 1rem);
   background: #fff;
 }
 .con_cents {
-  width: 7.1rem;
+  width: 94.7%;
+  margin-left: 2.6%;
   height: auto;
   overflow-y: scroll;
-  margin: 0.2rem auto 0;
+  /* margin: 0.2rem auto 0; */
 }
 .con_pro {
-  width: 7.1rem;
-  height: 6rem;
+  width: 100%;
+  height: px2rem(297px);
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
   margin: 0.2rem auto 0;
 }
-.banner {
-  width: 7.1rem;
-  height: 5rem;
+.cooperationBanner {
+  width: 100%;
+  height: px2rem(250px);
 }
 .swiper-container{
-  height:5rem;
+  width: 100%;
+  height:100%;
+  img{
+    width: 100%;
+    height:  px2rem(250px);
+  }
 }
 .conpro_img img {
   width: 100%;
   height: 100%;
 }
 .conpro_pro {
-  width: 7.1rem;
-  height: 1rem;
-  line-height: 1rem;
+  width: 100%;
+  height: px2rem(48px);
+  line-height: px2rem(48px);
+
 }
 .conname_name {
   font-size: 16px;
@@ -250,13 +258,13 @@ export default {
   line-height: 17px;
 }
 .cent_cate {
-  width: 7.1rem;
+  width:100%;
 
   margin: 0.2rem auto 0;
   margin-bottom: 0.5rem;
 }
 .pro_cate {
-  width: 7.1rem;
+  width:100%;
   height: 0.8rem;
   line-height: 0.8rem;
   border-bottom: 1px solid #f7f7f7;
@@ -268,7 +276,7 @@ export default {
   padding: 0 15px;
 }
 .pro_intro {
-  width: 7.1rem;
+  width: 100%;
   margin: 0.2rem auto 0;
   padding-bottom:12px;
   background: #ffffff;
@@ -285,7 +293,7 @@ export default {
   letter-spacing: 0;
 }
 .order_name {
-  width: 7.1rem;
+  width: 100%;
   margin: 0.2rem auto 0;
   margin-bottom: 20px;
   background: #ffffff;
@@ -293,7 +301,7 @@ export default {
   border-radius: 2px;
 }
 .order_time {
-  width: 7.1rem;
+  width: 100%;
   height: 0.6rem;
   line-height: 0.6rem;
 }
@@ -304,7 +312,7 @@ export default {
   letter-spacing: 0;
 }
 .begin_str {
-  width: 7.1rem;
+  width: 100%;
   height: 1rem;
   line-height: 1rem;
   border-bottom: 1px solid #f7f7f7;
@@ -316,7 +324,7 @@ export default {
   letter-spacing: 0;
 }
 .good_fail {
-  width: 7.1rem;
+  width: 100%;
   height: 0.8rem;
   line-height: 0.8rem;
   padding: 0 15px;
@@ -326,7 +334,7 @@ export default {
   border-bottom: 1px solid #f7f7f7;
 }
 .net_sign {
-  width: 7.1rem;
+  width: 100%;
   height: 0.8rem;
   line-height: 0.8rem;
   font-size: 14px;

@@ -1,12 +1,12 @@
 
 <template>
-  <div class="container">
+  <div class="detail-container">
     <div class="list_list">
       <!-- <div class="banner">
           <img src="../../assets/images/icon1.jpg"
                alt="">
       </div> -->
-      <div class="banner">
+      <div class="detailsBanner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="item in data.images">
@@ -47,7 +47,7 @@
       </div>
       <div class="data_name">
         <div class="begin_rent">
-          <span>选择你租赁的时长(月):</span>
+          <span class="timeLong">选择你租赁的时长(月):</span>
           <div class="spinner">
             <div class="decrease"
                  @click="decrease"
@@ -306,7 +306,7 @@
 
 </style>
 <style lang="scss">
-@import "./details.css";
+// @import "./details.css";
 @import '../../styles/helper.scss';
   #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title{
     font-size:0.32rem;
@@ -325,4 +325,194 @@
     /*width:.7rem !important;*/
     height:.7rem !important;
   }
+  .detail-container {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  padding-bottom:1.5rem;
+}
+.list_list {
+  width: 100%;
+  height: auto;
+}
+.detailsBanner {
+  width: 94.6%;
+  height: px2rem(250px);
+  margin: 0.2rem auto 0;
+}
+.detailsBanner img {
+  width: 100%;
+  // height: 100%;
+}
+.ban_cent {
+  width: 94.7%;
+  padding-bottom: 10px;
+  margin: 0.2rem auto 0;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  background: #fff;
+  border-radius: 2px;
+}
+.name_cent {
+  padding: 0.2rem 0.3rem;
+  margin-top: px2rem(10px);
+}
+.name {
+  font-size: px2rem(16px);
+  font-weight: bold;
+  color: #000000;
+  letter-spacing: 0;
+  margin-top: 0.8%;
+}
+.dollar {
+  font-size: px2rem(14px);
+  color: #333333;
+  letter-spacing: 0;
+  margin-left: px2rem(10px);
+}
+.name_rent {
+  padding: 0rem 0.3rem;
+}
+.monthly a {
+  color: red;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 17px;
+  text-decoration: none;
+}
+.renewal {
+  margin-left: 20px;
+  font-size: 12px;
+  color: #666666;
+  letter-spacing: 0;
+}
+.renewal a {
+  font-size: 14px;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 17px;
+  text-decoration: none;
+}
+.name_words {
+  padding: 0.1rem 0.2rem;
+  font-size: 13px;
+  color: #666666;
+  letter-spacing: 0;
+}
+.name_cate {
+  padding: 0rem 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #999999;
+  letter-spacing: 0;
+}
+.product {
+  width: 94.7%;
+  height: 1rem;
+  line-height: 1rem;
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  border-radius: 2px;
+  margin: 0.2rem auto 0;
+}
+.name_pro {
+  font-size: 14px;
+  color: #333333;
+  letter-spacing: 0;
+}
+.name_pro span {
+  margin-left: 10px;
+}
+.data_name {
+  width: 94.7%;
+  height: px2rem(102px);
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  border-radius: 2px;
+  margin-top: 10px;
+  margin: 0.2rem auto 0;
+}
+.begin_rent {
+  width: 100%;
+  height: px2rem(45px);
+  line-height: px2rem(45px);
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+ .timeLong{
+   font-size: px2rem(14px);
+ }
+}
+
+.name_credit {
+  width:100%;
+  height:px2rem(55px);
+  line-height: px2rem(55px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // padding: 0 50px;
+}
+.name_credit .sesame {
+  font-size: px2rem(14px);
+  color: #00a5ff;
+  letter-spacing: 0;
+}
+.sign {
+  font-size: 14px;
+  color: #fd4689;
+  letter-spacing: 0;
+}
+
+
+
+.spinner{
+  display: inline-block;
+}
+
+
+.decrease,.value,.increase{
+  height:26px;
+  width:26px;
+
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.value{
+  width:30px;
+  font: 16px Arial;
+  line-height:26px;
+  text-align: center;
+  background-color: #f96198;
+  border:none;
+  color: #fff;
+}
+.decrease,.increase{
+  display: inline-block;
+  vertical-align: middle;
+  -moz-box-shadow:0 0 2px #999 inset;               /* For Firefox3.6+ */
+  -webkit-box-shadow:0 0 2px #999 inset;            /* For Chrome5+, Safari5+ */
+  box-shadow:0 0 2px #999 inset;
+  color: #e5312a;
+  line-height:26px;
+  text-align: center;
+}
+
+.decrease{
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.disable{
+  background-color: #eee;
+}
+
+.increase{
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
 </style>
