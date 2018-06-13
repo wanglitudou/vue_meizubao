@@ -7,7 +7,8 @@
           <div class="portrait">
             <img :src="headImg"
                  alt="666">
-            <span class="name">{{nickname}}</span>
+            <!-- <span class="name">{{nickname}}</span> -->
+            <span class = "name">赵越</span>
           </div>
         </div>
         <div class="ban_right">
