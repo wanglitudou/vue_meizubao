@@ -1,7 +1,7 @@
 
 <template>
-  <div class="container">
-    <div class="cent_ban">
+  <div class="mine-container">
+    <div class="a-cent_ban">
       <div class="banners">
         <div class="ban_left">
           <div class="portrait">
@@ -151,13 +151,14 @@ export default {
 
 <style lang="scss">
 @import '../styles/helper.scss';
-.container {
+.mine-container {
   width: 100%;
-  height: auto;
-  // height: calc(100% - 0.88rem);
-  background: #fff;
+  // height: 100%;
+  position: relative;
+  height: calc(100% - 0.88rem);
+  // background: #fff; 
 }
-.cent_ban {
+.a-cent_ban {
   width: 100%;
   height: auto;
 }
@@ -172,12 +173,12 @@ export default {
   border-bottom-right-radius: 10px;
 }
 .banners .ban_left {
-  width: px2rem(120px);
+  width: px2rem(144px);
   height: px2rem(120px);
   line-height:px2rem(100px);
 }
 .banners .ban_left .portrait {
-  width: px2rem(76px);
+  width: px2rem(144px);
   height:px2rem(76px);
   border-radius: 50%;
   margin-top: px2rem(23px);
@@ -185,26 +186,35 @@ export default {
   display: flex;
 }
 .banners .ban_left .portrait img {
-  width: 100%;
+  width:px2rem(76px);
   height: 100%;
   border-radius: 50%;
 }
 .banners .ban_left .portrait .name {
  
 display: block;
-font-size: 16px;
-color: #000;
+font-size: px2rem(17px);
+// color: #000;
+line-height: px2rem(76px);
+margin-left: px2rem(12px);
+color: #FFFFFF;
+// width
 }
 
 .banners .ban_right {
-  height: 2rem;
-  line-height: 2rem;
+  width: px2rem(20px);
+  height: 100%;
+  // line-height: 2rem;
   color: #fff;
+  display: flex;
+  align-items: center;
   /* background: red; */
 }
 .banners .ban_right img {
-  width: px2rem(26px);
-  height: px2rem(26px);
+  width: 100%;
+  height: px2rem(20px);
+  margin-bottom: px2rem(30px);
+  // height: 100%;
 }
 .icons {
   color: #ddeecc;

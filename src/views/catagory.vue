@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="fenlei-container">
     
-    <div class="list_img">
+    <div class="list_imgs">
       <div class="box">
         <!-- <img src="../assets/images/img_1.png"
              alt=""> -->
@@ -66,20 +66,20 @@ export default {
 
 <style lang="scss">
 @import '../styles/helper.scss';
-.container {
+.fenlei-container {
   width: 100%;
-  height: auto;
-  // height: calc(100% - 0.88rem);
+  height: 100%;
+  overflow: scroll;
 }
-.list_img {
+.list_imgs {
   width: 100%;
-  height: 18rem;
+  height: 100%;
   overflow-y: scroll;
 }
 .box {
   width: 100%;
   height: auto;
-  padding-bottom: 1.2rem;
+  // padding-bottom: 1.2rem;
   // border: 1px solid #ccc;
  
 }
