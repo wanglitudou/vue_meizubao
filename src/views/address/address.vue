@@ -56,7 +56,6 @@ export default {
   watch: {
     selectedNumber: function(e) {
       console.log(e);
-
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateDefaultAddress", {
           is_default: 1,
