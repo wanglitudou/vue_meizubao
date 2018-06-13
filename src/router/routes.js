@@ -50,7 +50,7 @@ let routes = [
     children: [
       {
         name: "home",
-        path: "home",
+        path: "/home",
         meta: {
           title: "首页"
         },
@@ -58,7 +58,7 @@ let routes = [
       },
       {
         name: "catagory",
-        path: "catagory",
+        path: "/catagory",
         meta: {
           title: "分类"
         },
@@ -66,7 +66,7 @@ let routes = [
       },
       {
         name: "mine",
-        path: "mine",
+        path: "/mine",
         meta: {
           title: "我的"
         },
@@ -74,18 +74,18 @@ let routes = [
       },
       {
         name: "ordergoods",
-        path: "ordergoods",
+        path: "/ordergoods",
         component: ordergoods
       },
       {
         name: "payment",
-        path: "payment",
+        path: "/payment",
         component: payment
       },
 
       {
         name: "coursepage",
-        path: "coursepage",
+        path: "/coursepage",
         component: coursepage
       },
       {

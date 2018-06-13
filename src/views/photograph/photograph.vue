@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
+  <div class="photoContainer">
     <div class="pic_view">
       <div class="nav_pic">
-        <span v-for="(item,index) in tabs" :key="index" :class="num==index?'dora':''" @click="tab(index)">{{item}}</span>
+         <div class="nav_div" v-for="(item,index) in tabs" :key="index"  @click="tab(index)">
+        <span :class="num==index?'dora':''">{{item}}</span>
+        </div>
       </div>
 
       <div class="pic_ture">
@@ -252,12 +254,13 @@ down(){
   };
 </script>
 
-<style scoped>
+<style lang="scss">
+@import '../../styles/helper.scss';
 .dora {
   border-bottom: 2px solid #fd4689;
 }
 
-.container {
+.photoContainer {
   width: 100%;
   height: auto;
   background: #fff;
@@ -269,21 +272,32 @@ down(){
     margin: 0.2rem auto 0;
   } */
 .cent_cents {
-  width: 7.5rem;
+  width: 100%;
   overflow-y: scroll;
   height: calc(100% - 0.88rem);
 }
 
 .nav_pic {
-  width: 7.5rem;
-  height: 0.88rem;
-  line-height: 0.88rem;
+  width: 100%;
+  height: px2rem(44px);
+  line-height: px2rem(44px);
   box-shadow: 0 2px 9px 0 #eeeeee;
+ 
   display: flex;
-  justify-content: space-between;
-  padding: 0 1.54rem;
+  justify-content: center;
+  // padding: 0 1.54rem;
   font-size: 16px;
   color: #000;
+  .nav_div{
+    width: 50%;
+   display: flex;
+   justify-content: center;
+    span{
+      display: block;
+      width:px2rem(32px) ;
+      height:px2rem(44px);
+    }
+  }
 }
 
 .pic_center {
@@ -308,7 +322,6 @@ down(){
 
 .pic_name {
   width: 50%;
-
   background: #ffffff;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
@@ -319,7 +332,7 @@ down(){
 
 .picleft_img {
   width: 100%;
-  height: 2.26rem;
+  
 }
 
 .picleft_img img {

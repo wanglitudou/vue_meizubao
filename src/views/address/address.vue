@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="addressContainer">
     <div class="list_cont">
       <div class="list_one"
            v-for="item in list"
@@ -152,57 +152,62 @@ export default {
   }
 };
 </script>
-<style scoped>
-.container {
+<style lang="scss">
+@import '../../styles/helper.scss';
+.addressContainer {
   width: 100%;
   height: auto;
   height: calc(100% - 0.88rem);
   background: #fff;
 }
 .list_cont {
-  width: 7.1rem;
+  width: 94.7%;
   height: auto;
-  margin: 0.2rem auto 0;
+  /* margin: 0.2rem auto 0; */
+  margin-left: 2.7%;
 }
 .list_one {
-  width: 7.1rem;
-  height: 2.78rem;
+  width: 100%;
+  height: px2rem(139px);
   background: #ffffff;
   box-shadow: 0 0 6px 0 rgba(253, 70, 137, 0.2);
   border-radius: 3px;
-  margin: 0.2rem auto 0;
+  margin-top: px2rem(15px);
+  &:nth-child(1){
+    margin-top: px2rem(10px);
+  }
 }
 .goods {
-  width: 7.1rem;
-  height: 1rem;
-  line-height: 1rem;
+  width: 100%;
+  height: px2rem(45px);
+  line-height: px2rem(45px);
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
-  font-size: 14px;
+  padding: 0 px2rem(10px);
+  font-size: px2rem(14px);
   color: #333333;
   letter-spacing: 0;
 }
 .consig_address {
-  width: 7.1rem;
-  min-height: 0.8rem;
-  font-size: 14px;
+  width:100%;
+  min-height: px2rem(40px);
+  font-size: px2rem(14px);
   color: #333333;
   letter-spacing: 0;
-  padding: 0 0.1rem;
+  padding: 0 px2rem(10px);
   border-bottom: 1px solid #f7f7f7;
 }
 .give {
-  width: 7.1rem;
-  height: 1rem;
-  line-height: 1rem;
-  padding: 0 10px;
-  font-size: 14px;
+  width: 100%;
+  height: px2rem(46px);
+  line-height: px2rem(55px);
+  padding: 0 px2rem(10px);
+  font-size: px2rem(14px);
   color: #999999;
   letter-spacing: 0;
 }
 .give_address {
-  font-size: 14px;
+  font-size: px2rem(14px);
   color: #fd4689;
   letter-spacing: 0;
   float: left;
@@ -218,12 +223,12 @@ export default {
   color: #fd4689;
 }
 .give_good {
-  width: 7.1rem;
-  height: 0.8rem;
-  line-height: 0.8rem;
+  width: 100%;
+  height: px2rem(48px);
+  line-height: px2rem(48px);
   background-image: linear-gradient(-130deg, #fd82d9 0%, #fd4689 100%);
   box-shadow: 0 0 13px 0 #eeeeee;
-  margin: 0.2rem auto 0;
+  // margin: 0.2rem auto 0;
   text-align: center;
   position: fixed;
   width: 100%;
