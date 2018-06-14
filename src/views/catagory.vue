@@ -1,10 +1,7 @@
 <template>
   <div class="fenlei-container">
-    
     <div class="list_imgs">
       <div class="box">
-        <!-- <img src="../assets/images/img_1.png"
-             alt=""> -->
         <img src=""
              alt=""
              v-for="(item,index) in url"
@@ -65,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/helper.scss';
+@import "../styles/helper.scss";
 .fenlei-container {
   width: 100%;
   height: 100%;
@@ -79,13 +76,12 @@ export default {
 .box {
   width: 100%;
   height: auto;
-  // padding-bottom: 1.2rem;
+  padding-bottom: 1rem;
   // border: 1px solid #ccc;
- 
 }
 .box img {
   width: 100%;
   height: px2rem(180px);
- margin-top: px2rem(15px);
+  margin-top: px2rem(15px);
 }
 </style>

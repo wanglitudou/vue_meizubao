@@ -27,21 +27,24 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      url: [] //banner
+    };
+  },
+  created() {
+   
+  },
+  mounted: function() {},
+  methods: {}
+};
 </script>
 <style >
 .container {
   height: 100%;
   overflow: hidden;
-  /* background: #fff; */
-  /* height: 100%; */
-   /* height: calc(100% - 1.2rem); */
-   /* overflow: hidden; */
-
 }
-/* .wrapper {
-  flex: 1;
-} */
 .nav {
   width: 100%;
   height: 1.1rem;
@@ -55,7 +58,6 @@ export default {};
   box-sizing: border-box;
   color: #999;
   z-index: 2000;
-  /* box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05); */
 }
 .nav li {
   flex: 1;
@@ -70,9 +72,6 @@ export default {};
   margin: 0 auto;
   font-size: 10px;
 }
-/* .nav li .iconfont {
-  font-size: 0.44rem;
-} */
 .icon {
   width: 0.5rem;
   height: 0.5rem;
