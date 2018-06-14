@@ -390,6 +390,9 @@ export default {
   width: 100%;
   height: 100%;
   // margin: 0.2rem auto 0;
+// =======
+  margin: 0.2rem auto 0;
+// >>>>>>> 6b3cef56339dc58ab877a03c923055747ea896ae
   // overflow: hidden;
 }
 .nav_pic {

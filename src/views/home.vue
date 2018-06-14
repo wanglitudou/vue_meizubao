@@ -11,6 +11,7 @@
 
           </mt-swipe-item>
         </mt-swipe>
+
       </div>
       <!-- 搜索 -->
       <div class="search_content">
@@ -373,13 +374,16 @@ export default {
 @import "../styles/helper.scss";
 
 .homecontainer {
+
+
   height: 100%;
   overflow: scroll;
-  padding-bottom: 50px;
+  padding-bottom: 50px
   // display: flex;
   // flex-direction: column;
 }
-.slider-box {
+.slider-box{
+ 
   // padding-bottom: 50px;
 }
 .scrolls {
@@ -435,7 +439,7 @@ export default {
 
 .search_content {
   width: 100%;
-  height: 64px;
+  height: px2rem(64px);
   box-shadow: 0 2px 9px #eee;
   display: flex;
   align-items: center;

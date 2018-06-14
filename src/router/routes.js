@@ -34,7 +34,8 @@ import pageindustry from "../views/pageindustry/pageindustry.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
 import mediaDetails from "../views/photograph/mediaDetails.vue";
 import search from "../views/search/search.vue";
-import dataBase from '../views/dataBase/index.vue'
+import dataBase from '../views/dataBase/index.vue';
+import qian from '../views/qian/qian.vue'
 let routes = [
   {
     path: "/",
@@ -90,7 +91,7 @@ let routes = [
       },
       {
         name: "cart",
-        path: "/cart",
+        path: "cart",
         meta: {
           title: "订单"
         },
@@ -253,6 +254,11 @@ let routes = [
     name: "dataBase",
     path: "/dataBase",
     component: dataBase
+  },
+  {
+    name: "qian",
+    path: "/qian",
+    component: qian
   },
   // {
   //   name: "mine",

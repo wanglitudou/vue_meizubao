@@ -36,6 +36,8 @@
                 </span>
             </div>
         </div>
+      <div class="dsad" @click="toQian">去签协议</div>
+
         <!-- 暂无数据 -->
         <div class="nodata" v-if="showNodata">
             暂无数据
@@ -75,6 +77,9 @@ export default {
         }
       });
     },
+    toQian(){
+      this.$router.push('/qian')
+    },
     search(keyword) {
       if (keyword == "") {
         Toast("不能为空");
@@ -92,6 +97,7 @@ export default {
       let that = this;
       that.$axios
         .post(window.ajaxSrc+"/api/meizubao/videoSearch", {
+          uid:window.localStorage.getItem('id'),
           keywords: word,
           page: pages
         })

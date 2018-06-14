@@ -45,9 +45,7 @@ export default {
   methods: {
     init() {
       this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/videoDetail", {
-          params: { id: this.$route.query.pid }
-        })
+        .get(window.ajaxSrc + "/api/meizubao/videoDetail?id="+this.$route.query.pid+"&uid="+window.localStorage.getItem('id'))
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {

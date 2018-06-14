@@ -23,6 +23,7 @@ import "v-calendar/lib/v-calendar.min.css";
 //引入axios
 // import axios from "axios";
 import axios from "./http";
+import $ from 'jquery';
 window.ajaxSrc = "http://mzbao.weiyingjia.org";
 
 axios.defaults.transformRequest = [
