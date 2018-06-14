@@ -417,7 +417,7 @@ export default {
 .homecontainer {
   height: 100%;
   overflow: scroll;
-  padding-bottom: 50px;
+  // padding-bottom: 50px;
   // display: flex;
   // flex-direction: column;
 }

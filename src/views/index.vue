@@ -33,9 +33,7 @@ export default {
       url: [] //banner
     };
   },
-  created() {
-   
-  },
+  created() {},
   mounted: function() {},
   methods: {}
 };
@@ -48,6 +46,7 @@ export default {
 .nav {
   width: 100%;
   height: 1.1rem;
+  /* height: px2rem(48px); */
   display: flex;
   position: fixed;
   bottom: 0;
