@@ -407,12 +407,13 @@ export default {
   justify-content: space-between;
 }
 .year_lef {
-  width: 25%;
+  width: px2rem(90px);
   height: px2rem(92.6px);
 }
 .year_rig {
-  width: 78%;
-  height: 1.6rem;
+  width: px2rem(263px);
+  height: px2rem(92.6px);
+  line-height: px2rem(92.6px);
 }
 .manag {
   margin: 0.1rem;
@@ -424,7 +425,7 @@ export default {
 .new_year {
   display: flex;
   justify-content: space-between;
-  padding: 2px 5px;
+  padding: 5px 3px;
 }
 .year_new {
   display: flex;
@@ -453,7 +454,7 @@ export default {
   background: #ffffff;
   border: 1px solid #fd4689;
   border-radius: 3px;
-  font-size: 0.3rem;
+  font-size: 14px;
   color: #fd4689;
   letter-spacing: 0;
 }
