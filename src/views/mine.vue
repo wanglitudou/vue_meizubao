@@ -7,8 +7,8 @@
           <div class="portrait">
             <img :src="headImg"
                  alt="666">
-            <!-- <span class="name">{{nickname}}</span> -->
-            <span class = "name">赵越</span>
+            <span class="name">{{nickname}}</span>
+            <!-- <span class = "name">赵越</span> -->
           </div>
         </div>
         <div class="ban_right">
@@ -16,7 +16,7 @@
                  alt=""></span>
         </div>
       </div>
-      <div class="list_cent">
+      <div class="list_cents">
         <p @click="curriculum()">
           <span>
             <span class="icon"><img src="../assets/icon/course.png"
@@ -154,9 +154,9 @@ export default {
 @import '../styles/helper.scss';
 .mine-container {
   width: 100%;
-  // height: 100%;
+  height: 100%;
   position: relative;
-  height: calc(100% - 0.88rem);
+  // height: calc(100% - 0.88rem);
   // background: #fff; 
 }
 .a-cent_ban {
@@ -220,7 +220,7 @@ color: #FFFFFF;
 .icons {
   color: #ddeecc;
 }
-.list_cent {
+.list_cents {
   width: 94.7%;
   box-shadow: 0 2px 9px 0 rgba(253, 74, 203, 0.15);
   border-radius: 10px;
@@ -228,7 +228,7 @@ color: #FFFFFF;
   margin-top: -20px;
   background: #fff;
 }
-.list_cent p {
+.list_cents p {
   width: 100%;
   height: px2rem(46px);
   line-height: px2rem(46px);
@@ -238,17 +238,17 @@ color: #FFFFFF;
   padding: 0 20px;
   align-items: center;
 }
-.list_cent p {
+.list_cents p {
   position: relative;
   display: flex;
 }
 
-.list_cent p .icon {
+.list_cents p .icon {
   width: 18.4px;
   height: 17.4px;
   display: block;
 }
-.list_cent p .icon img {
+.list_cents p .icon img {
   display: block;
   width: 100%;
 }
@@ -263,24 +263,24 @@ color: #FFFFFF;
   height: 20px;
   margin-top: 10px;
 }
-.list_cent p i {
+.list_cents p i {
   color: #fd4689;
   font-size: 0.36rem;
 }
 /* .list_cent p{} */
-.list_cent p .mine {
+.list_cents p .mine {
   position: absolute;
   top: -0px;
   left: 47px;
   font-size: 15px;
   font-family: PingFangSC-Regular, sans-serif;
 }
-.list_cent p .more {
+.list_cents p .more {
   width: 20px;
   height: 14px;
   display: block;
 }
-.list_cent p .more img {
+.list_cents p .more img {
   width: 100%;
   display: block;
   left: 42px;

@@ -1,19 +1,9 @@
 
 <template>
   <div class="cartcontainer">
-    <div class="pic_view">
+    <div class="cart_pic_view">
       <div class="nav_pic">
-        <!-- <span v-for="(item,index) in tabs"
-              :key="index"
-              :class="num==index?'dora':''"
-              @click="tab(index)">{{item}}</span> -->
-        <!-- <span><router-link to="/cart/allorder" active-class="active">全部订单</router-link></span>
-           <span><router-link to="/cart/prepayment" active-class="active">代付款</router-link></span>
-           <span><router-link to="/cart/processing" active-class="active">进行中</router-link></span>
-           <span><router-link to="/cart/completed" active-class="active">已完成</router-link></span> -->
-        <!-- <div>代付款</div>
-           <div>进行中</div>
-           <div>已完成</div> -->
+      
         <div class="tabBar">
           <button @click="select">{{statusCode}}</button>
           <ul class="uli" v-show="ulShow">
@@ -24,105 +14,11 @@
           <div class="status" :class="tabNum == index ?'active':''" @click="tabClick(item.id,index)">
             {{item.item}}
           </div>
-
         </div>
         <!-- <div class="tabBar"></div> -->
         <!-- <div class="tabBar"></div> -->
       </div>
-      <!-- <router-view></router-view> -->
-      <!-- <div class="pic_ture">
-
-        <div v-show="num==0">
-          <div class="total">
-            <div class="payment">
-              <div class="pay_one">
-                <p class="pay_num">
-                  <span class="pay_code">201802113470380334</span>
-                  <span class="pay_wait">代付款</span>
-                </p>
-              </div>
-              <div class="pay_order">
-                <div class="pay_left">
-                  <img src="../assets/images/icon1.jpg"
-                       alt="">
-                </div>
-                <div class="pay_right">
-                  <p class="name_ord">
-                    仪器名称
-                  </p>
-                  <p class="amount">
-                    <span class="consume">￥1200.00</span>
-                    <span>数量：
-                      <span>3</span>
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div class="freight">
-                <p class="reckon">
-                  <span class="total_reck">共1件仪器</span>
-                  <span>合计￥
-                    <span>1200.00</span>
-                  </span>
-                  <span>（含运费0.00）</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="total_other">
-            <div class="payment">
-              <div class="pay_one">
-                <p class="pay_num">
-                  <span class="pay_code">201802113470380334</span>
-                  <span class="pay_wait">代付款</span>
-                </p>
-              </div>
-              <div class="pay_order">
-                <div class="pay_left">
-                  <img src="../assets/images/icon1.jpg"
-                       alt="">
-                </div>
-                <div class="pay_right">
-                  <p class="name_ord">
-                    仪器名称
-                  </p>
-                  <p class="amount">
-                    <span class="consume">￥1200.00</span>
-                    <span>数量：
-                      <span>3</span>
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div class="freight">
-                <p class="reckon">
-                  <span class="total_reck">共1件仪器</span>
-                  <span>合计￥
-                    <span>1200.00</span>
-                  </span>
-                  <span>（含运费0.00）</span>
-                </p>
-              </div>
-              <div class="btn_cent">
-                <span class="third">续约</span>
-                <span class="two">退还</span>
-
-              </div>
-
-            </div>
-          </div>
-
-        </div> -->
-      <!-- <div v-show="num==1">
-          2222
-        </div>
-        <div v-show="num==3">
-          333
-        </div>
-        <div v-show="num==4">
-          444
-        </div> -->
-      <!-- </div> -->
+     
       <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail" :loadMore="loadMore" :load="load" :toPay="toPay" :complete="complete" :renewal="renewal" :back="back"></order>
 
     </div>
@@ -248,17 +144,21 @@ export default {
     //确认收货
     receipt(type,id) {
       console.log(id);
+      let status = 6
+      if( type == 3){
+        status = 7
+      }
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
-          status: 6
+          status: status
         })
         .then(res => {
           if (res.data.status_code == "1001") {
             //  remove(this.orderlist,{"id":id})
             Toast("确认成功");
-            if(type == 3){
+            if(type == 3 ){
               var result2 = filter(this.orderlist, { id: id });
             forEach(result2, function(item) {
               item.status = 7;
@@ -269,7 +169,7 @@ export default {
               item.status = 6;
             });
             }
-            console.log(this.orderlist)
+            // console.log(this.orderlist)
 
             //  this.getOrder()
           } else {
@@ -382,18 +282,13 @@ export default {
 .cartcontainer {
   width: 100%;
   height: 100%;
-  // height: calc(100% -0.88rem);
+  // position: relative;
   background: #fff;
-  overflow: scroll;
 }
-.pic_view {
+.cart_pic_view{
   width: 100%;
   height: 100%;
   // margin: 0.2rem auto 0;
-// =======
-  margin: 0.2rem auto 0;
-// >>>>>>> 6b3cef56339dc58ab877a03c923055747ea896ae
-  // overflow: hidden;
 }
 .nav_pic {
   width: 100%;
@@ -403,12 +298,16 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  font-size: 16px;
-  color: #000;
+  font-size: px2rem(16px);
+  color: #999;
   position: fixed;
   top: 0;
   z-index: 3;
   background: #fff;
+}
+.nav_pic .tabBar{
+ width:24%;
+ text-align: center;
 }
 .nav_pic span a {
   color: #000;
@@ -552,6 +451,7 @@ export default {
 }
 .active {
   display: block;
+  color: #000;
   border-bottom: 2px solid #fd4689;
 }
 .uli {

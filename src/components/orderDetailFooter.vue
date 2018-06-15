@@ -15,7 +15,7 @@
           </div>
         </template>
         <template v-if="detail.status == 4">
-          <div class="total_rig" @click="confirm(detail.uid)">
+          <div class="total_rig" @click="confirm(detail.uid,detail.type)" v-if="detail.type != 5">
             <span>确认收货</span>
           </div>
         </template>

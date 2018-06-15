@@ -153,17 +153,23 @@ export default {
         });
     },
     //确认收货
-    confirm(uid) {
-      console.log(uid)
-      this.$axios
+    confirm(uid,type) {
+      console.log(type)
+      let status = 0
+      if(type == 3){
+         status = 7
+      }else{
+        status = 6
+      }
+     this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
-          status: 6,
+          status: status,
           uid: uid,
           id: this.orderId
         })
         .then(res => {
           if (res.data.status_code == "1001") {
-            this.detail.status = 6;
+            this.detail.status = status;
             console.log(this.detail);
             Toast("确认成功");
           } else {

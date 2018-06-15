@@ -11,6 +11,11 @@ import router from "./router/router.config.js";
 // import "../static/common/swiper.min.js";
 //引入element-ui
 
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
+// require('videojs-contrib-hls/dist/videojs-contrib-hls');
+Vue.use(VueVideoPlayer);
+
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import MintUI from "mint-ui";

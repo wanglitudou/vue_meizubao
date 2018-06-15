@@ -36,7 +36,7 @@
                 </span>
             </div>
         </div>
-      <div class="dsad" @click="toQian">去签协议</div>
+      <!-- <div class="dsad" @click="toQian">去签协议</div> -->
 
         <!-- 暂无数据 -->
         <div class="nodata" v-if="showNodata">

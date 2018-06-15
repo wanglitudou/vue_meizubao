@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="integralScrolls">
-      <div class="list_cent" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+      <div class="list_pull" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
         <!-- <div class="list_lef"> -->
 
         <div class="listing item" v-masonry-tile v-for="(item,index) of dataArr" :key="index" @click="toTrain(item.id)">
@@ -305,10 +305,10 @@ export default {
 //   color: #ffffff;
 //   letter-spacing: 0;
 // }
-.list_cent{
+.list_pull{
   overflow: hidden;
 }
-.item {
+.list_pull .item {
   width: 46.1%;
   height: auto;
   padding: 1%; 
@@ -320,14 +320,14 @@ export default {
   border-radius: 3px;
   margin-top: px2rem(10px);
 }
-.item img {
+.list_pull .item img {
   width: 100%;
 }
-.item .other {
+.list_pull .item .other {
   width: 94%;
   margin-left: 2.4%;
 }
-.item .other p {
+.list_pull .item .other p {
   width: 100%;
   border: none;
   &:nth-child(1) {
