@@ -3,7 +3,7 @@
   <div class="cartcontainer">
     <div class="cart_pic_view">
       <div class="nav_pic">
-      
+
         <div class="tabBar">
           <button @click="select">{{statusCode}}</button>
           <ul class="uli" v-show="ulShow">
@@ -18,8 +18,10 @@
         <!-- <div class="tabBar"></div> -->
         <!-- <div class="tabBar"></div> -->
       </div>
-     
+
       <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail" :loadMore="loadMore" :load="load" :toPay="toPay" :complete="complete" :renewal="renewal" :back="back"></order>
+
+    
 
     </div>
   </div>
@@ -42,7 +44,7 @@
 // }
 import order from "../components/order.vue";
 import { find, remove, filter, forEach } from "lodash";
-import {  Spinner, Toast, Indicator } from "mint-ui";
+import { Spinner, Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -64,7 +66,7 @@ export default {
       ],
       num: 0,
       tabNum: 3,
-      uid: window.localStorage.getItem('id'),
+      uid: window.localStorage.getItem("id"),
       ulShow: false,
       page: 1,
       orderlist: [],
@@ -73,7 +75,7 @@ export default {
     };
   },
   created() {
-   Indicator.open()
+    Indicator.open();
     this.getOrder(this.type, this.status, this.page, this.uid);
   },
   methods: {
@@ -84,9 +86,9 @@ export default {
     // 点击选择订单
     select() {
       this.ulShow = true;
-      setTimeout(()=>{
-         this.ulShow = false
-      },1000)
+      setTimeout(() => {
+        this.ulShow = false;
+      }, 1000);
     },
     // 点击下拉框选择  订单的状态 例如：仪器的订单  产品的订单
     optionLi(value, index) {
@@ -119,7 +121,7 @@ export default {
         .then(res => {
           // console.log(res.data.data);
           if (res.data.status_code == "1001") {
-             Indicator.close()
+            Indicator.close();
             if (res.data.data.length < 15) {
               this.load = false;
             } else {
@@ -138,11 +140,11 @@ export default {
     loadMore() {
       this.page++;
       console.log(this.page);
-     
+
       this.getOrder(this.type, this.status, this.page, this.uid);
     },
     //确认收货
-    receipt(type,id) {
+    receipt(type, id) {
       console.log(id);
       let status = 6
       if( type == 3){
@@ -158,19 +160,20 @@ export default {
           if (res.data.status_code == "1001") {
             //  remove(this.orderlist,{"id":id})
             Toast("确认成功");
-            if(type == 3 ){
-              var result2 = filter(this.orderlist, { id: id });
-            forEach(result2, function(item) {
-              item.status = 7;
-            });
-            }else{
-                  var result2 = filter(this.orderlist, { id: id });
-            forEach(result2, function(item) {
-              item.status = 6;
-            });
-            }
-            // console.log(this.orderlist)
 
+          
+            if (type == 3) {
+
+              var result2 = filter(this.orderlist, { id: id });
+              forEach(result2, function(item) {
+                item.status = 7;
+              });
+            } else {
+              var result2 = filter(this.orderlist, { id: id });
+              forEach(result2, function(item) {
+                item.status = 6;
+              });
+            }
             //  this.getOrder()
           } else {
             Toast("确认失败");
@@ -179,7 +182,7 @@ export default {
     },
     //取消订单
     cancel(id) {
-       console.log(id);
+      console.log(id);
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
           uid: this.uid,
@@ -190,30 +193,27 @@ export default {
           if (res.data.status_code == "1001") {
             //  remove(this.orderlist,{"id":id})
             Toast("取消成功");
-            
-                  var result2 = filter(this.orderlist, { id: id });
+
+            var result2 = filter(this.orderlist, { id: id });
             forEach(result2, function(item) {
               item.status = 8;
             });
-           
-           
 
             //  this.getOrder()
           } else {
             Toast("确认失败");
           }
         });
-      
     },
     //去详情页
     todetail(id) {
       console.log(id);
       this.$router.push({
-       name: "order_details",
+        name: "order_details",
         params: {
           id: id
         }
-      })
+      });
     },
     // 立即付款
     toPay(id) {
@@ -230,7 +230,7 @@ export default {
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
-          status:5
+          status: 5
         })
         .then(res => {
           if (res.data.status_code == "1001") {
@@ -249,8 +249,8 @@ export default {
         });
     },
     //退还
-    back(id){
-     this.$router.push({
+    back(id) {
+      this.$router.push({
         name: "order_details",
         params: {
           id: id
@@ -258,14 +258,14 @@ export default {
       });
     },
     //续约
-      renewal(id){
-        this.$router.push({
+    renewal(id) {
+      this.$router.push({
         name: "order_details",
         params: {
           id: id
         }
       });
-      }
+    }
   },
   watch: {},
   components: {
@@ -275,7 +275,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/helper.scss';
+@import "../styles/helper.scss";
 .dora {
   border-bottom: 2px solid #fd4689;
 }
@@ -289,10 +289,11 @@ export default {
   width: 100%;
   height: 100%;
   // margin: 0.2rem auto 0;
+
 }
 .nav_pic {
   width: 100%;
-  height:px2rem(44px);
+  height: px2rem(44px);
   line-height: px2rem(44px);
   box-shadow: 0 2px 9px 0 #eeeeee;
   display: flex;

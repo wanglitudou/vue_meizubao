@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="infor_container">
     <div class="auth_name">
       <div class="id_num">
         <p class="id_name">
@@ -276,16 +276,17 @@ export default {
   }
 };
 </script>
-<style scoped>
-.container {
+<style  lang="scss">
+@import "../../styles/helper.scss";
+.infor_container {
   width: 100%;
   height: auto;
   height: calc(100% - 1.5rem);
   background: #fff;
 }
 .auth_name {
-  width: 7.068rem;
-  height: 7.8rem;
+  width: px2rem(355px);
+  height: px2rem(390px);
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;

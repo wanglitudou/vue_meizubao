@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="infore_container">
     <div class="perfect">
       <div class="id_num">
         <p class="id_name">
@@ -125,11 +125,12 @@
           </p>
         </div>
       </div>
+      <div class="next_up">
+        <span class="next_nex"
+              @click="authname()">下一步</span>
+      </div>
     </div>
-    <div class="next_up">
-      <span class="next_nex"
-            @click="authname()">下一步</span>
-    </div>
+
   </div>
 </template>
 <script>
@@ -337,29 +338,35 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style  lang="scss">
+@import "../../styles/helper.scss";
 .yearActive {
   color: red;
   background: #dec;
 }
-.container {
+.infore_container {
   width: 100%;
-  height: auto;
-  height: calc(100% - 0.88rem);
+  height: 100%; // height: calc(100% - 0.88rem);
   background: #fff;
 }
 .perfect {
-  width: 7.068rem;
-  height: 10.34rem;
+  // width: 7.068rem;
+  width: px2rem(355px);
+  // height: 10.34rem;
+  height: px2rem(517px);
+  // width: 100%;
+  // height: 100%;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;
   margin: 0.2rem auto 0;
   margin-top: 0.2rem;
 }
 .id_num {
-  width: 7.068rem;
-  height: 0.88rem;
-  line-height: 0.88rem;
+  width: px2rem(355px);
+  // height: 0.88rem;
+  // line-height: 0.88rem;
+  height: px2rem(44px);
+  line-height: px2rem(44px);
   border-bottom: 1px solid #f7f7f7;
 }
 .id_name {
@@ -375,11 +382,15 @@ export default {
   letter-spacing: 0;
 }
 .id_txt input {
-  width: 4rem;
-  height: 0.88rem;
-  line-height: 0.88rem;
+  // width: 4rem;
+  width: px2rem(250px);
+  // height: 0.88rem;
+  // line-height: 0.88rem;
+  height: px2rem(44px);
+  line-height: px2rem(44px);
   border: 0;
   outline: none;
+  border: none;
   border-bottom: 1px solid #f7f7f7;
   border-right: 0;
 }
@@ -387,32 +398,34 @@ export default {
   margin-left: 0px;
 }
 .year_nums {
-  width: 7.068rem;
-  height: 1.6rem;
+  width: px2rem(355px);
+  height: px2rem(97.5px);
   margin: 0.2rem auto 0;
   border: 1px solid #f7f7f7;
-  border-bottom: 1px solid #f7f7f7;
+  // border-bottom: 1px solid #f7f7f7;
   display: flex;
   justify-content: space-between;
 }
 .year_lef {
-  width: 25%;
-  height: 1.6rem;
+  width: px2rem(90px);
+  height: px2rem(92.6px);
 }
 .year_rig {
-  width: 78%;
-  height: 1.6rem;
+  width: px2rem(263px);
+  height: px2rem(92.6px);
+  line-height: px2rem(92.6px);
 }
 .manag {
   margin: 0.1rem;
   font-size: 14px;
   color: #666666;
   letter-spacing: 0;
+  margin-left: px2rem(10px);
 }
 .new_year {
   display: flex;
   justify-content: space-between;
-  padding: 2px 5px;
+  padding: 5px 3px;
 }
 .year_new {
   display: flex;
@@ -421,26 +434,27 @@ export default {
 }
 .new_name {
   border: 1px solid #ccc;
-  width: 80px;
-  height: 30px;
-  line-height: 30px;
+  // width: 80px;
+  // height: 30px;
+  width: px2rem(66px);
+  line-height: px2rem(30px);
   border: 1px solid #cccccc;
   border-radius: 3px;
   text-align: center;
 }
 .next_up {
-  margin-top: 0.3rem;
+  // margin-top: 30px;
   text-align: center;
 }
 .next_nex {
-  width: 2.4rem;
-  height: 0.72rem;
-  line-height: 0.72rem;
+  width: px2rem(120px);
+  height: px2rem(72px);
+  line-height: px2rem(72px);
   padding: 0.2rem 0.7rem;
   background: #ffffff;
   border: 1px solid #fd4689;
   border-radius: 3px;
-  font-size: 0.3rem;
+  font-size: 14px;
   color: #fd4689;
   letter-spacing: 0;
 }

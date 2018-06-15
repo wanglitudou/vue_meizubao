@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       list: [],
-      selectedNumber: 1
+      selectedNumber: 0
       // radio2: ""
     };
   },
@@ -153,7 +153,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import '../../styles/helper.scss';
+@import "../../styles/helper.scss";
 .addressContainer {
   width: 100%;
   height: auto;
@@ -173,7 +173,7 @@ export default {
   box-shadow: 0 0 6px 0 rgba(253, 70, 137, 0.2);
   border-radius: 3px;
   margin-top: px2rem(15px);
-  &:nth-child(1){
+  &:nth-child(1) {
     margin-top: px2rem(10px);
   }
 }
@@ -189,7 +189,7 @@ export default {
   letter-spacing: 0;
 }
 .consig_address {
-  width:100%;
+  width: 100%;
   min-height: px2rem(40px);
   font-size: px2rem(14px);
   color: #333333;

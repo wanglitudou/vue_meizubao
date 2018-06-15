@@ -5,9 +5,11 @@
       <div class="banner">
         <mt-swipe :auto="4000">
 
-          <mt-swipe-item v-for="(item,index) in url" :key="index">
+          <mt-swipe-item v-for="(item,index) in url"
+                         :key="index">
 
-            <img :src="item.images" alt="">
+            <img :src="item.images"
+                 alt="">
 
           </mt-swipe-item>
         </mt-swipe>
@@ -15,9 +17,12 @@
       </div>
       <!-- 搜索 -->
       <div class="search_content">
-        <div class="list_search" ref="search" @click="toSearch">
+        <div class="list_search"
+             ref="search"
+             @click="toSearch">
           <div style="margin-left:20px;">请输入搜索</div>
-          <img src="../assets/icon/search_1.png" alt="111">
+          <img src="../assets/icon/search_1.png"
+               alt="111">
         </div>
       </div>
 
@@ -31,13 +36,18 @@
         </div>
         <!-- 内容-->
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
-            <img :src="item.images" alt="" @click="details(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in rentinginstrument"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
         <!-- 查看更多 -->
-        <div class="hot_cent" @click="detail()">
+        <div class="hot_cent"
+             @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
@@ -51,12 +61,17 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
-            <img :src="item.images" alt="" @click="essence(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in beautyindustry"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent" @click="looksee()">
+        <div class="hot_cent"
+             @click="looksee()">
           <span>查看更多></span>
         </div>
       </div>
@@ -69,11 +84,16 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
-            <img :src="item.images" alt="" @click="matching(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in accessoryproducts"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
-            <div class="hot_cent" @click="seemore()">
+            <div class="hot_cent"
+                 @click="seemore()">
               <span>查看更多></span>
             </div>
           </div>
@@ -88,13 +108,18 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
-            <img :src="item.images" alt="" @click="train(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in visualscreen"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="seemore()">
+        <div class="hot_cent"
+             @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -107,13 +132,18 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
-            <img :src="item.images" alt="" @click="cooperation(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in cooperativeProject"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="clickpay()">
+        <div class="hot_cent"
+             @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -141,15 +171,22 @@ export default {
     setTimeout(() => {
       Indicator.close();
     }, 1000);
-
     let that = this;
     var str = window.location.href;
     var code = that.GetQueryString("code");
-    if (code) {
-      that.getXlogin(code); //再次调用这个方法
-    } else {
-      that.getXlogin(""); //获取xlogin
+    if (!sessionStorage.aaa) {
+      console.log("666");
+      if (code) {
+        that.getXlogin(code); //再次调用这个方法
+      } else {
+        that.getXlogin(""); //获取xlogin
+      }
     }
+    // if (code) {
+    //   that.getXlogin(code); //再次调用这个方法
+    // } else {
+    //   that.getXlogin(""); //获取xlogin
+    // }
     // that.achieve(); //获取token
     that.banner(); //首页banner查询
     that.getInstrument(); // 首页热租仪器
@@ -306,6 +343,10 @@ export default {
               localStorage.id = res.data.data.id;
               sessionStorage.token = res.data.data.token;
               localStorage.headimg = res.data.data.headimg;
+              console.log(localStorage.headimg);
+              if (code) {
+                sessionStorage.aaa = true;
+              }
               // localStorage.name=res.data.data
 
               //判断tel是否存在,不存在跳到对应填写页面
@@ -374,16 +415,13 @@ export default {
 @import "../styles/helper.scss";
 
 .homecontainer {
-
-
   height: 100%;
   overflow: scroll;
-  padding-bottom: 50px
+  // padding-bottom: 50px;
   // display: flex;
   // flex-direction: column;
 }
-.slider-box{
- 
+.slider-box {
   // padding-bottom: 50px;
 }
 .scrolls {

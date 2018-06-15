@@ -151,13 +151,15 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/helper.scss';
+@import "../styles/helper.scss";
 .mine-container {
   width: 100%;
   height: 100%;
   position: relative;
+
   // height: calc(100% - 0.88rem);
   // background: #fff; 
+
 }
 .a-cent_ban {
   width: 100%;
@@ -176,30 +178,29 @@ export default {
 .banners .ban_left {
   width: px2rem(144px);
   height: px2rem(120px);
-  line-height:px2rem(100px);
+  line-height: px2rem(100px);
 }
 .banners .ban_left .portrait {
   width: px2rem(144px);
-  height:px2rem(76px);
+  height: px2rem(76px);
   border-radius: 50%;
   margin-top: px2rem(23px);
   z-index: 1000;
   display: flex;
 }
 .banners .ban_left .portrait img {
-  width:px2rem(76px);
+  width: px2rem(76px);
   height: 100%;
   border-radius: 50%;
 }
 .banners .ban_left .portrait .name {
- 
-display: block;
-font-size: px2rem(17px);
-// color: #000;
-line-height: px2rem(76px);
-margin-left: px2rem(12px);
-color: #FFFFFF;
-// width
+  display: block;
+  font-size: px2rem(17px);
+  // color: #000;
+  line-height: px2rem(76px);
+  margin-left: px2rem(12px);
+  color: #ffffff;
+  // width
 }
 
 .banners .ban_right {
