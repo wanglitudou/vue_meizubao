@@ -446,7 +446,7 @@ export default {
 .list_search {
   width: px2rem(335px);
   height: px2rem(44px);
-  margin-left: 5.3%;
+  margin-left: 2.3%;
   border-radius: 3px;
   border: 1px solid #eee;
   display: flex;
@@ -486,7 +486,7 @@ export default {
   font-weight: bold;
 }
 .worktogether {
-  margin-bottom: px2rem(30px);
+  margin-bottom: px2rem(20px);
 }
 .hotrent span {
   width: px2rem(64px);

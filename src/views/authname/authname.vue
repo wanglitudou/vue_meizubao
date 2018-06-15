@@ -345,7 +345,7 @@ export default {
 }
 
 .id_txt input {
-  width: px2rem(230px);
+  width: px2rem(200px);
   height: 0.88rem;
   line-height: 0.88rem;
   border: 0;

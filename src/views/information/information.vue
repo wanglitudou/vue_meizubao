@@ -386,6 +386,7 @@ export default {
   width: px2rem(250px);
   // height: 0.88rem;
   // line-height: 0.88rem;
+  // margin-left:50px;
   height: px2rem(44px);
   line-height: px2rem(44px);
   border: 0;
