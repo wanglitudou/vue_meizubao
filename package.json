@@ -31,6 +31,7 @@
     "vue-masonry": "^0.11.1",
     "vue-pickers": "^1.0.6",
     "vue-router": "^3.0.1",
+    "vue-video-player": "^5.0.2",
     "vue-wechat-title": "^2.0.4"
   },
   "devDependencies": {

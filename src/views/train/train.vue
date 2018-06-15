@@ -1,10 +1,22 @@
 <template>
   <div class="train-container">
+
     <div>
 
       <div class="cent_list">
+
         <div class="list_lists">
-          <div class="trainBanner">
+          <div class="trainBanner" v-if="data.is_play == 1">
+            <!-- <img :src="data.images" alt=""> -->
+            <!-- <video id="video" autoplay :poster="data.images" controls width="100%" height="100%">
+              <source :src="data.url" type="video/mp4">
+
+            </video> -->
+
+            <video-player class="vjs-custom-skin" :options="playerOptions" :playsinline="true" ref="videoPlayer" @ready="playerReadied($event)"></video-player>
+
+          </div>
+          <div class="trainBanner" v-else>
             <img :src="data.images" alt="">
           </div>
           <div class="name_project">
@@ -22,10 +34,10 @@
         </div>
         <div class="bes_time">
         </div>
-      </div>
+      </div> 
       <!-- 选择支付方式 -->
 
-      <orderFooter :text="'开始预约'" :count="data.price" :nextFun="nextFun"></orderFooter>
+      <orderFooter :text="'开始预约'" :count="data.price" :nextFun="nextFun" v-if="data.is_play == 2"></orderFooter>
     </div>
     <div class="opcity" v-show="showOpcity" @click="clearOpcity">
     </div>
@@ -40,16 +52,50 @@
 </template>
 <script>
 import { Radio } from "mint-ui";
+import "video.js/dist/video-js.css";
+import { videoPlayer } from "vue-video-player";
+// import ""
+import videojs from "video.js";
 import orderFooter from "../../components/orderFooter.vue";
 export default {
   methods: {
-    init() {
+    playerReadied(player) {
+      const track = new videojs.AudioTrack({
+        id: "my-spanish-audio-track",
+        kind: "translation",
+        label: "Spanish",
+        language: "es"
+      });
+      player.audioTracks().addTrack(track);
+      // Get the current player's AudioTrackList object.
+      const audioTrackList = player.audioTracks();
+      // Listen to the "change" event.
+      audioTrackList.addEventListener("change", function() {
+        // Log the currently enabled AudioTrack label.
+        for (let i = 0; i < audioTrackList.length; i++) {
+          const track = audioTrackList[i];
+          if (track.enabled) {
+            videojs.log(track.label);
+            return;
+          }
+        }
+      });
+    },
+    inits() {
       this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/videoDetail?id="+this.$route.query.pid+"&uid="+window.localStorage.getItem('id'))
+        .get(
+          window.ajaxSrc +
+            "/api/meizubao/videoDetail?id=" +
+            this.$route.query.pid +
+            "&uid=" +
+            window.localStorage.getItem("id")
+        )
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
             this.data = res.data.data;
+            this.playerOptions.sources[0].src=res.data.data.url
+            this.playerOptions.poster =  res.data.data.images
             console.log(res.data.data.integral);
           }
         })
@@ -73,6 +119,7 @@ export default {
           console.log("http请求错误");
         });
     },
+
     //  弹出遮罩选择支付方式
     nextFun: function() {
       this.showOpcity = true;
@@ -112,10 +159,16 @@ export default {
     },
     // 微信支付 和积分兑换
     nextPay() {
+      let payPrice= ''
       if (this.value == "") {
         Toast("请选择支付方式");
         return false;
+      }else if(this.value == 1){
+          payPrice =  this.data.price
+      }else{
+        payPrice =  this.data.integral
       }
+      // console.log(payPrice)
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
           uid: window.localStorage.id,
@@ -128,7 +181,7 @@ export default {
           agreement: "",
           image: this.data.images[0],
           goods_num: 1,
-          total_price: this.data.price,
+          total_price: payPrice,
           goods_name: this.data.name,
           address_id: "",
           deposit: "",
@@ -158,11 +211,12 @@ export default {
     }
   },
   components: {
-    orderFooter
+    orderFooter,
+    videoPlayer
   },
 
   mounted() {
-    this.init();
+    this.inits();
     this.initIntegral();
   },
   data() {
@@ -182,13 +236,25 @@ export default {
       ],
       value: "",
       showOpcity: false,
-      integral: ""
+      integral: "",
+      playerOptions: {
+        height: "360",
+        playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
+        sources: [
+          {
+            type: "video/mp4",
+            src: ""
+          }
+        ],
+        poster:""
+          
+      }
     };
   }
 };
 </script>
 <style lang="scss">
-@import '../../styles/helper.scss';
+@import "../../styles/helper.scss";
 .train-container {
   width: 100%;
   background-color: #fff;
@@ -207,7 +273,7 @@ export default {
   // height: px2rem(280px);
   width: 100%;
   height: auto;
-    // box-shadow: 0 2px 9px 0 #eeeeee;
+  // box-shadow: 0 2px 9px 0 #eeeeee;
 }
 
 .trainBanner {
@@ -220,7 +286,7 @@ export default {
 
 .trainBanner img {
   width: 100%;
-  height: 100%; 
+  height: 100%;
 }
 
 .name_project {
@@ -392,5 +458,16 @@ export default {
   padding: 10px;
   background: #fd4689;
   border-radius: 10px;
+}
+.video-js {
+  width: 100%;
+  height: 250px;
+}
+.vjs-button > .vjs-icon-placeholder:before{
+  font-size: 2em !important;
+}
+.video-js .vjs-big-play-button {
+  top: 40% !important;
+  left: 40% !important;
 }
 </style>

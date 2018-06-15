@@ -1,28 +1,33 @@
 <template>
     <div class="containers">
-        <div class="list_list">
+        <!-- <div class="list_list">
             <div class="list_search">
-                <!-- 头部导航 -->
+                头部导航
                 <div class="sortMenu clearfix" v-show="slideShow">
                     <ul class="sortMenu-ul">
                         <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
                             <tab :item="item" :index="index" :num="num"></tab>
-                            <!-- <li class="cell"   :class="num == index ?'dora':''">
-                            {{item.name}}
-                            </li> -->
+                           
                         </div>
                     </ul>
-                    <!-- 搜索按钮 -->
+                    搜索按钮
                     <div class="sousuo" @click="aaa()">
                         <img src="../../assets/icon/search_1.png" alt="">
                     </div>
                 </div>
                 <div class="topSearch" v-if="flog">
-                    <search @search="search"></search>
+                    
                 </div>
             </div>
-        </div>
-
+        </div> -->
+      <header class="clearfix">
+         
+         <p class="search_content">
+            <span>请输入关键字输入查询</span>
+            <img src="../../assets/icon/search_1.png" alt="">
+         </p>
+         <p class="logo"><img src="../../assets/images/menu.png" alt=""></p>
+      </header>
         <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
             <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
                 <!-- block item markup -->
@@ -73,6 +78,8 @@
             暂无数据
         </div>
 
+       
+
     </div>
 </template>
 <script>
@@ -80,7 +87,7 @@ import { Spinner, Toast, Indicator } from "mint-ui";
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
-
+import $ from 'jquery';
 import { VueMasonryPlugin } from "vue-masonry";
 import { isClassBody } from "babel-types";
 export default {
@@ -132,6 +139,7 @@ export default {
   },
 
   methods: {
+   
     aaa() {
       this.flog = true;
       this.imgsArr = [];
@@ -219,7 +227,8 @@ export default {
           console.log(res);
           console.log("查询失败");
         });
-    }
+    },
+  
   },
   components: {
     // vueWaterfallEasy,
@@ -228,8 +237,51 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss">
+@import '../../styles/helper.scss';
 @import "./detail.css";
+.clearfix{
+  width: 100%;
+  height: px2rem(44px);
+  box-shadow: 0 2px 9px #EEE;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  // padding: 7px 15px;
+ .logo{
+   width:px2rem(25px);
+   height: px2rem(25px);
+
+   img{
+     width: 100%;
+     display: inline-block;
+    
+   }
+ }
+ .search_content{
+   width: px2rem(270px);
+   height: px2rem(30px);
+   border:1px solid #ccc;
+   border-radius: px2rem(5px); 
+   display: flex;
+   justify-content: space-between;
+   font-size: px2rem(13px);
+   align-items: center;
+   color: #000;
+   span{
+     display: inline-block;
+     margin-left: (5px);
+    
+   }
+   img{
+      display: inline-block;
+     width: 20px;
+     margin-right: px2rem(5px);
+   }
+ }
+}
+
 .topSearch {
   position: fixed;
   width: 100%;
@@ -384,4 +436,5 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 </style>

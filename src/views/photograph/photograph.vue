@@ -1,6 +1,6 @@
 <template>
   <div class="photoContainer">
-    <div class="pic_view">
+    <div class="photo_pic_view">
       <div class="nav_pic">
          <div class="nav_div" v-for="(item,index) in tabs" :key="index"  @click="tab(index)">
         <span :class="num==index?'dora':''">{{item}}</span>

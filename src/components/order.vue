@@ -41,7 +41,7 @@
                     <!-- 租赁中 -->
                     <div class="zhuang" v-if="item.status == 6">
                         <div class="tuihuan" @click="back(item.id)">退还</div>
-                        <div class="xuyue" @click="renewal(item.id)">续约</div>
+                        <div class="jixu" @click="renewal(item.id)">续约</div>
                     </div>
                     <!-- 代付款 -->
                     <div class="waitPay" v-if="item.status == 1">
@@ -95,7 +95,7 @@
                     <div class="zhuang" v-if="item.status == 6">
                       
                         <div class="complete" @click="complete(item.id)">完成服务</div>
-                          <div class="xuyue"  @click="renewal(item.id)">续约</div>
+                          <div class="jixu"  @click="renewal(item.id)">续约</div>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                         <div class="waitBtn" @click="toPay(item.id)">立即付款</div>
                     </div>
                     <!--  -->
-
+                  
                 </div>
             </div>
         </div>
@@ -250,7 +250,9 @@ export default {
 @import '../styles/helper.scss';
 .order {
   padding-bottom: 50px;
-  margin-top: px2rem(46px);
+  padding-top: px2rem(48px);
+  height: 100%;
+  overflow: scroll;
 }
 .payment {
   width: 96%;
@@ -260,36 +262,42 @@ export default {
 
   margin-left: 2%;
   margin-top: 20px;
+   &:nth-child(1){
+    margin-top: 0px;
+  }
 }
 .paymenttop {
   width: 100%;
-  height: 1rem;
+  height: px2rem(36px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 16px;
-  font-family: PingFangSC-Regular；;
+  font-size: px2rem(14px);
+  font-family: PingFangSC-Regular;
+ color: #FF272D;
+
 }
 .paymenttop div {
   margin: 10px;
 }
 .paymentcenter {
   width: 100%;
-  height: 120px;
+  height: px2rem(86px);
   background: #fbfbfb 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
 .paymentcenter .img {
-  width: 40%;
+  width:px2rem(87.5px);
+  margin-left:px2rem(10px); 
 }
 .paymentcenter img {
   /* width: 100%;
    */
-  width: 127px;
-  height: 90px;
+  width: 100%;
+  height: px2rem(66px);
 }
 .paymentcenter .detail {
   width: 50%;
@@ -297,7 +305,7 @@ export default {
   margin-left: 3%;
 }
 .detail .name {
-  font-size: 16px;
+  font-size: px2rem(16px);
   color: #000;
   margin-bottom: 0.3rem;
 }
@@ -313,10 +321,11 @@ export default {
   margin-bottom: 0.3rem;
 }
 .detail .numPrice {
-  font-size: 13px;
+  font-size: px2rem(13px);
   display: flex;
   justify-content: space-between;
   line-height: 40px;
+  color: #FF272D;
 }
 .num {
   color: #666666;
@@ -346,7 +355,7 @@ export default {
   border-radius: 0.1rem;
   color: #cccccc;
 }
-.xuyue {
+.jixu {
   width: 48px;
   height: 36px;
   line-height: 36px;
@@ -439,21 +448,21 @@ export default {
 }
 .waitPay {
   width: 100%;
-  height: 50px;
+  height: px2rem(66px);
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 .waitBtn {
-  width: 80px;
-  height: 36px;
-  line-height: 36px;
-  margin-right: 10px;
+  width: px2rem(115px);
+  height: px2rem(36px);
+  line-height: px2rem(36px);
+  margin-right: px2rem(10px);
   text-align: center;
   border-radius: 0.1rem;
   color: #fd4689;
   border: 1px solid #fd4689;
-  font-size: 16px;
+  font-size: px2rem(16px);
 }
 .complete{
     width: 80px;
