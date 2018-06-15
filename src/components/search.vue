@@ -5,6 +5,7 @@
         </form>
         <img src="../assets/icon/search_1.png" alt="111">
     </div>
+
 </template>
 <script>
 export default {
@@ -66,5 +67,8 @@ export default {
 }
 .homeSearch input{
     font-size: px2rem(13px);
+
+  padding-left: 15px;
+  box-sizing: border-box;
 }
 </style>

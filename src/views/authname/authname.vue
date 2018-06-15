@@ -3,7 +3,7 @@
     <div class="auth_name">
       <div class="id_num">
         <p class="id_name">
-          <span>身份证号码:</span>
+          <span class="id_id">身份证号码:</span>
           <span class="id_txt"
                 id="updata">
             <input type="text"
@@ -36,10 +36,15 @@
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
                alt=""></span>
+
+      </div>
+      <div class="id_details">
+        <div class="positive">身份证正面</div>
+        <div class="reverse">身份证反面</div>
       </div>
       <div class="id_num id_number">
         <p class="id_name">
-          <span>家庭住址:</span>
+          <span class="id_id">家庭住址:</span>
           <span class="id_txt">
             <input type="text"
                    v-model="data.home_address"
@@ -69,6 +74,10 @@
           <img :src="data.imgfour"
                alt="">
         </span>
+      </div>
+      <div class="id_details">
+        <div class="positive">店面门头照片</div>
+        <div class="reverse">店面内部照片</div>
       </div>
       <div class="relation">
         <p class="credit">
@@ -284,6 +293,21 @@ export default {
   height: calc(100% - 1.5rem);
   background: #fff;
 }
+.id_details {
+  width: px2rem(355px);
+  height: px2rem(20px);
+  line-height: px2rem(20px);
+  color: #666;
+  margin-top: 5px;
+}
+.positive {
+  float: left;
+  margin-left: 21%;
+}
+.reverse {
+  float: left;
+  margin-left: 24%;
+}
 .auth_name {
   width: px2rem(355px);
   height: px2rem(390px);
@@ -292,11 +316,13 @@ export default {
   border-radius: 3px;
   margin: 0.2rem auto 0;
 }
-
+.id_id {
+  margin-left: px2rem(10px);
+}
 .id_num {
-  width: 7.068rem;
-  height: 0.88rem;
-  line-height: 0.88rem;
+  width: px2rem(355px);
+  height: px2rem(44px);
+  line-height: px2rem(44px);
   border-bottom: 1px solid #f7f7f7;
 }
 .id_name {
@@ -319,7 +345,7 @@ export default {
 }
 
 .id_txt input {
-  width: 4rem;
+  width: px2rem(200px);
   height: 0.88rem;
   line-height: 0.88rem;
   border: 0;
@@ -328,8 +354,8 @@ export default {
   border-right: 0;
 }
 .up_data {
-  width: 7.068rem;
-  height: 1.48rem;
+  width: px2rem(355px);
+  height: px2rem(72px);
   line-height: 1.48rem;
   margin-top: 0.22rem;
   display: flex;
@@ -337,9 +363,9 @@ export default {
   padding: 0 50px;
 }
 .updata_lef {
-  width: 115px;
-  height: 1.48rem;
-  line-height: 72px;
+  width: px2rem(115px);
+  height: px2rem(72px);
+  line-height: px2rem(72px);
   background: #eeeeee;
   border-radius: 3px;
   position: relative;
@@ -350,9 +376,9 @@ export default {
   height: 100%;
 }
 .updata_lefs {
-  width: 115px;
-  height: 1.48rem;
-  line-height: 72px;
+  width: px2rem(115px);
+  height: px2rem(72px);
+  line-height: px2rem(72px);
   background: #eeeeee;
   border-radius: 3px;
   position: relative;
@@ -399,9 +425,9 @@ export default {
   z-index: 999;
 }
 .updata_rig {
-  width: 115px;
-  height: 1.48rem;
-  line-height: 72px;
+  width: px2rem(115px);
+  height: px2rem(72px);
+  line-height: px2rem(72px);
   background: #eeeeee;
   border-radius: 3px;
   position: relative;
@@ -412,9 +438,9 @@ export default {
   height: 100%;
 }
 .updata_rigs {
-  width: 115px;
-  height: 1.48rem;
-  line-height: 72px;
+  width: px2rem(115px);
+  height: px2rem(72px);
+  line-height: px2rem(72px);
   background: #eeeeee;
   border-radius: 3px;
   position: relative;
@@ -424,19 +450,16 @@ export default {
   width: 100%;
   height: 100%;
 }
-.id_number {
-  margin-top: 10px;
-}
 .up_dataimg {
   margin-top: 10px;
 }
 .relation {
-  width: 7.068rem;
+  width: px2rem(355px);
   height: 1.6rem;
   line-height: 1.6rem;
 }
 .credit {
-  width: 7.068rem;
+  width: px2rem(355px);
   height: 1.6rem;
   line-height: 1.6rem;
   text-align: center;
@@ -449,9 +472,9 @@ export default {
   text-align: center;
 }
 .next_nex {
-  width: 120px;
-  height: 36px;
-  line-height: 36px;
+  width: px2rem(120px);
+  height: px2rem(36px);
+  line-height: px2rem(36px);
   padding: 10px 35px;
   background: #ffffff;
   border: 1px solid #fd4689;

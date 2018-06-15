@@ -386,6 +386,7 @@ export default {
   width: px2rem(250px);
   // height: 0.88rem;
   // line-height: 0.88rem;
+  // margin-left:50px;
   height: px2rem(44px);
   line-height: px2rem(44px);
   border: 0;
@@ -416,16 +417,18 @@ export default {
   line-height: px2rem(92.6px);
 }
 .manag {
-  margin: 0.1rem;
+  // margin: 0.1rem;
+  margin-top: 15px;
+  display: inline-block;
   font-size: 14px;
   color: #666666;
-  letter-spacing: 0;
   margin-left: px2rem(10px);
 }
 .new_year {
   display: flex;
   justify-content: space-between;
   padding: 5px 3px;
+  margin-top: 5px;
 }
 .year_new {
   display: flex;

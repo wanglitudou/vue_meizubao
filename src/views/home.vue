@@ -92,11 +92,12 @@
                  @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
-            <div class="hot_cent"
-                 @click="seemore()">
-              <span>查看更多></span>
-            </div>
           </div>
+
+        </div>
+        <div class="hot_cent"
+             @click="seemore()">
+          <span>查看更多></span>
         </div>
       </div>
 
@@ -124,7 +125,7 @@
         </div>
       </div>
 
-      <div class="list_btn">
+      <div class="list_btn worktogether">
         <div class=" hotrent">
           <span>合作项目</span>
         </div>
@@ -182,11 +183,6 @@ export default {
         that.getXlogin(""); //获取xlogin
       }
     }
-    // if (code) {
-    //   that.getXlogin(code); //再次调用这个方法
-    // } else {
-    //   that.getXlogin(""); //获取xlogin
-    // }
     // that.achieve(); //获取token
     that.banner(); //首页banner查询
     that.getInstrument(); // 首页热租仪器
@@ -197,28 +193,6 @@ export default {
   },
   mounted: function() {},
   methods: {
-    //获取token
-    // achieve() {
-    //   let that = this;
-    //   that.$axios
-    //     .post("http://mzbao.weiyingjia.org/api/meizubao/authorizations", {
-    //       // email: "",
-    //       // password: ""
-    //     })
-    //     .then(res => {
-    //       console.log(res);
-    //       if (res.data.status_code == 1001) {
-    //         console.log(res.data.data);
-    //         // that.lists = res.data.data;
-    //         // this.shop = res.data.data.shop;
-    //         // this.getData(res.data.data[0].id, "", this.pages, 1);
-    //       }
-    //     })
-    //     .catch(() => {
-    //       console.log("查询失败");
-    //     });
-    // },
-
     //获取地址栏参数
     GetQueryString(name) {
       var reg = new RegExp("(^|&?)" + name + "=([^&]*)(&|$)");
@@ -416,6 +390,7 @@ export default {
 
 .homecontainer {
   height: 100%;
+
   overflow: auto;
   padding-bottom: 50px;
   // display: flex;
@@ -424,15 +399,11 @@ export default {
 }
 .slider-box {
   // padding-bottom: 50px;
+
+
 }
 .scrolls {
   width: 100%;
-  // height: auto;
-  // padding-bottom: 1.2rem;
-  // overflow: hidden;
-  // /* overflow-y: scroll; */
-  /* height: calc(100% - 3.81rem); */
-  /* margin-top: 0.4rem; */
 }
 .banner {
   height: px2rem(150px);
@@ -484,10 +455,12 @@ export default {
   align-items: center;
 }
 
+
 .search_contents .list_search {
   width: 94.7%;
   height: px2rem(44px);
   margin-left:2.6%;
+
   border-radius: 3px;
   border: 1px solid #eee;
   display: flex;
@@ -504,103 +477,30 @@ export default {
   color: #666;
 }
 
-/* .list_ban {
-  width: 6.7rem;
-  height: 5rem;
-  margin: 0.5rem auto 0;
-  background: #ffffff;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  border-radius: 3px;
-}
-.list_ban .hotrent {
-  width: 100%;
-  height: 1.04rem;
-  line-height: 1.04rem;
-  text-align: center;
-  font-size: 16px;
-  color: #000000;
-  letter-spacing: 0;
-}
-.item_name {
-  display: block;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-top: 10px;
-}
-.list_ban .hotrents {
-  width: 100%;
-  height: 5px;
-  line-height: 5px;
-  text-align: center;
-  margin-top: -10px;
-}
-.list_ban .hotrents div {
-  width: 0.81rem;
-  height: 2px;
-  background: #fd82d9;
-  margin-left: 43%;
-}
-.hotimg {
-  width: 100%;
-  height: 2.4rem;
-  display: flex;
-  justify-content: center;
-}
-.hotimg .hotimg_lef {
-  width: 3.2rem;
-  height: 2.4rem;
-  padding: 5px;
-}
-.hotimg .hotimg_lef img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 6px;
-}
-.hotimg .hotimg_rig {
-  width: 3.2rem;
-  height: 2.4rem;
-  border-radius: 6px;
-}
-.hotimg .hotimg_rig img {
-  width: 3.2rem;
-  height: 2.4rem;
-}
-.hot_cent {
-  width: 100%;
-  height: 0.5rem;
-  line-height: 0.5rem;
-  margin-top: 0.8rem;
-  font-size: 12px;
-  color: #222;
-  text-align: center;
-}
-.hot_cent span {
-  color: #ccc;
-  font-size: 12px;
-} */
 .mint-swipe-item img {
   width: 100%;
   height: 100%;
 }
 .list_btn {
-  width: 94.7%;
+  // width: 94.7%;
+  width: px2rem(355px);
   height: px2rem(253px);
   margin-left: 2.6%;
   box-shadow: 0 2px 9px #eee;
-  margin-top: px2rem(20px);
+  margin-top: px2rem(10px);
   overflow: hidden;
+  // margin-bottom: 30px;
 }
 .list_btn .hotrent {
   width: 100%;
   text-align: center;
   font-size: px2rem(16px);
-  margin-top: px2rem(15px);
-  // height: px2rem(22px);
+  margin-top: px2rem(10px);
   color: #000;
   font-weight: bold;
+}
+.worktogether {
+  margin-bottom: px2rem(20px);
 }
 .hotrent span {
   width: px2rem(64px);
@@ -620,7 +520,6 @@ export default {
 }
 .hotimg {
   width: 100%;
-  // height: px2rem();
   height: auto;
   display: flex;
 }
@@ -642,7 +541,6 @@ export default {
 }
 .hotimg_lef .item_name {
   display: block;
-  width: px2rem(70px);
   height: px2rem(20px);
   color: #666;
   margin-top: px2rem(10px);
