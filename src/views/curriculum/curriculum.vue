@@ -114,7 +114,8 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss">
+@import '../../styles/helper.scss';
 .container {
   width: 100%;
   height: 100%;
@@ -125,7 +126,7 @@ export default {
 /* new 代码 */
 .searchTop {
   width: 100%;
-  height: 44px;
+  height: px2rem(44px);
   z-index: 4;
   position: fixed;
   background: #fff;
@@ -135,23 +136,23 @@ export default {
 .listContent {
   width: 96%;
   margin-left: 2%;
-  padding-top: 44px;
+  padding-top: px2rem(44px);
   position: relative;
 }
 .list {
   width: 100%;
-  height: 120px;
-  margin-top: 15px;
-  box-shadow: 0 2px 9px 0 #eee;
+  height: px2rem(120px);
+  margin-top: px2rem(15px);
+  box-shadow: 0 px2rem(2px) px2rem(9px) 0 #eee;
   border-radius: 6px;
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
 }
 .list .img {
-  width: 122.7px;
-  height: 96px;
-  margin-left: 10px;
+  width: px2rem(122.7px);
+  height: px2rem(96px);
+  margin-left: px2rem(10px);
 }
 .list img {
   width: 100%;

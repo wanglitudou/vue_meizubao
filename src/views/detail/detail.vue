@@ -28,18 +28,29 @@
          </p>
          <p class="logo"><img src="../../assets/images/menu.png" alt=""></p>
       </header>
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+      <section></section>
+      <div class="mask"></div>
+      <div class="rightContent">
+          <div class="tabTitle">全部分类</div>
+          
+          <div class="tabItem" >
+            <div :class="num == index?'active':'tabChird'" v-for="(item,index) in tabs" :key="index" @click="tab(item.id,index)">{{item.name}}</div>
+          </div>
+
+      </div>
+
+        <!-- <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
             <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
-                <!-- block item markup -->
-                <div class="box listing">
+
+                <div class="boxs listing">
                     <div>
                         <img :src="item.images" alt="">
                     </div>
                     <div class="other">
                         <p class="name">
-                            <!-- {{item.name}} -->
+                           
                             <span>{{item.name}}</span>
-                            <!-- {{item.price}} -->
+                          
                             <span class="paice">￥{{item.price}}</span>
                         </p>
                         <p class="meeting">
@@ -47,7 +58,7 @@
                         </p>
                         <p class="date">
                             <span>
-                                <!-- {{item.firstrent}} -->
+                                
                                 <a>￥{{item.firstrent}}</a>/月
                             </span>
                             <span class="count">
@@ -73,11 +84,11 @@
                     <span v-else>数据全部加载完成</span>
                 </span>
             </div>
-        </div>
-        <div class="nodata" v-if="showNodata">
+        </div> -->
+        <!-- <div class="nodata" v-if="showNodata">
             暂无数据
-        </div>
-
+        </div> -->
+       
        
 
     </div>
@@ -95,7 +106,7 @@ export default {
     return {
       tabs: [], // 热租仪器分类
       immediatelyorder: [], //热租仪器筛选
-      num: 0,
+      num: 9,
       flog: false,
       url: [],
       message: "",
@@ -115,7 +126,8 @@ export default {
       loading: true,
       topStatus: false,
       isNodata: true,
-      showNodata: false
+      showNodata: false,
+      showTab:true
     };
   },
 
@@ -185,6 +197,7 @@ export default {
       });
     },
     tab(id, index) {
+      this.showTab =  false
       this.num = index;
       this.uid = id;
       this.imgsArr = [];
@@ -326,19 +339,7 @@ export default {
   width: 24px;
   height: 24px;
 }
-.nav_pic {
-  /* width: 6.2rem;
-   */
-  width: 6.2rem;
-  height: 0.88rem;
-  overflow-x: scroll;
-  line-height: 0.88rem;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #000;
-}
+
 .list_tab {
   width: auto;
   padding: 5px;
@@ -350,12 +351,12 @@ export default {
   /* margin:3% */
 }
 
-.box {
+.boxs {
   width: 100%;
   height: 100%;
   margin: 2%;
 }
-.box img {
+.boxs img {
   width: 100%;
 }
 
@@ -436,5 +437,48 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
+.mask{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+background: #000000;
+}
+.rightContent{
+  width: px2rem(280px);
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #fff;
+}
+.rightContent .tabItem{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: px2rem(6px);
+}
+.rightContent .tabChird{
+  width: px2rem(70px);
+  height: px2rem(28px);
+  background: #f4f4f4;
+  margin:px2rem(7px) px2rem(10px);
+  text-align: center;
+  line-height: px2rem(28px);
+  font-size: 13px;
+}
+.rightContent .active{
+  background: #FD4689 20%;
+  color: #fff;
+    width: px2rem(70px);
+  height: px2rem(28px);
+  // background: #f4f4f4;
+  margin:px2rem(7px) px2rem(10px);
+  text-align: center;
+  line-height: px2rem(28px);
+  font-size: 13px;
+}
 </style>

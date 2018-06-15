@@ -13,7 +13,7 @@
         </p>
       </div>
     </div>
-    <div class="integralScrolls">
+    <!-- <div class="integralScrolls"> -->
       <div class="list_pull" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
         <!-- <div class="list_lef"> -->
 
@@ -36,12 +36,13 @@
 
         </div>
         <!-- 加载更多 -->
-        <div class="item loadMore" ref="load">
-          <!-- <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner> -->
 
-          <div class="add_more" @click="loadMore">
-            <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
-          </div>
+      </div>
+      <div class="loadMore" ref="load">
+        <!-- <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner> -->
+
+        <div class="add_more" @click="loadMore">
+          <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
         </div>
       </div>
       <!-- 没有数据 -->
@@ -49,7 +50,7 @@
         暂无数据
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 <script>
 import { Spinner, Toast, Indicator } from "mint-ui";
@@ -124,12 +125,14 @@ export default {
 @import "../../styles/helper.scss";
 .integralContainer {
   width: 100%;
-  height: auto;
-  /* height: auto; */
+  // height: 100%;
+   height: auto; 
   /* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12); */
   /* border-radius: 3px; */
   background: #fff;
   overflow: hidden;
+   position: relative;
+
 }
 .intege {
   width: 100%;
@@ -144,13 +147,7 @@ export default {
   justify-content: center;
   /* margin: 0.2rem auto 0; */
 }
-.intege_cent {
-  /* width: 166px; */
-  /* height: 45px; */
-  /* line-height: 45px; */
-  /* margin: 0 auto; */
-  /* margin-top: 22.5px; */
-}
+
 .mine_intege {
   font-size: px2rem(17px);
   color: #000000;
@@ -170,7 +167,7 @@ export default {
 }
 .intege_city {
   font-size: px2rem(17px);
- margin-top: px2rem(10px);
+  margin-top: px2rem(10px);
 }
 .city_inte {
   font-size: 17px;
@@ -178,16 +175,12 @@ export default {
   letter-spacing: 0;
   margin: 0.2rem 0.1rem;
 }
-/* .city_intege {
-  width: 7.068rem;
-  height: auto;
-  margin: 0.2rem auto 0;
-  border: 1px solid #ccc;
-} */
+
 .integralScrolls {
   width: 100%;
-  height: auto;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: auto;
+
   /* height: calc(100% - 0.68rem); */
 }
 
@@ -218,104 +211,20 @@ export default {
 .list_lef img {
   width: 100%;
 }
-// .list_rig {
-//   width: 3.46rem;
-//   border-radius: 3px;
-// }
-// .list_rig img {
-//   width: 3.44rem;
-// }
-
-// .list_rig .other span {
-// padding: 0.2rem;
-// font-size: 15px;
-// color: #000000;
-// letter-spacing: 0;
-// }
-// .list_lef .other span {
-//   padding: 0.2rem;
-//   font-size: 15px;
-//   color: #000000;
-//   letter-spacing: 0;
-// }
-// .paice {
-//   font-size: 13px;
-//   color: #666666;
-//   letter-spacing: 0;
-// }
-// .paice {
-//   font-size: 13px;
-//   color: #666666;
-//   letter-spacing: 0;
-// }
-// .meeting {
-//   padding: 0 0.3rem;
-//   font-size: 13px;
-//   color: #999999;
-//   letter-spacing: 0;
-// }
-// .count {
-//   font-size: 14px;
-//   color: #00a5ff;
-//   letter-spacing: 0;
-// }
-// .other a {
-//   font-size: 14px;
-//   color: #ff272d;
-//   letter-spacing: 0;
-// }
-/* .rent {
-  font-size: 12px;
-  color: #999999;
-  letter-spacing: 0;
-  padding: 0 0.2rem;
-} */
-// .list_lef .other .orders {
-//   width: 2.4rem;
-//   height: 0.72rem;
-//   line-height: 0.72rem;
-//   border: 1px solid #ccc;
-//   margin: 0 auto;
-//   text-align: center;
-//   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
-//   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
-//   border-radius: 3px;
-//   margin-top: 10px;
-//   margin-bottom: 15px;
-// }
-// .list_lef .other p .order {
-//   font-size: 14px;
-//   color: #ffffff;
-//   letter-spacing: 0;
-// }
-// .list_cent .list_rig .other .orders {
-//   width: 2.4rem;
-//   height: 0.72rem;
-//   line-height: 0.72rem;
-//   margin: 0 auto;
-//   text-align: center;
-//   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
-//   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
-//   border-radius: 3px;
-//   margin-top: 10px;
-//   margin-bottom: 15px;
-// }
-// .list_cent .list_rig .other p .order {
-//   font-size: 14px;
-//   color: #ffffff;
-//   letter-spacing: 0;
-// }
 .list_pull{
-  overflow: hidden;
+  width: 100%;
+  overflow: auto;
+  margin-bottom: px2rem(50px);
 }
+
 .list_pull .item {
   width: 46.1%;
   height: auto;
-  padding: 1%; 
+  padding: 1%;
   /* margin:3% */
   margin-left: 2.7%;
   // border: 1px solid #ccc;
-  box-shadow: 0 2px 9px 0 #EEE;
+  box-shadow: 0 2px 9px 0 #eee;
   background: #fff;
   border-radius: 3px;
   margin-top: px2rem(10px);
@@ -360,14 +269,18 @@ export default {
   align-items: center;
 }
 .loadMore {
-  width: 96%;
-  height: 50px;
+  width:100%;
+  position: absolute;
+  bottom: px2rem(0px);
+  height: px2rem(40px);
   display: flex;
   justify-content: center;
   align-items: center;
   color: #000;
-  font-size: 16px;
+  font-size: px2rem(14px);
+  line-height: px2rem(40px);
   border: none;
   box-shadow: none;
+  color: #00A5FF;
 }
 </style>
