@@ -1,10 +1,15 @@
 <template>
-    <div class="searchs">
-        <form action="javascript:return true;">
-            <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
-        </form>
-        <img src="../assets/icon/search_1.png" alt="111">
-    </div>
+  <div class="searchs">
+    <form action="javascript:return true;">
+      <input @keyup.13=show()
+             type="search"
+             placeholder="请输入搜索内容"
+             v-model="keyword"
+             ref="input1">
+    </form>
+    <img src="../assets/icon/search_1.png"
+         alt="111">
+  </div>
 </template>
 <script>
 export default {
@@ -23,11 +28,12 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style  lang="scss">
+@import "../styles/helper.scss";
 .searchs {
-  width: 92%;
-  height: 32px;
-  border: 1px solid #EEEEEE;
+  width: px2rem(355px);
+  height: px2rem(44px);
+  border: 1px solid #eeeeee;
   margin-top: 6px;
   text-align: center;
   margin-left: 4%;
@@ -51,15 +57,14 @@ export default {
   border-radius: 2px;
   outline: none;
   padding-left: 15px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 .searchs img {
   width: 23px;
   height: 24px;
   margin-right: 10px;
- 
 }
-.searchs input{
-    font-size: 13px;
+.searchs input {
+  font-size: 13px;
 }
 </style>

@@ -1,36 +1,44 @@
 <template>
-    <div class="main">
-        <div class="search_top">
-            <search @search="search"></search>
-        </div>
-
-        <div class="content">
-            <!-- {{filterList}} -->
-            <!-- dsdsadsakdlksajdlksajd  -->
-            <div class="list" v-for="(item,index) in filterList" @click="todetails(item.id,item.type)">
-                <div class="img">
-                    <img :src="item.images" alt="">
-                </div>
-                <div class="detail">
-                    <div class="name">{{item.name}}</div>
-                    <div class="price">￥{{item.price}}</div>
-                </div>
-                <div class="pay">
-                    <span>立即下单</span>
-                </div>
-            </div>
-            <div class='loadData' v-if="lists.length">
-                <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
-                <span v-else>
-                    <span @click="loadMore" v-if="lists.length>limitNum">加载更多</span>
-                    <span v-else>数据全部加载完成</span>
-                </span>
-            </div>
-            <div class="nodata" v-if="noData">
-                暂无数据
-            </div>
-        </div>
+  <div class="main">
+    <div class="search_top">
+      <search @search="search"></search>
     </div>
+
+    <div class="content">
+      <!-- {{filterList}} -->
+      <!-- dsdsadsakdlksajdlksajd  -->
+      <div class="list"
+           v-for="(item,index) in filterList"
+           @click="todetails(item.id,item.type)">
+        <div class="img">
+          <img :src="item.images"
+               alt="">
+        </div>
+        <div class="detail">
+          <div class="name">{{item.name}}</div>
+          <div class="price">￥{{item.price}}</div>
+        </div>
+        <div class="pay">
+          <span>立即下单</span>
+        </div>
+      </div>
+      <div class='loadData'
+           v-if="lists.length">
+        <mt-spinner type="fading-circle"
+                    color="#FD4689 "
+                    v-if="topStatus"></mt-spinner>
+        <span v-else>
+          <span @click="loadMore"
+                v-if="lists.length>limitNum">加载更多</span>
+          <span v-else>数据全部加载完成</span>
+        </span>
+      </div>
+      <div class="nodata"
+           v-if="noData">
+        暂无数据
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -103,7 +111,7 @@ export default {
           }
         });
       } else if (type == 2) {
-           this.$router.push({
+        this.$router.push({
           name: "essence",
           query: {
             pid: id
@@ -111,9 +119,8 @@ export default {
         });
         // 跳转技师
       } else if (type == 3) {
-
         //跳转产品
-        
+
         this.$router.push({
           name: "matching",
           query: {
@@ -122,7 +129,7 @@ export default {
         });
       } else if (type == 4) {
         //跳转视频
-        
+
         this.$router.push({
           name: "train",
           query: {
@@ -131,8 +138,8 @@ export default {
         });
       } else {
         //跳转 合作项目
-        // 
-         this.$router.push({
+        //
+        this.$router.push({
           name: "cooperation",
           query: {
             pid: id
@@ -146,13 +153,15 @@ export default {
   }
 };
 </script>
-
-<style>
+<style  lang="scss">
+@import "../../styles/helper.scss";
 .main {
   width: 100%;
   height: 100%;
 }
 .searchs {
+  width: px2rem(335px);
+  height: px2rem(44px);
   border-radius: 10px;
 }
 .content {
