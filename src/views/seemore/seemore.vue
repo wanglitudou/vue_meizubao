@@ -1,30 +1,37 @@
 <template>
-  <div class="containers">
+  <div class="containers" :class="isRellyShow?'activeContainers':'containers'">
 
-    <div class="list_list">
+    <!-- <div class="list_list">
       <div class="list_search">
         <div class="sortMenu clearfix" v-show="slideShow">
           <ul class="sortMenu-ul">
             <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
               <tab :item="item" :index="index" :num="num"></tab>
-              <!-- <li class="cell"   :class="num == index ?'dora':''">
-                            {{item.name}}
-                            </li> -->
+            
             </div>
           </ul>
-          <!-- 搜索按钮 -->
+          
           <div class="sousuo" @click="aaa()">
             <img src="../../assets/icon/search_1.png" alt="">
           </div>
         </div>
-        <!--  -->
+    
         <div class="topSearch" v-if="flog">
           <search @search="search"></search>
         </div>
 
       </div>
-    </div>
-
+    </div> -->
+    <header class="clearfix">
+      <div class="search_content">
+        <form action="javascript:return true;">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+        </form>
+        <img src="../../assets/icon/search_1.png" alt="111">
+      </div>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+    </header>
+    <section>
     <!-- 瀑布流布局 -->
     <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
       <!-- v-for="(item, index) in accessoryproducts -->
@@ -59,6 +66,8 @@
       </div>
 
     </div>
+    </section>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
     <!-- 暂无数据 -->
     <div class="noData" v-if="showNodata">
       赞无数据
@@ -67,6 +76,7 @@
 </template>
 <script>
 import { Spinner, Toast, Indicator } from "mint-ui";
+import slider from "../../components/sliderBar.vue";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
 import { VueMasonryPlugin } from "vue-masonry";
@@ -82,6 +92,7 @@ export default {
       message: "",
       slideShow: true,
       showLoad: true,
+      isRellyShow: false,
       load: true,
       keyword: "",
       code: 1, //这个是不搜索的
@@ -98,7 +109,7 @@ export default {
     let that = this;
     //热租仪器分类
     that.$axios
-      .get(window.ajaxSrc+"/api/meizubao/productType", {})
+      .get(window.ajaxSrc + "/api/meizubao/productType", {})
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
@@ -110,11 +121,18 @@ export default {
         setTimeout(() => {
           Indicator.close();
         }, 1000);
-        Toast('加载失败')
+        Toast("加载失败");
         console.log("查询失败");
       });
   },
   methods: {
+    // 隐藏slider
+    hideSide() {
+      this.isRellyShow = false;
+    },
+    logo() {
+      this.isRellyShow = true;
+    },
     details(id) {
       this.$router.push({
         name: "matching",
@@ -128,7 +146,7 @@ export default {
       let that = this;
       //热租仪器筛选
       that.$axios
-        .post(window.ajaxSrc+"/api/meizubao/productSearch", {
+        .post(window.ajaxSrc + "/api/meizubao/productSearch", {
           typeId: name,
           keywords: keyword,
           page: pages
@@ -160,47 +178,46 @@ export default {
           console.log("查询失败");
         });
     },
-    search(keyword) {
+    show() {
+
       if (this.keyword == "") {
         Toast("搜索不能为空");
         return false;
       }
-      this.keyword = keyword;
-      this.pages = 1;
-      this.getData("", keyword, this.pages);
-    },
-    loseblur() {
-      alert("666");
-    },
-    // aaa() {
-    //   //   this.flog = true;
-    //   this.flog = true;
-    //   this.imgsArr = [];
-    //   this.slideShow = false;
-    // },
-    aaa() {
-      this.flog = true;
-      this.accessoryproducts = [];
-      this.showNodata = false;
+        this.accessoryproducts = [];
+       this.showNodata = false;
       this.isNodata = false;
-      this.code = 2; //点击搜索 不传 产品id
-      //  console.log(this.$refs.masonry)
-      // this.$refs.masonry.style = "position:relative";
+      this.pages =1 
+      this.code = 2
+      this.getData('',this.keyword,this.pages)
     },
-    search(keyword) {
-      // console.log(word)
-      this.getData("", keyword, this.pages);
-    },
-   
+  
+    // aaa() {
+    //   this.flog = true;
+    //   this.accessoryproducts = [];
+    //   this.showNodata = false;
+    //   this.isNodata = false;
+    //   this.code = 2; //点击搜索 不传 产品id
+    //   //  console.log(this.$refs.masonry)
+    //   // this.$refs.masonry.style = "position:relative";
+    // },
+    // search(keyword) {
+    //   // console.log(word)
+    //   this.getData("", keyword, this.pages);
+    // },
+
     tab(id, index) {
       this.typeid = id;
       console.log(id);
       this.num = index;
       this.accessoryproducts = [];
-      (this.isNodata = false), (this.showNodata = false);
+      this.isRellyShow = false
+       this.pages = 1;
+      this.isNodata = false 
+      this.showNodata = false
       Indicator.open();
       setTimeout(() => {
-        this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+        this.getData(id, "", this.pages); //传输1  
       }, 2000);
       //   this.getData(id, "", 1); //传输1 是页数 为了和搜索区分开 提示暂无数据区分开
       //   this.$refs.masonry.style="position:relative"
@@ -223,65 +240,80 @@ export default {
   },
   components: {
     tab,
-    search
+    search,
+    slider
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../../styles/helper.scss";
+.activeContainers{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 .containers {
   width: 100%;
-  height: calc(100% - 0.81rem);
+  height: 100%;
   background: #fff;
 }
-
-.list_list {
+.clearfix {
   width: 100%;
-  height: auto;
-}
-.list_search {
-  width: 100%;
-  height: 0.88rem;
-  /* border: 1px solid #fff; */
-  /* margin-top: 0.2rem; */
-  text-align: center;
-  /* margin-left: 2%; */
-  background: #fff;
-  border-radius: 0.1rem;
-}
-
-.sortMenu {
-  z-index: 1;
-  width: 100%;
-  /* margin-top: px2rem(48px); */
-  position: fixed;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px 0 #ebeced;
+  height: px2rem(44px);
+  box-shadow: 0 2px 9px #eee;
   display: flex;
-}
-.sortMenu-ul {
-  /* min-width: px2rem(320px); */
-  width: 86%;
-  height: 0.88rem;
-  margin-left: 2%;
-  overflow-x: scroll;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  display: -webkit-box;
-  justify-content: flex-start;
-  animation: moveTo 0.5s ease both;
-}
-
-.sousuo {
-  width: 14%;
-  height: 0.88rem;
-  line-height: 44px;
-  background: #ffffff;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  position: absolute;
-  right: 0;
-  display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  // padding: 7px 15px;
+  .logo {
+    width: px2rem(25px);
+    height: px2rem(25px);
+
+    img {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+  .search_content {
+    width: px2rem(270px);
+    height: px2rem(30px);
+    border: 1px solid #ccc;
+    border-radius: px2rem(5px);
+    display: flex;
+    justify-content: space-between;
+    font-size: px2rem(13px);
+    align-items: center;
+    color: #000;
+    span {
+      display: inline-block;
+      margin-left: (5px);
+    }
+    img {
+      display: inline-block;
+      width: 20px;
+      margin-right: px2rem(5px);
+    }
+    form {
+      display: block;
+      width: 100%;
+      height: 80%;
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        padding-left: px2rem(8px);
+      }
+    }
+  }
 }
+
 .dora {
   border-bottom: 2px solid #fd4689;
   font-size: 18px;
@@ -438,7 +470,8 @@ export default {
   justify-content: center;
   align-items: center;
   color: #000;
-  font-size: 16px;
+  font-size: px2rem(14px);
+  color: #00a5ff;
 }
 .noData {
   width: 100%;
@@ -446,5 +479,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #00A5FF;
+  font-size:px2rem(14px);
+  position: absolute;top: 0;
+}
+section{
+  padding-top: px2rem(45px);
 }
 </style>
