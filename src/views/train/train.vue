@@ -6,18 +6,25 @@
       <div class="cent_list">
 
         <div class="list_lists">
-          <div class="trainBanner" v-if="data.is_play == 1">
+          <div class="trainBanner"
+               v-if="data.is_play == 1">
             <!-- <img :src="data.images" alt=""> -->
             <!-- <video id="video" autoplay :poster="data.images" controls width="100%" height="100%">
               <source :src="data.url" type="video/mp4">
 
             </video> -->
 
-            <video-player class="vjs-custom-skin" :options="playerOptions" :playsinline="true" ref="videoPlayer" @ready="playerReadied($event)"></video-player>
+            <video-player class="vjs-custom-skin"
+                          :options="playerOptions"
+                          :playsinline="true"
+                          ref="videoPlayer"
+                          @ready="playerReadied($event)"></video-player>
 
           </div>
-          <div class="trainBanner" v-else>
-            <img :src="data.images" alt="">
+          <div class="trainBanner"
+               v-else>
+            <img :src="data.images"
+                 alt="">
           </div>
           <div class="name_project">
             <p>
@@ -34,18 +41,28 @@
         </div>
         <div class="bes_time">
         </div>
-      </div> 
+      </div>
       <!-- 选择支付方式 -->
 
-      <orderFooter :text="'开始预约'" :count="data.price" :nextFun="nextFun" v-if="data.is_play == 2"></orderFooter>
+      <orderFooter :text="'开始预约'"
+                   :count="data.price"
+                   :nextFun="nextFun"
+                   v-if="data.is_play == 2"></orderFooter>
     </div>
-    <div class="opcity" v-show="showOpcity" @click="clearOpcity">
+    <div class="opcity"
+         v-show="showOpcity"
+         @click="clearOpcity">
     </div>
-    <div class="payMethod" v-show="showOpcity">
-      <mt-radio title="请选择支付方式" v-model="value" :options="options">
+    <div class="payMethod"
+         v-show="showOpcity">
+      <mt-radio title="请选择支付方式"
+                v-model="value"
+                :options="options">
       </mt-radio>
       <div class="pay">
-        <mt-button type="danger" style="margin:5px" @click="nextPay">立即支付 </mt-button>
+        <mt-button type="danger"
+                   style="margin:5px"
+                   @click="nextPay">立即支付 </mt-button>
       </div>
     </div>
   </div>
@@ -94,8 +111,8 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             this.data = res.data.data;
-            this.playerOptions.sources[0].src=res.data.data.url
-            this.playerOptions.poster =  res.data.data.images
+            this.playerOptions.sources[0].src = res.data.data.url;
+            this.playerOptions.poster = res.data.data.images;
             console.log(res.data.data.integral);
           }
         })
@@ -159,14 +176,14 @@ export default {
     },
     // 微信支付 和积分兑换
     nextPay() {
-      let payPrice= ''
+      let payPrice = "";
       if (this.value == "") {
         Toast("请选择支付方式");
         return false;
-      }else if(this.value == 1){
-          payPrice =  this.data.price
-      }else{
-        payPrice =  this.data.integral
+      } else if (this.value == 1) {
+        payPrice = this.data.price;
+      } else {
+        payPrice = this.data.integral;
       }
       // console.log(payPrice)
       this.$axios
@@ -246,14 +263,13 @@ export default {
             src: ""
           }
         ],
-        poster:""
-          
+        poster: ""
       }
     };
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .train-container {
   width: 100%;
@@ -463,7 +479,7 @@ export default {
   width: 100%;
   height: 250px;
 }
-.vjs-button > .vjs-icon-placeholder:before{
+.vjs-button > .vjs-icon-placeholder:before {
   font-size: 2em !important;
 }
 .video-js .vjs-big-play-button {

@@ -3,12 +3,13 @@
     <div class="con_cents">
       <div class="con_pro">
 
-
         <div class="cooperationBanner">
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="item in data.images">
-                <img :src="item" alt="">
+              <div class="swiper-slide"
+                   v-for="item in data.images">
+                <img :src="item"
+                     alt="">
               </div>
             </div>
           </div>
@@ -49,7 +50,6 @@
           <span>{{data.sigh_stoptime}}</span>
         </p>
 
-
         <p class="pro_cate">
           <span>项目开始时间：</span>
           <span>{{data.strtime}}</span>
@@ -60,10 +60,9 @@
         </p>
 
         <!--<p class="pro_cate">-->
-          <!--<span>订金</span>-->
-          <!--<span>{{data.money}}</span>-->
+        <!--<span>订金</span>-->
+        <!--<span>{{data.money}}</span>-->
         <!--</p>-->
-
 
       </div>
       <div class="pro_intro">
@@ -76,48 +75,45 @@
           <span>￥{{data.money}}</span>
         </p>
       </div>
-      <p class="list_rent" @click="showSign">
-                    <span>
-                        网签租赁协议
-                    </span>
+      <p class="list_rent"
+         @click="showSign">
+        <span>
+          网签租赁协议
+        </span>
       </p>
     </div>
-    <orderFooter :text="'立即下单'" :count="data.money" :nextFun="createOrder"  ></orderFooter>
-    <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
-
-
-
+    <orderFooter :text="'立即下单'"
+                 :count="data.money"
+                 :nextFun="createOrder"></orderFooter>
+    <sign id="componentSign"
+          v-if="showSignTag"
+          :src="data.agreement"
+          :gid="data.id"
+          :saveAgreementId="saveAgreementId"></sign>
 
   </div>
 </template>
 <script>
-  import orderFooter from '../../components/orderFooter.vue'
-  import sign from '../../components/sign.vue'
-  import { Toast } from 'mint-ui';
-
-
+import orderFooter from "../../components/orderFooter.vue";
+import sign from "../../components/sign.vue";
+import { Toast } from "mint-ui";
 
 export default {
   data() {
     return {
-      data:[],
-      agreementId:null,
-      showSignTag:false,
+      data: [],
+      agreementId: null,
+      showSignTag: false
     };
   },
 
-
-  saveAgreementId:function(agreementId){
-    this.showSignTag=false;
-    this.agreementId=agreementId;
+  saveAgreementId: function(agreementId) {
+    this.showSignTag = false;
+    this.agreementId = agreementId;
   },
-  showSign:function(){
-    this.showSignTag=true
+  showSign: function() {
+    this.showSignTag = true;
   },
-
-
-
-
 
   mounted() {
     this.init();
@@ -127,8 +123,8 @@ export default {
     orderFooter,
     sign
   },
-  methods:{
-    init(){
+  methods: {
+    init() {
       this.$axios
         .get(window.ajaxSrc + "/api/meizubao/projectDetail", {
           params: { id: this.$route.query.pid }
@@ -137,7 +133,6 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             this.data = res.data.data;
-
           }
         })
         .catch(() => {
@@ -145,64 +140,55 @@ export default {
         });
     },
 
-
-    saveAgreementId:function(agreementId){
-      this.showSignTag=false;
-      this.agreementId=agreementId;
+    saveAgreementId: function(agreementId) {
+      this.showSignTag = false;
+      this.agreementId = agreementId;
     },
-    showSign:function(){
-      this.showSignTag=true
+    showSign: function() {
+      this.showSignTag = true;
     },
-
-
 
     createOrder: function() {
-
-
-
-
-      if(!this.agreementId){
-        Toast('请网签租赁协议后下单');
-        return false
+      if (!this.agreementId) {
+        Toast("请网签租赁协议后下单");
+        return false;
       }
 
-
-
-//      window.location.href="http://mzbao.weiyingjia.org/meizubao/pay/index.php?total_fee=0.01&order_id=45";
+      //      window.location.href="http://mzbao.weiyingjia.org/meizubao/pay/index.php?total_fee=0.01&order_id=45";
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
-            uid:window.localStorage.id,
-            g_id:this.data.id,
-            type:5,
-            m_type:1,
-            strtime:"",
-            stoptime:"",
-            stage:"",
-            agreement:this.agreementId,
-            image:this.data.images[0],
-            goods_num:1,
-            total_price:this.data.money,
-            goods_name:this.data.name,
-            address_id:"",
-            deposit:"",
-            open_id:window.localStorage.openid,
+          uid: window.localStorage.id,
+          g_id: this.data.id,
+          type: 5,
+          m_type: 1,
+          strtime: "",
+          stoptime: "",
+          stage: "",
+          agreement: this.agreementId,
+          image: this.data.images[0],
+          goods_num: 1,
+          total_price: this.data.money,
+          goods_name: this.data.name,
+          address_id: "",
+          deposit: "",
+          open_id: window.localStorage.openid
         })
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-            window.location.href=res.data.data.url
+            window.location.href = res.data.data.url;
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("http请求错误");
           console.log(err);
         });
-    },
+    }
   }
 };
 </script>
-<style lang="scss">
-@import '../../styles/helper.scss';
+<style lang="scss" scoped>
+@import "../../styles/helper.scss";
 .cooperation-container {
   width: 100%;
   height: calc(100% - 1rem);
@@ -227,12 +213,12 @@ export default {
   width: 100%;
   height: px2rem(250px);
 }
-.swiper-container{
+.swiper-container {
   width: 100%;
-  height:100%;
-  img{
+  height: 100%;
+  img {
     width: 100%;
-    height:  px2rem(250px);
+    height: px2rem(250px);
   }
 }
 .conpro_img img {
@@ -243,7 +229,6 @@ export default {
   width: 100%;
   height: px2rem(48px);
   line-height: px2rem(48px);
-
 }
 .conname_name {
   font-size: 16px;
@@ -258,13 +243,13 @@ export default {
   line-height: 17px;
 }
 .cent_cate {
-  width:100%;
+  width: 100%;
 
   margin: 0.2rem auto 0;
   margin-bottom: 0.5rem;
 }
 .pro_cate {
-  width:100%;
+  width: 100%;
   height: 0.8rem;
   line-height: 0.8rem;
   border-bottom: 1px solid #f7f7f7;
@@ -278,7 +263,7 @@ export default {
 .pro_intro {
   width: 100%;
   margin: 0.2rem auto 0;
-  padding-bottom:12px;
+  padding-bottom: 12px;
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;
@@ -400,6 +385,6 @@ export default {
   color: #fd4689;
   letter-spacing: 0;
   text-align: center;
-  margin-bottom:1.5rem;
+  margin-bottom: 1.5rem;
 }
 </style>

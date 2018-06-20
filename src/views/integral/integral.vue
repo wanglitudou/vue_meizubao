@@ -14,12 +14,23 @@
       </div>
     </div>
     <div class="integralScrolls">
-      <div class="list_pull" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+      <div class="list_pull"
+           v-masonry
+           transition-duration="0.3s"
+           ref="masonry"
+           item-selector=".item"
+           column-width=".item"
+           v-if="isNodata">
         <!-- <div class="list_lef"> -->
 
-        <div class="listing item" v-masonry-tile v-for="(item,index) of dataArr" :key="index" @click="toTrain(item.id)">
+        <div class="listing item"
+             v-masonry-tile
+             v-for="(item,index) of dataArr"
+             :key="index"
+             @click="toTrain(item.id)">
           <div>
-            <img :src="item.images" alt="">
+            <img :src="item.images"
+                 alt="">
           </div>
           <div class="other">
             <p class="aa">
@@ -36,16 +47,19 @@
 
         </div>
         <!-- 加载更多 -->
-        <div class="item loadMore" ref="load">
+        <div class="item loadMore"
+             ref="load">
           <!-- <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner> -->
 
-          <div class="add_more" @click="loadMore">
+          <div class="add_more"
+               @click="loadMore">
             <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
           </div>
         </div>
       </div>
       <!-- 没有数据 -->
-      <div class="noData" v-if="showNodata">
+      <div class="noData"
+           v-if="showNodata">
         暂无数据
       </div>
     </div>
@@ -120,7 +134,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .integralContainer {
   width: 100%;
@@ -170,7 +184,7 @@ export default {
 }
 .intege_city {
   font-size: px2rem(17px);
- margin-top: px2rem(10px);
+  margin-top: px2rem(10px);
 }
 .city_inte {
   font-size: 17px;
@@ -305,17 +319,17 @@ export default {
 //   color: #ffffff;
 //   letter-spacing: 0;
 // }
-.list_pull{
+.list_pull {
   overflow: hidden;
 }
 .list_pull .item {
   width: 46.1%;
   height: auto;
-  padding: 1%; 
+  padding: 1%;
   /* margin:3% */
   margin-left: 2.7%;
   // border: 1px solid #ccc;
-  box-shadow: 0 2px 9px 0 #EEE;
+  box-shadow: 0 2px 9px 0 #eee;
   background: #fff;
   border-radius: 3px;
   margin-top: px2rem(10px);

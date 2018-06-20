@@ -38,7 +38,7 @@ export default {
   methods: {}
 };
 </script>
-<style >
+<style scoped>
 .container {
   height: 100%;
   overflow: hidden;

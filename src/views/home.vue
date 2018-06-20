@@ -385,12 +385,13 @@ export default {
   }
 };
 </script>
-<style  lang="scss">
+<style  lang="scss" scoped>
 @import "../styles/helper.scss";
 
 .homecontainer {
   height: 100%;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 .scrolls {
   width: 100%;

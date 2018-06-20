@@ -152,7 +152,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .addressContainer {
   width: 100%;

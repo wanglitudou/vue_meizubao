@@ -41,16 +41,14 @@
           <span>预约时间:</span>
         </p>
         <p class="list_begin">
-          <v-date-picker
-            id="datePicker"
-            mode='range'
-            v-model='selectedDate'
-            :disabled-dates='this.disableDate'
-            :input-props='{ class: "input-style" ,placeholder: "请选择你要租赁的日期"}'
-            show-caps>
+          <v-date-picker id="datePicker"
+                         mode='range'
+                         v-model='selectedDate'
+                         :disabled-dates='this.disableDate'
+                         :input-props='{ class: "input-style" ,placeholder: "请选择你要租赁的日期"}'
+                         show-caps>
           </v-date-picker>
         </p>
-
 
         <p class="list_tech">
           <span>您一共预约了{{during}}天</span>
@@ -60,15 +58,17 @@
           <span>技师最快到达时间：三天 </span>
         </p>
         <p class="list_apvance">
-                    <span>预付诚意金：
-                        <span>
-                            <span class="mon_ery"> ￥{{totalPrice}}</span></span>
-                    </span>
+          <span>预付诚意金：
+            <span>
+              <span class="mon_ery"> ￥{{totalPrice}}</span>
+            </span>
+          </span>
         </p>
-        <p class="list_rent" @click="showSign">
-                    <span>
-                        网签租赁协议
-                    </span>
+        <p class="list_rent"
+           @click="showSign">
+          <span>
+            网签租赁协议
+          </span>
         </p>
       </div>
 
@@ -86,144 +86,143 @@
 
     <!--</div>-->
 
-    <orderFooter :text="'立即下单'" :count="totalPrice" :nextFun="jumpToConfirm"></orderFooter>
+    <orderFooter :text="'立即下单'"
+                 :count="totalPrice"
+                 :nextFun="jumpToConfirm"></orderFooter>
 
-    <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
+    <sign id="componentSign"
+          v-if="showSignTag"
+          :src="data.agreement"
+          :gid="data.id"
+          :saveAgreementId="saveAgreementId"></sign>
 
   </div>
 </template>
 <script>
-  import orderFooter from '../../components/orderFooter.vue'
-  import sign from '../../components/sign.vue'
-  import { Toast } from 'mint-ui';
+import orderFooter from "../../components/orderFooter.vue";
+import sign from "../../components/sign.vue";
+import { Toast } from "mint-ui";
 
+const setUpTime = 3; //常量 技师出发准备时间 (从今天开始算 几天后可选);
+export default {
+  data() {
+    return {
+      data: [],
+      selectedDate: {
+        start: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000),
+        end: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000)
+      },
+      disableDate: [],
+      agreementId: null,
+      showSignTag: false
+    };
+  },
 
+  mounted() {
+    this.init();
+  },
 
-  const setUpTime=3;//常量 技师出发准备时间 (从今天开始算 几天后可选);
-  export default {
-    data() {
-      return {
-        data: [],
-        selectedDate: {
-          start: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000),
-          end: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000),
-        },
-        disableDate: [],
-        agreementId:null,
-        showSignTag:false,
-      };
+  computed: {
+    during() {
+      return (
+        (this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) /
+          (24 * 60 * 60 * 1000) +
+        1
+      );
     },
-
-
-    mounted(){
-      this.init();
-    },
-
-    computed: {
-      during(){
-        return (this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) / (24 * 60 * 60 * 1000)+1
-      },
-      totalPrice(){
-        let temPrice=this.during * this.data.dayprice * 2;
-        if(this.during>=5){
-          temPrice = temPrice * 0.8
-        }
-        return temPrice
-      },
-      startTime(){
-       return this.selectedDate.start.Format("yyyy-MM-dd hh:mm:ss")
-      },
-      endTime(){
-        return this.selectedDate.end.Format("yyyy-MM-dd hh:mm:ss")
+    totalPrice() {
+      let temPrice = this.during * this.data.dayprice * 2;
+      if (this.during >= 5) {
+        temPrice = temPrice * 0.8;
       }
+      return temPrice;
     },
-    components: {
-      orderFooter,
-      sign
+    startTime() {
+      return this.selectedDate.start.Format("yyyy-MM-dd hh:mm:ss");
+    },
+    endTime() {
+      return this.selectedDate.end.Format("yyyy-MM-dd hh:mm:ss");
+    }
+  },
+  components: {
+    orderFooter,
+    sign
+  },
+
+  methods: {
+    saveAgreementId: function(agreementId) {
+      this.showSignTag = false;
+      this.agreementId = agreementId;
+    },
+    showSign: function() {
+      this.showSignTag = true;
     },
 
+    jumpToConfirm: function() {
+      if (!this.agreementId) {
+        Toast("请网签租赁协议后下单");
+        return false;
+      }
 
-    methods: {
-      saveAgreementId:function(agreementId){
-        this.showSignTag=false;
-        this.agreementId=agreementId;
-      },
-      showSign:function(){
-        this.showSignTag=true
-      },
+      this.$router.push({
+        //          path: '/confirm/instrument',
+        name: "confirm",
+        params: {
+          type: 2,
+          g_id: this.$route.query.pid,
+          m_type: "1",
+          strtime: this.startTime,
+          stoptime: this.endTime,
+          stage: this.during,
+          agreement: this.agreementId,
+          image: this.data.images,
+          goods_num: "1",
+          total_price: this.totalPrice,
+          goods_name: this.data.name,
+          deposit: "",
 
-
-      jumpToConfirm: function () {
-
-        if(!this.agreementId){
-          Toast('请网签租赁协议后下单');
-          return false
+          price: this.data.dayprice
         }
-
-
-
-        this.$router.push({
-//          path: '/confirm/instrument',
-          name: "confirm",
-          params: {
-            type: 2,
-            g_id:this.$route.query.pid,
-            m_type:"1",
-            strtime:this.startTime,
-            stoptime:this.endTime,
-            stage:this.during,
-            agreement:this.agreementId,
-            image:this.data.images,
-            goods_num:"1",
-            total_price:this.totalPrice,
-            goods_name:this.data.name,
-            deposit:"",
-
-
-            price:this.data.dayprice,
-
+      });
+    },
+    init() {
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/technicianDetail", {
+          params: { id: this.$route.query.pid }
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.data = res.data.data;
+            this.createDisableDate();
           }
         })
-      },
-      init(){
+        .catch(err => {
+          console.log("http请求错误");
+          console.log(err);
+        });
+    },
 
-        this.$axios
-          .get(window.ajaxSrc + "/api/meizubao/technicianDetail", {
-            params: {id: this.$route.query.pid}
-          })
-          .then(res => {
-            console.log(res);
-            if (res.data.status_code == 1001) {
-              this.data = res.data.data;
-              this.createDisableDate();
-            }
-          })
-          .catch((err) => {
-            console.log("http请求错误");
-            console.log(err);
-          });
-      },
-
-
-      createDisableDate: function () {
-        for (var arr of this.data.appointmentTime) {
-          let temArr = {start: new Date(arr[0]), end: new Date(arr[1])};
-          this.disableDate.push(temArr)
-        }
-        let temArr = {start: null, end: new Date(new Date().getTime() + (setUpTime-1) * 24 * 60 * 60 * 1000)}
-        this.disableDate.push(temArr)
-      },
-
-
-
+    createDisableDate: function() {
+      for (var arr of this.data.appointmentTime) {
+        let temArr = { start: new Date(arr[0]), end: new Date(arr[1]) };
+        this.disableDate.push(temArr);
+      }
+      let temArr = {
+        start: null,
+        end: new Date(
+          new Date().getTime() + (setUpTime - 1) * 24 * 60 * 60 * 1000
+        )
+      };
+      this.disableDate.push(temArr);
     }
-
   }
+};
 </script>
-<style lang="scss">
-  // @import "./essence.css";
-  @import '../../styles/helper.scss';
-  .containerss {
+<style lang="scss" scoped>
+// @import "./essence.css";
+@import "../../styles/helper.scss";
+.containerss {
   width: 100%;
   height: calc(100% - 0rem);
   background: #fff;
@@ -258,17 +257,17 @@
   height: 100%;
   margin-top: px2rem(10px);
   background: #fff;
- margin-left: px2rem(10px);
+  margin-left: px2rem(10px);
 }
 .cent_list .ban_two .ban_rig p {
-   margin-top: p2rem(15px);
+  margin-top: p2rem(15px);
   // padding: 0.1rem 0.1rem;
   font-size: px2rem(14px);
   color: #000000;
   letter-spacing: 0;
-   &:nth-child(1){
+  &:nth-child(1) {
     font-size: px2rem(16px);
-    margin-top: px2rem(10px)
+    margin-top: px2rem(10px);
   }
   margin-top: px2rem(15px);
   // / / line-height: px2rem
@@ -283,7 +282,7 @@
   align-items: center;
 }
 .metting p {
-  margin:2.7%;
+  margin: 2.7%;
   // margin-top: px2rem(15px);
   font-size: px2rem(14px);
   color: #333333;
@@ -320,7 +319,7 @@
   letter-spacing: 0;
 }
 .list_app .list_tech {
-  height:px2rem(44px);
+  height: px2rem(44px);
   line-height: px2rem(44px);
   border-bottom: 1px solid #f7f7f7;
   padding: 0.2rem;
@@ -335,7 +334,7 @@
   height: px2rem(44px);
   line-height: px2rem(44px);
   border-bottom: 1px solid #f7f7f7;
- 
+
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
@@ -397,33 +396,35 @@
   color: #fd4689;
   letter-spacing: 0;
 }
-
 </style>
 
 
 <style>
+.input-style {
+  width: 200px;
+}
 
-  .input-style{
-    width:200px;
-  }
+#datePicker
+  .c-header
+  .c-title-layout
+  .c-title-popover
+  .c-title-anchor
+  .c-title {
+  font-size: 0.32rem;
+}
 
-  #datePicker .c-header .c-title-layout .c-title-popover .c-title-anchor .c-title {
-    font-size: 0.32rem;
-  }
+#datePicker .c-weekdays {
+  font-size: 0.28rem;
+}
 
-  #datePicker .c-weekdays {
-    font-size: 0.28rem;
-  }
+#datePicker .c-day-content {
+  width: 0.5rem;
+  height: 0.5rem;
+  font-size: 0.28rem;
+}
 
-  #datePicker .c-day-content {
-
-    width: .5rem;
-    height: .5rem;
-    font-size: .28rem;
-  }
-
-  #datePicker .c-day-background {
-    /*width:.7rem !important;*/
-    height: .7rem !important;
-  }
+#datePicker .c-day-background {
+  /*width:.7rem !important;*/
+  height: 0.7rem !important;
+}
 </style>

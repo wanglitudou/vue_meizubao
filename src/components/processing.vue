@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <order :orderlist="orderlist" :receipt="receipt" :todetail="todetail"></order>
-    </div>
+  <div>
+    <order :orderlist="orderlist"
+           :receipt="receipt"
+           :todetail="todetail"></order>
+  </div>
 </template>
 <script>
 import order from "./order.vue";
@@ -30,7 +32,7 @@ export default {
         .then(res => {
           if (res.data.status_code == "1001") {
             remove(this.orderlist, { id: id });
-              Toast('修改成功');
+            Toast("修改成功");
           } else {
             Toast("修改失败");
           }
@@ -56,8 +58,8 @@ export default {
           console.log("查询失败");
         });
     },
-    todetail(status,type){
-     console.log(status,type)
+    todetail(status, type) {
+      console.log(status, type);
     }
   },
   components: {

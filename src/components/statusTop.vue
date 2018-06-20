@@ -52,7 +52,7 @@ export default {
   props: ["detail"]
 };
 </script>
-<style>
+<style scoped>
 .status_top {
   display: flex;
   font-size: 16px;

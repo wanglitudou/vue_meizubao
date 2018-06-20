@@ -150,7 +150,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/helper.scss";
 .mine-container {
   width: 100%;
@@ -158,8 +158,7 @@ export default {
   position: relative;
 
   // height: calc(100% - 0.88rem);
-  // background: #fff; 
-
+  // background: #fff;
 }
 .a-cent_ban {
   width: 100%;

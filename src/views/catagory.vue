@@ -61,16 +61,16 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/helper.scss";
 .fenlei-container {
   width: 100%;
   height: 100%;
-
 }
 .list_imgs {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 .box {

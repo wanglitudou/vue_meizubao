@@ -28,7 +28,7 @@ export default {
   }
 };
 </script>
-<style  lang="scss">
+<style  lang="scss" scoped>
 @import "../styles/helper.scss";
 .searchs {
   width: px2rem(355px);

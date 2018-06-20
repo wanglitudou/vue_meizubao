@@ -246,7 +246,7 @@ export default {
   }
 };
 </script>
-<style  lang="scss">
+<style  lang="scss" scoped>
 @import '../styles/helper.scss';
 .order {
   padding-bottom: 50px;
