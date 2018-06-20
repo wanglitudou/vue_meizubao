@@ -19,7 +19,10 @@
       </p>
       <p class="collect_bet">
         <span>所在地区 {{province}}{{city}}{{area}}</span>
-        <span @click="levl()">请选择 ></span>
+        <span @click="levl()">请选择
+          <i class="icon_right_img"><img src="../../assets/icon/more.png"
+                 alt=""></i>
+        </span>
 
       </p>
       <p class="detail_address">
@@ -207,7 +210,8 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../../styles/helper.scss";
 .zhe {
   width: 100%;
   height: 100%;
@@ -217,24 +221,27 @@ export default {
   top: 0;
   z-index: 6;
 }
+.icon_right_img img {
+  height: px2rem(16px);
+}
 .container {
   width: 100%;
   height: 100%;
 }
 .inp {
-  width: 5rem;
+  width: px2rem(200px);
   padding: 0.1rem 0.2rem;
   outline: none;
   border: none;
   cursor: pointer;
 }
 .collectgoods {
-  width: 7.1rem;
-  height: 6rem;
-  margin: 0.2rem auto 0;
+  width: 94.7%;
+  height: auto;
+  margin-left: 2.7%;
 }
 .collects {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 1rem;
   line-height: 1rem;
   font-size: 15px;
@@ -243,7 +250,7 @@ export default {
   border-bottom: 2px solid #f7f7f7;
 }
 .collect_bet {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 1rem;
   line-height: 1rem;
   font-size: 15px;
@@ -254,7 +261,7 @@ export default {
   padding: 0 10px;
 }
 .detail_address {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 2rem;
   border-bottom: 2px solid #f7f7f7;
   font-size: 15px;
@@ -263,14 +270,14 @@ export default {
   margin-top: 0.1rem;
 }
 .inpts_text {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 2rem;
   outline: none;
   border: none;
   cursor: pointer;
 }
 .tacit_address {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 1rem;
   border-bottom: 2px solid #f7f7f7;
   font-size: 14px;
@@ -279,9 +286,9 @@ export default {
   margin-top: 10px;
 }
 .preservation {
-  width: 7.1rem;
-  height: 0.8rem;
-  line-height: 0.8rem;
+  width: px2rem(330px);
+  height: px2rem(36px);
+  line-height: px2rem(36px);
   background-image: linear-gradient(-130deg, #fd82d9 0%, #fd4689 100%);
   box-shadow: 0 0 13px 0 #eeeeee;
   margin: 0.2rem auto 0;

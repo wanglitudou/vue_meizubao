@@ -22,9 +22,7 @@
            item-selector=".item"
            column-width=".item"
            v-if="isNodata">
-
         <!-- <div class="list_lef"> -->
-
         <div class="listing item"
              v-masonry-tile
              v-for="(item,index) of dataArr"
