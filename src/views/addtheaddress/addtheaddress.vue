@@ -61,7 +61,7 @@ import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
 export default {
   data() {
     return {
-      checked: true,
+      checked: false,
       show1: false,
       pickData3: {
         columns: 3,
