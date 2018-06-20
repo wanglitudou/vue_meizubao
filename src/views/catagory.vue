@@ -66,12 +66,14 @@ export default {
 .fenlei-container {
   width: 100%;
   height: 100%;
+
+  background: #fff;
 }
 .list_imgs {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 }
 .box {
   width: 100%;

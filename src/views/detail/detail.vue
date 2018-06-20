@@ -1,5 +1,6 @@
 <template>
-  <div class="containers">
+  <div v-bind:class="isRellyShow == true?'containersActive':'containers'" >
+
     <!-- <div class="list_list">
             <div class="list_search">
                 头部导航
@@ -22,75 +23,70 @@
         </div> -->
     <header class="clearfix">
 
-      <p class="search_content">
-        <span>请输入关键字输入查询</span>
-        <img src="../../assets/icon/search_1.png"
-             alt="">
-      </p>
-      <p class="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
+
+      
+      <div class="search_content">
+        <form action="javascript:return true;">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+        </form>
+        <img src="../../assets/icon/search_1.png" alt="111">
+      </div>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
     </header>
-    <div v-masonry
-         transition-duration="0.3s"
-         ref="masonry"
-         item-selector=".item"
-         column-width=".item"
-         v-if="isNodata">
-      <div v-masonry-tile
-           class="item"
-           v-for="(item, index) in imgsArr"
-           @click="details(item.id)">
-        <!-- block item markup -->
-        <div class="box listing">
-          <div>
-            <img :src="item.images"
-                 alt="">
-          </div>
-          <div class="other">
-            <p class="name">
-              <!-- {{item.name}} -->
-              <span>{{item.name}}</span>
-              <!-- {{item.price}} -->
-              <span class="paice">￥{{item.price}}</span>
-            </p>
-            <p class="meeting">
-              {{item.centent}}
-            </p>
-            <p class="date">
-              <span>
-                <!-- {{item.firstrent}} -->
-                <a>￥{{item.firstrent}}</a>/月
-              </span>
-              <span class="count">
-                <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                {{item.created}}
+    <section>
 
-              </span>
-            </p>
-            <p class="rent"> 起租期:{{item.num}}个月</p>
-            <p class="orders">
-              <span class="order">
-                立即下单
-              </span>
-            </p>
+      <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+        <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
+
+          <div class="boxs listing">
+            <div>
+              <img :src="item.images" alt="">
+            </div>
+            <div class="other">
+              <p class="name">
+
+                <span>{{item.name}}</span>
+
+                <span class="paice">￥{{item.price}}</span>
+              </p>
+              <p class="meeting">
+                {{item.centent}}
+              </p>
+              <p class="date">
+                <span>
+
+                  <a>￥{{item.firstrent}}</a>/月
+                </span>
+                <span class="count">
+                  <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+                  {{item.created}}
+
+                </span>
+              </p>
+              <p class="rent"> 起租期:{{item.num}}个月</p>
+              <p class="orders">
+                <span class="order">
+                  立即下单
+                </span>
+              </p>
+            </div>
           </div>
+
         </div>
+        <div class="item loadMore" ref="load">
+          <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+          <span v-else>
+            <span @click="loadMore" v-if="loading">加载更多</span>
+            <span v-else>数据全部加载完成</span>
+          </span>
+        </div>
+      </div>
+    </section>
+    <!-- 侧边栏 -->
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
 
-      </div>
-      <div class="item loadMore"
-           ref="load">
-        <mt-spinner type="fading-circle"
-                    color="#FD4689 "
-                    v-if="topStatus"></mt-spinner>
-        <span v-else>
-          <span @click="loadMore"
-                v-if="loading">加载更多</span>
-          <span v-else>数据全部加载完成</span>
-        </span>
-      </div>
-    </div>
-    <div class="nodata"
-         v-if="showNodata">
+    <div class="nodata" v-if="showNodata">
+
       暂无数据
     </div>
 
@@ -101,6 +97,7 @@ import { Spinner, Toast, Indicator } from "mint-ui";
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
+import slider from "../../components/sliderBar.vue";
 import $ from "jquery";
 import { VueMasonryPlugin } from "vue-masonry";
 import { isClassBody } from "babel-types";
@@ -125,11 +122,13 @@ export default {
       showLoad: true,
       count: 15,
       code: 1,
-      uid: 0,
+      typeId: 0,
       loading: true,
       topStatus: false,
       isNodata: true,
-      showNodata: false
+      showNodata: false,
+      showTab: true,
+      isRellyShow: false
     };
   },
 
@@ -153,29 +152,54 @@ export default {
   },
 
   methods: {
-    aaa() {
-      this.flog = true;
-      this.imgsArr = [];
-      this.showNodata = false;
-      this.isNodata = false;
-      this.code = 2; //点击搜索 不传 产品id
-      //  console.log(this.$refs.masonry)
-      //   this.$refs.masonry.style = "position:relative";
+
+  
+
+
+    logo() {
+      this.isRellyShow = true;
     },
-    search(keyword) {
-      //   console.log(word)
-      this.keyword = keyword;
+    hideSide() {
+      this.isRellyShow = false;
+    },
+
+    //搜索
+    show() {
+      let that = this;
+      // that.$refs.contain.style="over:"
+      that.code = 2
+      // console.log(this.keyword)
+      //  this.keyword = keyword;
+
       if (this.keyword == "") {
         Toast("搜索不能为空");
         return false;
       }
+
       this.imgsArr = [];
       this.keyword = keyword;
+
       this.pages = 1;
+      Indicator.open();
       setTimeout(() => {
-        this.getData("", keyword, this.pages);
-      });
+        this.imgsArr = [];
+        this.getData("", that.keyword, that.pages);
+      },500);
     },
+    // search(keyword) {
+    //   //   console.log(word)
+
+    //   if (this.keyword == "") {
+    //     Toast("搜索不能为空");
+    //     return false;
+    //   }
+    //   this.imgsArr = [];
+    //   this.keyword = keyword;
+    //   this.pages = 1;
+    //   setTimeout(() => {
+    //     this.getData("", keyword, this.pages);
+    //   });
+    // },
     loadMore() {
       this.topStatus = true;
       this.pages++;
@@ -198,15 +222,19 @@ export default {
       });
     },
     tab(id, index) {
+      // console.log(id);
+  
       this.num = index;
-      this.uid = id;
+      this.typeId = id;
+      this.keyword =  ''
       this.imgsArr = [];
       this.isNodata = false;
       this.showNodata = false;
       this.pages = 1;
+      this.isRellyShow = false
       Indicator.open();
       setTimeout(() => {
-        this.getData(id, "", 1); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
+        this.getData(id, "", this.pages); //传输1  是页数
       }, 2000);
     },
     getData(name, keyword, page) {
@@ -245,13 +273,25 @@ export default {
   components: {
     // vueWaterfallEasy,
     tab,
-    search
+    search,
+    slider
   }
 };
 </script>
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
 @import "./detail.css";
+
+.containersActive{
+  width: 100%;
+  height: 100%;
+ overflow: hidden;
+}
+.containers{
+  width: 100%;
+  height: 100%;
+}
+
 .clearfix {
   width: 100%;
   height: px2rem(44px);
@@ -260,6 +300,11 @@ export default {
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
   // padding: 7px 15px;
   .logo {
     width: px2rem(25px);
@@ -289,8 +334,43 @@ export default {
       width: 20px;
       margin-right: px2rem(5px);
     }
+      display: inline-block;
+    }
   }
-}
+  .search_content {
+    width: px2rem(270px);
+    height: px2rem(30px);
+    border: 1px solid #ccc;
+    border-radius: px2rem(5px);
+    display: flex;
+    justify-content: space-between;
+    font-size: px2rem(13px);
+    align-items: center;
+    color: #000;
+    span {
+      display: inline-block;
+      margin-left: (5px);
+    }
+    img {
+      display: inline-block;
+      width: 20px;
+      margin-right: px2rem(5px);
+    }
+    form {
+      display: block;
+      width: 100%;
+      height: 80%;
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        padding-left: px2rem(8px);
+      }
+    }
+
+  }
+
 
 .topSearch {
   position: fixed;
@@ -336,36 +416,25 @@ export default {
   width: 24px;
   height: 24px;
 }
-.nav_pic {
-  /* width: 6.2rem;
-   */
-  width: 6.2rem;
-  height: 0.88rem;
-  overflow-x: scroll;
-  line-height: 0.88rem;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #000;
-}
+
 .list_tab {
   width: auto;
   padding: 5px;
 }
 .item {
-  width: 48%;
+  width: 46.1%;
   height: auto;
-  padding: 1%;
+  // padding: 1%;
   /* margin:3% */
+  margin: 0.6% 2%;
 }
 
-.box {
+.boxs {
   width: 100%;
   height: 100%;
-  margin: 2%;
+  // margin: 2%;
 }
-.box img {
+.boxs img {
   width: 100%;
 }
 
@@ -431,13 +500,15 @@ export default {
   justify-content: space-between;
 }
 .loadMore {
-  width: 100%;
+  width: 96%;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #000;
-  font-size: 16px;
+  font-size: px2rem(14px);
+  color: #00a5ff;
+  box-shadow: none;
 }
 .nodata {
   width: 100%;
@@ -445,5 +516,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #00a5ff;
+  font-size: px2rem(14px);
+  position: absolute;
+  top: 0;
+}
+section {
+  padding-top: px2rem(44px);
 }
 </style>

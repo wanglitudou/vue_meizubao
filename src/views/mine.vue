@@ -156,7 +156,7 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-
+  background: #fff;
   // height: calc(100% - 0.88rem);
   // background: #fff;
 }

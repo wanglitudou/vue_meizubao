@@ -16,7 +16,7 @@
 
       </div>
       <!-- 搜索 -->
-      <div class="search_content">
+      <div class="search_contents">
         <div class="list_search"
              ref="search"
              @click="toSearch">
@@ -390,8 +390,17 @@ export default {
 
 .homecontainer {
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+
+  overflow: auto;
+  padding-bottom: 50px;
+  // display: flex;
+  // flex-direction: column;
+  background: #fff;
+}
+.slider-box {
+  // padding-bottom: 50px;
+
+
 }
 .scrolls {
   width: 100%;
@@ -437,29 +446,33 @@ export default {
   width: 100%;
   height: 100%;
 }
-.search_content {
+
+.search_contents {
   width: 100%;
   height: px2rem(64px);
   box-shadow: 0 2px 9px #eee;
   display: flex;
   align-items: center;
 }
-.list_search {
-  width: px2rem(335px);
+
+
+.search_contents .list_search {
+  width: 94.7%;
   height: px2rem(44px);
-  margin-left: 2.3%;
+  margin-left:2.6%;
+
   border-radius: 3px;
   border: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.list_search img {
+.search_contents .list_search img {
   width: 23px;
   height: 24px;
   margin-right: 5.3%;
 }
-.list_search div {
+.search_contents .list_search div {
   font-size: 13px;
   color: #666;
 }

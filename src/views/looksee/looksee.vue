@@ -1,8 +1,7 @@
 <template>
-  <div class="container" ref="container">
-    <div class="pic_view">
+  <div  ref="container"  :class="isRellyShow?'containersActive':'container'">
 
-      <!-- <div class="nav_pic">
+    <!-- <div class="nav_pic">
                 <span class="list_tab"
                       v-for="(item,index) in tabs"
                       :key="index"
@@ -13,22 +12,22 @@
                     <img src="../../assets/icon/search_1.png" alt=""> 
                 </span>
             </div> -->
-      <div class="sortMenu clearfix" v-show="slideShow">
+    <!-- <div class="sortMenu clearfix" v-show="slideShow">
         <ul class="sortMenu-ul">
           <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
             <tab :item="item" :index="index" :num="num"></tab>
           </div>
-        </ul>
-        <!-- 搜索按钮 -->
-        <div class="sousuo" @click="aaa()">
-          <img src="../../assets/icon/search_1.png" alt="">
-        </div>
-      </div>
-      <div class="topSearch" v-if="flog">
+        </ul> -->
+    <!-- 搜索按钮 -->
+    <!-- <div class="sousuo" @click="aaa()"> -->
+    <!-- <img src="../../assets/icon/search_1.png" alt=""> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- <div class="topSearch" v-if="flog">
         <search @search="search"></search>
-      </div>
+      </div> -->
 
-      <div class="slider" v-show="slideShow">
+    <!-- <div class="slider" v-show="slideShow">
         <div class="slider_item" v-for="(value,index) in sliders">
           <div class="slider_tab" @click="slider(index)">
             <p>{{value.item}}</p>
@@ -37,7 +36,7 @@
               <img v-bind:src="index== number?Highlight:gray" alt="" class="rotate">
             </div>
           </div>
-          <!-- 下拉框 -->
+     
           <ul class="slider_ul" v-if="ulnum ==  index">
             <li class="slider_li" v-for="(i,subscript) in value.arr" @click="itemli(i,subscript,value.item,value.id)">
               <span class="span1" :class="linum ==  subscript?'actives':''">
@@ -46,42 +45,59 @@
             </li>
           </ul>
         </div>
+      </div> -->
+    <header class="clearfix">
+      <div class="search_content">
+        <form action="javascript:return true;">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+        </form>
+        <img src="../../assets/icon/search_1.png" alt="111">
       </div>
-    </div>
-    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:1.9rem" v-if="isNodata">
-      <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry" @click="details(item.id)">
-        <div class="cent_left">
-          <div class="list_img">
-            <img :src="item.images" alt="">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>{{item.name}}</span>
-              <span>{{item.level}}</span>
-            </p>
-            <p class="content">{{item.centetnt}}</p>
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">{{item.dayprice}}</span>/日</span>
-              <span class="week_pro">
-                <span class="week_mon">{{item.price}}</span>/周</span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment">点击预约</span>
-            </p>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+
+    </header>
+    <section>
+      <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+        <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry" @click="details(item.id)">
+          <div class="cent_left">
+            <div class="list_img">
+              <img :src="item.images" alt="">
+            </div>
+            <div class="list_oper">
+              <p class="oper_room">
+                <span class="eliteName">{{item.name}}</span>
+                <!-- <span>{{item.level}}</span> -->
+                <span class="eliteStar">
+                  <span v-for="val in item.level"><img src="../../assets/images/star.png" alt=""></span>
+                </span>
+
+              </p>
+              <p class="content">{{item.centetnt}}</p>
+              <p class="every_pro">
+                <span class="data_pro">
+                  <span class="data_mon">{{item.dayprice}}</span>/日</span>
+                <span class="week_pro">
+                  <span class="week_mon">{{item.price}}</span>/周</span>
+              </p>
+              <p class="cli_app">
+                <span class="cli_ment">点击预约</span>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- 加载更多 -->
-      <div class="item loadMore" ref="load">
-        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
-        <span v-else>
-          <span @click="loadMore" v-if="loading">加载更多</span>
-          <span v-else>数据全部加载完成</span>
-        </span>
+        <!-- 加载更多 -->
+        <div class="item loadMore" ref="load">
+          <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+          <span v-else>
+            <span @click="loadMore" v-if="loading">加载更多</span>
+            <span v-else>数据全部加载完成</span>
+          </span>
+        </div>
+
       </div>
 
-    </div>
+    </section>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
     <!-- 没有数据 -->
     <div class="nodata" v-if="showNodata">
       暂无数据
@@ -91,6 +107,7 @@
 </template>
 <script>
 import { Spinner, Toast, Indicator } from "mint-ui";
+import slider from "../../components/sliderBar.vue";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
 import { filter, forEach, find } from "lodash";
@@ -102,12 +119,11 @@ export default {
       num: 0,
       flog: false,
       url: [],
-      ulnum: 4,
-      linum: 4,
       message: "",
       Highlight: require("../../assets/images/jian2.png"),
       gray: require("../../assets/images/jian.png"),
       number: 4,
+      isRellyShow: false,
       sliders: [
         {
           id: 1, // 为1 是等级
@@ -128,6 +144,7 @@ export default {
       dayprice: "", //日薪资
       // arr:[{tab:ites,tabs:['']}],
       keywords: "",
+      keyword: "",
       code: 1,
       typeId: 0,
       slideShow: true,
@@ -149,7 +166,7 @@ export default {
     Indicator.open();
     //热租仪器分类
     that.$axios
-      .get(window.ajaxSrc+"/api/meizubao/technicianType", {})
+      .get(window.ajaxSrc + "/api/meizubao/technicianType", {})
       .then(res => {
         // console.log(res);
         if (res.data.status_code == 1001) {
@@ -165,10 +182,10 @@ export default {
         }
       })
       .catch(() => {
-          setTimeout(() => {
+        setTimeout(() => {
           Indicator.close();
         }, 1000);
-        Toast('加载失败')
+        Toast("加载失败");
       });
   },
   methods: {
@@ -180,6 +197,39 @@ export default {
         }
       });
     },
+    // 搜索回车事件
+    show() {
+      console.log(11);
+      this.code = 2
+      if (this.keyword == "") {
+        Toast("搜索框不能为空");
+        return false;
+      }
+      this.pages = 1
+      setTimeout(()=>{
+        // this.getData('')     
+        this.getData("", this.keyword, this.grade, this.dayprice, this.pages);  
+      },500)
+    },
+    //   search(keyword) {
+    //   if (keyword == "") {
+    //     Toast("搜索不能为空");
+    //     return false;
+    //   }
+    //   this.keywords = keyword;
+    //   this.pages = 1;
+    //   setTimeout(() => {
+    //     this.getData("", keyword, this.grade, this.dayprice, this.pages);
+    //   });
+    // },
+    // 点击右侧滑出
+    logo() {
+      this.isRellyShow = true;
+    },
+    // 隐藏右侧栏
+    hideSide() {
+      this.isRellyShow = false;
+    },
     getData(name, keywords, star, dayprice, page) {
       // console.log(name, keywords, star, dayprice, page);
       // console.log(dayprice)
@@ -187,7 +237,7 @@ export default {
       let that = this;
       //热租仪器筛选
       that.$axios
-        .post(window.ajaxSrc+"/api/meizubao/technicianSearch", {
+        .post(window.ajaxSrc + "/api/meizubao/technicianSearch", {
           typeId: name,
           keywords: keywords,
           page: page,
@@ -213,19 +263,7 @@ export default {
               that.loading = true;
             }
 
-            // if (res.data.data.length == 0) {
-            //   that.load = false;
-            //   that.$refs.container.style = "height:100%;";
-            //   this.$refs.load.style = "height:100%";
-            //   this.$refs.masonry.style = "position:relative";
-            // } else if (res.data.data.length < this.count) {
-            //   that.load = false;
-            //   this.$refs.load.style = "1rem";
-            //   // this.$refs.masonry.style="position:relative"
-            // } else {
-            //   that.load = true;
-            //   this.$refs.load.style = "height:1rem";
-            // }
+           
             that.thebeautyindustry = that.thebeautyindustry.concat(
               res.data.data
             );
@@ -256,25 +294,14 @@ export default {
     slider(index) {
       this.number = index;
     },
-    aaa() {
-      this.flog = true;
-      this.imgsArr = [];
-      this.slideShow = false;
-      // this.showLoad = false;
-      this.thebeautyindustry = [];
-      this.code = 2;
-      this.showNodata = false;
-      this.isNodata = false;
-      // this.itemshow = false;
-      //点击搜索 不传 产品id
-      //  console.log(this.$refs.masonry)
-      // this.$refs.masonry.style = "position:relative,margin-top:1.2rem";
-    },
+
     // details() {
     //   this.$router.push({ name: "details" });
     // },
     tab(id, index) {
-      this.num = index;
+      this.num = index;    
+      this.keyword = '';
+      this.isRellyShow = false
       this.typeId = id;
       Indicator.open();
       this.pages = 1;
@@ -285,61 +312,23 @@ export default {
       // that.getData(res.data.data[0].id,this.keywords,this.grade,this.dayprice,this.page);
       setTimeout(() => {
         this.getData(id, this.keywords, this.grade, this.dayprice, this.pages); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
-      },1000);
-    },
-    search(keyword) {
-      if (keyword == "") {
-        Toast("搜索不能为空");
-        return false;
-      }
-      this.keywords = keyword;
-      this.pages = 1;
-      setTimeout(() => {
-        this.getData("", keyword, this.grade, this.dayprice, this.pages);
-      });
-    },
-    // 点击筛选tab
-    slider(index) {
-      this.ulnum = index;
-      // console.log(index);
-    },
-    // 点击下拉菜单
-    itemli(item, index, value, id) {
-      // console.log(id)
-      this.linum = index;
-      if (id == 1) {
-        var result = find(this.sliders, { id: 1 });
-        result.item = item.item;
-        this.grade = item.num;
-        console.log("1");
-      }
-      if (id == 2) {
-        var result2 = find(this.sliders, { id: 2 });
-        result2.item = item.item;
-        this.dayprice = item.num;
-        // console.log(this.dayprice)
-        // console.log(2);
-      }
-
-      this.thebeautyindustry = [];
-      this.ulnum = 4;
-      this.pages = 1;
-      Indicator.open();
-      
-      setTimeout(() => {
-        this.getData(this.typeId, "", this.grade, this.dayprice, this.pages);
       }, 1000);
-      // console.log(this.grade)
-      // console.log(this.dayprice)
-    }
+    },
   },
   components: {
     tab,
+    slider,
     search
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../../styles/helper.scss"; 
+.containersActive{
+  width: 100%;
+  height: 100%;
+ overflow: hidden;
+}
 .container {
   width: 100%;
   height: 100%;
@@ -418,24 +407,20 @@ export default {
   height: 0.5rem;
   margin-top: 0.2rem;
 }
-.list_box {
-  width: 100%;
+.item {
+  width: 46.1%;
   height: auto;
-  margin-top: 0.2rem;
-  overflow-y: scroll;
-  margin-top: 0.2rem;
+  // padding: 1%;
+  margin: 0.6% 2%;
+  box-shadow: 0 2px 9px #ccc;
 }
-.list_box .listbox_lef {
-  width: 48%;
-  float: right;
-  border-radius: 3px;
-}
+
 .cent_left {
   background: #fff;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
-  margin-top: 10px;
-  padding-bottom: 0.4rem;
+  // margin-top: 10px;
+  padding-bottom: px2rem(15px);
 }
 .list_img {
   /* height: 2rem; */
@@ -445,31 +430,58 @@ export default {
   width: 100%;
   height: 100%;
 }
+.list_oper {
+  margin-left: px2rem(10px);
+}
 .oper_room {
-  padding: 0.2rem;
+  // padding: 0.2rem;
+}
+.oper_room .eliteName {
+  font-size: px2rem(15px);
+  color: #000;
+  font-weight: bold;
+}
+.oper_room .eliteStar {
+  margin-left: px2rem(17px);
+
+  img {
+    width: px2rem(12px);
+    height: px2rem(12px);
+  }
 }
 .content {
-  font-size: 13px;
+  font-size: px2rem(13px);
   color: #999999;
   letter-spacing: 0;
-  padding: 0rem 10px;
+  // padding: 0rem 10px;
+  margin-top: px2rem(6px);
 }
 .every_pro {
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+  // padding: 0 10px;
+  margin-top: px2rem(6px);
+}
+.data_pro {
+  font-size: px2rem(12px);
+  color: #3f3f3f;
 }
 .data_mon {
-  font-size: 12px;
-  color: #f00;
+  font-size: px2rem(12px);
+  color: #ff272d;
   letter-spacing: 0;
   line-height: 20px;
 }
+.week_pro {
+  margin-right: px2rem(8.2px);
+  font-size: px2rem(12px);
+  color: #3f3f3f;
+  line-height: px2rem(17px);
+}
 .week_mon {
-  font-size: 12px;
   color: #000;
   letter-spacing: 0;
-  line-height: 20px;
+  // line-height: 20px;
 }
 .cli_app {
   width: 2rem;
@@ -578,36 +590,7 @@ export default {
   box-shadow: 0 2px 4px 0 #ebeced;
   display: flex;
 }
-.sortMenu-ul {
-  /* min-width: px2rem(320px); */
-  width: 86%;
-  height: 0.88rem;
-  margin-left: 2%;
-  overflow-x: scroll;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  display: -webkit-box;
-  justify-content: flex-start;
-  animation: moveTo 0.5s ease both;
-}
-.sousuo {
-  width: 16%;
-  height: 0.88rem;
-  line-height: 44px;
-  background: #ffffff;
-  box-shadow: 0 2px 9px 0 #eeeeee;
-  position: absolute;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.item {
-  width: 47%;
-  height: auto;
-  padding: 1%;
-  margin: 1.2%;
-  box-shadow: 0 2px 9px #ccc;
-}
+
 .moreData {
   display: flex;
   align-items: center;
@@ -628,15 +611,6 @@ export default {
     #fd82d9 100%
   );
 }
-.topSearch {
-  position: fixed;
-  height: 1.2rem;
-  top: 0;
-  width: 100%;
-  /* height: 1.2rem; */
-  background: #fff;
-  z-index: 2;
-}
 .Loading {
   position: fixed;
   top: 0;
@@ -654,13 +628,75 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #00a5ff;
 }
 .loadMore {
-  width: 100%;
+  width: 96%;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #000;
+  color: #00a5ff;
+  font-size: px2rem(14px);
+  box-shadow: none;
+}
+// 头部样式
+.clearfix {
+  width: 100%;
+  height: px2rem(44px);
+  box-shadow: 0 2px 9px #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  // padding: 7px 15px;
+  .logo {
+    width: px2rem(25px);
+    height: px2rem(25px);
+    img {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+  .search_content {
+    width: px2rem(270px);
+    height: px2rem(30px);
+    border: 1px solid #ccc;
+    border-radius: px2rem(5px);
+    display: flex;
+    justify-content: space-between;
+    font-size: px2rem(13px);
+    align-items: center;
+    color: #000;
+    span {
+      display: inline-block;
+      margin-left: (5px);
+    }
+    form {
+      display: block;
+      width: 100%;
+      height: 80%;
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        padding-left: px2rem(8px);
+      }
+    }
+    img {
+      display: inline-block;
+      width: 20px;
+      margin-right: px2rem(5px);
+    }
+  }
+}
+section {
+  padding-top: px2rem(50px);
 }
 </style>

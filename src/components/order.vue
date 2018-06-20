@@ -252,7 +252,7 @@ export default {
   padding-bottom: 50px;
   padding-top: px2rem(48px);
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 .payment {
   width: 96%;

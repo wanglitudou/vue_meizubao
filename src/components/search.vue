@@ -1,15 +1,11 @@
 <template>
-  <div class="searchs">
-    <form action="javascript:return true;">
-      <input @keyup.13=show()
-             type="search"
-             placeholder="请输入搜索内容"
-             v-model="keyword"
-             ref="input1">
-    </form>
-    <img src="../assets/icon/search_1.png"
-         alt="111">
-  </div>
+    <div class="homeSearch">
+        <form action="javascript:return true;">
+            <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+        </form>
+        <img src="../assets/icon/search_1.png" alt="111">
+    </div>
+
 </template>
 <script>
 export default {
@@ -28,43 +24,55 @@ export default {
   }
 };
 </script>
+
 <style  lang="scss" scoped>
-@import "../styles/helper.scss";
-.searchs {
-  width: px2rem(355px);
-  height: px2rem(44px);
-  border: 1px solid #eeeeee;
-  margin-top: 6px;
+
+
+@import '../styles/helper.scss';
+.homeSearch {
+  width: 92%;
+  height: px2rem(34px);
+  border: 1px solid #EEEEEE;
+  margin-top: px2rem(6px);
+
   text-align: center;
   margin-left: 4%;
   background: #fff;
-  border-radius: 0.2rem;
+  border-radius: px2rem(3px);
   position: fixed;
   top: 0px;
   display: inherit;
   z-index: 8;
   background: #fff;
   border: 1px solid #eeeeee;
-  border-radius: 3px;
+  border-radius: px2rem(3px);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.searchs input {
-  /* width: 6rem; */
+.homeSearch form{
+  width: 80%;
+}
+.homeSearch input {
+  width: 100%;
+  display: block;
   /* height: 0.88rem; */
   border: 0;
-  border-radius: 2px;
+  border-radius: px2rem(2px);
   outline: none;
+  padding-left: px2rem(15px);
+  box-sizing: border-box; 
+}
+.homeSearch img {
+  width: px2rem(13px);
+  height: px2rem(14px);
+  margin-right: px2rem(14px);
+ 
+}
+.homeSearch input{
+    font-size: px2rem(13px);
+
   padding-left: 15px;
   box-sizing: border-box;
-}
-.searchs img {
-  width: 23px;
-  height: 24px;
-  margin-right: 10px;
-}
-.searchs input {
-  font-size: 13px;
 }
 </style>

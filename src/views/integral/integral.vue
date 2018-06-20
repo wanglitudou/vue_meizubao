@@ -13,6 +13,7 @@
         </p>
       </div>
     </div>
+
     <div class="integralScrolls">
       <div class="list_pull"
            v-masonry
@@ -21,6 +22,7 @@
            item-selector=".item"
            column-width=".item"
            v-if="isNodata">
+
         <!-- <div class="list_lef"> -->
 
         <div class="listing item"
@@ -46,23 +48,36 @@
           </div>
 
         </div>
-        <!-- 加载更多 -->
-        <div class="item loadMore"
+      </div>
+      <!-- 加载更多 -->
+      <div class=" loadMore"
+           ref="load">
+        <mt-spinner type="fading-circle"
+                    color="#FD4689 "
+                    v-if="topStatus"></mt-spinner>
+
+        <div class="add_more"
+             @click="loadMore">
+          <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
+        </div>
+      </div>
+      <!-- <div class="loadMore"
              ref="load">
-          <!-- <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner> -->
+         
 
           <div class="add_more"
                @click="loadMore">
             <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
+
           </div>
-        </div>
-      </div>
+        </div> -->
       <!-- 没有数据 -->
       <div class="noData"
            v-if="showNodata">
         暂无数据
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -138,12 +153,13 @@ export default {
 @import "../../styles/helper.scss";
 .integralContainer {
   width: 100%;
+  // height: 100%;
   height: auto;
-  /* height: auto; */
   /* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12); */
   /* border-radius: 3px; */
   background: #fff;
   overflow: hidden;
+  position: relative;
 }
 .intege {
   width: 100%;
@@ -158,13 +174,7 @@ export default {
   justify-content: center;
   /* margin: 0.2rem auto 0; */
 }
-.intege_cent {
-  /* width: 166px; */
-  /* height: 45px; */
-  /* line-height: 45px; */
-  /* margin: 0 auto; */
-  /* margin-top: 22.5px; */
-}
+
 .mine_intege {
   font-size: px2rem(17px);
   color: #000000;
@@ -192,16 +202,12 @@ export default {
   letter-spacing: 0;
   margin: 0.2rem 0.1rem;
 }
-/* .city_intege {
-  width: 7.068rem;
-  height: auto;
-  margin: 0.2rem auto 0;
-  border: 1px solid #ccc;
-} */
+
 .integralScrolls {
   width: 100%;
-  height: auto;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: auto;
+
   /* height: calc(100% - 0.68rem); */
 }
 
@@ -232,6 +238,7 @@ export default {
 .list_lef img {
   width: 100%;
 }
+
 // .list_rig {
 //   width: 3.46rem;
 //   border-radius: 3px;
@@ -322,6 +329,13 @@ export default {
 .list_pull {
   overflow: hidden;
 }
+
+.list_pull {
+  width: 100%;
+  overflow: auto;
+  margin-bottom: px2rem(50px);
+}
+
 .list_pull .item {
   width: 46.1%;
   height: auto;
@@ -374,14 +388,18 @@ export default {
   align-items: center;
 }
 .loadMore {
-  width: 96%;
-  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: px2rem(0px);
+  height: px2rem(40px);
   display: flex;
   justify-content: center;
   align-items: center;
   color: #000;
-  font-size: 16px;
+  font-size: px2rem(14px);
+  line-height: px2rem(40px);
   border: none;
   box-shadow: none;
+  color: #00a5ff;
 }
 </style>
