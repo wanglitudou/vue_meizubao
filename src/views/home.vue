@@ -399,8 +399,6 @@ export default {
 }
 .slider-box {
   // padding-bottom: 50px;
-
-
 }
 .scrolls {
   width: 100%;
@@ -455,11 +453,10 @@ export default {
   align-items: center;
 }
 
-
 .search_contents .list_search {
   width: 94.7%;
   height: px2rem(44px);
-  margin-left:2.6%;
+  margin-left: 2.6%;
 
   border-radius: 3px;
   border: 1px solid #eee;
@@ -500,7 +497,7 @@ export default {
   font-weight: bold;
 }
 .worktogether {
-  margin-bottom: px2rem(20px);
+  // margin-bottom: px2rem(10px);
 }
 .hotrent span {
   width: px2rem(64px);

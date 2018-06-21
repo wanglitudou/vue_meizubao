@@ -26,16 +26,14 @@
           </span>
           <span class="give_edit"
                 @click="edittheaddress(item.id)">
-            <i class="icon_img_delect"><img src="../../assets/icon/delect.png"
+            <i class="icon_edit_cont"><img src="../../assets/icon/edit_1.png"
                    alt=""></i>
-            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             编辑</span>
           <span class="give_delete"
                 @click="del(item.id)">
-            <!-- @click="del(item.id)"> -->
-            <i class="icon_edit_cont"><img src="../../assets/icon/edit_1.png"
+
+            <i class="icon_img_delect"><img src="../../assets/icon/delect.png"
                    alt=""></i>
-            <!-- <i class="iconfont icon-yingyongchengxu-xianxing"></i> -->
             删除</span>
         </p>
       </div>
