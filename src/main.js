@@ -11,8 +11,8 @@ import router from "./router/router.config.js";
 // import "../static/common/swiper.min.js";
 //引入element-ui
 
-import VueVideoPlayer from 'vue-video-player'
-import 'video.js/dist/video-js.css'
+import VueVideoPlayer from "vue-video-player";
+import "video.js/dist/video-js.css";
 // require('videojs-contrib-hls/dist/videojs-contrib-hls');
 Vue.use(VueVideoPlayer);
 
@@ -21,6 +21,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import MintUI from "mint-ui";
 import "mint-ui/lib/style.css";
 import "./components/js/jquery-2.1.0";
+import { Checklist } from "mint-ui";
 
 //引入新的日历插件
 import VCalendar from "v-calendar";
@@ -28,7 +29,7 @@ import "v-calendar/lib/v-calendar.min.css";
 //引入axios
 // import axios from "axios";
 import axios from "./http";
-import $ from 'jquery';
+import $ from "jquery";
 window.ajaxSrc = "http://mzbao.weiyingjia.org";
 
 axios.defaults.transformRequest = [

@@ -35,6 +35,13 @@
       </p>
       <p class="tacit_address">
         <span>
+          <!-- <mt-checklist align="left"
+                        v-model="value"
+                        class="give_icon"
+                        :options="options">
+
+          </mt-checklist> -->
+
           <el-checkbox v-model="checked"
                        class="give_icon"></el-checkbox>
         </span>
@@ -56,12 +63,14 @@
 <script>
 //mint-ui三级
 import { Picker, Toast } from "mint-ui";
+import { Checklist } from "mint-ui";
 import VuePickers from "vue-pickers";
 import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
 export default {
   data() {
     return {
-      checked: false,
+      checked: true,
+      // value: [],
       show1: false,
       pickData3: {
         columns: 3,
@@ -76,6 +85,12 @@ export default {
       address: "",
       consignee: "",
       telephone: ""
+      // options: [
+      //   {
+      //     label: " 设为默认地址",
+      //     value: true
+      //   }
+      // ]
     };
   },
   computed: {
@@ -210,8 +225,35 @@ export default {
   }
 };
 </script>
+<style>
+.el-checkbox__inner {
+  background: #fff;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background: #fd82d9;
+  border: 0;
+}
+.el-checkbox__inner {
+  border-radius: 50%;
+}
+.mint-checklist-label {
+}
+.mint-checklist-label {
+  display: inline-block;
+  /* margin-left: -10px; */
+}
+.mint-checkbox-core {
+  /* background: #000; */
+}
+.mint-checkbox-input:checked + .mint-checkbox-core {
+  background: #fd82d9;
+}
+</style>
+
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
+
 .zhe {
   width: 100%;
   height: 100%;
