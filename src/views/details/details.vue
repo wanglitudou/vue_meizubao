@@ -2,20 +2,14 @@
 <template>
   <div class="detail-container">
     <div class="list_list">
-      <!-- <div class="banner">
-          <img src="../../assets/images/icon1.jpg"
-               alt="">
-      </div> -->
       <div class="detailsBanner">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"
-                 v-for="item in data.images">
-              <img :src="item"
-                   alt="">
-            </div>
-          </div>
-        </div>
+        <mt-swipe :auto="4000">
+          <mt-swipe-item v-for="(item,index) in imgLists"
+                         :key="index">
+            <img :src="item"
+                 alt="">
+          </mt-swipe-item>
+        </mt-swipe>
       </div>
       <div class="ban_cent">
         <p class="name_cent">
@@ -70,9 +64,10 @@
           <!--</span>-->
         </div>
         <p class="name_credit">
-          <span class="sesame">验证芝麻信用</span>
           <span class="sign"
                 @click="showSign">网签租赁协议</span>
+          <span class="sesame">验证芝麻信用</span>
+
         </p>
       </div>
 
@@ -93,10 +88,11 @@
 import orderFooter from "../../components/orderFooter.vue";
 import sign from "../../components/sign.vue";
 import { Toast } from "mint-ui";
-
+import { Swipe, SwipeItem } from "mint-ui";
 export default {
   data() {
     return {
+      imgLists: [], //banner
       data: [],
       month: 1,
       agreementId: null,
@@ -290,10 +286,12 @@ export default {
           params: { id: this.$route.query.pid }
         })
         .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
+          console.log(res.data.status_code == "1001", "ffff");
+          if (res.data.status_code == "1001") {
             this.data = res.data.data;
             this.month = this.data.lease_time;
+            this.imgLists = res.data.data.images;
+            console.log(imgLists, "hhhh");
           }
         })
         .catch(() => {
@@ -343,9 +341,13 @@ export default {
   height: auto;
 }
 .detailsBanner {
-  width: 94.6%;
+  // width: 94.6%;
   height: px2rem(250px);
-  margin: 0.2rem auto 0;
+  // margin: 0.2rem auto 0;
+}
+.detailsBanner img {
+  width: 94%;
+  height: px2rem(250px);
 }
 .detailsBanner img {
   width: 100%;
@@ -401,10 +403,17 @@ export default {
 }
 .name_words {
   padding: 0.1rem 0.2rem;
+  height: 2rem;
   font-size: 13px;
   color: #666666;
-  letter-spacing: 0;
 }
+// .name_words span {
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   display: -webkit-box;
+//   -webkit-line-clamp: 3;
+//   -webkit-box-orient: vertical;
+// }
 .name_cate {
   padding: 0rem 0.2rem;
   display: flex;
@@ -460,7 +469,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // padding: 0 50px;
+  padding: 0 50px;
 }
 .name_credit .sesame {
   font-size: px2rem(14px);

@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="isRellyShow == true?'containersActive':'containers'" >
+  <div v-bind:class="isRellyShow == true?'containersActive':'containers'">
 
     <!-- <div class="list_list">
             <div class="list_search">
@@ -23,24 +23,38 @@
         </div> -->
     <header class="clearfix">
 
-
-      
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+          <input @keyup.13=show()
+                 type="search"
+                 placeholder="请输入搜索内容"
+                 v-model="keyword"
+                 ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png" alt="111">
+        <img src="../../assets/icon/search_1.png"
+             alt="111">
       </div>
-      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+      <p class="logo"
+         @click="logo"><img src="../../assets/images/menu.png"
+             alt=""></p>
     </header>
     <section>
 
-      <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
-        <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
+      <div v-masonry
+           transition-duration="0.3s"
+           ref="masonry"
+           item-selector=".item"
+           column-width=".item"
+           v-if="isNodata">
+        <div v-masonry-tile
+             class="item"
+             v-for="(item, index) in imgsArr"
+             @click="details(item.id)">
 
           <div class="boxs listing">
             <div>
-              <img :src="item.images" alt="">
+              <img :src="item.images"
+                   alt="">
             </div>
             <div class="other">
               <p class="name">
@@ -73,19 +87,28 @@
           </div>
 
         </div>
-        <div class="item loadMore" ref="load">
-          <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+        <div class="item loadMore"
+             ref="load">
+          <mt-spinner type="fading-circle"
+                      color="#FD4689 "
+                      v-if="topStatus"></mt-spinner>
           <span v-else>
-            <span @click="loadMore" v-if="loading">加载更多</span>
+            <span @click="loadMore"
+                  v-if="loading">加载更多</span>
             <span v-else>数据全部加载完成</span>
           </span>
         </div>
       </div>
     </section>
     <!-- 侧边栏 -->
-    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs"
+            :num="num"
+            :tab="tab"
+            :isRellyShow="isRellyShow"
+            :hideSide="hideSide"></slider>
 
-    <div class="nodata" v-if="showNodata">
+    <div class="nodata"
+         v-if="showNodata">
 
       暂无数据
     </div>
@@ -152,10 +175,6 @@ export default {
   },
 
   methods: {
-
-  
-
-
     logo() {
       this.isRellyShow = true;
     },
@@ -167,7 +186,7 @@ export default {
     show() {
       let that = this;
       // that.$refs.contain.style="over:"
-      that.code = 2
+      that.code = 2;
       // console.log(this.keyword)
       //  this.keyword = keyword;
 
@@ -184,7 +203,7 @@ export default {
       setTimeout(() => {
         this.imgsArr = [];
         this.getData("", that.keyword, that.pages);
-      },500);
+      }, 500);
     },
     // search(keyword) {
     //   //   console.log(word)
@@ -223,15 +242,15 @@ export default {
     },
     tab(id, index) {
       // console.log(id);
-  
+
       this.num = index;
       this.typeId = id;
-      this.keyword =  ''
+      this.keyword = "";
       this.imgsArr = [];
       this.isNodata = false;
       this.showNodata = false;
       this.pages = 1;
-      this.isRellyShow = false
+      this.isRellyShow = false;
       Indicator.open();
       setTimeout(() => {
         this.getData(id, "", this.pages); //传输1  是页数
@@ -282,16 +301,22 @@ export default {
 @import "../../styles/helper.scss";
 @import "./detail.css";
 
-.containersActive{
+.containersActive {
   width: 100%;
   height: 100%;
- overflow: hidden;
+  overflow: hidden;
 }
-.containers{
+.containers {
   width: 100%;
   height: 100%;
 }
-
+// .meeting {
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   display: -webkit-box;
+//   -webkit-line-clamp: 3;
+//   -webkit-box-orient: vertical;
+// }
 .clearfix {
   width: 100%;
   height: px2rem(44px);
@@ -315,62 +340,39 @@ export default {
       display: inline-block;
     }
   }
-  .search_content {
-    width: px2rem(270px);
-    height: px2rem(30px);
-    border: 1px solid #ccc;
-    border-radius: px2rem(5px);
-    display: flex;
-    justify-content: space-between;
-    font-size: px2rem(13px);
-    align-items: center;
-    color: #000;
-    span {
-      display: inline-block;
-      margin-left: (5px);
-    }
-    img {
-      display: inline-block;
-      width: 20px;
-      margin-right: px2rem(5px);
-    }
-      display: inline-block;
-    }
+}
+.search_content {
+  width: px2rem(270px);
+  height: px2rem(30px);
+  border: 1px solid #ccc;
+  border-radius: px2rem(5px);
+  display: flex;
+  justify-content: space-between;
+  font-size: px2rem(13px);
+  align-items: center;
+  color: #000;
+  span {
+    display: inline-block;
+    margin-left: (5px);
   }
-  .search_content {
-    width: px2rem(270px);
-    height: px2rem(30px);
-    border: 1px solid #ccc;
-    border-radius: px2rem(5px);
-    display: flex;
-    justify-content: space-between;
-    font-size: px2rem(13px);
-    align-items: center;
-    color: #000;
-    span {
-      display: inline-block;
-      margin-left: (5px);
-    }
-    img {
-      display: inline-block;
-      width: 20px;
-      margin-right: px2rem(5px);
-    }
-    form {
-      display: block;
+  img {
+    display: inline-block;
+    width: 20px;
+    margin-right: px2rem(5px);
+  }
+  form {
+    display: block;
+    width: 100%;
+    height: 80%;
+    input {
+      border: none;
+      outline: none;
       width: 100%;
-      height: 80%;
-      input {
-        border: none;
-        outline: none;
-        width: 100%;
-        height: 100%;
-        padding-left: px2rem(8px);
-      }
+      height: 100%;
+      padding-left: px2rem(8px);
     }
-
   }
-
+}
 
 .topSearch {
   position: fixed;

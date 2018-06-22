@@ -1,5 +1,6 @@
 <template>
-  <div  ref="container"  :class="isRellyShow?'containersActive':'container'">
+  <div ref="container"
+       :class="isRellyShow?'containersActive':'container'">
 
     <!-- <div class="nav_pic">
                 <span class="list_tab"
@@ -49,26 +50,43 @@
     <header class="clearfix">
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+          <input @keyup.13=show()
+                 type="search"
+                 placeholder="请输入搜索内容"
+                 v-model="keyword"
+                 ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png" alt="111">
+        <img src="../../assets/icon/search_1.png"
+             alt="111">
       </div>
-      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+      <p class="logo"
+         @click="logo"><img src="../../assets/images/menu.png"
+             alt=""></p>
 
     </header>
     <section>
-      <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
-        <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry" @click="details(item.id)">
+      <div v-masonry
+           transition-duration="0.3s"
+           ref="masonry"
+           item-selector=".item"
+           column-width=".item"
+           v-if="isNodata">
+        <div v-masonry-tile
+             class="item"
+             v-for="(item, index) in thebeautyindustry"
+             @click="details(item.id)">
           <div class="cent_left">
             <div class="list_img">
-              <img :src="item.images" alt="">
+              <img :src="item.images"
+                   alt="">
             </div>
             <div class="list_oper">
               <p class="oper_room">
                 <span class="eliteName">{{item.name}}</span>
                 <!-- <span>{{item.level}}</span> -->
                 <span class="eliteStar">
-                  <span v-for="val in item.level"><img src="../../assets/images/star.png" alt=""></span>
+                  <span v-for="val in item.level"><img src="../../assets/images/star.png"
+                         alt=""></span>
                 </span>
 
               </p>
@@ -86,10 +104,14 @@
           </div>
         </div>
         <!-- 加载更多 -->
-        <div class="item loadMore" ref="load">
-          <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+        <div class="item loadMore"
+             ref="load">
+          <mt-spinner type="fading-circle"
+                      color="#FD4689 "
+                      v-if="topStatus"></mt-spinner>
           <span v-else>
-            <span @click="loadMore" v-if="loading">加载更多</span>
+            <span @click="loadMore"
+                  v-if="loading">加载更多</span>
             <span v-else>数据全部加载完成</span>
           </span>
         </div>
@@ -97,9 +119,14 @@
       </div>
 
     </section>
-    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs"
+            :num="num"
+            :tab="tab"
+            :isRellyShow="isRellyShow"
+            :hideSide="hideSide"></slider>
     <!-- 没有数据 -->
-    <div class="nodata" v-if="showNodata">
+    <div class="nodata"
+         v-if="showNodata">
       暂无数据
     </div>
   </div>
@@ -200,16 +227,16 @@ export default {
     // 搜索回车事件
     show() {
       console.log(11);
-      this.code = 2
+      this.code = 2;
       if (this.keyword == "") {
         Toast("搜索框不能为空");
         return false;
       }
-      this.pages = 1
-      setTimeout(()=>{
-        // this.getData('')     
-        this.getData("", this.keyword, this.grade, this.dayprice, this.pages);  
-      },500)
+      this.pages = 1;
+      setTimeout(() => {
+        // this.getData('')
+        this.getData("", this.keyword, this.grade, this.dayprice, this.pages);
+      }, 500);
     },
     //   search(keyword) {
     //   if (keyword == "") {
@@ -263,7 +290,6 @@ export default {
               that.loading = true;
             }
 
-           
             that.thebeautyindustry = that.thebeautyindustry.concat(
               res.data.data
             );
@@ -299,9 +325,9 @@ export default {
     //   this.$router.push({ name: "details" });
     // },
     tab(id, index) {
-      this.num = index;    
-      this.keyword = '';
-      this.isRellyShow = false
+      this.num = index;
+      this.keyword = "";
+      this.isRellyShow = false;
       this.typeId = id;
       Indicator.open();
       this.pages = 1;
@@ -313,7 +339,7 @@ export default {
       setTimeout(() => {
         this.getData(id, this.keywords, this.grade, this.dayprice, this.pages); //传输1  是页数   是为了和搜索区分开 提示暂无数据区分开
       }, 1000);
-    },
+    }
   },
   components: {
     tab,
@@ -323,11 +349,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../styles/helper.scss"; 
-.containersActive{
+@import "../../styles/helper.scss";
+.containersActive {
   width: 100%;
   height: 100%;
- overflow: hidden;
+  overflow: hidden;
 }
 .container {
   width: 100%;
@@ -455,6 +481,11 @@ export default {
   letter-spacing: 0;
   // padding: 0rem 10px;
   margin-top: px2rem(6px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .every_pro {
   display: flex;

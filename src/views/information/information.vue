@@ -212,8 +212,17 @@ export default {
           that.data.manage_years = res.data.data.manage_years; //经营年限
           that.data.manage_area = res.data.data.manage_area; //经营面积
           that.lists = res.data.data;
+
           $("." + res.data.data.manage_years).addClass("yearActive");
           $("." + res.data.data.manage_area).addClass("yearActive");
+        }
+        //如果verify_status==4  跳转到个人信息页面
+        if (res.data.data.verify_status === 4) {
+          // that.$router.push()
+          that.$router.push({ name: "information" });
+          console.log("111");
+        } else {
+          console.log("lalalla");
         }
       })
       .catch(() => {

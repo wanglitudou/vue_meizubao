@@ -227,6 +227,13 @@ export default {
   height: calc(100% - 0rem);
   background: #fff;
 }
+.metting .met_cent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
 .cent_list {
   width: 94.7%;
   height: auto;
