@@ -29,7 +29,8 @@
     <div class="bottom-wrapper">
       <div class="des-wrapper">
         <span class="text">{{$route.query.name}}</span>
-        <span class="baiducloud">百度云下载</span>
+        <span class="baiducloud"
+              @click="baiducloud()">百度云下载</span>
         <!--<a :href="$route.query.images" download="test">下载</a>-->
         <img class="right-button"
              src="../../assets/images/download.jpg"
@@ -62,6 +63,10 @@ export default {
       }
     };
   },
+  created() {
+    let that = this;
+    that.baiducloud();
+  },
   mounted() {
     console.log($route.query.type);
     var clipboard = new ClipboardJS(".right-button");
@@ -82,6 +87,10 @@ export default {
     });
   },
   methods: {
+    baiducloud() {
+      alert("百度云盘密码:4sC7");
+      window.location.href = "https://pan.baidu.com/s/1TlvRtDtQSK3A4Ba_nBIRJg";
+    },
     playerReadied(player) {
       const track = new videojs.AudioTrack({
         id: "my-spanish-audio-track",
@@ -117,7 +126,9 @@ export default {
   height: 250px;
 }
 .baiducloud {
-  color: #dec;
+  color: #ff0000;
+  margin-left: 1rem;
+  font-size: 14px;
 }
 .vjs-button > .vjs-icon-placeholder:before {
   font-size: 2em !important;
