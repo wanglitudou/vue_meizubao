@@ -238,13 +238,7 @@ export default {
   border-radius: 50%;
 }
 .mint-checklist-label {
-}
-.mint-checklist-label {
   display: inline-block;
-  /* margin-left: -10px; */
-}
-.mint-checkbox-core {
-  /* background: #000; */
 }
 .mint-checkbox-input:checked + .mint-checkbox-core {
   background: #fd82d9;

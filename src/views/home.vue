@@ -25,7 +25,6 @@
                alt="111">
         </div>
       </div>
-
       <div class="list_btn">
         <!-- title -->
         <div class="hotrent">
