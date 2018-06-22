@@ -285,7 +285,7 @@ console.log(canvas.toDataURL("image/jpg"))
   position: fixed;
   height:100%;
   width: 100%;
-  background: #fff;
+  background: rgb(236, 158, 158);
   overflow: hidden;
   top:0;
   left:0;

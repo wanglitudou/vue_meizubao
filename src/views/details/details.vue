@@ -7,7 +7,7 @@
                alt="">
       </div> -->
       <div class="detailsBanner">
-<<<<<<< HEAD
+
         <mt-swipe :auto="4000">
 
           <mt-swipe-item v-for="(item,index) in data.images"
@@ -19,17 +19,7 @@
           </mt-swipe-item>
         </mt-swipe>
         
-=======
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"
-                 v-for="item in data.images">
-              <img :src="item"
-                   alt="">
-            </div>
-          </div>
-        </div>
->>>>>>> 6a3ff07b26837019f6450f6e8ca2df123885287f
+
       </div>
       <div class="ban_cent">
         <p class="name_cent">
