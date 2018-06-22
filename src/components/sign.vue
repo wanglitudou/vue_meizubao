@@ -43,7 +43,7 @@ export default {
 //      }catch (err){
 //        alert(err);
 //      }
-
+console.log(canvas.toDataURL("image/jpg"))
 
 
       let self= this;
@@ -100,7 +100,7 @@ export default {
 
       var img = new Image();
 
-      img.crossOrigin = 'anonymous';
+      // img.crossOrigin = 'anonymous';
 //      img.setAttribute("crossOrigin", "anonymous");
       img.src = this.src;
 

@@ -90,33 +90,67 @@
                  :count="totalPrice"
                  :nextFun="jumpToConfirm"></orderFooter>
 
-    <sign id="componentSign"
-          v-if="showSignTag"
-          :src="data.agreement"
-          :gid="data.id"
-          :saveAgreementId="saveAgreementId"></sign>
+
+    <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :type="type" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
+
 
   </div>
 </template>
 <script>
-import orderFooter from "../../components/orderFooter.vue";
-import sign from "../../components/sign.vue";
-import { Toast } from "mint-ui";
+  import orderFooter from '../../components/orderFooter.vue'
+  import sign from '../../components/canvas.vue'
+  import { Toast } from 'mint-ui';
 
-const setUpTime = 3; //常量 技师出发准备时间 (从今天开始算 几天后可选);
-export default {
-  data() {
-    return {
-      data: [],
-      selectedDate: {
-        start: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000),
-        end: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000)
-      },
-      disableDate: [],
-      agreementId: null,
-      showSignTag: false
-    };
-  },
+
+
+  const setUpTime=3;//常量 技师出发准备时间 (从今天开始算 几天后可选);
+  export default {
+    data() {
+      return {
+        data: [],
+        selectedDate: {
+          start: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000),
+          end: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000),
+        },
+        disableDate: [],
+        agreementId:null,
+        showSignTag:false,
+        type:2,
+      };
+    },
+
+
+    mounted(){
+      this.init();
+    },
+
+    // computed: {
+    //   during(){
+    //     return (this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) / (24 * 60 * 60 * 1000)+1
+    //   },
+    //   totalPrice(){
+    //     let temPrice=this.during * this.data.dayprice * 2;
+    //     if(this.during>=5){
+    //       temPrice = temPrice * 0.8
+    //     }
+    //     return temPrice
+
+
+// const setUpTime = 3; //常量 技师出发准备时间 (从今天开始算 几天后可选);
+// export default {
+//   data() {
+//     return {
+//       data: [],
+//       selectedDate: {
+//         start: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000),
+//         end: new Date(new Date().getTime() + setUpTime * 24 * 60 * 60 * 1000)
+// >>>>>>> 6a3ff07b26837019f6450f6e8ca2df123885287f
+//       },
+//       disableDate: [],
+//       agreementId: null,
+//       showSignTag: false
+//     };
+//   },
 
   mounted() {
     this.init();

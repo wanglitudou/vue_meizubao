@@ -3,6 +3,7 @@
   <div class="detail-container">
     <div class="list_list">
       <div class="detailsBanner">
+
         <mt-swipe :auto="4000">
           <mt-swipe-item v-for="(item,index) in imgLists"
                          :key="index">
@@ -10,6 +11,7 @@
                  alt="">
           </mt-swipe-item>
         </mt-swipe>
+
       </div>
       <div class="ban_cent">
         <p class="name_cent">
@@ -75,8 +77,10 @@
                    :count="(month*data.firstrent + (data.deposit-0)).toFixed(2)"
                    :nextFun="jumpToConfirm"></orderFooter>
 
+      <!-- <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign> -->
       <sign id="componentSign"
             v-if="showSignTag"
+            :type="type"
             :src="data.agreement"
             :gid="data.id"
             :saveAgreementId="saveAgreementId"></sign>
@@ -85,16 +89,18 @@
   </div>
 </template>
 <script>
-import orderFooter from "../../components/orderFooter.vue";
-import sign from "../../components/sign.vue";
-import { Toast } from "mint-ui";
-import { Swipe, SwipeItem } from "mint-ui";
+  import orderFooter from '../../components/orderFooter.vue'
+  // import sign from '../../components/sign.vue'
+  import sign from '../../components/canvas.vue';
+  import { Toast,Swipe, SwipeItem } from 'mint-ui';
+
 export default {
   data() {
     return {
       imgLists: [], //banner
       data: [],
       month: 1,
+        type:1,
       agreementId: null,
       showSignTag: false
     };
@@ -110,13 +116,18 @@ export default {
         return;
       }
 
+
       // 是否是搓浏览器
       // 自己在这里添加判断和筛选
       var isSBBrowser;
 
+
+ 
+
       var data = {
         posY: 0,
         maxscroll: 0
+
       };
 
       // 事件处理
@@ -349,9 +360,13 @@ export default {
   width: 94%;
   height: px2rem(250px);
 }
+// .detailsBanner .swiper-container {
+//   width: 100%;
+//   height: px2rem(250px);
+// }
 .detailsBanner img {
   width: 100%;
-  // height: 100%;
+  height: 100%;
 }
 .ban_cent {
   width: 94.7%;

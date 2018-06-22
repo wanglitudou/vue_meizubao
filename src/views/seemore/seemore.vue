@@ -494,7 +494,7 @@ export default {
   font-size:px2rem(14px);
   position: absolute;top: 0;
 }
-section{
+section{  
   padding-top: px2rem(45px);
 }
 </style>

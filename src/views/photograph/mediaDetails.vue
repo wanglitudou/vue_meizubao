@@ -29,6 +29,7 @@
     <div class="bottom-wrapper">
       <div class="des-wrapper">
         <span class="text">{{$route.query.name}}</span>
+        <span class="baiducloud">百度云下载</span>
         <!--<a :href="$route.query.images" download="test">下载</a>-->
         <img class="right-button"
              src="../../assets/images/download.jpg"
@@ -62,6 +63,7 @@ export default {
     };
   },
   mounted() {
+    console.log($route.query.type);
     var clipboard = new ClipboardJS(".right-button");
     clipboard.on("success", function(e) {
       Toast({
@@ -113,6 +115,9 @@ export default {
 .video-js {
   width: 100% !important;
   height: 250px;
+}
+.baiducloud {
+  color: #dec;
 }
 .vjs-button > .vjs-icon-placeholder:before {
   font-size: 2em !important;

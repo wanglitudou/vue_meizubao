@@ -270,7 +270,9 @@ export default {
 .dora {
   border-bottom: 2px solid #fd4689;
 }
-
+.cent_cents {
+  overflow-x: hidden;
+}
 .photoContainer {
   width: 100%;
   height: auto;
@@ -284,7 +286,7 @@ export default {
   } */
 .cent_cents {
   width: 100%;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   height: calc(100% - 0.88rem);
 }
 
@@ -296,7 +298,8 @@ export default {
 
   display: flex;
   justify-content: center;
-  // padding: 0 1.54rem;
+  // padding: 0 1.54rem;-y
+
   font-size: 16px;
   color: #000;
   .nav_div {
@@ -305,7 +308,7 @@ export default {
     justify-content: center;
     span {
       display: block;
-      width: px2rem(32px);
+      width: px2rem(42px);
       height: px2rem(44px);
     }
   }
@@ -342,12 +345,12 @@ export default {
 }
 
 .picleft_img {
-  width: 100%;
+  // width: 100%;
 }
 
 .picleft_img img {
-  width: 100%;
-  height: 100%;
+  width: px2rem(173px);
+  height: px2rem(113px);
 }
 
 .name_ins {
