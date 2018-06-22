@@ -285,7 +285,7 @@ export default {
   }
 };
 </script>
-<style  lang="scss">
+<style  lang="scss" scoped>
 @import "../../styles/helper.scss";
 .infor_container {
   width: 100%;

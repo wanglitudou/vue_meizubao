@@ -19,7 +19,10 @@
       </p>
       <p class="collect_bet">
         <span>所在地区 {{province}}{{city}}{{area}}</span>
-        <span @click="levl()">请选择 ></span>
+        <span @click="levl()">请选择
+          <i class="icon_right_img"><img src="../../assets/icon/more.png"
+                 alt=""></i>
+        </span>
 
       </p>
       <p class="detail_address">
@@ -32,6 +35,13 @@
       </p>
       <p class="tacit_address">
         <span>
+          <!-- <mt-checklist align="left"
+                        v-model="value"
+                        class="give_icon"
+                        :options="options">
+
+          </mt-checklist> -->
+
           <el-checkbox v-model="checked"
                        class="give_icon"></el-checkbox>
         </span>
@@ -53,12 +63,14 @@
 <script>
 //mint-ui三级
 import { Picker, Toast } from "mint-ui";
+import { Checklist } from "mint-ui";
 import VuePickers from "vue-pickers";
 import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
 export default {
   data() {
     return {
       checked: true,
+      // value: [],
       show1: false,
       pickData3: {
         columns: 3,
@@ -73,6 +85,12 @@ export default {
       address: "",
       consignee: "",
       telephone: ""
+      // options: [
+      //   {
+      //     label: " 设为默认地址",
+      //     value: true
+      //   }
+      // ]
     };
   },
   computed: {
@@ -207,7 +225,35 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style>
+.el-checkbox__inner {
+  background: #fff;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background: #fd82d9;
+  border: 0;
+}
+.el-checkbox__inner {
+  border-radius: 50%;
+}
+.mint-checklist-label {
+}
+.mint-checklist-label {
+  display: inline-block;
+  /* margin-left: -10px; */
+}
+.mint-checkbox-core {
+  /* background: #000; */
+}
+.mint-checkbox-input:checked + .mint-checkbox-core {
+  background: #fd82d9;
+}
+</style>
+
+<style lang="scss" scoped>
+@import "../../styles/helper.scss";
+
 .zhe {
   width: 100%;
   height: 100%;
@@ -217,24 +263,27 @@ export default {
   top: 0;
   z-index: 6;
 }
+.icon_right_img img {
+  height: px2rem(16px);
+}
 .container {
   width: 100%;
   height: 100%;
 }
 .inp {
-  width: 5rem;
+  width: px2rem(200px);
   padding: 0.1rem 0.2rem;
   outline: none;
   border: none;
   cursor: pointer;
 }
 .collectgoods {
-  width: 7.1rem;
-  height: 6rem;
-  margin: 0.2rem auto 0;
+  width: 94.7%;
+  height: auto;
+  margin-left: 2.7%;
 }
 .collects {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 1rem;
   line-height: 1rem;
   font-size: 15px;
@@ -243,7 +292,7 @@ export default {
   border-bottom: 2px solid #f7f7f7;
 }
 .collect_bet {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 1rem;
   line-height: 1rem;
   font-size: 15px;
@@ -254,7 +303,7 @@ export default {
   padding: 0 10px;
 }
 .detail_address {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 2rem;
   border-bottom: 2px solid #f7f7f7;
   font-size: 15px;
@@ -263,14 +312,14 @@ export default {
   margin-top: 0.1rem;
 }
 .inpts_text {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 2rem;
   outline: none;
   border: none;
   cursor: pointer;
 }
 .tacit_address {
-  width: 7.1rem;
+  width: px2rem(330px);
   height: 1rem;
   border-bottom: 2px solid #f7f7f7;
   font-size: 14px;
@@ -279,9 +328,9 @@ export default {
   margin-top: 10px;
 }
 .preservation {
-  width: 7.1rem;
-  height: 0.8rem;
-  line-height: 0.8rem;
+  width: px2rem(330px);
+  height: px2rem(36px);
+  line-height: px2rem(36px);
   background-image: linear-gradient(-130deg, #fd82d9 0%, #fd4689 100%);
   box-shadow: 0 0 13px 0 #eeeeee;
   margin: 0.2rem auto 0;

@@ -24,13 +24,17 @@ export default {
   }
 };
 </script>
-<style lang ="scss">
+
+<style  lang="scss" scoped>
+
+
 @import '../styles/helper.scss';
 .homeSearch {
   width: 92%;
   height: px2rem(34px);
   border: 1px solid #EEEEEE;
   margin-top: px2rem(6px);
+
   text-align: center;
   margin-left: 4%;
   background: #fff;

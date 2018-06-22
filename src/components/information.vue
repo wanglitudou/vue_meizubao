@@ -37,7 +37,7 @@ export default {
     props:['detail']
 }
 </script>
-<style>
+<style scoped>
 .information{
     width: 100%;
     height: auto;

@@ -26,12 +26,14 @@
           </span>
           <span class="give_edit"
                 @click="edittheaddress(item.id)">
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+            <i class="icon_edit_cont"><img src="../../assets/icon/edit_1.png"
+                   alt=""></i>
             编辑</span>
           <span class="give_delete"
                 @click="del(item.id)">
-            <!-- @click="del(item.id)"> -->
-            <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+
+            <i class="icon_img_delect"><img src="../../assets/icon/delect.png"
+                   alt=""></i>
             删除</span>
         </p>
       </div>
@@ -152,7 +154,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .addressContainer {
   width: 100%;
@@ -160,6 +162,13 @@ export default {
   height: calc(100% - 0.88rem);
   background: #fff;
 }
+.icon_edit_cont img {
+  height: px2rem(16px);
+}
+.icon_img_delect img {
+  height: px2rem(16px);
+}
+
 .list_cont {
   width: 94.7%;
   height: auto;

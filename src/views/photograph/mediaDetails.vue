@@ -13,18 +13,27 @@
           您的浏览器不支持 video 标签。
         </video> -->
       <div v-if="$route.query.type=='video'">
-        <video-player class="vjs-custom-skin" :options="playerOptions" :playsinline="true" ref="videoPlayer" @ready="playerReadied($event)"></video-player>
+        <video-player class="vjs-custom-skin"
+                      :options="playerOptions"
+                      :playsinline="true"
+                      ref="videoPlayer"
+                      @ready="playerReadied($event)"></video-player>
 
       </div>
       <!-- <video-player class="vjs-custom-skin" :options="playerOptions" :playsinline="true" ref="videoPlayer" @ready="playerReadied($event)"></video-player> -->
 
-      <img :src="$route.query.images" alt="" v-if="$route.query.type=='image'">
+      <img :src="$route.query.images"
+           alt=""
+           v-if="$route.query.type=='image'">
     </div>
     <div class="bottom-wrapper">
       <div class="des-wrapper">
         <span class="text">{{$route.query.name}}</span>
         <!--<a :href="$route.query.images" download="test">下载</a>-->
-        <img class="right-button" src="../../assets/images/download.jpg" alt="" :data-clipboard-text="$route.query.images">
+        <img class="right-button"
+             src="../../assets/images/download.jpg"
+             alt=""
+             :data-clipboard-text="$route.query.images">
       </div>
     </div>
   </div>
@@ -100,12 +109,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .video-js {
   width: 100% !important;
   height: 250px;
 }
-.vjs-button > .vjs-icon-placeholder:before{
+.vjs-button > .vjs-icon-placeholder:before {
   font-size: 2em !important;
 }
 .video-js .vjs-big-play-button {

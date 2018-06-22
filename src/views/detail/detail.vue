@@ -1,5 +1,6 @@
 <template>
   <div v-bind:class="isRellyShow == true?'containersActive':'containers'" >
+
     <!-- <div class="list_list">
             <div class="list_search">
                 头部导航
@@ -21,6 +22,9 @@
             </div>
         </div> -->
     <header class="clearfix">
+
+
+      
       <div class="search_content">
         <form action="javascript:return true;">
           <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
@@ -82,6 +86,7 @@
     <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
 
     <div class="nodata" v-if="showNodata">
+
       暂无数据
     </div>
 
@@ -147,6 +152,10 @@ export default {
   },
 
   methods: {
+
+  
+
+
     logo() {
       this.isRellyShow = true;
     },
@@ -161,10 +170,15 @@ export default {
       that.code = 2
       // console.log(this.keyword)
       //  this.keyword = keyword;
+
       if (this.keyword == "") {
         Toast("搜索不能为空");
         return false;
       }
+
+      this.imgsArr = [];
+      this.keyword = keyword;
+
       this.pages = 1;
       Indicator.open();
       setTimeout(() => {
@@ -267,6 +281,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
 @import "./detail.css";
+
 .containersActive{
   width: 100%;
   height: 100%;
@@ -276,6 +291,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .clearfix {
   width: 100%;
   height: px2rem(44px);
@@ -318,6 +334,28 @@ export default {
       width: 20px;
       margin-right: px2rem(5px);
     }
+      display: inline-block;
+    }
+  }
+  .search_content {
+    width: px2rem(270px);
+    height: px2rem(30px);
+    border: 1px solid #ccc;
+    border-radius: px2rem(5px);
+    display: flex;
+    justify-content: space-between;
+    font-size: px2rem(13px);
+    align-items: center;
+    color: #000;
+    span {
+      display: inline-block;
+      margin-left: (5px);
+    }
+    img {
+      display: inline-block;
+      width: 20px;
+      margin-right: px2rem(5px);
+    }
     form {
       display: block;
       width: 100%;
@@ -330,8 +368,9 @@ export default {
         padding-left: px2rem(8px);
       }
     }
+
   }
-}
+
 
 .topSearch {
   position: fixed;

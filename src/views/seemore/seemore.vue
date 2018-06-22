@@ -3,25 +3,22 @@
 
     <!-- <div class="list_list">
       <div class="list_search">
-        <div class="sortMenu clearfix" v-show="slideShow">
+        <div class="sortMenu clearfix"
+             v-show="slideShow">
           <ul class="sortMenu-ul">
-            <div v-for="(item,index) in tabs" :ley="index" @click="tab(item.id,index)">
-              <tab :item="item" :index="index" :num="num"></tab>
-            
-            </div>
-          </ul>
-          
-          <div class="sousuo" @click="aaa()">
-            <img src="../../assets/icon/search_1.png" alt="">
-          </div>
-        </div>
-    
-        <div class="topSearch" v-if="flog">
-          <search @search="search"></search>
-        </div>
 
-      </div>
-    </div> -->
+            <div v-for="(item,index) in tabs"
+                 :ley="index"
+                 @click="tab(item.id,index)">
+              <tab :item="item"
+                   :index="index"
+                   :num="num"></tab>
+              <!-- <li class="cell"   :class="num == index ?'dora':''">
+                            {{item.name}}
+        Search"
+             v-if="flog">-->
+
+          
     <header class="clearfix">
       <div class="search_content">
         <form action="javascript:return true;">
@@ -33,12 +30,21 @@
     </header>
     <section>
     <!-- 瀑布流布局 -->
-    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+    <div v-masonry
+         transition-duration="0.3s"
+         ref="masonry"
+         item-selector=".item"
+         column-width=".item"
+         v-if="isNodata">
       <!-- v-for="(item, index) in accessoryproducts -->
-      <div v-masonry-tile class="item" v-for="(item, index) in accessoryproducts" @click="details(item.id)">
+      <div v-masonry-tile
+           class="item"
+           v-for="(item, index) in accessoryproducts"
+           @click="details(item.id)">
         <div class="cent_left">
           <div class="list_img">
-            <img :src="item.images" alt="666">
+            <img :src="item.images"
+                 alt="666">
           </div>
           <div class="list_oper">
             <p class="oper_room">
@@ -57,10 +63,14 @@
         </div>
       </div>
       <!-- 店家加载更多 -->
-      <div class="item loadMore" ref="load">
-        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+      <div class="item loadMore"
+           ref="load">
+        <mt-spinner type="fading-circle"
+                    color="#FD4689 "
+                    v-if="topStatus"></mt-spinner>
         <span v-else>
-          <span @click="loadMore" v-if="loading">加载更多</span>
+          <span @click="loadMore"
+                v-if="loading">加载更多</span>
           <span v-else>数据全部加载完成</span>
         </span>
       </div>
@@ -69,7 +79,8 @@
     </section>
     <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
     <!-- 暂无数据 -->
-    <div class="noData" v-if="showNodata">
+    <div class="noData"
+         v-if="showNodata">
       赞无数据
     </div>
   </div>
@@ -201,11 +212,11 @@ export default {
     //   //  console.log(this.$refs.masonry)
     //   // this.$refs.masonry.style = "position:relative";
     // },
+
     // search(keyword) {
     //   // console.log(word)
     //   this.getData("", keyword, this.pages);
     // },
-
     tab(id, index) {
       this.typeid = id;
       console.log(id);

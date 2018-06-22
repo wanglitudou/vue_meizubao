@@ -13,13 +13,24 @@
         </p>
       </div>
     </div>
-    <!-- <div class="integralScrolls"> -->
-      <div class="list_pull" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
-        <!-- <div class="list_lef"> -->
 
-        <div class="listing item" v-masonry-tile v-for="(item,index) of dataArr" :key="index" @click="toTrain(item.id)">
+    <div class="integralScrolls">
+      <div class="list_pull"
+           v-masonry
+           transition-duration="0.3s"
+           ref="masonry"
+           item-selector=".item"
+           column-width=".item"
+           v-if="isNodata">
+        <!-- <div class="list_lef"> -->
+        <div class="listing item"
+             v-masonry-tile
+             v-for="(item,index) of dataArr"
+             :key="index"
+             @click="toTrain(item.id)">
           <div>
-            <img :src="item.images" alt="">
+            <img :src="item.images"
+                 alt="">
           </div>
           <div class="other">
             <p class="aa">
@@ -35,22 +46,37 @@
           </div>
 
         </div>
-        <!-- 加载更多 -->
-
       </div>
-      <div class="loadMore" ref="load">
-        <!-- <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner> -->
+      <!-- 加载更多 -->
+      <div class=" loadMore"
+           ref="load">
+        <mt-spinner type="fading-circle"
+                    color="#FD4689 "
+                    v-if="topStatus"></mt-spinner>
 
-        <div class="add_more" @click="loadMore">
+        <div class="add_more"
+             @click="loadMore">
           <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
         </div>
       </div>
+      <!-- <div class="loadMore"
+             ref="load">
+         
+
+          <div class="add_more"
+               @click="loadMore">
+            <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
+
+          </div>
+        </div> -->
       <!-- 没有数据 -->
-      <div class="noData" v-if="showNodata">
+      <div class="noData"
+           v-if="showNodata">
         暂无数据
       </div>
     </div>
-  <!-- </div> -->
+
+  </div>
 </template>
 <script>
 import { Spinner, Toast, Indicator } from "mint-ui";
@@ -121,18 +147,17 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .integralContainer {
   width: 100%;
   // height: 100%;
-   height: auto; 
+  height: auto;
   /* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12); */
   /* border-radius: 3px; */
   background: #fff;
   overflow: hidden;
-   position: relative;
-
+  position: relative;
 }
 .intege {
   width: 100%;
@@ -211,7 +236,99 @@ export default {
 .list_lef img {
   width: 100%;
 }
-.list_pull{
+
+// .list_rig {
+//   width: 3.46rem;
+//   border-radius: 3px;
+// }
+// .list_rig img {
+//   width: 3.44rem;
+// }
+
+// .list_rig .other span {
+// padding: 0.2rem;
+// font-size: 15px;
+// color: #000000;
+// letter-spacing: 0;
+// }
+// .list_lef .other span {
+//   padding: 0.2rem;
+//   font-size: 15px;
+//   color: #000000;
+//   letter-spacing: 0;
+// }
+// .paice {
+//   font-size: 13px;
+//   color: #666666;
+//   letter-spacing: 0;
+// }
+// .paice {
+//   font-size: 13px;
+//   color: #666666;
+//   letter-spacing: 0;
+// }
+// .meeting {
+//   padding: 0 0.3rem;
+//   font-size: 13px;
+//   color: #999999;
+//   letter-spacing: 0;
+// }
+// .count {
+//   font-size: 14px;
+//   color: #00a5ff;
+//   letter-spacing: 0;
+// }
+// .other a {
+//   font-size: 14px;
+//   color: #ff272d;
+//   letter-spacing: 0;
+// }
+/* .rent {
+  font-size: 12px;
+  color: #999999;
+  letter-spacing: 0;
+  padding: 0 0.2rem;
+} */
+// .list_lef .other .orders {
+//   width: 2.4rem;
+//   height: 0.72rem;
+//   line-height: 0.72rem;
+//   border: 1px solid #ccc;
+//   margin: 0 auto;
+//   text-align: center;
+//   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+//   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+//   border-radius: 3px;
+//   margin-top: 10px;
+//   margin-bottom: 15px;
+// }
+// .list_lef .other p .order {
+//   font-size: 14px;
+//   color: #ffffff;
+//   letter-spacing: 0;
+// }
+// .list_cent .list_rig .other .orders {
+//   width: 2.4rem;
+//   height: 0.72rem;
+//   line-height: 0.72rem;
+//   margin: 0 auto;
+//   text-align: center;
+//   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
+//   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
+//   border-radius: 3px;
+//   margin-top: 10px;
+//   margin-bottom: 15px;
+// }
+// .list_cent .list_rig .other p .order {
+//   font-size: 14px;
+//   color: #ffffff;
+//   letter-spacing: 0;
+// }
+.list_pull {
+  overflow: hidden;
+}
+
+.list_pull {
   width: 100%;
   overflow: auto;
   margin-bottom: px2rem(50px);
@@ -269,7 +386,7 @@ export default {
   align-items: center;
 }
 .loadMore {
-  width:100%;
+  width: 100%;
   position: absolute;
   bottom: px2rem(0px);
   height: px2rem(40px);
@@ -281,6 +398,6 @@ export default {
   line-height: px2rem(40px);
   border: none;
   box-shadow: none;
-  color: #00A5FF;
+  color: #00a5ff;
 }
 </style>

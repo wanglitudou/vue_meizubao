@@ -6,12 +6,18 @@
 
         <div class="tabBar">
           <button @click="select">{{statusCode}}</button>
-          <ul class="uli" v-show="ulShow">
-            <li class="status_item" v-for="(optionItem,index) in options" @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
+          <ul class="uli"
+              v-show="ulShow">
+            <li class="status_item"
+                v-for="(optionItem,index) in options"
+                @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
           </ul>
         </div>
-        <div class="tabBar" v-for="(item,index) in tabs">
-          <div class="status" :class="tabNum == index ?'active':''" @click="tabClick(item.id,index)">
+        <div class="tabBar"
+             v-for="(item,index) in tabs">
+          <div class="status"
+               :class="tabNum == index ?'active':''"
+               @click="tabClick(item.id,index)">
             {{item.item}}
           </div>
         </div>
@@ -19,9 +25,16 @@
         <!-- <div class="tabBar"></div> -->
       </div>
 
-      <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail" :loadMore="loadMore" :load="load" :toPay="toPay" :complete="complete" :renewal="renewal" :back="back"></order>
-
-    
+      <order :orderlist="orderlist"
+             :receipt="receipt"
+             :cancel="cancel"
+             :todetail="todetail"
+             :loadMore="loadMore"
+             :load="load"
+             :toPay="toPay"
+             :complete="complete"
+             :renewal="renewal"
+             :back="back"></order>
 
     </div>
   </div>
@@ -146,9 +159,9 @@ export default {
     //确认收货
     receipt(type, id) {
       console.log(id);
-      let status = 6
-      if( type == 3){
-        status = 7
+      let status = 6;
+      if (type == 3) {
+        status = 7;
       }
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
@@ -161,9 +174,7 @@ export default {
             //  remove(this.orderlist,{"id":id})
             Toast("确认成功");
 
-          
             if (type == 3) {
-
               var result2 = filter(this.orderlist, { id: id });
               forEach(result2, function(item) {
                 item.status = 7;
@@ -274,7 +285,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../styles/helper.scss";
 .dora {
   border-bottom: 2px solid #fd4689;
@@ -285,11 +296,10 @@ export default {
   // position: relative;
   background: #fff;
 }
-.cart_pic_view{
+.cart_pic_view {
   width: 100%;
   height: 100%;
   // margin: 0.2rem auto 0;
-
 }
 .nav_pic {
   width: 100%;
@@ -306,9 +316,9 @@ export default {
   z-index: 3;
   background: #fff;
 }
-.nav_pic .tabBar{
- width:24%;
- text-align: center;
+.nav_pic .tabBar {
+  width: 24%;
+  text-align: center;
 }
 .nav_pic span a {
   color: #000;
