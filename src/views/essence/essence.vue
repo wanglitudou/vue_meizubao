@@ -308,7 +308,7 @@
   letter-spacing: 0;
   &:nth-child(1) {
     font-size: px2rem(16px);
-    margin-top: px2rem(10px);
+    margin-top: px2rem(10px); 
   }
   margin-top: px2rem(15px);
   // / / line-height: px2rem

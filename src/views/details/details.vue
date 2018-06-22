@@ -3,6 +3,8 @@
   <div class="detail-container">
     <div class="list_list">
       <div class="detailsBanner">
+        
+
 
         <mt-swipe :auto="4000">
           <mt-swipe-item v-for="(item,index) in imgLists"
@@ -11,6 +13,7 @@
                  alt="">
           </mt-swipe-item>
         </mt-swipe>
+
 
       </div>
       <div class="ban_cent">
