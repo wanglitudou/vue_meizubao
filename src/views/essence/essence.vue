@@ -88,13 +88,13 @@
 
     <orderFooter :text="'立即下单'" :count="totalPrice" :nextFun="jumpToConfirm"></orderFooter>
 
-    <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
+    <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :type="type" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
 
   </div>
 </template>
 <script>
   import orderFooter from '../../components/orderFooter.vue'
-  import sign from '../../components/sign.vue'
+  import sign from '../../components/canvas.vue'
   import { Toast } from 'mint-ui';
 
 
@@ -111,6 +111,7 @@
         disableDate: [],
         agreementId:null,
         showSignTag:false,
+        type:2,
       };
     },
 

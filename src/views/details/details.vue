@@ -7,13 +7,17 @@
                alt="">
       </div> -->
       <div class="detailsBanner">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item in data.images">
-              <img :src="item" alt="">
-            </div>
-          </div>
-        </div>
+        <mt-swipe :auto="4000">
+
+          <mt-swipe-item v-for="(item,index) in data.images"
+                         :key="index">
+
+            <img :src="item"
+                 alt="">
+
+          </mt-swipe-item>
+        </mt-swipe>
+        
       </div>
       <div class="ban_cent">
         <p class="name_cent">
@@ -76,15 +80,16 @@
       <orderFooter :text="'立即下单'" :count="(month*data.firstrent + (data.deposit-0)).toFixed(2)" :nextFun="jumpToConfirm"></orderFooter>
 
 
-      <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
-
+      <!-- <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign> -->
+      <sign id="componentSign" v-if="showSignTag" :type="type" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
     </div>
   </div>
 </template>
 <script>
   import orderFooter from '../../components/orderFooter.vue'
-  import sign from '../../components/sign.vue'
-  import { Toast } from 'mint-ui';
+  // import sign from '../../components/sign.vue'
+  import sign from '../../components/canvas.vue';
+  import { Toast,Swipe, SwipeItem } from 'mint-ui';
 
 
   export default {
@@ -93,6 +98,7 @@
       return {
         data: [],
         month: 1,
+        type:1,
         agreementId:null,
         showSignTag:false,
       };
@@ -340,9 +346,13 @@
   height: px2rem(250px);
   margin: 0.2rem auto 0;
 }
-.detailsBanner img {
+// .detailsBanner .swiper-container {
+//   width: 100%;
+//   height: px2rem(250px);
+// }
+.detailsBanner  img {
   width: 100%;
-  // height: 100%;
+  height: 100%;
 }
 .ban_cent {
   width: 94.7%;
