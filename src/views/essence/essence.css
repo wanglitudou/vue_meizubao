@@ -10,6 +10,13 @@
   overflow-y: scroll;
   padding-bottom: 1.5rem;
 }
+.met_cent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 .cent_list .ban_two {
   width: 7.068rem;
   height: 4.44rem;
@@ -45,7 +52,7 @@
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
-  padding-bottom:8px;
+  padding-bottom: 8px;
 }
 .metting p {
   margin-left: 5px;

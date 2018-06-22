@@ -4,7 +4,15 @@
       <div class="con_pro">
 
         <div class="cooperationBanner">
-          <div class="swiper-container">
+          <mt-swipe :auto="4000">
+            <mt-swipe-item v-for="(item,index) in imgLists"
+                           :key="index">
+              <img :src="item"
+                   alt="">
+            </mt-swipe-item>
+          </mt-swipe>
+
+          <!-- <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide"
                    v-for="item in data.images">
@@ -12,7 +20,7 @@
                      alt="">
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="conpro_name">
@@ -97,10 +105,11 @@
 import orderFooter from "../../components/orderFooter.vue";
 import sign from "../../components/sign.vue";
 import { Toast } from "mint-ui";
-
+import { Swipe, SwipeItem } from "mint-ui";
 export default {
   data() {
     return {
+      imgLists: [], //banner
       data: [],
       agreementId: null,
       showSignTag: false
@@ -130,9 +139,11 @@ export default {
           params: { id: this.$route.query.pid }
         })
         .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
+          console.log(res.data.status_code == "1001", "fff");
+          if (res.data.status_code == "1001") {
             this.data = res.data.data;
+            this.imgLists = res.data.data.images;
+            console.log(imgLists, "hhhh");
           }
         })
         .catch(() => {
@@ -210,16 +221,14 @@ export default {
   margin: 0.2rem auto 0;
 }
 .cooperationBanner {
-  width: 100%;
   height: px2rem(250px);
 }
-.swiper-container {
+.cooperationBanner img {
+  width: 94%;
+  height: px2rem(250px);
+}
+.cooperationBanner img {
   width: 100%;
-  height: 100%;
-  img {
-    width: 100%;
-    height: px2rem(250px);
-  }
 }
 .conpro_img img {
   width: 100%;

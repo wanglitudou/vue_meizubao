@@ -23,13 +23,11 @@ module.exports = {
     // Various Dev Server settings
     // host: "localhost", // can be overwritten by process.env.HOST
 
-<<<<<<< HEAD
-    host: "192.168.3.114", // can be overwritten by process.env.HOST
+    // host: "192.168.3.114", // can be overwritten by process.env.HOST
     // host: "localhost", // can be overwritten by process.env.HOST
-=======
     // host: "192.168.1.65", // can be overwritten by process.env.HOST
     host: "localhost", // can be overwritten by process.env.HOST
->>>>>>> 6a3ff07b26837019f6450f6e8ca2df123885287f
+
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

@@ -42,8 +42,9 @@
 
           </mt-checklist> -->
 
-          <el-checkbox v-model="checked"
-                       class="give_icon"></el-checkbox>
+          <!-- <el-checkbox v-model="checked"
+                       class="give_icon"></el-checkbox> -->
+
         </span>
         <span>设为默认地址</span>
       </p>
@@ -226,7 +227,7 @@ export default {
 };
 </script>
 <style>
-.el-checkbox__inner {
+/* .el-checkbox__inner {
   background: #fff;
 }
 .el-checkbox__input.is-checked .el-checkbox__inner,
@@ -238,17 +239,11 @@ export default {
   border-radius: 50%;
 }
 .mint-checklist-label {
-}
-.mint-checklist-label {
   display: inline-block;
-  /* margin-left: -10px; */
-}
-.mint-checkbox-core {
-  /* background: #000; */
 }
 .mint-checkbox-input:checked + .mint-checkbox-core {
   background: #fd82d9;
-}
+} */
 </style>
 
 <style lang="scss" scoped>

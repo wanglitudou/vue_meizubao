@@ -2,8 +2,15 @@
   <div class="match-container">
     <div class="list_bans">
       <div class="matchBanner">
-        <img :src="data.images && data.images[0]"
-             alt="">
+        <mt-swipe :auto="4000">
+          <mt-swipe-item v-for="(item,index) in imgLists"
+                         :key="index">
+            <img :src="item"
+                 alt="">
+          </mt-swipe-item>
+        </mt-swipe>
+        <!-- <img :src="data.images && data.images[0]"
+             alt=""> -->
       </div>
       <div class="pro_name">
         <span class="pro_names">{{data.name}}</span>
@@ -61,9 +68,11 @@
 </template>
 <script>
 import orderFooter from "../../components/orderFooter.vue";
+import { Swipe, SwipeItem } from "mint-ui";
 export default {
   data() {
     return {
+      imgLists: [], //banner
       data: [],
       number: 1
     };
@@ -140,9 +149,11 @@ export default {
           params: { id: this.$route.query.pid }
         })
         .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
+          console.log(res.data.status_code == "1001", "ffff");
+          if (res.data.status_code == "1001") {
             this.data = res.data.data;
+            this.imgLists = res.data.data.images;
+            console.log(imgLists, "hhhh");
           }
         })
         .catch(() => {
@@ -172,16 +183,16 @@ export default {
 }
 
 .matchBanner {
-  width: 100%;
-  height: 5rem;
-  /* margin: 0.2rem  0; */
+  height: px2rem(250px);
 }
 
 .matchBanner img {
-  width: 100%;
-  height: 100%;
+  width: 94%;
+  height: px2rem(250px);
 }
-
+.matchBanner img {
+  width: 100%;
+}
 .pro_name {
   height: px2rem(47px);
   line-height: px2rem(47px);

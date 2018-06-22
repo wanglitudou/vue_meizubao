@@ -7,10 +7,12 @@
 
           <mt-swipe-item v-for="(item,index) in url"
                          :key="index">
-
-            <img :src="item.images"
-                 alt="">
-
+            <a target='_blank'
+               :href='item.url'>
+              <img :src="item.images"
+                   alt="">
+            </a>
+            <!-- <a href=""></a> -->
           </mt-swipe-item>
         </mt-swipe>
 
@@ -25,7 +27,6 @@
                alt="111">
         </div>
       </div>
-
       <div class="list_btn">
         <!-- title -->
         <div class="hotrent">
@@ -148,11 +149,10 @@
           <span>查看更多></span>
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
 <script>
 import { Indicator } from "mint-ui";
 import { Swipe, SwipeItem } from "mint-ui";
@@ -190,9 +190,96 @@ export default {
     that.getProduct(); //配套产品
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
+    //微信分享
+    // that.wxshare();
   },
   mounted: function() {},
   methods: {
+    //微信分享
+    // wxshare() {
+    //   var url = "http://mzbao.weiyingjia.org/api/meizubao/wxSign";
+    //   var dataList = {};
+
+    //   // 微信分享调用
+    //   $(function() {
+    //     (function() {
+    //       var urlLink = window.location.href;
+
+    //       $.ajax({
+    //         type: "get",
+    //         url: url,
+    //         data: {
+    //           url: urlLink
+    //         },
+    //         async: false,
+    //         dataType: "json",
+    //         success: function(res) {
+    //           console.log(res);
+    //           if (res.code == 1001) {
+    //             dataList.appId = res.data.data.appId;
+    //             dataList.nonceStr = res.data.data.nonceStr;
+    //             dataList.timestamp = res.data.data.timestamp;
+    //             dataList.url = res.data.data.url;
+    //             dataList.signature = res.data.data.signature;
+    //             dataList.rawString = res.data.data.rawString;
+    //           }
+    //         },
+    //         error: function() {}
+    //       });
+
+    //       var title = "meizubao",
+    //         desc = "meizubaomeizubaomeizubaomeizubao";
+    //       // imgUrl = url + "/assets/images/tianjia.png";
+
+    //       wx.config({
+    //         debug: false, //调式模式，设置为true后会直接在网页上弹出调试信息，用于排查问题
+    //         appId: dataList.appId,
+    //         timestamp: dataList.timestamp,
+    //         nonceStr: dataList.nonceStr,
+    //         signature: dataList.signature,
+    //         jsApiList: [
+    //           //需要使用的网页服务接口
+    //           "checkJsApi", //判断当前客户端版本是否支持指定JS接口
+    //           "onMenuShareTimeline", //分享给好友
+    //           "onMenuShareAppMessage" //分享到朋友圈
+    //         ]
+    //       });
+    //       wx.ready(function() {
+    //         // 分享朋友圈
+    //         wx.onMenuShareTimeline({
+    //           title: title, // 分享标题
+    //           desc: desc, // 分享描述
+    //           link: url, // 分享链接
+    //           imgUrl: imgUrl, // 分享图标
+    //           type: "link", // 分享类型,music、video或link，不填默认为link
+    //           dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+    //           success: function(data) {
+    //             layer.msg("分享成功");
+    //           },
+    //           cancel: function() {
+    //             layer.msg("已取消分享");
+    //           }
+    //         });
+    //         // 分享朋友
+    //         wx.onMenuShareAppMessage({
+    //           title: title, // 分享标题
+    //           desc: desc, // 分享描述
+    //           link: url, // 分享链接
+    //           imgUrl: imgUrl, // 分享图标
+    //           type: "link", // 分享类型,music、video或link，不填默认为link
+    //           dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+    //           success: function(data) {
+    //             layer.msg("分享成功");
+    //           },
+    //           cancel: function() {
+    //             layer.msg("已取消分享");
+    //           }
+    //         });
+    //       });
+    //     })();
+    //   });
+    // },
+
     //获取地址栏参数
     GetQueryString(name) {
       var reg = new RegExp("(^|&?)" + name + "=([^&]*)(&|$)");
@@ -207,7 +294,7 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/banners", {})
         .then(res => {
-          console.log(res);
+          console.log(res, "23");
           if (res.data.status_code == 1001) {
             that.url = res.data.data;
           }

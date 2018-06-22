@@ -2,23 +2,18 @@
 <template>
   <div class="detail-container">
     <div class="list_list">
-      <!-- <div class="banner">
-          <img src="../../assets/images/icon1.jpg"
-               alt="">
-      </div> -->
       <div class="detailsBanner">
+        
+
 
         <mt-swipe :auto="4000">
-
-          <mt-swipe-item v-for="(item,index) in data.images"
+          <mt-swipe-item v-for="(item,index) in imgLists"
                          :key="index">
-
             <img :src="item"
                  alt="">
-
           </mt-swipe-item>
         </mt-swipe>
-        
+
 
       </div>
       <div class="ban_cent">
@@ -74,9 +69,10 @@
           <!--</span>-->
         </div>
         <p class="name_credit">
-          <span class="sesame">验证芝麻信用</span>
           <span class="sign"
                 @click="showSign">网签租赁协议</span>
+          <span class="sesame">验证芝麻信用</span>
+
         </p>
       </div>
 
@@ -84,26 +80,27 @@
                    :count="(month*data.firstrent + (data.deposit-0)).toFixed(2)"
                    :nextFun="jumpToConfirm"></orderFooter>
 
-
-
       <!-- <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign> -->
-      <sign id="componentSign" v-if="showSignTag" :type="type" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign>
+      <sign id="componentSign"
+            v-if="showSignTag"
+            :type="type"
+            :src="data.agreement"
+            :gid="data.id"
+            :saveAgreementId="saveAgreementId"></sign>
 
     </div>
   </div>
 </template>
 <script>
-
   import orderFooter from '../../components/orderFooter.vue'
   // import sign from '../../components/sign.vue'
   import sign from '../../components/canvas.vue';
   import { Toast,Swipe, SwipeItem } from 'mint-ui';
 
-
-
 export default {
   data() {
     return {
+      imgLists: [], //banner
       data: [],
       month: 1,
         type:1,
@@ -303,10 +300,12 @@ export default {
           params: { id: this.$route.query.pid }
         })
         .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
+          console.log(res.data.status_code == "1001", "ffff");
+          if (res.data.status_code == "1001") {
             this.data = res.data.data;
             this.month = this.data.lease_time;
+            this.imgLists = res.data.data.images;
+            console.log(imgLists, "hhhh");
           }
         })
         .catch(() => {
@@ -356,15 +355,19 @@ export default {
   height: auto;
 }
 .detailsBanner {
-  width: 94.6%;
+  // width: 94.6%;
   height: px2rem(250px);
-  margin: 0.2rem auto 0;
+  // margin: 0.2rem auto 0;
+}
+.detailsBanner img {
+  width: 94%;
+  height: px2rem(250px);
 }
 // .detailsBanner .swiper-container {
 //   width: 100%;
 //   height: px2rem(250px);
 // }
-.detailsBanner  img {
+.detailsBanner img {
   width: 100%;
   height: 100%;
 }
@@ -418,10 +421,17 @@ export default {
 }
 .name_words {
   padding: 0.1rem 0.2rem;
+  height: 2rem;
   font-size: 13px;
   color: #666666;
-  letter-spacing: 0;
 }
+// .name_words span {
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   display: -webkit-box;
+//   -webkit-line-clamp: 3;
+//   -webkit-box-orient: vertical;
+// }
 .name_cate {
   padding: 0rem 0.2rem;
   display: flex;
@@ -477,7 +487,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // padding: 0 50px;
+  padding: 0 50px;
 }
 .name_credit .sesame {
   font-size: px2rem(14px);
