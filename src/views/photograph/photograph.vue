@@ -15,7 +15,6 @@
         <div v-show="num==0">
           <div class="cent_cents">
             <div class="pic_center">
-
               <div class="pic_name"
                    v-for="(item,index) in imageData ">
                 <div class="picleft_img"
@@ -44,7 +43,6 @@
           <div class="cent_cents">
             <div class="pic_center">
               <!--图片切换时展示的内容 左边-->
-
               <div class="pic_name"
                    v-for="(item,index) in videoData">
                 <div class="picleft_img"

@@ -7,8 +7,7 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.name"
-                   placeholder="请输入姓名"
-                   @blur="provingname()">
+                   placeholder="请输入姓名">
           </span>
         </p>
       </div>
@@ -18,8 +17,7 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.age"
-                   placeholder="请输入年龄"
-                   @blur="provingage()">
+                   placeholder="请输入年龄">
           </span>
         </p>
       </div>
@@ -29,7 +27,6 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.birthdate"
-                   @blur="provingbirthday()"
                    placeholder="请输入生日">
           </span>
         </p>
@@ -40,7 +37,6 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.phone"
-                   @blur="remind()"
                    placeholder="请输入电话">
           </span>
         </p>
@@ -51,7 +47,6 @@
           <span class="id_txt">
             <input type="text"
                    v-model="data.mailbox"
-                   @blur="provingmailbox()"
                    placeholder="请输入邮箱">
           </span>
         </p>
@@ -62,7 +57,6 @@
           <span class="id_txt id_ple">
             <input type="text"
                    v-model="data.shop"
-                   @blur="provingshop()"
                    placeholder="请输入店院名称">
           </span>
         </p>
@@ -73,7 +67,6 @@
           <span class="id_txt id_ple">
             <input type="text"
                    v-model="data.address"
-                   @blur="provingaddress()"
                    placeholder="请输入店院地址">
           </span>
         </p>
@@ -130,7 +123,6 @@
               @click="authname()">下一步</span>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -231,6 +223,44 @@ export default {
   },
   methods: {
     authname() {
+      let that = this;
+      if (!/^(?:[1-9]?\d|100)$/.test(that.data.age)) {
+        Toast("请输入正确的格式年龄");
+        return false;
+      }
+      //验证姓名
+      if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.data.name)) {
+        Toast("请输入正确的格式姓名");
+        return false;
+      }
+      if (
+        !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
+          that.data.birthdate
+        )
+      ) {
+        Toast("请输入正确的格式生日");
+        return false;
+      }
+      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.data.phone)) {
+        Toast("请输入正确的手机号格式");
+        return false;
+      }
+      if (
+        !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(
+          that.data.mailbox
+        )
+      ) {
+        Toast("请输入正确的格式邮箱");
+        return false;
+      }
+      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.shop)) {
+        Toast("请输入正确的格式店铺");
+        return false;
+      }
+      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.address)) {
+        Toast("请输入正确的格式地址");
+        return false;
+      }
       this.$router.push({
         path: "/authname",
         query: {
@@ -245,73 +275,74 @@ export default {
           manage_area: this.data.manage_area,
           id_card: this.data.id_card
         }
-      }); //调节其他页面时的跳转(完善信息页面)
+      });
+      //调节其他页面时的跳转(完善信息页面)
     },
     //验证姓名
-    provingname() {
-      let that = this;
-      if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.data.name)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
-    },
+    // provingname() {
+    //   let that = this;
+    //   if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.data.name)) {
+    //     Toast("请输入正确的格式");
+    //     return false;
+    //   }
+    // },
     //验证年龄
-    provingage() {
-      let that = this;
-      if (!/^(?:[1-9]?\d|100)$/.test(that.data.age)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
-    },
+    // provingage() {
+    //   let that = this;
+    //   if (!/^(?:[1-9]?\d|100)$/.test(that.data.age)) {
+    //     Toast("请输入正确的格式");
+    //     return false;
+    //   }
+    // },
     //验证生日
-    provingbirthday() {
-      // let that = this;
-      // if (
-      //   !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
-      //     that.data.birthdate
-      //   )
-      // ) {
-      //   Toast("请输入正确的格式");
-      //   return false;
-      // }
-    },
+    // provingbirthday() {
+    // let that = this;
+    // if (
+    //   !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
+    //     that.data.birthdate
+    //   )
+    // ) {
+    //   Toast("请输入正确的格式");
+    //   return false;
+    // }
+    // },
     //验证电话号码
-    remind() {
-      let that = this;
-      if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.data.phone)) {
-        Toast("请输入正确的手机号格式");
-        return false;
-      }
-    },
+    // remind() {
+    //   let that = this;
+    //   if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.data.phone)) {
+    //     Toast("请输入正确的手机号格式");
+    //     return false;
+    //   }
+    // },
 
     //验证邮箱
-    provingmailbox() {
-      let that = this;
-      if (
-        !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(
-          that.data.mailbox
-        )
-      ) {
-        Toast("请输入正确的格式");
-        return false;
-      }
-    },
+    // provingmailbox() {
+    //   let that = this;
+    //   if (
+    //     !/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(
+    //       that.data.mailbox
+    //     )
+    //   ) {
+    //     Toast("请输入正确的格式");
+    //     return false;
+    //   }
+    // },
     //验证店铺
-    provingshop() {
-      let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.shop)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
-    },
+    // provingshop() {
+    //   let that = this;
+    //   if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.shop)) {
+    //     Toast("请输入正确的格式");
+    //     return false;
+    //   }
+    // },
     //验证地址
-    provingaddress() {
-      let that = this;
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.address)) {
-        Toast("请输入正确的格式");
-        return false;
-      }
-    },
+    // provingaddress() {
+    //   let that = this;
+    //   if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.address)) {
+    //     Toast("请输入正确的格式");
+    //     return false;
+    //   }
+    // },
 
     next() {
       console.log(this.shop);

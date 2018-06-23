@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       list: [],
-      selectedNumber: 0
+      selectedNumber: 1
       // radio2: ""
     };
   },
@@ -67,7 +67,11 @@ export default {
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-            Toast("设置默认地址成功");
+            // Toast({
+            //   message: "设置默认地址成功",
+            //   position: "bottom",
+            //   duration: 1000
+            // });
           }
         })
         .catch(() => {
@@ -85,7 +89,9 @@ export default {
       MessageBox({
         title: "提示",
         message: "确定执行操作吗?",
+        position: "bottom",
         showCancelButton: true,
+
         callback: function(action) {
           console.log(action);
           if (action == "confirm") {
@@ -121,7 +127,6 @@ export default {
         .then(res => {
           console.log(res);
           that.list = res.data.data;
-
           for (var i = 0; i < that.list.length; i++) {
             if (that.list[i].is_default_address) {
               that.selectedNumber = that.list[i].id;
@@ -148,7 +153,6 @@ export default {
           address: this.address
         }
       });
-
       // this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
     }
   }
@@ -162,17 +166,21 @@ export default {
   height: calc(100% - 0.88rem);
   background: #fff;
 }
+.mint-toast-text {
+  background: red;
+}
+.mint-toast is-placebottom {
+  color: red;
+}
 .icon_edit_cont img {
   height: px2rem(16px);
 }
 .icon_img_delect img {
   height: px2rem(16px);
 }
-
 .list_cont {
   width: 94.7%;
   height: auto;
-  /* margin: 0.2rem auto 0; */
   margin-left: 2.7%;
 }
 .list_one {
@@ -237,7 +245,6 @@ export default {
   line-height: px2rem(48px);
   background-image: linear-gradient(-130deg, #fd82d9 0%, #fd4689 100%);
   box-shadow: 0 0 13px 0 #eeeeee;
-  // margin: 0.2rem auto 0;
   text-align: center;
   position: fixed;
   width: 100%;

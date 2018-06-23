@@ -35,16 +35,8 @@
       </p>
       <p class="tacit_address">
         <span>
-          <!-- <mt-checklist align="left"
-                        v-model="value"
-                        class="give_icon"
-                        :options="options">
-
-          </mt-checklist> -->
-
-          <!-- <el-checkbox v-model="checked"
-                       class="give_icon"></el-checkbox> -->
-
+          <el-checkbox v-model="checked"
+                       class="give_icon"></el-checkbox>
         </span>
         <span>设为默认地址</span>
       </p>
@@ -71,7 +63,6 @@ export default {
   data() {
     return {
       checked: true,
-      // value: [],
       show1: false,
       pickData3: {
         columns: 3,
@@ -86,12 +77,6 @@ export default {
       address: "",
       consignee: "",
       telephone: ""
-      // options: [
-      //   {
-      //     label: " 设为默认地址",
-      //     value: true
-      //   }
-      // ]
     };
   },
   computed: {
@@ -112,6 +97,7 @@ export default {
           if (res.data.status_code == 1001) {
             // console.log(res.data.data);
             console.log("666");
+
             that.consignee = res.data.data.user_name;
             that.telephone = res.data.data.mobile;
             that.address = res.data.data.address;
@@ -163,6 +149,7 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             Toast(res.data.message);
+
             // Toast("设置默认地址成功");
             setTimeout(() => {
               that.$router.push({
@@ -173,7 +160,6 @@ export default {
                   address: that.address
                 }
               });
-
               // that.$router.push({ name: "address" });
             }, 500);
           }
@@ -227,7 +213,7 @@ export default {
 };
 </script>
 <style>
-/* .el-checkbox__inner {
+.el-checkbox__inner {
   background: #fff;
 }
 .el-checkbox__input.is-checked .el-checkbox__inner,
@@ -243,7 +229,7 @@ export default {
 }
 .mint-checkbox-input:checked + .mint-checkbox-core {
   background: #fd82d9;
-} */
+}
 </style>
 
 <style lang="scss" scoped>
