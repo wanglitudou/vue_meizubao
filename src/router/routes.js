@@ -34,8 +34,8 @@ import pageindustry from "../views/pageindustry/pageindustry.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
 import mediaDetails from "../views/photograph/mediaDetails.vue";
 import search from "../views/search/search.vue";
-import dataBase from '../views/dataBase/index.vue';
-import qian from '../views/qian/qian.vue'
+import dataBase from "../views/dataBase/index.vue";
+import qian from "../views/qian/qian.vue";
 let routes = [
   {
     path: "/",
@@ -102,13 +102,16 @@ let routes = [
   {
     name: "detail",
     path: "/detail",
+    meta: {
+      title: "热租仪器"
+    },
     component: detail
   },
-  { 
-    name:'search',
-    path:'/search',
-    component:search
-  }, 
+  {
+    name: "search",
+    path: "/search",
+    component: search
+  },
   {
     name: "details",
     path: "/details",
@@ -151,16 +154,25 @@ let routes = [
   {
     name: "looksee",
     path: "/looksee",
+    meta: {
+      title: "美业精英"
+    },
     component: looksee
   },
   {
     name: "seemore",
     path: "/seemore",
+    meta: {
+      title: "配套产品"
+    },
     component: seemore
   },
   {
     name: "clickpay",
     path: "/clickpay",
+    meta: {
+      title: "合作项目"
+    },
     component: clickpay
   },
   {
@@ -259,7 +271,7 @@ let routes = [
     name: "qian",
     path: "/qian",
     component: qian
-  },
+  }
   // {
   //   name: "mine",
   //   path: "mine",
