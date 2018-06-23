@@ -477,15 +477,9 @@ export default {
 
 .homecontainer {
   height: 100%;
-
   overflow: auto;
   padding-bottom: 50px;
-  // display: flex;
-  // flex-direction: column;
   background: #fff;
-}
-.slider-box {
-  // padding-bottom: 50px;
 }
 .scrolls {
   width: 100%;

@@ -426,15 +426,12 @@ export default {
 .item {
   width: 46.1%;
   height: auto;
-  // padding: 1%;
-  /* margin:3% */
   margin: 0.6% 2%;
 }
 
 .boxs {
   width: 100%;
   height: 100%;
-  // margin: 2%;
 }
 .boxs img {
   width: 100%;
@@ -443,7 +440,6 @@ export default {
 .sortMenu {
   z-index: 1;
   width: 100%;
-  /* margin-top: px2rem(48px); */
   position: fixed;
   background-color: #ffffff;
   box-shadow: 0 2px 4px 0 #ebeced;
@@ -460,7 +456,6 @@ export default {
   justify-content: flex-start;
   animation: moveTo 0.5s ease both;
 }
-
 .noData {
   width: 100%;
   height: 100%;
@@ -493,8 +488,6 @@ export default {
   font-size: 15px;
   color: #000000;
   padding: 0 0.3rem;
-}
-.name .prace {
 }
 .date {
   padding: 0 0.3rem;
