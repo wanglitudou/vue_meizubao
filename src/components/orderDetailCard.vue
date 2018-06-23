@@ -4,7 +4,7 @@
 <!-- 技师 -->
   <div class="card" v-if='detail.type == 2'>
     <div class="head">
-      <img :src="detail.images" alt="">
+      <img :src="detail.image" alt="">
     </div>
     <div class="right-info">
       <p class="big">{{detail.goods_name}}</p>
@@ -22,7 +22,7 @@
 <!-- 仪器 -->
   <div class="card" v-if='detail.type ==1 '>  
     <div class="head">
-      <img :src="detail.images" alt="">
+      <img :src="detail.image" alt="">
     </div>
     <div class="right-info">
       <p class="big">{{detail.goods_name}}</p>
