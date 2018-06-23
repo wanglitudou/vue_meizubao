@@ -183,7 +183,7 @@ export default {
 .containers {
   width: 100%;
   /* height: calc(100% - 0.81rem); */
-  background: #dec;
+  background: #fff;
 }
 
 .list_box {
