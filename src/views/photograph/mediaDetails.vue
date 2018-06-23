@@ -56,7 +56,7 @@ export default {
         sources: [
           {
             type: "video/mp4",
-            src: ''
+            src: ""
           }
         ],
         poster: ""
@@ -85,9 +85,9 @@ export default {
         duration: 4000
       });
     });
-  if($route.query.type == 'video'){
-     this.playerOptions.sources[0].src =$router.query.images
-  }
+    if ($route.query.type == "video") {
+      this.playerOptions.sources[0].src = $router.query.images;
+    }
   },
   methods: {
     baiducloud() {

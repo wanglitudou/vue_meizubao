@@ -3,8 +3,6 @@
   <div class="detail-container">
     <div class="list_list">
       <div class="detailsBanner">
-        
-
 
         <mt-swipe :auto="4000">
           <mt-swipe-item v-for="(item,index) in imgLists"
@@ -13,7 +11,6 @@
                  alt="">
           </mt-swipe-item>
         </mt-swipe>
-
 
       </div>
       <div class="ban_cent">
@@ -44,9 +41,13 @@
           <span>配合产品 ：</span>
           <span>{{data.match_product}}</span>
         </p>
-
       </div>
       <div class="data_name">
+        <!-- <div>666</div> -->
+        <p class="cent_time">
+          <span class="sesame">验证芝麻信用</span>
+        </p>
+        <!-- <div class="cent_time">666</div> -->
         <div class="begin_rent">
           <span class="timeLong">选择你租赁的时长(月):</span>
           <div class="spinner">
@@ -71,7 +72,6 @@
         <p class="name_credit">
           <span class="sign"
                 @click="showSign">网签租赁协议</span>
-          <span class="sesame">验证芝麻信用</span>
 
         </p>
       </div>
@@ -92,10 +92,10 @@
   </div>
 </template>
 <script>
-  import orderFooter from '../../components/orderFooter.vue'
-  // import sign from '../../components/sign.vue'
-  import sign from '../../components/canvas.vue';
-  import { Toast,Swipe, SwipeItem } from 'mint-ui';
+import orderFooter from "../../components/orderFooter.vue";
+// import sign from '../../components/sign.vue'
+import sign from "../../components/canvas.vue";
+import { Toast, Swipe, SwipeItem } from "mint-ui";
 
 export default {
   data() {
@@ -103,7 +103,7 @@ export default {
       imgLists: [], //banner
       data: [],
       month: 1,
-        type:1,
+      type: 1,
       agreementId: null,
       showSignTag: false
     };
@@ -119,18 +119,13 @@ export default {
         return;
       }
 
-
       // 是否是搓浏览器
       // 自己在这里添加判断和筛选
       var isSBBrowser;
 
-
- 
-
       var data = {
         posY: 0,
         maxscroll: 0
-
       };
 
       // 事件处理
@@ -316,12 +311,8 @@ export default {
 };
 </script>
 <style >
-/* .swiper-container {
-  height: 5rem;
-} */
 </style>
 <style lang="scss" scoped>
-// @import "./details.css";
 @import "../../styles/helper.scss";
 #datePicker
   .c-header
@@ -341,8 +332,17 @@ export default {
   font-size: 0.28rem;
 }
 #datePicker .c-day-background {
-  /*width:.7rem !important;*/
   height: 0.7rem !important;
+}
+.cent_time {
+  width: 94.7%;
+  height: 1rem;
+  line-height: 1rem;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+}
+.mar_centime {
+  margin-left: px2rem(10px);
+  font-size: px2rem(14px);
 }
 .detail-container {
   width: 100%;
@@ -355,18 +355,12 @@ export default {
   height: auto;
 }
 .detailsBanner {
-  // width: 94.6%;
   height: px2rem(250px);
-  // margin: 0.2rem auto 0;
 }
 .detailsBanner img {
   width: 94%;
   height: px2rem(250px);
 }
-// .detailsBanner .swiper-container {
-//   width: 100%;
-//   height: px2rem(250px);
-// }
 .detailsBanner img {
   width: 100%;
   height: 100%;
@@ -421,17 +415,9 @@ export default {
 }
 .name_words {
   padding: 0.1rem 0.2rem;
-  height: 2rem;
   font-size: 13px;
   color: #666666;
 }
-// .name_words span {
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   display: -webkit-box;
-//   -webkit-line-clamp: 3;
-//   -webkit-box-orient: vertical;
-// }
 .name_cate {
   padding: 0rem 0.2rem;
   display: flex;
@@ -456,11 +442,10 @@ export default {
   letter-spacing: 0;
 }
 .name_pro span {
-  margin-left: 10px;
+  padding: 0 20px;
 }
 .data_name {
   width: 94.7%;
-  height: px2rem(102px);
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
@@ -479,7 +464,6 @@ export default {
     font-size: px2rem(14px);
   }
 }
-
 .name_credit {
   width: 100%;
   height: px2rem(55px);
@@ -487,12 +471,13 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 20px;
 }
-.name_credit .sesame {
+.sesame {
   font-size: px2rem(14px);
   color: #00a5ff;
   letter-spacing: 0;
+  padding: 0 20px;
 }
 .sign {
   font-size: 14px;
@@ -542,7 +527,6 @@ export default {
 .disable {
   background-color: #eee;
 }
-
 .increase {
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;

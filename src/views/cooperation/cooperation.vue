@@ -209,8 +209,7 @@ export default {
   width: 94.7%;
   margin-left: 2.6%;
   height: auto;
-  overflow-y: scroll;
-  /* margin: 0.2rem auto 0; */
+  margin: 0.2rem auto 0;
 }
 .con_pro {
   width: 100%;
@@ -240,10 +239,10 @@ export default {
   line-height: px2rem(48px);
 }
 .conname_name {
-  font-size: 16px;
+  font-size: 14px;
   color: #000000;
   letter-spacing: 0;
-  margin-left: 0.2rem;
+  margin-left: px2rem(10px);
 }
 .conmoney {
   font-size: 18px;
@@ -253,9 +252,9 @@ export default {
 }
 .cent_cate {
   width: 100%;
-
+  padding: 0 px2rem(10px);
   margin: 0.2rem auto 0;
-  margin-bottom: 0.5rem;
+  // margin-bottom: 0.5rem;
 }
 .pro_cate {
   width: 100%;
@@ -267,7 +266,6 @@ export default {
   letter-spacing: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 15px;
 }
 .pro_intro {
   width: 100%;
@@ -276,13 +274,15 @@ export default {
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;
+  // padding: 0 10px;
 }
 .pro_introduce {
-  margin: 0.08rem;
+  margin-left: px2rem(10px);
+  font-size: 14px;
 }
 .pro_int {
   padding: 0 10px;
-  font-size: 14px;
+  font-size: 13px;
   color: #666666;
   letter-spacing: 0;
 }
@@ -321,7 +321,7 @@ export default {
   width: 100%;
   height: 0.8rem;
   line-height: 0.8rem;
-  padding: 0 15px;
+  padding: 0 10px;
   font-size: 14px;
   color: #666666;
   letter-spacing: 0;

@@ -1,48 +1,63 @@
 <template>
-    <div class="containers">
-        <div class="topSearch">
-            <search @search="search"></search>
-        </div>
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" style="margin-top:0.88rem" v-if="isNodata">
-            <div v-masonry-tile class="item" v-for="(item, index) in screenscreening" @click="details(item.id)">
-                <div class="listbox_lef">
-                    <div class="cent_left">
-                        <div class="list_img">
-                            <img :src="item.images
-                        " alt="">
-                        </div>
-                        <div class="list_oper">
-                            <p class="oper_room">
-                                <span>{{item.name}}</span>
-                            </p>
-                            <p class="content">{{item.credit}}</p>
-                            <p class="every_pro">
-                                <span class="data_pro">
-                                    <span class="data_mon">￥{{item.price}}</span>/日</span>
-                            </p>
-                            <p class="cli_app">
-                                <span class="cli_ment">点击付费</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 点击加载更多 -->
-            <div class="item loadMore" ref="load">
-                <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
-                <span v-else>
-                    <span @click="loadMore" v-if="loading">加载更多</span>
-                    <span v-else>数据全部加载完成</span>
-                </span>
-            </div>
-        </div>
-      <!-- <div class="dsad" @click="toQian">去签协议</div> -->
-
-        <!-- 暂无数据 -->
-        <div class="nodata" v-if="showNodata">
-            暂无数据
-        </div>
+  <div class="containers">
+    <div class="topSearch">
+      <search @search="search"></search>
     </div>
+    <div v-masonry
+         transition-duration="0.3s"
+         ref="masonry"
+         item-selector=".item"
+         column-width=".item"
+         style="margin-top:0.88rem"
+         v-if="isNodata">
+      <div v-masonry-tile
+           class="item"
+           v-for="(item, index) in screenscreening"
+           @click="details(item.id)">
+        <div class="listbox_lef">
+          <div class="cent_left">
+            <div class="list_img">
+              <img :src="item.images
+                        "
+                   alt="">
+            </div>
+            <div class="list_oper">
+              <p class="oper_room">
+                <span>{{item.name}}</span>
+              </p>
+              <p class="content">{{item.credit}}</p>
+              <p class="every_pro">
+                <span class="data_pro">
+                  <span class="data_mon">￥{{item.price}}</span>/日</span>
+              </p>
+              <p class="cli_app">
+                <span class="cli_ment">点击预约</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 点击加载更多 -->
+      <div class="item loadMore"
+           ref="load">
+        <mt-spinner type="fading-circle"
+                    color="#FD4689 "
+                    v-if="topStatus"></mt-spinner>
+        <span v-else>
+          <span @click="loadMore"
+                v-if="loading">加载更多</span>
+          <span v-else>数据全部加载完成</span>
+        </span>
+      </div>
+    </div>
+    <!-- <div class="dsad" @click="toQian">去签协议</div> -->
+
+    <!-- 暂无数据 -->
+    <div class="nodata"
+         v-if="showNodata">
+      暂无数据
+    </div>
+  </div>
 </template>
 <script>
 import { Spinner, Toast, Indicator } from "mint-ui";
@@ -77,8 +92,8 @@ export default {
         }
       });
     },
-    toQian(){
-      this.$router.push('/qian')
+    toQian() {
+      this.$router.push("/qian");
     },
     search(keyword) {
       if (keyword == "") {
@@ -96,8 +111,8 @@ export default {
     getData(word, pages) {
       let that = this;
       that.$axios
-        .post(window.ajaxSrc+"/api/meizubao/videoSearch", {
-          uid:window.localStorage.getItem('id'),
+        .post(window.ajaxSrc + "/api/meizubao/videoSearch", {
+          uid: window.localStorage.getItem("id"),
           keywords: word,
           page: pages
         })
@@ -136,8 +151,8 @@ export default {
             that.screenscreening = res.data.data;
           }
         })
-        .catch((res) => {
-            console.log(res)
+        .catch(res => {
+          console.log(res);
           console.log("查询失败");
         });
     },
@@ -167,8 +182,8 @@ export default {
 }
 .containers {
   width: 100%;
-  height: calc(100% - 0.81rem);
-  background: #fff;
+  /* height: calc(100% - 0.81rem); */
+  background: #dec;
 }
 
 .list_box {
@@ -185,10 +200,6 @@ export default {
   box-shadow: 0 2px 9px 0 #eeeeee;
   position: absolute;
   right: 0;
-}
-.dora {
-  border-bottom: 2px solid #fd4689;
-  font-size: 18px;
 }
 .pic_view {
   width: 7.1rem;
@@ -359,5 +370,4 @@ export default {
 .searchs {
   font-size: 16px;
 }
-
 </style>
