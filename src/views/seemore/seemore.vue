@@ -1,5 +1,6 @@
 <template>
-  <div class="containers" :class="isRellyShow?'activeContainers':'containers'">
+  <div class="containers"
+       :class="isRellyShow?'activeContainers':'containers'">
 
     <!-- <div class="list_list">
       <div class="list_search">
@@ -18,66 +19,76 @@
         Search"
              v-if="flog">-->
 
-          
     <header class="clearfix">
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+          <input @keyup.13=show()
+                 type="search"
+                 placeholder="请输入搜索内容"
+                 v-model="keyword"
+                 ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png" alt="111">
+        <img src="../../assets/icon/search_1.png"
+             alt="111">
       </div>
-      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+      <p class="logo"
+         @click="logo"><img src="../../assets/images/menu.png"
+             alt=""></p>
     </header>
     <section>
-    <!-- 瀑布流布局 -->
-    <div v-masonry
-         transition-duration="0.3s"
-         ref="masonry"
-         item-selector=".item"
-         column-width=".item"
-         v-if="isNodata">
-      <!-- v-for="(item, index) in accessoryproducts -->
-      <div v-masonry-tile
-           class="item"
-           v-for="(item, index) in accessoryproducts"
-           @click="details(item.id)">
-        <div class="cent_left">
-          <div class="list_img">
-            <img :src="item.images"
-                 alt="666">
-          </div>
-          <div class="list_oper">
-            <p class="oper_room">
-              <span>{{item.name}}</span>
-            </p>
+      <!-- 瀑布流布局 -->
+      <div v-masonry
+           transition-duration="0.3s"
+           ref="masonry"
+           item-selector=".item"
+           column-width=".item"
+           v-if="isNodata">
+        <!-- v-for="(item, index) in accessoryproducts -->
+        <div v-masonry-tile
+             class="item"
+             v-for="(item, index) in accessoryproducts"
+             @click="details(item.id)">
+          <div class="cent_left">
+            <div class="list_img">
+              <img :src="item.images"
+                   alt="666">
+            </div>
+            <div class="list_oper">
+              <p class="oper_room">
+                <span>{{item.name}}</span>
+              </p>
 
-            <p class="every_pro">
-              <span class="data_pro">
-                <span class="data_mon">￥{{item.price}}</span>
-              </span>
-            </p>
-            <p class="cli_app">
-              <span class="cli_ment">立即下单</span>
-            </p>
+              <p class="every_pro">
+                <span class="data_pro">
+                  <span class="data_mon">￥{{item.price}}</span>
+                </span>
+              </p>
+              <p class="cli_app">
+                <span class="cli_ment">立即下单</span>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- 店家加载更多 -->
-      <div class="item loadMore"
-           ref="load">
-        <mt-spinner type="fading-circle"
-                    color="#FD4689 "
-                    v-if="topStatus"></mt-spinner>
-        <span v-else>
-          <span @click="loadMore"
-                v-if="loading">加载更多</span>
-          <span v-else>数据全部加载完成</span>
-        </span>
-      </div>
+        <!-- 店家加载更多 -->
+        <div class="item loadMore"
+             ref="load">
+          <mt-spinner type="fading-circle"
+                      color="#FD4689 "
+                      v-if="topStatus"></mt-spinner>
+          <span v-else>
+            <span @click="loadMore"
+                  v-if="loading">加载更多</span>
+            <span v-else>数据全部加载完成</span>
+          </span>
+        </div>
 
-    </div>
+      </div>
     </section>
-    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs"
+            :num="num"
+            :tab="tab"
+            :isRellyShow="isRellyShow"
+            :hideSide="hideSide"></slider>
     <!-- 暂无数据 -->
     <div class="noData"
          v-if="showNodata">
@@ -190,19 +201,18 @@ export default {
         });
     },
     show() {
-
       if (this.keyword == "") {
         Toast("搜索不能为空");
         return false;
       }
-        this.accessoryproducts = [];
-       this.showNodata = false;
+      this.accessoryproducts = [];
+      this.showNodata = false;
       this.isNodata = false;
-      this.pages =1 
-      this.code = 2
-      this.getData('',this.keyword,this.pages)
+      this.pages = 1;
+      this.code = 2;
+      this.getData("", this.keyword, this.pages);
     },
-  
+
     // aaa() {
     //   this.flog = true;
     //   this.accessoryproducts = [];
@@ -222,13 +232,13 @@ export default {
       console.log(id);
       this.num = index;
       this.accessoryproducts = [];
-      this.isRellyShow = false
-       this.pages = 1;
-      this.isNodata = false 
-      this.showNodata = false
+      this.isRellyShow = false;
+      this.pages = 1;
+      this.isNodata = false;
+      this.showNodata = false;
       Indicator.open();
       setTimeout(() => {
-        this.getData(id, "", this.pages); //传输1  
+        this.getData(id, "", this.pages); //传输1
       }, 2000);
       //   this.getData(id, "", 1); //传输1 是页数 为了和搜索区分开 提示暂无数据区分开
       //   this.$refs.masonry.style="position:relative"
@@ -258,7 +268,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
-.activeContainers{
+.activeContainers {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -490,11 +500,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #00A5FF;
-  font-size:px2rem(14px);
-  position: absolute;top: 0;
+  color: #00a5ff;
+  font-size: px2rem(14px);
+  position: absolute;
+  top: 0;
 }
-section{  
+section {
   padding-top: px2rem(45px);
 }
 </style>
