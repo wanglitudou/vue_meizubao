@@ -1,4 +1,3 @@
-
 <template>
   <div class="container">
     <div class="zhe"
@@ -17,13 +16,22 @@
                  v-model="telephone"
                  class="inp"></span>
       </p>
-      <p class="collect_bet">
-        <span>所在地区 {{province}}{{city}}{{area}}</span>
-        <span @click="levl()">请选择
+      <!--<p class="collect_bet">
+				<span>所在地区 {{province}}{{city}}{{area}}</span>
+				<span @click="levl()">请选择
           <i class="icon_right_img"><img src="../../assets/icon/more.png"
                  alt=""></i>
         </span>
-
+			</p>-->
+      <p class="collect_bet">
+        <x-address title=""
+                   hide-district
+                   v-model="site"
+                   raw-value
+                   :list="addressData"
+                   value-text-align="left"
+                   label-align="justify"
+                   placeholder="请选择您希望她/他的居住地"></x-address>
       </p>
       <p class="detail_address">
         <span class="detail_add">
@@ -59,7 +67,34 @@ import { Picker, Toast } from "mint-ui";
 import { Checklist } from "mint-ui";
 import VuePickers from "vue-pickers";
 import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
+import {
+  GroupTitle,
+  Group,
+  Cell,
+  XInput,
+  Selector,
+  PopupPicker,
+  Datetime,
+  XNumber,
+  ChinaAddressData,
+  XAddress,
+  XTextarea,
+  XSwitch
+} from "vux";
 export default {
+  components: {
+    Group,
+    GroupTitle,
+    Cell,
+    XInput,
+    Selector,
+    PopupPicker,
+    XAddress,
+    Datetime,
+    XNumber,
+    XTextarea,
+    XSwitch
+  },
   data() {
     return {
       checked: true,
@@ -76,7 +111,9 @@ export default {
       area: "",
       address: "",
       consignee: "",
-      telephone: ""
+      telephone: "",
+      site: [],
+      addressData: ChinaAddressData
     };
   },
   computed: {
@@ -216,17 +253,21 @@ export default {
 .el-checkbox__inner {
   background: #fff;
 }
+
 .el-checkbox__input.is-checked .el-checkbox__inner,
 .el-checkbox__input.is-indeterminate .el-checkbox__inner {
   background: #fd82d9;
   border: 0;
 }
+
 .el-checkbox__inner {
   border-radius: 50%;
 }
+
 .mint-checklist-label {
   display: inline-block;
 }
+
 .mint-checkbox-input:checked + .mint-checkbox-core {
   background: #fd82d9;
 }
@@ -234,7 +275,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
-
 .zhe {
   width: 100%;
   height: 100%;
@@ -244,13 +284,16 @@ export default {
   top: 0;
   z-index: 6;
 }
+
 .icon_right_img img {
   height: px2rem(16px);
 }
+
 .container {
   width: 100%;
   height: 100%;
 }
+
 .inp {
   width: px2rem(200px);
   padding: 0.1rem 0.2rem;
@@ -258,11 +301,13 @@ export default {
   border: none;
   cursor: pointer;
 }
+
 .collectgoods {
   width: 94.7%;
   height: auto;
   margin-left: 2.7%;
 }
+
 .collects {
   width: px2rem(330px);
   height: 1rem;
@@ -272,6 +317,7 @@ export default {
   padding-left: 10px;
   border-bottom: 2px solid #f7f7f7;
 }
+
 .collect_bet {
   width: px2rem(330px);
   height: 1rem;
@@ -283,6 +329,7 @@ export default {
   justify-content: space-between;
   padding: 0 10px;
 }
+
 .detail_address {
   width: px2rem(330px);
   height: 2rem;
@@ -292,6 +339,7 @@ export default {
   padding-left: 10px;
   margin-top: 0.1rem;
 }
+
 .inpts_text {
   width: px2rem(330px);
   height: 2rem;
@@ -299,6 +347,7 @@ export default {
   border: none;
   cursor: pointer;
 }
+
 .tacit_address {
   width: px2rem(330px);
   height: 1rem;
@@ -308,6 +357,7 @@ export default {
   padding-left: 10px;
   margin-top: 10px;
 }
+
 .preservation {
   width: px2rem(330px);
   height: px2rem(36px);
@@ -321,4 +371,3 @@ export default {
   font-size: 15px;
 }
 </style>
-

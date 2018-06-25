@@ -23,6 +23,17 @@ import "mint-ui/lib/style.css";
 import "./components/js/jquery-2.1.0";
 import { Checklist } from "mint-ui";
 
+//引入vux
+import { WechatPlugin, AjaxPlugin } from "vux";
+import { Confirm } from "vux";
+Vue.use(WechatPlugin);
+// console.log(Vue.wechat);
+
+Vue.use(AjaxPlugin);
+import { Datetime, Group } from "vux";
+Vue.component(Datetime.name, Datetime);
+Vue.component(Group.name, Group);
+
 //引入新的日历插件
 import VCalendar from "v-calendar";
 import "v-calendar/lib/v-calendar.min.css";
@@ -86,9 +97,9 @@ Date.prototype.Format = function(fmt) {
   return fmt;
 };
 
-import { VueMasonryPlugin } from "vue-masonry";
+// import { VueMasonryPlugin } from "vue-masonry";
 
-Vue.use(VueMasonryPlugin);
+// Vue.use(VueMasonryPlugin);
 Vue.use(MintUI);
 
 // eslint-disable no-new

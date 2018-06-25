@@ -11,7 +11,7 @@
       </div>
 
       <div class="pic_ture">
-        <!--图片切换时展示的内容-->
+        <!--图片切换时展示的内容-->`
         <div v-show="num==0">
           <div class="cent_cents">
             <div class="pic_center">
