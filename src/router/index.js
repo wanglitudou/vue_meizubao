@@ -29,6 +29,7 @@ import address from "../views/address/address.vue";
 import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
+import addsite from "../views/addtheaddress/addsite.vue";
 
 let routes = [
   {
@@ -97,6 +98,11 @@ let routes = [
     name: "detail",
     path: "detail",
     component: detail
+  },
+  {
+    name: "addsite",
+    path: "addsite",
+    component: addsite
   },
   {
     name: "details",
