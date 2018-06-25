@@ -156,7 +156,6 @@
 <script>
 import { Indicator } from "mint-ui";
 import { Swipe, SwipeItem } from "mint-ui";
-import { WechatPlugin, AjaxPlugin } from "vux";
 export default {
   data() {
     return {
@@ -166,7 +165,14 @@ export default {
       accessoryproducts: [], //配套产品
       cooperativeProject: [], //合作项目
       visualscreen: [], //培训视屏
-      configData: ""
+      dataList: {
+        appId: "",
+        nonceStr: "",
+        timestamp: null,
+        dataUrl: "",
+        signature: ""
+      },
+      userId: null
     };
   },
   created() {
@@ -192,57 +198,105 @@ export default {
     that.getProduct(); //配套产品
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
-    // that.weixinshare();
     //微信分享
-    // that.wxshare();
+    that.wxshare();
+    //获取userid
+    this.userId = localStorage.getItem("id");
   },
   mounted: function() {},
   methods: {
     //微信分享
-    // weixinshare() {
-    //   let that = this;
-    //   that.$axios
-    //     .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
-    //       params: { http: 1 }
-    //     })
-    //     .then(res => {
-    //       that.configData = res.data.data;
-    //       let appId = that.configData.appId;
-    //       let timestamp = that.configData.timestamp;
-    //       let nonceStr = that.configData.nonceStr;
-    //       let signature = that.configData.signature;
-    //       console.log(res.data.data);
-    //       console.log("asdf");
-    //       wx.config({
-    //         debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    //         appId: "appId", // 必填，公众号的唯一标识
-    //         timestamp: timestamp, // 必填，生成签名的时间戳
-    //         nonceStr: "nonceStr", // 必填，生成签名的随机串
-    //         signature: "signature", // 必填，签名
-    //         jsApiList: ["onMenuShareTimeline", "onMenuShareAppMessage"] // 必填，需要使用的JS接口列表
-    //       });
-    //       // wx.ready(function(){
+    wxshare() {
+      let that = this;
+      that.$axios
+        .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+          params: {
+            http: location.href
+          }
+        })
+        .then(res => {
+          if (res.data.status_code == 1001) {
+            console.log(res.data.data);
+            that.dataList.appId = res.data.data.appId;
+            that.dataList.nonceStr = res.data.data.nonceStr;
+            that.dataList.timestamp = res.data.data.timestamp;
+            that.dataList.dataUrl = res.data.data.dataUrl;
+            that.dataList.signature = res.data.data.signature;
+            wx.config({
+              debug: false,
+              appId: that.dataList.appId,
+              timestamp: that.dataList.timestamp,
+              nonceStr: that.dataList.nonceStr,
+              signature: that.dataList.signature,
+              jsApiList: [
+                //需要使用的网页服务接口
+                //									"checkJsApi", //判断当前客户端版本是否支持指定JS接口
+                "onMenuShareTimeline", //分享给好友
+                "onMenuShareAppMessage" //分享到朋友圈
+              ]
+            });
+            wx.ready(function() {
+              // 分享朋友圈
+              wx.onMenuShareTimeline({
+                title: "分享标题", // 分享标题
+                desc: "分享描述", // 分享描述
+                link: "http://mzbao.weiyingjia.org/", // 分享链接
+                imgUrl: "https://www.baidu.com/img/baidu_jgylogo3.gif", // 分享图标
+                type: "link", // 分享类型,music、video或link，不填默认为link
+                dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                success: function(data) {
+                  //							layer.msg("分享成功");
+                  alert("1111");
+                  that.$axios
+                    .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
+                      params: {
+                        uid: userId
+                      }
+                    })
+                    .then(res => {
+                      console.log(res);
+                      console.log(11111);
+                    });
+                },
+                cancel: function() {
+                  //							layer.msg("已取消分享");
+                  alert("1111");
+                }
+              });
+              // 分享朋友
+              wx.onMenuShareAppMessage({
+                title: "分享标题", // 分享标题
+                desc: "分享描述", // 分享描述
+                link: "http://mzbao.weiyingjia.org/", // 分享链接
+                imgUrl: "https://www.baidu.com/img/baidu_jgylogo3.gif", // 分享图标
+                type: "link", // 分享类型,music、video或link，不填默认为link
+                dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                success: function(data) {
+                  //							layer.msg("分享成功");
+                  alert("1111");
+                  that.$axios
+                    .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
+                      params: {
+                        uid: userId
+                      }
+                    })
+                    .then(res => {
+                      console.log(res);
+                    });
+                },
+                cancel: function() {
+                  //							layer.msg("已取消分享");
+                  alert("1111");
+                }
+              });
+            });
+          }
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    },
 
-    //       // }
-    //       // if (res.data.status_code == 1001) {
-    //       //   console.log("aaaasdsd");
-    //       // }
-    //     })
-    //     .catch(() => {
-    //       console.log("查询失败");
-    //     });
-    //   // that
-    //   //   .$axios({
-    //   //     method: "get",
-    //   //     url: "http://mzbao.weiyingjia.org/api/meizubao/wxSign",
-    //   //     params: {
-    //   //       http: 1
-    //   //     }
-    //   //   })
-    //   //   .then(res => {
-    //   //     console.log(res);
-    //   //   });
-    // },
     //获取地址栏参数
     GetQueryString(name) {
       var reg = new RegExp("(^|&?)" + name + "=([^&]*)(&|$)");
@@ -272,7 +326,7 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/instrument", {})
         .then(res => {
-          console.log(res);
+          //						console.log(res);
           if (res.data.status_code == 1001) {
             that.rentinginstrument = res.data.data;
           }
@@ -287,7 +341,7 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
         .then(res => {
-          console.log(res);
+          //						console.log(res);
           if (res.data.status_code == 1001) {
             that.beautyindustry = res.data.data;
           }
@@ -302,7 +356,7 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/product", {})
         .then(res => {
-          console.log(res);
+          //						console.log(res);
           if (res.data.status_code == 1001) {
             that.accessoryproducts = res.data.data;
           }
@@ -317,8 +371,7 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/video", {})
         .then(res => {
-          // console.log(res);
-          console.log("111aaa");
+          //						console.log(res);
           if (res.data.status_code == 1001) {
             that.visualscreen = res.data.data;
           }
@@ -333,7 +386,7 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
         .then(res => {
-          console.log(res);
+          //						console.log(res);
           if (res.data.status_code == 1001) {
             that.cooperativeProject = res.data.data;
           }
@@ -388,40 +441,79 @@ export default {
       this.$router.push(url); //轮播用到
     },
     detail() {
-      this.$router.push({ name: "detail" }); //点击图片的时候,跳转到对应的详情页面
+      this.$router.push({
+        name: "detail"
+      }); //点击图片的时候,跳转到对应的详情页面
     },
     details(pid) {
-      this.$router.push({ name: "details", query: { pid: pid } }); //热租仪器模块,点击图片,跳转到对应的详情页面
+      this.$router.push({
+        name: "details",
+        query: {
+          pid: pid
+        }
+      }); //热租仪器模块,点击图片,跳转到对应的详情页面
     },
     essence(pid) {
-      this.$router.push({ name: "essence", query: { pid: pid } }); //美业菁英模块,点击图片,跳转到对应的详情页面
+      this.$router.push({
+        name: "essence",
+        query: {
+          pid: pid
+        }
+      }); //美业菁英模块,点击图片,跳转到对应的详情页面
     },
     hotcent() {
-      this.$router.push({ name: "industry" }); //热租仪器
+      this.$router.push({
+        name: "industry"
+      }); //热租仪器
     },
     cooperation(pid) {
-      this.$router.push({ name: "cooperation", query: { pid: pid } }); //合作项目,点击合作项目模块,跳转到对应的详情页面
+      this.$router.push({
+        name: "cooperation",
+        query: {
+          pid: pid
+        }
+      }); //合作项目,点击合作项目模块,跳转到对应的详情页面
     },
     project() {
-      this.$router.push({ name: "project" }); //合作项目模块,点击查看更多的时候,跳转对应的详情页面
+      this.$router.push({
+        name: "project"
+      }); //合作项目模块,点击查看更多的时候,跳转对应的详情页面
     },
     matching(pid) {
-      this.$router.push({ name: "matching", query: { pid: pid } }); //配套产品模块,点击图片,跳转到对应详情页面
+      this.$router.push({
+        name: "matching",
+        query: {
+          pid: pid
+        }
+      }); //配套产品模块,点击图片,跳转到对应详情页面
     },
     train(pid) {
-      this.$router.push({ name: "train", query: { pid: pid } }); //培训视频模块,点击图片,跳转到对应的详情页面
+      this.$router.push({
+        name: "train",
+        query: {
+          pid: pid
+        }
+      }); //培训视频模块,点击图片,跳转到对应的详情页面
     },
     looksee() {
-      this.$router.push({ name: "looksee" }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
+      this.$router.push({
+        name: "looksee"
+      }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
     },
     seemore() {
-      this.$router.push({ name: "seemore" }); //配套产品模块,点击查看更多的时候,跳转到对应的页面
+      this.$router.push({
+        name: "seemore"
+      }); //配套产品模块,点击查看更多的时候,跳转到对应的页面
     },
     clickpay() {
-      this.$router.push({ name: "clickpay" }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
+      this.$router.push({
+        name: "clickpay"
+      }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
     toSearch() {
-      this.$router.push({ name: "search" });
+      this.$router.push({
+        name: "search"
+      });
     }
     // addtheaddress() {
     //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
@@ -436,29 +528,33 @@ export default {
   }
 };
 </script>
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 @import "../styles/helper.scss";
-
 .homecontainer {
   height: 100%;
   overflow: auto;
   padding-bottom: 50px;
   background: #fff;
 }
+
 .scrolls {
   width: 100%;
 }
+
 .banner {
   height: px2rem(150px);
 }
+
 .banner .swiper-container {
   width: 100%;
   height: px2rem(150px);
 }
+
 .banner .swiper-container img {
   width: 100%;
   height: auto;
 }
+
 .nav-list ul {
   width: 100%;
   display: flex;
@@ -467,6 +563,7 @@ export default {
   padding-bottom: 0.1rem;
   background: #ffffff;
 }
+
 .nav-list ul li {
   width: 25%;
   display: flex;
@@ -475,6 +572,7 @@ export default {
   flex-direction: column;
   margin-top: 0.2rem;
 }
+
 .nav-list ul li span {
   display: block;
   width: 0.84rem;
@@ -485,6 +583,7 @@ export default {
   line-height: 0.84rem;
   color: #ffffff;
 }
+
 .nav-list ul li span img {
   width: 100%;
   height: 100%;
@@ -502,18 +601,19 @@ export default {
   width: 94.7%;
   height: px2rem(44px);
   margin-left: 2.6%;
-
   border-radius: 3px;
   border: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .search_contents .list_search img {
   width: 23px;
   height: 24px;
   margin-right: 5.3%;
 }
+
 .search_contents .list_search div {
   font-size: 13px;
   color: #666;
@@ -523,6 +623,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .list_btn {
   // width: 94.7%;
   width: px2rem(355px);
@@ -533,6 +634,7 @@ export default {
   overflow: hidden;
   // margin-bottom: 30px;
 }
+
 .list_btn .hotrent {
   width: 100%;
   text-align: center;
@@ -541,13 +643,16 @@ export default {
   color: #000;
   font-weight: bold;
 }
+
 .worktogether {
   // margin-bottom: px2rem(10px);
 }
+
 .hotrent span {
   width: px2rem(64px);
   height: px2rem(22px);
 }
+
 .hotrents {
   width: 100%;
   height: px2rem(2px);
@@ -555,16 +660,19 @@ export default {
   justify-content: center;
   margin-top: px2rem(2px);
 }
+
 .hotrents div {
   width: px2rem(42px);
   height: px2rem(2px);
   background-image: linear-gradient(-130deg, #fd82d9 0%, #fd4689 100%);
 }
+
 .hotimg {
   width: 100%;
   height: auto;
   display: flex;
 }
+
 .hotimg_lef {
   display: flex;
   width: px2rem(160px);
@@ -577,10 +685,12 @@ export default {
     margin-left: px2rem(15px);
   }
 }
+
 .hotimg_lef img {
   width: px2rem(160px);
   height: px2rem(120px);
 }
+
 .hotimg_lef .item_name {
   display: block;
   height: px2rem(20px);
@@ -588,6 +698,7 @@ export default {
   margin-top: px2rem(10px);
   font-size: px2rem(14px);
 }
+
 .hot_cent {
   width: 100%;
   height: auto;
