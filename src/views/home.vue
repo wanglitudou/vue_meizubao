@@ -90,12 +90,12 @@
         </div>
         <div class="hotimg">
           <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
-            <img :src="item.images" alt="" @click="train(item.id)">
+            <img :src="item.images" alt="" @click="clickpay(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="seemore()">
+        <div class="hot_cent" @click="train()">
           <span>查看更多></span>
         </div>
       </div>
@@ -114,7 +114,7 @@
 
           </div>
         </div>
-        <div class="hot_cent" @click="clickpay()">
+        <div class="hot_cent" @click="project()">
           <span>查看更多></span>
         </div>
       </div>
@@ -136,7 +136,7 @@ export default {
       cooperativeProject: [], //合作项目 //培训视屏
 
       aa: "",
-
+    //  cc:'',
       dataList: {
         appId: "",
         nonceStr: "",
@@ -149,7 +149,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["hasPhoneNum"])
+    ...mapGetters(["hasPhoneNum"]),  
   },
   created() {
   
@@ -176,22 +176,24 @@ export default {
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
   },
-  mounted: function() {},
-  watch: {
-    aa() {
-      //  let a  =1
-      console.log(this.aa);
-      if (!this.aa) {
-        console.log(2323);
-        this.$router.push({
-          path: `/phone/${1}`
-        });
-      } else {
-        console.log(3213213213213213);
-      }
+  mounted: function() {
+    // console.log(this.hasPhoneNum)
+    // // this.aa = this.hasPhoneNum
+    // console.log(this.aa)
+    if(localStorage.getItem('hasPhone') != 1){
+   
+       this.$router.push({
+                path: `/phone/${1}`
+              });
     }
   },
+  // computed: {
+   
+  // },
   methods: {
+    ac(){
+     console.log("wanglicaonima")
+    },
     ...mapActions(["setPhoneNum"]),
     //微信分享
     wxshare() {
@@ -416,6 +418,8 @@ export default {
               this.$router.push({
                 path: `/phone/${1}`
               });
+            }else{
+              localStorage.setItem('hasPhone',1)
             }
             if (code) {
               sessionStorage.aaa = true;
@@ -437,6 +441,7 @@ export default {
     updataImg(url) {
       this.$router.push(url); //轮播用到
     },
+    // 热租仪器
     detail() {
       this.$router.push({
         name: "detail"
@@ -497,6 +502,7 @@ export default {
         name: "looksee"
       }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
     },
+    // 产品
     seemore() {
       this.$router.push({
         name: "seemore"
@@ -505,7 +511,8 @@ export default {
     clickpay() {
       this.$router.push({
         name: "clickpay"
-      }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
+      }); 
+      //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
     toSearch() {
       this.$router.push({

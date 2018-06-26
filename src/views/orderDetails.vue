@@ -97,12 +97,13 @@ export default {
       );
     },
     renprice() {
-      console.log(this.during);
+     
       if (this.during > 4) {
+        console.log("我大")
         // return  parseInt(this.detail.continued) * parseInt(this.during)
         return (this.detail.dayprice * parseInt(this.during) * 0.8).toFixed(2);
       } else {
-        console.log(21322121);
+        console.log("我小")
         return (this.detail.dayprice * parseInt(this.during)).toFixed(2);
       }
     },
@@ -429,11 +430,8 @@ export default {
 <template>
   <div class="container">
     <com-orderStatus :detail="detail"></com-orderStatus>
-    <com-addressCard :type="'show'"
-                     :detail="detail"
-                     v-if="detail.type == 1 ||detail.type == 2 "></com-addressCard>
-    <com-orderCard :type="'technician'"
-                   :detail="detail"></com-orderCard>
+    <com-addressCard :type="'show'" :detail="detail" v-if="detail.type == 1 ||detail.type == 2 "></com-addressCard>
+    <com-orderCard :type="'technician'" :detail="detail"></com-orderCard>
     <com-orderInformation :detail="detail"></com-orderInformation>
     <!-- <com-orderRenewal :detail="detail" :disableDate="disableDate"  :decrease="decrease" :allPrice="allPrice" :increase="increase" :mounth="mounth" :selectedDate="selectedDate" :during="during"></com-orderRenewal> -->
     <!-- <div> -->
@@ -462,43 +460,30 @@ export default {
     <!-- </div> -->
     <div>
       <!-- 仪器续约 -->
-      <div class="instrument"
-           v-if="detail.type == 1">
+      <div class="instrument" v-if="detail.type == 1">
         <div v-if="detail.status == 6">
           <!-- <div class="extension">续约</div> -->
           <div class="begin_rent">
             <span>选择你续约的时长(月):</span>
             <div class="spinner">
-              <div class="decrease"
-                   @click="decrease">-</div>
-              <input type="number"
-                     class="value"
-                     maxlength="3"
-                     v-model="mounth" />
-              <div class="increase"
-                   @click="increase">+</div>
+              <div class="decrease" @click="decrease">-</div>
+              <input type="number" class="value" maxlength="3" v-model="mounth" />
+              <div class="increase" @click="increase">+</div>
             </div>
           </div>
-          <div class="xuyue"
-               v-show="mounth>0">
+          <div class="xuyue" v-show="mounth>0">
             <span>续约金额：￥{{getPrice}}</span>
 
           </div>
         </div>
       </div>
       <!-- 技师续约 -->
-      <div class="technician"
-           v-if="detail.type == 2">
+      <div class="technician" v-if="detail.type == 2">
         <div v-if="detail.status == 6">
-          <v-date-picker id="datePicker"
-                         mode='range'
-                         v-model='selectedDate'
-                         :disabled-dates='disableDate'
-                         show-caps>
+          <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='disableDate' show-caps>
           </v-date-picker>
         </div>
-        <div class="xuyues"
-             v-show="during>0">
+        <div class="xuyues" v-show="during>0">
           <span>续约天数：{{during}}</span>
           <p>续约金额：{{renprice}}</p>
         </div>
@@ -507,16 +492,7 @@ export default {
         <!-- v-bind:class="{ disable: month==data.num }" -->
       </div>
     </div>
-    <com-orderFooter :detail='detail'
-                     :confirm="confirm"
-                     :back="back"
-                     :renewal="renewal"
-                     :during="during"
-                     :renprice="renprice"
-                     :count="'19700'"
-                     :confirm:="confirm"
-                     :text="'确认到达'"
-                     :nextFun="nextFun"></com-orderFooter>
+    <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :renewal="renewal" :during="during" :renprice="renprice" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
   </div>
 </template>
 

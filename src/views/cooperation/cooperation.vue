@@ -94,7 +94,8 @@
 </template>
 <script>
 	import orderFooter from "../../components/orderFooter.vue";
-	import sign from "../../components/sign.vue";
+	// import sign from "../../components/sign.vue";
+	import sign from "../../components/canvas.vue";
 	import { Toast } from "mint-ui";
 	import { Swipe, SwipeItem } from "mint-ui";
 	export default {
