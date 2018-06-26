@@ -14,7 +14,7 @@ export default {
     addressCard,
     orderCard
   },
-  created() {},
+  created() {console.log(this.$router.params)},
   mounted() {},
   methods: {
     createOrder: function() {
