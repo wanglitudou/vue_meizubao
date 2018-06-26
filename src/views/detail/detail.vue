@@ -195,8 +195,8 @@ export default {
         return false;
       }
 
-      this.imgsArr = [];
-      this.keyword = keyword;
+      // this.imgsArr = [];
+    
 
       this.pages = 1;
       Indicator.open();

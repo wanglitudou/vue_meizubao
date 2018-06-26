@@ -232,8 +232,11 @@ export default {
         Toast("搜索框不能为空");
         return false;
       }
+       Indicator.open();
       this.pages = 1;
+     
       setTimeout(() => {
+         this.thebeautyindustry =[]
         // this.getData('')
         this.getData("", this.keyword, this.grade, this.dayprice, this.pages);
       }, 500);

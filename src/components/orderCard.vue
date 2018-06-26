@@ -22,7 +22,7 @@
 
     <div class="card" v-if='type==2'>
       <div class="head">
-        <img src="img" alt="">
+        <img :src="img" alt="">
       </div>
       <div class="right-info">
         <p class="big">{{name}}</p>
@@ -39,7 +39,7 @@
 
     <div class="card" v-if='type==3'>
       <div class="head">
-        <img src="img" alt="">
+        <img :src="img" alt="">
       </div>
       <div class="right-info">
         <p class="big">{{name}}</p>
