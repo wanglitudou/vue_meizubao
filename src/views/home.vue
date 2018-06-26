@@ -133,8 +133,7 @@ export default {
       rentinginstrument: [], //热租仪器
       beautyindustry: [], //美业菁英
       accessoryproducts: [], //配套产品
-      cooperativeProject: [], //合作项目
-      visualscreen: [], //培训视屏
+      cooperativeProject: [], //合作项目 //培训视屏
 
       aa: "",
 
@@ -145,7 +144,8 @@ export default {
         dataUrl: "",
         signature: ""
       },
-      userId: null
+      userId: null,
+      visualscreen: [] //培训视屏
     };
   },
   computed: {
@@ -175,10 +175,6 @@ export default {
     that.getProduct(); //配套产品
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
-    //微信分享
-    that.wxshare();
-    //获取userid
-    this.userId = localStorage.getItem("id");
   },
   mounted: function() {},
   watch: {

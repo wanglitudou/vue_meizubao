@@ -39,7 +39,8 @@ export default {
   mounted() {},
   methods: {
     jumpToAddress() {
-      alert("暂时没有address页面,有了在这改 label");
+      alert("6666");
+      // alert("暂时没有address页面,有了在这改 label");
       //      this.$router.push({
       //        name:"confirm",
       //

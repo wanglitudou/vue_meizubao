@@ -156,7 +156,7 @@ export default {
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
-          nickname: this.$route.query.name,
+          user_name: this.$route.query.name,
           age: this.$route.query.age,
           birthdate: this.$route.query.birthdate,
           telephone: this.$route.query.phone,
@@ -171,8 +171,8 @@ export default {
         .then(res => {
           console.log(res);
           if ((res.data.status_code = "1001")) {
-            localStorage.nickname = this.$route.query.name;
-            console.log(localStorage.nickname);
+            localStorage.user_name = this.$route.query.name;
+            console.log(localStorage.user_name);
             Toast("修改成功");
             setTimeout(() => {
               this.$router.push({ name: "mine" });

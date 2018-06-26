@@ -108,12 +108,108 @@ export default {
             window.localStorage.getItem("id")
         )
         .then(res => {
-          console.log(res);
+          console.log(res.data.data);
           if (res.data.status_code == 1001) {
             this.data = res.data.data;
+            this.images = res.data.data.images;
             this.playerOptions.sources[0].src = res.data.data.url;
             this.playerOptions.poster = res.data.data.images;
             console.log(res.data.data.integral);
+
+            //微信分享
+            let that = this;
+            that.$axios
+              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+                params: {
+                  http: location.href
+                }
+              })
+              .then(res => {
+                if (res.data.status_code == 1001) {
+                  that.dataList.appId = res.data.data.appId;
+                  that.dataList.nonceStr = res.data.data.nonceStr;
+                  that.dataList.timestamp = res.data.data.timestamp;
+                  that.dataList.dataUrl = res.data.data.dataUrl;
+                  that.dataList.signature = res.data.data.signature;
+                  wx.config({
+                    debug: false,
+                    appId: that.dataList.appId,
+                    timestamp: that.dataList.timestamp,
+                    nonceStr: that.dataList.nonceStr,
+                    signature: that.dataList.signature,
+                    jsApiList: [
+                      //需要使用的网页服务接口
+                      //									"checkJsApi", //判断当前客户端版本是否支持指定JS接口
+                      "onMenuShareTimeline", //分享给好友
+                      "onMenuShareAppMessage" //分享到朋友圈
+                    ]
+                  });
+                  wx.ready(function() {
+                    // 分享朋友圈
+                    wx.onMenuShareTimeline({
+                      title: that.data.name, // 分享标题
+                      desc: that.data.centent, // 分享描述
+                      link: that.dqurl, // 分享链接
+                      imgUrl: that.images, // 分享图标
+                      type: "link", // 分享类型,music、video或link，不填默认为link
+                      dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                      success: function(data) {
+                        //							layer.msg("分享成功");
+                        //													alert("1111")
+                        that.$axios
+                          .get(
+                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            {
+                              params: {
+                                uid: that.userId
+                              }
+                            }
+                          )
+                          .then(res => {
+                            console.log(res);
+                            console.log(11111);
+                          });
+                      },
+                      cancel: function() {
+                        //							layer.msg("已取消分享");
+                        //													alert("1111")
+                      }
+                    });
+                    // 分享朋友
+                    wx.onMenuShareAppMessage({
+                      title: that.data.name, // 分享标题
+                      desc: that.data.centent, // 分享描述
+                      link: that.dqurl, // 分享链接
+                      imgUrl: that.images, // 分享图标
+                      type: "link", // 分享类型,music、video或link，不填默认为link
+                      dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                      success: function(data) {
+                        //							layer.msg("分享成功");
+                        //													alert("1111")
+                        that.$axios
+                          .get(
+                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            {
+                              params: {
+                                uid: that.userId
+                              }
+                            }
+                          )
+                          .then(res => {
+                            console.log(res);
+                          });
+                      },
+                      cancel: function() {
+                        //							layer.msg("已取消分享");
+                        //													alert("1111")
+                      }
+                    });
+                  });
+                }
+              })
+              .catch(res => {
+                console.log(res);
+              });
           }
         })
         .catch(() => {
@@ -124,7 +220,9 @@ export default {
     initIntegral() {
       this.$axios
         .get(window.ajaxSrc + "/api/meizubao/userInfo", {
-          params: { uid: window.localStorage.id }
+          params: {
+            uid: window.localStorage.id
+          }
         })
         .then(res => {
           console.log(res);
@@ -208,7 +306,9 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             if (this.value == 2) {
-              this.$router.push({ name: "cart" });
+              this.$router.push({
+                name: "cart"
+              });
               // console.log(11)
             } else {
               window.location.href = res.data.data.url;
@@ -235,6 +335,8 @@ export default {
   mounted() {
     this.inits();
     this.initIntegral();
+    this.userId = localStorage.getItem("id");
+    this.dqurl = window.location.href;
   },
   data() {
     return {
@@ -264,7 +366,17 @@ export default {
           }
         ],
         poster: ""
-      }
+      },
+      dataList: {
+        appId: "",
+        nonceStr: "",
+        timestamp: null,
+        dataUrl: "",
+        signature: ""
+      },
+      userId: null,
+      dqurl: "",
+      images: ""
     };
   }
 };
@@ -437,6 +549,7 @@ export default {
   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
 }
+
 .payMethod {
   width: 80%;
   height: auto;
@@ -447,6 +560,7 @@ export default {
   top: 30%;
   left: 10%;
 }
+
 .opcity {
   position: fixed;
   top: 0;
@@ -456,11 +570,13 @@ export default {
   opacity: 0.5;
   z-index: 5;
 }
+
 .mint-radiolist-title {
   text-align: center;
   font-size: 16px;
   color: #000;
 }
+
 .pay {
   width: 100%;
   text-align: center;
@@ -469,19 +585,23 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 .pay span {
   display: block;
   padding: 10px;
   background: #fd4689;
   border-radius: 10px;
 }
+
 .video-js {
   width: 100%;
   height: 250px;
 }
+
 .vjs-button > .vjs-icon-placeholder:before {
   font-size: 2em !important;
 }
+
 .video-js .vjs-big-play-button {
   top: 40% !important;
   left: 40% !important;
