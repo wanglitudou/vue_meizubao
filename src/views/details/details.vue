@@ -328,7 +328,7 @@ export default {
                   that.dataList.dataUrl = res.data.data.dataUrl;
                   that.dataList.signature = res.data.data.signature;
                   wx.config({
-                    debug: false,
+                    debug: true,
                     appId: that.dataList.appId,
                     timestamp: that.dataList.timestamp,
                     nonceStr: that.dataList.nonceStr,
@@ -343,10 +343,10 @@ export default {
                   wx.ready(function() {
                     // 分享朋友圈
                     wx.onMenuShareTimeline({
-                      title: this.data.name, // 分享标题
-                      desc: this.data.centent, // 分享描述
-                      link: this.dqurl, // 分享链接
-                      imgUrl: this.imgLists[0], // 分享图标
+                      title: that.data.name, // 分享标题
+                      desc: that.data.centent, // 分享描述
+                      link: that.dqurl, // 分享链接
+                      imgUrl: that.imgLists[0], // 分享图标
                       type: "link", // 分享类型,music、video或link，不填默认为link
                       dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                       success: function(data) {
@@ -373,10 +373,10 @@ export default {
                     });
                     // 分享朋友
                     wx.onMenuShareAppMessage({
-                      title: this.data.name, // 分享标题
-                      desc: this.data.centent, // 分享描述
-                      link: this.dqurl, // 分享链接
-                      imgUrl: this.imgLists[0], // 分享图标
+                      title: that.data.name, // 分享标题
+                      desc: that.data.centent, // 分享描述
+                      link: that.dqurl, // 分享链接
+                      imgUrl: that.imgLists[0], // 分享图标
                       type: "link", // 分享类型,music、video或link，不填默认为link
                       dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                       success: function(data) {
