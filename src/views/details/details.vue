@@ -1,4 +1,3 @@
-
 <template>
   <div class="detail-container">
     <div class="list_list">
@@ -105,12 +104,24 @@ export default {
       month: 1,
       type: 1,
       agreementId: null,
-      showSignTag: false
+      showSignTag: false,
+      dataList: {
+        appId: "",
+        nonceStr: "",
+        timestamp: null,
+        dataUrl: "",
+        signature: ""
+      },
+      userId: null,
+      dqurl: ""
     };
   },
   created() {},
   mounted() {
     this.init();
+    this.userId = localStorage.getItem("id");
+    this.dqurl = window.location.href;
+
     //签名
 
     $.smartScroll = function(container, selectorScrollable) {
@@ -122,7 +133,6 @@ export default {
       // 是否是搓浏览器
       // 自己在这里添加判断和筛选
       var isSBBrowser;
-
       var data = {
         posY: 0,
         maxscroll: 0
@@ -282,25 +292,120 @@ export default {
             this.month * this.data.firstrent + (this.data.deposit - 0),
           goods_name: this.data.name,
           deposit: this.data.deposit,
-
           price: this.data.firstrent,
           month: this.data.num
         }
       });
     },
-
     init() {
       this.$axios
         .get(window.ajaxSrc + "/api/meizubao/instrumentDetail", {
-          params: { id: this.$route.query.pid }
+          params: {
+            id: this.$route.query.pid
+          }
         })
         .then(res => {
-          console.log(res.data.status_code == "1001", "ffff");
+          //        console.log(res.data.status_code == "1001", "ffff");
           if (res.data.status_code == "1001") {
+            console.log(res);
             this.data = res.data.data;
             this.month = this.data.lease_time;
             this.imgLists = res.data.data.images;
-            console.log(imgLists, "hhhh");
+            console.log(this.imgLists[0], "hhhh");
+            //微信分享
+            let that = this;
+            that.$axios
+              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+                params: {
+                  http: location.href
+                }
+              })
+              .then(res => {
+                if (res.data.status_code == 1001) {
+                  that.dataList.appId = res.data.data.appId;
+                  that.dataList.nonceStr = res.data.data.nonceStr;
+                  that.dataList.timestamp = res.data.data.timestamp;
+                  that.dataList.dataUrl = res.data.data.dataUrl;
+                  that.dataList.signature = res.data.data.signature;
+                  wx.config({
+                    debug: false,
+                    appId: that.dataList.appId,
+                    timestamp: that.dataList.timestamp,
+                    nonceStr: that.dataList.nonceStr,
+                    signature: that.dataList.signature,
+                    jsApiList: [
+                      //需要使用的网页服务接口
+                      //									"checkJsApi", //判断当前客户端版本是否支持指定JS接口
+                      "onMenuShareTimeline", //分享给好友
+                      "onMenuShareAppMessage" //分享到朋友圈
+                    ]
+                  });
+                  wx.ready(function() {
+                    // 分享朋友圈
+                    wx.onMenuShareTimeline({
+                      title: this.data.name, // 分享标题
+                      desc: this.data.centent, // 分享描述
+                      link: this.dqurl, // 分享链接
+                      imgUrl: this.imgLists[0], // 分享图标
+                      type: "link", // 分享类型,music、video或link，不填默认为link
+                      dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                      success: function(data) {
+                        //							layer.msg("分享成功");
+                        alert("1111");
+                        that.$axios
+                          .get(
+                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            {
+                              params: {
+                                uid: userId
+                              }
+                            }
+                          )
+                          .then(res => {
+                            console.log(res);
+                            console.log(11111);
+                          });
+                      },
+                      cancel: function() {
+                        //							layer.msg("已取消分享");
+                        alert("1111");
+                      }
+                    });
+                    // 分享朋友
+                    wx.onMenuShareAppMessage({
+                      title: this.data.name, // 分享标题
+                      desc: this.data.centent, // 分享描述
+                      link: this.dqurl, // 分享链接
+                      imgUrl: this.imgLists[0], // 分享图标
+                      type: "link", // 分享类型,music、video或link，不填默认为link
+                      dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                      success: function(data) {
+                        //							layer.msg("分享成功");
+                        alert("1111");
+                        that.$axios
+                          .get(
+                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            {
+                              params: {
+                                uid: userId
+                              }
+                            }
+                          )
+                          .then(res => {
+                            console.log(res);
+                          });
+                      },
+                      cancel: function() {
+                        //							layer.msg("已取消分享");
+                        alert("1111");
+                      }
+                    });
+                  });
+                }
+              })
+              .catch(res => {
+                console.log(res);
+              });
           }
         })
         .catch(() => {
@@ -310,7 +415,7 @@ export default {
   }
 };
 </script>
-<style >
+<style>
 </style>
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
@@ -322,6 +427,7 @@ export default {
   .c-title {
   font-size: 0.32rem;
 }
+
 #datePicker .c-weekdays {
   font-size: 0.28rem;
 }
@@ -331,40 +437,49 @@ export default {
   height: 0.5rem;
   font-size: 0.28rem;
 }
+
 #datePicker .c-day-background {
   height: 0.7rem !important;
 }
+
 .cent_time {
   width: 94.7%;
   height: 1rem;
   line-height: 1rem;
   box-shadow: 0 2px 9px 0 #eeeeee;
 }
+
 .mar_centime {
   margin-left: px2rem(10px);
   font-size: px2rem(14px);
 }
+
 .detail-container {
   width: 100%;
   height: auto;
   background: #fff;
   padding-bottom: 1.5rem;
 }
+
 .list_list {
   width: 100%;
   height: auto;
 }
+
 .detailsBanner {
   height: px2rem(250px);
 }
+
 .detailsBanner img {
   width: 94%;
   height: px2rem(250px);
 }
+
 .detailsBanner img {
   width: 100%;
   height: 100%;
 }
+
 .ban_cent {
   width: 94.7%;
   padding-bottom: 10px;
@@ -373,10 +488,12 @@ export default {
   background: #fff;
   border-radius: 2px;
 }
+
 .name_cent {
   padding: 0.2rem 0.3rem;
   margin-top: px2rem(10px);
 }
+
 .name {
   font-size: px2rem(16px);
   font-weight: bold;
@@ -384,15 +501,18 @@ export default {
   letter-spacing: 0;
   margin-top: 0.8%;
 }
+
 .dollar {
   font-size: px2rem(14px);
   color: #333333;
   letter-spacing: 0;
   margin-left: px2rem(10px);
 }
+
 .name_rent {
   padding: 0rem 0.3rem;
 }
+
 .monthly a {
   color: red;
   font-size: 18px;
@@ -400,12 +520,14 @@ export default {
   line-height: 17px;
   text-decoration: none;
 }
+
 .renewal {
   margin-left: 20px;
   font-size: 12px;
   color: #666666;
   letter-spacing: 0;
 }
+
 .renewal a {
   font-size: 14px;
   color: #000000;
@@ -413,11 +535,13 @@ export default {
   line-height: 17px;
   text-decoration: none;
 }
+
 .name_words {
   padding: 0.1rem 0.2rem;
   font-size: 13px;
   color: #666666;
 }
+
 .name_cate {
   padding: 0rem 0.2rem;
   display: flex;
@@ -427,6 +551,7 @@ export default {
   color: #999999;
   letter-spacing: 0;
 }
+
 .product {
   width: 94.7%;
   height: 1rem;
@@ -436,14 +561,17 @@ export default {
   border-radius: 2px;
   margin: 0.2rem auto 0;
 }
+
 .name_pro {
   font-size: 14px;
   color: #333333;
   letter-spacing: 0;
 }
+
 .name_pro span {
   padding: 0 20px;
 }
+
 .data_name {
   width: 94.7%;
   background: #ffffff;
@@ -452,6 +580,7 @@ export default {
   margin-top: 10px;
   margin: 0.2rem auto 0;
 }
+
 .begin_rent {
   width: 100%;
   height: px2rem(45px);
@@ -464,6 +593,7 @@ export default {
     font-size: px2rem(14px);
   }
 }
+
 .name_credit {
   width: 100%;
   height: px2rem(55px);
@@ -473,12 +603,14 @@ export default {
   align-items: center;
   padding: 0 20px;
 }
+
 .sesame {
   font-size: px2rem(14px);
   color: #00a5ff;
   letter-spacing: 0;
   padding: 0 20px;
 }
+
 .sign {
   font-size: 14px;
   color: #fd4689;
@@ -494,7 +626,6 @@ export default {
 .increase {
   height: 26px;
   width: 26px;
-
   display: inline-block;
   vertical-align: middle;
 }
@@ -508,12 +639,15 @@ export default {
   border: none;
   color: #fff;
 }
+
 .decrease,
 .increase {
   display: inline-block;
   vertical-align: middle;
-  -moz-box-shadow: 0 0 2px #999 inset; /* For Firefox3.6+ */
-  -webkit-box-shadow: 0 0 2px #999 inset; /* For Chrome5+, Safari5+ */
+  -moz-box-shadow: 0 0 2px #999 inset;
+  /* For Firefox3.6+ */
+  -webkit-box-shadow: 0 0 2px #999 inset;
+  /* For Chrome5+, Safari5+ */
   box-shadow: 0 0 2px #999 inset;
   color: #e5312a;
   line-height: 26px;
@@ -524,9 +658,11 @@ export default {
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
 }
+
 .disable {
   background-color: #eee;
 }
+
 .increase {
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;

@@ -39,26 +39,6 @@
              :data-clipboard-text="$route.query.images">
       </div>
     </div>
-    <!-- <confirm v-model="show3"
-             show-input
-             :title="$t('Confirm deleting the item')"
-             :input-attrs="{type: 'number'}"
-             @on-cancel="onCancel"
-             @on-confirm="onConfirm"
-             @on-show="onShow"
-             @on-hide="onHide">
-    </confirm> -->
-    <!-- <div v-transfer-dom>
-      <confirm v-model="show3"
-               show-input
-               :title="$t('Confirm deleting the item')"
-               :input-attrs="{type: 'number'}"
-               @on-cancel="onCancel"
-               @on-confirm="onConfirm"
-               @on-show="onShow"
-               @on-hide="onHide">
-      </confirm>
-    </div> -->
   </div>
 </template>
 
@@ -119,19 +99,8 @@ export default {
   },
   methods: {
     baiducloud() {
-      // MessageBox({
-      //   title: "提示",
-      //   message: "密码:4sC7,点击确定继续前往",
-      //   showCancelButton: true,
-      //   showConfirmButton: true
-      // });
-
-      MessageBox.confirm("密码:4sC7,点击确定继续前往", {
-        // title: "提示",
-        // message: "密码:4sC7,点击确定继续前往"
-        // confirmButtonText: "123",
-        // cancelButtonText: "asd"
-      })
+      //百度云下载调用方法 确定 取消
+      MessageBox.confirm("密码:4sC7,点击确定继续前往", {})
         .then(action => {
           if (action == "confirm") {
             window.location.href =
@@ -142,48 +111,6 @@ export default {
         .catch(err => {
           console.log("取消");
         });
-      // MessageBox.confirm("确定执行此操作？").then(action => {
-
-      //  title: "提示",
-      // message: "密码:4sC7,点击确定继续前往",
-      // showCancelButton: true,
-      // showConfirmButton: true
-      // if (showCancelButton == true) {
-      //   window.location.href =
-      //     "https://pan.baidu.com/s/1TlvRtDtQSK3A4Ba_nBIRJg";
-      // } else {
-      //   alert("取消");
-      // }
-      // });
-      // if (showCancelButton == true) {
-      //   window.location.href =
-      //     "https://pan.baidu.com/s/1TlvRtDtQSK3A4Ba_nBIRJg";
-      // } else {
-      //   alert("取消");
-      // }
-      // alert();
-      // alert("百度云盘密码:4sC7");
-      // window.location.href = "https://pan.baidu.com/s/1TlvRtDtQSK3A4Ba_nBIRJg";
-      // const _this = this; // 需要注意 onCancel 和 onConfirm 的 this 指向
-      // this.$vux.confirm.show({
-      // 组件除show外的属性
-      // onCancel() {
-      //   console.log(this); // 非当前 vm
-      //   console.log(_this); // 当前 vm
-      // },
-      // onConfirm() {}
-      // });
-      // 隐藏
-      // this.$vux.confirm.hide();
-      // prompt形式调用
-      // this.$vux.confirm.prompt("placeholder", {
-      //   onCancel() {},
-      //   onConfirm() {}
-      // });
-      // 设置输入值
-      // this.$vux.confirm.setInputValue("value"); // 注意需要在 onShow 事件中执行
-      // 获取显示状态
-      // this.$vux.confirm.isVisible(); // v2.9.1 支持
     },
     playerReadied(player) {
       const track = new videojs.AudioTrack({

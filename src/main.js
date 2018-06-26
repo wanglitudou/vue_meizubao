@@ -27,7 +27,7 @@ import { Checklist } from "mint-ui";
 import { WechatPlugin, AjaxPlugin } from "vux";
 import { Confirm } from "vux";
 Vue.use(WechatPlugin);
-// console.log(Vue.wechat);
+console.log(Vue.wechat);
 
 Vue.use(AjaxPlugin);
 import { Datetime, Group } from "vux";

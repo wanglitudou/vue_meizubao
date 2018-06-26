@@ -26,7 +26,6 @@
           <img :src="data.imgOne"
                alt="">
         </span>
-
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
@@ -99,7 +98,6 @@ export default {
     return {
       data: {
         //其他
-
         headimg: "",
         manage_years: "",
         manage_area: "",
