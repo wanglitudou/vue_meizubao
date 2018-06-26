@@ -328,7 +328,7 @@ export default {
                   that.dataList.dataUrl = res.data.data.dataUrl;
                   that.dataList.signature = res.data.data.signature;
                   wx.config({
-                    debug: true,
+                    debug: false,
                     appId: that.dataList.appId,
                     timestamp: that.dataList.timestamp,
                     nonceStr: that.dataList.nonceStr,
@@ -357,7 +357,7 @@ export default {
                             "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
                             {
                               params: {
-                                uid: userId
+                                uid: that.userId
                               }
                             }
                           )
@@ -387,7 +387,7 @@ export default {
                             "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
                             {
                               params: {
-                                uid: userId
+                                uid: that.userId
                               }
                             }
                           )
