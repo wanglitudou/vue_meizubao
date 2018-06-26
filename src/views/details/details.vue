@@ -119,7 +119,9 @@ export default {
   created() {},
   mounted() {
     this.init();
+    //获取userid
     this.userId = localStorage.getItem("id");
+    //获取当前浏览器的地址
     this.dqurl = window.location.href;
 
     //签名
@@ -351,7 +353,7 @@ export default {
                       dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                       success: function(data) {
                         //							layer.msg("分享成功");
-                        alert("1111");
+                        //													alert("1111")
                         that.$axios
                           .get(
                             "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
@@ -368,7 +370,7 @@ export default {
                       },
                       cancel: function() {
                         //							layer.msg("已取消分享");
-                        alert("1111");
+                        //													alert("1111")
                       }
                     });
                     // 分享朋友
@@ -381,7 +383,7 @@ export default {
                       dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                       success: function(data) {
                         //							layer.msg("分享成功");
-                        alert("1111");
+                        //													alert("1111")
                         that.$axios
                           .get(
                             "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
@@ -397,7 +399,7 @@ export default {
                       },
                       cancel: function() {
                         //							layer.msg("已取消分享");
-                        alert("1111");
+                        //													alert("1111")
                       }
                     });
                   });

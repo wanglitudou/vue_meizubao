@@ -77,20 +77,20 @@
         </div>
         <div class="year_rig">
           <p class="new_year">
-            <span class="new_name yearBtn year1"
-                  vl="year1">新开业</span>
-            <span class="new_name yearBtn year2"
-                  vl="year2">1年以内</span>
-            <span class="new_name yearBtn year3"
-                  vl="year3">1~3年</span>
+            <span class="new_name yearBtn 新开业"
+                  vl="新开业">新开业</span>
+            <span class="new_name yearBtn 1年以内"
+                  vl="1年以内">1年以内</span>
+            <span class="new_name yearBtn 1~3年"
+                  vl="1~3年">1~3年</span>
           </p>
           <p class="year_new">
-            <span class="new_name yearBtn year4"
-                  vl="year4">3~5年</span>
-            <span class="new_name yearBtn year5"
-                  vl="year5">5~10年</span>
-            <span class="new_name yearBtn year6"
-                  vl="year6">10年以上</span>
+            <span class="new_name yearBtn 3~5年"
+                  vl="3~5年">3~5年</span>
+            <span class="new_name yearBtn 5~10年"
+                  vl="5~10年">5~10年</span>
+            <span class="new_name yearBtn 10年以上"
+                  vl="10年以上">10年以上</span>
           </p>
         </div>
       </div>
@@ -100,21 +100,21 @@
         </div>
         <div class="year_rig">
           <p class="new_year">
-            <span class="new_name areBtn are1"
-                  vl="are1">50</span>
-            <span class="new_name areBtn are2"
-                  vl="are2">50-100</span>
+            <span class="new_name areBtn 50"
+                  vl="50">50</span>
+            <span class="new_name areBtn 50-100"
+                  vl="50-100">50-100</span>
 
-            <span class="new_name areBtn are3"
-                  vl="are3">100-200</span>
+            <span class="new_name areBtn 100-200"
+                  vl="100-200">100-200</span>
           </p>
           <p class="year_new">
-            <span class="new_name areBtn are4"
-                  vl="are4">200-500</span>
-            <span class="new_name areBtn are5"
-                  vl="are5">500-1000</span>
-            <span class="new_name areBtn are6"
-                  vl="are6">1000以上</span>
+            <span class="new_name areBtn 200-500"
+                  vl="200-500">200-500</span>
+            <span class="new_name areBtn 500-1000"
+                  vl="500-1000">500-1000</span>
+            <span class="new_name areBtn 1000以上"
+                  vl="1000以上">1000以上</span>
           </p>
         </div>
       </div>
@@ -194,7 +194,7 @@ export default {
           console.log(res.data.data);
           // that.data.id="",//用户id
           //  that.data.headimg="",//头像
-          that.data.name = res.data.data.nickname;
+          that.data.name = res.data.data.user_name;
           that.data.age = res.data.data.age;
           that.data.phone = res.data.data.telephone;
           that.data.shop = res.data.data.store_name;
@@ -204,14 +204,16 @@ export default {
           that.data.manage_years = res.data.data.manage_years; //经营年限
           that.data.manage_area = res.data.data.manage_area; //经营面积
           that.lists = res.data.data;
-
           $("." + res.data.data.manage_years).addClass("yearActive");
           $("." + res.data.data.manage_area).addClass("yearActive");
         }
         //如果verify_status==4  跳转到个人信息页面
-        if (res.data.data.verify_status === 4) {
+        console.log(res.verify_status);
+        if (res.data.data.verify_status !== 4) {
+          // alert("666" if (res.data.data.verify_status !== 4) {
+          // alert("666");
           // that.$router.push()
-          that.$router.push({ name: "information" });
+          // that.$router.push({ name: "information" });
           console.log("111");
         } else {
           console.log("lalalla");
@@ -233,14 +235,14 @@ export default {
         Toast("请输入正确的格式姓名");
         return false;
       }
-      if (
-        !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
-          that.data.birthdate
-        )
-      ) {
-        Toast("请输入正确的格式生日");
-        return false;
-      }
+      // if (
+      //   !/^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/.test(
+      //     that.data.birthdate
+      //   )
+      // ) {
+      //   Toast("请输入正确的格式生日");
+      //   return false;
+      // }
       if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(that.data.phone)) {
         Toast("请输入正确的手机号格式");
         return false;
@@ -350,7 +352,7 @@ export default {
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
-          nickname: that.data.name,
+          user_name: that.data.name,
           age: that.data.age,
           birthdate: that.data.birthday,
           telephone: that.data.phone,

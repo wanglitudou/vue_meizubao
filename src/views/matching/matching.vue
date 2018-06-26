@@ -74,12 +74,23 @@ export default {
     return {
       imgLists: [], //banner
       data: [],
-      number: 1
+      number: 1,
+      dataList: {
+        appId: "",
+        nonceStr: "",
+        timestamp: null,
+        dataUrl: "",
+        signature: ""
+      },
+      userId: null,
+      dqurl: ""
     };
   },
 
   mounted() {
     this.init();
+    this.userId = localStorage.getItem("id");
+    this.dqurl = window.location.href;
   },
   methods: {
     decrease: function() {
@@ -146,14 +157,112 @@ export default {
     init() {
       this.$axios
         .get(window.ajaxSrc + "/api/meizubao/productDetail", {
-          params: { id: this.$route.query.pid }
+          params: {
+            id: this.$route.query.pid
+          }
         })
         .then(res => {
           console.log(res.data.status_code == "1001", "ffff");
+          console.log(res.data.data);
           if (res.data.status_code == "1001") {
             this.data = res.data.data;
             this.imgLists = res.data.data.images;
-            console.log(imgLists, "hhhh");
+            console.log(this.imgLists[0], "hhhh");
+
+            //微信分享
+            let that = this;
+            that.$axios
+              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+                params: {
+                  http: location.href
+                }
+              })
+              .then(res => {
+                if (res.data.status_code == 1001) {
+                  that.dataList.appId = res.data.data.appId;
+                  that.dataList.nonceStr = res.data.data.nonceStr;
+                  that.dataList.timestamp = res.data.data.timestamp;
+                  that.dataList.dataUrl = res.data.data.dataUrl;
+                  that.dataList.signature = res.data.data.signature;
+                  wx.config({
+                    debug: false,
+                    appId: that.dataList.appId,
+                    timestamp: that.dataList.timestamp,
+                    nonceStr: that.dataList.nonceStr,
+                    signature: that.dataList.signature,
+                    jsApiList: [
+                      //需要使用的网页服务接口
+                      //									"checkJsApi", //判断当前客户端版本是否支持指定JS接口
+                      "onMenuShareTimeline", //分享给好友
+                      "onMenuShareAppMessage" //分享到朋友圈
+                    ]
+                  });
+                  wx.ready(function() {
+                    // 分享朋友圈
+                    wx.onMenuShareTimeline({
+                      title: that.data.name, // 分享标题
+                      desc: that.data.details, // 分享描述
+                      link: that.dqurl, // 分享链接
+                      imgUrl: that.imgLists[0], // 分享图标
+                      type: "link", // 分享类型,music、video或link，不填默认为link
+                      dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                      success: function(data) {
+                        //							layer.msg("分享成功");
+                        //													alert("1111")
+                        that.$axios
+                          .get(
+                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            {
+                              params: {
+                                uid: that.userId
+                              }
+                            }
+                          )
+                          .then(res => {
+                            console.log(res);
+                            console.log(11111);
+                          });
+                      },
+                      cancel: function() {
+                        //							layer.msg("已取消分享");
+                        //													alert("1111")
+                      }
+                    });
+                    // 分享朋友
+                    wx.onMenuShareAppMessage({
+                      title: that.data.name, // 分享标题
+                      desc: that.data.details, // 分享描述
+                      link: that.dqurl, // 分享链接
+                      imgUrl: that.imgLists[0], // 分享图标
+                      type: "link", // 分享类型,music、video或link，不填默认为link
+                      dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                      success: function(data) {
+                        //							layer.msg("分享成功");
+                        //													alert("1111")
+                        that.$axios
+                          .get(
+                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            {
+                              params: {
+                                uid: that.userId
+                              }
+                            }
+                          )
+                          .then(res => {
+                            console.log(res);
+                          });
+                      },
+                      cancel: function() {
+                        //							layer.msg("已取消分享");
+                        //													alert("1111")
+                      }
+                    });
+                  });
+                }
+              })
+              .catch(res => {
+                console.log(res);
+              });
           }
         })
         .catch(() => {
@@ -190,9 +299,11 @@ export default {
   width: 94%;
   height: px2rem(250px);
 }
+
 .matchBanner img {
   width: 100%;
 }
+
 .pro_name {
   height: px2rem(47px);
   line-height: px2rem(47px);
@@ -319,7 +430,6 @@ export default {
 .increase {
   height: 26px;
   width: 26px;
-
   display: inline-block;
   vertical-align: middle;
 }
@@ -338,8 +448,10 @@ export default {
 .increase {
   display: inline-block;
   vertical-align: middle;
-  -moz-box-shadow: 0 0 2px #999 inset; /* For Firefox3.6+ */
-  -webkit-box-shadow: 0 0 2px #999 inset; /* For Chrome5+, Safari5+ */
+  -moz-box-shadow: 0 0 2px #999 inset;
+  /* For Firefox3.6+ */
+  -webkit-box-shadow: 0 0 2px #999 inset;
+  /* For Chrome5+, Safari5+ */
   box-shadow: 0 0 2px #999 inset;
   color: #e5312a;
   line-height: 26px;

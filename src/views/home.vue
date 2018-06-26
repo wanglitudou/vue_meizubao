@@ -164,15 +164,7 @@ export default {
       beautyindustry: [], //美业菁英
       accessoryproducts: [], //配套产品
       cooperativeProject: [], //合作项目
-      visualscreen: [], //培训视屏
-      dataList: {
-        appId: "",
-        nonceStr: "",
-        timestamp: null,
-        dataUrl: "",
-        signature: ""
-      },
-      userId: null
+      visualscreen: [] //培训视屏
     };
   },
   created() {
@@ -198,105 +190,9 @@ export default {
     that.getProduct(); //配套产品
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
-    //微信分享
-    that.wxshare();
-    //获取userid
-    this.userId = localStorage.getItem("id");
   },
   mounted: function() {},
   methods: {
-    //微信分享
-    wxshare() {
-      let that = this;
-      that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
-          params: {
-            http: location.href
-          }
-        })
-        .then(res => {
-          if (res.data.status_code == 1001) {
-            console.log(res.data.data);
-            that.dataList.appId = res.data.data.appId;
-            that.dataList.nonceStr = res.data.data.nonceStr;
-            that.dataList.timestamp = res.data.data.timestamp;
-            that.dataList.dataUrl = res.data.data.dataUrl;
-            that.dataList.signature = res.data.data.signature;
-            wx.config({
-              debug: false,
-              appId: that.dataList.appId,
-              timestamp: that.dataList.timestamp,
-              nonceStr: that.dataList.nonceStr,
-              signature: that.dataList.signature,
-              jsApiList: [
-                //需要使用的网页服务接口
-                //									"checkJsApi", //判断当前客户端版本是否支持指定JS接口
-                "onMenuShareTimeline", //分享给好友
-                "onMenuShareAppMessage" //分享到朋友圈
-              ]
-            });
-            wx.ready(function() {
-              // 分享朋友圈
-              wx.onMenuShareTimeline({
-                title: "分享标题", // 分享标题
-                desc: "分享描述", // 分享描述
-                link: "http://mzbao.weiyingjia.org/", // 分享链接
-                imgUrl: "https://www.baidu.com/img/baidu_jgylogo3.gif", // 分享图标
-                type: "link", // 分享类型,music、video或link，不填默认为link
-                dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
-                success: function(data) {
-                  //							layer.msg("分享成功");
-                  alert("1111");
-                  that.$axios
-                    .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
-                      params: {
-                        uid: userId
-                      }
-                    })
-                    .then(res => {
-                      console.log(res);
-                      console.log(11111);
-                    });
-                },
-                cancel: function() {
-                  //							layer.msg("已取消分享");
-                  alert("1111");
-                }
-              });
-              // 分享朋友
-              wx.onMenuShareAppMessage({
-                title: "分享标题", // 分享标题
-                desc: "分享描述", // 分享描述
-                link: "http://mzbao.weiyingjia.org/", // 分享链接
-                imgUrl: "https://www.baidu.com/img/baidu_jgylogo3.gif", // 分享图标
-                type: "link", // 分享类型,music、video或link，不填默认为link
-                dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
-                success: function(data) {
-                  //							layer.msg("分享成功");
-                  alert("1111");
-                  that.$axios
-                    .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
-                      params: {
-                        uid: userId
-                      }
-                    })
-                    .then(res => {
-                      console.log(res);
-                    });
-                },
-                cancel: function() {
-                  //							layer.msg("已取消分享");
-                  alert("1111");
-                }
-              });
-            });
-          }
-        })
-        .catch(res => {
-          console.log(res);
-        });
-    },
-
     //获取地址栏参数
     GetQueryString(name) {
       var reg = new RegExp("(^|&?)" + name + "=([^&]*)(&|$)");

@@ -102,28 +102,28 @@ export default {
     // console.log(headImg);
   },
   methods: {
-    getname() {
-      let that = this;
-      that.$axios
-        .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
-            localStorage.id
-        )
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            // that.data.imgOne = res.data.data.card_behind;
-            // that.data.imgtwo = res.data.data.business_license;
-            // that.data.imgthree = res.data.data.card_front;
-            // that.data.imgfour = res.data.data.store_image;
-            // that.data.id_card = res.data.data.id_card;
-            // that.data.home_address = res.data.data.home_address;
-          }
-        })
-        .catch(() => {
-          console.log("查询失败");
-        });
-    },
+    // getname() {
+    //   let that = this;
+    //   that.$axios
+    //     .get(
+    //       "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+    //         localStorage.id
+    //     )
+    //     .then(res => {
+    //       console.log(res);
+    //       if (res.data.status_code == 1001) {
+    //         // that.data.imgOne = res.data.data.card_behind;
+    //         // that.data.imgtwo = res.data.data.business_license;
+    //         // that.data.imgthree = res.data.data.card_front;
+    //         // that.data.imgfour = res.data.data.store_image;
+    //         // that.data.id_card = res.data.data.id_card;
+    //         // that.data.home_address = res.data.data.home_address;
+    //       }
+    //     })
+    //     .catch(() => {
+    //       console.log("查询失败");
+    //     });
+    // },
     //我的课程
     curriculum() {
       //点击我的课程时 跳到对应的页面
@@ -137,14 +137,42 @@ export default {
     address() {
       this.$router.push({ name: "address" });
     },
-
     //资料库
     photograph() {
       this.$router.push({ name: "photograph" });
     },
     //完善信息
     Perfectinformation() {
-      this.$router.push({ name: "information" });
+      console.log("888");
+      let that = this;
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+            localStorage.id
+        )
+        .then(res => {
+          console.log(res);
+
+          if (res.data.status_code == 1001) {
+            console.log(res.data.data.verify_status);
+            if (res.data.data.verify_status != 4) {
+              this.$router.push({ name: "information" });
+            }
+            // that.data.imgOne = res.data.data.card_behind;
+            // that.data.imgtwo = res.data.data.business_license;
+            // that.data.imgthree = res.data.data.card_front;
+            // that.data.imgfour = res.data.data.store_image;
+            // that.data.id_card = res.data.data.id_card;
+            // that.data.home_address = res.data.data.home_address;
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+
+      // alert("wode ");
+      // let that = this;
+      // this.$router.push({ name: "information" });
     }
   }
 };

@@ -50,6 +50,7 @@ import { MessageBox, Toast } from "mint-ui";
 export default {
   data() {
     return {
+      data_data: true,
       list: [],
       selectedNumber: 1
       // radio2: ""
@@ -79,7 +80,12 @@ export default {
         });
     }
   },
-
+  created() {
+    // console.log(this.$route.query.data_data);
+    if (this.$route.query.data_data == 1) {
+      console.log("asdfg11qqqq");
+    }
+  },
   mounted() {
     this.getList();
   },

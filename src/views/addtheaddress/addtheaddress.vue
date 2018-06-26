@@ -16,22 +16,12 @@
                  v-model="telephone"
                  class="inp"></span>
       </p>
-      <!--<p class="collect_bet">
-				<span>所在地区 {{province}}{{city}}{{area}}</span>
-				<span @click="levl()">请选择
+      <p class="collect_bet">
+        <span>所在地区 {{province}}{{city}}{{area}}</span>
+        <span @click="toShow()">请选择
           <i class="icon_right_img"><img src="../../assets/icon/more.png"
                  alt=""></i>
         </span>
-			</p>-->
-      <p class="collect_bet">
-        <x-address title=""
-                   hide-district
-                   v-model="site"
-                   raw-value
-                   :list="addressData"
-                   value-text-align="left"
-                   label-align="justify"
-                   placeholder="请选择您希望她/他的居住地"></x-address>
       </p>
       <p class="detail_address">
         <span class="detail_add">
@@ -55,10 +45,16 @@
         保存
       </span>
     </div>
-    <vue-pickers :show="show1"
+    <!-- <vue-pickers :show="show1"
                  :selectData="pickData3"
                  v-on:cancel="close"
-                 v-on:confirm="confirmFn"></vue-pickers>
+                 v-on:confirm="confirmFn"></vue-pickers> -->
+    <vue-pickers :show="show"
+                 :link="link"
+                 :columns="columns"
+                 :selectData="pickData"
+                 @cancel="close"
+                 @confirm="confirmFn"></vue-pickers>
   </div>
 </template>
 <script>
@@ -67,44 +63,25 @@ import { Picker, Toast } from "mint-ui";
 import { Checklist } from "mint-ui";
 import VuePickers from "vue-pickers";
 import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
-import {
-  GroupTitle,
-  Group,
-  Cell,
-  XInput,
-  Selector,
-  PopupPicker,
-  Datetime,
-  XNumber,
-  ChinaAddressData,
-  XAddress,
-  XTextarea,
-  XSwitch
-} from "vux";
+
 export default {
   components: {
-    Group,
-    GroupTitle,
-    Cell,
-    XInput,
-    Selector,
-    PopupPicker,
-    XAddress,
-    Datetime,
-    XNumber,
-    XTextarea,
-    XSwitch
+    VuePickers
   },
   data() {
     return {
-      checked: true,
+      checked: false,
       show1: false,
-      pickData3: {
-        columns: 3,
-        link: true,
-        pData1: provs_data,
-        pData2: citys_data,
-        pData3: dists_data
+      show: false,
+      isCopy: "",
+      res: null,
+      show: false,
+      columns: 3,
+      link: true,
+      pickData: {
+        data1: provs_data,
+        data2: citys_data,
+        data3: dists_data
       },
       province: "",
       city: "",
@@ -112,8 +89,7 @@ export default {
       address: "",
       consignee: "",
       telephone: "",
-      site: [],
-      addressData: ChinaAddressData
+      site: []
     };
   },
   computed: {
@@ -138,6 +114,9 @@ export default {
             that.consignee = res.data.data.user_name;
             that.telephone = res.data.data.mobile;
             that.address = res.data.data.address;
+            res.data.data.is_default_address == 1
+              ? (this.checked = true)
+              : (this.checked = false);
             console.log(that.consignee);
             console.log(that.telephone);
             console.log(that.address);
@@ -154,12 +133,16 @@ export default {
   methods: {
     close() {
       this.show1 = false;
+      this.show = false;
+    },
+    toShow() {
+      this.show = true;
     },
     confirmFn(e) {
       this.province = e.select1.text;
       this.city = e.select2.text;
       this.area = e.select3.text;
-      this.show1 = false;
+      this.show = false;
     },
     sive() {
       if (this.$route.query.type == "edit") {
