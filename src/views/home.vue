@@ -329,6 +329,7 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
         .then(res => {
+        
           //						console.log(res);
           if (res.data.status_code == 1001) {
             that.beautyindustry = res.data.data;

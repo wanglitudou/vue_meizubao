@@ -27,6 +27,7 @@ import curriculum from "../views/curriculum/curriculum.vue";
 import coursepage from "../views/coursepage/coursepage.vue";
 import integral from "../views/integral/integral.vue";
 import address from "../views/address/address.vue";
+import addresssite from "../views/address/addresssite.vue";
 import customservice from "../views/customservice/customservice.vue";
 import viewscreen from "../views/viewscreen/viewscreen.vue";
 import photograph from "../views/photograph/photograph.vue";
@@ -34,9 +35,9 @@ import pageindustry from "../views/pageindustry/pageindustry.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
 import mediaDetails from "../views/photograph/mediaDetails.vue";
 import search from "../views/search/search.vue";
-import dataBase from '../views/dataBase/index.vue';
-import qian from '../views/qian/qian.vue';
-import phone from '../views/phone.vue'
+import dataBase from "../views/dataBase/index.vue";
+import qian from "../views/qian/qian.vue";
+import phone from "../views/phone.vue";
 
 let routes = [
   {
@@ -202,6 +203,14 @@ let routes = [
     component: address
   },
   {
+    name: "addresssite",
+    path: "/addresssite",
+    meta: {
+      title: "我的地址"
+    },
+    component: addresssite
+  },
+  {
     name: "customservice",
     path: "/customservice",
     component: customservice
@@ -279,9 +288,9 @@ let routes = [
     path: "/phone/:id",
     component: phone,
     meta: {
-      title: ''
+      title: ""
     }
-  },
+  }
 
   // {
   //   name: "mine",

@@ -41,6 +41,7 @@ export default {
   props: ["type", "saveAddressId"],
   mounted() {
     this.init();
+    console.log(this.$route.params.siteId);
   },
   methods: {
     init() {
@@ -62,10 +63,10 @@ export default {
     },
     jumpToAddress() {
       this.$router.push({
-        path: "/address",
-        query: {
-          data_data: 1
-        }
+        path: "/addresssite"
+        // query: {
+        //   data_data: 1
+        // }
       });
       // this.$router.push({ name: "mine" });
 
