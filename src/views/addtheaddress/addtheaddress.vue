@@ -67,34 +67,34 @@ import { Picker, Toast } from "mint-ui";
 import { Checklist } from "mint-ui";
 import VuePickers from "vue-pickers";
 import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
-import {
-  GroupTitle,
-  Group,
-  Cell,
-  XInput,
-  Selector,
-  PopupPicker,
-  Datetime,
-  XNumber,
-  ChinaAddressData,
-  XAddress,
-  XTextarea,
-  XSwitch
-} from "vux";
+// import {
+//   GroupTitle,
+//   Group,
+//   Cell,
+//   XInput,
+//   Selector,
+//   PopupPicker,
+//   Datetime,
+//   XNumber,
+//   ChinaAddressData,
+//   XAddress,
+//   XTextarea,
+//   XSwitch
+// } from "vux";
 export default {
-  components: {
-    Group,
-    GroupTitle,
-    Cell,
-    XInput,
-    Selector,
-    PopupPicker,
-    XAddress,
-    Datetime,
-    XNumber,
-    XTextarea,
-    XSwitch
-  },
+  // components: {
+  //   Group,
+  //   GroupTitle,
+  //   Cell,
+  //   XInput,
+  //   Selector,
+  //   PopupPicker,
+  //   XAddress,
+  //   Datetime,
+  //   XNumber,
+  //   XTextarea,
+  //   XSwitch
+  // },
   data() {
     return {
       checked: true,

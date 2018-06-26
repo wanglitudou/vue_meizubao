@@ -22,14 +22,14 @@ select address:
 </i18n>
 
 <script>
-import {
-  Group,
-  XAddress,
-  ChinaAddressV4Data,
-  XButton,
-  Cell,
-  Value2nameFilter as value2name
-} from "vux";
+// import {
+//   Group,
+//   XAddress,
+//   ChinaAddressV4Data,
+//   XButton,
+//   Cell,
+//   Value2nameFilter as value2name
+// } from "vux";
 
 export default {
   components: {

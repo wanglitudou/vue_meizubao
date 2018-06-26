@@ -23,16 +23,7 @@ import "mint-ui/lib/style.css";
 import "./components/js/jquery-2.1.0";
 import { Checklist } from "mint-ui";
 
-//引入vux
-import { WechatPlugin, AjaxPlugin } from "vux";
-import { Confirm } from "vux";
-Vue.use(WechatPlugin);
-console.log(Vue.wechat);
 
-Vue.use(AjaxPlugin);
-import { Datetime, Group } from "vux";
-Vue.component(Datetime.name, Datetime);
-Vue.component(Group.name, Group);
 
 //引入新的日历插件
 import VCalendar from "v-calendar";
@@ -61,8 +52,12 @@ Vue.prototype.$axios = axios;
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
-//瀑布流
-
+//动态修改title
+Vue.directive('title', {
+  inserted: function (el, binding) {
+    document.title = binding.value;
+  }
+});
 //新的日历插件
 Vue.use(VCalendar, {
   firstDayOfWeek: 1, // Monday
@@ -97,15 +92,16 @@ Date.prototype.Format = function(fmt) {
   return fmt;
 };
 
-// import { VueMasonryPlugin } from "vue-masonry";
+import { VueMasonryPlugin } from "vue-masonry";
 
-// Vue.use(VueMasonryPlugin);
+Vue.use(VueMasonryPlugin);
 Vue.use(MintUI);
-
+import store from './store';
 // eslint-disable no-new
 new Vue({
   el: "#app",
   router,
+  store,
   components: { App },
   template: "<App/>"
 });

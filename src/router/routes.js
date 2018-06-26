@@ -34,8 +34,10 @@ import pageindustry from "../views/pageindustry/pageindustry.vue";
 import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
 import mediaDetails from "../views/photograph/mediaDetails.vue";
 import search from "../views/search/search.vue";
-import dataBase from "../views/dataBase/index.vue";
-import qian from "../views/qian/qian.vue";
+import dataBase from '../views/dataBase/index.vue';
+import qian from '../views/qian/qian.vue';
+import phone from '../views/phone.vue'
+
 let routes = [
   {
     path: "/",
@@ -271,7 +273,16 @@ let routes = [
     name: "qian",
     path: "/qian",
     component: qian
-  }
+  },
+  {
+    name: "phone",
+    path: "/phone/:id",
+    component: phone,
+    meta: {
+      title: ''
+    }
+  },
+
   // {
   //   name: "mine",
   //   path: "mine",

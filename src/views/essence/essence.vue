@@ -238,17 +238,22 @@
     },
 
     createDisableDate: function() {
+        let timeArr = []
       for (var arr of this.data.appointmentTime) {
         let temArr = { start: new Date(arr[0]), end: new Date(arr[1]) };
-        this.disableDate.push(temArr);
+        // console.log(temArr)
+        timeArr.push(temArr);
       }
-      let temArr = {
+      let temArrs = {
         start: null,
         end: new Date(
           new Date().getTime() + (setUpTime - 1) * 24 * 60 * 60 * 1000
         )
       };
-      this.disableDate.push(temArr);
+      
+      this.disableDate.push(temArrs);
+      this.disableDate.concat(timeArr)
+    
     }
   }
 };

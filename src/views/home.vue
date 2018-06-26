@@ -5,12 +5,9 @@
       <div class="banner">
         <mt-swipe :auto="4000">
 
-          <mt-swipe-item v-for="(item,index) in url"
-                         :key="index">
-            <a target='_blank'
-               :href='item.url'>
-              <img :src="item.images"
-                   alt="">
+          <mt-swipe-item v-for="(item,index) in url" :key="index">
+            <a target='_blank' :href='item.url'>
+              <img :src="item.images" alt="">
             </a>
             <!-- <a href=""></a> -->
           </mt-swipe-item>
@@ -19,12 +16,9 @@
       </div>
       <!-- 搜索 -->
       <div class="search_contents">
-        <div class="list_search"
-             ref="search"
-             @click="toSearch">
+        <div class="list_search" ref="search" @click="toSearch">
           <div style="margin-left:20px;">请输入搜索</div>
-          <img src="../assets/icon/search_1.png"
-               alt="111">
+          <img src="../assets/icon/search_1.png" alt="111">
         </div>
       </div>
       <div class="list_btn">
@@ -37,18 +31,13 @@
         </div>
         <!-- 内容-->
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in rentinginstrument"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="details(item.id)">
+          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
+            <img :src="item.images" alt="" @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
         <!-- 查看更多 -->
-        <div class="hot_cent"
-             @click="detail()">
+        <div class="hot_cent" @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
@@ -62,17 +51,12 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in beautyindustry"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="essence(item.id)">
+          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
+            <img :src="item.images" alt="" @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent"
-             @click="looksee()">
+        <div class="hot_cent" @click="looksee()">
           <span>查看更多></span>
         </div>
       </div>
@@ -85,19 +69,14 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in accessoryproducts"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="matching(item.id)">
+          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
+            <img :src="item.images" alt="" @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
 
         </div>
-        <div class="hot_cent"
-             @click="seemore()">
+        <div class="hot_cent" @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -110,18 +89,13 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in visualscreen"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="train(item.id)">
+          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
+            <img :src="item.images" alt="" @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent"
-             @click="seemore()">
+        <div class="hot_cent" @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -134,18 +108,13 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in cooperativeProject"
-               :key="item.index">
-            <img :src="item.images"
-                 alt=""
-                 @click="cooperation(item.id)">
+          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
+            <img :src="item.images" alt="" @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent"
-             @click="clickpay()">
+        <div class="hot_cent" @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -156,6 +125,7 @@
 <script>
 import { Indicator } from "mint-ui";
 import { Swipe, SwipeItem } from "mint-ui";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -165,6 +135,9 @@ export default {
       accessoryproducts: [], //配套产品
       cooperativeProject: [], //合作项目
       visualscreen: [], //培训视屏
+
+      aa: "",
+
       dataList: {
         appId: "",
         nonceStr: "",
@@ -175,7 +148,11 @@ export default {
       userId: null
     };
   },
+  computed: {
+    ...mapGetters(["hasPhoneNum"])
+  },
   created() {
+  
     Indicator.open();
     setTimeout(() => {
       Indicator.close();
@@ -204,7 +181,22 @@ export default {
     this.userId = localStorage.getItem("id");
   },
   mounted: function() {},
+  watch: {
+    aa() {
+      //  let a  =1
+      console.log(this.aa);
+      if (!this.aa) {
+        console.log(2323);
+        this.$router.push({
+          path: `/phone/${1}`
+        });
+      } else {
+        console.log(3213213213213213);
+      }
+    }
+  },
   methods: {
+    ...mapActions(["setPhoneNum"]),
     //微信分享
     wxshare() {
       let that = this;
@@ -415,21 +407,30 @@ export default {
             window.location.href = _url;
             var str = window.location.href;
           } else if (res.data.status_code == "1001") {
+            // if (!res.data.data.tel) {
+            localStorage.openid = res.data.data.openid;
+            localStorage.tel = res.data.data.tel;
+            localStorage.id = res.data.data.id;
+            sessionStorage.token = res.data.data.token;
+            localStorage.headimg = res.data.data.headimg;
+            console.log(localStorage.headimg);
+            sessionStorage.bbb = true;
+            this.setPhoneNum(res.data.data.tel);
             if (!res.data.data.tel) {
-              localStorage.openid = res.data.data.openid;
-              localStorage.tel = res.data.data.tel;
-              localStorage.id = res.data.data.id;
-              sessionStorage.token = res.data.data.token;
-              localStorage.headimg = res.data.data.headimg;
-              console.log(localStorage.headimg);
-              if (code) {
-                sessionStorage.aaa = true;
-              }
-              // localStorage.name=res.data.data
-
-              //判断tel是否存在,不存在跳到对应填写页面
-              // that.$router.push({ name: "mine" });
+              this.$router.push({
+                path: `/phone/${1}`
+              });
             }
+            if (code) {
+              sessionStorage.aaa = true;
+            }
+            // localStorage.name=res.data.data
+
+            //判断tel是否存在,不存在跳到对应填写页面
+            //that.$router.push({ name: "mine" });
+            // }else{
+            sessionStorage.bbb = true;
+            // }
           }
           console.log(res);
         })

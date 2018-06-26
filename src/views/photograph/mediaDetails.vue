@@ -46,7 +46,6 @@
 import ClipboardJS from "clipboard";
 import "video.js/dist/video-js.css";
 import { videoPlayer } from "vue-video-player";
-import { Confirm, TransferDomDirective as TransferDom } from "vux";
 import { MessageBox, Toast } from "mint-ui";
 // import ""
 import videojs from "video.js";
@@ -68,9 +67,9 @@ export default {
       }
     };
   },
-  directives: {
-    TransferDom
-  },
+  // directives: {
+  //   TransferDom
+  // },
   created() {
     let that = this;
   },
