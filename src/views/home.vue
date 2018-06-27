@@ -165,7 +165,7 @@ export default {
       beautyindustry: [], //美业菁英
       accessoryproducts: [], //配套产品
       cooperativeProject: [], //合作项目 //培训视屏
-  
+
       dataList: {
         appId: "",
         nonceStr: "",
@@ -207,7 +207,6 @@ export default {
     this.getUser();
   },
   mounted: function() {
-
     //微信分享
     this.wxshare();
     //获取userid
@@ -217,21 +216,20 @@ export default {
   },
   watch: {},
   methods: {
-
-    getUser(){
-      if(localStorage.id){
-      this.$axios
-        .get(window.ajaxSrc + "/api/meizubao/userInfo", {
-          params: { uid: localStorage.id }
-        })
-        .then(res => {
-          console.log(res);
-          if(!res.data.data.tel){
-              this.$router.push({ path: `/phone/${1}`})
-              return false
-          }
-          localStorage.tel = res.data.data.tel;
-        });
+    getUser() {
+      if (localStorage.id) {
+        this.$axios
+          .get(window.ajaxSrc + "/api/meizubao/userInfo", {
+            params: { uid: localStorage.id }
+          })
+          .then(res => {
+            console.log(res);
+            if (!res.data.data.tel) {
+              this.$router.push({ path: `/phone/${1}` });
+              return false;
+            }
+            localStorage.tel = res.data.data.tel;
+          });
       }
     },
     ...mapActions(["setPhoneNum"]),

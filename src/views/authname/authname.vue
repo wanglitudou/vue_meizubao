@@ -118,22 +118,22 @@ export default {
     };
   },
   created(e) {
-    var plateform = Zepto.device.os;
-    if (plateform == "android") {
-      $("selector")
-        .find("input[type='file']")
-        .attr("capture", "camera");
-    } else if (plateform == "ios") {
-      $("selector")
-        .find("input[type='file']")
-        .removeAttr("capture");
-    }
-    // var ua = navigator.userAgent.toLowerCase();
-    // //判断是否是苹果手机，是则是true
-    // var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
-    // if (isIos) {
-    //   $("input:file").removeAttr("capture");
+    // var plateform = Zepto.device.os;
+    // if (plateform == "android") {
+    //   $("selector")
+    //     .find("input[type='file']")
+    //     .attr("capture", "camera");
+    // } else if (plateform == "ios") {
+    //   $("selector")
+    //     .find("input[type='file']")
+    //     .removeAttr("capture");
     // }
+    var ua = navigator.userAgent.toLowerCase();
+    //判断是否是苹果手机，是则是true
+    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    if (isIos) {
+      $("input:file").removeAttr("capture");
+    }
 
     Indicator.open();
     this.getInfo();
