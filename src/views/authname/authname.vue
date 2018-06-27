@@ -19,6 +19,7 @@
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
+                 name="upload"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,1)">
@@ -28,6 +29,7 @@
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
+                 name="upload"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,2)">
@@ -54,6 +56,7 @@
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
                  id="img-upload"
+                 name="upload"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,3)">
@@ -63,6 +66,7 @@
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
                  id="img-upload"
+                 name="upload"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,4)">
@@ -114,12 +118,22 @@ export default {
     };
   },
   created(e) {
-    var ua = navigator.userAgent.toLowerCase();
-    //判断是否是苹果手机，是则是true
-    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
-    if (isIos) {
-      $("input:file").removeAttr("capture");
+    var plateform = Zepto.device.os;
+    if (plateform == "android") {
+      $("selector")
+        .find("input[type='file']")
+        .attr("capture", "camera");
+    } else if (plateform == "ios") {
+      $("selector")
+        .find("input[type='file']")
+        .removeAttr("capture");
     }
+    // var ua = navigator.userAgent.toLowerCase();
+    // //判断是否是苹果手机，是则是true
+    // var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    // if (isIos) {
+    //   $("input:file").removeAttr("capture");
+    // }
 
     Indicator.open();
     this.getInfo();
