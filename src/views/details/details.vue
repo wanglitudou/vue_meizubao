@@ -122,7 +122,10 @@ export default {
     //获取userid
     this.userId = localStorage.getItem("id");
     //获取当前浏览器的地址
-    this.dqurl = window.location.href;
+    this.dqurl =
+      window.location.href.split("#")[0] +
+      "#" +
+      window.location.href.split("#")[1];
 
     //签名
 

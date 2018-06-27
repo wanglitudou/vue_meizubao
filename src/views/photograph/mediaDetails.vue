@@ -13,7 +13,7 @@
           您的浏览器不支持 video 标签。
         </video> -->
       <div v-if="$route.query.type=='video'">
-        <video-player class="vjs-custom-skin"
+        <video-player class="vjs-custom-skin" style="width:100%;height:250px;"
                       :options="playerOptions"
                       :playsinline="true"
                       ref="videoPlayer"
@@ -44,10 +44,9 @@
 
 <script>
 import ClipboardJS from "clipboard";
-import "video.js/dist/video-js.css";
+// import "video.js/dist/video-js.css";
 import { videoPlayer } from "vue-video-player";
 import { MessageBox, Toast } from "mint-ui";
-// import ""
 import videojs from "video.js";
 export default {
   data() {
@@ -57,6 +56,8 @@ export default {
       playerOptions: {
         height: "360",
         playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
+         width: document.documentElement.clientWidth,
+         height:250+'px',
         sources: [
           {
             type: "video/mp4",
@@ -142,10 +143,6 @@ export default {
 </script>
 
 <style scoped>
-.video-js {
-  width: 100% !important;
-  height: 250px !important;
-}
 .baiducloud {
   color: #ff0000;
   margin-left: 1rem;

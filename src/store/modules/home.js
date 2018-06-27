@@ -1,6 +1,7 @@
 import Vue from 'vue'
 const state = {
-    hasPhoneNum: null
+    hasPhoneNum: null,
+    typeCode: '',
 }
 export const getters = {
     // hasPhoneNum: state => state.ctoList,
@@ -9,20 +10,36 @@ export const getters = {
             state.hasPhoneNum = localStorage.getItem('phone')
         }
         return state.hasPhoneNum
+    },
+    typeCode() {
+        if (!state.typeCode) {
+            state.typeCode = localStorage.getItem('typeCode')
+        }
+        return state.typeCode
     }
 }
 export const actions = {
     setPhoneNum({ commit }, value) {
-        console.log(value)
+      
         commit('set_phoneNum', value)
+    },
+    setTypeCode({ commit }, value) {
+      
+        commit('set_type_code', value)
     }
 }
 export const mutations = {
     set_phoneNum(state, list) {
         state.hasPhoneNum = list
-        localStorage.setItem('hasPhone', 2)
+
         localStorage.setItem('phone', state.hasPhoneNum)
     },
+    set_type_code(state, value) {
+  
+        state.typeCode = value
+
+        localStorage.setItem('typeCode', state.typeCode)
+    }
 }
 
 export default {

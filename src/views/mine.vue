@@ -5,48 +5,42 @@
       <div class="banners">
         <div class="ban_left">
           <div class="portrait">
-            <img :src="headImg"
-                 alt="666">
-            <span class="name">{{nickname}}</span>
-            <!-- <span class="upddatePhone"
-                  @click="updatePhone">修改手机号</span> -->
+            <img :src="headImg" alt="666">
+            <p class="notes_list">
+              <span class="name">{{nickname}}</span>
+              <span class="upddatePhone" @click="updatePhone">修改手机号</span>
+            </p>
+
             <!-- <span class = "name">赵越</span> -->
           </div>
         </div>
         <div class="ban_right">
-          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png"
-                 alt=""></span>
+          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png" alt=""></span>
         </div>
       </div>
       <div class="list_cents">
         <p @click="curriculum()">
           <span>
-            <span class="icon"><img src="../assets/icon/course.png"
-                   alt=""></span>
+            <span class="icon"><img src="../assets/icon/course.png" alt=""></span>
             <span class="mine">我的课程</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png"
-                 alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
         <p @click="integral()">
           <span>
-            <span class="icon"><img src="../assets/icon/integral.png"
-                   alt=""></span>
+            <span class="icon"><img src="../assets/icon/integral.png" alt=""></span>
             <span class="mine">我的积分</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png"
-                 alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
         <p @click="address()">
           <span>
-            <span class="icon"><img src="../assets/icon/address.png"
-                   alt=""></span>
+            <span class="icon"><img src="../assets/icon/address.png" alt=""></span>
             <span class="mine">我的地址</span>
           </span>
-          <span class="more"><img src="../assets/icon/more.png"
-                 alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
 
         </p>
 
@@ -69,13 +63,11 @@
         <p @click="photograph()">
           <span>
 
-            <span class="icon"><img src="../assets/icon/database.png"
-                   alt=""></span>
+            <span class="icon"><img src="../assets/icon/database.png" alt=""></span>
             <span class="mine">资料库</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png"
-                 alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
         </p>
       </div>
 
@@ -189,12 +181,12 @@ export default {
   border-bottom-right-radius: 10px;
 }
 .banners .ban_left {
-  width: px2rem(144px);
+  width: px2rem(184px);
   height: px2rem(120px);
-  line-height: px2rem(100px);
+  // line-height: px2rem(100px);
 }
 .banners .ban_left .portrait {
-  width: px2rem(144px);
+  width: px2rem(184px);
   height: px2rem(76px);
   border-radius: 50%;
   margin-top: px2rem(23px);
@@ -206,13 +198,23 @@ export default {
   height: 100%;
   border-radius: 50%;
 }
-.banners .ban_left .portrait .name {
+.banners .ban_left .notes_list {
   display: block;
   font-size: px2rem(17px);
   // color: #000;
-  line-height: px2rem(76px);
+  // line-height: px2rem(76px);
+  height: 100%;
+
   margin-left: px2rem(12px);
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  span{
+    display: block;
+    line-height: (30px);
+  }
   // width
 }
 
