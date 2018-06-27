@@ -124,8 +124,10 @@ export default {
     //获取当前浏览器的地址
     this.dqurl =
       window.location.href.split("#")[0] +
-      "#" +
-      window.location.href.split("#")[1];
+      "#/details?pid=" +
+      this.$route.query.pid;
+    //			console.log(typeof this.dqurl)
+    console.log();
 
     //签名
 
