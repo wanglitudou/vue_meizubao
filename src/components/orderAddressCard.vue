@@ -40,19 +40,32 @@ export default {
   },
   props: ["type", "saveAddressId"],
   mounted() {
-    this.init();
+    if (localStorage.siteId) {
+      // alert("有值");
+      this.changes();
+    } else {
+      // alert("无值");
+      this.init();
+    }
   },
   methods: {
     init() {
       this.$axios
         .get(window.ajaxSrc + "/api/meizubao/addressList", {
-          params: { uid: window.localStorage.id }
+          params: {
+            uid: window.localStorage.id
+          }
         })
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {
-            this.data = res.data.data[0];
+            //							this.data = res.data.data[0];
             this.saveAddressId(this.data.id);
+            for (var i = 0; i < res.data.data.length; i++) {
+              if (res.data.data[i].is_default_address == 1) {
+                this.data = res.data.data[i];
+              }
+            }
           }
         })
         .catch(err => {
@@ -62,15 +75,29 @@ export default {
     },
     jumpToAddress() {
       this.$router.push({
-        path: "/address",
-        query: {
-          data_data: 1
-        }
+        path: "/addresssite"
+        // query: {
+        //   data_data: 1
+        // }
       });
       // this.$router.push({ name: "mine" });
 
       // alert("暂时没有address页面,有了在这改 label");
       // alert("66666");
+    },
+    changes() {
+      this.$axios({
+        method: "get",
+        url: "http://mzbao.weiyingjia.org/api/meizubao/addressInfo",
+        params: {
+          id: localStorage.siteId
+        }
+      }).then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
+          this.data = res.data.data;
+        }
+      });
     }
   }
 };

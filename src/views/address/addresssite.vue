@@ -4,7 +4,8 @@
       <div class="list_one"
            v-for="item in list"
            :key="item.index">
-        <p class="goods">
+        <p class="goods"
+           @click="changesite(item.id)">
           <span class="consignee">收货人:
             <span class="consig_name">
               {{item.user_name}}
@@ -12,7 +13,8 @@
           </span>
           <span class="consig_num">{{item.mobile}}</span>
         </p>
-        <p class="consig_address">
+        <p class="consig_address"
+           @click="changesite(item.id)">
           <span class="consig_spec">
             {{item.address}}
           </span>
@@ -52,7 +54,8 @@ export default {
     return {
       data_data: true,
       list: [],
-      selectedNumber: 1
+      selectedNumber: 1,
+      siteId: null
       // radio2: ""
     };
   },
@@ -97,6 +100,7 @@ export default {
         message: "确定执行操作吗?",
         position: "bottom",
         showCancelButton: true,
+
         callback: function(action) {
           console.log(action);
           if (action == "confirm") {
@@ -115,6 +119,11 @@ export default {
           }
         }
       });
+    },
+    changesite(id) {
+      this.$router.go("-1");
+      let siteId = id;
+      localStorage.setItem("siteId", siteId);
     },
     getList() {
       let that = this;
@@ -145,11 +154,11 @@ export default {
     },
     //路由跳转,到新增地址页面
     addtheaddress() {
-      this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
+      this.$router.push({ name: "addtheaddre" }); //调节其他页面时的跳转(完善信息页面)
     },
     edittheaddress(id) {
       this.$router.push({
-        path: "/addtheaddress",
+        path: "/addtheaddre",
         query: {
           type: "edit",
           id: id,

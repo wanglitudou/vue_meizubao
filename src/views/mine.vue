@@ -8,7 +8,8 @@
             <img :src="headImg"
                  alt="666">
             <span class="name">{{nickname}}</span>
-             <span class="upddatePhone" @click="updatePhone">修改手机号</span>
+            <!-- <span class="upddatePhone"
+                  @click="updatePhone">修改手机号</span> -->
             <!-- <span class = "name">赵越</span> -->
           </div>
         </div>
@@ -92,39 +93,43 @@ export default {
     };
   },
   created() {
+    let that = this;
+    that.getname();
     Indicator.open();
     setTimeout(() => {
       Indicator.close();
     }, 1000);
     //获取头像
-    this.headImg = localStorage.getItem("headimg");
-    this.nickname = localStorage.getItem("nickname");
-
-    // console.log(headImg);
+    // this.headImg = localStorage.getItem("headimg");
+    // this.nickname = localStorage.getItem("nickname");
   },
   methods: {
-    // getname() {
-    //   let that = this;
-    //   that.$axios
-    //     .get(
-    //       "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
-    //         localStorage.id
-    //     )
-    //     .then(res => {
-    //       console.log(res);
-    //       if (res.data.status_code == 1001) {
-    //         // that.data.imgOne = res.data.data.card_behind;
-    //         // that.data.imgtwo = res.data.data.business_license;
-    //         // that.data.imgthree = res.data.data.card_front;
-    //         // that.data.imgfour = res.data.data.store_image;
-    //         // that.data.id_card = res.data.data.id_card;
-    //         // that.data.home_address = res.data.data.home_address;
-    //       }
-    //     })
-    //     .catch(() => {
-    //       console.log("查询失败");
-    //     });
-    // },
+    getname() {
+      let that = this;
+      that.$axios
+        .get(
+          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+            localStorage.id
+        )
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            this.headImg = res.data.data.headimg;
+            this.nickname = res.data.data.nickname;
+            console.log(res.data.data.verify_status);
+            localStorage.verify_status = res.data.data.verify_status;
+            // if (res.data.data.verify_status != 4) {
+            //   console.log("99999");
+            //   // this.$router.push({ name: "information" });
+            // }
+            console.log(nicknamename);
+            console.log(headimgimg);
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
     //我的课程
     curriculum() {
       //点击我的课程时 跳到对应的页面
@@ -144,38 +149,13 @@ export default {
     },
     //完善信息
     Perfectinformation() {
-      console.log("888");
-      let that = this;
-      that.$axios
-        .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
-            localStorage.id
-        )
-        .then(res => {
-          console.log(res);
-
-          if (res.data.status_code == 1001) {
-            console.log(res.data.data.verify_status);
-            if (res.data.data.verify_status != 4) {
-              this.$router.push({ name: "information" });
-            }
-            // that.data.imgOne = res.data.data.card_behind;
-            // that.data.imgtwo = res.data.data.business_license;
-            // that.data.imgthree = res.data.data.card_front;
-            // that.data.imgfour = res.data.data.store_image;
-            // that.data.id_card = res.data.data.id_card;
-            // that.data.home_address = res.data.data.home_address;
-          }
-        })
-        .catch(() => {
-          console.log("查询失败");
-        });
-
-      // alert("wode ");
-      // let that = this;
-      // this.$router.push({ name: "information" });
+      let verify_status = localStorage.verify_status;
+      if (verify_status != 4) {
+        console.log("99999");
+        this.$router.push({ name: "information" });
+      }
     },
-     updatePhone(){
+    updatePhone() {
       this.$router.push({
         path: `/phone/${2}`
       });
@@ -323,9 +303,9 @@ export default {
   margin-left: 15px;
   font-size: 14px;
 }
-.upddatePhone{
- display: inline-block;
- color: #fff;
- font-size: px2rem(14px);
+.upddatePhone {
+  display: inline-block;
+  color: #fff;
+  font-size: px2rem(14px);
 }
 </style>
