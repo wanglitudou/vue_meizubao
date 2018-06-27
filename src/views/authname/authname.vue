@@ -19,7 +19,6 @@
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
-                 capture="camera"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,1)">
@@ -29,7 +28,6 @@
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
-                 capture="camera"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,2)">
@@ -56,7 +54,6 @@
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
                  id="img-upload"
-                 capture="camera"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,3)">
@@ -66,7 +63,6 @@
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
                  id="img-upload"
-                 capture="camera"
                  accept="image/*"
                  multiple
                  @change="updataimg($event,4)">
