@@ -21,7 +21,7 @@
                  id="choose"
                  capture="camera"
                  accept="image/*"
-                 multiple="multiple"
+                 multiple
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
@@ -31,7 +31,7 @@
                  id="img-upload"
                  capture="camera"
                  accept="image/*"
-                 multiple="multiple"
+                 multiple
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
                alt=""></span>
@@ -58,7 +58,7 @@
                  id="img-upload"
                  capture="camera"
                  accept="image/*"
-                 multiple="multiple"
+                 multiple
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
                alt="">
@@ -68,7 +68,7 @@
                  id="img-upload"
                  capture="camera"
                  accept="image/*"
-                 multiple="multiple"
+                 multiple
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
                alt="">
