@@ -97,13 +97,12 @@ export default {
       );
     },
     renprice() {
-     
       if (this.during > 4) {
-        console.log("我大")
+        console.log("我大");
         // return  parseInt(this.detail.continued) * parseInt(this.during)
         return (this.detail.dayprice * parseInt(this.during) * 0.8).toFixed(2);
       } else {
-        console.log("我小")
+        console.log("我小");
         return (this.detail.dayprice * parseInt(this.during)).toFixed(2);
       }
     },
@@ -424,6 +423,14 @@ export default {
   /*width:.7rem !important;*/
   height: 0.7rem !important;
 }
+.input-style {
+  width: 200px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #fd4689;
+  /* outline: none; */
+  box-shadow: 0 2px 4px 0 #fd4689 ;
+}
 </style>
 
 
@@ -480,7 +487,7 @@ export default {
       <!-- 技师续约 -->
       <div class="technician" v-if="detail.type == 2">
         <div v-if="detail.status == 6">
-          <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='disableDate' show-caps>
+          <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='disableDate' :input-props='{ style:"color:#000", class: "input-style" , disabled:"disabled", placeholder: "请选择你要租赁的日期"}' show-caps>
           </v-date-picker>
         </div>
         <div class="xuyues" v-show="during>0">

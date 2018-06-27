@@ -45,7 +45,7 @@
                          mode='range'
                          v-model='selectedDate'
                          :disabled-dates='this.disableDate'
-                         :input-props='{ class: "input-style" ,placeholder: "请选择你要租赁的日期"}'
+                         :input-props='{ class: "input-style" ,disabled:"disabled", style:"color:#000",placeholder: "请选择你要租赁的日期"}'
                          show-caps>
           </v-date-picker>
         </p>
@@ -176,9 +176,9 @@ export default {
       );
     },
     totalPrice() {
-      let temPrice = this.during * this.data.dayprice * 2;
+      let temPrice = (this.during * this.data.dayprice * 2).toFixed(2);
       if (this.during >= 5) {
-        temPrice = temPrice * 0.8;
+        temPrice = (temPrice * 0.8).toFixed(2);
       }
       return temPrice;
     },
@@ -573,6 +573,11 @@ export default {
 <style>
 .input-style {
   width: 200px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #fd4689;
+  /* outline: none; */
+  box-shadow: 0 2px 4px 0 #fd4689 ;
 }
 
 #datePicker
@@ -597,5 +602,9 @@ export default {
 #datePicker .c-day-background {
   /*width:.7rem !important;*/
   height: 0.7rem !important;
+}
+
+.popover-origin{
+ padding-bottom: 50px !important;
 }
 </style>
