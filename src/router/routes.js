@@ -38,6 +38,7 @@ import search from "../views/search/search.vue";
 import dataBase from "../views/dataBase/index.vue";
 import qian from "../views/qian/qian.vue";
 import phone from "../views/phone.vue";
+import addtheaddre from "../views/addtheaddress/addtheaddre.vue";
 
 let routes = [
   {
@@ -266,6 +267,11 @@ let routes = [
     name: "addtheaddress",
     path: "/addtheaddress",
     component: addtheaddress
+  },
+  {
+    name: "addtheaddre",
+    path: "/addtheaddre",
+    component: addtheaddre
   },
 
   {

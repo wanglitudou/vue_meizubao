@@ -1,50 +1,51 @@
 <template>
-    <div class="addressContainer">
-        <div class="list_cont">
-            <div class="list_one"
-                 v-for="item in list"
-                 :key="item.index"
-                 @click="changesite(item.id, item.user_name, item.address, item.mobile)">
-                <p class="goods">
-                    <span class="consignee">收货人:
-                        <span class="consig_name">
-                            {{item.user_name}}
-                        </span>
-                    </span>
-                    <span class="consig_num">{{item.mobile}}</span>
-                </p>
-                <p class="consig_address">
-                    <span class="consig_spec">
-                        {{item.address}}
-                    </span>
-                </p>
-                <p class="give">
-                    <span class="give_address">
-                        <input type="radio"
-                               v-model="selectedNumber"
-                               :value="item.id"
-                               class="give_icon" /> 设为默认地址
-                    </span>
-                    <span class="give_edit"
-                          @click="edittheaddress(item.id)">
-                        <i class="icon_edit_cont"><img src="../../assets/icon/edit_1.png"
-                                 alt=""></i>
-                        编辑</span>
-                    <span class="give_delete"
-                          @click="del(item.id)">
+  <div class="addressContainer">
+    <div class="list_cont">
+      <div class="list_one"
+           v-for="item in list"
+           :key="item.index">
+        <p class="goods"
+           @click="changesite(item.id)">
+          <span class="consignee">收货人:
+            <span class="consig_name">
+              {{item.user_name}}
+            </span>
+          </span>
+          <span class="consig_num">{{item.mobile}}</span>
+        </p>
+        <p class="consig_address"
+           @click="changesite(item.id)">
+          <span class="consig_spec">
+            {{item.address}}
+          </span>
+        </p>
+        <p class="give">
+          <span class="give_address">
+            <input type="radio"
+                   v-model="selectedNumber"
+                   :value="item.id"
+                   class="give_icon" /> 设为默认地址
+          </span>
+          <span class="give_edit"
+                @click="edittheaddress(item.id)">
+            <i class="icon_edit_cont"><img src="../../assets/icon/edit_1.png"
+                   alt=""></i>
+            编辑</span>
+          <span class="give_delete"
+                @click="del(item.id)">
 
-                        <i class="icon_img_delect"><img src="../../assets/icon/delect.png"
-                                 alt=""></i>
-                        删除</span>
-                </p>
-            </div>
-            <div style="clear:both;height:2rem;"></div>
-        </div>
-        <div class="give_good">
-            <span class="give_add"
-                  @click="addtheaddress()">添加</span>
-        </div>
+            <i class="icon_img_delect"><img src="../../assets/icon/delect.png"
+                   alt=""></i>
+            删除</span>
+        </p>
+      </div>
+      <div style="clear:both;height:2rem;"></div>
     </div>
+    <div class="give_good">
+      <span class="give_add"
+            @click="addtheaddress()">添加</span>
+    </div>
+  </div>
 </template>
 <script>
 import { MessageBox, Toast } from "mint-ui";
@@ -119,17 +120,10 @@ export default {
         }
       });
     },
-    changesite(addrId, user_name, address, mobile) {
-      //   alert(111);
-      this.$router.push({
-        path: "/confirm/2",
-        query: {
-          name: user_name,
-          telephone: mobile,
-          addr: address,
-          addrId: addrId
-        }
-      });
+    changesite(id) {
+      this.$router.go("-1");
+      let siteId = id;
+      localStorage.setItem("siteId", siteId);
     },
     getList() {
       let that = this;
@@ -160,11 +154,11 @@ export default {
     },
     //路由跳转,到新增地址页面
     addtheaddress() {
-      this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
+      this.$router.push({ name: "addtheaddre" }); //调节其他页面时的跳转(完善信息页面)
     },
     edittheaddress(id) {
       this.$router.push({
-        path: "/addtheaddress",
+        path: "/addtheaddre",
         query: {
           type: "edit",
           id: id,

@@ -5,9 +5,12 @@
       <div class="banner">
         <mt-swipe :auto="4000">
 
-          <mt-swipe-item v-for="(item,index) in url" :key="index">
-            <a target='_blank' :href='item.url'>
-              <img :src="item.images" alt="">
+          <mt-swipe-item v-for="(item,index) in url"
+                         :key="index">
+            <a target='_blank'
+               :href='item.url'>
+              <img :src="item.images"
+                   alt="">
             </a>
             <!-- <a href=""></a> -->
           </mt-swipe-item>
@@ -16,9 +19,12 @@
       </div>
       <!-- 搜索 -->
       <div class="search_contents">
-        <div class="list_search" ref="search" @click="toSearch">
+        <div class="list_search"
+             ref="search"
+             @click="toSearch">
           <div style="margin-left:20px;">请输入搜索</div>
-          <img src="../assets/icon/search_1.png" alt="111">
+          <img src="../assets/icon/search_1.png"
+               alt="111">
         </div>
       </div>
       <div class="list_btn">
@@ -31,13 +37,18 @@
         </div>
         <!-- 内容-->
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
-            <img :src="item.images" alt="" @click="details(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in rentinginstrument"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
         <!-- 查看更多 -->
-        <div class="hot_cent" @click="detail()">
+        <div class="hot_cent"
+             @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
@@ -51,12 +62,17 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
-            <img :src="item.images" alt="" @click="essence(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in beautyindustry"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="essence(item.id)">
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent" @click="looksee()">
+        <div class="hot_cent"
+             @click="looksee()">
           <span>查看更多></span>
         </div>
       </div>
@@ -69,14 +85,19 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
-            <img :src="item.images" alt="" @click="matching(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in accessoryproducts"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="matching(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
 
         </div>
-        <div class="hot_cent" @click="seemore()">
+        <div class="hot_cent"
+             @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -89,13 +110,18 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
-            <img :src="item.images" alt="" @click="clickpay(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in visualscreen"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="train(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="train()">
+        <div class="hot_cent"
+             @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -108,13 +134,18 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
-            <img :src="item.images" alt="" @click="cooperation(item.id)">
+          <div class="hotimg_lef"
+               v-for="item in cooperativeProject"
+               :key="item.index">
+            <img :src="item.images"
+                 alt=""
+                 @click="cooperation(item.id)">
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="project()">
+        <div class="hot_cent"
+             @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -134,9 +165,7 @@ export default {
       beautyindustry: [], //美业菁英
       accessoryproducts: [], //配套产品
       cooperativeProject: [], //合作项目 //培训视屏
-
       aa: "",
-    //  cc:'',
       dataList: {
         appId: "",
         nonceStr: "",
@@ -145,14 +174,14 @@ export default {
         signature: ""
       },
       userId: null,
-      visualscreen: [] //培训视屏
+      visualscreen: [], //培训视屏
+      dqurl: ""
     };
   },
   computed: {
-    ...mapGetters(["hasPhoneNum"]),  
+    ...mapGetters(["hasPhoneNum"])
   },
   created() {
-  
     Indicator.open();
     setTimeout(() => {
       Indicator.close();
@@ -177,23 +206,28 @@ export default {
     that.getProject(); //合作项目查询
   },
   mounted: function() {
-    // console.log(this.hasPhoneNum)
-    // // this.aa = this.hasPhoneNum
-    // console.log(this.aa)
-    if(localStorage.getItem('hasPhone') != 1){
-   
-       this.$router.push({
-                path: `/phone/${1}`
-              });
+    //微信分享
+    this.wxshare();
+    //获取userid
+    this.userId = localStorage.getItem("id");
+    //获取当前浏览器的地址
+    this.dqurl = window.location.href;
+  },
+  watch: {
+    aa() {
+      //  let a  =1
+      console.log(this.aa);
+      if (!this.aa) {
+        console.log(2323);
+        this.$router.push({
+          path: `/phone/${1}`
+        });
+      } else {
+        console.log(3213213213213213);
+      }
     }
   },
-  // computed: {
-   
-  // },
   methods: {
-    ac(){
-     console.log("wanglicaonima")
-    },
     ...mapActions(["setPhoneNum"]),
     //微信分享
     wxshare() {
@@ -228,19 +262,20 @@ export default {
             wx.ready(function() {
               // 分享朋友圈
               wx.onMenuShareTimeline({
-                title: "分享标题", // 分享标题
-                desc: "分享描述", // 分享描述
-                link: "http://mzbao.weiyingjia.org/", // 分享链接
-                imgUrl: "https://www.baidu.com/img/baidu_jgylogo3.gif", // 分享图标
+                title: "美租宝", // 分享标题
+                desc: "秀出你的美丽", // 分享描述
+                link: that.dqurl, // 分享链接
+                imgUrl:
+                  "http://mzbadmin.weiyingjia.org/upload/1528440075_4193.png", // 分享图标
                 type: "link", // 分享类型,music、video或link，不填默认为link
                 dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                 success: function(data) {
                   //							layer.msg("分享成功");
-                  alert("1111");
+                  //										alert("1111");
                   that.$axios
                     .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
                       params: {
-                        uid: userId
+                        uid: that.userId
                       }
                     })
                     .then(res => {
@@ -250,24 +285,25 @@ export default {
                 },
                 cancel: function() {
                   //							layer.msg("已取消分享");
-                  alert("1111");
+                  //										alert("1111");
                 }
               });
               // 分享朋友
               wx.onMenuShareAppMessage({
-                title: "分享标题", // 分享标题
-                desc: "分享描述", // 分享描述
-                link: "http://mzbao.weiyingjia.org/", // 分享链接
-                imgUrl: "https://www.baidu.com/img/baidu_jgylogo3.gif", // 分享图标
+                title: "美租宝", // 分享标题
+                desc: "秀出你的美丽", // 分享描述
+                link: that.dqurl, // 分享链接
+                imgUrl:
+                  "http://mzbadmin.weiyingjia.org/upload/1528440075_4193.png", // 分享图标
                 type: "link", // 分享类型,music、video或link，不填默认为link
                 dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                 success: function(data) {
                   //							layer.msg("分享成功");
-                  alert("1111");
+                  //										alert("1111");
                   that.$axios
                     .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
                       params: {
-                        uid: userId
+                        uid: that.userId
                       }
                     })
                     .then(res => {
@@ -276,7 +312,7 @@ export default {
                 },
                 cancel: function() {
                   //							layer.msg("已取消分享");
-                  alert("1111");
+                  //										alert("1111");
                 }
               });
             });
@@ -331,7 +367,6 @@ export default {
       that.$axios
         .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
         .then(res => {
-        
           //						console.log(res);
           if (res.data.status_code == 1001) {
             that.beautyindustry = res.data.data;
@@ -419,8 +454,6 @@ export default {
               this.$router.push({
                 path: `/phone/${1}`
               });
-            }else{
-              localStorage.setItem('hasPhone',1)
             }
             if (code) {
               sessionStorage.aaa = true;
@@ -442,7 +475,6 @@ export default {
     updataImg(url) {
       this.$router.push(url); //轮播用到
     },
-    // 热租仪器
     detail() {
       this.$router.push({
         name: "detail"
@@ -503,7 +535,6 @@ export default {
         name: "looksee"
       }); //在美业菁英模块当中,点击查看更多的时候,跳转对应的页面 looksee
     },
-    // 产品
     seemore() {
       this.$router.push({
         name: "seemore"
@@ -512,8 +543,7 @@ export default {
     clickpay() {
       this.$router.push({
         name: "clickpay"
-      }); 
-      //点击培训视频当中的"查看更多" 跳转到对应的详情页面
+      }); //点击培训视频当中的"查看更多" 跳转到对应的详情页面
     },
     toSearch() {
       this.$router.push({

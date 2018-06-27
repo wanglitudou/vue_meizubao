@@ -97,7 +97,6 @@ export default {
         message: "确定执行操作吗?",
         position: "bottom",
         showCancelButton: true,
-
         callback: function(action) {
           console.log(action);
           if (action == "confirm") {
