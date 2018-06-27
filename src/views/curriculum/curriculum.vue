@@ -198,8 +198,7 @@ export default {
   font-family: PingFangSC-Regular;
 }
 .loadmore {
-  position: absolute;
-  bottom: 0px;
+  
   width: 100%;
   height: 40px;
   display: flex;

@@ -5,8 +5,8 @@
 
       <div class="cent_list">
 
-        <div class="list_lists">
-          <div class="trainBanner"
+        <div class="list_lists" ref="cao">
+          <div class="trainBanner" ref="divDisplay" id='divDisplay'
                v-if="data.is_play == 1">
             <!-- <img :src="data.images" alt=""> -->
             <!-- <video id="video" autoplay :poster="data.images" controls width="100%" height="100%">
@@ -67,7 +67,15 @@
     </div>
   </div>
 </template>
+<style>
+.video-js .vjs-big-play-button{
+  position:absolute;
+  left: 38% !important;
+  top: 38% !important;
+}
+</style>
 <script>
+
 import { Radio } from "mint-ui";
 import "video.js/dist/video-js.css";
 import { videoPlayer } from "vue-video-player";
@@ -306,9 +314,10 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             if (this.value == 2) {
-              this.$router.push({
-                name: "cart"
-              });
+              // this.$router.push({
+              //   name: "cart"
+              // });
+              this.data.is_play = 1
               // console.log(11)
             } else {
               window.location.href = res.data.data.url;
@@ -334,7 +343,10 @@ export default {
 
   mounted() {
     this.inits();
-    this.initIntegral();
+    this.initIntegral()
+ 
+       this.playerOptions.width = this.$refs.cao.offsetWidth
+    
     this.userId = localStorage.getItem("id");
     this.dqurl = window.location.href;
   },
@@ -357,7 +369,8 @@ export default {
       showOpcity: false,
       integral: "",
       playerOptions: {
-        height: "360",
+        width:'300',
+        height: '220',
         playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
         sources: [
           {
@@ -381,6 +394,8 @@ export default {
   }
 };
 </script>
+
+
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .train-container {
@@ -593,17 +608,12 @@ export default {
   border-radius: 10px;
 }
 
-.video-js {
-  width: 100%;
-  height: 250px;
-}
 
-.vjs-button > .vjs-icon-placeholder:before {
-  font-size: 2em !important;
-}
 
-.video-js .vjs-big-play-button {
-  top: 40% !important;
-  left: 40% !important;
+
+
+ .vjs-big-play-button{
+  top:35% !important;
+  left:35% !important;
 }
 </style>
