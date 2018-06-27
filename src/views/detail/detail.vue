@@ -85,9 +85,9 @@
               </p>
             </div>
           </div>
-
+           
         </div>
-        <div class="item loadMore"
+        <div class=" item loadMore"
              ref="load">
           <mt-spinner type="fading-circle"
                       color="#FD4689 "
@@ -314,7 +314,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 .clearfix {
@@ -517,6 +517,6 @@ export default {
   top: 0;
 }
 section {
-  padding-top: px2rem(44px);
+  padding-top: px2rem(48px);
 }
 </style>

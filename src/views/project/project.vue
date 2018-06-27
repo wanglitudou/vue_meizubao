@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div class="item loadMore" ref="load">
+       <div class=" loadMore" ref="load">
         <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
         <span v-else>
           <span @click="loadMore" v-if="loading">加载更多</span>
@@ -43,6 +43,7 @@
         </span>
       </div>
     </div>
+     
     <!-- 暂无数据 -->
     <div class="noData" v-if="showNodata">
       暂无数据
@@ -168,7 +169,8 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../../styles/helper.scss";
 .container {
   width: 100%;
   height: auto;
@@ -368,8 +370,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #000;
-  font-size: 16px;
+  color: #00A5FF;
+  font-size: px2rem(14px);
+  position: absolute;
+  bottom: px2rem(20px);
+  left: 0;
 }
 .searchs {
   font-size: 16px;

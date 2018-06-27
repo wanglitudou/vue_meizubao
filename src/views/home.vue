@@ -161,7 +161,7 @@ export default {
     var str = window.location.href;
     var code = that.GetQueryString("code");
     if (!sessionStorage.aaa) {
-      console.log("666");
+      // console.log("666");
       if (code) {
         that.getXlogin(code); //再次调用这个方法
       } else {
@@ -175,24 +175,29 @@ export default {
     that.getProduct(); //配套产品
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
+    this.getUser();
   },
   mounted: function() {
-    // console.log(this.hasPhoneNum)
-    // // this.aa = this.hasPhoneNum
-    // console.log(this.aa)
-    if(localStorage.getItem('hasPhone') != 1){
-   
-       this.$router.push({
-                path: `/phone/${1}`
-              });
-    }
   },
   // computed: {
    
   // },
   methods: {
-    ac(){
-     console.log("wanglicaonima")
+    getUser(){
+      if(localStorage.id){
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/userInfo", {
+          params: { uid: localStorage.id }
+        })
+        .then(res => {
+          console.log(res);
+          if(!res.data.data.tel){
+              this.$router.push({ path: `/phone/${1}`})
+              return false
+          }
+          localStorage.tel = res.data.data.tel;
+        });
+      }
     },
     ...mapActions(["setPhoneNum"]),
     //微信分享
@@ -418,8 +423,6 @@ export default {
               this.$router.push({
                 path: `/phone/${1}`
               });
-            }else{
-              localStorage.setItem('hasPhone',1)
             }
             if (code) {
               sessionStorage.aaa = true;
@@ -591,6 +594,7 @@ export default {
 .nav-list ul li span img {
   width: 100%;
   height: 100%;
+  object-fit: fill;
 }
 
 .search_contents {

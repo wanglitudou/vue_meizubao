@@ -19,9 +19,8 @@ export const actions = {
 }
 export const mutations = {
     set_phoneNum(state, list) {
-        console.log(list)
         state.hasPhoneNum = list
-        localStorage.setItem('hasPhone', 1)
+        localStorage.setItem('hasPhone', 2)
         localStorage.setItem('phone', state.hasPhoneNum)
     },
 }
