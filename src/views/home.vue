@@ -183,7 +183,7 @@ export default {
   },
   created() {
     Indicator.open();
-    setTimeout(() => {
+    setTimeout(() => { 
       Indicator.close();
     }, 1000);
     let that = this;
