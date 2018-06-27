@@ -165,7 +165,7 @@ export default {
       beautyindustry: [], //美业菁英
       accessoryproducts: [], //配套产品
       cooperativeProject: [], //合作项目 //培训视屏
-      aa: "",
+  
       dataList: {
         appId: "",
         nonceStr: "",
@@ -190,7 +190,7 @@ export default {
     var str = window.location.href;
     var code = that.GetQueryString("code");
     if (!sessionStorage.aaa) {
-      console.log("666");
+      // console.log("666");
       if (code) {
         that.getXlogin(code); //再次调用这个方法
       } else {
@@ -204,8 +204,10 @@ export default {
     that.getProduct(); //配套产品
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
+    this.getUser();
   },
   mounted: function() {
+
     //微信分享
     this.wxshare();
     //获取userid
@@ -213,21 +215,25 @@ export default {
     //获取当前浏览器的地址
     this.dqurl = window.location.href;
   },
-  watch: {
-    aa() {
-      //  let a  =1
-      console.log(this.aa);
-      if (!this.aa) {
-        console.log(2323);
-        this.$router.push({
-          path: `/phone/${1}`
-        });
-      } else {
-        console.log(3213213213213213);
-      }
-    }
-  },
+  watch: {},
   methods: {
+
+    getUser(){
+      if(localStorage.id){
+      this.$axios
+        .get(window.ajaxSrc + "/api/meizubao/userInfo", {
+          params: { uid: localStorage.id }
+        })
+        .then(res => {
+          console.log(res);
+          if(!res.data.data.tel){
+              this.$router.push({ path: `/phone/${1}`})
+              return false
+          }
+          localStorage.tel = res.data.data.tel;
+        });
+      }
+    },
     ...mapActions(["setPhoneNum"]),
     //微信分享
     wxshare() {
@@ -622,6 +628,7 @@ export default {
 .nav-list ul li span img {
   width: 100%;
   height: 100%;
+  object-fit: fill;
 }
 
 .search_contents {

@@ -7,10 +7,8 @@
 <script>
 export default {
   name: "App",
-  data () {
-    return {
-
-    }
+  data() {
+    return {};
   }
 };
 </script>
@@ -21,7 +19,7 @@ export default {
   height: 100%;
 }
 
-.date-picker-days i{
+.date-picker-days i {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;

@@ -69,6 +69,7 @@
               </div>
               <!--图片切换时展示的内容 右边-->
             </div>
+          
             <div class="add_more"
                  @click="loadMoreVideo">
               <span>{{videoNoMore?'已全部显示':'加载更多'}}</span>
@@ -87,11 +88,12 @@
 <script>
 import ClipboardJS from "clipboard";
 import { MessageBox, Toast } from "mint-ui";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
       tabs: ["图片", "视频"],
-      num: 0,
+      num:Number,
       imageData: [],
       videoData: [],
       imageNoMore: false,
@@ -100,11 +102,22 @@ export default {
       videoPage: 1
     };
   },
-  created() {},
+  computed:{
+    ...mapGetters(['typeCode'])
+  },
+  created(){
+     if(!this.typeCode){
+      this.typeCode =0
+    }
+    console.log(this.typeCode)
+    this.num =  this.typeCode
+  },
   mounted() {
     this.getImage();
     this.getVideo();
-
+     // console.log(this.num)
+   
+    // console.log(this.typeCode)
     //  var clipboard=new ClipboardJS('.right-button');
     // //  console.log(clipboard)
     // clipboard.on('success', function(e) {
@@ -127,6 +140,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(['setTypeCode']),
     bindCopy() {
       var btns = document.querySelectorAll(".button");
       console.log(btns);
@@ -156,6 +170,7 @@ export default {
       if (index == 1) {
         this.status_code = 2;
       }
+      this.setTypeCode(index)
     },
 
     loadMoreImage() {

@@ -202,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <div class="moreData" ref="load">
+        <div class="moreData" ref="load" v-show="orderlist.length">
             <div v-if="isload" @click="loadMore">加载更多..</div>
             <div v-else>已全部加载</div>
         </div>

@@ -82,7 +82,7 @@ export default {
       return this.time > 0 ? this.time + "s " : "获取";
     },
     isDisabled: function() {
-      if (!/^1[34578]\d{9}$/.test(this.phoneNum)) {
+      if (!/^1[634578]\d{9}$/.test(this.phoneNum)) {
         return false;
       } else {
         return true;
