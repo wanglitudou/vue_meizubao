@@ -123,11 +123,13 @@ export default {
     //获取userid
     this.userId = localStorage.getItem("id");
     //获取当前浏览器的地址
-    this.dqurl = window.location.href.split("#")[0] + "#/details?pid=" + 13;
-    // this.$route.query.pid;
+    this.dqurl =
+      window.location.href.split("#")[0] +
+      "?#/details?pid=" +
+      this.$route.query.pid;
+    //			this.dqurl = encodeURIComponent(window.location.href)
     //			console.log(typeof this.dqurl)
-    console.log();
-
+    console.log(this.dqurl);
     //签名
 
     $.smartScroll = function(container, selectorScrollable) {
@@ -341,10 +343,11 @@ export default {
             that.$axios
               .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
                 params: {
-                  http: location.href
+                  http: localStorage.dqurl
                 }
               })
               .then(res => {
+                console.log(res, "950927");
                 if (res.data.status_code == 1001) {
                   that.dataList.appId = res.data.data.appId;
                   that.dataList.nonceStr = res.data.data.nonceStr;

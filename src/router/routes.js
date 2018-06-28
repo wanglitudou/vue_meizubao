@@ -3,6 +3,7 @@ import home from "../views/home.vue";
 import catagory from "../views/catagory.vue";
 import cart from "../views/cart.vue";
 import mine from "../views/mine.vue";
+import aaa from "../views/aaa.vue";
 import confirm from "../views/confirm.vue";
 import orderDetails from "../views/orderDetails.vue";
 //引入其他页面的组件
@@ -22,6 +23,7 @@ import login from "../views/login/login.vue";
 import ordergoods from "../views/ordergoods/ordergoods.vue";
 import payment from "../views/payment/payment.vue";
 import authname from "../views/authname/authname.vue";
+// import authnames from "../views/authname/authnames.vue";
 import information from "../views/information/information.vue";
 import curriculum from "../views/curriculum/curriculum.vue";
 import coursepage from "../views/coursepage/coursepage.vue";
@@ -262,6 +264,11 @@ let routes = [
     name: "authname",
     path: "/authname",
     component: authname
+  },
+  {
+    name: "aaa",
+    path: "/aaa",
+    component: aaa
   },
   {
     name: "addtheaddress",

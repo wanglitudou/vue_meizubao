@@ -1,6 +1,6 @@
 <template>
-    <div class="main">
-        <!-- <div class="total">
+  <div class="main">
+    <!-- <div class="total">
             <div class="payment">
                 <div class="pay_one">
                     <p class="pay_num">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div> -->
-        <!-- <div class="payment">
+    <!-- <div class="payment">
            <div class="paymenttop">
              <div>d123321321321</div>
              <div>代发货</div>
@@ -57,13 +57,16 @@
            </div>
 
       </div> -->
-        <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail"></order>
-    </div>
+    <order :orderlist="orderlist"
+           :receipt="receipt"
+           :cancel="cancel"
+           :todetail="todetail"></order>
+  </div>
 </template>
 <script>
 import order from "./order.vue";
-import {find,remove} from 'lodash'
-import { Toast } from 'mint-ui';
+import { find, remove } from "lodash";
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
@@ -76,42 +79,41 @@ export default {
   },
   created() {
     this.getOrder();
-    let obj = [{'a':1},{'b':2},{'c':3}]
-    remove(obj,{'a':1})
-    console.log(obj)
-   //  console.log(vv)
+    let obj = [{ a: 1 }, { b: 2 }, { c: 3 }];
+    remove(obj, { a: 1 });
+    console.log(obj);
+    //  console.log(vv)
   },
   methods: {
     //   确认收货
     receipt(id) {
       console.log(id);
-     this.$axios.post('http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus',{
-         uid:1,
-         id:id,
-         status:3
-     }).then(res=>{
-         if(res.data.status_code == "1001"){
-           remove(this.orderlist,{"id":id})    
-              Toast('修改成功');
-         }else{
-             Toast('修改失败')
-         }
-     })
+      this.$axios
+        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+          uid: 1,
+          id: id,
+          status: 3
+        })
+        .then(res => {
+          if (res.data.status_code == "1001") {
+            remove(this.orderlist, { id: id });
+            Toast("修改成功");
+          } else {
+            Toast("修改失败");
+          }
+        });
     },
     // 取消订单
-    cancel(id){
-        console.log(id)
+    cancel(id) {
+      console.log(id);
     },
-    todetail(id){
-       
-       this.$router.push({
-
-      
-        name:'order_details',
-          params: {
-            id: id,
-          }
-       })
+    todetail(id) {
+      this.$router.push({
+        name: "order_details",
+        params: {
+          id: id
+        }
+      });
     },
     getOrder() {
       let that = this;
