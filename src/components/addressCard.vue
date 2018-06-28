@@ -1,8 +1,7 @@
 <template>
 
   <div>
-    <div class="address"
-         @click="jumpToAddress">
+    <div class="address">
       <div class="left">
         <img src="../assets/icon/address.png"
              alt="">
@@ -38,14 +37,7 @@ export default {
   props: ["type", "detail"],
   mounted() {},
   methods: {
-    jumpToAddress() {
-      alert("6666");
-      // alert("暂时没有address页面,有了在这改 label");
-      //      this.$router.push({
-      //        name:"confirm",
-      //
-      //      })
-    }
+   
   },
   data() {
     return {

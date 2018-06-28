@@ -95,6 +95,7 @@ import orderFooter from "../../components/orderFooter.vue";
 // import sign from '../../components/sign.vue'
 import sign from "../../components/canvas.vue";
 import { Toast, Swipe, SwipeItem } from "mint-ui";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -122,10 +123,7 @@ export default {
     //获取userid
     this.userId = localStorage.getItem("id");
     //获取当前浏览器的地址
-    this.dqurl =
-      window.location.href.split("#")[0] +
-      "?#/details?pid=" +
-      this.$route.query.pid;
+    this.dqurl = window.location.href;
     //			this.dqurl = encodeURIComponent(window.location.href)
     //			console.log(typeof this.dqurl)
     console.log(this.dqurl);
@@ -234,6 +232,7 @@ export default {
     sign
   },
   methods: {
+    ...mapActions(["setConfirmData"]),
     //签名
     // generatingsignature() {
     //   let that = this;
@@ -281,7 +280,22 @@ export default {
       }
 
       // console.log(this.month)
-
+      this.setConfirmData({
+        type: 1,
+        g_id: this.$route.query.pid,
+        m_type: 1,
+        strtime: "",
+        stoptime: "",
+        stage: this.month,
+        agreement: this.agreementId,
+        image: this.data.images[0],
+        goods_num: 1,
+        total_price: this.month * this.data.firstrent + (this.data.deposit - 0),
+        goods_name: this.data.name,
+        deposit: this.data.deposit,
+        price: this.data.firstrent,
+        month: this.data.num
+      });
       this.$router.push({
         //          path: '/confirm/instrument',
         name: "confirm",
@@ -324,7 +338,7 @@ export default {
             that.$axios
               .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
                 params: {
-                  http: localStorage.dqurl
+                  http: location.href
                 }
               })
               .then(res => {

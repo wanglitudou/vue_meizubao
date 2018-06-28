@@ -54,11 +54,6 @@
 					<span>{{data.sigh_strtime}}</span>
 				</p>
 				<p class="pro_cate">
-					<span>分成比例：</span>
-					<span>{{data.sigh_stoptime}}</span>
-				</p>
-
-				<p class="pro_cate">
 					<span>项目开始时间：</span>
 					<span>{{data.strtime}}</span>
 				</p>
@@ -103,7 +98,7 @@
 </template>
 <script>
 import orderFooter from "../../components/orderFooter.vue";
-import sign from "../../components/sign.vue";
+import sign from "../../components/canvas.vue";
 import { Toast } from "mint-ui";
 import { Swipe, SwipeItem } from "mint-ui";
 export default {
