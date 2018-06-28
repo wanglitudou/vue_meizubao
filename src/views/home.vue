@@ -190,7 +190,7 @@ export default {
   computed: {
     ...mapGetters(["hasPhoneNum"])
   },
-  created() {
+  mounted() {
     Indicator.open();
     setTimeout(() => {
       Indicator.close();
@@ -214,14 +214,15 @@ export default {
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
     this.getUser();
-  },
-  mounted: function() {
-    //微信分享
+     //微信分享
     this.wxshare();
     //获取userid
     this.userId = localStorage.getItem("id");
     //获取当前浏览器的地址
     this.dqurl = window.location.href;
+  },
+  created: function() {
+   
   },
   watch: {},
   methods: {

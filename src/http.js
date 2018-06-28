@@ -4,7 +4,7 @@ import router from './router/routes'
 //请求拦截器
 axios.interceptors.request.use(
     config => {
-        console.log(window.sessionStorage.getItem('token'))
+        // console.log(window.sessionStorage.getItem('token'))
         if (window.sessionStorage.token) {
             // config.headers.Authorization = 'token'+window.sessionStorage.token;
         }else{

@@ -26,7 +26,7 @@ export const getters = {
     },
 
     confirmData(){
-        if (state.confirmData == {}) {
+        if (isEmpty(state.confirmData)) {
             
             state.confirmData =  JSON.parse(localStorage.getItem('confirmData'))
         }

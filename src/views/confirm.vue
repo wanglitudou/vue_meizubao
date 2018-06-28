@@ -16,18 +16,19 @@ export default {
     addressCard,
     orderCard
   },
-  created() {console.log(this.$router.params)},
+  created() {},
   mounted() {
+     console.log(this.confirmData);
   this.datas = this.confirmData 
-console.log(this.datas)
   },
   computed:{
    ...mapGetters(['confirmData'])
   },
 methods: {
     createOrder: function() {
+
       //全部参数通过  $route传入 除 uid addressId
-      console.log(this.addressId);
+     
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
           uid: window.localStorage.id,
