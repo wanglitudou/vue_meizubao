@@ -1,42 +1,46 @@
-<template>    
-    <div class="order_foot">
-      <div class="total_foot">
-        <div class="total_lef" v-if="during >0">
+<template>
+  <div class="order_foot">
+    <div class="total_foot">
+      <div class="total_lef" v-if="during >0">
           <span class="add">合计：</span>
           <span class="tinct">¥{{renprice}}</span>
-        </div>
-         <div class="total_lef" v-else>
-          <span class="add">合计：</span>
-          <span class="tinct">¥{{detail.total_price}}</span>
-        </div>
-        <template v-if="detail.status == 1">
-          <div class="total_rig" @click="nextFun">
-            <span>立即付款</span>
-          </div>
-        </template>
-        <template v-if="detail.status == 4">
-          <div class="total_rig" @click="confirm(detail.uid,detail.type)" v-if="detail.type != 5">
-            <span>确认收货</span>
-          </div>
-        </template>
-        <template v-if="detail.status == 6">
-          <div class="total_rig" @click="back(detail.uid)">
-            <span v-if="detail.type != 2">退还</span>
-            <span v-else>完成服务</span>
-          </div>
-          <div class="total_rig" @click="renewal(detail)">
-            <span>续约</span>
-          </div>
-        </template>
-
       </div>
+      <div class="total_lef" v-else-if="mounth >0">
+        <span class="add">合计：</span>
+        <span class="tinct">¥{{getPrice}}</span>
+      </div>
+       <div class="total_lef" v-else>
+        <span class="add">合计：</span>
+        <span class="tinct">¥{{detail.total_price}}</span>
+      </div>
+      <template v-if="detail.status == 1">
+        <div class="total_rig" @click="nextFun">
+          <span>立即付款</span>
+        </div>
+      </template>
+      <template v-if="detail.status == 4">
+        <div class="total_rig" @click="confirm(detail.uid,detail.type)" v-if="detail.type != 5">
+          <span>确认收货</span>
+        </div>
+      </template>
+      <template v-if="detail.status == 6">
+        <div class="total_rig" @click="back(detail.uid)">
+          <span v-if="detail.type != 2">退还</span>
+          <span v-else>完成服务</span>
+        </div>
+        <div class="total_rig" @click="renewal(detail)">
+          <span>续约</span>
+        </div>
+      </template>
+
     </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "orderFooter",
-  props: ["count", "nextFun", "detail", "confirm", "back", "renewal",'during','renprice'],
+  props: ["count", "nextFun", "detail", "confirm", "back",'mounth', "renewal",'during','renprice','getPrice'],
   mounted() {
     this.countNum = this.toThousands(this.count);
   },

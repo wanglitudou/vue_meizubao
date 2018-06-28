@@ -121,9 +121,11 @@ export default {
       });
     },
     changesite(id) {
-      this.$router.go("-1");
-      let siteId = id;
+      console.log(id)
+       let siteId = id;
       localStorage.setItem("siteId", siteId);
+      this.$router.go("-1");
+     
     },
     getList() {
       let that = this;

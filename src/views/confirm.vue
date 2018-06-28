@@ -3,12 +3,12 @@ import orderFooter from "../components/orderFooter.vue";
 import addressCard from "../components/orderAddressCard.vue";
 import orderCard from "../components/orderCard.vue";
 import { Toast } from "mint-ui";
-import { mapGetters } from "vuex";
+import {mapGetters}from 'vuex'
 export default {
   data() {
     return {
       addressId: null,
-      datas: {}
+      datas:{}
     };
   },
   components: {
@@ -16,20 +16,16 @@ export default {
     addressCard,
     orderCard
   },
-  created() {
-    console.log(this.$router.params);
-  },
+  created() {},
   mounted() {
-    this.datas = this.confirmData;
-    console.log(this.datas);
+  this.datas = this.confirmData 
   },
-  computed: {
-    ...mapGetters(["confirmData"])
+  computed:{
+   ...mapGetters(['confirmData'])
   },
-  methods: {
+methods: {
     createOrder: function() {
       //全部参数通过  $route传入 除 uid addressId
-      console.log(this.addressId);
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
           uid: window.localStorage.id,

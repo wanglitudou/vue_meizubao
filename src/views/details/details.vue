@@ -118,6 +118,9 @@ export default {
     };
   },
   created() {},
+  activated(){
+    console.log(this.$route.query)
+  },
   mounted() {
     this.init();
     //获取userid

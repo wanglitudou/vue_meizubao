@@ -87,6 +87,7 @@ export default {
       // alert("66666");
     },
     changes() {
+      console.log(11)
       this.$axios({
         method: "get",
         url: "http://mzbao.weiyingjia.org/api/meizubao/addressInfo",
@@ -96,7 +97,10 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
+        
+         console.log(res)
           this.data = res.data.data;
+            this.saveAddressId(res.data.data.id);
         }
       });
     }
