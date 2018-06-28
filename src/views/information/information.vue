@@ -227,12 +227,12 @@ export default {
     authname() {
       let that = this;
       if (!/^(?:[1-9]?\d|100)$/.test(that.data.age)) {
-        Toast("请输入正确的格式年龄");
+        Toast("请输入正确的年龄格式");
         return false;
       }
       //验证姓名
       if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.data.name)) {
-        Toast("请输入正确的格式姓名");
+        Toast("请输入正确的姓名格式");
         return false;
       }
       // if (
@@ -252,17 +252,17 @@ export default {
           that.data.mailbox
         )
       ) {
-        Toast("请输入正确的格式邮箱");
+        Toast("请输入正确的邮箱格式");
         return false;
       }
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.shop)) {
-        Toast("请输入正确的格式店铺");
-        return false;
-      }
-      if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.address)) {
-        Toast("请输入正确的格式地址");
-        return false;
-      }
+      // if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.shop)) {
+      //   Toast("请输入正确的格式店铺");
+      //   return false;
+      // }
+      // if (!/^[\u4e00-\u9fa5A-Za-z]{2,20}$/.test(that.data.address)) {
+      //   Toast("请输入正确的格式地址");
+      //   return false;
+      // }
       this.$router.push({
         path: "/authname",
         query: {
