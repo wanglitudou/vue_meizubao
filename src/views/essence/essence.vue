@@ -370,8 +370,9 @@ export default {
           start: new Date(arr[0]),
           end: new Date(arr[1])
         };
-        arrTime.push(temArrs);
+       
       }
+       arrTime.push(temArrs);
       let temArr = {
         start: null,
         end: new Date(
