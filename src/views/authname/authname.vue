@@ -9,7 +9,6 @@
             <input type="text"
                    class="inpt"
                    v-model="data.id_card"
-                   @blur="card()"
                    placeholder="请输入身份证号码">
           </span>
         </p>
@@ -166,6 +165,12 @@ export default {
         });
     },
     submitBtn() {
+      //身份验证
+      let that = this;
+      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(that.data.id_card)) {
+        Toast("请输入正确的身份证格式");
+        return false;
+      }
       //用户信息
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
@@ -201,34 +206,12 @@ export default {
     // complete() {
     //   this.$router.push({ name: "mine" });
     // },
-    idCardReg(num) {
-      console.log(num);
-      let re1 = /^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}[0-9Xx]$/,
-        re2 = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-      if (re1.test(num) || re2.test(num)) {
-        return true;
-      } else {
-        Toast("请输入正确的格式");
-        return false;
-      }
-    },
-    card() {
-      let that = this;
-      if (this.idCardReg(this.data.id_card)) {
-        return;
-      }
-    },
-    homeaddress() {
-      let that = this;
-      if (
-        !/(^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+)$/.test(
-          that.data.home_address
-        )
-      ) {
-        Toast("请输入正确的格式");
-        return false;
-      }
-    },
+    // idCardReg(num) {
+    //   var regS = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; // 身份证号码
+
+    //   console.log(num);
+    // },
+    homeaddress() {},
     updataimg(e, num) {
       let file = e.target.files[0];
       console.log(file);

@@ -69,7 +69,7 @@
               </div>
               <!--图片切换时展示的内容 右边-->
             </div>
-          
+
             <div class="add_more"
                  @click="loadMoreVideo">
               <span>{{videoNoMore?'已全部显示':'加载更多'}}</span>
@@ -93,7 +93,7 @@ export default {
   data() {
     return {
       tabs: ["图片", "视频"],
-      num:Number,
+      num: Number,
       imageData: [],
       videoData: [],
       imageNoMore: false,
@@ -102,24 +102,23 @@ export default {
       videoPage: 1
     };
   },
-  computed:{
-    ...mapGetters(['typeCode'])
+  computed: {
+    ...mapGetters(["typeCode"])
   },
-  created(){
-   
-     if(this.typeCode == null){
-      this.typeCode =0
-    }else{
-      console.log("22")
+  created() {
+    if (this.typeCode == null) {
+      this.typeCode = 0;
+    } else {
+      console.log("22");
     }
-    console.log(this.typeCode)
-    this.num =  this.typeCode
+    console.log(this.typeCode);
+    this.num = this.typeCode;
   },
   mounted() {
     this.getImage();
     this.getVideo();
-     // console.log(this.num)
-   
+    // console.log(this.num)
+
     // console.log(this.typeCode)
     //  var clipboard=new ClipboardJS('.right-button');
     // //  console.log(clipboard)
@@ -143,7 +142,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setTypeCode']),
+    ...mapActions(["setTypeCode"]),
     bindCopy() {
       var btns = document.querySelectorAll(".button");
       console.log(btns);
@@ -173,7 +172,7 @@ export default {
       if (index == 1) {
         this.status_code = 2;
       }
-      this.setTypeCode(index)
+      this.setTypeCode(index);
     },
 
     loadMoreImage() {
