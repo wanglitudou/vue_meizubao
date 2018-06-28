@@ -103,7 +103,7 @@
 import orderFooter from "../../components/orderFooter.vue";
 import sign from "../../components/canvas.vue";
 import { Toast } from "mint-ui";
-
+import {mapActions} from 'vuex'
 const setUpTime = 3; //常量 技师出发准备时间 (从今天开始算 几天后可选);
 export default {
   data() {
@@ -168,6 +168,7 @@ export default {
   },
 
   computed: {
+
     during() {
       return (
         (this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) /
@@ -195,6 +196,7 @@ export default {
   },
 
   methods: {
+         ...mapActions(['setConfirmData']),
     saveAgreementId: function(agreementId) {
       this.showSignTag = false;
       this.agreementId = agreementId;
@@ -208,7 +210,23 @@ export default {
         Toast("请网签租赁协议后下单");
         return false;
       }
+        this.setConfirmData({
+        type: 2,
+          g_id: this.$route.query.pid,
+          m_type: "1",
+          strtime: this.startTime,
+          stoptime: this.endTime,
+          stage: this.during,
+          agreement: this.agreementId,
+          image: this.data.images,
+          goods_num: "1",
+          total_price: this.totalPrice,
+          goods_name: this.data.name,
+          deposit: "",
 
+          price: this.data.dayprice
+
+     }) 
       this.$router.push({
         //          path: '/confirm/instrument',
         name: "confirm",

@@ -95,6 +95,7 @@ import orderFooter from "../../components/orderFooter.vue";
 // import sign from '../../components/sign.vue'
 import sign from "../../components/canvas.vue";
 import { Toast, Swipe, SwipeItem } from "mint-ui";
+import {mapActions} from 'vuex'
 
 export default {
   data() {
@@ -232,6 +233,7 @@ export default {
     sign
   },
   methods: {
+    ...mapActions(['setConfirmData']),
     //签名
     // generatingsignature() {
     //   let that = this;
@@ -279,7 +281,24 @@ export default {
       }
 
       // console.log(this.month)
+     this.setConfirmData({
+         type: 1,
+          g_id: this.$route.query.pid,
+          m_type: 1,
+          strtime: "",
+          stoptime: "",
+          stage: this.month,
+          agreement: this.agreementId,
+          image: this.data.images[0],
+          goods_num: 1,
+          total_price:
+            this.month * this.data.firstrent + (this.data.deposit - 0),
+          goods_name: this.data.name,
+          deposit: this.data.deposit,
+          price: this.data.firstrent,
+          month: this.data.num
 
+     }) 
       this.$router.push({
         //          path: '/confirm/instrument',
         name: "confirm",

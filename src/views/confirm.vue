@@ -3,10 +3,12 @@ import orderFooter from "../components/orderFooter.vue";
 import addressCard from "../components/orderAddressCard.vue";
 import orderCard from "../components/orderCard.vue";
 import { Toast } from "mint-ui";
+import {mapGetters}from 'vuex'
 export default {
   data() {
     return {
-      addressId: null
+      addressId: null,
+      datas:{}
     };
   },
   components: {
@@ -15,8 +17,14 @@ export default {
     orderCard
   },
   created() {console.log(this.$router.params)},
-  mounted() {},
-  methods: {
+  mounted() {
+  this.datas = this.confirmData 
+console.log(this.datas)
+  },
+  computed:{
+   ...mapGetters(['confirmData'])
+  },
+methods: {
     createOrder: function() {
       //全部参数通过  $route传入 除 uid addressId
       console.log(this.addressId);
@@ -68,24 +76,24 @@ export default {
 <template>
   <div class="container">
 
-    <addressCard :type="'button'"
+    <addressCard :type="' '"
                  :saveAddressId="saveAddressId"></addressCard>
 
     <!--stage 仪器租赁时长(月)、技师租赁天数-->
     <!--month 仪器起租期(月)-->
     <!--number 商品数量-->
 
-    <orderCard :type="$route.params.type"
-               :name="$route.params.goods_name"
-               :img="$route.params.image"
-               :price="$route.params.price"
-               :total_price="$route.params.total_price"
-               :stage="$route.params.stage"
-               :deposit="$route.params.deposit"
-               :month="$route.params.month"
-               :number="$route.params.goods_num"></orderCard>
+    <orderCard :type="datas.type"
+               :name="datas.goods_name"
+               :img="datas.image"
+               :price="datas.price"
+               :total_price="datas.total_price"
+               :stage="datas.stage"
+               :deposit="datas.deposit"
+               :month="datas.month"
+               :number="datas.goods_num"></orderCard>
 
-    <orderFooter :count="$route.params.total_price"
+    <orderFooter :count="datas.total_price"
                  :text="'立即下单'"
                  :nextFun="createOrder"></orderFooter>
 

@@ -60,12 +60,13 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             //							this.data = res.data.data[0];
-            this.saveAddressId(this.data.id);
+           
             for (var i = 0; i < res.data.data.length; i++) {
               if (res.data.data[i].is_default_address == 1) {
                 this.data = res.data.data[i];
               }
             }
+             this.saveAddressId(this.data.id);
           }
         })
         .catch(err => {

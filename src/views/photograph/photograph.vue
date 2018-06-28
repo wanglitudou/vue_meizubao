@@ -106,8 +106,11 @@ export default {
     ...mapGetters(['typeCode'])
   },
   created(){
-     if(!this.typeCode){
+   
+     if(this.typeCode == null){
       this.typeCode =0
+    }else{
+      console.log("22")
     }
     console.log(this.typeCode)
     this.num =  this.typeCode
