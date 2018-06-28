@@ -98,11 +98,9 @@ export default {
     },
     renprice() {
       if (this.during > 4) {
-        console.log("我大");
         // return  parseInt(this.detail.continued) * parseInt(this.during)
         return (this.detail.dayprice * parseInt(this.during) * 0.8).toFixed(2);
       } else {
-        console.log("我小");
         return (this.detail.dayprice * parseInt(this.during)).toFixed(2);
       }
     },
@@ -118,7 +116,6 @@ export default {
           params: { id: 1 }
         })
         .then(res => {
-          console.log(res);
           if (res.data.status_code == "1001") {
             this.allTime = res.data.data;
             var appointmentTime = [];
@@ -140,7 +137,6 @@ export default {
             }
 
             var beforeDate = new Date(minDateStamp - 24 * 60 * 60 * 1000);
-            console.log(beforeDate);
             let temArr = { start: new Date(beforeDate), end: null };
             this.disableDate.push(temArr);
             //            for (var arr of this.allTime) {
@@ -155,7 +151,6 @@ export default {
     },
     //立即支付
     nextFun() {
-      // console.log(111)
       var openid = window.localStorage.getItem("openid");
       this.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/continuePay", {
@@ -173,7 +168,6 @@ export default {
     },
     //确认收货
     confirm(uid, type) {
-      console.log(type);
       let status = 0;
       if (type == 3) {
         status = 7;
@@ -189,7 +183,6 @@ export default {
         .then(res => {
           if (res.data.status_code == "1001") {
             this.detail.status = status;
-            console.log(this.detail);
             Toast("确认成功");
           } else {
             Toast("确认失败");
@@ -246,7 +239,6 @@ export default {
     //   console.log(this.allPrice);
     // },
     renewal(detail) {
-      console.log(detail);
       var openid = window.localStorage.getItem("openid");
       //  this.text = '继续续约'
 
@@ -256,7 +248,6 @@ export default {
           return false;
         }
         this.allPrice = this.getPrice;
-        console.log(detail);
         this.getRenewal(
           this.orderId,
           this.mounth,
@@ -264,14 +255,11 @@ export default {
           this.allPrice,
           openid
         );
-        // console.log(this.orderId)
       } else if (detail.type == 2) {
         if (this.during == 0) {
           Toast("请选择您的时间");
           return false;
         }
-        // console.log(during)
-        //  console.log(this.renprice)
         this.price = this.renprice;
 
         this.getRenewal(this.orderId, "", this.endTime, this.price, openid);
@@ -280,9 +268,6 @@ export default {
     // 加法
     increase() {
       this.mounth++;
-      console.log(this.mounth);
-      console.log(this.getPrice);
-      console.log(this.detail.continued);
       // this.getPrice(this.detail.continued, this.mounth);
     },
     // 减法
@@ -331,7 +316,7 @@ export default {
   margin-top: 10px;
 }
 .begin_rent {
-  width: 7.068rem;
+  width: 100%;
   height: 1rem;
   line-height: 1rem;
   box-shadow: 0 2px 9px 0 #eeeeee;
@@ -478,10 +463,10 @@ export default {
               <div class="increase" @click="increase">+</div>
             </div>
           </div>
-          <div class="xuyue" v-show="mounth>0">
+          <!-- <div class="xuyue" v-show="mounth>0">
             <span>续约金额：￥{{getPrice}}</span>
 
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- 技师续约 -->
@@ -499,7 +484,7 @@ export default {
         <!-- v-bind:class="{ disable: month==data.num }" -->
       </div>
     </div>
-    <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :renewal="renewal" :during="during" :renprice="renprice" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
+    <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :mounth="mounth" :getPrice="getPrice" :renewal="renewal" :during="during" :renprice="renprice" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
   </div>
 </template>
 

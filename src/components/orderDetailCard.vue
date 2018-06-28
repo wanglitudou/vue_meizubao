@@ -15,7 +15,7 @@
         <!-- <span class="text-right color666">：{{detail.strtime}}</span> -->
       </div>
       <div class="bottom-text">
-        <span class="color666">诚意金：</span>￥<span class="big red">{{detail.deposit}}</span>
+        <span class="color666">诚意金：</span>￥<span class="big red">{{detail.total_price}}</span>
       </div>
     </div>
   </div>

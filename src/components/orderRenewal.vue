@@ -52,10 +52,11 @@ export default {
 </script>
 <style scoped>
 .instrument {
+  width:100%;
   margin-top: 10px;
 }
 .begin_rent {
-  width: 7.068rem;
+  width: 100%;
   height: 1rem;
   line-height: 1rem;
   box-shadow: 0 2px 9px 0 #eeeeee;

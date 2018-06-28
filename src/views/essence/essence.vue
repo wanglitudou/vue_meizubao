@@ -364,12 +364,13 @@ export default {
     },
 
     createDisableDate: function() {
+      let arrTime = []
       for (var arr of this.data.appointmentTime) {
-        let temArr = {
+        let temArrs = {
           start: new Date(arr[0]),
           end: new Date(arr[1])
         };
-        this.disableDate.push(temArr);
+        arrTime.push(temArrs);
       }
       let temArr = {
         start: null,
@@ -378,6 +379,7 @@ export default {
         )
       };
       this.disableDate.push(temArr);
+      this.disableDate = this.disableDate.concat(arrTime)
     }
   }
 };
