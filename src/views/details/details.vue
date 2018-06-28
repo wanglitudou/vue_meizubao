@@ -119,8 +119,7 @@ export default {
   },
   created() {},
   activated(){
-   console.log("222")
-   console.log(this.$route.query)
+    console.log(this.$route.query)
   },
   mounted() {
     this.init();

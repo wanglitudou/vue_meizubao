@@ -3,6 +3,7 @@ import home from "../views/home.vue";
 import catagory from "../views/catagory.vue";
 import cart from "../views/cart.vue";
 import mine from "../views/mine.vue";
+import aaa from "../views/aaa.vue";
 
 //引入其他页面的组件
 
@@ -163,6 +164,11 @@ let routes = [
     name: "integral",
     path: "integral",
     component: integral
+  },
+  {
+    name: "aaa",
+    path: "aaa",
+    component: aaa
   },
   {
     name: "address",

@@ -54,7 +54,7 @@ export default {
               signature: that.dataList.signature,
               jsApiList: [
                 //需要使用的网页服务接口
-                //									"checkJsApi", //判断当前客户端版本是否支持指定JS接口
+                //"checkJsApi", //判断当前客户端版本是否支持指定JS接口
                 "chooseImage" //上传图片
               ]
             });

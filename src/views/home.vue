@@ -27,10 +27,19 @@
                alt="111">
         </div>
       </div> -->
-      <div class="search_contents">
+      <!-- <div class="search_contents">
         <div class="list_search"
              ref="search"
              @click="toSearch()">
+          <div style="margin-left:20px;">请输入搜索</div>
+          <img src="../assets/icon/search_1.png"
+               alt="111">
+        </div>
+      </div> -->
+      <div class="search_contents">
+        <div class="list_search"
+             ref="search"
+             @click="aaa()">
           <div style="margin-left:20px;">请输入搜索</div>
           <img src="../assets/icon/search_1.png"
                alt="111">
@@ -570,10 +579,10 @@ export default {
     // address() {
     //   this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
     // }
-    // aaa() {
-    //   //完善信息
-    //   this.$router.push({ name: "aaa" });
-    // }
+    aaa() {
+      //完善信息
+      this.$router.push({ name: "aaa" });
+    }
   }
 };
 </script>

@@ -18,7 +18,6 @@ export default {
   },
   created() {},
   mounted() {
-     console.log(this.confirmData);
   this.datas = this.confirmData 
   },
   computed:{
@@ -26,9 +25,7 @@ export default {
   },
 methods: {
     createOrder: function() {
-
       //全部参数通过  $route传入 除 uid addressId
-     
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/addOrder", {
           uid: window.localStorage.id,
