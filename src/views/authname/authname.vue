@@ -258,14 +258,14 @@ export default {
             that.fileList = res.data;
           }
           if (num == 1) {
-            that.data.imgOne = res.data.url;
+            that.data.imgOne = res.data.data.card_front;
             console.log("666");
           } else if (num == 2) {
-            that.data.imgtwo = res.data.url;
+            that.data.imgtwo = res.data.data.card_behind;
           } else if (num == 3) {
-            that.data.imgthree = res.data.url;
+            that.data.imgthree = res.data.data.business_license;
           } else if (num == 4) {
-            that.data.imgfour = res.data.url;
+            that.data.imgfour = res.data.data.store_image;
           }
         },
         error: function(res) {

@@ -22,10 +22,6 @@ import MintUI from "mint-ui";
 import "mint-ui/lib/style.css";
 import "./components/js/jquery-2.1.0";
 import { Checklist } from "mint-ui";
-
-
-
-
 //引入新的日历插件
 import VCalendar from "v-calendar";
 import "v-calendar/lib/v-calendar.min.css";
@@ -54,8 +50,8 @@ Vue.prototype.$axios = axios;
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 //动态修改title
-Vue.directive('title', {
-  inserted: function (el, binding) {
+Vue.directive("title", {
+  inserted: function(el, binding) {
     document.title = binding.value;
   }
 });
@@ -97,7 +93,7 @@ import { VueMasonryPlugin } from "vue-masonry";
 
 Vue.use(VueMasonryPlugin);
 Vue.use(MintUI);
-import store from './store';
+import store from "./store";
 // eslint-disable no-new
 new Vue({
   el: "#app",
