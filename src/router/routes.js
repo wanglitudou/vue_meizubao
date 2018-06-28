@@ -1,46 +1,46 @@
-import index from "../views/index.vue";
-import home from "../views/home.vue";
-import catagory from "../views/catagory.vue";
-import cart from "../views/cart.vue";
-import mine from "../views/mine.vue";
-import aaa from "../views/aaa.vue";
-import confirm from "../views/confirm.vue";
-import orderDetails from "../views/orderDetails.vue";
-//引入其他页面的组件
+// import index from "../views/index.vue";
+// import home from "../views/home.vue";
+// import catagory from "../views/catagory.vue";
+// import cart from "../views/cart.vue";
+// import mine from "../views/mine.vue";
+// import aaa from "../views/aaa.vue";
+// import confirm from "../views/confirm.vue";
+// import orderDetails from "../views/orderDetails.vue";
+// //引入其他页面的组件
 
-import detail from "../views/detail/detail.vue";
-import industry from "../views/industry/industry.vue";
-import details from "../views/details/details.vue";
-import cooperation from "../views/cooperation/cooperation.vue";
-import project from "../views/project/project.vue";
-import matching from "../views/matching/matching.vue";
-import train from "../views/train/train.vue";
-import essence from "../views/essence/essence.vue";
-import looksee from "../views/looksee/looksee.vue";
-import seemore from "../views/seemore/seemore.vue";
-import clickpay from "../views/clickpay/clickpay.vue";
-import login from "../views/login/login.vue";
-import ordergoods from "../views/ordergoods/ordergoods.vue";
-import payment from "../views/payment/payment.vue";
-import authname from "../views/authname/authname.vue";
-// import authnames from "../views/authname/authnames.vue";
-import information from "../views/information/information.vue";
-import curriculum from "../views/curriculum/curriculum.vue";
-import coursepage from "../views/coursepage/coursepage.vue";
-import integral from "../views/integral/integral.vue";
-import address from "../views/address/address.vue";
-import addresssite from "../views/address/addresssite.vue";
-import customservice from "../views/customservice/customservice.vue";
-import viewscreen from "../views/viewscreen/viewscreen.vue";
-import photograph from "../views/photograph/photograph.vue";
-import pageindustry from "../views/pageindustry/pageindustry.vue";
-import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
-import mediaDetails from "../views/photograph/mediaDetails.vue";
-import search from "../views/search/search.vue";
-import dataBase from "../views/dataBase/index.vue";
-import qian from "../views/qian/qian.vue";
-import phone from "../views/phone.vue";
-import addtheaddre from "../views/addtheaddress/addtheaddre.vue";
+// import detail from "../views/detail/detail.vue";
+// import industry from "../views/industry/industry.vue";
+// import details from "../views/details/details.vue";
+// import cooperation from "../views/cooperation/cooperation.vue";
+// import project from "../views/project/project.vue";
+// import matching from "../views/matching/matching.vue";
+// import train from "../views/train/train.vue";
+// import essence from "../views/essence/essence.vue";
+// import looksee from "../views/looksee/looksee.vue";
+// import seemore from "../views/seemore/seemore.vue";
+// import clickpay from "../views/clickpay/clickpay.vue";
+// import login from "../views/login/login.vue";
+// import ordergoods from "../views/ordergoods/ordergoods.vue";
+// import payment from "../views/payment/payment.vue";
+// import authname from "../views/authname/authname.vue";
+// // import authnames from "../views/authname/authnames.vue";
+// import information from "../views/information/information.vue";
+// import curriculum from "../views/curriculum/curriculum.vue";
+// import coursepage from "../views/coursepage/coursepage.vue";
+// import integral from "../views/integral/integral.vue";
+// import address from "../views/address/address.vue";
+// import addresssite from "../views/address/addresssite.vue";
+// import customservice from "../views/customservice/customservice.vue";
+// import viewscreen from "../views/viewscreen/viewscreen.vue";
+// import photograph from "../views/photograph/photograph.vue";
+// import pageindustry from "../views/pageindustry/pageindustry.vue";
+// import addtheaddress from "../views/addtheaddress/addtheaddress.vue";
+// import mediaDetails from "../views/photograph/mediaDetails.vue";
+// import search from "../views/search/search.vue";
+// import dataBase from "../views/dataBase/index.vue";
+// import qian from "../views/qian/qian.vue";
+// import phone from "../views/phone.vue";
+// import addtheaddre from "../views/addtheaddress/addtheaddre.vue";
 
 let routes = [
   {
@@ -53,7 +53,7 @@ let routes = [
     // meta: {
     //   title: "首页"
     // },
-    component: index,
+    component: resolve => require(['../views/index.vue'], resolve),//懒加载
     children: [
       {
         name: "home",
@@ -61,7 +61,7 @@ let routes = [
         meta: {
           title: "首页"
         },
-        component: home
+        component: resolve => require(['../views/home.vue'], resolve)
       },
       {
         name: "catagory",
@@ -69,7 +69,7 @@ let routes = [
         meta: {
           title: "分类"
         },
-        component: catagory
+        component: resolve => require(['../views/catagory.vue'], resolve)
       },
       {
         name: "mine",
@@ -77,23 +77,23 @@ let routes = [
         meta: {
           title: "我的"
         },
-        component: mine
+        component: resolve => require(['../views/mine.vue'], resolve)
       },
       {
         name: "ordergoods",
         path: "ordergoods",
-        component: ordergoods
+        component: resolve => require(['../views/ordergoods/ordergoods.vue'], resolve)
       },
       {
         name: "payment",
         path: "payment",
-        component: payment
+        component:  resolve => require(['../views/payment/payment.vue'], resolve)
       },
 
       {
         name: "coursepage",
         path: "coursepage",
-        component: coursepage
+        component: resolve => require(['../views/coursepage/coursepage.vue'], resolve)
       },
       {
         name: "cart",
@@ -101,7 +101,7 @@ let routes = [
         meta: {
           title: "订单"
         },
-        component: cart
+        component:  resolve => require(['../views/cart.vue'], resolve)
       }
     ]
   },
@@ -111,17 +111,17 @@ let routes = [
     meta: {
       title: "热租仪器"
     },
-    component: detail
+    component:  resolve => require(['../views/detail/detail.vue'], resolve)
   },
   {
     name: "search",
     path: "/search",
-    component: search
+    component: resolve => require(['../views/search/search.vue'], resolve)
   },
   {
     name: "details",
     path: "/details",
-    component: details,
+    component: resolve => require(['../views/details/details.vue'], resolve),
     meta: {
       keepAlive: true,
       title: "详情页"
@@ -130,32 +130,32 @@ let routes = [
   {
     name: "industry",
     path: "/industry",
-    component: industry
+    component:  resolve => require(['../views/industry/industry.vue'], resolve),
   },
   {
     name: "cooperation",
     path: "/cooperation",
-    component: cooperation
+    component:  resolve => require(['../views/cooperation/cooperation.vue'], resolve),
   },
   {
     name: "project",
     path: "/project",
-    component: project
+    component: resolve => require(['../views/project/project.vue'], resolve),
   },
   {
     name: "matching",
     path: "/matching",
-    component: matching
+    component:  resolve => require(['../views/matching/matching.vue'], resolve),
   },
   {
     name: "train",
     path: "/train",
-    component: train
+    component: resolve => require(['../views/train/train.vue'], resolve),
   },
   {
     name: "essence",
     path: "/essence",
-    component: essence
+    component: resolve => require(['../views/essence/essence.vue'], resolve),
   },
   {
     name: "looksee",
@@ -163,7 +163,7 @@ let routes = [
     meta: {
       title: "美业精英"
     },
-    component: looksee
+    component: resolve => require(['../views/looksee/looksee.vue'], resolve),
   },
   {
     name: "seemore",
@@ -171,7 +171,7 @@ let routes = [
     meta: {
       title: "配套产品"
     },
-    component: seemore
+    component: resolve => require(['../views/seemore/seemore.vue'], resolve),
   },
   {
     name: "clickpay",
@@ -179,7 +179,7 @@ let routes = [
     meta: {
       title: "合作项目"
     },
-    component: clickpay
+    component:resolve => require(['../views/clickpay/clickpay.vue'], resolve),
   },
   {
     name: "curriculum",
@@ -187,7 +187,7 @@ let routes = [
     meta: {
       title: "我的课程"
     },
-    component: curriculum
+    component: resolve => require(['../views/curriculum/curriculum.vue'], resolve),
   },
   {
     name: "integral",
@@ -195,7 +195,7 @@ let routes = [
     meta: {
       title: "我的积分"
     },
-    component: integral
+    component:  resolve => require(['../views/integral/integral.vue'], resolve),
   },
   {
     name: "address",
@@ -203,7 +203,7 @@ let routes = [
     meta: {
       title: "我的地址"
     },
-    component: address
+    component: resolve => require(['../views/address/address.vue'], resolve),
   },
   {
     name: "addresssite",
@@ -211,17 +211,17 @@ let routes = [
     meta: {
       title: "我的地址"
     },
-    component: addresssite
+    component: resolve => require(['../views/address/addresssite.vue'], resolve),
   },
   {
     name: "customservice",
     path: "/customservice",
-    component: customservice
+    component: resolve => require(['../views/customservice/customservice.vue'], resolve),
   },
   {
     name: "viewscreen",
     path: "/viewscreen",
-    component: viewscreen
+    component:  resolve => require(['../views/viewscreen/viewscreen.vue'], resolve),
   },
   {
     name: "photograph",
@@ -229,27 +229,27 @@ let routes = [
     meta: {
       title: "资料库"
     },
-    component: photograph
+    component: resolve => require(['../views/photograph/photograph.vue'], resolve),
   },
   {
     name: "pageindustry",
     path: "/pageindustry",
-    component: pageindustry
+    component: resolve => require(['../views/pageindustry/pageindustry.vue'], resolve),
   },
   {
     name: "login",
     path: "/login",
-    component: login
+    component:resolve => require(['../views/login/login.vue'], resolve),
   },
   {
     name: "information",
     path: "/information",
-    component: information
+    component:resolve => require(['../views/information/information.vue'], resolve),
   },
   {
     name: "confirm",
     path: "/confirm/:type",
-    component: confirm,
+    component: resolve => require(['../views/confirm.vue'], resolve),
     meta: {
       keepAlive: true
     }
@@ -258,48 +258,48 @@ let routes = [
     name: "order_details",
     path: "/order_details",
 
-    component: orderDetails
+    component: resolve => require(['../views/orderDetails.vue'], resolve),
   },
   {
     name: "authname",
     path: "/authname",
-    component: authname
+    component: resolve => require(['../views/authname/authname.vue'], resolve),
   },
   {
     name: "aaa",
     path: "/aaa",
-    component: aaa
+    component:  resolve => require(['../views/aaa.vue'], resolve),
   },
   {
     name: "addtheaddress",
     path: "/addtheaddress",
-    component: addtheaddress
+    component: resolve => require(['../views/addtheaddress/addtheaddress.vue'], resolve),
   },
   {
     name: "addtheaddre",
     path: "/addtheaddre",
-    component: addtheaddre
+    component:  resolve => require(['../views/addtheaddress/addtheaddre.vue'], resolve),
   },
 
   {
     name: "mediaDetails",
     path: "/mediaDetails",
-    component: mediaDetails
+    component:  resolve => require(['../views/photograph/mediaDetails.vue'], resolve),
   },
   {
     name: "dataBase",
     path: "/dataBase",
-    component: dataBase
+    component: resolve => require(['../views/dataBase/index.vue'], resolve),
   },
   {
     name: "qian",
     path: "/qian",
-    component: qian
+    component:  resolve => require(['../views/qian/qian.vue'], resolve),
   },
   {
     name: "phone",
     path: "/phone/:id",
-    component: phone,
+    component: resolve => require(['../views/phone.vue'], resolve),
     meta: {
       title: ""
     }
