@@ -39,7 +39,7 @@
       <div class="search_contents">
         <div class="list_search"
              ref="search"
-             @click="aaa()">
+             @click="qqq()">
           <div style="margin-left:20px;">请输入搜索</div>
           <img src="../assets/icon/search_1.png"
                alt="111">
@@ -223,16 +223,14 @@ export default {
     that.getVideo(); //培训视屏
     that.getProject(); //合作项目查询
     this.getUser();
-     //微信分享
+    //微信分享
     this.wxshare();
     //获取userid
     this.userId = localStorage.getItem("id");
     //获取当前浏览器的地址
     this.dqurl = window.location.href;
   },
-  created: function() {
-   
-  },
+  created: function() {},
   watch: {},
   methods: {
     getUser() {
@@ -579,9 +577,13 @@ export default {
     // address() {
     //   this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
     // }
-    aaa() {
+    // aaa() {
+    //   //完善信息
+    //   this.$router.push({ name: "aaa" });
+    // },
+    qqq() {
       //完善信息
-      this.$router.push({ name: "aaa" });
+      this.$router.push({ name: "qqq" });
     }
     // bbb() {
     //   //完善信息

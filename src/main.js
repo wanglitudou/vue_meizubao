@@ -22,6 +22,9 @@ import MintUI from "mint-ui";
 import "mint-ui/lib/style.css";
 import "./components/js/jquery-2.1.0";
 import { Checklist } from "mint-ui";
+import { Popup } from "mint-ui";
+import { Toast } from "mint-ui";
+import { Picker } from "mint-ui";
 //引入新的日历插件
 import VCalendar from "v-calendar";
 import "v-calendar/lib/v-calendar.min.css";
@@ -29,6 +32,7 @@ import "v-calendar/lib/v-calendar.min.css";
 // import axios from "axios";
 import axios from "./http";
 import $ from "jquery";
+
 window.ajaxSrc = "http://mzbao.weiyingjia.org";
 
 axios.defaults.transformRequest = [

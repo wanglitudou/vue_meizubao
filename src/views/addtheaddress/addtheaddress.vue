@@ -16,13 +16,33 @@
                  v-model="telephone"
                  class="inp"></span>
       </p>
-      <p class="collect_bet">
-        <span>所在地区 {{province}}{{city}}{{area}}</span>
-        <span @click="toShow()">请选择
-          <i class="icon_right_img"><img src="../../assets/icon/more.png"
-                 alt=""></i>
-        </span>
-      </p>
+      <!-- <p class="collect_bet"> -->
+
+      <div class="page-content">
+        <ul class="new-address-form">
+          <li class="new-address-form-item">
+            <span class="form-title">所在地区：</span>
+            <input type="text"
+                   placeholder="点击选择所在地区"
+                   class="form-input"
+                   @click="addressPickerShow = true"
+                   v-model="provCityCounty">
+          </li>
+        </ul>
+        <mt-popup v-model="addressPickerShow"
+                  position="bottom"
+                  class="address-popup">
+          <mt-picker :slots="addressSlots"
+                     @change="addressPickerChange"
+                     :visible-item-count="5"></mt-picker>
+        </mt-popup>
+      </div>
+      <span>
+
+        <!-- <i class="icon_right_img"><img src="../../assets/icon/more.png"
+                 alt=""></i> -->
+      </span>
+      <!-- </p> -->
       <p class="detail_address">
         <span class="detail_add">
           <input type="text"
@@ -49,28 +69,60 @@
                  :selectData="pickData3"
                  v-on:cancel="close"
                  v-on:confirm="confirmFn"></vue-pickers> -->
-    <vue-pickers :show="show"
-                 :link="link"
-                 :columns="columns"
-                 :selectData="pickData"
-                 @cancel="close"
-                 @confirm="confirmFn"></vue-pickers>
+    <mt-popup v-model="addressPickerShow"
+              position="bottom"
+              class="address-popup">
+      <mt-picker :slots="addressSlots"
+                 @change="addressPickerChange"
+                 :visible-item-count="5"></mt-picker>
+    </mt-popup>
+
   </div>
 </template>
 <script>
 //mint-ui三级
-import { Picker, Toast } from "mint-ui";
-import { Checklist } from "mint-ui";
-import VuePickers from "vue-pickers";
-import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
-
-
+// import { Picker, Toast } from "mint-ui";
+// import { Checklist } from "mint-ui";
+// import VuePickers from "vue-pickers";
+// import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
+import { Popup, picker } from "mint-ui";
+import { Toast } from "mint-ui";
+// import { Picker } from "mint-ui";
+import { Picker } from "mint-ui";
+import addressData from "../../../static/addressData.js";
 export default {
   components: {
-    VuePickers
+    "mt-picker": Picker,
+    "mt-popup": Popup
+    // VuePickers
   },
   data() {
     return {
+      zipcode: "",
+      province: "",
+      city: "",
+      county: "",
+      addressPickerShow: false,
+      addressSlots: [
+        {
+          flex: 1,
+          values: addressData.province,
+          className: "slot1",
+          textAlign: "center"
+        },
+        {
+          flex: 1,
+          values: addressData.city[0],
+          className: "slot2",
+          textAlign: "center"
+        },
+        {
+          flex: 1,
+          values: addressData.county[0][0],
+          className: "slot3",
+          textAlign: "center"
+        }
+      ],
       checked: false,
       show1: false,
       show: false,
@@ -79,14 +131,7 @@ export default {
       show: false,
       columns: 3,
       link: true,
-      pickData: {
-        data1: provs_data,
-        data2: citys_data,
-        data3: dists_data
-      },
-      province: "",
-      city: "",
-      area: "",
+
       address: "",
       consignee: "",
       telephone: "",
@@ -96,6 +141,9 @@ export default {
   computed: {
     isDefault() {
       return this.checked ? 1 : 0;
+    },
+    provCityCounty: function() {
+      return this.province + " " + this.city + " " + this.county;
     }
   },
   created() {
@@ -128,16 +176,19 @@ export default {
         });
     }
   },
-  components: {
-    VuePickers
-  },
   methods: {
+    addressPickerChange: function(picker, values) {
+      let provinceIndex = addressData.province.indexOf(values[0]);
+      let cityIndex = addressData.city[provinceIndex].indexOf(values[1]);
+      picker.setSlotValues(1, addressData.city[provinceIndex]);
+      picker.setSlotValues(2, addressData.county[provinceIndex][cityIndex]);
+      this.province = values[0];
+      this.city = values[1];
+      this.county = values[2];
+    },
     close() {
       this.show1 = false;
       this.show = false;
-    },
-    toShow() {
-      this.show = true;
     },
     confirmFn(e) {
       this.province = e.select1.text;
@@ -160,11 +211,13 @@ export default {
           mobile: that.telephone,
           user_name: that.consignee,
           province: that.province,
-          city: that.city,
           area: that.area,
           address: that.address,
           is_default_address: that.isDefault,
-          user_id: window.localStorage.id
+          user_id: window.localStorage.id,
+          county: that.county,
+          city: that.city,
+          county: that.county
         })
         .then(res => {
           console.log(res);
@@ -199,6 +252,7 @@ export default {
           province: that.province,
           city: that.city,
           area: that.area,
+          county: that.county,
           address: that.address,
           is_default_address: that.isDefault,
           user_id: window.localStorage.id,
@@ -353,5 +407,44 @@ export default {
   margin-top: 1.4rem;
   color: #ffffff;
   font-size: 15px;
+}
+.page-content {
+  box-sizing: border-box;
+  overflow: auto;
+  // height: 100%;
+  // padding-bottom: 100px;
+}
+
+.new-address-form .new-address-form-item {
+  display: flex;
+  align-items: center;
+  /* padding: 36px 20px; */
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.new-address-form .new-address-form-item .form-title {
+  font-size: 14px;
+  color: #333;
+  margin-left: 10px;
+}
+.new-address-form .new-address-form-item .form-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-bottom: 1px solid transparent;
+}
+
+.new-address-form .new-address-form-item .form-input .error {
+  border-bottom: 1px solid red;
+}
+.address-popup {
+  width: 100%;
+}
+.address-popup .picker-slot-wrapper {
+  backface-visibility: hidden;
+}
+.address-popup .picker-item {
+  backface-visibility: hidden;
 }
 </style>

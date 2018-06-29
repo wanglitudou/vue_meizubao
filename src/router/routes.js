@@ -53,7 +53,7 @@ let routes = [
     // meta: {
     //   title: "首页"
     // },
-    component: resolve => require(['../views/index.vue'], resolve),//懒加载
+    component: resolve => require(["../views/index.vue"], resolve), //懒加载
     children: [
       {
         name: "home",
@@ -61,7 +61,7 @@ let routes = [
         meta: {
           title: "首页"
         },
-        component: resolve => require(['../views/home.vue'], resolve)
+        component: resolve => require(["../views/home.vue"], resolve)
       },
       {
         name: "catagory",
@@ -69,7 +69,7 @@ let routes = [
         meta: {
           title: "分类"
         },
-        component: resolve => require(['../views/catagory.vue'], resolve)
+        component: resolve => require(["../views/catagory.vue"], resolve)
       },
       {
         name: "mine",
@@ -77,23 +77,25 @@ let routes = [
         meta: {
           title: "我的"
         },
-        component: resolve => require(['../views/mine.vue'], resolve)
+        component: resolve => require(["../views/mine.vue"], resolve)
       },
       {
         name: "ordergoods",
         path: "ordergoods",
-        component: resolve => require(['../views/ordergoods/ordergoods.vue'], resolve)
+        component: resolve =>
+          require(["../views/ordergoods/ordergoods.vue"], resolve)
       },
       {
         name: "payment",
         path: "payment",
-        component:  resolve => require(['../views/payment/payment.vue'], resolve)
+        component: resolve => require(["../views/payment/payment.vue"], resolve)
       },
 
       {
         name: "coursepage",
         path: "coursepage",
-        component: resolve => require(['../views/coursepage/coursepage.vue'], resolve)
+        component: resolve =>
+          require(["../views/coursepage/coursepage.vue"], resolve)
       },
       {
         name: "cart",
@@ -101,7 +103,7 @@ let routes = [
         meta: {
           title: "订单"
         },
-        component:  resolve => require(['../views/cart.vue'], resolve)
+        component: resolve => require(["../views/cart.vue"], resolve)
       }
     ]
   },
@@ -111,17 +113,17 @@ let routes = [
     meta: {
       title: "热租仪器"
     },
-    component:  resolve => require(['../views/detail/detail.vue'], resolve)
+    component: resolve => require(["../views/detail/detail.vue"], resolve)
   },
   {
     name: "search",
     path: "/search",
-    component: resolve => require(['../views/search/search.vue'], resolve)
+    component: resolve => require(["../views/search/search.vue"], resolve)
   },
   {
     name: "details",
     path: "/details",
-    component: resolve => require(['../views/details/details.vue'], resolve),
+    component: resolve => require(["../views/details/details.vue"], resolve),
     meta: {
       keepAlive: true,
       title: "详情页"
@@ -130,32 +132,33 @@ let routes = [
   {
     name: "industry",
     path: "/industry",
-    component:  resolve => require(['../views/industry/industry.vue'], resolve),
+    component: resolve => require(["../views/industry/industry.vue"], resolve)
   },
   {
     name: "cooperation",
     path: "/cooperation",
-    component:  resolve => require(['../views/cooperation/cooperation.vue'], resolve),
+    component: resolve =>
+      require(["../views/cooperation/cooperation.vue"], resolve)
   },
   {
     name: "project",
     path: "/project",
-    component: resolve => require(['../views/project/project.vue'], resolve),
+    component: resolve => require(["../views/project/project.vue"], resolve)
   },
   {
     name: "matching",
     path: "/matching",
-    component:  resolve => require(['../views/matching/matching.vue'], resolve),
+    component: resolve => require(["../views/matching/matching.vue"], resolve)
   },
   {
     name: "train",
     path: "/train",
-    component: resolve => require(['../views/train/train.vue'], resolve),
+    component: resolve => require(["../views/train/train.vue"], resolve)
   },
   {
     name: "essence",
     path: "/essence",
-    component: resolve => require(['../views/essence/essence.vue'], resolve),
+    component: resolve => require(["../views/essence/essence.vue"], resolve)
   },
   {
     name: "looksee",
@@ -163,7 +166,7 @@ let routes = [
     meta: {
       title: "美业精英"
     },
-    component: resolve => require(['../views/looksee/looksee.vue'], resolve),
+    component: resolve => require(["../views/looksee/looksee.vue"], resolve)
   },
   {
     name: "seemore",
@@ -171,7 +174,7 @@ let routes = [
     meta: {
       title: "配套产品"
     },
-    component: resolve => require(['../views/seemore/seemore.vue'], resolve),
+    component: resolve => require(["../views/seemore/seemore.vue"], resolve)
   },
   {
     name: "clickpay",
@@ -179,7 +182,7 @@ let routes = [
     meta: {
       title: "合作项目"
     },
-    component:resolve => require(['../views/clickpay/clickpay.vue'], resolve),
+    component: resolve => require(["../views/clickpay/clickpay.vue"], resolve)
   },
   {
     name: "curriculum",
@@ -187,7 +190,8 @@ let routes = [
     meta: {
       title: "我的课程"
     },
-    component: resolve => require(['../views/curriculum/curriculum.vue'], resolve),
+    component: resolve =>
+      require(["../views/curriculum/curriculum.vue"], resolve)
   },
   {
     name: "integral",
@@ -195,7 +199,7 @@ let routes = [
     meta: {
       title: "我的积分"
     },
-    component:  resolve => require(['../views/integral/integral.vue'], resolve),
+    component: resolve => require(["../views/integral/integral.vue"], resolve)
   },
   {
     name: "address",
@@ -203,7 +207,7 @@ let routes = [
     meta: {
       title: "我的地址"
     },
-    component: resolve => require(['../views/address/address.vue'], resolve),
+    component: resolve => require(["../views/address/address.vue"], resolve)
   },
   {
     name: "addresssite",
@@ -211,17 +215,19 @@ let routes = [
     meta: {
       title: "我的地址"
     },
-    component: resolve => require(['../views/address/addresssite.vue'], resolve),
+    component: resolve => require(["../views/address/addresssite.vue"], resolve)
   },
   {
     name: "customservice",
     path: "/customservice",
-    component: resolve => require(['../views/customservice/customservice.vue'], resolve),
+    component: resolve =>
+      require(["../views/customservice/customservice.vue"], resolve)
   },
   {
     name: "viewscreen",
     path: "/viewscreen",
-    component:  resolve => require(['../views/viewscreen/viewscreen.vue'], resolve),
+    component: resolve =>
+      require(["../views/viewscreen/viewscreen.vue"], resolve)
   },
   {
     name: "photograph",
@@ -229,27 +235,30 @@ let routes = [
     meta: {
       title: "资料库"
     },
-    component: resolve => require(['../views/photograph/photograph.vue'], resolve),
+    component: resolve =>
+      require(["../views/photograph/photograph.vue"], resolve)
   },
   {
     name: "pageindustry",
     path: "/pageindustry",
-    component: resolve => require(['../views/pageindustry/pageindustry.vue'], resolve),
+    component: resolve =>
+      require(["../views/pageindustry/pageindustry.vue"], resolve)
   },
   {
     name: "login",
     path: "/login",
-    component:resolve => require(['../views/login/login.vue'], resolve),
+    component: resolve => require(["../views/login/login.vue"], resolve)
   },
   {
     name: "information",
     path: "/information",
-    component:resolve => require(['../views/information/information.vue'], resolve),
+    component: resolve =>
+      require(["../views/information/information.vue"], resolve)
   },
   {
     name: "confirm",
     path: "/confirm/:type",
-    component: resolve => require(['../views/confirm.vue'], resolve),
+    component: resolve => require(["../views/confirm.vue"], resolve),
     meta: {
       keepAlive: true
     }
@@ -258,48 +267,56 @@ let routes = [
     name: "order_details",
     path: "/order_details",
 
-    component: resolve => require(['../views/orderDetails.vue'], resolve),
+    component: resolve => require(["../views/orderDetails.vue"], resolve)
   },
   {
     name: "authname",
     path: "/authname",
-    component: resolve => require(['../views/authname/authname.vue'], resolve),
+    component: resolve => require(["../views/authname/authname.vue"], resolve)
   },
   {
     name: "aaa",
     path: "/aaa",
-    component:  resolve => require(['../views/aaa.vue'], resolve),
+    component: resolve => require(["../views/aaa.vue"], resolve)
+  },
+  {
+    name: "qqq",
+    path: "/qqq",
+    component: resolve => require(["../views/qqq.vue"], resolve)
   },
   {
     name: "addtheaddress",
     path: "/addtheaddress",
-    component: resolve => require(['../views/addtheaddress/addtheaddress.vue'], resolve),
+    component: resolve =>
+      require(["../views/addtheaddress/addtheaddress.vue"], resolve)
   },
   {
     name: "addtheaddre",
     path: "/addtheaddre",
-    component:  resolve => require(['../views/addtheaddress/addtheaddre.vue'], resolve),
+    component: resolve =>
+      require(["../views/addtheaddress/addtheaddre.vue"], resolve)
   },
 
   {
     name: "mediaDetails",
     path: "/mediaDetails",
-    component:  resolve => require(['../views/photograph/mediaDetails.vue'], resolve),
+    component: resolve =>
+      require(["../views/photograph/mediaDetails.vue"], resolve)
   },
   {
     name: "dataBase",
     path: "/dataBase",
-    component: resolve => require(['../views/dataBase/index.vue'], resolve),
+    component: resolve => require(["../views/dataBase/index.vue"], resolve)
   },
   {
     name: "qian",
     path: "/qian",
-    component:  resolve => require(['../views/qian/qian.vue'], resolve),
+    component: resolve => require(["../views/qian/qian.vue"], resolve)
   },
   {
     name: "phone",
     path: "/phone/:id",
-    component: resolve => require(['../views/phone.vue'], resolve),
+    component: resolve => require(["../views/phone.vue"], resolve),
     meta: {
       title: ""
     }
