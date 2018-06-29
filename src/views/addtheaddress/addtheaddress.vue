@@ -16,17 +16,18 @@
                  v-model="telephone"
                  class="inp"></span>
       </p>
-      <!-- <p class="collect_bet"> -->
-
       <div class="page-content">
         <ul class="new-address-form">
           <li class="new-address-form-item">
             <span class="form-title">所在地区：</span>
-            <input type="text"
+            <!-- <input type="text"
                    placeholder="点击选择所在地区"
                    class="form-input"
                    @click="addressPickerShow = true"
-                   v-model="provCityCounty">
+                   v-model="provCityCounty"> -->
+            <span class="form-input"
+                  @click="addressPickerShow = true"
+                  v-model="provCityCounty">{{province}}{{city}}{{area}}</span>
           </li>
         </ul>
         <mt-popup v-model="addressPickerShow"
@@ -101,7 +102,8 @@ export default {
       zipcode: "",
       province: "",
       city: "",
-      county: "",
+      // county: "",
+      area: "",
       addressPickerShow: false,
       addressSlots: [
         {
@@ -118,7 +120,7 @@ export default {
         },
         {
           flex: 1,
-          values: addressData.county[0][0],
+          values: addressData.area[0][0],
           className: "slot3",
           textAlign: "center"
         }
@@ -131,7 +133,6 @@ export default {
       show: false,
       columns: 3,
       link: true,
-
       address: "",
       consignee: "",
       telephone: "",
@@ -143,7 +144,7 @@ export default {
       return this.checked ? 1 : 0;
     },
     provCityCounty: function() {
-      return this.province + " " + this.city + " " + this.county;
+      return this.province + " " + this.city + " " + this.area;
     }
   },
   created() {
@@ -159,10 +160,12 @@ export default {
           if (res.data.status_code == 1001) {
             // console.log(res.data.data);
             console.log("666");
-
             that.consignee = res.data.data.user_name;
             that.telephone = res.data.data.mobile;
             that.address = res.data.data.address;
+            that.province = res.data.data.province;
+            that.city = res.data.data.city;
+            that.area = res.data.data.area;
             res.data.data.is_default_address == 1
               ? (this.checked = true)
               : (this.checked = false);
@@ -181,10 +184,10 @@ export default {
       let provinceIndex = addressData.province.indexOf(values[0]);
       let cityIndex = addressData.city[provinceIndex].indexOf(values[1]);
       picker.setSlotValues(1, addressData.city[provinceIndex]);
-      picker.setSlotValues(2, addressData.county[provinceIndex][cityIndex]);
+      picker.setSlotValues(2, addressData.area[provinceIndex][cityIndex]);
       this.province = values[0];
       this.city = values[1];
-      this.county = values[2];
+      this.area = values[2];
     },
     close() {
       this.show1 = false;
@@ -211,13 +214,13 @@ export default {
           mobile: that.telephone,
           user_name: that.consignee,
           province: that.province,
+          city: that.city,
           area: that.area,
           address: that.address,
           is_default_address: that.isDefault,
           user_id: window.localStorage.id,
-          county: that.county,
-          city: that.city,
-          county: that.county
+          // county: that.county,
+          province: that.province
         })
         .then(res => {
           console.log(res);
@@ -252,7 +255,6 @@ export default {
           province: that.province,
           city: that.city,
           area: that.area,
-          county: that.county,
           address: that.address,
           is_default_address: that.isDefault,
           user_id: window.localStorage.id,
@@ -432,6 +434,8 @@ export default {
   border: none;
   outline: none;
   padding: 10px;
+  font-size: 15px;
+  color: #666666;
   border-bottom: 1px solid transparent;
 }
 
