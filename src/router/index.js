@@ -4,7 +4,7 @@ import catagory from "../views/catagory.vue";
 import cart from "../views/cart.vue";
 import mine from "../views/mine.vue";
 import aaa from "../views/aaa.vue";
-
+import bbb from "../views/bbb.vue";
 //引入其他页面的组件
 
 import detail from "../views/detail/detail.vue";
@@ -169,6 +169,11 @@ let routes = [
     name: "aaa",
     path: "aaa",
     component: aaa
+  },
+  {
+    name: "bbb",
+    path: "bbb",
+    component: bbb
   },
   {
     name: "address",

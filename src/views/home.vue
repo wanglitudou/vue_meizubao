@@ -583,6 +583,10 @@ export default {
       //完善信息
       this.$router.push({ name: "aaa" });
     }
+    // bbb() {
+    //   //完善信息
+    //   this.$router.push({ name: "bbb" });
+    // }
   }
 };
 </script>
