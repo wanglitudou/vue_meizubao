@@ -256,14 +256,14 @@ export default {
 }
 .payment {
   width: 96%;
-  height: auto;
-  border-radius: 3px;
+  height: px2rem(181px);
+  border-radius: px2rem(3px);
   box-shadow: 0 2px 9px 0 #eeeeee;
 
   margin-left: 2%;
-  margin-top: 20px;
+  margin-top: px2rem(10px);
    &:nth-child(1){
-    margin-top: 0px;
+    margin-top: px2rem(15px);
   }
 }
 .paymenttop {
@@ -278,14 +278,14 @@ export default {
 
 }
 .paymenttop div {
-  margin: 10px;
+  margin: px2rem(10px);
 }
 .paymentcenter {
   width: 100%;
   height: px2rem(86px);
   background: #fbfbfb 100%;
   display: flex;
-  justify-content: space-around;
+//   justify-content: space-around;
   align-items: center;
 }
 
@@ -302,23 +302,21 @@ export default {
 .paymentcenter .detail {
   width: 50%;
   height: auto;
-  margin-left: 3%;
+  margin-left: px2rem(15.2px);
 }
 .detail .name {
   font-size: px2rem(16px);
   color: #000;
-  margin-bottom: 0.3rem;
+  font-weight: bold;
 }
 .detail .content {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  clolor: #666666 100%;
+  color: #666666;
   font-size: 13px;
   -webkit-font-smoothing: antialiased;
-  /* margin-top:0.1rem; */
-  margin-bottom: 0.3rem;
 }
 .detail .numPrice {
   font-size: px2rem(13px);
@@ -335,12 +333,14 @@ export default {
 }
 .paymentbottom {
   width: 100%;
-  height: auto;
+  height: px2rem(59px);
 }
 .zhuang {
-  display: flex;
+  width: 100%;
+  height: 100%;
+ display: flex;
   justify-content: flex-end;
-  padding: 10px;
+  align-items: center;
 }
 .tuihuan {
   /* width: ; */
@@ -356,12 +356,12 @@ export default {
   color: #cccccc;
 }
 .jixu {
-  width: 48px;
-  height: 36px;
-  line-height: 36px;
+  width: px2rem(48px);
+  height: px2rem(36px);
+  line-height: px2rem(36px);
   text-align: center;
-  font-size: 14px;
-  /* padding: 0 10px; */
+  font-size: px2rem(14px);
+    margin-right:px2rem(10px);
   border: 1px solid #fd4689;
   border-radius: 0.1rem;
   color: #fd4689;
@@ -369,16 +369,16 @@ export default {
 .complete{
     
   /* width: ; */
-  width: 80px;
-  height: 36px;
-  line-height: 36px;
+  width: px2rem(80px);
+  height: px2rem(36px);
+  line-height: px2rem(36px);
   text-align: center;
-  font-size: 14px;
-  /* padding: 0 10px; */
+  font-size: px2rem(14px);
+  margin-right:px2rem(10px);
   border: 1px solid #fd4689;
-  margin-right: 0.5rem;
+   background-image: linear-gradient(130deg, #fd4689 0%, #fd82d9 100%);
   border-radius: 0.1rem;
-  color: #fd4689;
+  color: #fff;
 
 }
 .payway {
@@ -387,11 +387,11 @@ export default {
 }
 .logistics {
   line-height: 1rem;
-  font-size: 14px;
+  font-size: px2rem(14px);
 }
 .single {
   line-height: 1rem;
-  font-size: 14px;
+  font-size: px2rem(14px);
 }
 .receipt {
   width: 100%;
@@ -448,13 +448,13 @@ export default {
 }
 .waitPay {
   width: 100%;
-  height: px2rem(66px);
+  height:100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 .waitBtn {
-  width: px2rem(115px);
+  width: px2rem(80px);
   height: px2rem(36px);
   line-height: px2rem(36px);
   margin-right: px2rem(10px);
@@ -462,11 +462,7 @@ export default {
   border-radius: 0.1rem;
   color: #fd4689;
   border: 1px solid #fd4689;
-  font-size: px2rem(16px);
+  font-size: px2rem(14px);
 }
-.complete{
-    width: 80px;
-    height: 36px;
-    
-}
+
 </style>

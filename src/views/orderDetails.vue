@@ -415,6 +415,8 @@ export default {
   border: 1px solid #fd4689;
   /* outline: none; */
   box-shadow: 0 2px 4px 0 #fd4689 ;
+  font-size:14px;
+  margin-top:10px;
 }
 </style>
 

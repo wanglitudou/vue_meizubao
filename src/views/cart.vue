@@ -6,18 +6,15 @@
 
         <div class="tabBar">
           <button @click="select">{{statusCode}}</button>
-          <ul class="uli"
-              v-show="ulShow">
-            <li class="status_item"
-                v-for="(optionItem,index) in options"
-                @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
-          </ul>
+          <div class="bgContent"  v-show="ulShow">
+            <span class="triangular"></span>
+            <ul class="uli">
+              <li class="status_item" v-for="(optionItem,index) in options" :key="index" @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
+            </ul>
+          </div>
         </div>
-        <div class="tabBar"
-             v-for="(item,index) in tabs">
-          <div class="status"
-               :class="tabNum == index ?'active':''"
-               @click="tabClick(item.id,index)">
+        <div class="tabBar" v-for="(item,index) in tabs" :key="index">
+          <div class="status" :class="tabNum == index ?'active':''" @click="tabClick(item.id,index)">
             {{item.item}}
           </div>
         </div>
@@ -25,16 +22,7 @@
         <!-- <div class="tabBar"></div> -->
       </div>
 
-      <order :orderlist="orderlist"
-             :receipt="receipt"
-             :cancel="cancel"
-             :todetail="todetail"
-             :loadMore="loadMore"
-             :load="load"
-             :toPay="toPay"
-             :complete="complete"
-             :renewal="renewal"
-             :back="back"></order>
+      <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail" :loadMore="loadMore" :load="load" :toPay="toPay" :complete="complete" :renewal="renewal" :back="back"></order>
 
     </div>
   </div>
@@ -101,7 +89,7 @@ export default {
       this.ulShow = true;
       setTimeout(() => {
         this.ulShow = false;
-      }, 1000);
+      }, 2500);
     },
     // 点击下拉框选择  订单的状态 例如：仪器的订单  产品的订单
     optionLi(value, index) {
@@ -465,10 +453,34 @@ export default {
   color: #000;
   border-bottom: 2px solid #fd4689;
 }
+.bgContent {
+  width: px2rem(118px);
+  height: auto;
+  box-shadow: 0 2px 4px #fd4689;
+  position: relative;
+  background: #fff;
+   filter: drop-shadow(0 0 6px  #FD4689); 
+  border-radius: px2rem(5px);
+}
+.triangular{
+  position:absolute;
+     border-left: 10px solid transparent;
+                border-right: 10px solid transparent; 
+                border-bottom: 10px solid #fff;
+               
+                position: absolute;
+                top: -10px;
+                left: 50%;
+                margin-left: -10px; 
+}
 .uli {
-  border: 1px solid #ccc;
   background: #fff;
   z-index: 3;
+}
+.status_item{
+  font-size: px2rem(14px);
+  color:#555;
+  line-height: px2rem(40px);
 }
 button {
   border: none;
