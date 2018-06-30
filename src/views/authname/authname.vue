@@ -15,24 +15,18 @@
       </div>
       <div class="up_data">
         <span class="updata_lef">
-          <!-- <span class="inpt_imgone"
-                id="choose"
-                @click="actionSheet"
-                @change="updataimg($event,1)">
-          </span> -->
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
-                 @click="actionSheet"
                  @change="updataimg($event,1)">
-          <img :src="data[0].imgOne"
+          <img :src="data.imgOne"
                alt="">
         </span>
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
                  @change="updataimg($event,2)">
-          <img :src="data[0].imgtwo"
+          <img :src="data.imgtwo"
                alt=""></span>
 
       </div>
@@ -56,14 +50,14 @@
                  class="inpt_imgthree"
                  id="img-upload"
                  @change="updataimg($event,3)">
-          <img :src="data[0].imgthree"
+          <img :src="data.imgthree"
                alt="">
         </span>
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
                  id="img-upload"
                  @change="updataimg($event,4)">
-          <img :src="data[0].imgfour"
+          <img :src="data.imgfour"
                alt="">
         </span>
       </div>
@@ -81,23 +75,11 @@
       <span class="next_nex"
             @click="submitBtn()">已完成</span>
     </div>
-
-    <!-- <div>
-      <button @click="actionSheet">
-        <label class="mint-button-text">点击上拉 action sheet</label>
-      </button>
-
-    </div> -->
-    <mt-actionsheet :actions="data"
-                    v-model="sheetVisible">
-    </mt-actionsheet>
   </div>
 </template>
 <script>
 import { Toast, Indicator } from "mint-ui";
 import { Popup, picker } from "mint-ui";
-// import { Toast } from "mint-ui";
-// import { Picker } from "mint-ui";
 import { Actionsheet } from "mint-ui";
 import "mint-ui/lib/style.css";
 export default {
@@ -125,41 +107,25 @@ export default {
 
       // // action sheet 默认不显示，为false。操作sheetVisible可以控制显示与隐藏
       sheetVisible: false,
-      data: [
-        {
-          //其他
-          headimg: "",
-          manage_years: "",
-          manage_area: "",
-          id_card: "",
-          card_front: "",
-          card_behind: "",
-          home_address: "",
-          business_license: "",
-          store_image: "",
-          store_name: "",
-          lists: [],
-          fileList: [],
-          imgOne: "",
-          imgtwo: "",
-          imgthree: "",
-          imgfour: ""
-          // name: "拍照",
-          // method: this.getCamera, // 调用methods中的函数
-          // name: "从相册中选择",
-          // method: this.getLibrary, // 调用methods中的函数
-          // sheetVisible: false
-        },
-        {
-          name: "拍照"
-          // method: this.getCamera // 调用methods中的函数
-        },
-        {
-          name: "从相册中选择"
-          // method: this.getLibrary // 调用methods中的函数
-        }
-      ],
-      sheetVisible: false
+      data: {
+        //其他
+        headimg: "",
+        manage_years: "",
+        manage_area: "",
+        id_card: "",
+        card_front: "",
+        card_behind: "",
+        home_address: "",
+        business_license: "",
+        store_image: "",
+        store_name: "",
+        lists: [],
+        fileList: [],
+        imgOne: "",
+        imgtwo: "",
+        imgthree: "",
+        imgfour: ""
+      }
     };
   },
   created(e) {
@@ -198,12 +164,12 @@ export default {
           console.log(res);
           console.log("我是图片");
           if (res.data.status_code == 1001) {
-            that.data[0].imgOne = res.data.data.card_front;
-            that.data[0].imgtwo = res.data.data.card_behind;
-            that.data[0].imgthree = res.data.data.business_license;
-            that.data[0].imgfour = res.data.data.store_image;
-            that.data[0].id_card = res.data.data.id_card;
-            that.data[0].home_address = res.data.data.home_address;
+            that.data.imgOne = res.data.data.card_front;
+            that.data.imgtwo = res.data.data.card_behind;
+            that.data.imgthree = res.data.data.business_license;
+            that.data.imgfour = res.data.data.store_image;
+            that.data.id_card = res.data.data.id_card;
+            that.data.home_address = res.data.data.home_address;
           }
         })
         .catch(() => {
@@ -249,14 +215,6 @@ export default {
           console.log("查询失败");
         });
     },
-    // complete() {
-    //   this.$router.push({ name: "mine" });
-    // },
-    // idCardReg(num) {
-    //   var regS = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; // 身份证号码
-
-    //   console.log(num);
-    // },
     homeaddress() {},
     updataimg(e, num) {
       let file = e.target.files[0];
@@ -278,16 +236,6 @@ export default {
       formData.append("type", num);
       formData.append("uid", localStorage.id);
       let that = this;
-      // that.$axios
-      //   .post("http://mzbao.weiyingjia.org/api/meizubao/uploadImages", {
-
-      //   })
-      //   .then(res => {
-      //     console.log(res);
-      //   })
-      //   .catch(() => {
-      //     console.log("查询失败");
-      //   });
       console.log(formData);
       $.ajax({
         type: "post",
@@ -318,18 +266,6 @@ export default {
           console.log(11111);
         }
       });
-    },
-    actionSheet: function() {
-      // 打开action sheet
-      this.sheetVisible = true;
-    },
-    getCamera: function() {
-      // console.log("打开照相机");
-      alert("拍照");
-    },
-    getLibrary: function() {
-      alert("打开相册");
-      // console.log("打开相册");
     }
   }
 };
