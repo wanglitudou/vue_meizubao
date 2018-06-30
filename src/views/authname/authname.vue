@@ -19,7 +19,7 @@
                  class="inpt_imgone"
                  id="choose"
                  accept="image/*"
-                 multiple
+                 capture="camera"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
@@ -28,7 +28,7 @@
                  class="inpt_imgtwo"
                  id="img-upload"
                  accept="image/*"
-                 multiple
+                 capture="camera"
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
                alt=""></span>
@@ -54,7 +54,7 @@
                  class="inpt_imgthree"
                  id="img-upload"
                  accept="image/*"
-                 multiple
+                 capture="camera"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
                alt="">
@@ -63,7 +63,7 @@
                  class="inpt_imgfour"
                  id="img-upload"
                  accept="image/*"
-                 multiple
+                 capture="camera"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
                alt="">
