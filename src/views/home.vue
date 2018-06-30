@@ -27,7 +27,7 @@
                alt="111">
         </div>
       </div> -->
-      <div class="search_contents">
+      <!-- <div class="search_contents">
         <div class="list_search"
              ref="search"
              @click="toSearch()">
@@ -35,8 +35,8 @@
           <img src="../assets/icon/search_1.png"
                alt="111">
         </div>
-      </div>
-      <!-- <div class="search_contents">
+      </div> -->
+      <div class="search_contents">
         <div class="list_search"
              ref="search"
              @click="qqq()">
@@ -44,7 +44,7 @@
           <img src="../assets/icon/search_1.png"
                alt="111">
         </div>
-      </div> -->
+      </div>
       <div class="list_btn">
         <!-- title -->
         <div class="hotrent">
@@ -570,7 +570,7 @@ export default {
       this.$router.push({
         name: "search"
       });
-    }
+    },
     // addtheaddress() {
     //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
     // }
@@ -581,10 +581,10 @@ export default {
     //   //完善信息
     //   this.$router.push({ name: "aaa" });
     // },
-    // qqq() {
-    //   //完善信息
-    //   this.$router.push({ name: "qqq" });
-    // }
+    qqq() {
+      //完善信息
+      this.$router.push({ name: "qqq" });
+    }
     // bbb() {
     //   //完善信息
     //   this.$router.push({ name: "bbb" });

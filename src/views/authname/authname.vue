@@ -15,14 +15,13 @@
       </div>
       <div class="up_data">
         <span class="updata_lef">
+
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
-                 name="upload"
-                 accept="image/*"
-                 multiple
+                 @click="actionSheet"
                  @change="updataimg($event,1)">
-          <img :src="data.imgOne"
+          <img :src="data[0].imgOne"
                alt="">
         </span>
         <span class="updata_rig"><input type="file"
@@ -32,7 +31,7 @@
                  accept="image/*"
                  multiple
                  @change="updataimg($event,2)">
-          <img :src="data.imgtwo"
+          <img :src="data[0].imgtwo"
                alt=""></span>
 
       </div>
@@ -59,7 +58,7 @@
                  accept="image/*"
                  multiple
                  @change="updataimg($event,3)">
-          <img :src="data.imgthree"
+          <img :src="data[0].imgthree"
                alt="">
         </span>
         <span class="updata_rigs"><input type="file"
@@ -69,7 +68,7 @@
                  accept="image/*"
                  multiple
                  @change="updataimg($event,4)">
-          <img :src="data.imgfour"
+          <img :src="data[0].imgfour"
                alt="">
         </span>
       </div>
@@ -88,32 +87,84 @@
             @click="submitBtn()">已完成</span>
     </div>
 
+    <!-- <div>
+      <button @click="actionSheet">
+        <label class="mint-button-text">点击上拉 action sheet</label>
+      </button>
+
+    </div> -->
+    <mt-actionsheet :actions="data"
+                    v-model="sheetVisible">
+    </mt-actionsheet>
   </div>
 </template>
 <script>
 import { Toast, Indicator } from "mint-ui";
+import { Popup, picker } from "mint-ui";
+// import { Toast } from "mint-ui";
+// import { Picker } from "mint-ui";
+import { Actionsheet } from "mint-ui";
+import "mint-ui/lib/style.css";
 export default {
+  name: "infor_container",
   data() {
     return {
-      data: {
-        //其他
-        headimg: "",
-        manage_years: "",
-        manage_area: "",
-        id_card: "",
-        card_front: "",
-        card_behind: "",
-        home_address: "",
-        business_license: "",
-        store_image: "",
-        store_name: "",
-        lists: [],
-        fileList: [],
-        imgOne: "",
-        imgtwo: "",
-        imgthree: "",
-        imgfour: ""
-      }
+      // data: [{
+      //   headimg: "",
+      //   manage_years: "",
+      //   manage_area: "",
+      //   id_card: "",
+      //   card_front: "",
+      //   card_behind: "",
+      //   home_address: "",
+      //   business_license: "",
+      //   store_image: "",
+      //   store_name: "",
+      //   lists: [],
+      //   fileList: [],
+      //   imgOne: "",
+      //   imgtwo: "",
+      //   imgthree: "",
+      //   imgfour: ""
+      // }],
+
+      // // action sheet 默认不显示，为false。操作sheetVisible可以控制显示与隐藏
+      sheetVisible: false,
+      data: [
+        {
+          //其他
+          headimg: "",
+          manage_years: "",
+          manage_area: "",
+          id_card: "",
+          card_front: "",
+          card_behind: "",
+          home_address: "",
+          business_license: "",
+          store_image: "",
+          store_name: "",
+          lists: [],
+          fileList: [],
+          imgOne: "",
+          imgtwo: "",
+          imgthree: "",
+          imgfour: ""
+          // name: "拍照",
+          // method: this.getCamera, // 调用methods中的函数
+          // name: "从相册中选择",
+          // method: this.getLibrary, // 调用methods中的函数
+          // sheetVisible: false
+        },
+        {
+          name: "拍照",
+          method: this.getCamera // 调用methods中的函数
+        },
+        {
+          name: "从相册中选择",
+          method: this.getLibrary // 调用methods中的函数
+        }
+      ],
+      sheetVisible: false
     };
   },
   created(e) {
@@ -152,12 +203,12 @@ export default {
           console.log(res);
           console.log("我是图片");
           if (res.data.status_code == 1001) {
-            that.data.imgOne = res.data.data.card_front;
-            that.data.imgtwo = res.data.data.card_behind;
-            that.data.imgthree = res.data.data.business_license;
-            that.data.imgfour = res.data.data.store_image;
-            that.data.id_card = res.data.data.id_card;
-            that.data.home_address = res.data.data.home_address;
+            that.data[0].imgOne = res.data.data.card_front;
+            that.data[0].imgtwo = res.data.data.card_behind;
+            that.data[0].imgthree = res.data.data.business_license;
+            that.data[0].imgfour = res.data.data.store_image;
+            that.data[0].id_card = res.data.data.id_card;
+            that.data[0].home_address = res.data.data.home_address;
           }
         })
         .catch(() => {
@@ -251,27 +302,37 @@ export default {
         contentType: false,
         dataType: "json",
         success: function(res) {
-          console.log(res);
+          console.log(res.data);
           // alert(res.data.url);
 
           if (res.code == 200) {
             that.fileList = res.data;
           }
           if (num == 1) {
-            that.data.imgOne = res.data.data.card_front;
+            that.data[0].imgOne = res.data.url;
             console.log("666");
           } else if (num == 2) {
-            that.data.imgtwo = res.data.data.card_behind;
+            that.data[0].imgtwo = res.data.url;
           } else if (num == 3) {
-            that.data.imgthree = res.data.data.business_license;
+            that.data[0].imgthree = res.data.url;
           } else if (num == 4) {
-            that.data.imgfour = res.data.data.store_image;
+            that.data[0].imgfour = res.data.url;
           }
         },
         error: function(res) {
           console.log(11111);
         }
       });
+    },
+    actionSheet: function() {
+      // 打开action sheet
+      this.sheetVisible = true;
+    },
+    getCamera: function() {
+      console.log("打开照相机");
+    },
+    getLibrary: function() {
+      console.log("打开相册");
     }
   }
 };
