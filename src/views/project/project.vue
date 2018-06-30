@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-       <div class="item loadMore" ref="load">
+      <div class="item loadMore" ref="load">
         <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
         <span v-else>
           <span @click="loadMore" v-if="loading">加载更多</span>
@@ -43,7 +43,7 @@
         </span>
       </div>
     </div>
-     
+
     <!-- 暂无数据 -->
     <div class="noData" v-if="showNodata">
       暂无数据
@@ -66,7 +66,7 @@ export default {
       loading: true,
       isNodata: false,
       showNodata: false,
-      topStatus: false,
+      topStatus: false
     };
   },
   created() {
@@ -91,7 +91,7 @@ export default {
         Toast("不能为空");
         return false;
       }
-      this.cooperativeproject = []
+      this.cooperativeproject = [];
       this.keyword = keyword;
       this.pages = 1;
       this.code = 2;
@@ -105,7 +105,7 @@ export default {
       let that = this;
       //首页banner查询
       that.$axios
-        .post(window.ajaxSrc+"/api/meizubao/projectSearch", {
+        .post(window.ajaxSrc + "/api/meizubao/projectSearch", {
           keywords: keyword,
           page: pages
         })
@@ -268,35 +268,34 @@ export default {
   /* height: 100%; */
 }
 .oper_room {
-  margin:px2rem(5px) px2rem(10px);
-  font-size:px2rem(15px);
-  color:#000;
-  font-weight:bold;
+  margin: px2rem(5px) px2rem(10px);
+  font-size: px2rem(15px);
+  color: #000;
+  font-weight: bold;
 }
 .content {
   font-size: px2rem(13px);
-   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
   color: #999999;
   letter-spacing: 0;
   padding: 0rem 10px;
-  margin-top:px2rem(6px);
+  margin-top: px2rem(6px);
 }
 .every_pro {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: px2rem(6px) px2rem(10px);
-  color:#999999;
-  font-size:px2rem(12px);
+  color: #999999;
+  font-size: px2rem(12px);
   width: 100%;
- .data_mon{
-   color:#FF272D;
-   font-size:px2rem(14px);
- }
+  .data_mon {
+    color: #ff272d;
+    font-size: px2rem(14px);
+  }
 }
 .data_mon {
   font-size: 12px;
@@ -305,7 +304,7 @@ export default {
   line-height: 20px;
 }
 .pay_add {
-  margin-right:px2rem(50px);
+  margin-right: px2rem(50px);
   text-decoration: line-through;
 }
 .cli_app {
@@ -387,7 +386,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #00A5FF;
+  color: #00a5ff;
   font-size: px2rem(14px);
   position: absolute;
   bottom: px2rem(20px);

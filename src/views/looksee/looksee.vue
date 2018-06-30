@@ -481,14 +481,13 @@ export default {
 .content {
   font-size: px2rem(13px);
   color: #999999;
-  letter-spacing: 0;
+  
   // padding: 0rem 10px;
   margin-top: px2rem(6px);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+ display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
 }
 .every_pro {
   display: flex;

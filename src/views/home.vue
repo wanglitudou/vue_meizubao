@@ -55,10 +55,10 @@
         </div>
         <!-- 内容-->
         <div class="hotimg">
-          <div class="hotimg_lef"
+          <div class="hotimg_lef" 
                v-for="item in rentinginstrument"
                :key="item.index">
-            <img :src="item.images"
+            <img :src="item.images"  
                  alt=""
                  @click="details(item.id)">
             <span class="item_name">{{item.name}}</span>
@@ -230,7 +230,9 @@ export default {
     //获取当前浏览器的地址
     this.dqurl = window.location.href;
   },
-  created: function() {},
+  created: function() {
+    
+  },
   watch: {},
   methods: {
     getUser() {
@@ -240,7 +242,7 @@ export default {
             params: { uid: localStorage.id }
           })
           .then(res => {
-            console.log(res);
+         
             if (!res.data.data.tel) {
               this.$router.push({ path: `/phone/${1}` });
               return false;
@@ -261,7 +263,7 @@ export default {
         })
         .then(res => {
           if (res.data.status_code == 1001) {
-            console.log(res.data.data);
+            
             that.dataList.appId = res.data.data.appId;
             that.dataList.nonceStr = res.data.data.nonceStr;
             that.dataList.timestamp = res.data.data.timestamp;
@@ -328,7 +330,7 @@ export default {
                       }
                     })
                     .then(res => {
-                      console.log(res);
+                    
                     });
                 },
                 cancel: function() {

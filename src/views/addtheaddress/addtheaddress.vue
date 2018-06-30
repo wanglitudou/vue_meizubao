@@ -204,7 +204,6 @@ export default {
       if (this.$route.query.type == "edit") {
         this.editAddress();
       } else {
-   
         this.addAddress();
       }
     },
@@ -234,7 +233,7 @@ export default {
             setTimeout(() => {
             //   that.$router.push({
             //     path: "address",
-            //     query: { 
+            //     query: {
             //       consignee: that.province,
             //       telephone: that.telephone,
             //       address: that.address
