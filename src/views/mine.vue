@@ -5,42 +5,51 @@
       <div class="banners">
         <div class="ban_left">
           <div class="portrait">
-            <img :src="headImg" alt="666">
+            <img :src="headImg"
+                 alt="666">
             <p class="notes_list">
               <span class="name">{{nickname}}</span>
-              <span class="upddatePhone" @click="updatePhone">修改手机号</span>
+              <span class="upddatePhone"
+                    @click="updatePhone">修改手机号</span>
             </p>
 
             <!-- <span class = "name">赵越</span> -->
           </div>
         </div>
         <div class="ban_right">
-          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png" alt=""></span>
+          <span @click="Perfectinformation()"><img src="../assets/icon/edit_1.png"
+                 alt=""></span>
         </div>
       </div>
       <div class="list_cents">
         <p @click="curriculum()">
           <span>
-            <span class="icon"><img src="../assets/icon/course.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/course.png"
+                   alt=""></span>
             <span class="mine">我的课程</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
         </p>
         <p @click="integral()">
           <span>
-            <span class="icon"><img src="../assets/icon/integral.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/integral.png"
+                   alt=""></span>
             <span class="mine">我的积分</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
         </p>
         <p @click="address()">
           <span>
-            <span class="icon"><img src="../assets/icon/address.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/address.png"
+                   alt=""></span>
             <span class="mine">我的地址</span>
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
 
         </p>
 
@@ -63,11 +72,13 @@
         <p @click="photograph()">
           <span>
 
-            <span class="icon"><img src="../assets/icon/database.png" alt=""></span>
+            <span class="icon"><img src="../assets/icon/database.png"
+                   alt=""></span>
             <span class="mine">资料库</span>
 
           </span>
-          <span class="more"><img src="../assets/icon/more.png" alt=""></span>
+          <span class="more"><img src="../assets/icon/more.png"
+                 alt=""></span>
         </p>
       </div>
 
@@ -76,7 +87,7 @@
 </template>
 
 <script>
-import { Indicator } from "mint-ui";
+import { Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -145,6 +156,8 @@ export default {
       if (verify_status != 4) {
         console.log("99999");
         this.$router.push({ name: "information" });
+      } else {
+        Toast("您的信息已提交还未通过审核");
       }
     },
     updatePhone() {
@@ -211,7 +224,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  span{
+  span {
     display: block;
     line-height: (30px);
   }
