@@ -66,7 +66,7 @@ export default {
       loading: true,
       isNodata: false,
       showNodata: false,
-      topStatus: false
+      topStatus: false,
     };
   },
   created() {
@@ -268,18 +268,35 @@ export default {
   /* height: 100%; */
 }
 .oper_room {
-  padding: 0.2rem;
+  margin:px2rem(5px) px2rem(10px);
+  font-size:px2rem(15px);
+  color:#000;
+  font-weight:bold;
 }
 .content {
-  font-size: 13px;
+  font-size: px2rem(13px);
+   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   color: #999999;
   letter-spacing: 0;
   padding: 0rem 10px;
+  margin-top:px2rem(6px);
 }
 .every_pro {
   display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
+  justify-content: space-around;
+  align-items: center;
+  margin: px2rem(6px) px2rem(10px);
+  color:#999999;
+  font-size:px2rem(12px);
+  width: 100%;
+ .data_mon{
+   color:#FF272D;
+   font-size:px2rem(14px);
+ }
 }
 .data_mon {
   font-size: 12px;
@@ -288,7 +305,7 @@ export default {
   line-height: 20px;
 }
 .pay_add {
-  margin-right: 1.2rem;
+  margin-right:px2rem(50px);
   text-decoration: line-through;
 }
 .cli_app {

@@ -63,7 +63,7 @@
     <div class="preservation"
          @click="sive()">
       <span class="sive">
-        保存
+        保存  
       </span>
     </div>
     <!-- <vue-pickers :show="show1"
@@ -200,13 +200,16 @@ export default {
       this.show = false;
     },
     sive() {
+      console.log(this.$route.query.type)
       if (this.$route.query.type == "edit") {
         this.editAddress();
       } else {
+   
         this.addAddress();
       }
     },
     addAddress() {
+      console.log(1111111)
       let that = this;
       that.$axios
         .post("http://mzbao.weiyingjia.org/api/meizubao/address", {
@@ -229,16 +232,17 @@ export default {
 
             // Toast("设置默认地址成功");
             setTimeout(() => {
-              that.$router.push({
-                path: "/address",
-                query: {
-                  consignee: that.province,
-                  telephone: that.telephone,
-                  address: that.address
-                }
-              });
+            //   that.$router.push({
+            //     path: "address",
+            //     query: { 
+            //       consignee: that.province,
+            //       telephone: that.telephone,
+            //       address: that.address
+            //     }
+            //   });
+            that.$router.go(-1)
               // that.$router.push({ name: "address" });
-            }, 500);
+            }, 1000);
           }
         })
         .catch(() => {
@@ -265,17 +269,17 @@ export default {
           if (res.data.status_code == 1001) {
             Toast(res.data.message);
             setTimeout(() => {
-              that.$router.push({
-                path: "/address",
-                query: {
-                  consignee: that.province,
-                  telephone: that.telephone,
-                  address: that.address
-                }
-              });
-
+              // that.$router.push({
+              //   path: "/address",
+              //   // query: {
+              //   //   consignee: that.province,
+              //   //   telephone: that.telephone,
+              //   //   address: that.address
+              //   // }
+              // });
+              that.$router.go(-1)
               // that.$router.push({ name: "address" });
-            }, 500);
+            }, 1000);
           }
         })
         .catch(() => {

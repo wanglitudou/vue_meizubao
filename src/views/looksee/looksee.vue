@@ -663,6 +663,7 @@ export default {
   justify-content: center;
   align-items: center;
   color: #00a5ff;
+  font-size:px2rem(14px);
 }
 .loadMore {
   width: 96%;

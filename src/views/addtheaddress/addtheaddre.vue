@@ -244,14 +244,15 @@ export default {
 
             // Toast("设置默认地址成功");
             setTimeout(() => {
-              that.$router.push({
-                path: "/addresssite",
-                query: {
-                  consignee: that.province,
-                  telephone: that.telephone,
-                  address: that.address
-                }
-              });
+              // that.$router.push({
+              //   path: "/addresssite",
+              //   query: {
+              //     consignee: that.province,
+              //     telephone: that.telephone,
+              //     address: that.address
+              //   }
+              // });
+              that.$router.go(-1)
               // that.$router.push({ name: "address" });
             }, 500);
           }
@@ -280,15 +281,15 @@ export default {
           if (res.data.status_code == 1001) {
             Toast(res.data.message);
             setTimeout(() => {
-              that.$router.push({
-                path: "/addresssite",
-                query: {
-                  consignee: that.province,
-                  telephone: that.telephone,
-                  address: that.address
-                }
-              });
-
+              // that.$router.push({
+              //   path: "/addresssite",
+              //   // query: {
+              //   //   consignee: that.province,
+              //   //   telephone: that.telephone,
+              //   //   address: that.address
+              //   // }
+              // });
+              that.$router.go(-1)
               // that.$router.push({ name: "address" });
             }, 500);
           }

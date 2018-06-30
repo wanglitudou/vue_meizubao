@@ -59,7 +59,7 @@
             <div class="other">
               <p class="name">
 
-                <span>{{item.name}}</span>
+                <span class="titleName">{{item.name}}</span>
 
                 <span class="paice">￥{{item.price}}</span>
               </p>
@@ -311,11 +311,14 @@ export default {
   height: 100%;
 }
 .meeting {
+  margin-top:px2rem(6px);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  font-size:px2rem(13px);
+  color:#999;
 }
 .clearfix {
   width: 100%;
@@ -489,10 +492,24 @@ export default {
   color: #000000;
   padding: 0 0.3rem;
 }
+.titleName{
+  font-size:px2rem(15px);
+  color:#000;
+  font-weight:bold;
+
+}
 .date {
   padding: 0 0.3rem;
   display: flex;
+  margin-top:px2rem(6px);
   justify-content: space-between;
+  span {
+    a{
+      color:#FF272D;
+      font-size:px2rem(14px);
+
+    }
+  }
 }
 .loadMore {
   width: 96%;
@@ -517,6 +534,12 @@ export default {
   top: 0;
 }
 section {
-  padding-top: px2rem(48px);
+  padding-top: px2rem(50px);
+}
+.rent{
+  color:#999;
+  padding: 0 0.3rem;
+  font-size:px2rem(12px);
+  margin-top:px2rem(6px);
 }
 </style>

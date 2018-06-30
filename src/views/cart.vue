@@ -89,7 +89,7 @@ export default {
       this.ulShow = true;
       setTimeout(() => {
         this.ulShow = false;
-      }, 2500);
+      }, 3000);
     },
     // 点击下拉框选择  订单的状态 例如：仪器的订单  产品的订单
     optionLi(value, index) {

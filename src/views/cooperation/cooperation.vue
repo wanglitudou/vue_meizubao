@@ -2,7 +2,6 @@
 	<div class="cooperation-container">
 		<div class="con_cents">
 			<div class="con_pro">
-
 				<div class="cooperationBanner">
 					<mt-swipe :auto="4000">
 						<mt-swipe-item v-for="(item,index) in imgLists"
@@ -11,16 +10,6 @@
 							     alt="">
 						</mt-swipe-item>
 					</mt-swipe>
-
-					<!-- <div class="swiper-container">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide"
-                   v-for="item in data.images">
-                <img :src="item"
-                     alt="">
-              </div>
-            </div>
-          </div> -->
 				</div>
 
 				<div class="conpro_name">
@@ -315,6 +304,7 @@ export default {
   margin-left: 2.6%;
   height: auto;
   margin: 0.2rem auto 0;
+  padding-bottom:px2rem(5px)
 }
 
 .con_pro {
