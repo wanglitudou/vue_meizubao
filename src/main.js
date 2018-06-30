@@ -25,6 +25,9 @@ import { Checklist } from "mint-ui";
 import { Popup } from "mint-ui";
 import { Toast } from "mint-ui";
 import { Picker } from "mint-ui";
+import { Actionsheet } from "mint-ui";
+import "mint-ui/lib/style.css";
+
 //引入新的日历插件
 import VCalendar from "v-calendar";
 import "v-calendar/lib/v-calendar.min.css";
