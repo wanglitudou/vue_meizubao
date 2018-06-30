@@ -15,7 +15,11 @@
       </div>
       <div class="up_data">
         <span class="updata_lef">
-
+          <!-- <span class="inpt_imgone"
+                id="choose"
+                @click="actionSheet"
+                @change="updataimg($event,1)">
+          </span> -->
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
@@ -27,9 +31,6 @@
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
-                 name="upload"
-                 accept="image/*"
-                 multiple
                  @change="updataimg($event,2)">
           <img :src="data[0].imgtwo"
                alt=""></span>
@@ -54,9 +55,6 @@
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
                  id="img-upload"
-                 name="upload"
-                 accept="image/*"
-                 multiple
                  @change="updataimg($event,3)">
           <img :src="data[0].imgthree"
                alt="">
@@ -64,9 +62,6 @@
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
                  id="img-upload"
-                 name="upload"
-                 accept="image/*"
-                 multiple
                  @change="updataimg($event,4)">
           <img :src="data[0].imgfour"
                alt="">
@@ -156,12 +151,12 @@ export default {
           // sheetVisible: false
         },
         {
-          name: "拍照",
-          method: this.getCamera // 调用methods中的函数
+          name: "拍照"
+          // method: this.getCamera // 调用methods中的函数
         },
         {
-          name: "从相册中选择",
-          method: this.getLibrary // 调用methods中的函数
+          name: "从相册中选择"
+          // method: this.getLibrary // 调用methods中的函数
         }
       ],
       sheetVisible: false
@@ -178,12 +173,12 @@ export default {
     //     .find("input[type='file']")
     //     .removeAttr("capture");
     // }
-    var ua = navigator.userAgent.toLowerCase();
-    //判断是否是苹果手机，是则是true
-    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
-    if (isIos) {
-      $("input:file").removeAttr("capture");
-    }
+    // var ua = navigator.userAgent.toLowerCase();
+    // //判断是否是苹果手机，是则是true
+    // var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    // if (isIos) {
+    //   $("input:file").removeAttr("capture");
+    // }
 
     Indicator.open();
     this.getInfo();
@@ -450,6 +445,7 @@ export default {
   left: 0;
   opacity: 0;
   z-index: 999;
+  background: #dec;
 }
 .inpt_imgtwo {
   width: 100%;
