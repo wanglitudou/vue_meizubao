@@ -329,10 +329,12 @@ export default {
       this.sheetVisible = true;
     },
     getCamera: function() {
-      console.log("打开照相机");
+      // console.log("打开照相机");
+      alert("拍照");
     },
     getLibrary: function() {
-      console.log("打开相册");
+      alert("打开相册");
+      // console.log("打开相册");
     }
   }
 };
