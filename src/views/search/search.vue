@@ -104,14 +104,14 @@ export default {
 
       if (type == 1) {
         // 跳转仪器
-        this.$router.push({
+        this.$router.replace({
           name: "details",
           query: {
             pid: id
           }
         });
       } else if (type == 2) {
-        this.$router.push({
+        this.$router.replace({
           name: "essence",
           query: {
             pid: id
@@ -121,7 +121,7 @@ export default {
       } else if (type == 3) {
         //跳转产品
 
-        this.$router.push({
+        this.$router.replace({
           name: "matching",
           query: {
             pid: id
@@ -130,7 +130,7 @@ export default {
       } else if (type == 4) {
         //跳转视频
 
-        this.$router.push({
+        this.$router.replace({
           name: "train",
           query: {
             pid: id
@@ -139,7 +139,7 @@ export default {
       } else {
         //跳转 合作项目
         //
-        this.$router.push({
+        this.$router.replace({
           name: "cooperation",
           query: {
             pid: id
@@ -207,6 +207,7 @@ export default {
 }
 .detail .price {
   color: #ff272d;
+  font-size:14px;
 }
 .pay span {
   display: block;
@@ -220,6 +221,7 @@ export default {
   margin-top: 50px;
   margin-right: 10px;
   border-radius: 0.1rem;
+  font-size:14px;
 }
 .loadData {
   margin-top: 10px;

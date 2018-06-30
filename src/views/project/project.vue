@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-       <div class=" loadMore" ref="load">
+       <div class="item loadMore" ref="load">
         <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
         <span v-else>
           <span @click="loadMore" v-if="loading">加载更多</span>
@@ -365,7 +365,7 @@ export default {
   align-items: center;
 }
 .loadMore {
-  width: 100%;
+  width: 96%;
   height: 50px;
   display: flex;
   justify-content: center;

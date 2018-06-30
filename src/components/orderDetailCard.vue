@@ -98,16 +98,15 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-
-
+<style lang="scss" scoped>
+@import '../styles/helper.scss';
   .color333 {
     color: #333;
   }
 
   .color666 {
     color: #666;
+    font-size:px2rem(12px);
     font-weight: 400;
   }
 
@@ -150,7 +149,12 @@ export default {
   }
 
   .big {
-    font-size: 16px;
+    font-size: px2rem(16px);
+    color:#000;
+    font-weight:bold;
+    font-family: PingFangSC-Regular;
+    color: #000000;
+    letter-spacing: 0;
   }
   .red {
     color: #ff272d;

@@ -418,6 +418,9 @@ export default {
   /* height: 100%; */
 }
 .oper_room {
+  font-size:px2rem(15px);
+  color:#000;
+  font-weight:bold;
   padding: 0.2rem;
 }
 
@@ -427,10 +430,11 @@ export default {
   padding: 0 10px;
 }
 .data_mon {
-  font-size: 12px;
-  color: #f00;
+  font-size: px2rem(14px);
+  color: #FF272D;
   letter-spacing: 0;
   line-height: 20px;
+  
 }
 .week_mon {
   font-size: 12px;
