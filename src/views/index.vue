@@ -1,7 +1,10 @@
 <template>
 
   <div class="container">
-    <router-view class="wrapper"></router-view>
+    <keep-alive>
+        <router-view class="wrapper"></router-view>
+    </keep-alive>
+   
     <ul class="nav">
       <router-link :tag="'li'"
                    :to="{name:'home'}">

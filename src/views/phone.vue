@@ -142,6 +142,8 @@ export default {
           console.log(res);
           if (res.data.status_code == "200") {
             Toast("发送成功");
+          }else if(res.data.status_code == '202'){
+            Toast("发送失败")
           }
         });
     },
