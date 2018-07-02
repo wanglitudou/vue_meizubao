@@ -15,10 +15,19 @@
       </div>
       <div class="up_data">
         <span class="updata_lef">
+          <!-- <span class="inpt_imgone"
+                id="choose"
+                @click="actionSheet"
+                @change="updataimg($event,1)">
+          </span> -->
+          <!-- <input type="file"
+                 class="inpt_imgone"
+                 id="choose"
+                 @click="actionSheet"
+                 @change="updataimg($event,1)"> -->
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
-                 accept="image/*"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
@@ -26,7 +35,6 @@
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
-                 accept="image/*"
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
                alt=""></span>
@@ -51,7 +59,6 @@
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
                  id="img-upload"
-                 accept="image/*"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
                alt="">
@@ -59,7 +66,6 @@
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
                  id="img-upload"
-                 accept="image/*"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
                alt="">
@@ -79,13 +85,26 @@
       <span class="next_nex"
             @click="submitBtn()">已完成</span>
     </div>
+
+    <!-- <div>
+      <button @click="actionSheet">
+        <label class="mint-button-text">点击上拉 action sheet</label>
+      </button>
+
+    </div> -->
+    <!-- <mt-actionsheet :actions="data"
+                    v-model="sheetVisible">
+    </mt-actionsheet> -->
   </div>
 </template>
 <script>
 import { Toast, Indicator } from "mint-ui";
 import { Popup, picker } from "mint-ui";
-import { Actionsheet } from "mint-ui";
+// import { Toast } from "mint-ui";
+// import { Picker } from "mint-ui";
+// import { Actionsheet } from "mint-ui";
 import "mint-ui/lib/style.css";
+import { imgPreview } from "../../../static/imgSend.js";
 export default {
   name: "infor_container",
   data() {
@@ -110,7 +129,7 @@ export default {
       // }],
 
       // // action sheet 默认不显示，为false。操作sheetVisible可以控制显示与隐藏
-      sheetVisible: false,
+      // sheetVisible: false,
       data: {
         //其他
         headimg: "",
@@ -129,10 +148,17 @@ export default {
         imgtwo: "",
         imgthree: "",
         imgfour: ""
+        // name: "拍照",
+        // method: this.getCamera, // 调用methods中的函数
+        // name: "从相册中选择",
+        // method: this.getLibrary, // 调用methods中的函数
+        // sheetVisible: false
       }
+      // sheetVisible: false
     };
   },
   created(e) {
+    console.log(12333331);
     // var plateform = Zepto.device.os;
     // if (plateform == "android") {
     //   $("selector")
@@ -149,11 +175,6 @@ export default {
     // if (isIos) {
     //   $("input:file").removeAttr("capture");
     // }
-    var ua = navigator.userAgent.toLowerCase();
-    var isiOS = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1; // ios终端
-    if (!isiOS) {
-      $("input").attr("capture", "camera");
-    }
 
     Indicator.open();
     this.getInfo();
@@ -224,27 +245,40 @@ export default {
           console.log("查询失败");
         });
     },
+    // complete() {
+    //   this.$router.push({ name: "mine" });
+    // },
+    // idCardReg(num) {
+    //   var regS = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; // 身份证号码
+
+    //   console.log(num);
+    // },
     homeaddress() {},
     updataimg(e, num) {
+      let that = this;
       let file = e.target.files[0];
       console.log(file);
-      // alert(file.isClosed);
-      // alert(file.path);
-      // if (file.isClosed == undefined) {
-      //   return Toast("上传失败");
-      // }else{
-      //    }
-      // }
-      // alert(file.type);
-      // alert(file.name);
-      // alert(file.lastModified);
+      imgPreview(this, file, num);
+      return;
+      // that.data.imgOne = imgPreview(this, file, "anma");
 
       var formData = new FormData();
       //上传图片
       formData.append("img", file);
       formData.append("type", num);
       formData.append("uid", localStorage.id);
-      let that = this;
+      console.log(file);
+
+      // that.$axios
+      //   .post("http://mzbao.weiyingjia.org/api/meizubao/uploadImages", {
+
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+      //   })
+      //   .catch(() => {
+      //     console.log("查询失败");
+      //   });
       console.log(formData);
       $.ajax({
         type: "post",
@@ -261,14 +295,14 @@ export default {
             that.fileList = res.data;
           }
           if (num == 1) {
-            that.data[0].imgOne = res.data.url;
+            that.data.imgOne = res.data.url;
             console.log("666");
           } else if (num == 2) {
-            that.data[0].imgtwo = res.data.url;
+            that.data.imgtwo = res.data.url;
           } else if (num == 3) {
-            that.data[0].imgthree = res.data.url;
+            that.data.imgthree = res.data.url;
           } else if (num == 4) {
-            that.data[0].imgfour = res.data.url;
+            that.data.imgfour = res.data.url;
           }
         },
         error: function(res) {
@@ -276,6 +310,18 @@ export default {
         }
       });
     }
+    // actionSheet: function() {
+    //   // 打开action sheet
+    //   this.sheetVisible = true;
+    // },
+    // getCamera: function() {
+    //   // console.log("打开照相机");
+    //   alert("拍照");
+    // },
+    // getLibrary: function() {
+    //   alert("打开相册");
+    //   // console.log("打开相册");
+    // }
   }
 };
 </script>
