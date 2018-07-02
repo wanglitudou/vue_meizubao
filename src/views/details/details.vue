@@ -468,9 +468,9 @@ export default {
 }
 
 .cent_time {
-  width: 94.7%;
-  height: 1rem;
-  line-height: 1rem;
+  width: 100%;
+  height:px2rem(40px);
+  line-height: px2rem(40px);
   box-shadow: 0 2px 9px 0 #eeeeee;
 }
 
@@ -564,34 +564,37 @@ export default {
 }
 
 .name_words {
-  padding: 0.1rem 0.2rem;
-  font-size: 13px;
+  padding: 0rem 0.2rem;
+  margin-top:px2rem(10px);
+  font-size: px2rem(13px);
   color: #666666;
 }
 
 .name_cate {
   padding: 0rem 0.2rem;
+  margin-top:px2rem(8px);
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  font-size: 12px;
+  font-size: px2rem(12px);
   color: #999999;
   letter-spacing: 0;
 }
 
 .product {
   width: 94.7%;
-  height: 1rem;
-  line-height: 1rem;
+  height:px2rem(44px);
+  line-height: px2rem(44px);
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
-  margin: 0.2rem auto 0;
+ 
+  margin: px2rem(15px) auto 0;
 }
 
 .name_pro {
-  font-size: 14px;
-  color: #333333;
+  font-size:px2rem(14px);
+  color:#333333;
   letter-spacing: 0;
 }
 
@@ -604,8 +607,8 @@ export default {
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
-  margin-top: 10px;
-  margin: 0.2rem auto 0;
+  // margin-top:;
+  margin: px2rem(10px) auto 0;
 }
 
 .begin_rent {
@@ -639,7 +642,7 @@ export default {
 }
 
 .sign {
-  font-size: 14px;
+  font-size: px2rem(14px);
   color: #fd4689;
   letter-spacing: 0;
 }

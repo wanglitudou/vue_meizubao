@@ -61,6 +61,6 @@ export default {
   /* border: 1px solid #ccc; */
   background: #ffffff;
   box-shadow: 0 1px 4.5px 0 #eeeeee;
-  color: #000;
+  color: #FF272D;
 }
 </style>

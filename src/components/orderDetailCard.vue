@@ -115,23 +115,23 @@ export default {
   }
 
   .card {
-    height: 100px;
+    height: px2rem(100px);
     background: #FFFFFF;
     box-shadow: 0 1px 4.5px 0 #EEEEEE;
     border-radius: 1px;
-    padding: 10px;
-    margin-top: 20px;
-    font-size: 12px;
+    padding:px2rem(10px);
+    margin-top: px2rem(20px);
+    font-size: px2rem(12px);
     display: flex;
 
   }
 
   .card .head {
-    height: 80px;
-    width: 80px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    height: px2rem(80px);
+    width: px2rem(80px);
+    -webkit-border-radius: px2rem(5px);
+    -moz-border-radius: px2rem(5px);
+    border-radius: px2rem(5px);
     overflow: hidden;
   }
 
@@ -145,7 +145,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: 10px;
+    margin-left: px2rem(10px);
   }
 
   .big {

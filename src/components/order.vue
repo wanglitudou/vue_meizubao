@@ -291,13 +291,15 @@ export default {
 
 .paymentcenter .img {
   width:px2rem(87.5px);
+  height: px2rem(66px);
   margin-left:px2rem(10px); 
+  overflow: hidden;
 }
 .paymentcenter img {
   /* width: 100%;
    */
   width: 100%;
-  height: px2rem(66px);
+
 }
 .paymentcenter .detail {
   width: 50%;
@@ -307,7 +309,7 @@ export default {
 .detail .name {
   font-size: px2rem(16px);
   color: #000;
-  font-weight: bold;
+  font-weight:bold;
 }
 .detail .content {
   display: -webkit-box;
