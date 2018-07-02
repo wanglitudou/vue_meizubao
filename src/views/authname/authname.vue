@@ -18,6 +18,7 @@
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
+                 accept="image/*"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
@@ -25,6 +26,7 @@
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
                  id="img-upload"
+                 accept="image/*"
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
                alt=""></span>
@@ -49,6 +51,7 @@
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
                  id="img-upload"
+                 accept="image/*"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
                alt="">
@@ -56,6 +59,7 @@
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
                  id="img-upload"
+                 accept="image/*"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
                alt="">
@@ -145,6 +149,11 @@ export default {
     // if (isIos) {
     //   $("input:file").removeAttr("capture");
     // }
+    var ua = navigator.userAgent.toLowerCase();
+    var isiOS = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1; // ios终端
+    if (!isiOS) {
+      $("input").attr("capture", "camera");
+    }
 
     Indicator.open();
     this.getInfo();
