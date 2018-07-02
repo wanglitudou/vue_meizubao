@@ -98,10 +98,7 @@ export default {
   created() {
     let that = this;
     that.getname();
-    Indicator.open();
-    setTimeout(() => {
-      Indicator.close();
-    }, 1000);
+    
     //获取头像
     // this.headImg = localStorage.getItem("headimg");
     // this.nickname = localStorage.getItem("nickname");
