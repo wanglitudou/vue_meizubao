@@ -202,9 +202,9 @@
                 </div>
             </div>
         </div>
-        <div class="moreData" ref="load" v-show="orderlist.length">
+        <div :class="orderlist.length?'moreData':'everLoad'" ref="load">
             <div v-if="isload" @click="loadMore">加载更多..</div>
-            <div v-else>已全部加载</div>
+            <div v-else >已全部加载</div>
         </div>
     </div>
 
@@ -464,5 +464,14 @@ export default {
   border: 1px solid #fd4689;
   font-size: px2rem(14px);
 }
-
+.everLoad{
+    width:96%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background:#000;
+    color:#00A5FF;
+    font-size:px2rem(14px);
+}
 </style>

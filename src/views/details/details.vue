@@ -492,7 +492,9 @@ export default {
 }
 
 .detailsBanner {
+  width:100%;
   height: px2rem(250px);
+  overflow: hidden;
 }
 
 .detailsBanner img {
@@ -502,7 +504,7 @@ export default {
 
 .detailsBanner img {
   width: 100%;
-  height: 100%;
+  // height: 100%;
 }
 
 .ban_cent {
