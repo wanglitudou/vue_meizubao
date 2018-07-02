@@ -19,7 +19,6 @@
                  class="inpt_imgone"
                  id="choose"
                  accept="image/*"
-                 :multiple="multiple"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
@@ -28,7 +27,6 @@
                  class="inpt_imgtwo"
                  id="img-upload"
                  accept="image/*"
-                 :multiple="multiple"
                  @change="updataimg($event,2)">
           <img :src="data.imgtwo"
                alt=""></span>
@@ -54,7 +52,6 @@
                  class="inpt_imgthree"
                  id="img-upload"
                  accept="image/*"
-                 :multiple="multiple"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
                alt="">
@@ -63,7 +60,6 @@
                  class="inpt_imgfour"
                  id="img-upload"
                  accept="image/*"
-                 :multiple="multiple"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
                alt="">
@@ -147,11 +143,16 @@ export default {
     //     .find("input[type='file']")
     //     .removeAttr("capture");
     // }
+    // var ua = navigator.userAgent.toLowerCase();
+    // //判断是否是苹果手机，是则是true
+    // var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    // if (isIos) {
+    //   $("input:file").removeAttr("capture");
+    // }
     var ua = navigator.userAgent.toLowerCase();
-    //判断是否是苹果手机，是则是true
-    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
-    if (isIos) {
-      $("input:file").removeAttr("capture");
+    var isiOS = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1; // ios终端
+    if (!isiOS) {
+      $("input").attr("capture", "camera");
     }
 
     Indicator.open();
