@@ -98,7 +98,10 @@ export default {
   created() {
     let that = this;
     that.getname();
-    
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
     //获取头像
     // this.headImg = localStorage.getItem("headimg");
     // this.nickname = localStorage.getItem("nickname");
@@ -173,8 +176,6 @@ export default {
   height: 100%;
   position: relative;
   background: #fff;
-  // height: calc(100% - 0.88rem);
-  // background: #fff;
 }
 .a-cent_ban {
   width: 100%;
@@ -193,7 +194,6 @@ export default {
 .banners .ban_left {
   width: px2rem(184px);
   height: px2rem(120px);
-  // line-height: px2rem(100px);
 }
 .banners .ban_left .portrait {
   width: px2rem(184px);
@@ -211,10 +211,7 @@ export default {
 .banners .ban_left .notes_list {
   display: block;
   font-size: px2rem(17px);
-  // color: #000;
-  // line-height: px2rem(76px);
   height: 100%;
-
   margin-left: px2rem(12px);
   color: #ffffff;
   display: flex;
@@ -225,23 +222,19 @@ export default {
     display: block;
     line-height: (30px);
   }
-  // width
 }
 
 .banners .ban_right {
   width: px2rem(20px);
   height: 100%;
-  // line-height: 2rem;
   color: #fff;
   display: flex;
   align-items: center;
-  /* background: red; */
 }
 .banners .ban_right img {
   width: 100%;
   height: px2rem(20px);
   margin-bottom: px2rem(30px);
-  // height: 100%;
 }
 .icons {
   color: #ddeecc;
@@ -293,7 +286,6 @@ export default {
   color: #fd4689;
   font-size: 0.36rem;
 }
-/* .list_cent p{} */
 .list_cents p .mine {
   position: absolute;
   top: -0px;

@@ -383,8 +383,8 @@ export default {
 <style  lang="scss" scoped>
 @import "../../styles/helper.scss";
 .yearActive {
-  color: red;
-  background: #dec;
+  color: #fff;
+  background: #fd4689;
 }
 .infore_container {
   width: 100%;
@@ -475,12 +475,12 @@ export default {
 .year_new {
   display: flex;
   justify-content: space-between;
-  padding: 2px 5px;
+  padding: 10px 5px;
 }
 .new_name {
   border: 1px solid #ccc;
-  // width: 80px;
-  // height: 30px;
+  font-size: 14px;
+  color: #ccc;
   width: px2rem(66px);
   line-height: px2rem(30px);
   border: 1px solid #cccccc;
@@ -488,7 +488,6 @@ export default {
   text-align: center;
 }
 .next_up {
-  // margin-top: 30px;
   text-align: center;
 }
 .next_nex {

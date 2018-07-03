@@ -5,9 +5,12 @@
       <div class="banner">
         <mt-swipe :auto="4000">
 
-          <mt-swipe-item v-for="(item,index) in url" :key="index">
-            <a target='_blank' :href='item.url'>
-              <img :src="item.images" alt="">
+          <mt-swipe-item v-for="(item,index) in url"
+                         :key="index">
+            <a target='_blank'
+               :href='item.url'>
+              <img :src="item.images"
+                   alt="">
             </a>
             <!-- <a href=""></a> -->
           </mt-swipe-item>
@@ -15,16 +18,7 @@
 
       </div>
       <!-- 搜索 -->
-      <!-- <div class="search_contents">
-        <div class="list_search"
-             ref="search"
-             @click="toSearch">
-          <div style="margin-left:20px;">请输入搜索</div>
-          <img src="../assets/icon/search_1.png"
-               alt="111">
-        </div>
-      </div> -->
-      <!-- <div class="search_contents">
+      <div class="search_contents">
         <div class="list_search"
              ref="search"
              @click="toSearch()">
@@ -32,13 +26,13 @@
           <img src="../assets/icon/search_1.png"
                alt="111">
         </div>
-      </div> -->
-      <div class="search_contents">
+      </div>
+      <!-- <div class="search_contents">
         <div class="list_search" ref="search" @click="qqq()">
           <div style="margin-left:20px;">请输入搜索</div>
           <img src="../assets/icon/search_1.png" alt="111">
         </div>
-      </div>
+      </div> -->
       <div class="list_btn">
         <!-- title -->
         <div class="hotrent">
@@ -49,16 +43,22 @@
         </div>
         <!-- 内容-->
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in rentinginstrument" :key="item.index">
+          <div class="hotimg_lef"
+               v-for="item in rentinginstrument"
+               :key="item.index">
             <div class="img_box">
-              <img :src="item.images" class='cao' alt="" @click="details(item.id)">
+              <img :src="item.images"
+                   class='cao'
+                   alt=""
+                   @click="details(item.id)">
             </div>
 
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
         <!-- 查看更多 -->
-        <div class="hot_cent" @click="detail()">
+        <div class="hot_cent"
+             @click="detail()">
           <span>查看更多></span>
         </div>
       </div>
@@ -71,15 +71,22 @@
         <div class=" hotrents">
           <div></div>
         </div>
-        <div class="hotimg" ref="ht">
-          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="essence(item.id)">
-              </div>
+        <div class="hotimg"
+             ref="ht">
+          <div class="hotimg_lef"
+               v-for="item in beautyindustry"
+               :key="item.index">
+            <div class="img_box">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="essence(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
-        <div class="hot_cent" @click="looksee()">
+        <div class="hot_cent"
+             @click="looksee()">
           <span>查看更多></span>
         </div>
       </div>
@@ -92,16 +99,22 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="matching(item.id)">
-              </div>
+          <div class="hotimg_lef"
+               v-for="item in accessoryproducts"
+               :key="item.index">
+            <div class="img_box">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="matching(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
 
           </div>
 
         </div>
-        <div class="hot_cent" @click="seemore()">
+        <div class="hot_cent"
+             @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -114,15 +127,21 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="train(item.id)">
-              </div>
+          <div class="hotimg_lef"
+               v-for="item in visualscreen"
+               :key="item.index">
+            <div class="img_box">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="train(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="seemore()">
+        <div class="hot_cent"
+             @click="seemore()">
           <span>查看更多></span>
         </div>
       </div>
@@ -135,15 +154,21 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="cooperation(item.id)">
-              </div>
+          <div class="hotimg_lef"
+               v-for="item in cooperativeProject"
+               :key="item.index">
+            <div class="img_box">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="cooperation(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
 
           </div>
         </div>
-        <div class="hot_cent" @click="clickpay()">
+        <div class="hot_cent"
+             @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -743,13 +768,13 @@ export default {
 //   width: px2rem(160px);
 //   height: px2rem(120px);
 // }
-.img_box{
+.img_box {
   widows: px2rem(160px);
   height: px2rem(120px);
   overflow: hidden;
 }
-.img_box img{
-  width:100%;
+.img_box img {
+  width: 100%;
 }
 .hotimg_lef .item_name {
   display: block;

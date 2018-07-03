@@ -15,6 +15,12 @@
         <span><input type="text"
                  v-model="telephone"
                  class="inp"></span>
+        <span class="img_input">
+          <span class="plaese_choose"> 请选择</span>
+          <i class="icon_right_img">
+            <img src="../../assets/icon/more.png"
+                 alt=""></i>
+        </span>
       </p>
       <div class="page-content">
         <ul class="new-address-form">
@@ -28,7 +34,9 @@
             <span class="form-input"
                   @click="addressPickerShow = true"
                   v-model="provCityCounty">{{province}}{{city}}{{area}}</span>
+
           </li>
+
         </ul>
         <mt-popup v-model="addressPickerShow"
                   position="bottom"
@@ -37,13 +45,12 @@
                      @change="addressPickerChange"
                      :visible-item-count="5"></mt-picker>
         </mt-popup>
+
       </div>
+
       <span>
 
-        <!-- <i class="icon_right_img"><img src="../../assets/icon/more.png"
-                 alt=""></i> -->
       </span>
-      <!-- </p> -->
       <p class="detail_address">
         <span class="detail_add">
           <input type="text"
@@ -66,10 +73,6 @@
         保存
       </span>
     </div>
-    <!-- <vue-pickers :show="show1"
-                 :selectData="pickData3"
-                 v-on:cancel="close"
-                 v-on:confirm="confirmFn"></vue-pickers> -->
     <mt-popup v-model="addressPickerShow"
               position="bottom"
               class="address-popup">
@@ -82,10 +85,6 @@
 </template>
 <script>
 //mint-ui三级
-// import { Picker, Toast } from "mint-ui";
-// import { Checklist } from "mint-ui";
-// import VuePickers from "vue-pickers";
-// import { provs_data, citys_data, dists_data } from "vue-pickers/lib/areaData";
 import { Popup, picker } from "mint-ui";
 import { Toast } from "mint-ui";
 // import { Picker } from "mint-ui";
@@ -231,14 +230,6 @@ export default {
 
             // Toast("设置默认地址成功");
             setTimeout(() => {
-              //   that.$router.push({
-              //     path: "address",
-              //     query: {
-              //       consignee: that.province,
-              //       telephone: that.telephone,
-              //       address: that.address
-              //     }
-              //   });
               that.$router.go(-1);
               // that.$router.push({ name: "address" });
             }, 1000);
@@ -327,9 +318,22 @@ export default {
   top: 0;
   z-index: 6;
 }
-
+.plaese_choose {
+  position: absolute;
+  right: 60px;
+  top: 80px;
+  display: inline-block;
+}
 .icon_right_img img {
-  height: px2rem(16px);
+  height: px2rem(22px);
+  width: px2rem(20px);
+  margin-right: px2rem(40.2px);
+}
+.icon_right_img {
+  position: absolute;
+  right: 0px;
+  top: 85px;
+  display: inline-block;
 }
 
 .container {
@@ -343,6 +347,8 @@ export default {
   outline: none;
   border: none;
   cursor: pointer;
+  font-size: 15px;
+  color: #666;
 }
 
 .collectgoods {
@@ -377,18 +383,17 @@ export default {
   width: px2rem(330px);
   height: 2rem;
   border-bottom: 2px solid #f7f7f7;
-  font-size: 15px;
-  color: #9b9b9b;
   padding-left: 10px;
   margin-top: 0.1rem;
 }
-
 .inpts_text {
   width: px2rem(330px);
   height: 2rem;
   outline: none;
   border: none;
   cursor: pointer;
+  font-size: 15px;
+  color: #666;
 }
 
 .tacit_address {
@@ -416,20 +421,19 @@ export default {
 .page-content {
   box-sizing: border-box;
   overflow: auto;
-  // height: 100%;
-  // padding-bottom: 100px;
 }
 
 .new-address-form .new-address-form-item {
   display: flex;
   align-items: center;
-  /* padding: 36px 20px; */
   border-bottom: 1px solid #e6e6e6;
+  margin-right: 20px;
+  position: relative;
 }
 
 .new-address-form .new-address-form-item .form-title {
-  font-size: 14px;
-  color: #333;
+  font-size: 15px;
+  color: #666;
   margin-left: 10px;
 }
 .new-address-form .new-address-form-item .form-input {
@@ -438,10 +442,11 @@ export default {
   outline: none;
   padding: 10px;
   font-size: 15px;
+  color: #666;
   color: #666666;
   border-bottom: 1px solid transparent;
+  width: 80%;
 }
-
 .new-address-form .new-address-form-item .form-input .error {
   border-bottom: 1px solid red;
 }

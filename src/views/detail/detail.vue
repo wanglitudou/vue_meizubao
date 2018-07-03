@@ -85,7 +85,7 @@
               </p>
             </div>
           </div>
-           
+
         </div>
         <div class=" item loadMore"
              ref="load">
@@ -116,7 +116,7 @@
   </div>
 </template>
 <script>
-import { Spinner, Toast, Indicator } from "mint-ui";
+import { Spinner, Toast } from "mint-ui";
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
@@ -156,7 +156,6 @@ export default {
   },
 
   created() {
-    Indicator.open();
     let that = this;
     //热租仪器分类
     that.$axios
@@ -196,7 +195,6 @@ export default {
       }
 
       // this.imgsArr = [];
-    
 
       this.pages = 1;
       Indicator.open();
@@ -311,13 +309,13 @@ export default {
   height: 100%;
 }
 .meeting {
-  margin-top:px2rem(6px);
- display: -webkit-box;
--webkit-box-orient: vertical;
--webkit-line-clamp: 3;
-overflow: hidden;
-  font-size:px2rem(13px);
-  color:#999;
+  margin-top: px2rem(6px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: px2rem(13px);
+  color: #999;
 }
 .clearfix {
   width: 100%;
@@ -491,22 +489,20 @@ overflow: hidden;
   color: #000000;
   padding: 0 0.3rem;
 }
-.titleName{
-  font-size:px2rem(15px);
-  color:#000;
-  font-weight:bold;
-
+.titleName {
+  font-size: px2rem(15px);
+  color: #000;
+  font-weight: bold;
 }
 .date {
   padding: 0 0.3rem;
   display: flex;
-  margin-top:px2rem(6px);
+  margin-top: px2rem(6px);
   justify-content: space-between;
   span {
-    a{
-      color:#FF272D;
-      font-size:px2rem(14px);
-
+    a {
+      color: #ff272d;
+      font-size: px2rem(14px);
     }
   }
 }
@@ -535,10 +531,10 @@ overflow: hidden;
 section {
   padding-top: px2rem(50px);
 }
-.rent{
-  color:#999;
+.rent {
+  color: #999;
   padding: 0 0.3rem;
-  font-size:px2rem(12px);
-  margin-top:px2rem(6px);
+  font-size: px2rem(12px);
+  margin-top: px2rem(6px);
 }
 </style>
