@@ -11,7 +11,7 @@
       </div>
 
       <div class="pic_ture">
-        <!--图片切换时展示的内容-->`
+        <!--图片切换时展示的内容-->
         <div v-show="num==0">
           <div class="cent_cents">
             <div class="pic_center">
@@ -321,6 +321,7 @@ export default {
     width: 50%;
     display: flex;
     justify-content: center;
+    color: #666;
     span {
       display: block;
       width: px2rem(42px);
@@ -382,7 +383,7 @@ export default {
 
 .ins_img {
   vertical-align: middle;
-  width: 24px;
+  width: px2rem(12px);
 }
 .ins_img img {
   width: 14px;

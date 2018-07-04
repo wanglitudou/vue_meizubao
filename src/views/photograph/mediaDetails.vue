@@ -13,22 +13,32 @@
           您的浏览器不支持 video 标签。
         </video> -->
       <div v-if="$route.query.type=='video'">
-        <video-player class="vjs-custom-skin" style="width:100%;height:250px;" :options="playerOptions" :playsinline="true" ref="videoPlayer" @ready="playerReadied($event)"></video-player>
+        <video-player class="vjs-custom-skin"
+                      style="width:100%;height:250px;"
+                      :options="playerOptions"
+                      :playsinline="true"
+                      ref="videoPlayer"
+                      @ready="playerReadied($event)"></video-player>
 
       </div>
       <!-- <video-player class="vjs-custom-skin" :options="playerOptions" :playsinline="true" ref="videoPlayer" @ready="playerReadied($event)"></video-player> -->
       <div v-else>
-        <img :src="$route.query.images" alt="">
+        <img :src="$route.query.images"
+             alt="">
       </div>
 
     </div>
     <div class="bottom-wrapper">
       <div class="des-wrapper">
         <span class="text">{{$route.query.name}}</span>
-        <span class="baiducloud" @click="baiducloud()">百度云下载
+        <span class="baiducloud"
+              @click="baiducloud()">百度云下载
         </span>
         <!--<a :href="$route.query.images" download="test">下载</a>-->
-        <img class="right-button" src="../../assets/images/download.jpg" alt="" :data-clipboard-text="$route.query.images">
+        <img class="right-button"
+             src="../../assets/images/download.jpg"
+             alt=""
+             :data-clipboard-text="$route.query.images">
       </div>
     </div>
   </div>
@@ -87,7 +97,8 @@ export default {
     });
     if (this.$route.query.type == "video") {
       // this.playerOptions.sources[0].src =this.$route.query;
-      this.playerOptions.sources[0].src ="http://10.2.9.130/mzbadmin.weiyingjia.org/upload/1530084920911.mp4";
+      this.playerOptions.sources[0].src =
+        "http://10.2.9.130/mzbadmin.weiyingjia.org/upload/1530084920911.mp4";
       // console.log( $router.query.images)
     }
   },
@@ -138,15 +149,15 @@ export default {
 
 <style scoped>
 .baiducloud {
-  color: #ff0000;
+  color: #fd4689;
   margin-left: 1rem;
-  font-size: 14px;
+  font-size: 16px;
 }
-.video-js .vjs-big-play-button{      
+.video-js .vjs-big-play-button {
   position: absolute !important;
-   
-  top:35% !important;
-  left:35% !important;
+
+  top: 35% !important;
+  left: 35% !important;
 }
 
 .top-wrapper {

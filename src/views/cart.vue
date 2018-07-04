@@ -6,15 +6,23 @@
 
         <div class="tabBar">
           <button @click="select">{{statusCode}}</button>
-          <div class="bgContent"  v-show="ulShow">
+          <div class="bgContent"
+               v-show="ulShow">
             <span class="triangular"></span>
             <ul class="uli">
-              <li class="status_item" v-for="(optionItem,index) in options" :key="index" @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
+              <li class="status_item"
+                  v-for="(optionItem,index) in options"
+                  :key="index"
+                  @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
             </ul>
           </div>
         </div>
-        <div class="tabBar" v-for="(item,index) in tabs" :key="index">
-          <div class="status" :class="tabNum == index ?'active':''" @click="tabClick(item.id,index)">
+        <div class="tabBar"
+             v-for="(item,index) in tabs"
+             :key="index">
+          <div class="status"
+               :class="tabNum == index ?'active':''"
+               @click="tabClick(item.id,index)">
             {{item.item}}
           </div>
         </div>
@@ -22,7 +30,16 @@
         <!-- <div class="tabBar"></div> -->
       </div>
 
-      <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail" :loadMore="loadMore" :load="load" :toPay="toPay" :complete="complete" :renewal="renewal" :back="back"></order>
+      <order :orderlist="orderlist"
+             :receipt="receipt"
+             :cancel="cancel"
+             :todetail="todetail"
+             :loadMore="loadMore"
+             :load="load"
+             :toPay="toPay"
+             :complete="complete"
+             :renewal="renewal"
+             :back="back"></order>
 
     </div>
   </div>
@@ -77,6 +94,9 @@ export default {
   },
   created() {
     Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
     this.getOrder(this.type, this.status, this.page, this.uid);
   },
   methods: {
@@ -459,27 +479,27 @@ export default {
   box-shadow: 0 2px 4px #fd4689;
   position: relative;
   background: #fff;
-   filter: drop-shadow(0 0 6px  #FD4689); 
+  filter: drop-shadow(0 0 6px #fd4689);
   border-radius: px2rem(5px);
 }
-.triangular{
-  position:absolute;
-     border-left: 10px solid transparent;
-                border-right: 10px solid transparent; 
-                border-bottom: 10px solid #fff;
-               
-                position: absolute;
-                top: -10px;
-                left: 50%;
-                margin-left: -10px; 
+.triangular {
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  margin-left: -10px;
 }
 .uli {
   background: #fff;
   z-index: 3;
 }
-.status_item{
+.status_item {
   font-size: px2rem(14px);
-  color:#555;
+  color: #555;
   line-height: px2rem(40px);
 }
 button {
