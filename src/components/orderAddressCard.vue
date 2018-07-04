@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -48,6 +49,12 @@ export default {
       this.init();
     }
   },
+  created() {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
+  },
   methods: {
     init() {
       this.$axios
@@ -60,13 +67,13 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             //							this.data = res.data.data[0];
-           
+
             for (var i = 0; i < res.data.data.length; i++) {
               if (res.data.data[i].is_default_address == 1) {
                 this.data = res.data.data[i];
               }
             }
-             this.saveAddressId(this.data.id);
+            this.saveAddressId(this.data.id);
           }
         })
         .catch(err => {
@@ -87,7 +94,7 @@ export default {
       // alert("66666");
     },
     changes() {
-      console.log(11)
+      console.log(11);
       this.$axios({
         method: "get",
         url: "http://mzbao.weiyingjia.org/api/meizubao/addressInfo",
@@ -97,10 +104,9 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
-        
-         console.log(res)
+          console.log(res);
           this.data = res.data.data;
-            this.saveAddressId(res.data.data.id);
+          this.saveAddressId(res.data.data.id);
         }
       });
     }

@@ -25,36 +25,20 @@
 
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show()
-                 type="search"
-                 placeholder="请输入搜索内容"
-                 v-model="keyword"
-                 ref="input1">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png"
-             alt="111">
+        <img src="../../assets/icon/search_1.png" alt="111">
       </div>
-      <p class="logo"
-         @click="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
     </header>
     <section>
 
-      <div v-masonry
-           transition-duration="0.3s"
-           ref="masonry"
-           item-selector=".item"
-           column-width=".item"
-           v-if="isNodata">
-        <div v-masonry-tile
-             class="item"
-             v-for="(item, index) in imgsArr"
-             @click="details(item.id)">
+      <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+        <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
 
           <div class="boxs listing">
             <div>
-              <img :src="item.images"
-                   alt="">
+              <img :src="item.images" alt="">
             </div>
             <div class="other">
               <p class="name">
@@ -85,30 +69,21 @@
               </p>
             </div>
           </div>
-           
+
         </div>
-        <div class=" item loadMore"
-             ref="load">
-          <mt-spinner type="fading-circle"
-                      color="#FD4689 "
-                      v-if="topStatus"></mt-spinner>
+        <div class=" item loadMore" ref="load">
+          <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
           <span v-else>
-            <span @click="loadMore"
-                  v-if="loading">加载更多</span>
+            <span @click="loadMore" v-if="loading">加载更多</span>
             <span v-else>数据全部加载完成</span>
           </span>
         </div>
       </div>
     </section>
     <!-- 侧边栏 -->
-    <slider :tabContent="tabs"
-            :num="num"
-            :tab="tab"
-            :isRellyShow="isRellyShow"
-            :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
 
-    <div class="nodata"
-         v-if="showNodata">
+    <div class="nodata" v-if="showNodata">
 
       暂无数据
     </div>
@@ -196,7 +171,6 @@ export default {
       }
 
       // this.imgsArr = [];
-    
 
       this.pages = 1;
       Indicator.open();
@@ -265,7 +239,7 @@ export default {
           page: page
         })
         .then(res => {
-          console.log(res)
+          console.log(res);
           if (res.data.status_code == 1001) {
             Indicator.close();
             this.topStatus = false;
@@ -280,7 +254,7 @@ export default {
               that.topStatus = false;
               that.loading = true;
             }
-           
+
             this.imgsArr = this.imgsArr.concat(res.data.data);
           }
         })
@@ -312,13 +286,13 @@ export default {
   height: 100%;
 }
 .meeting {
-  margin-top:px2rem(6px);
- display: -webkit-box;
--webkit-box-orient: vertical;
--webkit-line-clamp: 3;
-overflow: hidden;
-  font-size:px2rem(13px);
-  color:#999;
+  margin-top: px2rem(6px);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: px2rem(13px);
+  color: #999;
 }
 .clearfix {
   width: 100%;
@@ -492,22 +466,20 @@ overflow: hidden;
   color: #000000;
   padding: 0 0.3rem;
 }
-.titleName{
-  font-size:px2rem(15px);
-  color:#000;
-  font-weight:bold;
-
+.titleName {
+  font-size: px2rem(15px);
+  color: #000;
+  font-weight: bold;
 }
 .date {
   padding: 0 0.3rem;
   display: flex;
-  margin-top:px2rem(6px);
+  margin-top: px2rem(6px);
   justify-content: space-between;
   span {
-    a{
-      color:#FF272D;
-      font-size:px2rem(14px);
-
+    a {
+      color: #ff272d;
+      font-size: px2rem(14px);
     }
   }
 }
@@ -536,10 +508,10 @@ overflow: hidden;
 section {
   padding-top: px2rem(50px);
 }
-.rent{
-  color:#999;
+.rent {
+  color: #999;
   padding: 0 0.3rem;
-  font-size:px2rem(12px);
-  margin-top:px2rem(6px);
+  font-size: px2rem(12px);
+  margin-top: px2rem(6px);
 }
 </style>

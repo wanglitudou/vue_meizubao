@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import { MessageBox, Toast } from "mint-ui";
+import { MessageBox, Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -88,6 +88,10 @@ export default {
     if (this.$route.query.data_data == 1) {
       console.log("asdfg11qqqq");
     }
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
   },
   mounted() {
     this.getList();
@@ -121,11 +125,10 @@ export default {
       });
     },
     changesite(id) {
-      console.log(id)
-       let siteId = id;
+      console.log(id);
+      let siteId = id;
       localStorage.setItem("siteId", siteId);
       this.$router.go("-1");
-     
     },
     getList() {
       let that = this;

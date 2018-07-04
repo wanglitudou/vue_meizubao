@@ -94,9 +94,8 @@
 import orderFooter from "../../components/orderFooter.vue";
 // import sign from '../../components/sign.vue'
 import sign from "../../components/canvas.vue";
-import { Toast, Swipe, SwipeItem } from "mint-ui";
+import { Toast, Swipe, SwipeItem, Indicator } from "mint-ui";
 import { mapActions } from "vuex";
-
 export default {
   data() {
     return {
@@ -117,9 +116,14 @@ export default {
       dqurl: ""
     };
   },
-  created() {},
-  activated(){
-    console.log(this.$route.query)
+  created() {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
+  },
+  activated() {
+    console.log(this.$route.query);
   },
   mounted() {
     this.init();
@@ -492,7 +496,7 @@ export default {
 }
 
 .detailsBanner {
-  width:100%;
+  width: 100%;
   height: px2rem(250px);
   overflow: hidden;
 }

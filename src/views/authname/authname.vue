@@ -28,7 +28,8 @@
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
-                 @change="updataimg($event,1)">
+                 @change="updataimg($event,1)"
+                 @click="successfuluploading()">
           <img :src="data.imgOne"
                alt="">
         </span>
@@ -36,6 +37,7 @@
                  class="inpt_imgtwo"
                  id="img-upload"
                  @change="updataimg($event,2)">
+
           <img :src="data.imgtwo"
                alt=""></span>
 
@@ -90,7 +92,6 @@
       <button @click="actionSheet">
         <label class="mint-button-text">点击上拉 action sheet</label>
       </button>
-
     </div> -->
     <!-- <mt-actionsheet :actions="data"
                     v-model="sheetVisible">
@@ -100,36 +101,13 @@
 <script>
 import { Toast, Indicator } from "mint-ui";
 import { Popup, picker } from "mint-ui";
-// import { Toast } from "mint-ui";
-// import { Picker } from "mint-ui";
-// import { Actionsheet } from "mint-ui";
+import { Spinner } from "mint-ui";
 import "mint-ui/lib/style.css";
 import { imgPreview } from "../../../static/imgSend.js";
 export default {
   name: "infor_container",
   data() {
     return {
-      // data: [{
-      //   headimg: "",
-      //   manage_years: "",
-      //   manage_area: "",
-      //   id_card: "",
-      //   card_front: "",
-      //   card_behind: "",
-      //   home_address: "",
-      //   business_license: "",
-      //   store_image: "",
-      //   store_name: "",
-      //   lists: [],
-      //   fileList: [],
-      //   imgOne: "",
-      //   imgtwo: "",
-      //   imgthree: "",
-      //   imgfour: ""
-      // }],
-
-      // // action sheet 默认不显示，为false。操作sheetVisible可以控制显示与隐藏
-      // sheetVisible: false,
       data: {
         //其他
         headimg: "",
@@ -175,12 +153,17 @@ export default {
     // if (isIos) {
     //   $("input:file").removeAttr("capture");
     // }
-
     Indicator.open();
     this.getInfo();
     setTimeout(() => {
       Indicator.close();
     }, 500);
+
+    // Toast({
+    //   message: "设置默认地址成功",
+    //   position: "bottom",
+    //   duration: 1000
+    // });
   },
   methods: {
     getInfo() {
@@ -250,7 +233,6 @@ export default {
     // },
     // idCardReg(num) {
     //   var regS = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; // 身份证号码
-
     //   console.log(num);
     // },
     homeaddress() {},
@@ -258,20 +240,23 @@ export default {
       let that = this;
       let file = e.target.files[0];
       console.log(file);
+      Toast({
+        message: "上传成功",
+        position: "top",
+        duration: 2000
+      });
       imgPreview(this, file, num);
       return;
       // that.data.imgOne = imgPreview(this, file, "anma");
-
       var formData = new FormData();
       //上传图片
       formData.append("img", file);
       formData.append("type", num);
       formData.append("uid", localStorage.id);
       console.log(file);
-
+      console.log("上传成功");
       // that.$axios
       //   .post("http://mzbao.weiyingjia.org/api/meizubao/uploadImages", {
-
       //   })
       //   .then(res => {
       //     console.log(res);
@@ -280,6 +265,7 @@ export default {
       //     console.log("查询失败");
       //   });
       console.log(formData);
+      console.log("1111111");
       $.ajax({
         type: "post",
         url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
@@ -290,12 +276,13 @@ export default {
         success: function(res) {
           console.log(res.data);
           // alert(res.data.url);
-
           if (res.code == 200) {
             that.fileList = res.data;
+            console.log("00000");
           }
           if (num == 1) {
             that.data.imgOne = res.data.url;
+
             console.log("666");
           } else if (num == 2) {
             that.data.imgtwo = res.data.url;
@@ -309,19 +296,10 @@ export default {
           console.log(11111);
         }
       });
-    }
-    // actionSheet: function() {
-    //   // 打开action sheet
-    //   this.sheetVisible = true;
-    // },
-    // getCamera: function() {
-    //   // console.log("打开照相机");
-    //   alert("拍照");
-    // },
-    // getLibrary: function() {
-    //   alert("打开相册");
-    //   // console.log("打开相册");
-    // }
+
+      console.log("shangchaun");
+    },
+    successfuluploading() {}
   }
 };
 </script>
@@ -383,7 +361,6 @@ export default {
   color: #cccccc;
   letter-spacing: 0;
 }
-
 .id_txt input {
   width: px2rem(200px);
   height: 0.88rem;

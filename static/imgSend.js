@@ -9,7 +9,7 @@ export function imgPreview(that, file, type) {
   if (/^image/.test(file.type)) {
     // 创建一个reader
     let reader = new FileReader();
-    // 将图片2将转成 base64 格式
+    // 将图片将转成 base64 格式
     reader.readAsDataURL(file);
     // 读取成功后的回调
     reader.onloadend = function() {
@@ -43,6 +43,7 @@ export function imgPreview(that, file, type) {
     };
   }
 }
+//压缩 carvas画图，知道图的大小
 function compress(img, Orientation) {
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
@@ -137,51 +138,4 @@ function upImgFront(that, src, type) {
       }
     }
   });
-  //   axios({
-  //     method: "post",
-  //     url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
-  //     data: formData,
-  //     transformRequest: [
-  //       function(data) {
-  //         let ret = "";
-  //         for (let it in data) {
-  //           ret +=
-  //             encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
-  //         }
-  //         return ret;
-  //       }
-  //     ],
-  //     headers: {
-  //       "Content-Type": "application/x-www-form-urlencoded"
-  //     }
-  //   })
-  //     .then(res => {
-  //       //   that.isLoadingShow = false;
-  //       console.log("weishabuzou");
-  //       if (type == 1) {
-  //         console.log("zoule");
-  //         console.log(that.data.imgOne);
-  //         // that.data.imgOne = res.data.url;
-  //         console.log(that.data.imgOne);
-  //       } else if (type == 2) {
-  //         // that.data.imgtwo = res.data.url;
-  //       } else if (type == 3) {
-  //         // that.data.imgthree = res.data.url;
-  //       } else if (type == 4) {
-  //         // that.data.imgfour = res.data.url;
-  //       } else {
-  //         setTimeout(() => {
-  //           that.isDialogShow = true;
-  //         }, 100);
-  //         that.dialogTit = "图片上传失败";
-  //       }
-  //     })
-  //     .catch(error => {
-  //       // that.isLoadingShow = false;
-  //       // setTimeout(() => {
-  //       //     that.isDialogShow = true;
-  //       // },100);
-  //       // that.dialogTit = '服务器错误';
-  //       // console.log('错误了'+ error);
-  //     });
 }

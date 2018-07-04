@@ -1,92 +1,91 @@
 <template>
-	<div class="container">
-		<div class="zhe"
-		     v-show="show1"
-		     @click="close"></div>
-		<div class="collectgoods">
-			<p class="collects">
-				收货人:
-				<span><input type="text"
-					       v-model="consignee"
-					       class="inp"></span>
-			</p>
-			<p class="collects">
-				联系电话:
-				<span><input type="text"
-					       v-model="telephone"
-					       class="inp"></span>
-			</p>
+  <div class="container">
+    <div class="zhe"
+         v-show="show1"
+         @click="close"></div>
+    <div class="collectgoods">
+      <p class="collects">
+        收货人:
+        <span><input type="text"
+                 v-model="consignee"
+                 class="inp"></span>
+      </p>
+      <p class="collects">
+        联系电话:
+        <span><input type="text"
+                 v-model="telephone"
+                 class="inp"></span>
+        <span class="img_input">
+          <span class="plaese_choose"> 请选择</span>
+          <i class="icon_right_img">
+            <img src="../../assets/icon/more.png"
+                 alt=""></i>
+        </span>
+      </p>
 
-			<!-- <p class="collect_bet">
-				<span>所在地区 {{province}}{{city}}{{area}}</span>
-				<span @click="toShow()">请选择
-					<i class="icon_right_img"><img src="../../assets/icon/more.png"
-						     alt=""></i>
-				</span>
-			</p> -->
-			<div class="page-content">
-				<ul class="new-address-form">
-					<li class="new-address-form-item">
-						<span class="form-title">所在地区：</span>
-						<!-- <input type="text"
+      <div class="page-content">
+        <ul class="new-address-form">
+          <li class="new-address-form-item">
+            <span class="form-title">所在地区：</span>
+            <!-- <input type="text"
                    placeholder="点击选择所在地区"
                    class="form-input"
                    @click="addressPickerShow = true"
                    v-model="provCityCounty"> -->
-						<span class="form-input"
-						      @click="addressPickerShow = true"
-						      v-model="provCityCounty">{{province}}{{city}}{{area}}</span>
-					</li>
-				</ul>
-				<mt-popup v-model="addressPickerShow"
-				          position="bottom"
-				          class="address-popup">
-					<mt-picker :slots="addressSlots"
-					           @change="addressPickerChange"
-					           :visible-item-count="5"></mt-picker>
-				</mt-popup>
-			</div>
+            <span class="form-input"
+                  @click="addressPickerShow = true"
+                  v-model="provCityCounty">{{province}}{{city}}{{area}}</span>
+          </li>
+        </ul>
+        <mt-popup v-model="addressPickerShow"
+                  position="bottom"
+                  class="address-popup">
+          <mt-picker :slots="addressSlots"
+                     @change="addressPickerChange"
+                     :visible-item-count="5"></mt-picker>
+        </mt-popup>
+      </div>
 
-			<p class="detail_address">
-				<span class="detail_add">
-					<input type="text"
-					       class="inpts_text"
-					       placeholder="请输入详细地址"
-					       v-model="address">
-				</span>
-			</p>
-			<p class="tacit_address">
-				<span>
-					<el-checkbox v-model="checked"
-					             class="give_icon"></el-checkbox>
-				</span>
-				<span>设为默认地址</span>
-			</p>
-		</div>
-		<div class="preservation"
-		     @click="sive()">
-			<span class="sive">
-				保存
-			</span>
-		</div>
-		<!-- <vue-pickers :show="show1"
+      <p class="detail_address">
+        <span class="detail_add">
+          <input type="text"
+                 class="inpts_text"
+                 placeholder="请输入详细地址"
+                 v-model="address">
+        </span>
+      </p>
+      <p class="tacit_address">
+        <span>
+          <el-checkbox v-model="checked"
+                       class="give_icon"></el-checkbox>
+        </span>
+        <span>设为默认地址</span>
+      </p>
+    </div>
+    <div class="preservation"
+         @click="sive()">
+      <span class="sive">
+        保存
+      </span>
+    </div>
+    <!-- <vue-pickers :show="show1"
                  :selectData="pickData3"
                  v-on:cancel="close"
                  v-on:confirm="confirmFn"></vue-pickers> -->
-		<!-- <vue-pickers :show="show"
+    <!-- <vue-pickers :show="show"
 		             :link="link"
 		             :columns="columns"
 		             :selectData="pickData"
 		             @cancel="close"
 		             @confirm="confirmFn"></vue-pickers> -->
-		<mt-popup v-model="addressPickerShow"
-		          position="bottom"
-		          class="address-popup">
-			<mt-picker :slots="addressSlots"
-			           @change="addressPickerChange"
-			           :visible-item-count="5"></mt-picker>
-		</mt-popup>
-	</div>
+    <mt-popup v-model="addressPickerShow"
+              position="bottom"
+              class="address-popup">
+      <mt-picker :slots="addressSlots"
+                 @change="addressPickerChange"
+                 :visible-item-count="5"></mt-picker>
+    </mt-popup>
+  </div>
 </template>
 <script>
 //mint-ui三级
@@ -97,7 +96,7 @@
 import { Popup, picker } from "mint-ui";
 import { Toast } from "mint-ui";
 // import { Picker } from "mint-ui";
-import { Picker } from "mint-ui";
+import { Picker, Indicator } from "mint-ui";
 import addressData from "../../../static/addressData.js";
 
 export default {
@@ -160,6 +159,10 @@ export default {
     }
   },
   created() {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
     let that = this;
     if (this.$route.query.type == "edit") {
       that.$axios
@@ -252,7 +255,7 @@ export default {
               //     address: that.address
               //   }
               // });
-              that.$router.go(-1)
+              that.$router.go(-1);
               // that.$router.push({ name: "address" });
             }, 500);
           }
@@ -289,7 +292,7 @@ export default {
               //   //   address: that.address
               //   // }
               // });
-              that.$router.go(-1)
+              that.$router.go(-1);
               // that.$router.push({ name: "address" });
             }, 500);
           }
@@ -342,7 +345,15 @@ export default {
 }
 
 .icon_right_img img {
-  height: px2rem(16px);
+  height: px2rem(22px);
+  width: px2rem(20px);
+  margin-right: px2rem(40.2px);
+}
+.icon_right_img {
+  position: absolute;
+  right: 0px;
+  top: 85px;
+  display: inline-block;
 }
 
 .container {
@@ -356,8 +367,15 @@ export default {
   outline: none;
   border: none;
   cursor: pointer;
+  font-size: 15px;
+  color: #666;
 }
-
+.plaese_choose {
+  position: absolute;
+  right: 60px;
+  top: 80px;
+  display: inline-block;
+}
 .collectgoods {
   width: 94.7%;
   height: auto;
@@ -402,6 +420,8 @@ export default {
   outline: none;
   border: none;
   cursor: pointer;
+  font-size: 15px;
+  color: #666;
 }
 
 .tacit_address {
@@ -437,13 +457,14 @@ export default {
 .new-address-form .new-address-form-item {
   display: flex;
   align-items: center;
-  /* padding: 36px 20px; */
   border-bottom: 1px solid #e6e6e6;
+  margin-right: 20px;
+  position: relative;
 }
 
 .new-address-form .new-address-form-item .form-title {
-  font-size: 14px;
-  color: #333;
+  font-size: 15px;
+  color: #666;
   margin-left: 10px;
 }
 .new-address-form .new-address-form-item .form-input {

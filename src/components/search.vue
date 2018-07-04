@@ -1,18 +1,30 @@
 <template>
-    <div class="homeSearch">
-        <form action="javascript:return true;">
-            <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
-        </form>
-        <img src="../assets/icon/search_1.png" alt="111">
-    </div>
+  <div class="homeSearch">
+    <form action="javascript:return true;">
+      <input @keyup.13=show()
+             type="search"
+             placeholder="请输入搜索内容"
+             v-model="keyword"
+             ref="input1">
+    </form>
+    <img src="../assets/icon/search_1.png"
+         alt="111">
+  </div>
 
 </template>
 <script>
+import { Toast, Indicator } from "mint-ui";
 export default {
   data() {
     return {
       keyword: ""
     };
+  },
+  created() {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 500);
   },
   methods: {
     show() {
@@ -26,13 +38,11 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
-
-
-@import '../styles/helper.scss';
+@import "../styles/helper.scss";
 .homeSearch {
   width: 92%;
   height: px2rem(34px);
-  border: 1px solid #EEEEEE;
+  border: 1px solid #eeeeee;
   margin-top: px2rem(6px);
 
   text-align: center;
@@ -50,7 +60,7 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.homeSearch form{
+.homeSearch form {
   width: 80%;
 }
 .homeSearch input {
@@ -61,16 +71,15 @@ export default {
   border-radius: px2rem(2px);
   outline: none;
   padding-left: px2rem(15px);
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 .homeSearch img {
   width: px2rem(13px);
   height: px2rem(14px);
   margin-right: px2rem(14px);
- 
 }
-.homeSearch input{
-    font-size: px2rem(13px);
+.homeSearch input {
+  font-size: px2rem(13px);
 
   padding-left: 15px;
   box-sizing: border-box;
