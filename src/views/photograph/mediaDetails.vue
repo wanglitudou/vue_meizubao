@@ -144,9 +144,8 @@ export default {
 }
 .video-js .vjs-big-play-button{      
   position: absolute !important;
-   
-  top:35% !important;
-  left:35% !important;
+  top:40% !important;
+  left:40% !important;
 }
 
 .top-wrapper {

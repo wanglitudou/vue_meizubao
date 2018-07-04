@@ -265,6 +265,7 @@ export default {
           page: page
         })
         .then(res => {
+          console.log(res)
           if (res.data.status_code == 1001) {
             Indicator.close();
             this.topStatus = false;
@@ -279,7 +280,7 @@ export default {
               that.topStatus = false;
               that.loading = true;
             }
-
+           
             this.imgsArr = this.imgsArr.concat(res.data.data);
           }
         })

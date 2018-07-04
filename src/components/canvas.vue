@@ -60,7 +60,6 @@ export default {
     },
     btn_submit() {
       const image = this.draw.getPNGImage();
-      console.log(image);
         let self= this;
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/agreement", {

@@ -73,9 +73,9 @@
         </div>
         <div class="hotimg" ref="ht">
           <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="essence(item.id)">
-              </div>
+            <div class="img_box">
+              <img :src="item.images" alt="" class='cao' @click="essence(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
           </div>
         </div>
@@ -93,9 +93,9 @@
         </div>
         <div class="hotimg">
           <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="matching(item.id)">
-              </div>
+            <div class="img_box">
+              <img :src="item.images" alt="" class='cao' @click="matching(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -115,9 +115,9 @@
         </div>
         <div class="hotimg">
           <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="train(item.id)">
-              </div>
+            <div class="img_box">
+              <img :src="item.images" alt="" class='cao' @click="train(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -136,9 +136,9 @@
         </div>
         <div class="hotimg">
           <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
-              <div class="img_box">
-            <img :src="item.images" alt="" class='cao' @click="cooperation(item.id)">
-              </div>
+            <div class="img_box">
+              <img :src="item.images" alt="" class='cao' @click="cooperation(item.id)">
+            </div>
             <span class="item_name">{{item.name}}</span>
 
           </div>
@@ -743,13 +743,13 @@ export default {
 //   width: px2rem(160px);
 //   height: px2rem(120px);
 // }
-.img_box{
+.img_box {
   widows: px2rem(160px);
   height: px2rem(120px);
   overflow: hidden;
 }
-.img_box img{
-  width:100%;
+.img_box img {
+  width: 100%;
 }
 .hotimg_lef .item_name {
   display: block;
