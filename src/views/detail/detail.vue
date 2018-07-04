@@ -25,36 +25,20 @@
 
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show()
-                 type="search"
-                 placeholder="请输入搜索内容"
-                 v-model="keyword"
-                 ref="input1">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png"
-             alt="111">
+        <img src="../../assets/icon/search_1.png" alt="111">
       </div>
-      <p class="logo"
-         @click="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
     </header>
     <section>
 
-      <div v-masonry
-           transition-duration="0.3s"
-           ref="masonry"
-           item-selector=".item"
-           column-width=".item"
-           v-if="isNodata">
-        <div v-masonry-tile
-             class="item"
-             v-for="(item, index) in imgsArr"
-             @click="details(item.id)">
+      <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+        <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
 
           <div class="boxs listing">
             <div>
-              <img :src="item.images"
-                   alt="">
+              <img :src="item.images" alt="">
             </div>
             <div class="other">
               <p class="name">
@@ -87,28 +71,19 @@
           </div>
 
         </div>
-        <div class=" item loadMore"
-             ref="load">
-          <mt-spinner type="fading-circle"
-                      color="#FD4689 "
-                      v-if="topStatus"></mt-spinner>
+        <div class=" item loadMore" ref="load">
+          <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
           <span v-else>
-            <span @click="loadMore"
-                  v-if="loading">加载更多</span>
+            <span @click="loadMore" v-if="loading">加载更多</span>
             <span v-else>数据全部加载完成</span>
           </span>
         </div>
       </div>
     </section>
     <!-- 侧边栏 -->
-    <slider :tabContent="tabs"
-            :num="num"
-            :tab="tab"
-            :isRellyShow="isRellyShow"
-            :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
 
-    <div class="nodata"
-         v-if="showNodata">
+    <div class="nodata" v-if="showNodata">
 
       暂无数据
     </div>
@@ -116,7 +91,7 @@
   </div>
 </template>
 <script>
-import { Spinner, Toast } from "mint-ui";
+import { Spinner, Toast, Indicator } from "mint-ui";
 import qs from "qs";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
@@ -156,6 +131,7 @@ export default {
   },
 
   created() {
+    Indicator.open();
     let that = this;
     //热租仪器分类
     that.$axios
@@ -263,6 +239,7 @@ export default {
           page: page
         })
         .then(res => {
+          console.log(res);
           if (res.data.status_code == 1001) {
             Indicator.close();
             this.topStatus = false;

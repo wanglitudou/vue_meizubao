@@ -81,7 +81,8 @@
 		      v-if="showSignTag"
 		      :src="data.agreement"
 		      :gid="data.id"
-		      :saveAgreementId="saveAgreementId"></sign>
+		      :saveAgreementId="saveAgreementId"
+          :type="type"></sign>
 
 	</div>
 </template>
@@ -105,7 +106,8 @@ export default {
         signature: ""
       },
       userId: null,
-      dqurl: ""
+      dqurl: "",
+      type:5
     };
   },
 

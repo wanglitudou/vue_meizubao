@@ -336,7 +336,7 @@ export default {
   margin: 0.2rem auto 0;
   display: flex;
   /* justify-content: space-between; */
-  padding: 0 10px;
+  // padding: 0 10px;
   flex-wrap: wrap;
   /* overflow-y: scroll;
     height: calc(100% - 0.88rem); */
@@ -351,43 +351,57 @@ export default {
 }
 
 .pic_name {
-  width: 50%;
+  width: px2rem(173px);
   background: #ffffff;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   margin-top: 10px;
+  
   float: left;
-  padding: 5px;
+  // padding: 5px;
+  margin-left:px2rem(10px);
 }
 
 .picleft_img {
-  // width: 100%;
+  width: px2rem(173px);
+  height: px2rem(113px);
+  overflow: hidden;
 }
 
 .picleft_img img {
-  width: px2rem(173px);
-  height: px2rem(113px);
+ width: 100%;
 }
 
 .name_ins {
   display: flex;
   width: 100%;
-  height: 0.6rem;
-  line-height: 0.6rem;
+  height: px2rem(33.7px);
+  line-height: px2rem(33.7px);
   justify-content: space-between;
-  padding: 0 2px;
-  font-size: 15px;
+  // padding: 0 2px;
+  align-items: center;
+  font-size: px2rem(15px);
   color: #000000;
   letter-spacing: 0;
+  font-weight: 400;
 }
-
+.ins_name{
+  margin-left:px2rem(10px);
+}
 .ins_img {
+  display:block;
   vertical-align: middle;
+<<<<<<< HEAD
   width: px2rem(12px);
+=======
+  width: px2rem(28px);
+  height: px2rem(28px);
+>>>>>>> 3307d7dc09a2c74d902c70047ca25a242ec76b01
 }
 .ins_img img {
-  width: 14px;
-  height: 14px;
+
+  width: px2rem(14px);
+  height: px2rem(14px);
 }
 
 .add_more {

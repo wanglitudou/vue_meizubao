@@ -311,9 +311,10 @@ export default {
   height: 0.7rem !important;
 }
 </style>
-<style>
+<style lang="scss">
+@import "../styles/helper.scss";
 .instrument {
-  margin-top: 10px;
+  margin-top: px2rem(10px);
 }
 .begin_rent {
   width: 100%;
@@ -380,10 +381,14 @@ export default {
 .xuyues {
   width: 100%;
   box-shadow: 0 2px 9px #ccc;
-  line-height: 30px;
-  font-size: 16px;
-  margin-top: 10px;
-  color: #fd4689;
+  line-height: px2rem(30px);
+  font-size: px2rem(14px);
+  margin-top: px2rem(10px);
+  color: #666;
+  padding-left:px2rem(10px);
+  .diffrent{
+    color:#FD4689;
+  }
 }
 #datePicker
   .c-header
@@ -492,10 +497,16 @@ export default {
                          show-caps>
           </v-date-picker>
         </div>
+<<<<<<< HEAD
         <div class="xuyues"
              v-show="during>0">
           <span>续约天数：{{during}}</span>
           <p>续约金额：{{renprice}}</p>
+=======
+        <div class="xuyues" v-show="during>0">
+          <span>续约天数：<span class="diffrent">{{during}}</span></span>
+          <p>续约金额：<span class='diffrent'>{{renprice}}</span></p>
+>>>>>>> 3307d7dc09a2c74d902c70047ca25a242ec76b01
         </div>
         <!-- @click="decrease" -->
         <!-- @click="increase" -->

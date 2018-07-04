@@ -71,16 +71,10 @@
         <div class=" hotrents">
           <div></div>
         </div>
-        <div class="hotimg"
-             ref="ht">
-          <div class="hotimg_lef"
-               v-for="item in beautyindustry"
-               :key="item.index">
+        <div class="hotimg" ref="ht">
+          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
             <div class="img_box">
-              <img :src="item.images"
-                   alt=""
-                   class='cao'
-                   @click="essence(item.id)">
+              <img :src="item.images" alt="" class='cao' @click="essence(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
           </div>
@@ -99,14 +93,9 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in accessoryproducts"
-               :key="item.index">
+          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
             <div class="img_box">
-              <img :src="item.images"
-                   alt=""
-                   class='cao'
-                   @click="matching(item.id)">
+              <img :src="item.images" alt="" class='cao' @click="matching(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
 
@@ -127,14 +116,9 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in visualscreen"
-               :key="item.index">
+          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
             <div class="img_box">
-              <img :src="item.images"
-                   alt=""
-                   class='cao'
-                   @click="train(item.id)">
+              <img :src="item.images" alt="" class='cao' @click="train(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
 
@@ -154,14 +138,9 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef"
-               v-for="item in cooperativeProject"
-               :key="item.index">
+          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
             <div class="img_box">
-              <img :src="item.images"
-                   alt=""
-                   class='cao'
-                   @click="cooperation(item.id)">
+              <img :src="item.images" alt="" class='cao' @click="cooperation(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
 

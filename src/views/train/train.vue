@@ -44,7 +44,7 @@
       </div>
       <!-- 选择支付方式 -->
 
-      <orderFooter :text="'开始预约'"
+      <orderFooter :text="'立即下单'"
                    :count="data.price"
                    :nextFun="nextFun"
                    v-if="data.is_play == 2"></orderFooter>
@@ -398,6 +398,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
+
 .train-container {
   width: 100%;
   background-color: #fff;
@@ -615,5 +616,11 @@ export default {
  .vjs-big-play-button{
   top:35% !important;
   left:35% !important;
+}
+a:hover{
+  text-decoration:none !important;
+}
+a{
+   text-decoration:none !important;
 }
 </style>
