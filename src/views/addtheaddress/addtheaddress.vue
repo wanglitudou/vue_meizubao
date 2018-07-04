@@ -86,9 +86,8 @@
 <script>
 //mint-ui三级
 import { Popup, picker } from "mint-ui";
-import { Toast } from "mint-ui";
 // import { Picker } from "mint-ui";
-import { Picker } from "mint-ui";
+import { Toast, Picker, Indicator } from "mint-ui";
 import addressData from "../../../static/addressData.js";
 export default {
   components: {
@@ -147,6 +146,10 @@ export default {
     }
   },
   created() {
+    Indicator.open();
+    setTimeout(() => {
+      Indicator.close();
+    }, 1000);
     let that = this;
     if (this.$route.query.type == "edit") {
       that.$axios

@@ -11,7 +11,7 @@
       </div>
 
       <div class="pic_ture">
-        <!--图片切换时展示的内容-->`
+        <!--图片切换时展示的内容-->
         <div v-show="num==0">
           <div class="cent_cents">
             <div class="pic_center">
@@ -321,6 +321,7 @@ export default {
     width: 50%;
     display: flex;
     justify-content: center;
+    color: #666;
     span {
       display: block;
       width: px2rem(42px);
@@ -334,11 +335,7 @@ export default {
   height: auto;
   margin: 0.2rem auto 0;
   display: flex;
-  /* justify-content: space-between; */
-  // padding: 0 10px;
   flex-wrap: wrap;
-  /* overflow-y: scroll;
-    height: calc(100% - 0.88rem); */
 }
 
 .picten_lef {
@@ -355,10 +352,10 @@ export default {
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   margin-top: 10px;
-  
+
   float: left;
   // padding: 5px;
-  margin-left:px2rem(10px);
+  margin-left: px2rem(10px);
 }
 
 .picleft_img {
@@ -368,7 +365,7 @@ export default {
 }
 
 .picleft_img img {
- width: 100%;
+  width: 100%;
 }
 
 .name_ins {
@@ -384,17 +381,17 @@ export default {
   letter-spacing: 0;
   font-weight: 400;
 }
-.ins_name{
-  margin-left:px2rem(10px);
+.ins_name {
+  margin-left: px2rem(10px);
 }
 .ins_img {
-  display:block;
+  display: block;
   vertical-align: middle;
+  width: px2rem(12px);
   width: px2rem(28px);
   height: px2rem(28px);
 }
 .ins_img img {
-
   width: px2rem(14px);
   height: px2rem(14px);
 }
