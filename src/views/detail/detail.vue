@@ -286,12 +286,10 @@ export default {
   height: 100%;
 }
 .meeting {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+  text-overflow: ellipsis; 
+overflow: hidden; 
+white-space: nowrap; 
   margin-top: px2rem(6px);
-
   font-size: px2rem(13px);
   color: #999;
 }
