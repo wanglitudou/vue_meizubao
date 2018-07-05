@@ -28,11 +28,11 @@
                  @change="updataimg($event,1)"> -->
           <input type="file"
                  class="inpt_imgone"
-                 capture="camera"
                  accept="image/*"
+                 multiple
+                 capture="camera"
                  id="choose"
-                 @change="updataimg($event,1)"
-                 @click="successfuluploading()">
+                 @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
         </span>
@@ -299,10 +299,8 @@ export default {
           console.log(11111);
         }
       });
-
       console.log("shangchaun");
-    },
-    successfuluploading() {}
+    }
   }
 };
 </script>
