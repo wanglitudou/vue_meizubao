@@ -28,6 +28,8 @@
                  @change="updataimg($event,1)"> -->
           <input type="file"
                  class="inpt_imgone"
+                 capture="camera"
+                 accept="image/*"
                  id="choose"
                  @change="updataimg($event,1)"
                  @click="successfuluploading()">
@@ -148,12 +150,12 @@ export default {
     //     .find("input[type='file']")
     //     .removeAttr("capture");
     // }
-    // var ua = navigator.userAgent.toLowerCase();
-    // //判断是否是苹果手机，是则是true
-    // var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
-    // if (isIos) {
-    //   $("input:file").removeAttr("capture");
-    // }
+    var ua = navigator.userAgent.toLowerCase();
+    //判断是否是苹果手机，是则是true
+    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    if (isIos) {
+      $("input:file").removeAttr("capture");
+    }
     Indicator.open();
     this.getInfo();
     setTimeout(() => {
