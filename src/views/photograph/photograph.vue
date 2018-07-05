@@ -391,12 +391,9 @@ export default {
 .ins_img {
   display:block;
   vertical-align: middle;
-<<<<<<< HEAD
   width: px2rem(12px);
-=======
   width: px2rem(28px);
   height: px2rem(28px);
->>>>>>> 3307d7dc09a2c74d902c70047ca25a242ec76b01
 }
 .ins_img img {
 
