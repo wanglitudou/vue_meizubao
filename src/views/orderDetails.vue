@@ -385,9 +385,9 @@ export default {
   font-size: px2rem(14px);
   margin-top: px2rem(10px);
   color: #666;
-  padding-left:px2rem(10px);
-  .diffrent{
-    color:#FD4689;
+  padding-left: px2rem(10px);
+  .diffrent {
+    color: #fd4689;
   }
 }
 #datePicker
@@ -501,10 +501,19 @@ export default {
              v-show="during>0">
           <span>续约天数：{{during}}</span>
           <p>续约金额：{{renprice}}</p>
+          <div class="xuyues"
+               v-show="during>0">
+            <span>续约天数：
+              <span class="diffrent">{{during}}</span>
+            </span>
+            <p>续约金额：
+              <span class='diffrent'>{{renprice}}</span>
+            </p>
+          </div>
+          <!-- @click="decrease" -->
+          <!-- @click="increase" -->
+          <!-- v-bind:class="{ disable: month==data.num }" -->
         </div>
-        <!-- @click="decrease" -->
-        <!-- @click="increase" -->
-        <!-- v-bind:class="{ disable: month==data.num }" -->
       </div>
     </div>
     <com-orderFooter :detail='detail'
