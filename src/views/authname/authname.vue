@@ -15,6 +15,7 @@
       </div>
       <div class="up_data">
         <span class="updata_lef">
+
           <!-- <span class="inpt_imgone"
                 id="choose"
                 @click="actionSheet"
