@@ -484,9 +484,10 @@ export default {
   
   // padding: 0rem 10px;
   margin-top: px2rem(6px);
- text-overflow: ellipsis; 
-overflow: hidden; 
-white-space: nowrap; 
+ display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
 }
 .every_pro {
   display: flex;
