@@ -39,7 +39,7 @@ export default {
       data: []
     };
   },
-  props: ["type", "saveAddressId"],
+  props: ["type", "saveAddressId",'userInfo'],
   mounted() {
     if (localStorage.siteId) {
       // alert("有值");
@@ -64,7 +64,6 @@ export default {
           }
         })
         .then(res => {
-          console.log(res);
           if (res.data.status_code == 1001) {
             //							this.data = res.data.data[0];
 
@@ -73,7 +72,9 @@ export default {
                 this.data = res.data.data[i];
               }
             }
-            this.saveAddressId(this.data.id);
+            console.log(this.data)
+            // this.userInfo(this.data)
+            this.saveAddressId(this.data);
           }
         })
         .catch(err => {
@@ -102,11 +103,12 @@ export default {
           id: localStorage.siteId
         }
       }).then(res => {
-        console.log(res);
+    
         if (res.data.status_code == 1001) {
-          console.log(res);
+          
           this.data = res.data.data;
-          this.saveAddressId(res.data.data.id);
+          console.log(this.data)
+          this.saveAddressId(res.data.data);
         }
       });
     }

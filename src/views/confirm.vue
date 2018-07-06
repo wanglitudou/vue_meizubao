@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       addressId: null,
+      userInfo:{},
       datas:{}
     };
   },
@@ -40,7 +41,10 @@ methods: {
           goods_num: this.datas.goods_num,
           total_price: this.datas.total_price,
           goods_name: this.datas.goods_name,
-          address_id: this.addressId,
+          address_id: this.userInfo.id,
+          address_mobile:this.userInfo.mobile,
+          address_username:this.userInfo.user_name,
+          address_info:this.userInfo.province+this.userInfo.city+this.userInfo.area+this.userInfo.address,
           deposit: this.datas.deposit,
           open_id: window.localStorage.openid
         })
@@ -57,8 +61,9 @@ methods: {
         });
     },
     saveAddressId: function(id) {
+      console.log(id)
       console.log("comfirm页面存id:" + id);
-      this.addressId = id;
+      this.userInfo = id;
     }
   }
 };
