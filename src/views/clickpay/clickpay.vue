@@ -31,7 +31,7 @@
                   <span class="data_mon">￥{{item.price}}</span>/日</span>
               </p>
               <p class="cli_app">
-                <span class="cli_ment">点击预约</span>
+                <span class="cli_ment">点击购买</span>
               </p>
             </div>
           </div>

@@ -180,7 +180,7 @@ let routes = [
     name: "clickpay",
     path: "/clickpay",
     meta: {
-      title: "合作项目"
+      title: "我的视频"
     },
     component: resolve => require(["../views/clickpay/clickpay.vue"], resolve)
   },

@@ -125,7 +125,7 @@
           </div>
         </div>
         <div class="hot_cent"
-             @click="seemore()">
+             @click="clickpay()">
           <span>查看更多></span>
         </div>
       </div>
@@ -147,7 +147,7 @@
           </div>
         </div>
         <div class="hot_cent"
-             @click="clickpay()">
+             @click="project()">
           <span>查看更多></span>
         </div>
       </div>
