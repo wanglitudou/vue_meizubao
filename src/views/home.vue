@@ -1,10 +1,8 @@
 <template>
   <div class="homecontainer">
     <div class="slider-box">
-
       <div class="banner">
         <mt-swipe :auto="4000">
-
           <mt-swipe-item v-for="(item,index) in url"
                          :key="index">
             <a target='_blank'
@@ -15,7 +13,6 @@
             <!-- <a href=""></a> -->
           </mt-swipe-item>
         </mt-swipe>
-
       </div>
       <!-- 搜索 -->
       <div class="search_contents">
@@ -71,10 +68,16 @@
         <div class=" hotrents">
           <div></div>
         </div>
-        <div class="hotimg" ref="ht">
-          <div class="hotimg_lef" v-for="item in beautyindustry" :key="item.index">
+        <div class="hotimg"
+             ref="ht">
+          <div class="hotimg_lef"
+               v-for="item in beautyindustry"
+               :key="item.index">
             <div class="img_box">
-              <img :src="item.images" alt="" class='cao' @click="essence(item.id)">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="essence(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
           </div>
@@ -93,9 +96,14 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in accessoryproducts" :key="item.index">
+          <div class="hotimg_lef"
+               v-for="item in accessoryproducts"
+               :key="item.index">
             <div class="img_box">
-              <img :src="item.images" alt="" class='cao' @click="matching(item.id)">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="matching(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
 
@@ -116,9 +124,14 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in visualscreen" :key="item.index">
+          <div class="hotimg_lef"
+               v-for="item in visualscreen"
+               :key="item.index">
             <div class="img_box">
-              <img :src="item.images" alt="" class='cao' @click="train(item.id)">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="train(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
 
@@ -138,9 +151,14 @@
           <div></div>
         </div>
         <div class="hotimg">
-          <div class="hotimg_lef" v-for="item in cooperativeProject" :key="item.index">
+          <div class="hotimg_lef"
+               v-for="item in cooperativeProject"
+               :key="item.index">
             <div class="img_box">
-              <img :src="item.images" alt="" class='cao' @click="cooperation(item.id)">
+              <img :src="item.images"
+                   alt=""
+                   class='cao'
+                   @click="cooperation(item.id)">
             </div>
             <span class="item_name">{{item.name}}</span>
 
@@ -154,6 +172,7 @@
     </div>
   </div>
 </template>
+
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
 <script>
 import { Indicator } from "mint-ui";
@@ -167,7 +186,6 @@ export default {
       beautyindustry: [], //美业菁英
       accessoryproducts: [], //配套产品
       cooperativeProject: [], //合作项目 //培训视屏
-
       dataList: {
         appId: "",
         nonceStr: "",
