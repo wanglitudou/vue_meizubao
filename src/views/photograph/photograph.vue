@@ -16,7 +16,7 @@
           <div class="cent_cents">
             <div class="pic_center">
               <div class="pic_name"
-                   v-for="(item,index) in imageData ">
+                   v-for="(item,index) in imageData">
                 <div class="picleft_img"
                      @click="jumpToDetails('image',item.images,item.name)">
                   <img :src="item.images"

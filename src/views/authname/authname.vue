@@ -15,6 +15,7 @@
       </div>
       <div class="up_data">
         <span class="updata_lef">
+
           <!-- <span class="inpt_imgone"
                 id="choose"
                 @click="actionSheet"
@@ -27,14 +28,19 @@
                  @change="updataimg($event,1)"> -->
           <input type="file"
                  class="inpt_imgone"
+                 accept="image/*"
+                 multiple
+                 capture="camera"
                  id="choose"
-                 @change="updataimg($event,1)"
-                 @click="successfuluploading()">
+                 @change="updataimg($event,1)">
           <img :src="data.imgOne"
                alt="">
         </span>
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
+                 accept="image/*"
+                 multiple
+                 capture="camera"
                  id="img-upload"
                  @change="updataimg($event,2)">
 
@@ -60,6 +66,9 @@
       <div class="up_data up_dataimg">
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
+                 accept="image/*"
+                 multiple
+                 capture="camera"
                  id="img-upload"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
@@ -67,6 +76,9 @@
         </span>
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
+                 accept="image/*"
+                 multiple
+                 capture="camera"
                  id="img-upload"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
@@ -147,12 +159,12 @@ export default {
     //     .find("input[type='file']")
     //     .removeAttr("capture");
     // }
-    // var ua = navigator.userAgent.toLowerCase();
-    // //判断是否是苹果手机，是则是true
-    // var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
-    // if (isIos) {
-    //   $("input:file").removeAttr("capture");
-    // }
+    var ua = navigator.userAgent.toLowerCase();
+    //判断是否是苹果手机，是则是true
+    var isIos = ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1;
+    if (isIos) {
+      $("input:file").removeAttr("capture");
+    }
     Indicator.open();
     this.getInfo();
     setTimeout(() => {
@@ -279,27 +291,36 @@ export default {
           if (res.code == 200) {
             that.fileList = res.data;
             console.log("00000");
-          }
-          if (num == 1) {
-            that.data.imgOne = res.data.url;
+            if (num == 1) {
+              that.data.imgOne = res.data.url;
 
-            console.log("666");
-          } else if (num == 2) {
-            that.data.imgtwo = res.data.url;
-          } else if (num == 3) {
-            that.data.imgthree = res.data.url;
-          } else if (num == 4) {
-            that.data.imgfour = res.data.url;
+              console.log("666");
+            } else if (num == 2) {
+              that.data.imgtwo = res.data.url;
+            } else if (num == 3) {
+              that.data.imgthree = res.data.url;
+            } else if (num == 4) {
+              that.data.imgfour = res.data.url;
+            }
           }
+          // if (num == 1) {
+          //   that.data.imgOne = res.data.url;
+
+          //   console.log("666");
+          // } else if (num == 2) {
+          //   that.data.imgtwo = res.data.url;
+          // } else if (num == 3) {
+          //   that.data.imgthree = res.data.url;
+          // } else if (num == 4) {
+          //   that.data.imgfour = res.data.url;
+          // }
         },
         error: function(res) {
           console.log(11111);
         }
       });
-
       console.log("shangchaun");
-    },
-    successfuluploading() {}
+    }
   }
 };
 </script>
