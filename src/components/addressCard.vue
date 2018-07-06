@@ -9,13 +9,13 @@
       <div class="center">
         <div class="top">
           <span class="color666">收货人:
-            <span class="color333">{{detail.user_name}}</span>
+            <span class="color333">{{detail.address_username}}</span>
           </span>
-          <span class="color333 text-right">{{detail.mobile}}</span>
+          <span class="color333 text-right">{{detail.address_mobile}}</span>
         </div>
         <div class="bottom">
           <span class="color666">收货地址: </span>
-          <span class="color333">{{detail.province}}{{detail.city}}{{detail.area}}{{detail.address}}</span>
+          <span class="color333">{{detail.address_info}}</span>
         </div>
       </div>
       <div class="right"

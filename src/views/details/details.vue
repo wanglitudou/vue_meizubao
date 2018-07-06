@@ -29,7 +29,7 @@
           <span>{{data.centent}}</span>
         </p>
         <p class="name_cate">
-          <span>起租期:{{data.num}}个月</span>
+          <span>起租期:{{data.lease_time}}个月</span>
           <span>租赁押金:￥{{data.deposit}}</span>
           <span>{{data.place}}</span>
         </p>
