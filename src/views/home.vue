@@ -270,7 +270,7 @@ export default {
     wxshare() {
       let that = this;
       that.$axios
-        .get(window.ajaxSrc+"/api/meizubao/wxSign", {
+        .get(window.ajaxSrc + "/api/meizubao/wxSign", {
           params: {
             http: location.href
           }
@@ -301,15 +301,14 @@ export default {
                 title: "美租宝", // 分享标题
                 desc: "秀出你的美丽", // 分享描述
                 link: that.dqurl, // 分享链接
-                imgUrl:
-                  window.ajaxSrc+"/upload/1528440075_4193.png", // 分享图标
+                imgUrl: window.ajaxSrc + "/upload/1528440075_4193.png", // 分享图标
                 type: "link", // 分享类型,music、video或link，不填默认为link
                 dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                 success: function(data) {
                   //							layer.msg("分享成功");
                   //										alert("1111");
                   that.$axios
-                    .get(window.ajaxSrc+"/api/meizubao/addPoint", {
+                    .get(window.ajaxSrc + "/api/meizubao/addPoint", {
                       params: {
                         uid: that.userId
                       }
@@ -329,15 +328,14 @@ export default {
                 title: "美租宝", // 分享标题
                 desc: "秀出你的美丽", // 分享描述
                 link: that.dqurl, // 分享链接
-                imgUrl:
-                  window.ajaxSrc+"/upload/1528440075_4193.png", // 分享图标
+                imgUrl: window.ajaxSrc + "/upload/1528440075_4193.png", // 分享图标
                 type: "link", // 分享类型,music、video或link，不填默认为link
                 dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                 success: function(data) {
                   //							layer.msg("分享成功");
                   //										alert("1111");
                   that.$axios
-                    .get(window.ajaxSrc+"/api/meizubao/addPoint", {
+                    .get(window.ajaxSrc + "/api/meizubao/addPoint", {
                       params: {
                         uid: that.userId
                       }
@@ -369,7 +367,7 @@ export default {
     banner() {
       let that = this;
       that.$axios
-        .get(window.ajaxSrc+"/api/meizubao/banners", {})
+        .get(window.ajaxSrc + "/api/meizubao/banners", {})
         .then(res => {
           console.log(res, "23");
           if (res.data.status_code == 1001) {
@@ -384,7 +382,7 @@ export default {
     getInstrument() {
       let that = this;
       that.$axios
-        .get(window.ajaxSrc+"/api/meizubao/instrument", {})
+        .get(window.ajaxSrc + "/api/meizubao/instrument", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -399,7 +397,7 @@ export default {
     getTechnician() {
       let that = this;
       that.$axios
-        .get(window.ajaxSrc+"/api/meizubao/technician", {})
+        .get(window.ajaxSrc + "/api/meizubao/technician", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -414,7 +412,7 @@ export default {
     getProduct() {
       let that = this;
       that.$axios
-        .get(window.ajaxSrc+"/api/meizubao/product", {})
+        .get(window.ajaxSrc + "/api/meizubao/product", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -429,7 +427,7 @@ export default {
     getVideo() {
       let that = this;
       that.$axios
-        .get(window.ajaxSrc+"/api/meizubao/video", {})
+        .get(window.ajaxSrc + "/api/meizubao/video", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -444,7 +442,7 @@ export default {
     getProject() {
       let that = this;
       that.$axios
-        .get(window.ajaxSrc+"/api/meizubao/project", {})
+        .get(window.ajaxSrc + "/api/meizubao/project", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -458,9 +456,9 @@ export default {
 
     //获取xlogin
     getXlogin(code) {
-      var str = window.ajaxSrc+"/api/meizubao/wlogin";
+      var str = window.ajaxSrc + "/api/meizubao/wlogin";
       if (code) {
-        str = window.ajaxSrc+"/api/meizubao/wlogin?code=" + code;
+        str = window.ajaxSrc + "/api/meizubao/wlogin?code=" + code;
       }
       let that = this;
       that.$axios
