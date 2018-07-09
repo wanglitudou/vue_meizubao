@@ -290,7 +290,8 @@ export default {
 }
 .photoContainer {
   width: 100%;
-  height: auto;
+  height: 100%;
+  overflow: hidden;
   background: #fff;
 }
 

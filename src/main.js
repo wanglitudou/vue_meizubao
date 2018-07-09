@@ -35,7 +35,9 @@ import "v-calendar/lib/v-calendar.min.css";
 import axios from "./http";
 import $ from "jquery";
 
-window.ajaxSrc = "http://mzbao.weiyingjia.org";
+var domain = window.location.host;
+
+window.ajaxSrc = "http://" + domain;
 
 axios.defaults.transformRequest = [
   function(data) {

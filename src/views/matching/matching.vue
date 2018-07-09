@@ -3,8 +3,10 @@
     <div class="list_bans">
       <div class="matchBanner">
         <mt-swipe :auto="4000">
-          <mt-swipe-item v-for="(item,index) in imgLists" :key="index">
-            <img :src="item" alt="">
+          <mt-swipe-item v-for="(item,index) in imgLists"
+                         :key="index">
+            <img :src="item"
+                 alt="">
           </mt-swipe-item>
         </mt-swipe>
         <!-- <img :src="data.images && data.images[0]"
@@ -35,9 +37,15 @@
           <span class="zro">购买数量</span>
 
           <div class="spinner">
-            <div class="decrease" @click="decrease" v-bind:class="{ disable: number==1  }">-</div>
-            <input type="number" class="value" maxlength="3" v-model="number" />
-            <div class="increase" @click="increase">+</div>
+            <div class="decrease"
+                 @click="decrease"
+                 v-bind:class="{ disable: number==1  }">-</div>
+            <input type="number"
+                   class="value"
+                   maxlength="3"
+                   v-model="number" />
+            <div class="increase"
+                 @click="increase">+</div>
           </div>
 
         </div>
@@ -52,7 +60,9 @@
       </div>
     </div>
 
-    <orderFooter :text="'立即下单'" :count="number*data.discount" :nextFun="jumpToConfirm"></orderFooter>
+    <orderFooter :text="'立即下单'"
+                 :count="number*data.discount"
+                 :nextFun="jumpToConfirm"></orderFooter>
 
   </div>
 </template>
@@ -77,15 +87,14 @@ export default {
       dqurl: ""
     };
   },
-  computed: {
-  },
+  computed: {},
   mounted() {
     this.init();
     this.userId = localStorage.getItem("id");
     this.dqurl = window.location.href;
   },
   methods: {
-     ...mapActions(['setConfirmData']),
+    ...mapActions(["setConfirmData"]),
     decrease: function() {
       if (this.number > 1) {
         this.number--;
@@ -97,23 +106,22 @@ export default {
       this.number++;
     },
     jumpToConfirm: function() {
-   this.setConfirmData({
-          type: 3,
-          g_id: this.$route.query.pid,
-          m_type: 1,
-          strtime: "",
-          stoptime: "",
-          stage: "",
-          agreement: "",
-          image: this.data.images[0],
-          goods_num: this.number,
-          total_price: this.number * this.data.discount,
-          goods_name: this.data.name,
-          deposit: "",
+      this.setConfirmData({
+        type: 3,
+        g_id: this.$route.query.pid,
+        m_type: 1,
+        strtime: "",
+        stoptime: "",
+        stage: "",
+        agreement: "",
+        image: this.data.images[0],
+        goods_num: this.number,
+        total_price: this.number * this.data.discount,
+        goods_name: this.data.name,
+        deposit: "",
 
-          price: this.data.discount
-
-     })
+        price: this.data.discount
+      });
       this.$router.push({
         //          path: '/confirm/instrument',
         name: "confirm",
@@ -290,8 +298,9 @@ export default {
 .match-container {
   width: 100%;
   /* height: calc(100% - 0.88rem); */
-  height: auto;
+  height: 100%;
   background: #fff;
+  overflow: hidden;
 }
 
 .list_bans {

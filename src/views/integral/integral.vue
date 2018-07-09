@@ -152,7 +152,7 @@ export default {
 .integralContainer {
   width: 100%;
   // height: 100%;
-  height: auto;
+  height: 100%;
   /* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12); */
   /* border-radius: 3px; */
   background: #fff;

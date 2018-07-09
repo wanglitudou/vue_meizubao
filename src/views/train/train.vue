@@ -5,8 +5,11 @@
 
       <div class="cent_list">
 
-        <div class="list_lists" ref="cao">
-          <div class="trainBanner" ref="divDisplay" id='divDisplay'
+        <div class="list_lists"
+             ref="cao">
+          <div class="trainBanner"
+               ref="divDisplay"
+               id='divDisplay'
                v-if="data.is_play == 1">
             <!-- <img :src="data.images" alt=""> -->
             <!-- <video id="video" autoplay :poster="data.images" controls width="100%" height="100%">
@@ -68,14 +71,13 @@
   </div>
 </template>
 <style>
-.video-js .vjs-big-play-button{
-  position:absolute;
+.video-js .vjs-big-play-button {
+  position: absolute;
   left: 38% !important;
   top: 38% !important;
 }
 </style>
 <script>
-
 import { Radio } from "mint-ui";
 import "video.js/dist/video-js.css";
 import { videoPlayer } from "vue-video-player";
@@ -317,7 +319,7 @@ export default {
               // this.$router.push({
               //   name: "cart"
               // });
-              this.data.is_play = 1
+              this.data.is_play = 1;
               // console.log(11)
             } else {
               window.location.href = res.data.data.url;
@@ -343,10 +345,10 @@ export default {
 
   mounted() {
     this.inits();
-    this.initIntegral()
- 
-       this.playerOptions.width = this.$refs.cao.offsetWidth
-    
+    this.initIntegral();
+
+    this.playerOptions.width = this.$refs.cao.offsetWidth;
+
     this.userId = localStorage.getItem("id");
     this.dqurl = window.location.href;
   },
@@ -369,8 +371,8 @@ export default {
       showOpcity: false,
       integral: "",
       playerOptions: {
-        width:'300',
-        height: '220',
+        width: "300",
+        height: "220",
         playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
         sources: [
           {
@@ -401,6 +403,8 @@ export default {
 
 .train-container {
   width: 100%;
+  height: 100%;
+  overflow: hidden;
   background-color: #fff;
   height: calc(100% - 1rem);
 }
@@ -609,18 +613,14 @@ export default {
   border-radius: 10px;
 }
 
-
-
-
-
- .vjs-big-play-button{
-  top:35% !important;
-  left:35% !important;
+.vjs-big-play-button {
+  top: 35% !important;
+  left: 35% !important;
 }
-a:hover{
-  text-decoration:none !important;
+a:hover {
+  text-decoration: none !important;
 }
-a{
-   text-decoration:none !important;
+a {
+  text-decoration: none !important;
 }
 </style>

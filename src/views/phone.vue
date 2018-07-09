@@ -1,41 +1,63 @@
 <template>
-  <div class="phoneContain" v-title="titles">
-    <div class="updatePhone" v-if="status">
+  <div class="phoneContain"
+       v-title="titles">
+    <div class="updatePhone"
+         v-if="status">
       <div class="already">
-        <img src="../assets/images/phone.png" alt="">
+        <img src="../assets/images/phone.png"
+             alt="">
         <span>已绑定的手机号</span>
       </div>
       <div class="inputContent">
-        <input type="number" :placeholder="word" v-model="alreadyNum" ref="input">
+        <input type="number"
+               :placeholder="word"
+               v-model="alreadyNum"
+               ref="input">
       </div>
       <div class="buttons">
-        <mt-button size="large" @click="nextTep" :disabled="!isDisableds" :class="isDisableds == true?'isActives':'showActives'">绑定手机号</mt-button>
+        <mt-button size="large"
+                   @click="nextTep"
+                   :disabled="!isDisableds"
+                   :class="isDisableds == true?'isActives':'showActives'">绑定手机号</mt-button>
       </div>
     </div>
-    <div class="content" v-else>
+    <div class="content"
+         v-else>
       <div class="topline">
         <div class="leftPhone">
-          <img src="../assets/images/phone.png" alt=""> 电话号：
+          <img src="../assets/images/phone.png"
+               alt=""> 电话号：
         </div>
         <div class="rightInput">
-          <input type="text" class="phoneNum" placeholder="请输入绑定的电话号" v-model="phoneNum">
+          <input type="text"
+                 class="phoneNum"
+                 placeholder="请输入绑定的电话号"
+                 v-model="phoneNum">
 
           <!-- <mt-field  placeholder="请输入绑定的电话号" type="tel" v-model="phone"></mt-field> -->
         </div>
       </div>
       <div class="bottomLine">
         <div class="leftPhone">
-          <img src="../assets/images/lock.png" alt=""> 验证码：
+          <img src="../assets/images/lock.png"
+               alt=""> 验证码：
         </div>
         <div class="rightcoe">
-          <input type="number" class="phoneNum" placeholder="请输入验证码" v-model="code">
-          <button :disabled="disabled || time > 0" @click="send">
+          <input type="number"
+                 class="phoneNum"
+                 placeholder="请输入验证码"
+                 v-model="code">
+          <button :disabled="disabled || time > 0"
+                  @click="send">
             {{ text }}
           </button>
         </div>
       </div>
       <div class="button">
-        <mt-button size="large" @click="sendCode" :disabled="!isDisabled" :class="isDisabled == true?'isActive':'showActive'">绑定手机号</mt-button>
+        <mt-button size="large"
+                   @click="sendCode"
+                   :disabled="!isDisabled"
+                   :class="isDisabled == true?'isActive':'showActive'">绑定手机号</mt-button>
       </div>
 
     </div>
@@ -115,7 +137,7 @@ export default {
           if (res.data.status_code == "1001") {
             Toast("绑定成功");
             localStorage.tel = this.phoneNum;
-            this.setPhoneNum(this.phoneNum)
+            this.setPhoneNum(this.phoneNum);
             setTimeout(() => {
               this.$router.go(-1);
             }, 1000);
@@ -141,8 +163,8 @@ export default {
           console.log(res);
           if (res.data.status_code == "200") {
             Toast("发送成功");
-          }else if(res.data.status_code == '202'){
-            Toast("发送失败")
+          } else if (res.data.status_code == "202") {
+            Toast("发送失败");
           }
         });
     },
@@ -152,8 +174,8 @@ export default {
         this.isDisableds = false;
         return;
       }
-      this.status = false
-      this.phoneNum  = this.alreadyNum
+      this.status = false;
+      this.phoneNum = this.alreadyNum;
     }
   }
 };

@@ -103,7 +103,7 @@ export default {
       console.log(keyword);
       this.keyword = keyword;
       this.pages = 1;
-      this.screenscreening =[]
+      this.screenscreening = [];
       setTimeout(() => {
         this.getData(keyword, this.pages);
       }, 1000);
@@ -183,7 +183,7 @@ export default {
 }
 .containers {
   width: 100%;
-  /* height: calc(100% - 0.81rem); */
+  height: auto;
   background: #fff;
 }
 
@@ -353,7 +353,7 @@ export default {
   color: #00a5ff;
 }
 .nodata {
-   width: 100%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -369,7 +369,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #00A5FF;
+  color: #00a5ff;
   font-size: 16px;
 }
 .searchs {

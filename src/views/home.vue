@@ -232,7 +232,10 @@ export default {
     //获取当前浏览器的地址
     this.dqurl = window.location.href;
   },
-  created: function() {
+  created() {
+    // var domain = window.location.host;
+    console.log(window.ajaxSrc);
+
     // // var box = this.$refs.ht
     //  var imgs = document.getElementsByClassName('cao');
     //         for (let i = 0; i < imgs.length; i++) {

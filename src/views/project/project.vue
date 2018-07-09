@@ -1,5 +1,6 @@
 <template>
-  <div class="container" ref="container">
+  <div class="container"
+       ref="container">
     <!-- <div class="searchs_box">
       <input type="text"
              placeholder="请输入搜索内容">
@@ -11,12 +12,21 @@
     </div>
     <!-- 瀑布流 -->
 
-    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
-      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
+    <div v-masonry
+         transition-duration="0.3s"
+         ref="masonry"
+         item-selector=".item"
+         column-width=".item"
+         v-if="isNodata">
+      <div v-masonry-tile
+           class="item"
+           v-for="(item, index) in cooperativeproject"
+           @click="details(item.id)">
         <div class="listbox_lef">
           <div class="cent_left">
             <div class="list_img">
-              <img :src="item.images" alt="">
+              <img :src="item.images"
+                   alt="">
             </div>
             <div class="list_oper">
               <p class="oper_room">
@@ -29,23 +39,29 @@
                 <span class="pay_add">￥{{item.price}}</span>
               </p>
               <p class="cli_app">
-                <span class="cli_ment" @click="cooperation()">点击预约</span>
+                <span class="cli_ment"
+                      @click="cooperation()">点击预约</span>
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class="item loadMore" ref="load">
-        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+      <div class="item loadMore"
+           ref="load">
+        <mt-spinner type="fading-circle"
+                    color="#FD4689 "
+                    v-if="topStatus"></mt-spinner>
         <span v-else>
-          <span @click="loadMore" v-if="loading">加载更多</span>
+          <span @click="loadMore"
+                v-if="loading">加载更多</span>
           <span v-else>数据全部加载完成</span>
         </span>
       </div>
     </div>
 
     <!-- 暂无数据 -->
-    <div class="noData" v-if="showNodata">
+    <div class="noData"
+         v-if="showNodata">
       暂无数据
     </div>
   </div>
@@ -173,7 +189,8 @@ export default {
 @import "../../styles/helper.scss";
 .container {
   width: 100%;
-  height: auto;
+  height: 100%;
+  overflow: hidden;
   background: #fff;
 }
 .sousuo {

@@ -389,6 +389,7 @@ export default {
 .infore_container {
   width: 100%;
   height: 100%; // height: calc(100% - 0.88rem);
+  overflow: hidden;
   background: #fff;
 }
 .perfect {

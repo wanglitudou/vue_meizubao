@@ -103,7 +103,7 @@
 import orderFooter from "../../components/orderFooter.vue";
 import sign from "../../components/canvas.vue";
 import { Toast } from "mint-ui";
-import {mapActions} from 'vuex'
+import { mapActions } from "vuex";
 const setUpTime = 3; //常量 技师出发准备时间 (从今天开始算 几天后可选);
 export default {
   data() {
@@ -168,7 +168,6 @@ export default {
   },
 
   computed: {
-
     during() {
       return (
         (this.selectedDate.end.getTime() - this.selectedDate.start.getTime()) /
@@ -196,7 +195,7 @@ export default {
   },
 
   methods: {
-         ...mapActions(['setConfirmData']),
+    ...mapActions(["setConfirmData"]),
     saveAgreementId: function(agreementId) {
       this.showSignTag = false;
       this.agreementId = agreementId;
@@ -210,23 +209,22 @@ export default {
         Toast("请网签租赁协议后下单");
         return false;
       }
-        this.setConfirmData({
+      this.setConfirmData({
         type: 2,
-          g_id: this.$route.query.pid,
-          m_type: "1",
-          strtime: this.startTime,
-          stoptime: this.endTime,
-          stage: this.during,
-          agreement: this.agreementId,
-          image: this.data.images,
-          goods_num: "1",
-          total_price: this.totalPrice,
-          goods_name: this.data.name,
-          deposit: "",
+        g_id: this.$route.query.pid,
+        m_type: "1",
+        strtime: this.startTime,
+        stoptime: this.endTime,
+        stage: this.during,
+        agreement: this.agreementId,
+        image: this.data.images,
+        goods_num: "1",
+        total_price: this.totalPrice,
+        goods_name: this.data.name,
+        deposit: "",
 
-          price: this.data.dayprice
-
-     }) 
+        price: this.data.dayprice
+      });
       this.$router.push({
         //          path: '/confirm/instrument',
         name: "confirm",
@@ -364,15 +362,14 @@ export default {
     },
 
     createDisableDate: function() {
-      let arrTime = []
+      let arrTime = [];
       for (var arr of this.data.appointmentTime) {
         let temArrs = {
           start: new Date(arr[0]),
           end: new Date(arr[1])
         };
-       
       }
-       arrTime.push(temArrs);
+      arrTime.push(temArrs);
       let temArr = {
         start: null,
         end: new Date(
@@ -380,7 +377,7 @@ export default {
         )
       };
       this.disableDate.push(temArr);
-      this.disableDate = this.disableDate.concat(arrTime)
+      this.disableDate = this.disableDate.concat(arrTime);
     }
   }
 };
@@ -390,7 +387,10 @@ export default {
 @import "../../styles/helper.scss";
 .containerss {
   width: 100%;
-  height: calc(100% - 0rem);
+  height: 100%;
+  background: #fff;
+  overflow: hidden;
+  // height: calc(100% - 0rem);
   background: #fff;
 }
 
@@ -598,7 +598,7 @@ export default {
   text-align: center;
   border: 1px solid #fd4689;
   /* outline: none; */
-  box-shadow: 0 2px 4px 0 #fd4689 ;
+  box-shadow: 0 2px 4px 0 #fd4689;
 }
 
 #datePicker
@@ -625,7 +625,7 @@ export default {
   height: 0.7rem !important;
 }
 
-.popover-origin{
- padding-bottom: 50px !important;
+.popover-origin {
+  padding-bottom: 50px !important;
 }
 </style>

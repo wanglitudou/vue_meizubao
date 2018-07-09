@@ -21,11 +21,13 @@ export default {
   data() {
     return {};
   }
-};</script>
+};
+</script>
 <style scoped>
 .container {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background: #dec;
 }
 .name_foot {

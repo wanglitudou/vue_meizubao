@@ -232,11 +232,11 @@ export default {
         Toast("搜索框不能为空");
         return false;
       }
-       Indicator.open();
+      Indicator.open();
       this.pages = 1;
-     
+
       setTimeout(() => {
-         this.thebeautyindustry =[]
+        this.thebeautyindustry = [];
         // this.getData('')
         this.getData("", this.keyword, this.grade, this.dayprice, this.pages);
       }, 500);
@@ -361,6 +361,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background: #fff;
 }
 .list_container {
@@ -481,12 +482,12 @@ export default {
 .content {
   font-size: px2rem(13px);
   color: #999999;
-  
+
   // padding: 0rem 10px;
   margin-top: px2rem(6px);
- text-overflow: ellipsis; 
-overflow: hidden; 
-white-space: nowrap; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .every_pro {
   display: flex;
@@ -661,7 +662,7 @@ white-space: nowrap;
   justify-content: center;
   align-items: center;
   color: #00a5ff;
-  font-size:px2rem(14px);
+  font-size: px2rem(14px);
 }
 .loadMore {
   width: 96%;
