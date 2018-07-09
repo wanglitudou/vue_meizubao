@@ -76,7 +76,7 @@
 </style>
 <script>
 
-import { Radio } from "mint-ui";
+import { Radio ,Toast} from "mint-ui";
 import "video.js/dist/video-js.css";
 import { videoPlayer } from "vue-video-player";
 // import ""
@@ -317,11 +317,14 @@ export default {
               // this.$router.push({
               //   name: "cart"
               // });
+              Toast('支付成功')
               this.data.is_play = 1
               // console.log(11)
             } else {
               window.location.href = res.data.data.url;
             }
+          }else{
+            Toast('支付失败')
           }
         })
         .catch(() => {
