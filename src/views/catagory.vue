@@ -22,7 +22,6 @@ export default {
       url: [
         {
           img: require("../assets/images/img_1.jpg"),
-          // img: require("../assets/images/img_1.jpg"),
           href: "detail"
         },
         {
