@@ -240,11 +240,15 @@ export default {
       let that = this;
       let file = e.target.files[0];
       console.log(file);
-      Toast({
-        message: "上传成功",
-        position: "top",
-        duration: 2000
-      });
+      // Toast({
+      //   message: "上传成功",
+      //   position: "top",
+      //   duration: 2000
+      // });
+      Indicator.open();
+      setTimeout(() => {
+        Indicator.close();
+      }, 4000);
       imgPreview(this, file, num);
       return;
       // that.data.imgOne = imgPreview(this, file, "anma");
