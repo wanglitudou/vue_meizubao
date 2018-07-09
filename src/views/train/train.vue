@@ -247,7 +247,7 @@ export default {
     nextFun: function() {
       this.showOpcity = true;
       // console.log(this.integral)
-      if (this.data.integral > this.integral) {
+      if (this.data.integral > this.integral || this.data.is_exchange == 2) {
         this.options[1].disabled = true;
       } else {
         this.options[1].disabled = false;
@@ -397,7 +397,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
@@ -620,10 +619,13 @@ export default {
   top:35% !important;
   left:35% !important;
 }
-a:hover{
+.mint-cell:hover{
   text-decoration:none !important;
 }
-a{
+.mint-cell{
    text-decoration:none !important;
+}
+a:hover{
+  text-decoration: none;
 }
 </style>
