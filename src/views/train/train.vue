@@ -5,11 +5,8 @@
 
       <div class="cent_list">
 
-        <div class="list_lists"
-             ref="cao">
-          <div class="trainBanner"
-               ref="divDisplay"
-               id='divDisplay'
+        <div class="list_lists" ref="cao">
+          <div class="trainBanner" ref="divDisplay" id='divDisplay'
                v-if="data.is_play == 1">
             <!-- <img :src="data.images" alt=""> -->
             <!-- <video id="video" autoplay :poster="data.images" controls width="100%" height="100%">
@@ -71,14 +68,15 @@
   </div>
 </template>
 <style>
-.video-js .vjs-big-play-button {
-  position: absolute;
+.video-js .vjs-big-play-button{
+  position:absolute;
   left: 38% !important;
   top: 38% !important;
 }
 </style>
 <script>
-import { Radio, Toast } from "mint-ui";
+
+import { Radio ,Toast} from "mint-ui";
 import "video.js/dist/video-js.css";
 import { videoPlayer } from "vue-video-player";
 // import ""
@@ -129,7 +127,7 @@ export default {
             //微信分享
             let that = this;
             that.$axios
-              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+              .get(window.ajaxSrc+"/api/meizubao/wxSign", {
                 params: {
                   http: location.href
                 }
@@ -168,7 +166,7 @@ export default {
                         //													alert("1111")
                         that.$axios
                           .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            window.ajaxSrc+"/api/meizubao/addPoint",
                             {
                               params: {
                                 uid: that.userId
@@ -198,7 +196,7 @@ export default {
                         //													alert("1111")
                         that.$axios
                           .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            window.ajaxSrc+"/api/meizubao/addPoint",
                             {
                               params: {
                                 uid: that.userId
@@ -249,7 +247,7 @@ export default {
     nextFun: function() {
       this.showOpcity = true;
       // console.log(this.integral)
-      if (this.data.integral > this.integral) {
+      if (this.data.integral > this.integral || this.data.is_exchange == 2) {
         this.options[1].disabled = true;
       } else {
         this.options[1].disabled = false;
@@ -319,14 +317,14 @@ export default {
               // this.$router.push({
               //   name: "cart"
               // });
-              Toast("支付成功");
-              this.data.is_play = 1;
+              Toast('支付成功')
+              this.data.is_play = 1
               // console.log(11)
             } else {
               window.location.href = res.data.data.url;
             }
-          } else {
-            Toast("支付失败");
+          }else{
+            Toast('支付失败')
           }
         })
         .catch(() => {
@@ -348,10 +346,10 @@ export default {
 
   mounted() {
     this.inits();
-    this.initIntegral();
-
-    this.playerOptions.width = this.$refs.cao.offsetWidth;
-
+    this.initIntegral()
+ 
+       this.playerOptions.width = this.$refs.cao.offsetWidth
+    
     this.userId = localStorage.getItem("id");
     this.dqurl = window.location.href;
   },
@@ -374,8 +372,8 @@ export default {
       showOpcity: false,
       integral: "",
       playerOptions: {
-        width: "300",
-        height: "220",
+        width:'300',
+        height: '220',
         playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
         sources: [
           {
@@ -400,14 +398,11 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
 
 .train-container {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
   background-color: #fff;
   height: calc(100% - 1rem);
 }
@@ -616,14 +611,12 @@ export default {
   border-radius: 10px;
 }
 
-.vjs-big-play-button {
-  top: 35% !important;
-  left: 35% !important;
-}
-a:hover {
-  text-decoration: none !important;
-}
-a {
-  text-decoration: none !important;
+
+
+
+
+ .vjs-big-play-button{
+  top:35% !important;
+  left:35% !important;
 }
 </style>

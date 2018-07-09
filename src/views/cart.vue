@@ -133,7 +133,7 @@ export default {
       let that = this;
       //热租仪器分类
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/orderList", {
+        .post(window.ajaxSrc+"/api/meizubao/orderList", {
           uid: uid,
           type: type,
           status: status,
@@ -172,7 +172,7 @@ export default {
         status = 7;
       }
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc+"/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
           status: status
@@ -203,7 +203,7 @@ export default {
     cancel(id) {
       console.log(id);
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc+"/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
           status: 8
@@ -246,7 +246,7 @@ export default {
     //确认收货物
     complete(id) {
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc+"/api/meizubao/updateOrderStatus", {
           uid: this.uid,
           id: id,
           status: 5
