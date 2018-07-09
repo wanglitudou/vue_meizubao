@@ -46,7 +46,7 @@ export default {
   },
   created() {
     this.$axios
-      .get("http://mzbao.weiyingjia.org/api/meizubao/orderDetail", {
+      .get(window.ajaxSrc+"/api/meizubao/orderDetail", {
         params: { id: this.orderId }
       })
       .then(res => {
@@ -112,7 +112,7 @@ export default {
     getTimeArray() {
       // console.log(this.stoptime)
       this.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/technicianTime", {
+        .get(window.ajaxSrc+"/api/meizubao/technicianTime", {
           params: { id: 1 }
         })
         .then(res => {
@@ -153,7 +153,7 @@ export default {
     nextFun() {
       var openid = window.localStorage.getItem("openid");
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/continuePay", {
+        .post(window.ajaxSrc+"/api/meizubao/continuePay", {
           id: this.orderId,
           open_id: openid
         })
@@ -175,7 +175,7 @@ export default {
         status = 6;
       }
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc+"/api/meizubao/updateOrderStatus", {
           status: status,
           uid: uid,
           id: this.orderId
@@ -197,7 +197,7 @@ export default {
     back(uid) {
       // console.log(status,uid,id)
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc+"/api/meizubao/updateOrderStatus", {
           status: 5,
           uid: uid,
           id: this.orderId
@@ -217,7 +217,7 @@ export default {
     },
     getRenewal(orderId, month, stoptime, totalPrice, openid) {
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/rentContinue", {
+        .post(window.ajaxSrc+"/api/meizubao/rentContinue", {
           id: orderId,
           stage: month,
           total_price: totalPrice,

@@ -1,20 +1,20 @@
 <template>
-    <div class="container">
-        <div class="list_conta">
-            <div class="view_vi">
-                <img src="../../assets/images/tuwen_1jpg.jpg"
-                     alt="">
-            </div>
-            <div class="view_name">
-                <span>仪器名称仪器</span>
-                <span class="download">
+  <div class="container">
+    <div class="list_conta">
+      <div class="view_vi">
+        <img src="../../assets/images/tuwen_1jpg.jpg"
+             alt="">
+      </div>
+      <div class="view_name">
+        <span>仪器名称仪器</span>
+        <span class="download">
 
-                    <img src="../../assets/images/download.jpg"
-                         alt="">
-                </span>
-            </div>
-        </div>
+          <img src="../../assets/images/download.jpg"
+               alt="">
+        </span>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 export default {};
@@ -22,7 +22,8 @@ export default {};
 <style scoped>
 .container {
   width: 100%;
-  height: auto;
+  height: 100%;
+  overflow: hidden;
   background: #fff;
   /* height: calc(100% - 0.88rem); */
 }

@@ -232,7 +232,10 @@ export default {
     //获取当前浏览器的地址
     this.dqurl = window.location.href;
   },
-  created: function() {
+  created() {
+    // var domain = window.location.host;
+    console.log(window.ajaxSrc);
+
     // // var box = this.$refs.ht
     //  var imgs = document.getElementsByClassName('cao');
     //         for (let i = 0; i < imgs.length; i++) {
@@ -267,7 +270,7 @@ export default {
     wxshare() {
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+        .get(window.ajaxSrc+"/api/meizubao/wxSign", {
           params: {
             http: location.href
           }
@@ -299,14 +302,14 @@ export default {
                 desc: "秀出你的美丽", // 分享描述
                 link: that.dqurl, // 分享链接
                 imgUrl:
-                  "http://mzbadmin.weiyingjia.org/upload/1528440075_4193.png", // 分享图标
+                  window.ajaxSrc+"/upload/1528440075_4193.png", // 分享图标
                 type: "link", // 分享类型,music、video或link，不填默认为link
                 dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                 success: function(data) {
                   //							layer.msg("分享成功");
                   //										alert("1111");
                   that.$axios
-                    .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
+                    .get(window.ajaxSrc+"/api/meizubao/addPoint", {
                       params: {
                         uid: that.userId
                       }
@@ -327,14 +330,14 @@ export default {
                 desc: "秀出你的美丽", // 分享描述
                 link: that.dqurl, // 分享链接
                 imgUrl:
-                  "http://mzbadmin.weiyingjia.org/upload/1528440075_4193.png", // 分享图标
+                  window.ajaxSrc+"/upload/1528440075_4193.png", // 分享图标
                 type: "link", // 分享类型,music、video或link，不填默认为link
                 dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
                 success: function(data) {
                   //							layer.msg("分享成功");
                   //										alert("1111");
                   that.$axios
-                    .get("http://mzbao.weiyingjia.org/api/meizubao/addPoint", {
+                    .get(window.ajaxSrc+"/api/meizubao/addPoint", {
                       params: {
                         uid: that.userId
                       }
@@ -366,7 +369,7 @@ export default {
     banner() {
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/banners", {})
+        .get(window.ajaxSrc+"/api/meizubao/banners", {})
         .then(res => {
           console.log(res, "23");
           if (res.data.status_code == 1001) {
@@ -381,7 +384,7 @@ export default {
     getInstrument() {
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/instrument", {})
+        .get(window.ajaxSrc+"/api/meizubao/instrument", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -396,7 +399,7 @@ export default {
     getTechnician() {
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/technician", {})
+        .get(window.ajaxSrc+"/api/meizubao/technician", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -411,7 +414,7 @@ export default {
     getProduct() {
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/product", {})
+        .get(window.ajaxSrc+"/api/meizubao/product", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -426,7 +429,7 @@ export default {
     getVideo() {
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/video", {})
+        .get(window.ajaxSrc+"/api/meizubao/video", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -441,7 +444,7 @@ export default {
     getProject() {
       let that = this;
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/project", {})
+        .get(window.ajaxSrc+"/api/meizubao/project", {})
         .then(res => {
           //						console.log(res);
           if (res.data.status_code == 1001) {
@@ -455,9 +458,9 @@ export default {
 
     //获取xlogin
     getXlogin(code) {
-      var str = "http://mzbao.weiyingjia.org/api/meizubao/wlogin";
+      var str = window.ajaxSrc+"/api/meizubao/wlogin";
       if (code) {
-        str = "http://mzbao.weiyingjia.org/api/meizubao/wlogin?code=" + code;
+        str = window.ajaxSrc+"/api/meizubao/wlogin?code=" + code;
       }
       let that = this;
       that.$axios

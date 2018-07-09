@@ -1,36 +1,46 @@
 <template>
-    <div class="container">
+  <div class="container">
 
-        <!-- 搜索按钮 -->
-        <div class="searchTop">
-            <search @search="search"></search>
-        </div>
-        <div class="listContent" v-if="isHaveData">
-            <div class="list" v-for="(item,index) in list " @click="todetail(item)">
-                <div class="img">
-                    <img :src="item.images" alt="">
-                </div>
-                <div class="textDesc">
-                    <p class="name">{{item.name}}</p>
-                    <p class="desc">{{item.content}}</p>
-                </div>
-            </div>
-            <!--加载更多和暂无数据 -->
-
-        </div>
-
-        <!-- 暂无数据 -->
-        <div class="nodata" v-else>暂无数据</div>
-        <div class="loadmore" v-if="list.length">
-            <div class="loading" v-if="isload">
-                <mt-spinner type="fading-circle" color="#FD4689"></mt-spinner>
-            </div>
-            <div class="isNodata" v-else>
-                <p @click="loadMore" v-if="iSmore">加载更多</p>
-                <p v-else>数据已全部加载</p>
-            </div>
-        </div>
+    <!-- 搜索按钮 -->
+    <div class="searchTop">
+      <search @search="search"></search>
     </div>
+    <div class="listContent"
+         v-if="isHaveData">
+      <div class="list"
+           v-for="(item,index) in list "
+           @click="todetail(item)">
+        <div class="img">
+          <img :src="item.images"
+               alt="">
+        </div>
+        <div class="textDesc">
+          <p class="name">{{item.name}}</p>
+          <p class="desc">{{item.content}}</p>
+        </div>
+      </div>
+      <!--加载更多和暂无数据 -->
+
+    </div>
+
+    <!-- 暂无数据 -->
+    <div class="nodata"
+         v-else>暂无数据</div>
+    <div class="loadmore"
+         v-if="list.length">
+      <div class="loading"
+           v-if="isload">
+        <mt-spinner type="fading-circle"
+                    color="#FD4689"></mt-spinner>
+      </div>
+      <div class="isNodata"
+           v-else>
+        <p @click="loadMore"
+           v-if="iSmore">加载更多</p>
+        <p v-else>数据已全部加载</p>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import search from "../../components/search.vue";
@@ -74,8 +84,8 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             setTimeout(() => {
-              Indicator.close()
-            },1000)
+              Indicator.close();
+            }, 1000);
             if (res.data.data.length == 0) {
               this.isHaveData = false;
             } else if (res.data.data.length < this.count) {
@@ -96,7 +106,7 @@ export default {
       this.$router.push({
         name: "dataBase",
         query: {
-          item:item
+          item: item
         }
       });
     },
@@ -115,7 +125,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import '../../styles/helper.scss';
+@import "../../styles/helper.scss";
 .container {
   width: 100%;
   height: 100%;
@@ -198,7 +208,6 @@ export default {
   font-family: PingFangSC-Regular;
 }
 .loadmore {
-  
   width: 100%;
   height: 40px;
   display: flex;

@@ -200,8 +200,9 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  height: auto;
+  height: 100%;
   height: calc(100% - 1.5rem);
+  overflow: hidden;
   background: #ffffff;
 }
 .inpt {
