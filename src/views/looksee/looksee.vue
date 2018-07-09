@@ -454,6 +454,7 @@ export default {
 .list_img {
   /* height: 2rem; */
   width: 100%;
+  border-radius: px2rem(4px);
 }
 .list_img img {
   width: 100%;

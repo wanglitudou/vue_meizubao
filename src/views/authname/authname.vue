@@ -28,9 +28,6 @@
                  @change="updataimg($event,1)"> -->
           <input type="file"
                  class="inpt_imgone"
-                 accept="image/*"
-                 multiple
-                 capture="camera"
                  id="choose"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
@@ -38,9 +35,6 @@
         </span>
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
-                 accept="image/*"
-                 multiple
-                 capture="camera"
                  id="img-upload"
                  @change="updataimg($event,2)">
 
@@ -66,9 +60,6 @@
       <div class="up_data up_dataimg">
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
-                 accept="image/*"
-                 multiple
-                 capture="camera"
                  id="img-upload"
                  @change="updataimg($event,3)">
           <img :src="data.imgthree"
@@ -76,9 +67,6 @@
         </span>
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
-                 accept="image/*"
-                 multiple
-                 capture="camera"
                  id="img-upload"
                  @change="updataimg($event,4)">
           <img :src="data.imgfour"
@@ -252,11 +240,15 @@ export default {
       let that = this;
       let file = e.target.files[0];
       console.log(file);
-      Toast({
-        message: "上传成功",
-        position: "top",
-        duration: 2000
-      });
+      // Toast({
+      //   message: "上传成功",
+      //   position: "top",
+      //   duration: 2000
+      // });
+      Indicator.open();
+      setTimeout(() => {
+        Indicator.close();
+      }, 4000);
       imgPreview(this, file, num);
       return;
       // that.data.imgOne = imgPreview(this, file, "anma");
