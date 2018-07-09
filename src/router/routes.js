@@ -158,13 +158,16 @@ let routes = [
   {
     name: "essence",
     path: "/essence",
+    meta: {
+      title: "菁英详情"
+    },
     component: resolve => require(["../views/essence/essence.vue"], resolve)
   },
   {
     name: "looksee",
     path: "/looksee",
     meta: {
-      title: "美业精英"
+      title: "菁英详情"
     },
     component: resolve => require(["../views/looksee/looksee.vue"], resolve)
   },
@@ -252,6 +255,9 @@ let routes = [
   {
     name: "information",
     path: "/information",
+    meta: {
+      title: "个人信息"
+    },
     component: resolve =>
       require(["../views/information/information.vue"], resolve)
   },
@@ -272,6 +278,9 @@ let routes = [
   {
     name: "authname",
     path: "/authname",
+    meta: {
+      title: "个人信息"
+    },
     component: resolve => require(["../views/authname/authname.vue"], resolve)
   },
   {
