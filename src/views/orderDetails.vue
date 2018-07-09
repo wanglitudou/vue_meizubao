@@ -46,7 +46,7 @@ export default {
   },
   created() {
     this.$axios
-      .get(window.ajaxSrc+"/api/meizubao/orderDetail", {
+      .get(window.ajaxSrc + "/api/meizubao/orderDetail", {
         params: { id: this.orderId }
       })
       .then(res => {
@@ -112,7 +112,7 @@ export default {
     getTimeArray() {
       // console.log(this.stoptime)
       this.$axios
-        .get(window.ajaxSrc+"/api/meizubao/technicianTime", {
+        .get(window.ajaxSrc + "/api/meizubao/technicianTime", {
           params: { id: 1 }
         })
         .then(res => {
@@ -153,7 +153,7 @@ export default {
     nextFun() {
       var openid = window.localStorage.getItem("openid");
       this.$axios
-        .post(window.ajaxSrc+"/api/meizubao/continuePay", {
+        .post(window.ajaxSrc + "/api/meizubao/continuePay", {
           id: this.orderId,
           open_id: openid
         })
@@ -175,7 +175,7 @@ export default {
         status = 6;
       }
       this.$axios
-        .post(window.ajaxSrc+"/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
           status: status,
           uid: uid,
           id: this.orderId
@@ -197,7 +197,7 @@ export default {
     back(uid) {
       // console.log(status,uid,id)
       this.$axios
-        .post(window.ajaxSrc+"/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
           status: 5,
           uid: uid,
           id: this.orderId
@@ -217,7 +217,7 @@ export default {
     },
     getRenewal(orderId, month, stoptime, totalPrice, openid) {
       this.$axios
-        .post(window.ajaxSrc+"/api/meizubao/rentContinue", {
+        .post(window.ajaxSrc + "/api/meizubao/rentContinue", {
           id: orderId,
           stage: month,
           total_price: totalPrice,
@@ -241,13 +241,14 @@ export default {
     renewal(detail) {
       var openid = window.localStorage.getItem("openid");
       //  this.text = '继续续约'
-
+      this.allPrice = this.getPrice;
       if (detail.type == 1) {
         if (this.mounth == 0) {
           Toast("请选择您的时间");
           return false;
         }
         this.allPrice = this.getPrice;
+        // console.log(this.allPrice)
         this.getRenewal(
           this.orderId,
           this.mounth,
@@ -429,11 +430,8 @@ export default {
 <template>
   <div class="container">
     <com-orderStatus :detail="detail"></com-orderStatus>
-    <com-addressCard :type="'show'"
-                     :detail="detail"
-                     v-if="detail.type == 1 ||detail.type == 2 "></com-addressCard>
-    <com-orderCard :type="'technician'"
-                   :detail="detail"></com-orderCard>
+    <com-addressCard :type="'show'" :detail="detail" v-if="detail.type == 1 ||detail.type == 2 "></com-addressCard>
+    <com-orderCard :type="'technician'" :detail="detail"></com-orderCard>
     <com-orderInformation :detail="detail"></com-orderInformation>
     <!-- <com-orderRenewal :detail="detail" :disableDate="disableDate"  :decrease="decrease" :allPrice="allPrice" :increase="increase" :mounth="mounth" :selectedDate="selectedDate" :during="during"></com-orderRenewal> -->
     <!-- <div> -->
@@ -462,21 +460,15 @@ export default {
     <!-- </div> -->
     <div>
       <!-- 仪器续约 -->
-      <div class="instrument"
-           v-if="detail.type == 1">
+      <div class="instrument" v-if="detail.type == 1">
         <div v-if="detail.status == 6">
           <!-- <div class="extension">续约</div> -->
           <div class="begin_rent">
             <span>选择你续约的时长(月):</span>
             <div class="spinner">
-              <div class="decrease"
-                   @click="decrease">-</div>
-              <input type="number"
-                     class="value"
-                     maxlength="3"
-                     v-model="mounth" />
-              <div class="increase"
-                   @click="increase">+</div>
+              <div class="decrease" @click="decrease">-</div>
+              <input type="number" class="value" maxlength="3" v-model="mounth" />
+              <div class="increase" @click="increase">+</div>
             </div>
           </div>
           <!-- <div class="xuyue" v-show="mounth>0">
@@ -486,23 +478,15 @@ export default {
         </div>
       </div>
       <!-- 技师续约 -->
-      <div class="technician"
-           v-if="detail.type == 2">
+      <div class="technician" v-if="detail.type == 2">
         <div v-if="detail.status == 6">
-          <v-date-picker id="datePicker"
-                         mode='range'
-                         v-model='selectedDate'
-                         :disabled-dates='disableDate'
-                         :input-props='{ style:"color:#000", class: "input-style" , disabled:"disabled", placeholder: "请选择你要租赁的日期"}'
-                         show-caps>
+          <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='disableDate' :input-props='{ style:"color:#000", class: "input-style" , disabled:"disabled", placeholder: "请选择你要租赁的日期"}' show-caps>
           </v-date-picker>
         </div>
-        <div class="xuyues"
-             v-show="during>0">
+        <div class="xuyues" v-show="during>0">
           <span>续约天数：{{during}}</span>
           <p>续约金额：{{renprice}}</p>
-          <div class="xuyues"
-               v-show="during>0">
+          <div class="xuyues" v-show="during>0">
             <span>续约天数：
               <span class="diffrent">{{during}}</span>
             </span>
@@ -516,18 +500,7 @@ export default {
         </div>
       </div>
     </div>
-    <com-orderFooter :detail='detail'
-                     :confirm="confirm"
-                     :back="back"
-                     :mounth="mounth"
-                     :getPrice="getPrice"
-                     :renewal="renewal"
-                     :during="during"
-                     :renprice="renprice"
-                     :count="'19700'"
-                     :confirm:="confirm"
-                     :text="'确认到达'"
-                     :nextFun="nextFun"></com-orderFooter>
+    <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :mounth="mounth" :getPrice="getPrice" :renewal="renewal" :during="during" :renprice="renprice" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
   </div>
 </template>
 
