@@ -164,7 +164,7 @@ let routes = [
     name: "looksee",
     path: "/looksee",
     meta: {
-      title: "美业精英"
+      title: "美业菁英"
     },
     component: resolve => require(["../views/looksee/looksee.vue"], resolve)
   },

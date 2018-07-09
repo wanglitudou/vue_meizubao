@@ -30,7 +30,7 @@
                 <span class="data_pro">
                   <span class="data_mon">￥{{item.price}}</span>/日</span>
               </p>
-              <p class="cli_app">
+              <p class="cli_app" v-if="item.is_play == 2">
                 <span class="cli_ment">点击购买</span>
               </p>
             </div>

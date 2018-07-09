@@ -228,7 +228,7 @@ export default {
   width: 100%;
   text-align: center;
   line-height: 30px;
-  color: #fd4689;
+  color: #00A5FF;
   font-size: 14px;
 }
 .nodata {

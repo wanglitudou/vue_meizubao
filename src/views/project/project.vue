@@ -255,7 +255,7 @@ export default {
   background: #fff;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
-  margin-top: 1.2rem;
+  // margin-top: 1.2rem;
   padding-bottom: 0.4rem;
 }
 .list_img {

@@ -768,6 +768,7 @@ export default {
 .img_box {
   widows: px2rem(160px);
   height: px2rem(120px);
+  border-radius: px2rem(4px);
   overflow: hidden;
 }
 .img_box img {
