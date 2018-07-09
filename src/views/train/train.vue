@@ -245,9 +245,16 @@ export default {
 
     //  弹出遮罩选择支付方式
     nextFun: function() {
+      if(this.data.is_exchange ==2){
+         console.log(222)
+       console.log(this.value)
+       this.value = 1
+       this.nextPay()
+       return false
+      }
       this.showOpcity = true;
       // console.log(this.integral)
-      if (this.data.integral > this.integral || this.data.is_exchange == 2) {
+      if (this.data.integral > this.integral) {
         this.options[1].disabled = true;
       } else {
         this.options[1].disabled = false;
