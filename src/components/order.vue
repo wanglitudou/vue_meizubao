@@ -89,7 +89,10 @@
                     </div>
                     <!-- 待发货 -->
                     <div class='Cancellation' v-if="item.status == 3">
-                        <div class="cancel" @click="cancel(item.id)">取消订单</div>
+                       <div v-if="item.is_show_cancel == 1">
+                            <div class="cancel" @click="cancel(item.id)">取消订单</div>
+                       </div>
+                        
                     </div>
                     <!-- 租赁中 -->
                     <div class="zhuang" v-if="item.status == 6">

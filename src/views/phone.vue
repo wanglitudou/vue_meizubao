@@ -141,6 +141,8 @@ export default {
             setTimeout(() => {
               this.$router.go(-1);
             }, 1000);
+          }else{
+            Toast('验证码错误')
           }
         })
         .catch(() => {});
