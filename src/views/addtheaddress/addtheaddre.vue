@@ -220,6 +220,12 @@ export default {
       this.show = false;
     },
     sive() {
+      let that = this;
+      if (!/^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/.test(that.consignee)) {
+        Toast("请输入正确的姓名格式");
+        return false;
+      }
+
       if (this.$route.query.type == "edit") {
         this.editAddress();
       } else {
