@@ -143,7 +143,7 @@ export default {
     return {
       tabs: [], // 热租仪器分类
       thebeautyindustry: [], //技师筛选
-      num: 0,
+      num: 100,
       flog: false,
       url: [],
       message: "",
@@ -200,7 +200,7 @@ export default {
           that.tabs = res.data.data;
           that.typeId = res.data.data[0].id;
           that.getData(
-            res.data.data[0].id,
+            0,
             this.keywords,
             this.grade,
             this.dayprice,

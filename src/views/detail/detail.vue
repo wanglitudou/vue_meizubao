@@ -129,7 +129,7 @@ export default {
     return {
       tabs: [], // 热租仪器分类
       immediatelyorder: [], //热租仪器筛选
-      num: 0,
+      num: 100,
       flog: false,
       url: [],
       message: "",
@@ -166,7 +166,7 @@ export default {
         if (res.data.status_code == 1001) {
           console.log(res.data.data);
           that.tabs = res.data.data;
-          this.getData(res.data.data[0].id, "", this.pages);
+          this.getData(0, "", this.pages);
         }
       })
       .catch(() => {
@@ -304,13 +304,12 @@ export default {
 .containersActive {
   width: 100%;
   height: 100%;
-  background: #fff;
   overflow: hidden;
+  background: #fff;
 }
 .containers {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background: #fff;
 }
 .meeting {
@@ -357,7 +356,7 @@ export default {
   color: #000;
   span {
     display: inline-block;
-    margin-left: (5px);
+    margin-left: px2rem(5px);
   }
   img {
     display: inline-block;
@@ -474,7 +473,7 @@ export default {
   justify-content: center;
   width: 100%;
   height: 1rem;
-  font-size: 14px;
+  font-size:px2rem(14px);
   color: #00a5ff;
 }
 .Loading {

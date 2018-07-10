@@ -300,14 +300,14 @@ export default {
   /* height: calc(100% - 0.88rem); */
   height: 100%;
   background: #fff;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .list_bans {
   width: 94.5%;
   margin: 0 2.7%;
   overflow-y: scroll;
-  padding-bottom: 1.3rem;
+  padding-bottom: 1.5rem;
 }
 
 .matchBanner {
