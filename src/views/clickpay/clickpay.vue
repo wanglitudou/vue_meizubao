@@ -1,14 +1,27 @@
 <template>
-  <div class="containers">
-    <div class="topSearch">
-      <search @search="search"></search>
-    </div>
+  <div v-bind:class="isRellyShow == true?'containersActive':'containers'">
+   <header class="clearfix">
+     <div class="search_content">
+        <form action="javascript:return true;">
+          <input @keyup.13=show()
+                 type="search"
+                 placeholder="请输入搜索内容"
+                 v-model="keyword"
+                 ref="input1">
+        </form>
+        <img src="../../assets/icon/search_1.png"
+             alt="111">
+     </div>
+    <p class="logo"
+         @click="logo"><img src="../../assets/images/menu.png"
+             alt=""></p>
+   </header>
+   <section>
     <div v-masonry
          transition-duration="0.3s"
          ref="masonry"
          item-selector=".item"
          column-width=".item"
-         style="margin-top:0.88rem"
          v-if="isNodata">
       <div v-masonry-tile
            class="item"
@@ -50,6 +63,14 @@
         </span>
       </div>
     </div>
+    </section>
+    <!-- 侧边栏 -->
+     <slider :tabContent="tabs"
+            :num="num"
+            :tab="tab"
+            :isRellyShow="isRellyShow"
+            :hideSide="hideSide"></slider>
+
     <!-- <div class="dsad" @click="toQian">去签协议</div> -->
 
     <!-- 暂无数据 -->
@@ -62,11 +83,14 @@
 <script>
 import { Spinner, Toast, Indicator } from "mint-ui";
 import search from "../../components/search.vue";
+import slider from "../../components/sliderBar.vue";
 export default {
   data() {
     return {
+      tabs:[],
       screenscreening: [], //视频筛选
       pages: 1,
+      num:100,
       keyword: "",
       showLoad: true,
       load: true,
@@ -75,15 +99,46 @@ export default {
       topStatus: false,
       showNodata: false,
       isNodata: false,
-      loading: false
+      loading: false,
+      isRellyShow:false
     };
   },
   created() {
     Indicator.open();
+    let that =  this
     //首页banner查询
-    this.getData(this.keyword, this.pages);
+    // this.getData(this.keyword, this.pages);
+     that.$axios
+      .get(window.ajaxSrc + "/api/meizubao/videoType", {})
+      .then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
+          console.log(res.data.data);
+          that.tabs = res.data.data;
+          this.getData(0, "", this.pages);
+        }
+      })
+      .catch(() => {
+        console.log("查询失败");
+      });
   },
   methods: {
+     tab(id, index) {
+      // console.log(id);
+
+      this.num = index;
+      this.typeId = id;
+      this.keyword = "";
+      this.screenscreening = [];
+      this.isNodata = false;
+      this.showNodata = false;
+      this.pages = 1;
+      this.isRellyShow = false;
+      Indicator.open();
+      setTimeout(() => {
+        this.getData(id, "", this.pages); //传输1  是页数
+      }, 2000);
+    },
     details(id) {
       this.$router.push({
         name: "train",
@@ -91,6 +146,26 @@ export default {
           pid: id
         }
       });
+    },
+    logo(){
+      this.isRellyShow = true 
+    },
+    show(){
+      let that = this 
+      that.code = 2
+      if(this.keyword ==''){
+        Toast('搜索不能为空')
+        return false;
+      }
+      this.pages = 1
+        Indicator.open();
+        setTimeout(() => {
+        this.screenscreening = [];
+        this.getData("", that.keyword, that.pages);
+      }, 500);
+    },
+    hideSide() {
+      this.isRellyShow = false;
     },
     toQian() {
       this.$router.push("/qian");
@@ -109,11 +184,12 @@ export default {
       }, 1000);
     },
     //请求数据
-    getData(word, pages) {
+    getData(typeId,word, pages) {
       let that = this;
       that.$axios
         .post(window.ajaxSrc + "/api/meizubao/videoSearch", {
           uid: window.localStorage.getItem("id"),
+          typeId:typeId,
           keywords: word,
           page: pages
         })
@@ -168,11 +244,69 @@ export default {
     }
   },
   components: {
-    search
+    search,
+    slider
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
+@import "../../styles/helper.scss";
+.clearfix {
+  width: 100%;
+  height: px2rem(44px);
+  box-shadow: 0 2px 9px #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  // padding: 7px 15px;
+  .logo {
+    width: px2rem(25px);
+    height:px2rem(25px);
+
+    img {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+}
+.search_content {
+  width: px2rem(270px);
+  height:  px2rem(30px);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: px2rem(13px);
+  align-items: center;
+  color: #000;
+  span {
+    display: inline-block;
+    margin-left:  px2rem(5px);
+  }
+  img {
+    display: inline-block;
+    width: px2rem(20px);
+    margin-right:  px2rem(5px);
+  }
+  form {
+    display: block;
+    width: 100%;
+    height: 80%;
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      padding-left:  px2rem(8px);
+    }
+  }
+}
 .topSearch {
   position: fixed;
   width: 100%;
@@ -253,16 +387,11 @@ export default {
   height: 0.5rem;
   margin-top: 0.2rem;
 }
-.list_box .listbox_lef {
-  width: 48%;
-  float: right;
-  border-radius: 3px;
-}
+
 .cent_left {
   background: #fff;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
-  margin-top: 10px;
   padding-bottom: 0.4rem;
 }
 /* .list_img {
@@ -281,6 +410,9 @@ export default {
   width: 100%;
 }
 .oper_room {
+  font-size:15px;
+  font-weight:bold;
+  color:#000; 
   padding: 0.2rem;
 }
 .content {
@@ -338,10 +470,10 @@ export default {
   letter-spacing: 0;
 }
 .item {
-  width: 47%;
+   width: 46.1%;
   height: auto;
-  padding: 1%;
-  margin: 1.5%;
+    margin: 0.6% 2%;
+  box-shadow: 0 2px 9px #ccc;
 }
 .moreData {
   display: flex;
@@ -365,14 +497,24 @@ export default {
 }
 .loadMore {
   width: 96%;
-  height: 50px;
+  height: px2rem(50px);
   display: flex;
   justify-content: center;
   align-items: center;
   color: #00a5ff;
-  font-size: 16px;
+  font-size: px2rem(14px);
+   box-shadow: none;
 }
 .searchs {
   font-size: 14px;
+}
+.containersActive {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+section {
+  padding-top: px2rem(50px);
 }
 </style>

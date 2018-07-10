@@ -107,7 +107,7 @@ export default {
     return {
       tabs: [], // 热租仪器分类
       accessoryproducts: [], //产品配套筛选
-      num: 0,
+      num: 100,
       pages: 1,
       flog: false,
       url: [],
@@ -136,7 +136,7 @@ export default {
         console.log(res);
         if (res.data.status_code == 1001) {
           that.tabs = res.data.data;
-          this.getData(res.data.data[0].id, "", this.pages);
+          this.getData(0, "", this.pages);
         }
       })
       .catch(() => {
@@ -406,7 +406,7 @@ export default {
   background: #fff;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 3px;
-  margin-top: 10px;
+  // margin-top: 10px;
   padding-bottom: 0.4rem;
 }
 .list_img {
@@ -474,10 +474,10 @@ export default {
   letter-spacing: 0;
 }
 .item {
-  width: 48%;
+  width: 46.1%;
   height: auto;
-  padding: 1%;
-  margin: 1%;
+  margin: 0.6% 2%;
+   box-shadow: 0 2px 9px #ccc;
 }
 .moreData {
   display: flex;
@@ -497,6 +497,7 @@ export default {
   color: #000;
   font-size: px2rem(14px);
   color: #00a5ff;
+   box-shadow:none;
 }
 .noData {
   width: 100%;
@@ -510,6 +511,6 @@ export default {
   top: 0;
 }
 section {
-  padding-top: px2rem(45px);
+  padding-top: px2rem(50px);
 }
 </style>

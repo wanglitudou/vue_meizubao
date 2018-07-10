@@ -1,32 +1,25 @@
 <template>
-  <div class="container"
-       ref="container">
-    <!-- <div class="searchs_box">
-      <input type="text"
-             placeholder="请输入搜索内容">
-      <img src="../../assets/icon/search_1.png"
-           alt="111">
-    </div> -->
-    <div class="topSearch">
-      <search @search="search"></search>
-    </div>
-    <!-- 瀑布流 -->
+  <div  ref="container"  v-bind:class="isRellyShow == true?'containersActive':'container'">
 
-    <div v-masonry
-         transition-duration="0.3s"
-         ref="masonry"
-         item-selector=".item"
-         column-width=".item"
-         v-if="isNodata">
-      <div v-masonry-tile
-           class="item"
-           v-for="(item, index) in cooperativeproject"
-           @click="details(item.id)">
+    <header class="clearfix">
+      <div class="search_content">
+        <form action="javascript:return true;">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+        </form>
+        <img src="../../assets/icon/search_1.png" alt="111">
+      </div>
+      <p class="logo"
+         @click="logo"><img src="../../assets/images/menu.png"
+             alt=""></p>
+    </header>
+    <!-- 瀑布流 -->
+    <section>
+    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
         <div class="listbox_lef">
           <div class="cent_left">
             <div class="list_img">
-              <img :src="item.images"
-                   alt="">
+              <img :src="item.images" alt="">
             </div>
             <div class="list_oper">
               <p class="oper_room">
@@ -39,29 +32,29 @@
                 <span class="pay_add">￥{{item.price}}</span>
               </p>
               <p class="cli_app">
-                <span class="cli_ment"
-                      @click="cooperation()">点击预约</span>
+                <span class="cli_ment" @click="cooperation()">点击预约</span>
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class="item loadMore"
-           ref="load">
-        <mt-spinner type="fading-circle"
-                    color="#FD4689 "
-                    v-if="topStatus"></mt-spinner>
+      <div class="item loadMore" ref="load">
+        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
         <span v-else>
-          <span @click="loadMore"
-                v-if="loading">加载更多</span>
+          <span @click="loadMore" v-if="loading">加载更多</span>
           <span v-else>数据全部加载完成</span>
         </span>
       </div>
     </div>
-
+    </section>
+    <!-- 侧边栏 -->
+    <slider :tabContent="tabs"
+            :num="num"
+            :tab="tab"
+            :isRellyShow="isRellyShow"
+            :hideSide="hideSide"></slider>
     <!-- 暂无数据 -->
-    <div class="noData"
-         v-if="showNodata">
+    <div class="noData" v-if="showNodata">
       暂无数据
     </div>
   </div>
@@ -69,9 +62,12 @@
 <script>
 import { Spinner, Toast, Indicator } from "mint-ui";
 import search from "../../components/search.vue";
+import slider from "../../components/sliderBar.vue";
 export default {
   data() {
     return {
+      tabs:[],//热租仪器分类
+      num:100,
       cooperativeproject: [], //合作项目
       keyword: "",
       pages: 1,
@@ -82,12 +78,20 @@ export default {
       loading: true,
       isNodata: false,
       showNodata: false,
-      topStatus: false
+      topStatus: false,
+      isRellyShow:false
     };
   },
   created() {
     Indicator.open();
-    this.getData(this.keyword, this.pages);
+    let that  = this 
+    that.$axios.get(window.ajaxSrc + '/api/meizubao/projectType',{}).then(res=>{
+      console.log(res)
+      if(res.data.status_code == 1001){
+        that.tabs = res.data.data
+      this.getData(0,that.keyword, that.pages);
+      }
+    })
   },
   methods: {
     details(id) {
@@ -116,12 +120,13 @@ export default {
         this.getData(keyword, this.pages);
       }, 1000);
     },
-    getData(keyword, pages) {
+    getData(typeId,keyword, pages) {
       console.log(keyword);
       let that = this;
       //首页banner查询
       that.$axios
         .post(window.ajaxSrc + "/api/meizubao/projectSearch", {
+          typeId:typeId,
           keywords: keyword,
           page: pages
         })
@@ -174,14 +179,49 @@ export default {
       } else {
         this.getData("", this.pages);
       }
-    }
+    },
+    hideSide(){
+      this.isRellyShow = false;
+    },
+    logo(){
+      this.isRellyShow = true;
+    },
+    show(){
+     let that = this 
+     that.code =2  
+     if(that.keyword == ''){
+       Toast('搜索不能为空')
+       return false
+     }
+     that.pages = 1
+     Indicator.open();
+     setTimeout(()=>{
+       that.cooperativeproject = []
+       that.getData('',that.keyword,that.pages)
+     })
+    },
+    tab(id,index){
+      this.num = index;
+      this.typeId = id;
+      this.keyword = "";
+      this.cooperativeproject = [];
+      this.isNodata = false;
+      this.showNodata = false;
+      this.pages = 1;
+      this.isRellyShow = false;
+      Indicator.open();
+      setTimeout(() => {
+        this.getData(id, "", this.pages); //传输1  是页数
+      }, 1000);
+    },
     // cooperation() {
     //   //点击预约的时候,跳转到对应的详情页面
     //   this.$router({ name: "cooperation" });
     // }
   },
   components: {
-    search
+    search,
+    slider
   }
 };
 </script>
@@ -190,6 +230,12 @@ export default {
 .container {
   width: 100%;
   height: 100%;
+  background: #fff;
+}
+.containersActive {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   background: #fff;
 }
 .sousuo {
@@ -389,12 +435,16 @@ export default {
   opacity: 0.5;
   z-index: 1;
 }
-.nodata {
+.noData {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color:#00a5ff;
+   font-size: px2rem(14px);
+    position: absolute;
+  top: 0;
 }
 .loadMore {
   width: 96%;
@@ -410,5 +460,64 @@ export default {
 }
 .searchs {
   font-size: 16px;
+}
+.clearfix {
+  width: 100%;
+  height: px2rem(44px);
+  box-shadow: 0 2px 9px #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  // padding: 7px 15px;
+  .logo {
+    width: px2rem(25px);
+    height: px2rem(25px);
+
+    img {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+}
+.search_content {
+  width: px2rem(270px);
+  height: px2rem(30px);
+  border: 1px solid #ccc;
+  border-radius: px2rem(5px);
+  display: flex;
+  justify-content: space-between;
+  font-size: px2rem(13px);
+  align-items: center;
+  color: #000;
+  span {
+    display: inline-block;
+    margin-left: (5px);
+  }
+  img {
+    display: inline-block;
+    width: 20px;
+    margin-right: px2rem(5px);
+  }
+  form {
+    display: block;
+    width: 100%;
+    height: 80%;
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      padding-left: px2rem(8px);
+    }
+  }
+}
+section{
+   padding-top: px2rem(50px);
 }
 </style>
