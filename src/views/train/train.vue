@@ -246,8 +246,6 @@ export default {
     //  弹出遮罩选择支付方式
     nextFun: function() {
       if(this.data.is_exchange ==2){
-         console.log(222)
-       console.log(this.value)
        this.value = 1
        this.nextPay()
        return false
