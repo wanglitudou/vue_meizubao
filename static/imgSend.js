@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export function imgPreview(that, file, type) {
   console.log(1234);
   let file_use = file;
@@ -71,7 +72,7 @@ function compress(img, Orientation) {
   //如果图片像素大于100万则使用瓦片绘制
   let count;
   if ((count = (width * height) / 1000000) > 1) {
-    console.log("超过100W像素");
+    // console.log("超过100W像素");
     count = ~~(Math.sqrt(count) + 1); //计算要分成多少块瓦片
     //            计算每块瓦片的宽和高
     let nw = ~~(width / count);
@@ -106,12 +107,13 @@ function compress(img, Orientation) {
 function upImgFront(that, src, type) {
   that.isLoadingShow = true;
   that.loadingTit = "图片上传中...";
-  console.log("23456");
+  // console.log("23456");
   var formData = new FormData();
   //上传图片
   formData.append("img", src);
   formData.append("type", type);
   formData.append("uid", localStorage.id);
+  console.log(formData.get("img"));
   $.ajax({
     type: "post",
     url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
@@ -120,7 +122,7 @@ function upImgFront(that, src, type) {
     contentType: false,
     dataType: "json",
     success: function(res) {
-      console.log(res.data);
+      // console.log(res.data);
       // alert(res.data.url);
 
       if (res.code == 200) {
