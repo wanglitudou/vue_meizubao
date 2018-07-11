@@ -17,7 +17,7 @@ export function imgPreview(that, file, type) {
       let img = new Image();
       img.src = result;
       //判断图片是否大于100K,是就直接上传，反之压缩图片
-      if (this.result.length <= 100 * 1024) {
+      if (this.result.length <= 50 * 1024) {
         if (type == "imageFront") {
           upImgFront(self, this.result);
         }

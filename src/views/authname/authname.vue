@@ -138,13 +138,7 @@ export default {
         imgtwo: "",
         imgthree: "",
         imgfour: ""
-        // name: "拍照",
-        // method: this.getCamera, // 调用methods中的函数
-        // name: "从相册中选择",
-        // method: this.getLibrary, // 调用methods中的函数
-        // sheetVisible: false
       }
-      // sheetVisible: false
     };
   },
   created(e) {
