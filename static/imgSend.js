@@ -17,7 +17,7 @@ export function imgPreview(that, file, type) {
       let img = new Image();
       img.src = result;
       //判断图片是否大于100K,是就直接上传，反之压缩图片
-      if (this.result.length <= 50 * 1024) {
+      if (this.result.length <= 100 * 1024) {
         if (type == "imageFront") {
           upImgFront(self, this.result);
         }
@@ -125,27 +125,27 @@ function upImgFront(that, src, type) {
 
       if (res.code == 200) {
         // that.fileList = res.data;
-        if (num == 1) {
-          that.data.imgOne = res.data.url;
-          console.log("666");
-        } else if (num == 2) {
-          that.data.imgtwo = res.data.url;
-        } else if (num == 3) {
-          that.data.imgthree = res.data.url;
-        } else if (num == 4) {
-          that.data.imgfour = res.data.url;
-        }
+        // if (num == 1) {
+        //   that.data.imgOne = res.data.url;
+        //   console.log("666");
+        // } else if (num == 2) {
+        //   that.data.imgtwo = res.data.url;
+        // } else if (num == 3) {
+        //   that.data.imgthree = res.data.url;
+        // } else if (num == 4) {
+        //   that.data.imgfour = res.data.url;
+        // }
       }
-      // if (num == 1) {
-      //   that.data.imgOne = res.data.url;
-      //   console.log("666");
-      // } else if (num == 2) {
-      //   that.data.imgtwo = res.data.url;
-      // } else if (num == 3) {
-      //   that.data.imgthree = res.data.url;
-      // } else if (num == 4) {
-      //   that.data.imgfour = res.data.url;
-      // }
+      if (num == 1) {
+        that.data.imgOne = res.data.url;
+        console.log("666");
+      } else if (num == 2) {
+        that.data.imgtwo = res.data.url;
+      } else if (num == 3) {
+        that.data.imgthree = res.data.url;
+      } else if (num == 4) {
+        that.data.imgfour = res.data.url;
+      }
     }
   });
 }

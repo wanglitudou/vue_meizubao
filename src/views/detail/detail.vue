@@ -77,7 +77,7 @@
 
                 </span>
               </p>
-              <p class="rent"> 起租期:{{item.num}}个月</p>
+              <p class="rent"> 起租期:{{item.lease_time}}个月</p>
               <p class="orders">
                 <span class="order">
                   立即下单
@@ -473,7 +473,7 @@ export default {
   justify-content: center;
   width: 100%;
   height: 1rem;
-  font-size:px2rem(14px);
+  font-size: px2rem(14px);
   color: #00a5ff;
 }
 .Loading {
