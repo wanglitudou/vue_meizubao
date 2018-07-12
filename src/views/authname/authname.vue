@@ -167,10 +167,7 @@ export default {
     getInfo() {
       let that = this;
       that.$axios
-        .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
-            localStorage.id
-        )
+        .get(window.ajaxSrc + "/api/meizubao/userInfo?uid=" + localStorage.id)
         .then(res => {
           console.log(res);
           console.log("我是图片");
@@ -196,7 +193,7 @@ export default {
       }
       //用户信息
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
+        .post(window.ajaxSrc + "/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
           user_name: this.$route.query.name,
           age: this.$route.query.age,
@@ -270,7 +267,7 @@ export default {
       console.log("1111111");
       $.ajax({
         type: "post",
-        url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
+        url: window.ajaxSrc + "/api/meizubao/uploadImages",
         data: formData,
         processData: false,
         contentType: false,

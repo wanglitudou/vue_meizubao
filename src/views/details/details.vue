@@ -343,7 +343,7 @@ export default {
             //微信分享
             let that = this;
             that.$axios
-              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+              .get(window.ajaxSrc + "/api/meizubao/wxSign", {
                 params: {
                   http: location.href
                 }
@@ -382,14 +382,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                             console.log(11111);
@@ -412,14 +409,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                           });

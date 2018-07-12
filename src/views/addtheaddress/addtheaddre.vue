@@ -167,7 +167,8 @@ export default {
     if (this.$route.query.type == "edit") {
       that.$axios
         .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/addressInfo?id=" +
+          window.ajaxSrc +
+            "/api/meizubao/addressInfo?id=" +
             this.$route.query.id
         )
         .then(res => {
@@ -235,7 +236,7 @@ export default {
     addAddress() {
       let that = this;
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/address", {
+        .post(window.ajaxSrc + "/api/meizubao/address", {
           // user_id: localStorage.id,
           mobile: that.telephone,
           user_name: that.consignee,
@@ -273,7 +274,7 @@ export default {
     editAddress() {
       let that = this;
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateAddress", {
+        .post(window.ajaxSrc + "/api/meizubao/updateAddress", {
           // user_id: localStorage.id,
           mobile: that.telephone,
           user_name: that.consignee,

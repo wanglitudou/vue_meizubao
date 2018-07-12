@@ -116,7 +116,7 @@ function upImgFront(that, src, type) {
   console.log(formData.get("img"));
   $.ajax({
     type: "post",
-    url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
+    url: window.ajaxSrc + "/api/meizubao/uploadImages",
     data: formData,
     processData: false,
     contentType: false,

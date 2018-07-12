@@ -62,7 +62,7 @@ export default {
       //获取验证码
       that.$axios
         .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/telcode?phone=" +
+          window.ajaxSrc+"/api/meizubao/telcode?phone=" +
             that.phone +
             "&used_type=1",
           {}
@@ -89,7 +89,7 @@ export default {
       let that = this;
       //手机号登陆
       that.$axios
-        .get("http://mzbao.weiyingjia.org/api/meizubao/wlogin", {})
+        .get(window.ajaxSrc+"/api/meizubao/wlogin", {})
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {

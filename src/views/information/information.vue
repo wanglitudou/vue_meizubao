@@ -185,7 +185,7 @@ export default {
     //用户信息
     that.$axios
       .get(
-        "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+        window.ajaxSrc+"/api/meizubao/userInfo?uid=" +
           localStorage.id
       )
       .then(res => {
@@ -350,7 +350,7 @@ export default {
       console.log(this.shop);
       let that = this;
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
+        .post(window.ajaxSrc+"/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
           user_name: that.data.name,
           age: that.data.age,
