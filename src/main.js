@@ -37,7 +37,9 @@ import $ from "jquery";
 
 // var domain = window.location.host;
 
-window.ajaxSrc = "http://mzbao.weiyingjia.org";
+// window.ajaxSrc = "http://mzbao.weiyingjia.org";
+
+window.ajaxSrc = "http://interface.coronets.com.cn";
 
 axios.defaults.transformRequest = [
   function(data) {
@@ -64,8 +66,8 @@ Vue.directive("title", {
   }
 });
 // 插件
-import VueScroller from 'vue-scroller';
-Vue.use(VueScroller)
+import VueScroller from "vue-scroller";
+Vue.use(VueScroller);
 
 //新的日历插件
 Vue.use(VCalendar, {
