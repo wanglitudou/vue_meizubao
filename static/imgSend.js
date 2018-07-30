@@ -8,7 +8,7 @@ export function imgPreview(that, file, type) {
   let Orientation;
   if (!file || !window.FileReader) return;
   if (/^image/.test(file.type)) {
-    // 创建一个reader
+    // 创建一个readerreader
     let reader = new FileReader();
     // 将图片将转成 base64 格式
     reader.readAsDataURL(file);

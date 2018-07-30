@@ -781,6 +781,10 @@ export default {
   color: #666;
   margin-top: px2rem(10px);
   font-size: px2rem(14px);
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .hot_cent {
