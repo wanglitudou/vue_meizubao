@@ -114,7 +114,8 @@ function upImgFront(that, src, type) {
   formData.append("uid", localStorage.id);
   $.ajax({
     type: "post",
-    url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
+    // url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
+    url: "http://interface.coronets.com.cn/api/meizubao/uploadImages",
     data: formData,
     processData: false,
     contentType: false,

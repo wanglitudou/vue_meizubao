@@ -25,19 +25,39 @@
 
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+          <input @keyup.13=show()
+                 type="search"
+                 placeholder="请输入搜索内容"
+                 v-model="keyword"
+                 ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png" alt="111">
+        <img src="../../assets/icon/search_1.png"
+             alt="111">
       </div>
-      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+      <p class="logo"
+         @click="logo"><img src="../../assets/images/menu.png"
+             alt=""></p>
     </header>
-    <section >
-      <scroller :on-infinite="infinite" style="padding-top:50px" ref="myscroller"  :refreshLayerColor="'#000'"   v-bind:class="isvoid == true?'empty':''">
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
-          <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
+    <section>
+      <scroller :on-infinite="infinite"
+                style="padding-top:50px"
+                ref="myscroller"
+                :refreshLayerColor="'#000'"
+                v-bind:class="isvoid == true?'empty':''">
+        <div v-masonry
+             transition-duration="0.3s"
+             ref="masonry"
+             item-selector=".item"
+             column-width=".item"
+             v-if="isNodata">
+          <div v-masonry-tile
+               class="item"
+               v-for="(item, index) in imgsArr"
+               @click="details(item.id)">
             <div class="boxs listing">
               <div>
-                <img :src="item.images" alt="">
+                <img :src="item.images"
+                     alt="">
               </div>
               <div class="other">
                 <p class="name">
@@ -68,7 +88,6 @@
                 </p>
               </div>
 
-   
             </div>
           </div>
           <!-- <div class=" item loadMore" ref="load">
@@ -78,11 +97,16 @@
             </span>
           </div> -->
         </div>
-        <div class="void" style="height: 1px;"></div>
+        <div class="void"
+             style="height: 1px;"></div>
       </scroller>
     </section>
     <!-- 侧边栏 -->
-    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs"
+            :num="num"
+            :tab="tab"
+            :isRellyShow="isRellyShow"
+            :hideSide="hideSide"></slider>
 
     <!-- <div class="nodata" v-if="showNodata">
 
@@ -107,7 +131,7 @@ export default {
       immediatelyorder: [], //热租仪器筛选
       num: 100,
       flog: false,
-      isvoid:false,
+      isvoid: false,
       url: [],
       message: "",
       imgsArr: [],
@@ -130,7 +154,7 @@ export default {
       showTab: true,
       isRellyShow: false,
       offset: 0,
-      num:400
+      num: 400
     };
   },
 
@@ -230,11 +254,11 @@ export default {
               if (res.data.data.length == 0) {
                 this.isNodata = false;
                 this.showNodata = true;
-                  this.isvoid = true;
+                this.isvoid = true;
               } else {
                 console.log(111);
                 this.isNodata = true;
-                $('.loading-layer').css('hieght','100%')
+                $(".loading-layer").css("hieght", "100%");
               }
               console.log(res.data.data);
               // if (res.data.data.length < 10) {
@@ -329,7 +353,7 @@ export default {
       let that = this;
       // that.$refs.contain.style="over:"
       that.code = 2;
-      this.isvoid = false
+      this.isvoid = false;
       // console.log(this.keyword)
       //  this.keyword = keyword;
 
@@ -344,7 +368,7 @@ export default {
       Indicator.open();
       setTimeout(() => {
         this.imgsArr = [];
-        this.getData("", that.keyword, that.pages,'');
+        this.getData("", that.keyword, that.pages, "");
       }, 500);
     },
 
@@ -379,8 +403,7 @@ export default {
       this.isNodata = false;
       this.showNodata = false;
       this.pages = 1;
-      this.isvoid=  false,
-      this.isRellyShow = false;
+      (this.isvoid = false), (this.isRellyShow = false);
       Indicator.open();
       // setTimeout(() => {
       this.getData(id, "", this.pages, ""); //传输1  是页数
@@ -483,8 +506,8 @@ export default {
   .logo {
     width: px2rem(25px);
     height: px2rem(25px);
-    position:absolute;
-    right:20px;
+    position: absolute;
+    right: 20px;
     img {
       width: 100%;
       display: inline-block;
@@ -501,8 +524,8 @@ export default {
   font-size: px2rem(13px);
   align-items: center;
   color: #000;
-  position:absolute;
-  left:20px;
+  position: absolute;
+  left: 20px;
   span {
     display: inline-block;
     margin-left: px2rem(5px);
@@ -686,7 +709,7 @@ section {
   // height: 100%;
   // // padding-top: px2rem(50px);
   // position: absolute;
- 
+
   // top:px2rem(44px);
   //  padding:px2rem(50px) 0 ;
 }
@@ -696,12 +719,12 @@ section {
   font-size: px2rem(12px);
   margin-top: px2rem(6px);
 }
-.void{
+.void {
   height: px2rem(44px);
 }
-.empty{
+.empty {
   display: flex;
-  height:100%;
+  height: 100%;
   align-items: center;
 }
 // .loading-layer{
