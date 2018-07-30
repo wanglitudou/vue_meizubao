@@ -110,10 +110,7 @@ export default {
     getname() {
       let that = this;
       that.$axios
-        .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
-            localStorage.id
-        )
+        .get(window.ajaxSrc + "/api/meizubao/userInfo?uid=" + localStorage.id)
         .then(res => {
           console.log(res);
           if (res.data.status_code == 1001) {

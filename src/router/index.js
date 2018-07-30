@@ -103,6 +103,9 @@ let routes = [
   {
     name: "addsite",
     path: "addsite",
+
+
+    
     component: addsite
   },
   {

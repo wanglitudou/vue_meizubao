@@ -29,8 +29,6 @@
           <input type="file"
                  class="inpt_imgone"
                  id="choose"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  @change="updataimg($event,1)">
           <img :src="data.imgOne"
@@ -38,8 +36,6 @@
         </span>
         <span class="updata_rig"><input type="file"
                  class="inpt_imgtwo"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  id="img-upload"
                  @change="updataimg($event,2)">
@@ -66,8 +62,6 @@
       <div class="up_data up_dataimg">
         <span class="updata_lefs"><input type="file"
                  class="inpt_imgthree"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  id="img-upload"
                  @change="updataimg($event,3)">
@@ -76,8 +70,6 @@
         </span>
         <span class="updata_rigs"><input type="file"
                  class="inpt_imgfour"
-                 multiple
-                 capture="camera"
                  accept="image/*"
                  id="img-upload"
                  @change="updataimg($event,4)">
@@ -138,13 +130,7 @@ export default {
         imgtwo: "",
         imgthree: "",
         imgfour: ""
-        // name: "拍照",
-        // method: this.getCamera, // 调用methods中的函数
-        // name: "从相册中选择",
-        // method: this.getLibrary, // 调用methods中的函数
-        // sheetVisible: false
       }
-      // sheetVisible: false
     };
   },
   created(e) {
@@ -181,10 +167,7 @@ export default {
     getInfo() {
       let that = this;
       that.$axios
-        .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
-            localStorage.id
-        )
+        .get(window.ajaxSrc + "/api/meizubao/userInfo?uid=" + localStorage.id)
         .then(res => {
           console.log(res);
           console.log("我是图片");
@@ -210,7 +193,7 @@ export default {
       }
       //用户信息
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
+        .post(window.ajaxSrc + "/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
           user_name: this.$route.query.name,
           age: this.$route.query.age,
@@ -284,7 +267,7 @@ export default {
       console.log("1111111");
       $.ajax({
         type: "post",
-        url: "http://mzbao.weiyingjia.org/api/meizubao/uploadImages",
+        url: window.ajaxSrc + "/api/meizubao/uploadImages",
         data: formData,
         processData: false,
         contentType: false,

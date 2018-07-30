@@ -60,7 +60,7 @@ export default {
     selectedNumber: function(e) {
       console.log(e);
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateDefaultAddress", {
+        .post(window.ajaxSrc + "/api/meizubao/updateDefaultAddress", {
           is_default: 1,
           uid: window.localStorage.id,
           id: e
@@ -106,10 +106,7 @@ export default {
           if (action == "confirm") {
             console.log("666");
             that.$axios
-              .get(
-                "http://mzbao.weiyingjia.org/api/meizubao/delAddress?id=" + id,
-                {}
-              )
+              .get(window.ajaxSrc + "/api/meizubao/delAddress?id=" + id, {})
               .then(res => {
                 that.getList();
               })
@@ -124,8 +121,7 @@ export default {
       let that = this;
       that.$axios
         .get(
-          "http://mzbao.weiyingjia.org/api/meizubao/addressList?uid=" +
-            localStorage.id,
+          window.ajaxSrc + "/api/meizubao/addressList?uid=" + localStorage.id,
           {
             // id: localStorage.id,
             // consignee: that.$router.consignee,

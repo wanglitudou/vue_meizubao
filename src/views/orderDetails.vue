@@ -117,6 +117,7 @@ export default {
         })
         .then(res => {
           if (res.data.status_code == "1001") {
+            console.log(res)
             this.allTime = res.data.data;
             var appointmentTime = [];
 

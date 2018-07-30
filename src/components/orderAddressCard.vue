@@ -39,7 +39,7 @@ export default {
       data: []
     };
   },
-  props: ["type", "saveAddressId",'userInfo'],
+  props: ["type", "saveAddressId", "userInfo"],
   mounted() {
     if (localStorage.siteId) {
       // alert("有值");
@@ -72,7 +72,7 @@ export default {
                 this.data = res.data.data[i];
               }
             }
-            console.log(this.data)
+            console.log(this.data);
             // this.userInfo(this.data)
             this.saveAddressId(this.data);
           }
@@ -98,16 +98,14 @@ export default {
       console.log(11);
       this.$axios({
         method: "get",
-        url: "http://mzbao.weiyingjia.org/api/meizubao/addressInfo",
+        url: window.ajaxSrc + "/api/meizubao/addressInfo",
         params: {
           id: localStorage.siteId
         }
       }).then(res => {
-    
         if (res.data.status_code == 1001) {
-          
           this.data = res.data.data;
-          console.log(this.data)
+          console.log(this.data);
           this.saveAddressId(res.data.data);
         }
       });

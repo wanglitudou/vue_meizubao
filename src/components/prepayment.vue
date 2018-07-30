@@ -1,15 +1,15 @@
 <template>
-    <div>
-     <order :orderlist="orderlist"></order>
-    </div>
+  <div>
+    <order :orderlist="orderlist"></order>
+  </div>
 </template>
 <script>
-import order from './order.vue'
+import order from "./order.vue";
 export default {
   data() {
     return {
       uid: 1,
-      type: 1,//代付款
+      type: 1, //代付款
       status: 1,
       page: 1,
       orderlist: []
@@ -19,7 +19,7 @@ export default {
     let that = this;
     //热租仪器分类
     this.$axios
-      .post("http://mzbao.weiyingjia.org/api/meizubao/orderList", {
+      .post(window.ajaxSrc + "/api/meizubao/orderList", {
         uid: this.uid,
         type: this.type,
         status: this.status,

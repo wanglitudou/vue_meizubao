@@ -1,90 +1,90 @@
 <template>
-	<div class="cooperation-container">
-		<div class="con_cents">
-			<div class="con_pro">
-				<div class="cooperationBanner">
-					<mt-swipe :auto="4000">
-						<mt-swipe-item v-for="(item,index) in imgLists"
-						               :key="index">
-							<img :src="item"
-							     alt="">
-						</mt-swipe-item>
-					</mt-swipe>
-				</div>
+  <div class="cooperation-container">
+    <div class="con_cents">
+      <div class="con_pro">
+        <div class="cooperationBanner">
+          <mt-swipe :auto="4000">
+            <mt-swipe-item v-for="(item,index) in imgLists"
+                           :key="index">
+              <img :src="item"
+                   alt="">
+            </mt-swipe-item>
+          </mt-swipe>
+        </div>
 
-				<div class="conpro_name">
-					<p class="conpro_pro">
-						<span class="conname_name">{{data.name}}</span>
-						<span class="conmoney">￥{{data.price}}</span>
-					</p>
-				</div>
-			</div>
-			<div class="cent_cate">
-				<p class="pro_cate">
-					<span>项目类别123：</span>
-					<span>{{data.typeName}}</span>
-				</p>
-				<p class="pro_cate">
-					<span>适合人群：</span>
-					<span>{{data.suitable}}</span>
-				</p>
+        <div class="conpro_name">
+          <p class="conpro_pro">
+            <span class="conname_name">{{data.name}}</span>
+            <span class="conmoney">￥{{data.price}}</span>
+          </p>
+        </div>
+      </div>
+      <div class="cent_cate">
+        <p class="pro_cate">
+          <span>项目类别123：</span>
+          <span>{{data.typeName}}</span>
+        </p>
+        <p class="pro_cate">
+          <span>适合人群：</span>
+          <span>{{data.suitable}}</span>
+        </p>
 
-				<p class="pro_cate">
-					<span>项目禁忌：</span>
-					<span>{{data.taboo}}</span>
-				</p>
-				<p class="pro_cate">
-					<span>分成比例：</span>
-					<span>{{data.divideinto}}</span>
-				</p>
+        <p class="pro_cate">
+          <span>项目禁忌：</span>
+          <span>{{data.taboo}}</span>
+        </p>
+        <p class="pro_cate">
+          <span>分成比例：</span>
+          <span>{{data.divideinto}}</span>
+        </p>
 
-				<p class="pro_cate">
-					<span>报名开始时间：</span>
-					<span>{{data.sigh_strtime}}</span>
-				</p>
-				<p class="pro_cate">
-					<span>项目开始时间：</span>
-					<span>{{data.strtime}}</span>
-				</p>
-				<p class="pro_cate">
-					<span>项目结束时间：</span>
-					<span>{{data.stoptime}}</span>
-				</p>
+        <p class="pro_cate">
+          <span>报名开始时间：</span>
+          <span>{{data.sigh_strtime}}</span>
+        </p>
+        <p class="pro_cate">
+          <span>项目开始时间：</span>
+          <span>{{data.strtime}}</span>
+        </p>
+        <p class="pro_cate">
+          <span>项目结束时间：</span>
+          <span>{{data.stoptime}}</span>
+        </p>
 
-				<!--<p class="pro_cate">-->
-				<!--<span>订金</span>-->
-				<!--<span>{{data.money}}</span>-->
-				<!--</p>-->
+        <!--<p class="pro_cate">-->
+        <!--<span>订金</span>-->
+        <!--<span>{{data.money}}</span>-->
+        <!--</p>-->
 
-			</div>
-			<div class="pro_intro">
-				<p class="pro_introduce">项目介绍</p>
-				<p class="pro_int">{{data.content}}</p>
-			</div>
-			<div class="order_name">
-				<p class="good_fail">
-					<span>预付诚意金：</span>
-					<span>￥{{data.money}}</span>
-				</p>
-			</div>
-			<p class="list_rent"
-			   @click="showSign">
-				<span>
-					网签租赁协议
-				</span>
-			</p>
-		</div>
-		<orderFooter :text="'立即下单'"
-		             :count="data.money"
-		             :nextFun="createOrder"></orderFooter>
-		<sign id="componentSign"
-		      v-if="showSignTag"
-		      :src="data.agreement"
-		      :gid="data.id"
-		      :saveAgreementId="saveAgreementId"
+      </div>
+      <div class="pro_intro">
+        <p class="pro_introduce">项目介绍</p>
+        <p class="pro_int">{{data.content}}</p>
+      </div>
+      <div class="order_name">
+        <p class="good_fail">
+          <span>预付诚意金：</span>
+          <span>￥{{data.money}}</span>
+        </p>
+      </div>
+      <p class="list_rent"
+         @click="showSign">
+        <span>
+          网签租赁协议
+        </span>
+      </p>
+    </div>
+    <orderFooter :text="'立即下单'"
+                 :count="data.money"
+                 :nextFun="createOrder"></orderFooter>
+    <sign id="componentSign"
+          v-if="showSignTag"
+          :src="data.agreement"
+          :gid="data.id"
+          :saveAgreementId="saveAgreementId"
           :type="type"></sign>
 
-	</div>
+  </div>
 </template>
 <script>
 import orderFooter from "../../components/orderFooter.vue";
@@ -107,7 +107,7 @@ export default {
       },
       userId: null,
       dqurl: "",
-      type:5
+      type: 5
     };
   },
 
@@ -148,7 +148,7 @@ export default {
             //微信分享
             let that = this;
             that.$axios
-              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+              .get(window.ajaxSrc + "/api/meizubao/wxSign", {
                 params: {
                   http: location.href
                 }
@@ -186,14 +186,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                             console.log(11111);
@@ -217,7 +214,7 @@ export default {
                         //													alert("1111")
                         that.$axios
                           .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
+                            window.ajaxSrc+"/api/meizubao/addPoint",
                             {
                               params: {
                                 uid: that.userId
@@ -306,7 +303,7 @@ export default {
   margin-left: 2.6%;
   height: auto;
   margin: 0.2rem auto 0;
-  padding-bottom:px2rem(5px)
+  padding-bottom: px2rem(5px);
 }
 
 .con_pro {

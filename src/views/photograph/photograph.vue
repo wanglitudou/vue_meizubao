@@ -218,7 +218,7 @@ export default {
       console.log(111);
       download(
         "hello world",
-        "http://mzbadmin.weiyingjia.org/upload/1527501986451.mp4",
+        window.ajaxSrc + "/upload/1527501986451.mp4",
         "text/plain"
       );
     },

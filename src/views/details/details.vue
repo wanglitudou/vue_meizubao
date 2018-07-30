@@ -343,7 +343,7 @@ export default {
             //微信分享
             let that = this;
             that.$axios
-              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+              .get(window.ajaxSrc + "/api/meizubao/wxSign", {
                 params: {
                   http: location.href
                 }
@@ -382,14 +382,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                             console.log(11111);
@@ -412,14 +409,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                           });
@@ -473,7 +467,7 @@ export default {
 
 .cent_time {
   width: 100%;
-  height:px2rem(40px);
+  height: px2rem(40px);
   line-height: px2rem(40px);
   box-shadow: 0 2px 9px 0 #eeeeee;
 }
@@ -569,14 +563,16 @@ export default {
 
 .name_words {
   padding: 0rem 0.2rem;
-  margin-top:px2rem(10px);
+  margin-top: px2rem(10px);
   font-size: px2rem(13px);
   color: #666666;
+  width: 100%;
+  height: auto;
 }
 
 .name_cate {
   padding: 0rem 0.2rem;
-  margin-top:px2rem(8px);
+  margin-top: px2rem(8px);
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
@@ -587,18 +583,18 @@ export default {
 
 .product {
   width: 94.7%;
-  height:px2rem(44px);
+  height: px2rem(44px);
   line-height: px2rem(44px);
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
- 
+
   margin: px2rem(15px) auto 0;
 }
 
 .name_pro {
-  font-size:px2rem(14px);
-  color:#333333;
+  font-size: px2rem(14px);
+  color: #333333;
   letter-spacing: 0;
 }
 

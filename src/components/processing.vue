@@ -24,7 +24,7 @@ export default {
     receipt(id) {
       console.log(id);
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateOrderStatus", {
+        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
           uid: 1,
           id: id,
           status: 3
@@ -41,7 +41,7 @@ export default {
     getorder() {
       let that = this;
       this.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/orderList", {
+        .post(window.ajaxSrc + "/api/meizubao/orderList", {
           uid: this.uid,
           type: this.type,
           status: this.status,

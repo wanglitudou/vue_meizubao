@@ -262,7 +262,7 @@ export default {
             //微信分享
             let that = this;
             that.$axios
-              .get("http://mzbao.weiyingjia.org/api/meizubao/wxSign", {
+              .get(window.ajaxSrc + "/api/meizubao/wxSign", {
                 params: {
                   http: location.href
                 }
@@ -300,14 +300,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                             console.log(11111);
@@ -330,14 +327,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            "http://mzbao.weiyingjia.org/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                           });
@@ -398,7 +392,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -449,7 +443,7 @@ export default {
     font-size: px2rem(16px);
     margin-top: px2rem(10px);
   }
-  margin-top: px2rem(15px);
+  margin-top: px2rem(10px);
   // / / line-height: px2rem
 }
 

@@ -185,7 +185,7 @@ export default {
     //用户信息
     that.$axios
       .get(
-        "http://mzbao.weiyingjia.org/api/meizubao/userInfo?uid=" +
+        window.ajaxSrc+"/api/meizubao/userInfo?uid=" +
           localStorage.id
       )
       .then(res => {
@@ -350,7 +350,7 @@ export default {
       console.log(this.shop);
       let that = this;
       that.$axios
-        .post("http://mzbao.weiyingjia.org/api/meizubao/updateUserInfo", {
+        .post(window.ajaxSrc+"/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
           user_name: that.data.name,
           age: that.data.age,
@@ -396,13 +396,14 @@ export default {
   // width: 7.068rem;
   width: px2rem(355px);
   // height: 10.34rem;
-  height: px2rem(517px);
+  // height: px2rem(517px);
   // width: 100%;
   // height: 100%;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 3px;
   margin: 0.2rem auto 0;
   margin-top: 0.2rem;
+  // height: calc(100% - 0.88rem);
 }
 .id_num {
   width: px2rem(355px);
@@ -490,10 +491,12 @@ export default {
 }
 .next_up {
   text-align: center;
+  // margin-bottom: 50px;
 }
 .next_nex {
   width: px2rem(120px);
   height: px2rem(72px);
+  text-align: center;
   line-height: px2rem(72px);
   padding: 0.2rem 0.7rem;
   background: #ffffff;
@@ -501,6 +504,5 @@ export default {
   border-radius: 3px;
   font-size: 14px;
   color: #fd4689;
-  letter-spacing: 0;
 }
 </style>
