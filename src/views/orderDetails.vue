@@ -117,7 +117,7 @@ export default {
         })
         .then(res => {
           if (res.data.status_code == "1001") {
-            console.log(res)
+            console.log(res);
             this.allTime = res.data.data;
             var appointmentTime = [];
 
@@ -250,20 +250,20 @@ export default {
         }
         this.allPrice = this.getPrice;
         console.log(this.allPrice);
-        // this.getRenewal(
-        //   this.orderId,
-        //   this.mounth,
-        //   this.stoptime,
-        //   this.allPrice,
-        //   openid
-        // );
+        this.getRenewal(
+          this.orderId,
+          this.mounth,
+          this.stoptime,
+          this.allPrice,
+          openid
+        );
       } else if (detail.type == 2) {
         if (this.during == 0) {
           Toast("请选择您的时间");
           return false;
         }
         this.price = this.renprice;
-
+        // console.log(this.renprice);
         this.getRenewal(this.orderId, "", this.endTime, this.price, openid);
       }
     },
@@ -503,7 +503,7 @@ export default {
              v-show="during>0">
           <span>续约天数：{{during}}</span>
           <p>续约金额：{{renprice}}</p>
-          <div class="xuyues"
+          <!-- <div class="xuyues"
                v-show="during>0">
             <span>续约天数：
               <span class="diffrent">{{during}}</span>
@@ -511,7 +511,7 @@ export default {
             <p>续约金额：
               <span class='diffrent'>{{renprice}}</span>
             </p>
-          </div>
+          </div> -->
           <!-- @click="decrease" -->
           <!-- @click="increase" -->
           <!-- v-bind:class="{ disable: month==data.num }" -->
