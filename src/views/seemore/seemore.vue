@@ -1,6 +1,5 @@
 <template>
-  <div class="containers"
-       :class="isRellyShow?'activeContainers':'containers'">
+  <div class="containers" :class="isRellyShow?'activeContainers':'containers'">
 
     <!-- <div class="list_list">
       <div class="list_search">
@@ -22,78 +21,46 @@
     <header class="clearfix">
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show()
-                 type="search"
-                 placeholder="请输入搜索内容"
-                 v-model="keyword"
-                 ref="input1">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png"
-             alt="111">
+        <img src="../../assets/icon/search_1.png" alt="111">
       </div>
-      <p class="logo"
-         @click="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
     </header>
     <section>
-      <!-- 瀑布流布局 -->
-      <div v-masonry
-           transition-duration="0.3s"
-           ref="masonry"
-           item-selector=".item"
-           column-width=".item"
-           v-if="isNodata">
-        <!-- v-for="(item, index) in accessoryproducts -->
-        <div v-masonry-tile
-             class="item"
-             v-for="(item, index) in accessoryproducts"
-             @click="details(item.id)">
-          <div class="cent_left">
-            <div class="list_img">
-              <img :src="item.images"
-                   alt="666">
-            </div>
-            <div class="list_oper">
-              <p class="oper_room">
-                <span>{{item.name}}</span>
-              </p>
+      <scroller :on-infinite="infinite" style="padding-top:50px" ref="myscroller" :refreshLayerColor="'#000'" v-bind:class="isvoid == true?'empty':''">
+        <!-- 瀑布流布局 -->
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+          <!-- v-for="(item, index) in accessoryproducts -->
+          <div v-masonry-tile class="item" v-for="(item, index) in accessoryproducts" @click="details(item.id)">
+            <div class="cent_left">
+              <div class="list_img">
+                <img :src="item.images" alt="666">
+              </div>
+              <div class="list_oper">
+                <p class="oper_room">
+                  <span>{{item.name}}</span>
+                </p>
 
-              <p class="every_pro">
-                <span class="data_pro">
-                  <span class="data_mon">￥{{item.price}}</span>
-                </span>
-              </p>
-              <p class="cli_app">
-                <span class="cli_ment">立即下单</span>
-              </p>
+                <p class="every_pro">
+                  <span class="data_pro">
+                    <span class="data_mon">￥{{item.price}}</span>
+                  </span>
+                </p>
+                <p class="cli_app">
+                  <span class="cli_ment">立即下单</span>
+                </p>
+              </div>
             </div>
           </div>
+          <!-- 店家加载更多 -->
         </div>
-        <!-- 店家加载更多 -->
-        <div class="item loadMore"
-             ref="load">
-          <mt-spinner type="fading-circle"
-                      color="#FD4689 "
-                      v-if="topStatus"></mt-spinner>
-          <span v-else>
-            <span @click="loadMore"
-                  v-if="loading">加载更多</span>
-            <span v-else>数据全部加载完成</span>
-          </span>
-        </div>
-
-      </div>
+        <div style="height:1px"></div>
+      </scroller>
     </section>
-    <slider :tabContent="tabs"
-            :num="num"
-            :tab="tab"
-            :isRellyShow="isRellyShow"
-            :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
     <!-- 暂无数据 -->
-    <div class="noData"
-         v-if="showNodata">
-      赞无数据
-    </div>
+  
   </div>
 </template>
 <script>
@@ -123,7 +90,8 @@ export default {
       showNodata: false,
       isNodata: false,
       loading: false,
-      typeid: 0
+      typeId: 0,
+      isvoid:false
     };
   },
   created() {
@@ -136,7 +104,7 @@ export default {
         console.log(res);
         if (res.data.status_code == 1001) {
           that.tabs = res.data.data;
-          this.getData(0, "", this.pages);
+          this.getData(this.typeId, "", this.pages, "");
         }
       })
       .catch(() => {
@@ -148,6 +116,14 @@ export default {
       });
   },
   methods: {
+    infinite(done) {
+      setTimeout(() => {
+        this.pages++;
+        // this.pages++; //每当向上滑动的时候就让页数加1
+
+        this.getData(this.typeId, this.keyword, this.pages, done);
+      }, 1000);
+    },
     // 隐藏slider
     hideSide() {
       this.isRellyShow = false;
@@ -164,41 +140,69 @@ export default {
       });
       console.log(id);
     },
-    getData(name, keyword, pages) {
+    getData(name, keyword, pages, done) {
       let that = this;
       //热租仪器筛选
-      that.$axios
-        .post(window.ajaxSrc + "/api/meizubao/productSearch", {
-          typeId: name,
-          keywords: keyword,
-          page: pages
-        })
+      if (done) {
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/productSearch", {
+            typeId: name,
+            keywords: keyword,
+            page: pages
+          })
 
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            Indicator.close();
-            this.topStatus = false;
-            if (res.data.data.length == 0) {
-              this.isNodata = false;
-              this.showNodata = true;
-            } else if (res.data.data.length < this.count) {
-              this.loading = false;
-              this.isNodata = true;
-            } else {
-              this.isNodata = true;
-              that.topStatus = false;
-              that.loading = true;
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              if (res.data.data.length < 10) {
+                pages = 0;
+                done(true);
+              } else {
+                if (done) done();
+              }
+              that.accessoryproducts = that.accessoryproducts.concat(
+                res.data.data
+              );
             }
+          })
+          .catch(() => {
+            console.log("查询失败");
+          });
+      } else {
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/productSearch", {
+            typeId: name,
+            keywords: keyword,
+            page: pages
+          })
 
-            that.accessoryproducts = that.accessoryproducts.concat(
-              res.data.data
-            );
-          }
-        })
-        .catch(() => {
-          console.log("查询失败");
-        });
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              Indicator.close();
+              this.topStatus = false;
+              if (res.data.data.length == 0) {
+                this.isNodata = false;
+                this.isvoid =  true;
+                this.showNodata = true;
+              } else if (res.data.data.length < this.count) {
+                this.loading = false;
+                this.isNodata = true;
+              } else {
+                this.isNodata = true;
+                that.topStatus = false;
+                that.loading = true;
+              }
+
+              that.accessoryproducts = that.accessoryproducts.concat(
+                res.data.data
+              );
+            }
+          })
+          .catch(() => {
+            console.log("查询失败");
+          });
+      }
     },
     show() {
       if (this.keyword == "") {
@@ -234,6 +238,7 @@ export default {
       this.accessoryproducts = [];
       this.isRellyShow = false;
       this.pages = 1;
+      this.isvoid =  false;
       this.isNodata = false;
       this.showNodata = false;
       Indicator.open();
@@ -418,9 +423,9 @@ export default {
   /* height: 100%; */
 }
 .oper_room {
-  font-size:px2rem(15px);
-  color:#000;
-  font-weight:bold;
+  font-size: px2rem(15px);
+  color: #000;
+  font-weight: bold;
   padding: 0.2rem;
 }
 
@@ -431,10 +436,9 @@ export default {
 }
 .data_mon {
   font-size: px2rem(14px);
-  color: #FF272D;
+  color: #ff272d;
   letter-spacing: 0;
   line-height: 20px;
-  
 }
 .week_mon {
   font-size: 12px;
@@ -477,7 +481,7 @@ export default {
   width: 46.1%;
   height: auto;
   margin: 0.6% 2%;
-   box-shadow: 0 2px 9px #ccc;
+  box-shadow: 0 2px 9px #ccc;
 }
 .moreData {
   display: flex;
@@ -497,7 +501,7 @@ export default {
   color: #000;
   font-size: px2rem(14px);
   color: #00a5ff;
-   box-shadow:none;
+  box-shadow: none;
 }
 .noData {
   width: 100%;
@@ -511,6 +515,11 @@ export default {
   top: 0;
 }
 section {
-  padding-top: px2rem(50px);
+  // padding-top: px2rem(50px);
+}
+.empty{
+  height:100%;
+  display: flex;
+  align-items: center;
 }
 </style>

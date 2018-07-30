@@ -1,84 +1,62 @@
 <template>
   <div v-bind:class="isRellyShow == true?'containersActive':'containers'">
-   <header class="clearfix">
-     <div class="search_content">
+    <header class="clearfix">
+      <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show()
-                 type="search"
-                 placeholder="请输入搜索内容"
-                 v-model="keyword"
-                 ref="input1">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png"
-             alt="111">
-     </div>
-    <p class="logo"
-         @click="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
-   </header>
-   <section>
-    <div v-masonry
-         transition-duration="0.3s"
-         ref="masonry"
-         item-selector=".item"
-         column-width=".item"
-         v-if="isNodata">
-      <div v-masonry-tile
-           class="item"
-           v-for="(item, index) in screenscreening"
-           @click="details(item.id)">
-        <div class="listbox_lef">
-          <div class="cent_left">
-            <div class="list_img">
-              <img :src="item.images
-                        "
-                   alt="">
-            </div>
-            <div class="list_oper">
-              <p class="oper_room">
-                <span>{{item.name}}</span>
-              </p>
-              <p class="content">{{item.credit}}</p>
-              <p class="every_pro">
-                <span class="data_pro">
-                  <span class="data_mon">￥{{item.price}}</span>/日</span>
-              </p>
-              <p class="cli_app"
-                 v-if="item.is_play == 2">
-                <span class="cli_ment">点击购买</span>
-              </p>
+        <img src="../../assets/icon/search_1.png" alt="111">
+      </div>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+    </header>
+    <section>
+      <scroller :on-infinite="infinite" style="padding-top:50px" ref="myscroller" :refreshLayerColor="'#000'" v-bind:class="isvoid == true?'empty':''">
+
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+          <div v-masonry-tile class="item" v-for="(item, index) in screenscreening" @click="details(item.id)">
+            <div class="listbox_lef">
+              <div class="cent_left">
+                <div class="list_img">
+                  <img :src="item.images
+                        " alt="">
+                </div>
+                <div class="list_oper">
+                  <p class="oper_room">
+                    <span>{{item.name}}</span>
+                  </p>
+                  <p class="content">{{item.credit}}</p>
+                  <p class="every_pro">
+                    <span class="data_pro">
+                      <span class="data_mon">￥{{item.price}}</span>/日</span>
+                  </p>
+                  <p class="cli_app" v-if="item.is_play == 2">
+                    <span class="cli_ment">点击购买</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- 点击加载更多 -->
+          <!-- <div class="item loadMore" ref="load">
+            <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+            <span v-else>
+              <span @click="loadMore" v-if="loading">加载更多</span>
+              <span v-else>数据全部加载完成</span>
+            </span>
+          </div> -->
         </div>
-      </div>
-      <!-- 点击加载更多 -->
-      <div class="item loadMore"
-           ref="load">
-        <mt-spinner type="fading-circle"
-                    color="#FD4689 "
-                    v-if="topStatus"></mt-spinner>
-        <span v-else>
-          <span @click="loadMore"
-                v-if="loading">加载更多</span>
-          <span v-else>数据全部加载完成</span>
-        </span>
-      </div>
-    </div>
+        <div style="height:1px"></div>
+      </scroller>
     </section>
     <!-- 侧边栏 -->
-     <slider :tabContent="tabs"
-            :num="num"
-            :tab="tab"
-            :isRellyShow="isRellyShow"
-            :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
 
     <!-- <div class="dsad" @click="toQian">去签协议</div> -->
 
     <!-- 暂无数据 -->
-    <div class="nodata"
-         v-if="showNodata">
+    <!-- <div class="nodata" v-if="showNodata">
       暂无数据
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -88,10 +66,10 @@ import slider from "../../components/sliderBar.vue";
 export default {
   data() {
     return {
-      tabs:[],
+      tabs: [],
       screenscreening: [], //视频筛选
       pages: 1,
-      num:100,
+      num: 100,
       keyword: "",
       showLoad: true,
       load: true,
@@ -101,15 +79,16 @@ export default {
       showNodata: false,
       isNodata: false,
       loading: false,
-      isRellyShow:false
+      isRellyShow: false,
+      isvoid: false
     };
   },
   created() {
     Indicator.open();
-    let that =  this
+    let that = this;
     //首页banner查询
     // this.getData(this.keyword, this.pages);
-     that.$axios
+    that.$axios
       .get(window.ajaxSrc + "/api/meizubao/videoType", {})
       .then(res => {
         console.log(res);
@@ -124,7 +103,7 @@ export default {
       });
   },
   methods: {
-     tab(id, index) {
+    tab(id, index) {
       // console.log(id);
 
       this.num = index;
@@ -134,6 +113,7 @@ export default {
       this.isNodata = false;
       this.showNodata = false;
       this.pages = 1;
+      this.isvoid =  false;
       this.isRellyShow = false;
       Indicator.open();
       setTimeout(() => {
@@ -148,21 +128,22 @@ export default {
         }
       });
     },
-    logo(){
-      this.isRellyShow = true 
+    logo() {
+      this.isRellyShow = true;
     },
-    show(){
-      let that = this 
-      that.code = 2
-      if(this.keyword ==''){
-        Toast('搜索不能为空')
+    show() {
+      let that = this;
+      that.code = 2;
+      this.isvoid =  false
+      if (this.keyword == "") {
+        Toast("搜索不能为空");
         return false;
       }
-      this.pages = 1
-        Indicator.open();
-        setTimeout(() => {
+      this.pages = 1;
+      Indicator.open();
+      setTimeout(() => {
         this.screenscreening = [];
-        this.getData("", that.keyword, that.pages);
+        this.getData("", that.keyword, that.pages,'');
       }, 500);
     },
     hideSide() {
@@ -181,16 +162,68 @@ export default {
       this.pages = 1;
       this.screenscreening = [];
       setTimeout(() => {
-        this.getData(keyword, this.pages);
+        this.getData("", keyword, this.pages, "");
+      }, 1000);
+    },
+    infinite(done) {
+      setTimeout(() => {
+        this.pages++;
+        // this.pages++; //每当向上滑动的时候就让页数加1
+
+        this.getData(this.typeId, this.keyword, this.pages, done);
       }, 1000);
     },
     //请求数据
-    getData(typeId,word, pages) {
+    getData(typeId, word, pages, done) {
       let that = this;
-      that.$axios
+      if (done) {
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/videoSearch", {
+            uid: window.localStorage.getItem("id"),
+            typeId: typeId,
+            keywords: word,
+            page: pages
+          })
+          .then(res => {
+            console.log(res);
+
+            if (res.data.status_code == 1001) {
+              console.log(11);
+              this.showLoading = false;
+              setTimeout(() => {
+                Indicator.close();
+              }, 1000);
+              // if (res.data.data.length == 0) {
+              //   that.load = false;
+              //   this.$refs.load.style = "height:100%";
+              //   this.$refs.masonry.style = "position:relative";
+              // } else if (res.data.data.length < this.count) {
+              //   that.load = false;
+              //   this.$refs.load.style = "1rem";
+              //   // this.$refs.masonry.style="position:relative"
+              // } else {
+              //   that.load = true;
+              //   this.$refs.load.style = "height:1rem";
+              // }
+             if (res.data.data.length < 10) {
+                pages = 0;
+                done(true);
+              } else {
+                if (done) done();
+              }
+
+              that.screenscreening = that.screenscreening.concat(res.data.data);
+            }
+          })
+          .catch(res => {
+            console.log(res);
+            console.log("查询失败");
+          });
+      } else {
+          that.$axios
         .post(window.ajaxSrc + "/api/meizubao/videoSearch", {
           uid: window.localStorage.getItem("id"),
-          typeId:typeId,
+          typeId: typeId,
           keywords: word,
           page: pages
         })
@@ -218,6 +251,7 @@ export default {
             if (res.data.data.length == 0) {
               this.showNodata = true;
               this.isNodata = false;
+              this.isvoid =  true;
             } else if (res.data.data.length < this.count) {
               this.isNodata = true;
               this.loading = false;
@@ -233,6 +267,7 @@ export default {
           console.log(res);
           console.log("查询失败");
         });
+      }
     },
     loadMore() {
       this.pages++;
@@ -268,7 +303,7 @@ export default {
   // padding: 7px 15px;
   .logo {
     width: px2rem(25px);
-    height:px2rem(25px);
+    height: px2rem(25px);
 
     img {
       width: 100%;
@@ -278,7 +313,7 @@ export default {
 }
 .search_content {
   width: px2rem(270px);
-  height:  px2rem(30px);
+  height: px2rem(30px);
   border: 1px solid #ccc;
   border-radius: 5px;
   display: flex;
@@ -288,12 +323,12 @@ export default {
   color: #000;
   span {
     display: inline-block;
-    margin-left:  px2rem(5px);
+    margin-left: px2rem(5px);
   }
   img {
     display: inline-block;
     width: px2rem(20px);
-    margin-right:  px2rem(5px);
+    margin-right: px2rem(5px);
   }
   form {
     display: block;
@@ -304,7 +339,7 @@ export default {
       outline: none;
       width: 100%;
       height: 100%;
-      padding-left:  px2rem(8px);
+      padding-left: px2rem(8px);
     }
   }
 }
@@ -411,9 +446,9 @@ export default {
   width: 100%;
 }
 .oper_room {
-  font-size:15px;
-  font-weight:bold;
-  color:#000; 
+  font-size: 15px;
+  font-weight: bold;
+  color: #000;
   padding: 0.2rem;
 }
 .content {
@@ -471,9 +506,9 @@ export default {
   letter-spacing: 0;
 }
 .item {
-   width: 46.1%;
+  width: 46.1%;
   height: auto;
-    margin: 0.6% 2%;
+  margin: 0.6% 2%;
   box-shadow: 0 2px 9px #ccc;
 }
 .moreData {
@@ -504,7 +539,7 @@ export default {
   align-items: center;
   color: #00a5ff;
   font-size: px2rem(14px);
-   box-shadow: none;
+  box-shadow: none;
 }
 .searchs {
   font-size: 14px;
@@ -515,7 +550,12 @@ export default {
   overflow: hidden;
   background: #fff;
 }
-section {
-  padding-top: px2rem(50px);
+// section {
+//   padding-top: px2rem(50px);
+// }
+.empty{
+  display: flex;
+  height:100%;
+  align-items: center;
 }
 </style>

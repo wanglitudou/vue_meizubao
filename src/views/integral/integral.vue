@@ -15,32 +15,21 @@
     </div>
 
     <div class="integralScrolls">
-      <div class="list_pull"
-           v-masonry
-           transition-duration="0.3s"
-           ref="masonry"
-           item-selector=".item"
-           column-width=".item"
-           v-if="isNodata">
+      <div class="list_pull" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
         <!-- <div class="list_lef"> -->
-        <div class="listing item"
-             v-masonry-tile
-             v-for="(item,index) of dataArr"
-             :key="index"
-             @click="toTrain(item.id)">
+        <div class="listing item" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10"    v-masonry-tile v-for=" (item,index) of dataArr " :key="index " @click="toTrain(item.id) ">
           <div>
-            <img :src="item.images"
-                 alt="">
+            <img :src="item.images " alt=" ">
           </div>
-          <div class="other">
-            <p class="aa">
+          <div class="other ">
+            <p class="aa ">
               <span>{{item.name}}</span>
             </p>
             <p>{{item.content}}</p>
             <p>
               <span>
                 <a>
-                  <i class="iconfont icon-yingyongchengxu-xianxing"></i>{{item.price}}</a>
+                  <i class="iconfont icon-yingyongchengxu-xianxing "></i>{{item.price}}</a>
               </span>
             </p>
           </div>
@@ -48,30 +37,12 @@
         </div>
       </div>
       <!-- 加载更多 -->
-      <div class=" loadMore"
-           ref="load">
-        <mt-spinner type="fading-circle"
-                    color="#FD4689 "
-                    v-if="topStatus"></mt-spinner>
-
-        <div class="add_more"
-             @click="loadMore">
-          <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
-        </div>
+      <div class=" loadMore " ref="load "  v-show="!queryLoading">
+        <mt-spinner type="fading-circle " color="#FD4689 " v-if="topStatus"></mt-spinner>
+       <span v-show="allLoaded">已全部加载</span>
       </div>
-      <!-- <div class="loadMore"
-             ref="load">
-         
-
-          <div class="add_more"
-               @click="loadMore">
-            <span>{{loading?'加载更多':'数据全部加载完成'}}</span>
-
-          </div>
-        </div> -->
       <!-- 没有数据 -->
-      <div class="noData"
-           v-if="showNodata">
+      <div class="noData " v-if="showNodata ">
         暂无数据
       </div>
     </div>
@@ -79,7 +50,7 @@
   </div>
 </template>
 <script>
-import { Spinner, Toast, Indicator } from "mint-ui";
+import { Spinner, Toast, Indicator, InfiniteScroll } from "mint-ui";
 export default {
   data() {
     return {
@@ -88,26 +59,16 @@ export default {
       // dataArrs:['1','2','3','4','5','6','1','2','3','4','5','6','1','2','3','4','5','6','1','2','3','4','5','6','1','2','3','4','5','6'],
       integral: "",
       count: 15,
-      isNodata: true,
-      showNodata: false,
-      topStatus: false,
-      loading: false
+      moreLoading: false,
+      isNodata: true,//没有数据时候隐藏 列表页
+      showNodata: false,//列表为显示全局没有数据 
+      topStatus: false,//显示正在加载loading
+      loading: false,//滚动加载loading  是否需要加载
+      allLoaded:false,//全部加载完成后显示 数据全部加载
+      queryLoading:false,//控制是否显示loading
     };
   },
   mounted() {
-    // this.$axios
-    //   .get(window.ajaxSrc + "/api/meizubao/productDetail", {
-    //     params: { id: this.$route.query.pid }
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //     if (res.data.status_code == 1001) {
-    //       this.data = res.data.data;
-    //     }
-    //   })
-    //   .catch(() => {
-    //     console.log("http请求错误");
-    //   });
     this.init();
   },
   methods: {
@@ -123,16 +84,18 @@ export default {
             if (res.data.data.data.length == 0) {
               this.showNodata = true;
               this.isNodata = false;
+              this.queryLoading = true
             } else if (res.data.data.data.length < this.count) {
               this.topStatus = false;
               this.showNodata = false;
-              this.loading = false;
+              // this.loading = false;
+              this.allLoaded =  true
             } else {
-              this.topStatus = false;
-              this.loading = true;
+              this.topStatus = true;
+              // this.loading = true;
               this.showNodata = false;
+               this.allLoaded =  false
             }
-
             this.integral = this.integral.concat(res.data.data.integral);
             this.dataArr = res.data.data.data;
           }
@@ -142,7 +105,32 @@ export default {
       this.$router.push({ name: "train", query: { pid: id } });
     },
     loadMore() {
-      this.page++;
+       if(this.allLoaded){
+          this.moreLoading = true;
+          return;
+        }
+        if(this.queryLoading){
+          return;
+        }
+          this.moreLoading = !this.queryLoading;
+
+           this.page++;
+      // if(this.queryLoading){
+
+      // }
+      //  this.moreLoading = true;;
+      //  if(this.allLoaded){
+      //     this.moreLoading = true;
+      //     return;
+      //   }
+      //    if(this.queryLoading){
+      //     return;
+      //   }
+      //    this.moreLoading = !this.queryLoading;
+      // // console.log(111)
+      // this.page++;
+      this.init()
+      // console.log(11)
     }
   }
 };
@@ -156,7 +144,7 @@ export default {
   /* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12); */
   /* border-radius: 3px; */
   background: #fff;
-  overflow: hidden;
+  // overflow: hidden;
   position: relative;
 }
 .intege {
@@ -237,101 +225,14 @@ export default {
   width: 100%;
 }
 
-// .list_rig {
-//   width: 3.46rem;
-//   border-radius: 3px;
-// }
-// .list_rig img {
-//   width: 3.44rem;
-// }
-
-// .list_rig .other span {
-// padding: 0.2rem;
-// font-size: 15px;
-// color: #000000;
-// letter-spacing: 0;
-// }
-// .list_lef .other span {
-//   padding: 0.2rem;
-//   font-size: 15px;
-//   color: #000000;
-//   letter-spacing: 0;
-// }
-// .paice {
-//   font-size: 13px;
-//   color: #666666;
-//   letter-spacing: 0;
-// }
-// .paice {
-//   font-size: 13px;
-//   color: #666666;
-//   letter-spacing: 0;
-// }
-// .meeting {
-//   padding: 0 0.3rem;
-//   font-size: 13px;
-//   color: #999999;
-//   letter-spacing: 0;
-// }
-// .count {
-//   font-size: 14px;
-//   color: #00a5ff;
-//   letter-spacing: 0;
-// }
-// .other a {
-//   font-size: 14px;
-//   color: #ff272d;
-//   letter-spacing: 0;
-// }
-/* .rent {
-  font-size: 12px;
-  color: #999999;
-  letter-spacing: 0;
-  padding: 0 0.2rem;
-} */
-// .list_lef .other .orders {
-//   width: 2.4rem;
-//   height: 0.72rem;
-//   line-height: 0.72rem;
-//   border: 1px solid #ccc;
-//   margin: 0 auto;
-//   text-align: center;
-//   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
-//   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
-//   border-radius: 3px;
-//   margin-top: 10px;
-//   margin-bottom: 15px;
-// }
-// .list_lef .other p .order {
-//   font-size: 14px;
-//   color: #ffffff;
-//   letter-spacing: 0;
-// }
-// .list_cent .list_rig .other .orders {
-//   width: 2.4rem;
-//   height: 0.72rem;
-//   line-height: 0.72rem;
-//   margin: 0 auto;
-//   text-align: center;
-//   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
-//   box-shadow: 0 1px 4px 0 rgba(253, 70, 137, 0.58);
-//   border-radius: 3px;
-//   margin-top: 10px;
-//   margin-bottom: 15px;
-// }
-// .list_cent .list_rig .other p .order {
-//   font-size: 14px;
-//   color: #ffffff;
-//   letter-spacing: 0;
-// }
 .list_pull {
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .list_pull {
   width: 100%;
-  overflow: auto;
-  margin-bottom: px2rem(50px);
+  // overflow: auto;
+  // margin-bottom: px2rem(50px);
 }
 
 .list_pull .item {
@@ -387,8 +288,8 @@ export default {
 }
 .loadMore {
   width: 100%;
-  position: absolute;
-  bottom: px2rem(0px);
+  // position: absolute;
+  // bottom: px2rem(0px);
   height: px2rem(40px);
   display: flex;
   justify-content: center;

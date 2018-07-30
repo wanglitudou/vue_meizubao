@@ -25,93 +25,67 @@
 
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show()
-                 type="search"
-                 placeholder="请输入搜索内容"
-                 v-model="keyword"
-                 ref="input1">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png"
-             alt="111">
+        <img src="../../assets/icon/search_1.png" alt="111">
       </div>
-      <p class="logo"
-         @click="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
     </header>
-    <section>
+    <section >
+      <scroller :on-infinite="infinite" style="padding-top:50px" ref="myscroller"  :refreshLayerColor="'#000'"   v-bind:class="isvoid == true?'empty':''">
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+          <div v-masonry-tile class="item" v-for="(item, index) in imgsArr" @click="details(item.id)">
+            <div class="boxs listing">
+              <div>
+                <img :src="item.images" alt="">
+              </div>
+              <div class="other">
+                <p class="name">
 
-      <div v-masonry
-           transition-duration="0.3s"
-           ref="masonry"
-           item-selector=".item"
-           column-width=".item"
-           v-if="isNodata">
-        <div v-masonry-tile
-             class="item"
-             v-for="(item, index) in imgsArr"
-             @click="details(item.id)">
+                  <span class="titleName">{{item.name}}</span>
 
-          <div class="boxs listing">
-            <div>
-              <img :src="item.images"
-                   alt="">
-            </div>
-            <div class="other">
-              <p class="name">
+                  <span class="paice">￥{{item.price}}</span>
+                </p>
+                <p class="meeting">
+                  {{item.centent}}
+                </p>
+                <p class="date">
+                  <span>
 
-                <span class="titleName">{{item.name}}</span>
+                    <a>￥{{item.firstrent}}</a>/月
+                  </span>
+                  <span class="count">
+                    <i class="iconfont icon-yingyongchengxu-xianxing"></i>
+                    {{item.created}}
 
-                <span class="paice">￥{{item.price}}</span>
-              </p>
-              <p class="meeting">
-                {{item.centent}}
-              </p>
-              <p class="date">
-                <span>
-
-                  <a>￥{{item.firstrent}}</a>/月
-                </span>
-                <span class="count">
-                  <i class="iconfont icon-yingyongchengxu-xianxing"></i>
-                  {{item.created}}
-
-                </span>
-              </p>
-              <p class="rent"> 起租期:{{item.num}}个月</p>
-              <p class="orders">
-                <span class="order">
-                  立即下单
-                </span>
-              </p>
+                  </span>
+                </p>
+                <p class="rent"> 起租期:{{item.num}}个月</p>
+                <p class="orders">
+                  <span class="order">
+                    立即下单
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
-
+          <!-- <div class=" item loadMore" ref="load">
+            <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+            <span v-else>
+              <span>数据全部加载完成</span>
+            </span>
+          </div> -->
         </div>
-        <div class=" item loadMore"
-             ref="load">
-          <mt-spinner type="fading-circle"
-                      color="#FD4689 "
-                      v-if="topStatus"></mt-spinner>
-          <span v-else>
-            <span @click="loadMore"
-                  v-if="loading">加载更多</span>
-            <span v-else>数据全部加载完成</span>
-          </span>
-        </div>
-      </div>
+        <div class="void" style="height: 1px;"></div>
+      </scroller>
     </section>
     <!-- 侧边栏 -->
-    <slider :tabContent="tabs"
-            :num="num"
-            :tab="tab"
-            :isRellyShow="isRellyShow"
-            :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
 
-    <div class="nodata"
-         v-if="showNodata">
+    <!-- <div class="nodata" v-if="showNodata">
 
       暂无数据
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -131,6 +105,7 @@ export default {
       immediatelyorder: [], //热租仪器筛选
       num: 100,
       flog: false,
+      isvoid:false,
       url: [],
       message: "",
       imgsArr: [],
@@ -151,12 +126,14 @@ export default {
       isNodata: true,
       showNodata: false,
       showTab: true,
-      isRellyShow: false
+      isRellyShow: false,
+      offset: 0,
+      num:400
     };
   },
 
-  created() {
-    Indicator.open();
+  mounted() {
+    // Indicator.open();
     let that = this;
     //热租仪器分类
     that.$axios
@@ -166,7 +143,55 @@ export default {
         if (res.data.status_code == 1001) {
           console.log(res.data.data);
           that.tabs = res.data.data;
-          this.getData(0, "", this.pages);
+          that.$axios
+            .post(window.ajaxSrc + "/api/meizubao/instrumentSearch", {
+              typeId: 0,
+              keywords: "",
+              page: this.pages
+            })
+            .then(res => {
+              console.log(res);
+              if (res.data.status_code == 1001) {
+                Indicator.close();
+                this.topStatus = false;
+                if (res.data.data.length == 0) {
+                  this.isNodata = false;
+                  this.showNodata = true;
+                } else {
+                  this.isNodata = true;
+                }
+
+                // if (res.data.data.length < 10) {
+
+                //   //return;
+                // } else {
+                //   done(true);
+                // }
+                // if (page == 1) {
+                this.imgsArr = res.data.data; //如果是想下滑动，刷新数据 就让items等于最新数据
+                // } else {
+                // this.imgsArr = this.imgsArr.concat(res.data.data); //否则就把数据拼接
+                // }
+
+                // if (res.data.data.length == 0) {
+                //   this.isNodata = false;
+                //   this.showNodata = true;
+                // } else if (res.data.data.length < this.count) {
+                //   this.loading = false;
+                //   this.isNodata = true;
+                // } else {
+                //   this.isNodata = true;
+                //   that.topStatus = false;
+                //   that.loading = true;
+                // }
+
+                // this.imgsArr = this.imgsArr.concat(res.data.data);
+              }
+            })
+            .catch(res => {
+              console.log(res);
+              console.log("查询失败");
+            });
         }
       })
       .catch(() => {
@@ -175,6 +200,121 @@ export default {
   },
 
   methods: {
+    infinite(done) {
+      // console.log(this.code);
+      // console.log(111)
+      setTimeout(() => {
+        this.pages++;
+        // this.pages++; //每当向上滑动的时候就让页数加1
+
+        this.getData(this.typeId, this.keyword, this.pages, done);
+      }, 1000);
+
+      //  this.$refs.myscroller.resize();
+    },
+    getData(name, keyword, page, done) {
+      if (done == "") {
+        this.$axios
+          .post(window.ajaxSrc + "/api/meizubao/instrumentSearch", {
+            typeId: name,
+            keywords: keyword,
+            page: page
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              Indicator.close();
+              this.topStatus = false;
+              if (res.data.data.length == 0) {
+                this.isNodata = false;
+                this.showNodata = true;
+                  this.isvoid = true;
+              } else {
+                console.log(111);
+                this.isNodata = true;
+                $('.loading-layer').css('hieght','100%')
+              }
+              console.log(res.data.data);
+              // if (res.data.data.length < 10) {
+
+              //   //return;
+              // } else {
+              //   done(true);
+              // }
+              // if (page == 1) {
+              // this.imgsArr = res.data.data; //如果是想下滑动，刷新数据 就让items等于最新数据
+              // } else {
+              // this.imgsArr = this.imgsArr.concat(res.data.data); //否则就把数据拼接
+              // }
+
+              // if (res.data.data.length == 0) {
+              //   this.isNodata = false;
+              //   this.showNodata = true;
+              // } else if (res.data.data.length < this.count) {
+              //   this.loading = false;
+              //   this.isNodata = true;
+              // } else {
+              //   this.isNodata = true;
+              //   that.topStatus = false;
+              //   that.loading = true;
+              // }
+
+              this.imgsArr = this.imgsArr.concat(res.data.data);
+              // console.log(this.imgsArr);
+            }
+          })
+          .catch(res => {
+            console.log(res);
+            console.log("查询失败");
+          });
+      } else {
+        // console.log()
+        let that = this;
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/instrumentSearch", {
+            typeId: name,
+            keywords: keyword,
+            page: page
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == 1001) {
+              Indicator.close();
+              this.topStatus = false;
+              if (res.data.data.length < 10) {
+                page = 0;
+                done(true);
+                // return;
+              } else {
+                if (done) done();
+              }
+              // if (page == 1) {
+              //   this.imgsArr = res.data.data; //如果是想下滑动，刷新数据 就让items等于最新数据
+              // } else {
+              this.imgsArr = this.imgsArr.concat(res.data.data); //否则就把数据拼接
+              // }
+              // if (res.data.data.length == 0) {
+              //   this.isNodata = false;
+              //   this.showNodata = true;
+              // } else if (res.data.data.length < this.count) {
+              //   this.loading = false;
+              //   this.isNodata = true;
+              // } else {
+              //   this.isNodata = true;
+              //   that.topStatus = false;
+              //   that.loading = true;
+              // }
+
+              // this.imgsArr = this.imgsArr.concat(res.data.data);
+            }
+          })
+          .catch(res => {
+            console.log(res);
+            console.log("查询失败");
+          });
+      }
+    },
+
     logo() {
       this.isRellyShow = true;
     },
@@ -187,6 +327,7 @@ export default {
       let that = this;
       // that.$refs.contain.style="over:"
       that.code = 2;
+      this.isvoid = false
       // console.log(this.keyword)
       //  this.keyword = keyword;
 
@@ -201,23 +342,10 @@ export default {
       Indicator.open();
       setTimeout(() => {
         this.imgsArr = [];
-        this.getData("", that.keyword, that.pages);
+        this.getData("", that.keyword, that.pages,'');
       }, 500);
     },
-    // search(keyword) {
-    //   //   console.log(word)
 
-    //   if (this.keyword == "") {
-    //     Toast("搜索不能为空");
-    //     return false;
-    //   }
-    //   this.imgsArr = [];
-    //   this.keyword = keyword;
-    //   this.pages = 1;
-    //   setTimeout(() => {
-    //     this.getData("", keyword, this.pages);
-    //   });
-    // },
     loadMore() {
       this.topStatus = true;
       this.pages++;
@@ -249,44 +377,60 @@ export default {
       this.isNodata = false;
       this.showNodata = false;
       this.pages = 1;
+      this.isvoid=  false,
       this.isRellyShow = false;
       Indicator.open();
-      setTimeout(() => {
-        this.getData(id, "", this.pages); //传输1  是页数
-      }, 2000);
-    },
-    getData(name, keyword, page) {
-      let that = this;
-      that.$axios
-        .post(window.ajaxSrc + "/api/meizubao/instrumentSearch", {
-          typeId: name,
-          keywords: keyword,
-          page: page
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            Indicator.close();
-            this.topStatus = false;
-            if (res.data.data.length == 0) {
-              this.isNodata = false;
-              this.showNodata = true;
-            } else if (res.data.data.length < this.count) {
-              this.loading = false;
-              this.isNodata = true;
-            } else {
-              this.isNodata = true;
-              that.topStatus = false;
-              that.loading = true;
-            }
+      // setTimeout(() => {
+      this.getData(id, "", this.pages, ""); //传输1  是页数
+      // this.$axios
+      //   .post(window.ajaxSrc + "/api/meizubao/instrumentSearch", {
+      //     typeId: id,
+      //     keywords: "",
+      //     page: this.pages
+      //   })
+      //   .then(res => {
+      //     console.log(res);
+      //     if (res.data.status_code == 1001) {
+      //       Indicator.close();
+      //       this.topStatus = false;
+      //       if (res.data.data.length == 0) {
+      //         this.isNodata = false;
+      //         this.showNodata = true;
+      //       }
+      //       console.log(res.data.data);
+      //       // if (res.data.data.length < 10) {
 
-            this.imgsArr = this.imgsArr.concat(res.data.data);
-          }
-        })
-        .catch(res => {
-          console.log(res);
-          console.log("查询失败");
-        });
+      //       //   //return;
+      //       // } else {
+      //       //   done(true);
+      //       // }
+      //       // if (page == 1) {
+      //       // this.imgsArr = res.data.data; //如果是想下滑动，刷新数据 就让items等于最新数据
+      //       // } else {
+      //       // this.imgsArr = this.imgsArr.concat(res.data.data); //否则就把数据拼接
+      //       // }
+
+      //       // if (res.data.data.length == 0) {
+      //       //   this.isNodata = false;
+      //       //   this.showNodata = true;
+      //       // } else if (res.data.data.length < this.count) {
+      //       //   this.loading = false;
+      //       //   this.isNodata = true;
+      //       // } else {
+      //       //   this.isNodata = true;
+      //       //   that.topStatus = false;
+      //       //   that.loading = true;
+      //       // }
+
+      //       this.imgsArr = this.imgsArr.concat(res.data.data);
+      //       console.log(this.imgsArr);
+      //     }
+      //   })
+      //   .catch(res => {
+      //     console.log(res);
+      //     console.log("查询失败");
+      //   });
+      // }, 2000);
     }
   },
   components: {
@@ -302,15 +446,15 @@ export default {
 @import "./detail.css";
 
 .containersActive {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #fff;
+  // width: 100%;
+  // height: 100%;
+  // overflow: hidden;
+  // background: #fff;
 }
 .containers {
-  width: 100%;
-  height: 100%;
-  background: #fff;
+  // width: 100%;
+  // height: 100%;
+  // background: #fff;
 }
 .meeting {
   text-overflow: ellipsis;
@@ -328,16 +472,17 @@ export default {
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
+  // top: 0;
+  // left: 0;
   z-index: 2;
   background: #fff;
   // padding: 7px 15px;
   .logo {
     width: px2rem(25px);
     height: px2rem(25px);
-
+    position:absolute;
+    right:20px;
     img {
       width: 100%;
       display: inline-block;
@@ -354,6 +499,8 @@ export default {
   font-size: px2rem(13px);
   align-items: center;
   color: #000;
+  position:absolute;
+  left:20px;
   span {
     display: inline-block;
     margin-left: px2rem(5px);
@@ -430,6 +577,7 @@ export default {
   width: 46.1%;
   height: auto;
   margin: 0.6% 2%;
+  box-shadow: 0 2px 9px #ccc;
 }
 
 .boxs {
@@ -473,7 +621,7 @@ export default {
   justify-content: center;
   width: 100%;
   height: 1rem;
-  font-size:px2rem(14px);
+  font-size: px2rem(14px);
   color: #00a5ff;
 }
 .Loading {
@@ -532,7 +680,13 @@ export default {
   top: 0;
 }
 section {
-  padding-top: px2rem(50px);
+  // width: 100%;
+  // height: 100%;
+  // // padding-top: px2rem(50px);
+  // position: absolute;
+ 
+  // top:px2rem(44px);
+  //  padding:px2rem(50px) 0 ;
 }
 .rent {
   color: #999;
@@ -540,4 +694,16 @@ section {
   font-size: px2rem(12px);
   margin-top: px2rem(6px);
 }
+.void{
+  height: px2rem(44px);
+}
+.empty{
+  display: flex;
+  height:100%;
+  align-items: center;
+}
+// .loading-layer{
+//   // no-data-text
+//  color:#00a5ff !important;
+// }
 </style>

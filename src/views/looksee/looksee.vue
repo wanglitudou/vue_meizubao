@@ -1,6 +1,5 @@
 <template>
-  <div ref="container"
-       :class="isRellyShow?'containersActive':'container'">
+  <div ref="container" :class="isRellyShow?'containersActive':'container'">
 
     <!-- <div class="nav_pic">
                 <span class="list_tab"
@@ -50,90 +49,66 @@
     <header class="clearfix">
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show()
-                 type="search"
-                 placeholder="请输入搜索内容"
-                 v-model="keyword"
-                 ref="input1">
+          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png"
-             alt="111">
+        <img src="../../assets/icon/search_1.png" alt="111">
       </div>
-      <p class="logo"
-         @click="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
 
     </header>
     <section>
-      <div v-masonry
-           transition-duration="0.3s"
-           ref="masonry"
-           item-selector=".item"
-           column-width=".item"
-           v-if="isNodata">
-        <div v-masonry-tile
-             class="item"
-             v-for="(item, index) in thebeautyindustry"
-             @click="details(item.id)">
-          <div class="cent_left">
-            <div class="list_img">
-              <img :src="item.images"
-                   alt="">
-            </div>
-            <div class="list_oper">
-              <p class="oper_room">
-                <span class="eliteName">{{item.name}}</span>
-                <!-- <span>{{item.level}}</span> -->
-                <span class="eliteStar">
-                  <span v-for="val in item.level"><img src="../../assets/images/star.png"
-                         alt=""></span>
-                </span>
+      <scroller :on-infinite="infinite" style="padding-top:50px" ref="myscroller" :refreshLayerColor="'#000'" v-bind:class="isvoid == true?'empty':''">
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+          <div v-masonry-tile class="item" v-for="(item, index) in thebeautyindustry" @click="details(item.id)">
+            <div class="cent_left">
+              <div class="list_img">
+                <img :src="item.images" alt="">
+              </div>
+              <div class="list_oper">
+                <p class="oper_room">
+                  <span class="eliteName">{{item.name}}</span>
+                  <!-- <span>{{item.level}}</span> -->
+                  <span class="eliteStar">
+                    <span v-for="val in item.level"><img src="../../assets/images/star.png" alt=""></span>
+                  </span>
 
-              </p>
-              <p class="content">{{item.centetnt}}</p>
-              <p class="every_pro">
-                <span class="data_pro">
-                  <span class="data_mon">{{item.dayprice}}</span>/日</span>
-                <span class="week_pro">
-                  <span class="week_mon">{{item.price}}</span>/周</span>
-              </p>
-              <p class="cli_app">
-                <span class="cli_ment">点击预约</span>
-              </p>
+                </p>
+                <p class="content">{{item.centetnt}}</p>
+                <p class="every_pro">
+                  <span class="data_pro">
+                    <span class="data_mon">{{item.dayprice}}</span>/日</span>
+                  <span class="week_pro">
+                    <span class="week_mon">{{item.price}}</span>/周</span>
+                </p>
+                <p class="cli_app">
+                  <span class="cli_ment">点击预约</span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- 加载更多 -->
-        <div class="item loadMore"
-             ref="load">
-          <mt-spinner type="fading-circle"
-                      color="#FD4689 "
-                      v-if="topStatus"></mt-spinner>
+          <!-- 加载更多 -->
+          <!-- <div class="item loadMore" ref="load">
+          <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
           <span v-else>
-            <span @click="loadMore"
-                  v-if="loading">加载更多</span>
+            <span @click="loadMore" v-if="loading">加载更多</span>
             <span v-else>数据全部加载完成</span>
           </span>
+        </div> -->
+
         </div>
-
-      </div>
-
+        <div style="height:1px"></div>
+      </scroller>
     </section>
-    <slider :tabContent="tabs"
-            :num="num"
-            :tab="tab"
-            :isRellyShow="isRellyShow"
-            :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
     <!-- 没有数据 -->
-    <div class="nodata"
-         v-if="showNodata">
+    <div class="nodata" v-if="showNodata">
       暂无数据
     </div>
   </div>
 
 </template>
 <script>
-import { Spinner, Toast, Indicator } from "mint-ui";
+import { Spinner, Toast, Indicator, loadMore } from "mint-ui";
 import slider from "../../components/sliderBar.vue";
 import tab from "../../components/tabBar.vue";
 import search from "../../components/search.vue";
@@ -151,6 +126,8 @@ export default {
       gray: require("../../assets/images/jian.png"),
       number: 4,
       isRellyShow: false,
+      allLoaded: false,
+      isvoid:false,
       sliders: [
         {
           id: 1, // 为1 是等级
@@ -204,11 +181,13 @@ export default {
             this.keywords,
             this.grade,
             this.dayprice,
-            this.pages
+            this.pages,
+            ""
           );
         }
       })
-      .catch(() => {
+      .catch(res => {
+        console.log(res);
         setTimeout(() => {
           Indicator.close();
         }, 1000);
@@ -216,6 +195,21 @@ export default {
       });
   },
   methods: {
+    infinite(done) {
+      setTimeout(() => {
+        this.pages++;
+        // this.pages++; //每当向上滑动的时候就让页数加1
+
+        this.getData(
+          this.typeId,
+          this.keyword,
+          this.grade,
+          this.dayprice,
+          this.pages,
+          done
+        );
+      }, 1000);
+    },
     details(id) {
       this.$router.push({
         name: "essence",
@@ -228,6 +222,7 @@ export default {
     show() {
       console.log(11);
       this.code = 2;
+      this.isvoid =  false
       if (this.keyword == "") {
         Toast("搜索框不能为空");
         return false;
@@ -238,7 +233,14 @@ export default {
       setTimeout(() => {
         this.thebeautyindustry = [];
         // this.getData('')
-        this.getData("", this.keyword, this.grade, this.dayprice, this.pages);
+        this.getData(
+          "",
+          this.keyword,
+          this.grade,
+          this.dayprice,
+          this.pages,
+          ""
+        );
       }, 500);
     },
     //   search(keyword) {
@@ -260,47 +262,94 @@ export default {
     hideSide() {
       this.isRellyShow = false;
     },
-    getData(name, keywords, star, dayprice, page) {
+    getData(name, keywords, star, dayprice, pages, done) {
+      if (done) {
+        let that = this;
+        //热租仪器筛选
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/technicianSearch", {
+            typeId: name,
+            keywords: keywords,
+            page: pages,
+            // level: "",
+            level: star,
+            dayprice: dayprice
+            // price: ""
+          })
+          .then(res => {
+            // console.log(res.data.data.length);
+            if (res.data.status_code == 1001) {
+              Indicator.close();
+              // this.topStatus = false;
+              // if (res.data.data.length == 0) {
+              //   this.isNodata = false;
+              //   this.showNodata = true;
+              // } else if (res.data.data.length < this.count) {
+              //   this.loading = false;
+              //   this.isNodata = true;
+              // } else {
+              //   this.isNodata = true;
+              //   that.topStatus = false;
+              //   that.loading = true;
+              // }
+              if (res.data.data.length < 10) {
+                pages = 0;
+                done(true);
+              } else {
+                if (done) done();
+              }
+              that.thebeautyindustry = that.thebeautyindustry.concat(
+                res.data.data
+              );
+            }
+          })
+          .catch(res => {
+            console.log(res)
+            console.log("查询失败");
+          });
+      } else {
+        let that = this;
+        //热租仪器筛选
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/technicianSearch", {
+            typeId: name,
+            keywords: keywords,
+            page: pages,
+            // level: "",
+            level: star,
+            dayprice: dayprice
+            // price: ""
+          })
+          .then(res => {
+            // console.log(res.data.data.length);
+            if (res.data.status_code == 1001) {
+              Indicator.close();
+              this.topStatus = false;
+              if (res.data.data.length == 0) {
+                this.isvoid =  true
+                this.isNodata = false;
+                this.showNodata = true;
+              } else if (res.data.data.length < this.count) {
+                this.loading = false;
+                this.isNodata = true;
+              } else {
+                this.isNodata = true;
+                that.topStatus = false;
+                that.loading = true;
+              }
+
+              that.thebeautyindustry = that.thebeautyindustry.concat(
+                res.data.data
+              );
+            }
+          })
+          .catch(() => {
+            console.log("查询失败");
+          });
+      }
       // console.log(name, keywords, star, dayprice, page);
       // console.log(dayprice)
       // return false
-      let that = this;
-      //热租仪器筛选
-      that.$axios
-        .post(window.ajaxSrc + "/api/meizubao/technicianSearch", {
-          typeId: name,
-          keywords: keywords,
-          page: page,
-          // level: "",
-          level: star,
-          dayprice: dayprice
-          // price: ""
-        })
-        .then(res => {
-          // console.log(res.data.data.length);
-          if (res.data.status_code == 1001) {
-            Indicator.close();
-            this.topStatus = false;
-            if (res.data.data.length == 0) {
-              this.isNodata = false;
-              this.showNodata = true;
-            } else if (res.data.data.length < this.count) {
-              this.loading = false;
-              this.isNodata = true;
-            } else {
-              this.isNodata = true;
-              that.topStatus = false;
-              that.loading = true;
-            }
-
-            that.thebeautyindustry = that.thebeautyindustry.concat(
-              res.data.data
-            );
-          }
-        })
-        .catch(() => {
-          console.log("查询失败");
-        });
     },
     loadMore() {
       this.topStatus = true;
@@ -334,6 +383,7 @@ export default {
       this.typeId = id;
       Indicator.open();
       this.pages = 1;
+      this.isvoid =  false;
       this.isNodata = false;
       this.showNodata = false;
       this.thebeautyindustry = [];
@@ -729,7 +779,12 @@ export default {
     }
   }
 }
-section {
-  padding-top: px2rem(50px);
+// section {
+//   padding-top: px2rem(50px);
+// }
+.empty{
+ display: flex;
+ height:100%;
+ align-items: center;
 }
 </style>

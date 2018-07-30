@@ -63,6 +63,10 @@ Vue.directive("title", {
     document.title = binding.value;
   }
 });
+// 插件
+import VueScroller from 'vue-scroller';
+Vue.use(VueScroller)
+
 //新的日历插件
 Vue.use(VCalendar, {
   firstDayOfWeek: 1, // Monday

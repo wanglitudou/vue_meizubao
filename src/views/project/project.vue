@@ -1,5 +1,5 @@
 <template>
-  <div  ref="container"  v-bind:class="isRellyShow == true?'containersActive':'container'">
+  <div ref="container" v-bind:class="isRellyShow == true?'containersActive':'container'">
 
     <header class="clearfix">
       <div class="search_content">
@@ -8,55 +8,53 @@
         </form>
         <img src="../../assets/icon/search_1.png" alt="111">
       </div>
-      <p class="logo"
-         @click="logo"><img src="../../assets/images/menu.png"
-             alt=""></p>
+      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
     </header>
     <!-- 瀑布流 -->
     <section>
-    <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
-      <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
-        <div class="listbox_lef">
-          <div class="cent_left">
-            <div class="list_img">
-              <img :src="item.images" alt="">
-            </div>
-            <div class="list_oper">
-              <p class="oper_room">
-                <span>{{item.name}}</span>
-              </p>
-              <p class="content">{{item.content}}</p>
-              <p class="every_pro">
-                <span class="data_pro">
-                  <span class="data_mon">￥{{item.price}}</span>/日</span>
-                <span class="pay_add">￥{{item.price}}</span>
-              </p>
-              <p class="cli_app">
-                <span class="cli_ment" @click="cooperation()">点击预约</span>
-              </p>
+      <scroller :on-infinite="infinite" style="padding-top:50px" ref="myscroller" :refreshLayerColor="'#000'" v-bind:class="isvoid == true?'empty':''">
+        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+          <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
+            <div class="listbox_lef">
+              <div class="cent_left">
+                <div class="list_img">
+                  <img :src="item.images" alt="">
+                </div>
+                <div class="list_oper">
+                  <p class="oper_room">
+                    <span>{{item.name}}</span>
+                  </p>
+                  <p class="content">{{item.content}}</p>
+                  <p class="every_pro">
+                    <span class="data_pro">
+                      <span class="data_mon">￥{{item.price}}</span>/日</span>
+                    <span class="pay_add">￥{{item.price}}</span>
+                  </p>
+                  <p class="cli_app">
+                    <span class="cli_ment" @click="cooperation()">点击预约</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- <div class="item loadMore" ref="load">
+            <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
+            <span v-else>
+              <span @click="loadMore" v-if="loading">加载更多</span>
+              <span v-else>数据全部加载完成</span>
+            </span>
+          </div> -->
         </div>
-      </div>
-      <div class="item loadMore" ref="load">
-        <mt-spinner type="fading-circle" color="#FD4689 " v-if="topStatus"></mt-spinner>
-        <span v-else>
-          <span @click="loadMore" v-if="loading">加载更多</span>
-          <span v-else>数据全部加载完成</span>
-        </span>
-      </div>
-    </div>
+        <div class="void" style="height: 1px;"></div>
+      </scroller>
     </section>
     <!-- 侧边栏 -->
-    <slider :tabContent="tabs"
-            :num="num"
-            :tab="tab"
-            :isRellyShow="isRellyShow"
-            :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
     <!-- 暂无数据 -->
-    <div class="noData" v-if="showNodata">
+    <!-- <div class="noData" v-if="showNodata">
       暂无数据
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -66,8 +64,8 @@ import slider from "../../components/sliderBar.vue";
 export default {
   data() {
     return {
-      tabs:[],//热租仪器分类
-      num:100,
+      tabs: [], //热租仪器分类
+      num: 100,
       cooperativeproject: [], //合作项目
       keyword: "",
       pages: 1,
@@ -79,19 +77,24 @@ export default {
       isNodata: false,
       showNodata: false,
       topStatus: false,
-      isRellyShow:false
+      isRellyShow: false,
+      isvoid: false,
+      typeId: 0
     };
   },
   created() {
+    // console.log(done)
     Indicator.open();
-    let that  = this 
-    that.$axios.get(window.ajaxSrc + '/api/meizubao/projectType',{}).then(res=>{
-      console.log(res)
-      if(res.data.status_code == 1001){
-        that.tabs = res.data.data
-      this.getData(0,that.keyword, that.pages);
-      }
-    })
+    let that = this;
+    that.$axios
+      .get(window.ajaxSrc + "/api/meizubao/projectType", {})
+      .then(res => {
+        console.log(res);
+        if (res.data.status_code == 1001) {
+          that.tabs = res.data.data;
+          this.getData(0, that.keyword, that.pages, "");
+        }
+      });
   },
   methods: {
     details(id) {
@@ -106,70 +109,101 @@ export default {
       //合作项目,点击合作项目模块,跳转到对应的详情页面
       this.$router.push({ name: "cooperation" });
     },
-    search(keyword) {
-      if (keyword == "") {
-        Toast("不能为空");
-        return false;
-      }
-      this.cooperativeproject = [];
-      this.keyword = keyword;
-      this.pages = 1;
-      this.code = 2;
-      Indicator.open();
+    infinite(done) {
       setTimeout(() => {
-        this.getData(keyword, this.pages);
+        this.pages++;
+        // this.pages++; //每当向上滑动的时候就让页数加1
+
+        this.getData(this.typeId, this.keyword, this.pages, done);
       }, 1000);
     },
-    getData(typeId,keyword, pages) {
-      console.log(keyword);
-      let that = this;
-      //首页banner查询
-      that.$axios
-        .post(window.ajaxSrc + "/api/meizubao/projectSearch", {
-          typeId:typeId,
-          keywords: keyword,
-          page: pages
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == "1001") {
-            setTimeout(() => {
-              Indicator.close();
-            }, 1000);
-            if (res.data.data.length == 0) {
-              this.showNodata = true;
-              this.isNodata = false;
-            } else if (res.data.data.length < this.count) {
-              this.isNodata = true;
-              this.loading = false;
-            } else {
-              this.isNodata = true;
-              that.topStatus = false;
-              that.loading = true;
-            }
-            // if (res.data.data.length == 0) {
-            //   that.load = false;
-            //   this.$refs.load.style = "height:100%";
-            //   this.$refs.container.style = "height:100%";
-            //   this.$refs.masonry.style = "position:relative";
-            // } else if (res.data.data.length < this.count) {
-            //   that.load = false;
-            //   this.$refs.load.style = "1rem";
-            //   // this.$refs.masonry.style="position:relative"
-            // } else {
-            //   that.load = true;
-            //   this.$refs.load.style = "height:1rem";
-            // }
+    getData(typeId, keyword, pages, done) {
 
-            that.cooperativeproject = that.cooperativeproject.concat(
-              res.data.data
-            );
-          }
-        })
-        .catch(res => {
-          console.log(res);
-          console.log("查询失败");
-        });
+      if (done) {
+        let that = this;
+        //首页banner查询
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/projectSearch", {
+            typeId: typeId,
+            keywords: keyword,
+            page: pages
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == "1001") {
+              // setTimeout(() => {
+              //   Indicator.close();
+              // }, 1000);
+              // if (res.data.data.length == 0) {
+              //    pages = 0;
+              //     done(true);
+              //   this.showNodata = true;
+              //   this.isNodata = false;
+              // } else if (res.data.data.length < this.count) {
+              //   this.isNodata = true;
+              //   this.loading = false;
+              // } else {
+              //   this.isNodata = true;
+              //   that.topStatus = false;
+              //   that.loading = true;
+              // }
+              if (res.data.data.length < 10) {
+                pages = 0;
+                done(true);
+              } else {
+                if (done) done();
+              }
+
+              that.cooperativeproject = that.cooperativeproject.concat(
+                res.data.data
+              );
+            }
+          })
+          .catch(res => {
+            console.log(res);
+            console.log("查询失败");
+          });
+      } else {
+        let that = this;
+        //首页banner查询
+        that.$axios
+          .post(window.ajaxSrc + "/api/meizubao/projectSearch", {
+            typeId: typeId,
+            keywords: keyword,
+            page: pages
+          })
+          .then(res => {
+            console.log(res);
+            if (res.data.status_code == "1001") {
+              setTimeout(() => {
+                Indicator.close();
+              }, 1000);
+              if (res.data.data.length == 0) {
+                //  pages = 0;
+                // done(true);
+                this.isvoid = true;
+                this.showNodata = true;
+                this.isNodata = false;
+              } else if (res.data.data.length < this.count) {
+                this.isNodata = true;
+                this.loading = false;
+              } else {
+                this.isNodata = true;
+                that.topStatus = false;
+                that.loading = true;
+              }
+
+              that.cooperativeproject = that.cooperativeproject.concat(
+                res.data.data
+              );
+            }
+          })
+          .catch(res => {
+            console.log(res);
+            console.log("查询失败");
+          });
+      }
+      // console.log(keyword);
     },
     loadMore() {
       this.pages++;
@@ -180,30 +214,32 @@ export default {
         this.getData("", this.pages);
       }
     },
-    hideSide(){
+    hideSide() {
       this.isRellyShow = false;
     },
-    logo(){
+    logo() {
       this.isRellyShow = true;
     },
-    show(){
-     let that = this 
-     that.code =2  
-     if(that.keyword == ''){
-       Toast('搜索不能为空')
-       return false
-     }
-     that.pages = 1
-     Indicator.open();
-     setTimeout(()=>{
-       that.cooperativeproject = []
-       that.getData('',that.keyword,that.pages)
-     })
+    show() {
+      let that = this;
+      that.code = 2;
+      this.isvoid =  false
+      if (that.keyword == "") {
+        Toast("搜索不能为空");
+        return false;
+      }
+      that.pages = 1;
+      Indicator.open();
+      setTimeout(() => {
+        that.cooperativeproject = [];
+        that.getData("", that.keyword, that.pages,'');
+      });
     },
-    tab(id,index){
+    tab(id, index) {
       this.num = index;
       this.typeId = id;
       this.keyword = "";
+      this.isvoid = false;
       this.cooperativeproject = [];
       this.isNodata = false;
       this.showNodata = false;
@@ -211,13 +247,9 @@ export default {
       this.isRellyShow = false;
       Indicator.open();
       setTimeout(() => {
-        this.getData(id, "", this.pages); //传输1  是页数
+        this.getData(id, "", this.pages,''); //传输1  是页数
       }, 1000);
-    },
-    // cooperation() {
-    //   //点击预约的时候,跳转到对应的详情页面
-    //   this.$router({ name: "cooperation" });
-    // }
+    }
   },
   components: {
     search,
@@ -441,9 +473,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:#00a5ff;
-   font-size: px2rem(14px);
-    position: absolute;
+  color: #00a5ff;
+  font-size: px2rem(14px);
+  position: absolute;
   top: 0;
 }
 .loadMore {
@@ -517,7 +549,12 @@ export default {
     }
   }
 }
-section{
-   padding-top: px2rem(50px);
+section {
+  padding-top: px2rem(50px);
+}
+.empty {
+  display: flex;
+  height: 100%;
+  align-items: center;
 }
 </style>
