@@ -184,10 +184,7 @@ export default {
     console.log($(".new_name"));
     //用户信息
     that.$axios
-      .get(
-        window.ajaxSrc+"/api/meizubao/userInfo?uid=" +
-          localStorage.id
-      )
+      .get(window.ajaxSrc + "/api/meizubao/userInfo?uid=" + localStorage.id)
       .then(res => {
         console.log(res);
         if (res.data.status_code == 1001) {
@@ -350,7 +347,7 @@ export default {
       console.log(this.shop);
       let that = this;
       that.$axios
-        .post(window.ajaxSrc+"/api/meizubao/updateUserInfo", {
+        .post(window.ajaxSrc + "/api/meizubao/updateUserInfo", {
           uid: localStorage.id,
           user_name: that.data.name,
           age: that.data.age,
@@ -388,7 +385,8 @@ export default {
 }
 .infore_container {
   width: 100%;
-  height: 100%; // height: calc(100% - 0.88rem);
+  height: 100%;
+  // height: calc(100% - 0.88rem);
   overflow: hidden;
   background: #fff;
 }
@@ -490,19 +488,24 @@ export default {
   text-align: center;
 }
 .next_up {
-  text-align: center;
-  // margin-bottom: 50px;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+  position: relative;
 }
 .next_nex {
   width: px2rem(120px);
-  height: px2rem(72px);
+  height: px2rem(50px);
+  line-height: px2rem(50px);
   text-align: center;
-  line-height: px2rem(72px);
-  padding: 0.2rem 0.7rem;
   background: #ffffff;
   border: 1px solid #fd4689;
   border-radius: 3px;
   font-size: 14px;
   color: #fd4689;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }
 </style>
