@@ -490,7 +490,7 @@ export default {
 }
 .next_up {
   width: 100%;
-  height: 60px;
+  height: 70px;
   position: relative;
 }
 .next_nex {
@@ -504,7 +504,7 @@ export default {
   font-size: 14px;
   color: #fd4689;
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
