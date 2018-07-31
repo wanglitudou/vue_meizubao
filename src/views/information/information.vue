@@ -392,7 +392,8 @@ export default {
 }
 .perfect {
   // width: 7.068rem;
-  width: px2rem(355px);
+  height: auto;
+  // width: px2rem(355px);
   // height: 10.34rem;
   // height: px2rem(517px);
   // width: 100%;
@@ -489,8 +490,7 @@ export default {
 }
 .next_up {
   width: 100%;
-  height: 100px;
-  margin-bottom: 20px;
+  height: 60px;
   position: relative;
 }
 .next_nex {
@@ -504,7 +504,7 @@ export default {
   font-size: 14px;
   color: #fd4689;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
