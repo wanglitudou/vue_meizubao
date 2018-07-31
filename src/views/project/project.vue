@@ -1,24 +1,45 @@
 <template>
-  <div ref="container" v-bind:class="isRellyShow == true?'containersActive':'container'">
+  <div ref="container"
+       v-bind:class="isRellyShow == true?'containersActive':'container'">
 
     <header class="clearfix">
       <div class="search_content">
         <form action="javascript:return true;">
-          <input @keyup.13=show() type="search" placeholder="请输入搜索内容" v-model="keyword" ref="input1">
+          <input @keyup.13=show()
+                 type="search"
+                 placeholder="请输入搜索内容"
+                 v-model="keyword"
+                 ref="input1">
         </form>
-        <img src="../../assets/icon/search_1.png" alt="111">
+        <img src="../../assets/icon/search_1.png"
+             alt="111">
       </div>
-      <p class="logo" @click="logo"><img src="../../assets/images/menu.png" alt=""></p>
+      <p class="logo"
+         @click="logo"><img src="../../assets/images/menu.png"
+             alt=""></p>
     </header>
     <!-- 瀑布流 -->
     <section>
-      <scroller :on-infinite="infinite" style="padding-top:50px" ref="myscroller" :refreshLayerColor="'#000'" v-bind:class="isvoid == true?'empty':''">
-        <div v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
-          <div v-masonry-tile class="item" v-for="(item, index) in cooperativeproject" @click="details(item.id)">
+      <scroller :on-infinite="infinite"
+                style="padding-top:50px"
+                ref="myscroller"
+                :refreshLayerColor="'#000'"
+                v-bind:class="isvoid == true?'empty':''">
+        <div v-masonry
+             transition-duration="0.3s"
+             ref="masonry"
+             item-selector=".item"
+             column-width=".item"
+             v-if="isNodata">
+          <div v-masonry-tile
+               class="item"
+               v-for="(item, index) in cooperativeproject"
+               @click="details(item.id)">
             <div class="listbox_lef">
               <div class="cent_left">
                 <div class="list_img">
-                  <img :src="item.images" alt="">
+                  <img :src="item.images"
+                       alt="">
                 </div>
                 <div class="list_oper">
                   <p class="oper_room">
@@ -28,10 +49,11 @@
                   <p class="every_pro">
                     <span class="data_pro">
                       <span class="data_mon">￥{{item.price}}</span>/日</span>
-                    <span class="pay_add">￥{{item.price}}</span>
+                    <!-- <span class="pay_add">￥{{item.price}}</span> -->
                   </p>
                   <p class="cli_app">
-                    <span class="cli_ment" @click="cooperation()">点击预约</span>
+                    <span class="cli_ment"
+                          @click="cooperation()">点击预约</span>
                   </p>
                 </div>
               </div>
@@ -46,11 +68,16 @@
             </span>
           </div> -->
         </div>
-        <div class="void" style="height: 1px;"></div>
+        <div class="void"
+             style="height: 1px;"></div>
       </scroller>
     </section>
     <!-- 侧边栏 -->
-    <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
+    <slider :tabContent="tabs"
+            :num="num"
+            :tab="tab"
+            :isRellyShow="isRellyShow"
+            :hideSide="hideSide"></slider>
     <!-- 暂无数据 -->
     <!-- <div class="noData" v-if="showNodata">
       暂无数据
@@ -118,7 +145,6 @@ export default {
       }, 1000);
     },
     getData(typeId, keyword, pages, done) {
-
       if (done) {
         let that = this;
         //首页banner查询
@@ -223,7 +249,7 @@ export default {
     show() {
       let that = this;
       that.code = 2;
-      this.isvoid =  false
+      this.isvoid = false;
       if (that.keyword == "") {
         Toast("搜索不能为空");
         return false;
@@ -232,7 +258,7 @@ export default {
       Indicator.open();
       setTimeout(() => {
         that.cooperativeproject = [];
-        that.getData("", that.keyword, that.pages,'');
+        that.getData("", that.keyword, that.pages, "");
       });
     },
     tab(id, index) {
@@ -247,7 +273,7 @@ export default {
       this.isRellyShow = false;
       Indicator.open();
       setTimeout(() => {
-        this.getData(id, "", this.pages,''); //传输1  是页数
+        this.getData(id, "", this.pages, ""); //传输1  是页数
       }, 1000);
     }
   },
@@ -380,7 +406,7 @@ export default {
 }
 .every_pro {
   display: flex;
-  justify-content: space-around;
+  // justify-content: space-around;
   align-items: center;
   margin: px2rem(6px) px2rem(10px);
   color: #999999;
