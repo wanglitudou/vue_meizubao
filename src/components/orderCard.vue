@@ -11,7 +11,7 @@
         <p class="big">{{name}}</p>
         <div>
           <span class="color666">租赁押金：</span><span>￥{{deposit}}</span>
-          <span class="text-right color666">起租期：{{month}}月</span>
+          <span class="text-right color666">起租期：{{stage}}月</span>
         </div>
         <div class="bottom-text">
           <span class="color666">首租租金：</span>￥<span class="big red">{{price}}</span>/月
