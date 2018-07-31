@@ -444,7 +444,7 @@ export default {
 .year_nums {
   width: px2rem(355px);
   height: px2rem(97.5px);
-  margin: 0.2rem auto 0;
+  margin: 0.1rem auto 0;
   border: 1px solid #f7f7f7;
   // border-bottom: 1px solid #f7f7f7;
   display: flex;
@@ -490,7 +490,7 @@ export default {
 }
 .next_up {
   width: 100%;
-  height: 70px;
+  height: 100px;
   position: relative;
 }
 .next_nex {
@@ -504,7 +504,7 @@ export default {
   font-size: 14px;
   color: #fd4689;
   position: absolute;
-  top: 30%;
+  top: 35%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
