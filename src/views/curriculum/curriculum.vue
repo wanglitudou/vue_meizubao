@@ -16,7 +16,7 @@
         </div>
         <div class="textDesc">
           <p class="name">{{item.name}}</p>
-          <p class="desc">{{item.content}}</p>
+          <p class="desc">{{item.goods_name}}</p>
         </div>
       </div>
       <!--加载更多和暂无数据 -->

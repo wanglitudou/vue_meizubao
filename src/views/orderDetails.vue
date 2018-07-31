@@ -206,9 +206,9 @@ export default {
         .then(res => {
           if (res.data.status_code == "1001") {
             this.detail.status = 5;
-            Toast("退还成功");
+            Toast("操作成功");
           } else {
-            Toast("退还失败");
+            Toast("操作失败");
           }
         })
         .catch(res => {
@@ -217,6 +217,7 @@ export default {
         });
     },
     getRenewal(orderId, month, stoptime, totalPrice, openid) {
+      
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/rentContinue", {
           id: orderId,
