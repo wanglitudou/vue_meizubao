@@ -206,9 +206,9 @@ export default {
         .then(res => {
           if (res.data.status_code == "1001") {
             this.detail.status = 5;
-            Toast("退还成功");
+            Toast("操作成功");
           } else {
-            Toast("退还失败");
+            Toast("操作失败");
           }
         })
         .catch(res => {
@@ -217,6 +217,7 @@ export default {
         });
     },
     getRenewal(orderId, month, stoptime, totalPrice, openid) {
+      
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/rentContinue", {
           id: orderId,
@@ -250,13 +251,13 @@ export default {
         }
         this.allPrice = this.getPrice;
         console.log(this.allPrice);
-        // this.getRenewal(
-        //   this.orderId,
-        //   this.mounth,
-        //   this.stoptime,
-        //   this.allPrice,
-        //   openid
-        // );
+        this.getRenewal(
+          this.orderId,
+          this.mounth,
+          this.stoptime,
+          this.allPrice,
+          openid
+        );
       } else if (detail.type == 2) {
         if (this.during == 0) {
           Toast("请选择您的时间");

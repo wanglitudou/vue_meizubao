@@ -37,7 +37,7 @@ import $ from "jquery";
 
 // var domain = window.location.host;
 
-window.ajaxSrc = "http://mzbao.weiyingjia.org";
+window.ajaxSrc = "http://interface.coronets.com.cn";
 
 axios.defaults.transformRequest = [
   function(data) {
