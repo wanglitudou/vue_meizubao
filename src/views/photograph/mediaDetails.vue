@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       show3: false,
+      baidu_cloud: this.$route.query,
       message: "赋值",
       playerOptions: {
         height: "360",
@@ -75,6 +76,8 @@ export default {
   // },
   created() {
     let that = this;
+
+    console.log(this.$route.query);
   },
 
   mounted() {
@@ -105,11 +108,13 @@ export default {
   methods: {
     baiducloud() {
       //百度云下载调用方法 确定 取消
-      MessageBox.confirm("密码:4sC7,点击确定继续前往", {})
+      MessageBox.confirm(
+        "密码:" + this.baidu_cloud.baidu_cloud_pwd + ",点击确定继续前往",
+        {}
+      )
         .then(action => {
           if (action == "confirm") {
-            window.location.href =
-              "https://pan.baidu.com/s/1TlvRtDtQSK3A4Ba_nBIRJg";
+            window.location.href = this.baidu_cloud.baidu_cloud_link;
             console.log("确定");
           }
         })

@@ -18,7 +18,7 @@
               <div class="pic_name"
                    v-for="(item,index) in imageData">
                 <div class="picleft_img"
-                     @click="jumpToDetails('image',item.images,item.name)">
+                     @click="jumpToDetails('image',item.images,item.name,item.baidu_cloud_link,item.baidu_cloud_pwd)">
                   <img :src="item.images"
                        alt="">
                 </div>
@@ -46,7 +46,7 @@
               <div class="pic_name"
                    v-for="(item,index) in videoData">
                 <div class="picleft_img"
-                     @click="jumpToDetails('video',item.images,item.name)">
+                     @click="jumpToDetails('video',item.images,item.name,item.baidu_cloud_link,item.baidu_cloud_pwd)">
                   <img src="../../assets/images/icon7.jpg"
                        alt="">
                 </div>
@@ -190,21 +190,25 @@ export default {
       }
     },
 
-    jumpToDetails: function(type, images, name) {
-      this.$router
-        .push({
-          //          path: '/confirm/instrument',
-          name: "mediaDetails",
-          query: {
-            type: type,
-            images: images,
-            name: name
-          }
-        })
-        .catch(err => {
-          console.log("http请求错误");
-          console.log(err);
-        });
+    jumpToDetails: function(
+      type,
+      images,
+      name,
+      baidu_cloud_link,
+      baidu_cloud_pwd
+    ) {
+      console.log(111);
+      this.$router.push({
+        //          path: '/confirm/instrument',
+        name: "mediaDetails",
+        query: {
+          type: type,
+          images: images,
+          name: name,
+          baidu_cloud_link: baidu_cloud_link,
+          baidu_cloud_pwd: baidu_cloud_pwd
+        }
+      });
     },
     // down(id, url) {
     //   console.log(id);
