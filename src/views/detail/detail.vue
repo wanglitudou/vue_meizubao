@@ -80,7 +80,7 @@
 
                   </span>
                 </p>
-                <p class="rent"> 起租期:{{item.num}}个月</p>
+                <p class="rent"> 起租期:{{item.lease_time}}个月</p>
                 <p class="orders">
                   <span class="order">
                     立即下单
