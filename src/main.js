@@ -34,9 +34,6 @@ import "v-calendar/lib/v-calendar.min.css";
 // import axios from "axios";
 import axios from "./http";
 import $ from "jquery";
-
-// var domain = window.location.host;
-
 window.ajaxSrc = "http://interface.coronets.com.cn";
 
 axios.defaults.transformRequest = [

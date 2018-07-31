@@ -143,6 +143,9 @@ let routes = [
   {
     name: "project",
     path: "/project",
+    meta: {
+      title: "项目合作"
+    },
     component: resolve => require(["../views/project/project.vue"], resolve)
   },
   {

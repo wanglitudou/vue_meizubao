@@ -12,7 +12,8 @@ module.exports = {
 
     proxyTable: {
       "/app": {
-        target: "http://mzbao.weiyingjia.org",
+        // target: "http://mzbao.weiyingjia.org",
+        target: "http://interface.coronets.com.cn",
         changeOrigin: true,
         pathRewrite: {
           //需要rewrite重写的, 如果在服务器端做了处理则可以不要这段

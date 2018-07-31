@@ -774,6 +774,7 @@ export default {
 }
 .img_box img {
   width: 100%;
+  height: 100%;
 }
 .hotimg_lef .item_name {
   display: block;
