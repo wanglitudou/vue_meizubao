@@ -237,8 +237,11 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             if (res.data.data.length == 0) {
-              this.videoNoMore = true;
+              this.imageNoMore = true;
               return false;
+            } else if (res.data.data.length < 10) {
+              this.imageNoMore = true;
+              // return false;
             }
             this.imageData = this.imageData.concat(res.data.data);
             this.imagePage++;
@@ -263,6 +266,9 @@ export default {
             if (res.data.data.length == 0) {
               this.videoNoMore = true;
               return false;
+            } else if (res.data.data.length < 10) {
+              this.videoNoMore = true;
+              // return false;
             }
             this.videoData = this.videoData.concat(res.data.data);
             this.videoPage++;
