@@ -495,8 +495,8 @@ export default {
 }
 .next_nex {
   width: px2rem(120px);
-  height: px2rem(50px);
-  line-height: px2rem(50px);
+  height: px2rem(30px);
+  line-height: px2rem(30px);
   text-align: center;
   background: #ffffff;
   border: 1px solid #fd4689;
@@ -504,7 +504,7 @@ export default {
   font-size: 14px;
   color: #fd4689;
   position: absolute;
-  top: 35%;
+  top: 20%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
