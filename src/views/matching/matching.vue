@@ -20,8 +20,8 @@
           <span>配合仪器: {{data.instrument}}</span>
         </p>
         <p class="cate_cen">
-          <span>配合产品:</span>
-          <span>422266522335118</span>
+          <span>产品规格:</span>
+          <span> {{data.code}}</span>
         </p>
       </div>
       <div class="price_cent">
@@ -56,7 +56,8 @@
       </div>
       <div class="pro_detail">
         <p class="pro_det">产品详情</p>
-        <p class="pro_beg">{{data.details}}</p>
+        <p class="pro_beg"
+           v-html="data.details"></p>
       </div>
     </div>
 
@@ -190,7 +191,7 @@ export default {
             //微信分享
             let that = this;
             that.$axios
-              .get(window.ajaxSrc+"/api/meizubao/wxSign", {
+              .get(window.ajaxSrc + "/api/meizubao/wxSign", {
                 params: {
                   http: location.href
                 }
@@ -228,14 +229,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            window.ajaxSrc+"/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                             console.log(11111);
@@ -258,14 +256,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            window.ajaxSrc+"/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                           });

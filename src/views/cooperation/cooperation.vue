@@ -59,7 +59,8 @@
       </div>
       <div class="pro_intro">
         <p class="pro_introduce">项目介绍</p>
-        <p class="pro_int">{{data.content}}</p>
+        <p class="pro_int"
+           v-html="data.content"></p>
       </div>
       <div class="order_name">
         <p class="good_fail">
@@ -213,14 +214,11 @@ export default {
                         //							layer.msg("分享成功");
                         //													alert("1111")
                         that.$axios
-                          .get(
-                            window.ajaxSrc+"/api/meizubao/addPoint",
-                            {
-                              params: {
-                                uid: that.userId
-                              }
+                          .get(window.ajaxSrc + "/api/meizubao/addPoint", {
+                            params: {
+                              uid: that.userId
                             }
-                          )
+                          })
                           .then(res => {
                             console.log(res);
                           });

@@ -26,7 +26,7 @@
           <span></span>
         </p>
         <p class="name_words">
-          <span>{{data.centent}}</span>
+          <span v-html="data.centent"></span>
         </p>
         <p class="name_cate">
           <span>起租期:{{data.lease_time}}个月</span>

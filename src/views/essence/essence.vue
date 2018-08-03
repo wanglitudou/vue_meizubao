@@ -34,7 +34,8 @@
         </div>
       </div>
       <div class="metting">
-        <p class="met_cent">{{data.centetnt}}</p>
+        <p class="met_cent"
+           v-html="data.centetnt"></p>
       </div>
       <div class="list_app">
         <p class="list_time">
@@ -389,11 +390,6 @@ export default {
 }
 
 .metting .met_cent {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 }
 
 .cent_list {

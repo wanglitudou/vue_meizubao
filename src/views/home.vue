@@ -582,16 +582,7 @@ export default {
         name: "search"
       });
     },
-    // addtheaddress() {
-    //   this.$router.push({ name: "addtheaddress" }); //调节其他页面时的跳转(完善信息页面)
-    // }
-    // address() {
-    //   this.$router.push({ name: "address" }); //调节其他页面时的跳转(完善信息页面)
-    // }
-    // aaa() {
-    //   //完善信息
-    //   this.$router.push({ name: "aaa" });
-    // },
+
     qqq() {
       //完善信息
       this.$router.push({ name: "qqq" });
