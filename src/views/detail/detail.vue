@@ -66,9 +66,9 @@
 
                   <span class="paice">￥{{item.price}}</span>
                 </p>
-                <p class="meeting">
+                <!-- <p class="meeting">
                   {{item.centent}}
-                </p>
+                </p> -->
                 <p class="date">
                   <span>
 

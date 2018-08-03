@@ -73,7 +73,7 @@
                   </span>
 
                 </p>
-                <p class="content">{{item.centetnt}}</p>
+                <!-- <p class="content">{{item.centetnt}}</p> -->
                 <p class="every_pro">
                   <span class="data_pro">
                     <span class="data_mon">{{item.dayprice}}</span>/日</span>

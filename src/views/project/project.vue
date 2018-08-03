@@ -45,7 +45,7 @@
                   <p class="oper_room">
                     <span>{{item.name}}</span>
                   </p>
-                  <p class="content">{{item.content}}</p>
+                  <!-- <p class="content">{{item.content}}</p> -->
                   <p class="every_pro">
                     <span class="data_pro">
                       <span class="data_mon">￥{{item.price}}</span>/日</span>
