@@ -15,17 +15,31 @@
     </div>
 
     <div class="integralScrolls">
-      <div class="list_pull" v-masonry transition-duration="0.3s" ref="masonry" item-selector=".item" column-width=".item" v-if="isNodata">
+      <div class="list_pull"
+           v-masonry
+           transition-duration="0.3s"
+           ref="masonry"
+           item-selector=".item"
+           column-width=".item"
+           v-if="isNodata">
         <!-- <div class="list_lef"> -->
-        <div class="listing item" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10"    v-masonry-tile v-for=" (item,index) of dataArr " :key="index " @click="toTrain(item.id) ">
+        <div class="listing item"
+             v-infinite-scroll="loadMore"
+             infinite-scroll-disabled="loading"
+             infinite-scroll-distance="10"
+             v-masonry-tile
+             v-for=" (item,index) of dataArr "
+             :key="index "
+             @click="toTrain(item.id) ">
           <div>
-            <img :src="item.images " alt=" ">
+            <img :src="item.images "
+                 alt=" ">
           </div>
           <div class="other ">
             <p class="aa ">
               <span>{{item.name}}</span>
             </p>
-            <p>{{item.content}}</p>
+
             <p>
               <span>
                 <a>
@@ -37,12 +51,17 @@
         </div>
       </div>
       <!-- 加载更多 -->
-      <div class=" loadMore " ref="load "  v-show="!queryLoading">
-        <mt-spinner type="fading-circle " color="#FD4689 " v-if="topStatus"></mt-spinner>
-       <span v-show="allLoaded">已全部加载</span>
+      <div class=" loadMore "
+           ref="load "
+           v-show="!queryLoading">
+        <mt-spinner type="fading-circle "
+                    color="#FD4689 "
+                    v-if="topStatus"></mt-spinner>
+        <span v-show="allLoaded">已全部加载</span>
       </div>
       <!-- 没有数据 -->
-      <div class="noData " v-if="showNodata ">
+      <div class="noData "
+           v-if="showNodata ">
         暂无数据
       </div>
     </div>
@@ -60,12 +79,12 @@ export default {
       integral: "",
       count: 15,
       moreLoading: false,
-      isNodata: true,//没有数据时候隐藏 列表页
-      showNodata: false,//列表为显示全局没有数据 
-      topStatus: false,//显示正在加载loading
-      loading: false,//滚动加载loading  是否需要加载
-      allLoaded:false,//全部加载完成后显示 数据全部加载
-      queryLoading:false,//控制是否显示loading
+      isNodata: true, //没有数据时候隐藏 列表页
+      showNodata: false, //列表为显示全局没有数据
+      topStatus: false, //显示正在加载loading
+      loading: false, //滚动加载loading  是否需要加载
+      allLoaded: false, //全部加载完成后显示 数据全部加载
+      queryLoading: false //控制是否显示loading
     };
   },
   mounted() {
@@ -84,17 +103,17 @@ export default {
             if (res.data.data.data.length == 0) {
               this.showNodata = true;
               this.isNodata = false;
-              this.queryLoading = true
+              this.queryLoading = true;
             } else if (res.data.data.data.length < this.count) {
               this.topStatus = false;
               this.showNodata = false;
               // this.loading = false;
-              this.allLoaded =  true
+              this.allLoaded = true;
             } else {
               this.topStatus = true;
               // this.loading = true;
               this.showNodata = false;
-               this.allLoaded =  false
+              this.allLoaded = false;
             }
             this.integral = this.integral.concat(res.data.data.integral);
             this.dataArr = res.data.data.data;
@@ -105,16 +124,16 @@ export default {
       this.$router.push({ name: "train", query: { pid: id } });
     },
     loadMore() {
-       if(this.allLoaded){
-          this.moreLoading = true;
-          return;
-        }
-        if(this.queryLoading){
-          return;
-        }
-          this.moreLoading = !this.queryLoading;
+      if (this.allLoaded) {
+        this.moreLoading = true;
+        return;
+      }
+      if (this.queryLoading) {
+        return;
+      }
+      this.moreLoading = !this.queryLoading;
 
-           this.page++;
+      this.page++;
       // if(this.queryLoading){
 
       // }
@@ -129,7 +148,7 @@ export default {
       //    this.moreLoading = !this.queryLoading;
       // // console.log(111)
       // this.page++;
-      this.init()
+      this.init();
       // console.log(11)
     }
   }

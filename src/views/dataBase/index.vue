@@ -1,16 +1,23 @@
 <template>
   <div class="main">
     <div class="content">
-      <div class="video" ref="video" id="divDisplay">
+      <div class="video"
+           ref="video"
+           id="divDisplay">
         <!-- <video id="video" autoplay poster="../../assets/images/icon7.jpg" controls width="100%" height="100%">
                     <source :src="item.url" type="video/mp4"> 您的浏览器不支持 video 标签。
                 </video> -->
-        <video-player class="vjs-custom-skin"  :options="playerOptions" :playsinline="true" ref="videoPlayer" @ready="playerReadied($event)"></video-player>
+        <video-player class="vjs-custom-skin"
+                      :options="playerOptions"
+                      :playsinline="true"
+                      ref="videoPlayer"
+                      @ready="playerReadied($event)"></video-player>
       </div>
       <div class="desc">
         <div class="title">课程标题</div>
-        <div class="text">
-          {{item.content}}
+        <div class="text"
+             v-html="item.content">
+
         </div>
       </div>
       <div class="price">
@@ -34,14 +41,13 @@ export default {
     return {
       item: this.$route.query.item,
       playerOptions: {
-    
         playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
-        width: '',
+        width: "",
         height: 250 + "px",
         sources: [
           {
             type: "video/mp4",
-            src: '',
+            src: ""
           }
         ],
         poster: ""
@@ -50,15 +56,15 @@ export default {
   },
   created() {
     // this.init();
-  
-    this.playerOptions.sources[0].src = this.item.url
-  },
-  mounted(){
- var div = document.getElementById('divDisplay');
 
-        var clientHeight = div.clientWidth;
-        // var clientWidth = div.clientWidth;
-       this.playerOptions.width  = clientHeight+'px'
+    this.playerOptions.sources[0].src = this.item.url;
+  },
+  mounted() {
+    var div = document.getElementById("divDisplay");
+
+    var clientHeight = div.clientWidth;
+    // var clientWidth = div.clientWidth;
+    this.playerOptions.width = clientHeight + "px";
   },
   methods: {
     playerReadied(player) {
