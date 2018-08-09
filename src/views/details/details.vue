@@ -79,7 +79,7 @@
                  v-else>
           </span>
           <span class="text"
-                @click="toNew">《什么乱7八糟的协议》</span>
+                @click="toNew">《仪器协议》</span>
         </p>
       </div>
 
@@ -276,8 +276,8 @@ export default {
     toNew() {
       this.$router.push({
         name: "news",
-        query:{
-          id:1
+        query: {
+          id: 1
         }
       });
     },

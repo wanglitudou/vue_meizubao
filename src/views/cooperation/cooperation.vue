@@ -80,7 +80,7 @@
                v-else>
         </span>
         <span class="text"
-              @click="toNew">《什么乱7八糟的协议》</span>
+              @click="toNew">《合作项目协议》</span>
       </p>
     </div>
     <orderFooter :text="'立即下单'"

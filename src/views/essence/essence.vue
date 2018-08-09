@@ -77,7 +77,7 @@
                  v-else>
           </span>
           <span class="text"
-                @click="toNew">《什么乱7八糟的协议》</span>
+                @click="toNew">《美业菁英协议》</span>
 
         </p>
       </div>
