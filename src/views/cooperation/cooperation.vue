@@ -68,22 +68,30 @@
           <span>￥{{data.money}}</span>
         </p>
       </div>
-      <p class="list_rent"
-         @click="showSign">
-        <span>
+      <p class="list_rent">
+        <!-- <span>
           网签租赁协议
+        </span> -->
+        <span class="imgs"
+              @click="check">
+          <img src="../../assets/images/button2.png"
+               v-if="checked">
+          <img src="../../assets/images/button.png"
+               v-else>
         </span>
+        <span class="text"
+              @click="toNew">《什么乱7八糟的协议》</span>
       </p>
     </div>
     <orderFooter :text="'立即下单'"
                  :count="data.money"
                  :nextFun="createOrder"></orderFooter>
-    <sign id="componentSign"
+    <!-- <sign id="componentSign"
           v-if="showSignTag"
           :src="data.agreement"
           :gid="data.id"
           :saveAgreementId="saveAgreementId"
-          :type="type"></sign>
+          :type="type"></sign> -->
 
   </div>
 </template>
@@ -97,6 +105,7 @@ export default {
     return {
       imgLists: [], //banner
       data: [],
+      checked: false,
       agreementId: null,
       showSignTag: false,
       dataList: {
@@ -131,6 +140,24 @@ export default {
     sign
   },
   methods: {
+    check() {
+      console.log(this.checked);
+      if (!this.checked) {
+        this.checked = true;
+        this.agreementId = 1;
+      } else {
+        this.checked = false;
+        this.agreementId = "";
+      }
+    },
+    toNew() {
+      this.$router.push({
+        name: "news",
+        query: {
+          id: 3
+        }
+      });
+    },
     init() {
       this.$axios
         .get(window.ajaxSrc + "/api/meizubao/projectDetail", {
@@ -251,7 +278,7 @@ export default {
 
     createOrder: function() {
       if (!this.agreementId) {
-        Toast("请网签租赁协议后下单");
+        Toast("请同意协议后下单");
         return false;
       }
 
@@ -278,6 +305,11 @@ export default {
           console.log(res);
           if (res.data.status_code == 1001) {
             window.location.href = res.data.data.url;
+          } else {
+            if (res.data.status_code == 1002) {
+              // window.location.href = res.data.data.url;
+              Toast(res.data.message);
+            }
           }
         })
         .catch(err => {
@@ -504,13 +536,36 @@ export default {
 }
 
 .list_rent {
+  //;
+  // line-height: 1rem;
+  // border-bottom: 1px solid #f7f7f7;
+  // font-size: 14px;
+  // color: #fd4689;
+  // letter-spacing: 0;
+  // // text-align: center;
+  margin-bottom: 1.5rem;
+  // .name_credit {
+  width: 100%;
   height: 1rem;
   line-height: 1rem;
-  border-bottom: 1px solid #f7f7f7;
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  // }
+}
+.list_rent .imgs {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+.list_rent .imgs img {
+  width: 25px;
+  height: 25px;
+}
+.list_rent .text {
   font-size: 14px;
-  color: #fd4689;
-  letter-spacing: 0;
-  text-align: center;
-  margin-bottom: 1.5rem;
+  color: red;
 }
 </style>

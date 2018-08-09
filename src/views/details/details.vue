@@ -69,9 +69,17 @@
           <!--</span>-->
         </div>
         <p class="name_credit">
-          <span class="sign"
-                @click="showSign">网签租赁协议</span>
-
+          <!-- <span class="sign"
+                @click="showSign">网签租赁协议</span> -->
+          <span class="imgs"
+                @click="check">
+            <img src="../../assets/images/button2.png"
+                 v-if="checked">
+            <img src="../../assets/images/button.png"
+                 v-else>
+          </span>
+          <span class="text"
+                @click="toNew">《什么乱7八糟的协议》</span>
         </p>
       </div>
 
@@ -80,12 +88,12 @@
                    :nextFun="jumpToConfirm"></orderFooter>
 
       <!-- <sign id="componentSign" v-if="showSignTag" :src="data.agreement" :gid="data.id" :saveAgreementId="saveAgreementId"></sign> -->
-      <sign id="componentSign"
+      <!-- <sign id="componentSign"
             v-if="showSignTag"
             :type="type"
             :src="data.agreement"
             :gid="data.id"
-            :saveAgreementId="saveAgreementId"></sign>
+            :saveAgreementId="saveAgreementId"></sign> -->
 
     </div>
   </div>
@@ -101,6 +109,7 @@ export default {
     return {
       imgLists: [], //banner
       data: [],
+      checked: false,
       month: 1,
       type: 1,
       agreementId: null,
@@ -255,7 +264,23 @@ export default {
     //       console.log("查询失败");
     //     });
     // },
-
+    check() {
+      if (!this.checked) {
+        this.checked = true;
+        this.agreementId = 1;
+      } else {
+        this.checked = false;
+        this.agreementId = "";
+      }
+    },
+    toNew() {
+      this.$router.push({
+        name: "news",
+        query:{
+          id:1
+        }
+      });
+    },
     saveAgreementId: function(agreementId) {
       this.showSignTag = false;
       this.agreementId = agreementId;
@@ -277,7 +302,7 @@ export default {
 
     jumpToConfirm: function() {
       if (!this.agreementId) {
-        Toast("请网签租赁协议后下单");
+        Toast("请同意协议后下单");
         return false;
       }
 
@@ -629,7 +654,7 @@ export default {
   height: px2rem(55px);
   line-height: px2rem(55px);
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
@@ -696,5 +721,19 @@ export default {
 .increase {
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
+}
+.name_credit .imgs {
+  width: px2rem(35px);
+  height: px2rem(35px);
+  display: flex;
+  align-items: center;
+  img {
+    width: px2rem(25px);
+    height: px2rem(25px);
+  }
+}
+.name_credit .text {
+  font-size: px2rem(14px);
+  color: red;
 }
 </style>

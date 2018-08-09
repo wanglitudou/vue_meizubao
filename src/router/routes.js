@@ -332,6 +332,14 @@ let routes = [
     meta: {
       title: ""
     }
+  },
+  {
+    name: "news",
+    path: "/news",
+    component: resolve => require(["../views/news.vue"], resolve),
+    meta: {
+      title: "租赁仪器协议"
+    }
   }
 
   // {

@@ -65,11 +65,20 @@
             </span>
           </span>
         </p>
-        <p class="list_rent"
-           @click="showSign">
-          <span>
-            网签租赁协议
+        <p class="list_rent">
+          <!-- <span> -->
+          <!-- 网签租赁协议 -->
+          <!-- </span> -->
+          <span class="imgs"
+                @click="check">
+            <img src="../../assets/images/button2.png"
+                 v-if="checked">
+            <img src="../../assets/images/button.png"
+                 v-else>
           </span>
+          <span class="text"
+                @click="toNew">《什么乱7八糟的协议》</span>
+
         </p>
       </div>
 
@@ -91,12 +100,12 @@
                  :count="totalPrice"
                  :nextFun="jumpToConfirm"></orderFooter>
 
-    <sign id="componentSign"
+    <!-- <sign id="componentSign"
           v-if="showSignTag"
           :src="data.agreement"
           :type="type"
           :gid="data.id"
-          :saveAgreementId="saveAgreementId"></sign>
+          :saveAgreementId="saveAgreementId"></sign> -->
 
   </div>
 </template>
@@ -127,7 +136,8 @@ export default {
       },
       userId: null,
       dqurl: "",
-      images: ""
+      images: "",
+      checked: false
     };
   },
 
@@ -204,7 +214,24 @@ export default {
     showSign: function() {
       this.showSignTag = true;
     },
-
+    check() {
+      console.log(this.checked);
+      if (!this.checked) {
+        this.checked = true;
+        this.agreementId = 1;
+      } else {
+        this.checked = false;
+        this.agreementId = "";
+      }
+    },
+    toNew() {
+      this.$router.push({
+        name: "news",
+        query: {
+          id: 3
+        }
+      });
+    },
     jumpToConfirm: function() {
       if (!this.agreementId) {
         Toast("请网签租赁协议后下单");
@@ -384,7 +411,7 @@ export default {
   width: 100%;
   height: 100%;
   background: #fff;
-  overflow: hidden;
+  // overflow: hidden;
   // height: calc(100% - 0rem);
   background: #fff;
 }
@@ -396,7 +423,7 @@ export default {
   width: 94.7%;
   height: auto;
   margin: px2rem(10px) 2.6%;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   padding-bottom: 1.5rem;
 }
 
@@ -520,14 +547,30 @@ export default {
 
 .list_app .list_rent {
   height: 0.88rem;
-  line-height: 0.88rem;
-  border-bottom: 1px solid #f7f7f7;
-  font-size: 14px;
-  color: #fd4689;
-  letter-spacing: 0;
-  text-align: center;
+  margin-bottom: 1.5rem;
+  // .name_credit {
+  width: 100%;
+  height: 1rem;
+  line-height: 1rem;
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
-
+.list_rent .imgs {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+.list_rent .imgs img {
+  width: 25px;
+  height: 25px;
+}
+.list_rent .text {
+  font-size: 14px;
+  color: red;
+}
 .foot_cent {
   width: 100%;
   margin-top: 20px;

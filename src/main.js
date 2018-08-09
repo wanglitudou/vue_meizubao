@@ -35,7 +35,7 @@ import "v-calendar/lib/v-calendar.min.css";
 import axios from "./http";
 import $ from "jquery";
 window.ajaxSrc = "http://interface.coronets.com.cn";
-
+// window.ajaxSrc = "http://mzbao.weiyingjia.org";
 axios.defaults.transformRequest = [
   function(data) {
     let newData = "";
@@ -61,8 +61,8 @@ Vue.directive("title", {
   }
 });
 // 插件
-import VueScroller from 'vue-scroller';
-Vue.use(VueScroller)
+import VueScroller from "vue-scroller";
+Vue.use(VueScroller);
 
 //新的日历插件
 Vue.use(VCalendar, {
