@@ -3,13 +3,15 @@ import orderFooter from "../components/orderFooter.vue";
 import addressCard from "../components/orderAddressCard.vue";
 import orderCard from "../components/orderCard.vue";
 import { Toast } from "mint-ui";
-import {mapGetters}from 'vuex'
+import {find, findIndex, isEmpty} from 'lodash';
+import {mapGetters}from 'vuex';
 export default {
   data() {
     return {
       addressId: null,
       userInfo:{},
-      datas:{}
+      datas:{},
+      type:'',
     };
   },
   components: {
@@ -20,6 +22,7 @@ export default {
   created() {},
   mounted() {
   this.datas = this.confirmData 
+  console.log(this.datas)
   },
   computed:{
    ...mapGetters(['confirmData'])
@@ -61,9 +64,14 @@ methods: {
         });
     },
     saveAddressId: function(id) {
-      console.log(id)
-      console.log("comfirm页面存id:" + id);
+      if(isEmpty(id)){
+        this.type=0
+      }else{
+        this.type=1
+      }
+     
       this.userInfo = id;
+     
     }
   }
 };
@@ -79,7 +87,7 @@ methods: {
 <template>
   <div class="container">
 
-    <addressCard :type="' '"
+    <addressCard :type="type"
                  :saveAddressId="saveAddressId"></addressCard>
 
     <!--stage 仪器租赁时长(月)、技师租赁天数-->

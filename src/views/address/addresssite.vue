@@ -20,11 +20,11 @@
           </span>
         </p>
         <p class="give">
-          <span class="give_address">
+          <span class="give_address" @click="selectedNumbers(item.id)">
+            <!-- v-model="selectedNumber" -->
             <input type="radio"
-                   v-model="selectedNumber"
-                   :value="item.id"
-                   class="give_icon" /> 设为默认地址
+                   :checked="item.is_default_address == 1?true:false"
+                   class="give_icon"/> 设为默认地址
           </span>
           <span class="give_edit"
                 @click="edittheaddress(item.id)">
@@ -54,34 +54,13 @@ export default {
     return {
       data_data: true,
       list: [],
-      selectedNumber: 1,
+      selectedNumber: '',
       siteId: null
       // radio2: ""
     };
   },
   watch: {
-    selectedNumber: function(e) {
-      console.log(e);
-      this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/updateDefaultAddress", {
-          is_default: 1,
-          uid: window.localStorage.id,
-          id: e
-        })
-        .then(res => {
-          console.log(res);
-          if (res.data.status_code == 1001) {
-            // Toast({
-            //   message: "设置默认地址成功",
-            //   position: "bottom",
-            //   duration: 1000
-            // });
-          }
-        })
-        .catch(() => {
-          console.log("查询失败");
-        });
-    }
+    
   },
   created() {
     // console.log(this.$route.query.data_data);
@@ -97,8 +76,41 @@ export default {
     this.getList();
   },
   methods: {
+    selectedNumbers: function(e) {
+      console.log(e);
+      this.$axios
+        .post(window.ajaxSrc + "/api/meizubao/updateDefaultAddress", {
+          is_default: 1,
+          uid: window.localStorage.id,
+          id: e
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.status_code == 1001) {
+            localStorage.setItem("siteId",e);
+            this.getList()
+            Toast({
+              message: "设置默认地址成功",
+              duration: 1000
+            });
+          }
+        })
+        .catch(() => {
+          console.log("查询失败");
+        });
+    },
+
+
     del(id) {
-      let that = this;
+      let that = this,
+          default_id=localStorage.getItem('siteId');
+      // console.log(id)
+      if(id == default_id){
+       localStorage.removeItem('siteId')
+      }else{
+        console.log(22)
+      }
+      //  return false
       MessageBox({
         title: "提示",
         message: "确定执行操作吗?",
@@ -125,6 +137,7 @@ export default {
       console.log(id);
       let siteId = id;
       localStorage.setItem("siteId", siteId);
+      this.selectedNumbers(id)
       this.$router.go("-1");
     },
     getList() {
@@ -144,7 +157,7 @@ export default {
           that.list = res.data.data;
           for (var i = 0; i < that.list.length; i++) {
             if (that.list[i].is_default_address) {
-              that.selectedNumber = that.list[i].id;
+              // that.selectedNumber = that.list[i].id;
               return false;
             }
           }

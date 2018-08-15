@@ -302,7 +302,7 @@ export default {
 
     jumpToConfirm: function() {
       if (!this.agreementId) {
-        Toast("请同意协议后下单");
+        Toast("请先同意协议后，再进行下单");
         return false;
       }
 
@@ -311,7 +311,7 @@ export default {
         return false;
       }
 
-      // console.log(this.month)
+      // console.log((this.month * this.data.firstrent + (this.data.deposit - 0)).toFixed(2))
       this.setConfirmData({
         type: 1,
         g_id: this.$route.query.pid,
@@ -322,7 +322,7 @@ export default {
         agreement: this.agreementId,
         image: this.data.images[0],
         goods_num: 1,
-        total_price: this.month * this.data.firstrent + (this.data.deposit - 0),
+        total_price: (this.month * this.data.firstrent + (this.data.deposit - 0)).toFixed(2),
         goods_name: this.data.name,
         deposit: this.data.deposit,
         price: this.data.firstrent,
@@ -463,7 +463,22 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss" >
+@import "../../styles/helper.scss";
+ .name_words {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+ 
+}
+ .name_words img {
+    width: 100% !important;
+  }
+  .name_words p {
+    width: 95%;
+    margin-left: 2.5%;
+  }
 </style>
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
@@ -608,24 +623,27 @@ export default {
 
 .product {
   width: 94.7%;
-  height: px2rem(44px);
-  line-height: px2rem(44px);
+  min-height: px2rem(44px);
+  height:auto;
+  line-height: px2rem(24px);
   background: #ffffff;
   box-shadow: 0 2px 9px 0 #eeeeee;
   border-radius: 2px;
-
+ display:flex;
+  align-items:center;
   margin: px2rem(15px) auto 0;
 }
 
 .name_pro {
+  width:100%;
+  // height:100%;
   font-size: px2rem(14px);
   color: #333333;
   letter-spacing: 0;
+  padding:px2rem(5px) px2rem(20px);
 }
 
-.name_pro span {
-  padding: 0 20px;
-}
+
 
 .data_name {
   width: 94.7%;

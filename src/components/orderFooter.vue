@@ -20,6 +20,7 @@
     props: ["count", "text", 'nextFun'],
     mounted(){
       this.countNum = this.toThousands(this.count)
+   
     },
     computed: {
       finalCount: function () {
@@ -35,6 +36,7 @@
 
 
       toThousands(num) {
+        console.log(num)
         return (num+"").replace(/(\d)(?=(\d{3})+(\.|$))/g, '$1,');
 //        var flag = 1;
 //        if (num < 0) {
@@ -127,3 +129,4 @@
   }
 
 </style>
+

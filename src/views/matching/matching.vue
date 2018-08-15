@@ -288,6 +288,22 @@ export default {
   }
 };
 </script>
+<style lang="scss" >
+@import "../../styles/helper.scss";
+ .pro_beg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+ 
+}
+ .pro_beg img {
+    width: 100% !important;
+  }
+  .pro_beg p {
+    width: 95%;
+  }
+</style>
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .match-container {

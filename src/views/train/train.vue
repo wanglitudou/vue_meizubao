@@ -77,6 +77,21 @@
   left: 38% !important;
   top: 38% !important;
 }
+
+ .intro_con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+ .intro_con img {
+    width: 100% !important;
+  }
+  .intro_con p {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+
 </style>
 <script>
 import { Radio, Toast } from "mint-ui";
@@ -411,7 +426,7 @@ export default {
 
 .cent_list {
   width: 94.7%;
-  margin-left: 2.7%;
+  margin-left: 2.5%;
   height: auto;
   overflow-y: scroll;
 }
@@ -503,7 +518,7 @@ export default {
 }
 
 .intro_con {
-  margin: 0.2rem;
+  margin-top: 0.2rem;
   // margin:px2rem(16px);
   line-height: px2rem(30px);
   font-size: 14px;

@@ -1,6 +1,12 @@
 <template>
   <div class="addressContainer">
-    <div class="list_cont">
+
+    <div v-if="!list.length" class="noAddress">
+       <div>
+            暂无地址
+       </div>
+    </div>
+    <div class="list_cont" v-else>
       <div class="list_one"
            v-for="item in list"
            :key="item.index">
@@ -10,11 +16,11 @@
               {{item.user_name}}
             </span>
           </span>
-          <span class="consig_num">{{item.mobile}}</span>
+          <span class="consig_num">电话：{{item.mobile}}</span>
         </p>
         <p class="consig_address">
           <span class="consig_spec">
-            {{item.address}}
+            地址：{{item.address}}
           </span>
         </p>
         <p class="give">
@@ -260,5 +266,14 @@ export default {
   font-size: 16px;
   color: #ffffff;
   letter-spacing: 0;
+}
+.noAddress{
+   width:100%;
+   height:100%;
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   font-size:px2rem(16px);
+   color:#fd4689;
 }
 </style>

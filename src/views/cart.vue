@@ -6,23 +6,15 @@
 
         <div class="tabBar">
           <button @click="select">{{statusCode}}</button>
-          <div class="bgContent"
-               v-show="ulShow">
+          <div class="bgContent" v-show="ulShow">
             <span class="triangular"></span>
             <ul class="uli">
-              <li class="status_item"
-                  v-for="(optionItem,index) in options"
-                  :key="index"
-                  @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
+              <li class="status_item" v-for="(optionItem,index) in options" :key="index" @click="optionLi(optionItem,index)">{{optionItem.item}}</li>
             </ul>
           </div>
         </div>
-        <div class="tabBar"
-             v-for="(item,index) in tabs"
-             :key="index">
-          <div class="status"
-               :class="tabNum == index ?'active':''"
-               @click="tabClick(item.id,index)">
+        <div class="tabBar" v-for="(item,index) in tabs" :key="index">
+          <div class="status" :class="tabNum == index ?'active':''" @click="tabClick(item.id,index)">
             {{item.item}}
           </div>
         </div>
@@ -30,16 +22,7 @@
         <!-- <div class="tabBar"></div> -->
       </div>
 
-      <order :orderlist="orderlist"
-             :receipt="receipt"
-             :cancel="cancel"
-             :todetail="todetail"
-             :loadMore="loadMore"
-             :load="load"
-             :toPay="toPay"
-             :complete="complete"
-             :renewal="renewal"
-             :back="back"></order>
+      <order :orderlist="orderlist" :receipt="receipt" :cancel="cancel" :todetail="todetail" :loadMore="loadMore" :load="load" :toPay="toPay" :complete="complete" :renewal="renewal" :back="back"></order>
 
     </div>
   </div>
@@ -62,7 +45,7 @@
 // }
 import order from "../components/order.vue";
 import { find, remove, filter, forEach } from "lodash";
-import { Spinner, Toast, Indicator } from "mint-ui";
+import { Spinner, Toast, Indicator, MessageBox } from "mint-ui";
 export default {
   data() {
     return {
@@ -167,62 +150,81 @@ export default {
     //确认收货
     receipt(type, id) {
       console.log(id);
-      let status = 6;
-      if (type == 3) {
-        status = 7;
-      }
-      this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
-          uid: this.uid,
-          id: id,
-          status: status
-        })
-        .then(res => {
-          if (res.data.status_code == "1001") {
-            //  remove(this.orderlist,{"id":id})
-            Toast("确认成功");
-
+      MessageBox({
+        title: "提示",
+        message: "是否确认收货",
+        showCancelButton: true,
+        callback: function(action) {
+          if (action == "confirm") {
+            //确认收货
+            let status = 6;
             if (type == 3) {
-              var result2 = filter(this.orderlist, { id: id });
-              forEach(result2, function(item) {
-                item.status = 7;
-              });
-            } else {
-              var result2 = filter(this.orderlist, { id: id });
-              forEach(result2, function(item) {
-                item.status = 6;
-              });
+              status = 7;
             }
-            //  this.getOrder()
-          } else {
-            Toast("确认失败");
+            this.$axios
+              .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
+                uid: this.uid,
+                id: id,
+                status: status
+              })
+              .then(res => {
+                if (res.data.status_code == "1001") {
+                  //  remove(this.orderlist,{"id":id})
+                  Toast("确认成功");
+
+                  if (type == 3) {
+                    var result2 = filter(this.orderlist, { id: id });
+                    forEach(result2, function(item) {
+                      item.status = 7;
+                    });
+                  } else {
+                    var result2 = filter(this.orderlist, { id: id });
+                    forEach(result2, function(item) {
+                      item.status = 6;
+                    });
+                  }
+                  //  this.getOrder()
+                } else {
+                  Toast("确认失败");
+                }
+              });
           }
-        });
+        }
+      });
     },
     //取消订单
     cancel(id) {
-      console.log(id);
-      this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
-          uid: this.uid,
-          id: id,
-          status: 8
-        })
-        .then(res => {
-          if (res.data.status_code == "1001") {
-            //  remove(this.orderlist,{"id":id})
-            Toast("取消成功");
+      MessageBox({
+        title: "提示",
+        message: "是否取消订单",
+        showCancelButton: true,
+        callback: function(action) {
+          if (action == "confirm") {
+            console.log(id);
+            this.$axios
+              .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
+                uid: this.uid,
+                id: id,
+                status: 8
+              })
+              .then(res => {
+                if (res.data.status_code == "1001") {
+                  //  remove(this.orderlist,{"id":id})
+                  Toast("取消成功");
 
-            var result2 = filter(this.orderlist, { id: id });
-            forEach(result2, function(item) {
-              item.status = 8;
-            });
+                  var result2 = filter(this.orderlist, { id: id });
+                  forEach(result2, function(item) {
+                    item.status = 8;
+                  });
 
-            //  this.getOrder()
-          } else {
-            Toast("确认失败");
+                  //  this.getOrder()
+                } else {
+                  Toast("确认失败");
+                }
+              });
           }
-        });
+        }
+      });
     },
     //去详情页
     todetail(id) {
@@ -245,27 +247,36 @@ export default {
     },
     //确认收货物
     complete(id) {
-      this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
-          uid: this.uid,
-          id: id,
-          status: 5
-        })
-        .then(res => {
-          if (res.data.status_code == "1001") {
-            //  remove(this.orderlist,{"id":id})
+      MessageBox({
+        title: "提示",
+        message: "是否确认收货",
+        showCancelButton: true,
+        callback: function(action) {
+          if (action == "confirm") {
+            this.$axios
+              .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
+                uid: this.uid,
+                id: id,
+                status: 5
+              })
+              .then(res => {
+                if (res.data.status_code == "1001") {
+                  //  remove(this.orderlist,{"id":id})
 
-            Toast("修改成功");
-            var result2 = filter(this.orderlist, { id: id });
-            forEach(result2, function(item) {
-              item.status = 5;
-            });
+                  Toast("修改成功");
+                  var result2 = filter(this.orderlist, { id: id });
+                  forEach(result2, function(item) {
+                    item.status = 5;
+                  });
 
-            //  this.getOrder()
-          } else {
-            Toast("修改失败");
+                  //  this.getOrder()
+                } else {
+                  Toast("修改失败");
+                }
+              });
           }
-        });
+        }
+      });
     },
     //退还
     back(id) {

@@ -4,10 +4,8 @@
       <div class="con_pro">
         <div class="cooperationBanner">
           <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="(item,index) in imgLists"
-                           :key="index">
-              <img :src="item"
-                   alt="">
+            <mt-swipe-item v-for="(item,index) in imgLists" :key="index">
+              <img :src="item" alt="">
             </mt-swipe-item>
           </mt-swipe>
         </div>
@@ -59,8 +57,7 @@
       </div>
       <div class="pro_intro">
         <p class="pro_introduce">项目介绍</p>
-        <p class="pro_int"
-           v-html="data.content"></p>
+        <p class="pro_int" v-html="data.content"></p>
       </div>
       <div class="order_name">
         <p class="good_fail">
@@ -72,20 +69,14 @@
         <!-- <span>
           网签租赁协议
         </span> -->
-        <span class="imgs"
-              @click="check">
-          <img src="../../assets/images/button2.png"
-               v-if="checked">
-          <img src="../../assets/images/button.png"
-               v-else>
+        <span class="imgs" @click="check">
+          <img src="../../assets/images/button2.png" v-if="checked">
+          <img src="../../assets/images/button.png" v-else>
         </span>
-        <span class="text"
-              @click="toNew">《合作项目协议》</span>
+        <span class="text" @click="toNew">《合作项目协议》</span>
       </p>
     </div>
-    <orderFooter :text="'立即下单'"
-                 :count="data.money"
-                 :nextFun="createOrder"></orderFooter>
+    <orderFooter :text="'立即下单'" :count="data.money" :nextFun="createOrder"></orderFooter>
     <!-- <sign id="componentSign"
           v-if="showSignTag"
           :src="data.agreement"
@@ -320,6 +311,21 @@ export default {
   }
 };
 </script>
+<style>
+.pro_int {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+.pro_int img {
+  width: 100% !important;
+}
+.pro_int p {
+  width: 95%;
+  margin: 5px 2.5%;
+}
+</style>
 <style lang="scss" scoped>
 @import "../../styles/helper.scss";
 .cooperation-container {

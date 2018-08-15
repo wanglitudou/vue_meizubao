@@ -3,8 +3,7 @@
     <div class="cent_list">
       <div class="ban_two">
         <div class="ban_lef">
-          <img :src="data.images"
-               alt="">
+          <img :src="data.images" alt="">
         </div>
         <div class="ban_rig">
           <p>
@@ -34,20 +33,14 @@
         </div>
       </div>
       <div class="metting">
-        <p class="met_cent"
-           v-html="data.centetnt"></p>
+        <p class="met_cent" v-html="data.centetnt" ref="content_text"></p>
       </div>
       <div class="list_app">
         <p class="list_time">
           <span>预约时间:</span>
         </p>
         <p class="list_begin">
-          <v-date-picker id="datePicker"
-                         mode='range'
-                         v-model='selectedDate'
-                         :disabled-dates='this.disableDate'
-                         :input-props='{ class: "input-style" ,disabled:"disabled", style:"color:#000",placeholder: "请选择你要租赁的日期"}'
-                         show-caps>
+          <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='this.disableDate' :input-props='{ class: "input-style" ,disabled:"disabled", style:"color:#000",placeholder: "请选择你要租赁的日期"}' show-caps>
           </v-date-picker>
         </p>
 
@@ -69,15 +62,11 @@
           <!-- <span> -->
           <!-- 网签租赁协议 -->
           <!-- </span> -->
-          <span class="imgs"
-                @click="check">
-            <img src="../../assets/images/button2.png"
-                 v-if="checked">
-            <img src="../../assets/images/button.png"
-                 v-else>
+          <span class="imgs" @click="check">
+            <img src="../../assets/images/button2.png" v-if="checked">
+            <img src="../../assets/images/button.png" v-else>
           </span>
-          <span class="text"
-                @click="toNew">《美业菁英协议》</span>
+          <span class="text" @click="toNew">《美业菁英协议》</span>
 
         </p>
       </div>
@@ -96,9 +85,7 @@
 
     <!--</div>-->
 
-    <orderFooter :text="'立即下单'"
-                 :count="totalPrice"
-                 :nextFun="jumpToConfirm"></orderFooter>
+    <orderFooter :text="'立即下单'" :count="totalPrice" :nextFun="jumpToConfirm"></orderFooter>
 
     <!-- <sign id="componentSign"
           v-if="showSignTag"
@@ -145,6 +132,7 @@ export default {
     this.init();
     this.userId = localStorage.getItem("id");
     this.dqurl = window.location.href;
+    // console.log(this.$refs)
   },
 
   // computed: {
@@ -234,7 +222,7 @@ export default {
     },
     jumpToConfirm: function() {
       if (!this.agreementId) {
-        Toast("请网签租赁协议后下单");
+        Toast("请先同意协议后，再进行下单");
         return false;
       }
       this.setConfirmData({
@@ -404,7 +392,23 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
+@import "../../styles/helper.scss";
+.metting .met_cent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+  p {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+}
+</style>
+<style lang="scss"  scoped>
 // @import "./essence.css";
 @import "../../styles/helper.scss";
 .containerss {
@@ -414,9 +418,6 @@ export default {
   // overflow: hidden;
   // height: calc(100% - 0rem);
   background: #fff;
-}
-
-.metting .met_cent {
 }
 
 .cent_list {
@@ -481,7 +482,7 @@ export default {
 }
 
 .metting p {
-  margin: 2.7%;
+  // margin: 2.7%;
   // margin-top: px2rem(15px);
   font-size: px2rem(14px);
   color: #333333;

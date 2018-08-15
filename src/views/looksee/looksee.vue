@@ -101,9 +101,9 @@
     </section>
     <slider :tabContent="tabs" :num="num" :tab="tab" :isRellyShow="isRellyShow" :hideSide="hideSide"></slider>
     <!-- 没有数据 -->
-    <div class="nodata" v-if="showNodata">
+    <!-- <div class="nodata" v-if="showNodata">
       暂无数据
-    </div>
+    </div> -->
   </div>
 
 </template>

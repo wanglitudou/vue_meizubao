@@ -2,7 +2,7 @@
 
   <div>
     <div class="address"
-         @click="jumpToAddress">
+         @click="jumpToAddress" v-if="type">
       <div class="left">
         <img src="../assets/icon/address.png"
              alt="">
@@ -27,6 +27,9 @@
       <div class="right"
            v-else> </div>
     </div>
+    <div class="noAddress" v-else  @click="jumpToAddress">
+       <img src="../assets/images/jia.png" alt="">
+    </div>
     <!-- <div class="address-line"  v-if="type=='button'"></div> -->
   </div>
 </template>
@@ -36,7 +39,7 @@ import { Indicator } from "mint-ui";
 export default {
   data() {
     return {
-      data: []
+      data:{}
     };
   },
   props: ["type", "saveAddressId", "userInfo"],
@@ -70,6 +73,8 @@ export default {
             for (var i = 0; i < res.data.data.length; i++) {
               if (res.data.data[i].is_default_address == 1) {
                 this.data = res.data.data[i];
+              }else{
+                
               }
             }
             console.log(this.data);
@@ -107,6 +112,8 @@ export default {
           this.data = res.data.data;
           console.log(this.data);
           this.saveAddressId(res.data.data);
+        }else{
+          console.log("没有地址")
         }
       });
     }
@@ -127,7 +134,23 @@ export default {
   padding-bottom: 10px;
   justify-content: space-between;
 }
-
+.noAddress{
+  height:80px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  border-radius: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.noAddress img{
+  width:50px;
+  height:50px;
+}
 .address-line {
   background-image: linear-gradient(-130deg, #fd4689 0%, #fd82d9 100%);
   border-radius: 2px;

@@ -202,10 +202,8 @@ export default {
     ...mapGetters(["hasPhoneNum"])
   },
   mounted() {
-    Indicator.open();
-    setTimeout(() => {
-      Indicator.close();
-    }, 1000);
+   
+   
     let that = this;
     var str = window.location.href;
     var code = that.GetQueryString("code");
@@ -257,11 +255,12 @@ export default {
             params: { uid: localStorage.id }
           })
           .then(res => {
-            if (!res.data.data.tel) {
+            localStorage.tel = res.data.data.tel;
+            if (!localStorage.tel) {
               this.$router.push({ path: `/phone/${1}` });
               return false;
             }
-            localStorage.tel = res.data.data.tel;
+            
           });
       }
     },

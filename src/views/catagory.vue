@@ -47,10 +47,6 @@ export default {
     };
   },
   created() {
-    Indicator.open();
-    setTimeout(() => {
-      Indicator.close();
-    }, 1000);
   },
   mounted() {},
   methods: {

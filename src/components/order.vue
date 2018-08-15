@@ -259,7 +259,7 @@ export default {
 }
 .payment {
   width: 96%;
-  height: px2rem(181px);
+  height: px2rem(175px);
   border-radius: px2rem(3px);
   box-shadow: 0 2px 9px 0 #eeeeee;
 
@@ -400,7 +400,7 @@ export default {
 }
 .receipt {
   width: 100%;
-  height: 1.2rem;
+  height: 1.3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

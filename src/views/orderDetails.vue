@@ -1,5 +1,5 @@
 <script>
-import { Toast } from "mint-ui";
+import { Toast, MessageBox } from "mint-ui";
 import orderFooter from "../components/orderDetailFooter.vue";
 import addressCard from "../components/addressCard.vue";
 import orderCard from "../components/orderDetailCard.vue";
@@ -169,55 +169,73 @@ export default {
     },
     //确认收货
     confirm(uid, type) {
-      let status = 0;
-      if (type == 3) {
-        status = 7;
-      } else {
-        status = 6;
-      }
-      this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
-          status: status,
-          uid: uid,
-          id: this.orderId
-        })
-        .then(res => {
-          if (res.data.status_code == "1001") {
-            this.detail.status = status;
-            Toast("确认成功");
-          } else {
-            Toast("确认失败");
+      MessageBox({
+        title: "提示",
+        message: "是否确认收货",
+        showCancelButton: true,
+        callback: function(action) {
+          if (action == "confirm") {
+            let status = 0;
+            if (type == 3) {
+              status = 7;
+            } else {
+              status = 6;
+            }
+            this.$axios
+              .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
+                status: status,
+                uid: uid,
+                id: this.orderId
+              })
+              .then(res => {
+                if (res.data.status_code == "1001") {
+                  this.detail.status = status;
+                  Toast("确认成功");
+                } else {
+                  Toast("确认失败");
+                }
+              })
+              .catch(res => {
+                console.log(res);
+                console.log("查询失败");
+              });
           }
-        })
-        .catch(res => {
-          console.log(res);
-          console.log("查询失败");
-        });
+        }
+      });
     },
     // 退还
     back(uid) {
-      // console.log(status,uid,id)
-      this.$axios
-        .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
-          status: 5,
-          uid: uid,
-          id: this.orderId
-        })
-        .then(res => {
-          if (res.data.status_code == "1001") {
-            this.detail.status = 5;
-            Toast("操作成功");
-          } else {
-            Toast("操作失败");
+      MessageBox({
+        title: "提示",
+        message: "是否确认收货",
+        showCancelButton: true,
+        callback: function(action) {
+          if (action == "confirm") {
+            this.$axios
+              .post(window.ajaxSrc + "/api/meizubao/updateOrderStatus", {
+                status: 5,
+                uid: uid,
+                id: this.orderId
+              })
+              .then(res => {
+                if (res.data.status_code == "1001") {
+                  this.detail.status = 5;
+                  Toast("操作成功");
+                } else {
+                  Toast("操作失败");
+                }
+              })
+              .catch(res => {
+                console.log(res);
+                console.log("查询失败");
+              });
           }
-        })
-        .catch(res => {
-          console.log(res);
-          console.log("查询失败");
-        });
+        }
+      });
+
+      // console.log(status,uid,id)
     },
     getRenewal(orderId, month, stoptime, totalPrice, openid) {
-      
       this.$axios
         .post(window.ajaxSrc + "/api/meizubao/rentContinue", {
           id: orderId,
@@ -432,11 +450,8 @@ export default {
 <template>
   <div class="container">
     <com-orderStatus :detail="detail"></com-orderStatus>
-    <com-addressCard :type="'show'"
-                     :detail="detail"
-                     v-if="detail.type == 1 ||detail.type == 2 "></com-addressCard>
-    <com-orderCard :type="'technician'"
-                   :detail="detail"></com-orderCard>
+    <com-addressCard :type="'show'" :detail="detail" v-if="detail.type == 1 ||detail.type == 2 "></com-addressCard>
+    <com-orderCard :type="'technician'" :detail="detail"></com-orderCard>
     <com-orderInformation :detail="detail"></com-orderInformation>
     <!-- <com-orderRenewal :detail="detail" :disableDate="disableDate"  :decrease="decrease" :allPrice="allPrice" :increase="increase" :mounth="mounth" :selectedDate="selectedDate" :during="during"></com-orderRenewal> -->
     <!-- <div> -->
@@ -465,21 +480,15 @@ export default {
     <!-- </div> -->
     <div>
       <!-- 仪器续约 -->
-      <div class="instrument"
-           v-if="detail.type == 1">
+      <div class="instrument" v-if="detail.type == 1">
         <div v-if="detail.status == 6">
           <!-- <div class="extension">续约</div> -->
           <div class="begin_rent">
             <span>选择你续约的时长(月):</span>
             <div class="spinner">
-              <div class="decrease"
-                   @click="decrease">-</div>
-              <input type="number"
-                     class="value"
-                     maxlength="3"
-                     v-model="mounth" />
-              <div class="increase"
-                   @click="increase">+</div>
+              <div class="decrease" @click="decrease">-</div>
+              <input type="number" class="value" maxlength="3" v-model="mounth" />
+              <div class="increase" @click="increase">+</div>
             </div>
           </div>
           <!-- <div class="xuyue" v-show="mounth>0">
@@ -489,19 +498,12 @@ export default {
         </div>
       </div>
       <!-- 技师续约 -->
-      <div class="technician"
-           v-if="detail.type == 2">
+      <div class="technician" v-if="detail.type == 2">
         <div v-if="detail.status == 6">
-          <v-date-picker id="datePicker"
-                         mode='range'
-                         v-model='selectedDate'
-                         :disabled-dates='disableDate'
-                         :input-props='{ style:"color:#000", class: "input-style" , disabled:"disabled", placeholder: "请选择你要租赁的日期"}'
-                         show-caps>
+          <v-date-picker id="datePicker" mode='range' v-model='selectedDate' :disabled-dates='disableDate' :input-props='{ style:"color:#000", class: "input-style" , disabled:"disabled", placeholder: "请选择你要租赁的日期"}' show-caps>
           </v-date-picker>
         </div>
-        <div class="xuyues"
-             v-show="during>0">
+        <div class="xuyues" v-show="during>0">
           <span>续约天数：{{during}}</span>
           <p>续约金额：{{renprice}}</p>
           <!-- <div class="xuyues"
@@ -519,18 +521,7 @@ export default {
         </div>
       </div>
     </div>
-    <com-orderFooter :detail='detail'
-                     :confirm="confirm"
-                     :back="back"
-                     :mounth="mounth"
-                     :getPrice="getPrice"
-                     :renewal="renewal"
-                     :during="during"
-                     :renprice="renprice"
-                     :count="'19700'"
-                     :confirm:="confirm"
-                     :text="'确认到达'"
-                     :nextFun="nextFun"></com-orderFooter>
+    <com-orderFooter :detail='detail' :confirm="confirm" :back="back" :mounth="mounth" :getPrice="getPrice" :renewal="renewal" :during="during" :renprice="renprice" :count="'19700'" :confirm:="confirm" :text="'确认到达'" :nextFun="nextFun"></com-orderFooter>
   </div>
 </template>
 
