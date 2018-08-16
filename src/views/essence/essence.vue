@@ -32,6 +32,13 @@
           </p>
         </div>
       </div>
+      <!-- 日新周薪 -->
+     <div class="price">
+      <p style="margin-left:20px"><span style="color:#FF272D">￥{{data.dayprice}}</span>/日</p>
+      <p style="margin-right:20px"><span style="color:#000;">￥{{data.price}}元</span>/周</p>
+
+     </div>
+
       <div class="metting">
         <p class="met_cent" v-html="data.centetnt" ref="content_text"></p>
       </div>
@@ -470,6 +477,25 @@ export default {
   margin-top: px2rem(10px);
   // / / line-height: px2rem
 }
+.price {
+  width: 100%;
+  margin: px2rem(15px) auto 0;
+  background: #ffffff;
+  box-shadow: 0 2px 9px 0 #eeeeee;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  color:#3F3F3F;
+   p{
+    height:px2rem(50px);
+    font-size:px2rem(15px);
+    color:#000;
+    line-height:px2rem(50px);
+  }
+  
+
+}
 
 .metting {
   width: 100%;
@@ -479,6 +505,7 @@ export default {
   border-radius: 2px;
   display: flex;
   align-items: center;
+ 
 }
 
 .metting p {

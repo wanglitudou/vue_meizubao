@@ -76,9 +76,9 @@
                 <!-- <p class="content">{{item.centetnt}}</p> -->
                 <p class="every_pro">
                   <span class="data_pro">
-                    <span class="data_mon">{{item.dayprice}}</span>/日</span>
+                    <span class="data_mon">￥{{item.dayprice}}</span>/日</span>
                   <span class="week_pro">
-                    <span class="week_mon">{{item.price}}</span>/周</span>
+                    <span class="week_mon">￥{{item.price}}</span>/周</span>
                 </p>
                 <p class="cli_app">
                   <span class="cli_ment">点击预约</span>
@@ -542,7 +542,7 @@ export default {
   display: flex;
   justify-content: space-between;
   // padding: 0 10px;
-  margin-top: px2rem(6px);
+  margin-top: px2rem(6px);align-items: center;
 }
 .data_pro {
   font-size: px2rem(12px);
