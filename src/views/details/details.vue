@@ -15,7 +15,7 @@
       <div class="ban_cent">
         <p class="name_cent">
           <span class="name">{{data.name}}</span>
-          <span class="dollar">￥ {{data.price}}元</span>
+          <span class="dollar">￥ {{data.price}}</span>
         </p>
         <p class="name_rent">
           <span class="monthly">

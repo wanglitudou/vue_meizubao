@@ -47,8 +47,8 @@
     <div class="right-info">
       <p class="big">{{detail.goods_name}}</p>
       <div>
-        <span class="color666">价格：</span><span class="big red"> {{detail.productprice}}</span>
-        <span class="text-right">x {{detail.number}}</span>
+        <span class="color666">折扣价格：</span><span class="big red"> {{detail.productdiscount}}</span>
+        <span class="text-right">x {{detail.goods_num}}</span>
       </div>
       <div class="bottom-text">
       </div>
@@ -62,7 +62,7 @@
     <div class="right-info">
       <p class="big">{{detail.goods_name}}</p>
       <div>
-        <span class="color666">诚意金：</span><span class="big red"> {{detail.deposit}}</span>
+        <span class="color666">诚意金：</span><span class="big red"> {{detail.total_price}}</span>
         <!-- <span class="text-right">x {{number}}</span> -->
       </div>
       <div class="bottom-text">
